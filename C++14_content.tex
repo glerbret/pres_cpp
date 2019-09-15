@@ -1,0 +1,538 @@
+\documentclass[C++.tex]{subfiles}
+\begin{document}
+
+\section{C++14}
+\subsection*{Présentation}
+\begin{frame}
+	\frametitle{Présentation}
+	\begin{itemize}
+		\item Approuvé le 16 août 2014
+		\item Dernier \textit{Working Draft} : \href{https://timsong-cpp.github.io/cppwp/n4140/draft.pdf}{N4140}
+		\item Dans la continuité de C++11
+		\item Changement moins important
+		\item Mais loin d'une simple version correctrice
+		\item Très bon support par les versions récentes de GCC, Clang et Visual C++
+	\end{itemize}
+\end{frame}
+
+\subsection*{constexpr}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|constexpr|}
+	\begin{itemize}
+		\item Fonctions membres \lstinline|constexpr| ne sont plus implicitement \lstinline|const|
+		\item Relâchement des contraintes sur les fonctions \lstinline|constexpr|
+		\begin{itemize}
+			\item Variables locales (ni \lstinline|static|, ni \lstinline|thread_local| et obligatoirement initialisées)
+			\item Objets mutables créés lors l'évaluation de l'expression constante
+			\item \lstinline|if|, \lstinline|switch|, \lstinline|while|, \lstinline|for|, \lstinline|do while|
+		\end{itemize}
+		\item Application de \lstinline|constexpr| à plusieurs éléments de la bibliothèque standard
+	\end{itemize}
+\end{frame}
+
+\subsection*{Déduction de type}
+\begin{frame}[fragile]
+	\frametitle{Généralisation de la déduction du type retour\titlehfill{}1/2}
+	\begin{itemize}
+		\item Utilisable sur les lambdas complexes
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+[](int x) { 
+  if(x >= 0) return 2 * x; 
+  else return -2 * x;};\end{lstlisting}
+
+	\pause
+
+	\begin{itemize}
+		\item Mais aussi sur les fonctions
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto bar(int x) {
+  if(x >= 0) return 2 * x; 
+  else return -2 * x;}\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Généralisation de la déduction du type retour\titlehfill{}2/2}
+	\begin{itemize}
+		\item Y compris récursive
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto fact(unsigned int x) {
+  if(x == 0) return 1U;
+  else return x * fact(x-1);}\end{lstlisting}
+
+	\begin{alertblock}{Contraintes}
+		\begin{itemize}
+			\item Un \lstinline|return| doit précéder l'appel récursive
+			\item Tous les chemins doivent avoir le même type de retour
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|decltype(auto)|}
+	\begin{itemize}
+		\item Détermine le type retour en conservant la référence
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string bar("bar");
+
+string  foo1() { return string("foo"); }
+string& bar1() { return bar; }
+
+decltype(auto) foo2() { return foo1(); } // string
+decltype(auto) bar2() { return bar1(); } // string&
+auto foo3() { return foo1(); }           // string
+auto bar3() { return bar1(); }           // string\end{lstlisting}
+\end{frame}
+
+\subsection*{Initialisation}
+\begin{frame}[fragile]
+	\frametitle{\textit{Aggregate Initialisation}}
+	\begin{itemize}
+		\item Devient compatible avec l'initialisation par défaut des membres
+		\item \ldots{} les membres non explicitement initialisés le sont par défaut
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+	struct Foo {int i, int j = 5};
+
+	Foo foo{42};   // i = 42, j = 5\end{lstlisting}
+\end{frame}
+
+\subsection*{Itérateurs}
+\begin{frame}[fragile]
+	\frametitle{Itérateurs}
+	\begin{itemize}
+		\item Fonctions libres \lstinline|std::cbegin()| et \lstinline|std::cend()|
+		\item Fonctions libres \lstinline|std::rbegin()| et \lstinline|std::rend()|
+		\item Fonctions libres \lstinline|std::crbegin()| et \lstinline|std::crend()|
+		\item \textit{Null forward iterator} ne référençant aucun conteneur valide
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto ni = vector<int>::iterator();
+auto nd = vector<double>::iterator();
+
+ni == ni;    // true
+nd != nd;    // false
+ni == nd;    // Erreur de compilation\end{lstlisting}
+
+	\begin{alertblock}{Attention}
+		\textit{Null forward iterator} non comparables avec des itérateurs \og classiques\fg{}
+
+\note[item]{But ? Pouvoir créer un itérateur sans l'initialiser avec un conteneur existant. Assez limité de mon point de vue}
+	\end{alertblock}
+\end{frame}
+
+\subsection*{Algorithmes}
+\begin{frame}[fragile]
+	\frametitle{Algorithmes}
+	\begin{itemize}
+		\item Surcharge de \lstinline|std::equal()|, \lstinline|std::mismatch()| et de \lstinline|std::is_permutation()| prenant deux paires complètes d'itérateurs
+	\end{itemize}
+
+	\begin{block}{Note}
+		Il n'est donc plus nécessaire de tester la taille auparavant
+	\end{block}
+
+	\begin{itemize}
+		\item \lstinline|std::exchange()| change la valeur d'un objet et retourne l'ancienne
+
+\note[item]{Pas un algorithme à proprement parler, comme \lstinline|std::swap|}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 2, 3};
+vector<int> bar = exchange(foo, {10, 11});
+// foo : 10 11, bar : 1, 2, 3\end{lstlisting}
+
+	\begin{block}{Dépréciation}
+		\lstinline|std::random_shuffle()| est déprécié
+
+\note[item]{Remplacé par \lstinline|std::shuffle()| qui permet un meilleur aléa}
+	\end{block}
+\end{frame}
+
+\subsection*{string}
+\begin{frame}[fragile]
+	\frametitle{\textit{Quoted string}}
+	\begin{itemize}
+		\item Insertion et extraction de chaînes avec guillemets
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+stringstream ss;
+string in = "String with spaces and \"quotes\"";
+string out;
+
+ss << quoted(in);
+cout << "in:  '" << in << "'\n"
+     << "stored as '" << ss.str() << "'\n";
+// in : 'String with spaces and "quotes"'
+// stored as '"String with spaces and \"quotes\""'
+
+ss >> quoted(out);
+cout << "out: '" << out << "'\n";
+// out: 'String with spaces, and "quotes"'\end{lstlisting}
+
+\note[item]{Exemple issue de cppreference.com}
+\end{frame}
+
+\subsection*{Littéraux}
+\begin{frame}[fragile]
+	\frametitle{Littéraux binaires}
+	\begin{itemize}
+		\item Support des littéraux binaires grâce au préfixe \og 0b\fg{}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int foo = 0b101010; // 42\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Séparateurs}
+	\begin{itemize}
+		\item Utilisation possible de ' dans les nombres littéraux
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int foo = 0b0010'1010;  // 42
+int bar = 1'000;        // 1000
+int baz = 010'00;       // 512\end{lstlisting}
+
+	\begin{block}{Note}
+		Purement esthétique, aucune sémantique ni place réservée
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textit{User-defined literals} standard\titlehfill{}1/3}
+
+\note[item]{Dans la bibliothéque et non dans le langage}
+\note[item]{Notons l'absence de \_}
+
+	\begin{itemize}
+		\item Suffixe \og s\fg{} sur les chaînes : \lstinline|std::string|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto foo = "abcd"s;   // string\end{lstlisting}
+
+	\begin{block}{Note}
+		Remplace avantageusement \lstinline|std::string("abcd")| dans de nombreux contextes (p.ex. assertions cppunit)
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textit{User-defined literals} standard\titlehfill{}2/3}
+	\begin{itemize}
+		\item Suffixe \og h\fg{}, \og min\fg{}, \og s\fg{}, \og ms\fg{}, \og us\fg{} et \og ns\fg{} : \lstinline|std::chrono::duration| dans l'unité correspondante
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto foo = 60s;       // chrono::seconds
+auto bar = 5min;      // chrono::minutes\end{lstlisting}
+
+	\begin{block}{Note}
+		Suffixe \og s\fg{} utilisé pour \lstinline|std::string| et pour les secondes mais sans ambiguïté car dépendant du type de littéral auquel il s'applique
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textit{User-defined literals} standard\titlehfill{}3/3}
+	\begin{itemize}
+		\item Suffixe \og if\fg{} : nombre imaginaire de type \lstinline|std::complex<float>|
+		\item Suffixe \og i\fg{} : nombre imaginaire de type \lstinline|std::complex<double>|
+		\item Suffixe \og il\fg{} : nombre imaginaire de type \lstinline|std::complex<long double>|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto foo = 5i;        // complex<double>\end{lstlisting}
+\end{frame}
+
+\subsection*{tuple}
+\begin{frame}[fragile]
+	\frametitle{Adressage des tuples par le type}
+	\begin{itemize}
+		\item Utilisation du type plutôt que de l'indice
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+tuple<int, long, long> foo{42, 58L, 9L};
+
+cout << get<int>(foo);     // 42\end{lstlisting}
+
+	\pause
+
+	\begin{alertblock}{Attention}
+		Uniquement s'il n'y a qu'une occurrence du type dans le tuple
+	\begin{lstlisting}[language=C++]
+get<long>(foo);     // Erreur\end{lstlisting}
+	\end{alertblock}
+\end{frame}
+
+\subsection*{Template}
+\begin{frame}[fragile]
+	\frametitle{Variable template}
+	\begin{itemize}
+		\item Généralisation des templates aux variables
+		\item Y compris les spécialisations
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+template<typename T>
+constexpr T PI = T(3.1415926535897932385);
+
+template<>
+constexpr const char* PI<const char*> = "pi";
+
+cout << PI<int>;          // 3
+cout << PI<double>;       // 3.14159
+cout << PI<const char*>;  // pi\end{lstlisting}
+
+	\begin{block}{Sous silence \ldots}
+		\lstinline|std::integer_sequence|
+	\end{block}
+\end{frame}
+
+\subsection*{Programmation fonctionnelle}
+\begin{frame}[fragile]
+	\frametitle{\textit{Generic lambdas}}
+	\begin{itemize}
+		\item Lambdas utilisables sur différents types de paramètres
+		\item Déduction du type des paramètres déclarés \lstinline|auto|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto foo = [] (auto in) { cout << in << '\n'; };
+
+foo(2);
+foo("azerty"s);\end{lstlisting}
+
+	\begin{block}{Mais aussi}
+		Ajout des paramètres par défaut aux lambdas
+
+	\begin{lstlisting}[language=C++]
+auto foo = [] (int bar = 12) { cout << bar << '\n'; };\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textit{Variadic lambdas}}
+	\begin{itemize}
+		\item Lambda à nombre de paramètres variable
+		\item Suffixe \lstinline|...| à \lstinline|auto|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto foo = [] (auto... args) { 
+  std::cout << sizeof...(args) << '\n'; };
+
+foo(2);           // 1
+foo(2, 3, 4);     // 3
+foo("azerty"s);   // 1\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Capture généralisée\titlehfill{}1/2}
+
+\note[item]{On parle parfois de renommage des captures}
+
+	\begin{itemize}
+		\item Création de variables depuis les variables locales
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int foo = 42;
+
+auto bar = [ &x = foo ]() { --x; };
+bar();  // foo : 41
+
+auto baz = [ y = 2*foo ]() { cout << y << '\n'; };
+baz();  // 82\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Capture généralisée\titlehfill{}2/2}
+	\begin{itemize}
+		\item Capture par déplacement
+	\end{itemize}
+	
+	\begin{lstlisting}[language=C++]
+auto foo = make_unique<int>(42);
+auto bar = [ foo = move(foo) ](int i) {
+cout << *foo * i << '\n'; };
+
+bar(5);  // Affiche 210\end{lstlisting}
+
+	\begin{itemize}
+		\item Capture des variables membres
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+struct Bar {
+	auto foo() {
+		return [s=s] { cout << s << '\n'; }; }
+
+	std::string s;};\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Améliorations des lambdas}
+	\begin{itemize}
+		\item Type de retour complètement facultatif
+
+\note[item]{Il n'y a plus les restrictions de C++11 (une seule instruction, de type \lstinline|return|)}
+
+		\item Une lambda qui ne capture rien peut être convertie en pointeur de fonction
+
+\note[item]{Donc passable à des fonctions C attendant un pointeur de fonction en paramètre}
+
+\begin{lstlisting}[language=C++]
+void foo(void(* bar)(int))
+		
+foo([](int x) { std::cout << x << std::endl; });\end{lstlisting}
+
+		\item Peuvent être \lstinline|noexecpt|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Type traits}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::is_final|}
+	\begin{itemize}
+		\item Indique si la classe est finale ou non
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+class Foo {};
+class Bar final {};
+
+is_final<Foo>::value;   // false
+is_final<Bar>::value;   // true\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Alias transformation}
+	\begin{itemize}
+		\item Simplification de l'usage des transformations de types
+		\item Ajout du suffixe \lstinline|_t| aux transformations
+		\item Suppression de \lstinline|typename| et \lstinline|::type|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+typedef add_const<int>::type A;
+typedef add_const<const int>::type B;
+typedef add_const<const int*>::type C;
+
+// Deviennent
+
+add_const_t<int> A;
+add_const_t<const int> B;
+add_const_t<const int*> C;\end{lstlisting}
+\end{frame}
+
+\subsection*{Pointeur intelligent}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::make_unique|}
+	\begin{itemize}
+		\item Alloue et construit l'objet dans le \lstinline|std::unique_ptr|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+unique_ptr<int> foo = make_unique<int>(42);\end{lstlisting}
+
+	\begin{alertblock}{Don't}
+		Plus de \lstinline|new| dans le code applicatif
+	\end{alertblock}
+
+	\begin{block}{Note}
+		Utilisable pour construire dans un conteneur
+	\end{block}
+\end{frame}
+
+\subsection*{Attributs}
+\begin{frame}[fragile]
+	\frametitle{Attribut \lstinline|[[ deprecated ]]|\titlehfill{}1/2}
+	\begin{itemize}
+		\item Indique qu'une entité (variable, fonction, classe, \ldots) est dépréciée
+		\item Émission possible d'un warning sur l'utilisation d'une entité \lstinline|deprecated|
+
+\note[item]{Peut car il n'y a pas d'obligation dans la norme. En pratique c'est le cas}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+[[ deprecated ]]
+void bar() {}
+
+class [[ deprecated ]] Baz { };
+
+[[ deprecated ]]
+int foo{42};\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Attribut \lstinline|[[ deprecated ]]|\titlehfill{}2/2}
+	\begin{itemize}
+		\item Possibilité de fournir un message explicatif
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+[[ deprecated("utilisez foo") ]]
+void bar() {}\end{lstlisting}
+
+	\begin{lstlisting}
+warning: 'void bar()' is deprecated: utilisez foo\end{lstlisting}
+\end{frame}
+
+\subsection*{Multi-threading}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::shared_timed_mutex|}
+	\begin{itemize}
+		\item Similaire à \lstinline|std::timed_mutex|
+		\item \ldots{}avec deux niveaux d'accès
+		\begin{itemize}
+			\item Exclusif : possible si le verrou n'est pas pris
+			\item Partagé : possible si le verrou n'est pas pris en exclusif
+		\end{itemize}
+		\item Même API que \lstinline|std::timed_mutex|  pour l'accès exclusif
+		\item API similaire pour l'accès partagé
+		\begin{itemize}
+			\item \lstinline|lock_shared|
+			\item \lstinline|try_lock_shared|
+			\item \lstinline|try_lock_shared_for|
+			\item \lstinline|try_lock_shared_until|
+			\item \lstinline|unlock_shared|
+		\end{itemize}
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		Un même thread ne doit pas prendre un mutex qu'il possède déjà, même en accès partagé
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::shared_lock|}
+	\begin{itemize}
+		\item Capsule RAII sur les mutex partagés
+		\item Supporte les mutex verrouillés ou non
+		\item Relâche le mutex à la destruction
+		\item Similaire à \lstinline|std::unique_lock| mais en accès partagée
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+shared_timed_mutex foo;
+{
+  shared_lock<shared_timed_mutex> bar(foo, defer_lock);
+  ...
+  bar.lock();  // Prise du mutex
+  ...
+}  // Liberation du mutex\end{lstlisting}
+\end{frame}
+\end{document}

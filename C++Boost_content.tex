@@ -1,0 +1,530 @@
+\documentclass[C++.tex]{subfiles}
+\begin{document}
+
+\section{Boost}
+\subsection*{Présentation}
+\begin{frame}
+	\frametitle{Présentation}
+	\begin{columns}[T]
+		\begin{column}{0.75\textwidth}
+			\begin{itemize}
+				\item Ensemble de bibliothèques
+			
+\note[item]{À la louche, on passe les 120 bibliothèques}
+			
+				\item Domaines très variés
+				\item Antichambre de la bibliothèque standard
+				\item Licence permissive (proche MIT ou BSD)
+				\item Portable
+				\item Haut niveau d'exigence (y compris documentaire)
+				\item Processus de revue strict et transparent
+				\item Conférence annuelle (BoostCon puis \href{http://cppnow.org/}{C++now})
+			
+\note[item]{Conf sur Boost, mais aussi le C++ en général, des outils, des bibliothèques, etc.}
+			
+				\item Une version tout les 4 à 5 mois
+				\item Compatibilité ascendante non garantie
+			
+\note[item]{mais plutôt bonne et surtout documentée}
+			\end{itemize}
+		\end{column}
+
+		\begin{column}{0.25\textwidth}
+			\begin{figure}[ht]
+ 				\begin{center}
+					\includegraphics[height=0.07\textheight]{input_src/C++/Boost.png}
+				\end{center}
+				\href{http://www.boost.org/}{{\small www.boost.org}}
+			\end{figure}
+		\end{column}
+	\end{columns}	
+\end{frame}
+
+\subsection*{Typage}
+\begin{frame}[fragile]
+	\frametitle{Boost.Optional, Boost.Any et Boost.Variant}
+	\begin{itemize}
+		\item Intégrées à C++17
+		\item Fonctionnement identique entre Boost et C++17
+		\item \ldots{} à deux ou trois détails syntaxiques prés
+		\begin{itemize}
+			\item Changement de namespace
+			\item \lstinline|std::nullopt| devient \lstinline|boost::none|
+			\item \lstinline|polymorphic_relaxed_get()| devient \lstinline|std::get_if()|
+		\end{itemize}
+	\end{itemize}
+
+	\begin{exampleblock}{Do}
+		Utilisez Boost.Optional, Boost.Any et Boost.Variant si votre bibliothèque standard n'est pas C++17
+	\end{exampleblock}
+\end{frame}
+
+\subsection*{Filesystem}
+\begin{frame}[fragile]
+	\frametitle{Boost.Filesystem}
+	\begin{itemize}
+		\item Intégrée à C++17
+		\item Fonctionnement identique entre Boost et C++17
+		\item Ajout de \lstinline|boost::filesystem::fstream| compatible avec \lstinline|std::fstream| pour ouvrir un fichier depuis un \textit{path}
+
+\note[item]{Contrairement à la bibliothèque standard, Boost n'a pas pu créé une surcharge de \lstinline|std::fstream| prenant en paramètre un path (pas de modification de std hors de la bibliothèque standard)}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+path p{"test.txt"};
+ofstream ofs{p};
+ofs << "Hello, world!\n";\end{lstlisting}
+\end{frame}
+
+\subsection*{DateTime}
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}1/7}
+	\begin{itemize}
+		\item Intégrée, en grande partie, à C++11 et C++20
+		\item Manipulation de dates et heures
+		\item Gestion des temps POSIX (\lstinline|ptime|)
+		\item Gestion des \textit{timezones} et des temps locaux
+		\item Gestion du calendrier grégorien (\lstinline|date|)
+		\item Gestion des durées (\lstinline|time_duration|)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}2/7}
+	\begin{itemize}
+		\item Récupération de la date et heure courante dans la timezone locale
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+ptime date = second_clock::local_time();\end{lstlisting}
+
+	\begin{itemize}
+		\item \ldots{} ou en UTC
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+ptime date = second_clock::universal_time();\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}3/7}
+	\begin{itemize}
+		\item Construction depuis une chaîne
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+std::string ts("2002-01-20 23:59:59.000");
+ptime t(time_from_string(ts))
+
+std::string ts("20020131T235959");
+ptime t(from_iso_string(ts))\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}4/7}
+	\begin{itemize}
+		\item Écriture sous forme de chaîne
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+std::string ts("2002-01-01 10:00:01.123456789");
+ptime t(time_from_string(ts))
+
+to_simple_string(ptime);
+// 2002-Jan-01 10:00:01.123456789
+to_iso_string(ptime);
+// 20020131T100001,123456789
+to_iso_extended_string(ptime);
+// 2002-01-31T10:00:01,123456789
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}5/7}
+	\begin{itemize}
+		\item Accesseurs sur un élément de la date
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+ptime now = second_clock::local_time();
+
+now.date().year();
+now.date().month();
+now.date().day();
+now.date().day_of_week();
+now.date().day_of_year();
+now.date().week_number();
+now.time_of_day().hours();
+now.time_of_day().minutes();
+now.time_of_day().seconds();\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}6/7}
+	\begin{itemize}
+		\item Fonctions de conversion
+		\begin{itemize}
+			\item \lstinline|end_of_month()| date du dernier jour du mois
+			\item \lstinline|julian_day()| jour julien correspondant
+			\item \lstinline|utc_time()| conversion local vers UTC
+			\item \lstinline|local_time()| conversion UTC vers local
+			\item \lstinline|to_tm()| conversion en une structure \lstinline|tm|
+		\end{itemize}
+		\item Opérateurs de comparaison
+		\item Différence entre deux dates
+		\item Ajout et soustraction d'une durée à une date ou à une autre durée
+		\item Ajout et soustraction de jours à une date
+		\item Multiplication et division d'une durée par un entier
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.DateTime\titlehfill{}7/7}
+	\begin{exampleblock}{Do}
+		Préférez \lstinline|Boost.DateTime| aux classes \textit{home-made}
+
+\note[item]{Oui je pense à SMACTTools::DateTime ici}
+	\end{exampleblock}
+
+	\begin{block}{Pour aller plus loin}
+		\begin{itemize}
+			\item \lstinline|Boost.Locale| pour gérer le formatage de \lstinline|time_t| dans les flux
+
+\note[item]{\lstinline|Boost.Locale| fourni un support sur pas mal d'autres points liés à la localisation (format des devises, des nombres, conversion des chaînes en respectant les réglès locales, etc.)}
+
+			\item \href{http://site.icu-project.org/}{ICU (\textit{International Components for Unicode})} supporte de multiples calendriers (musulman, hébreu, chinois, perse, \ldots)
+
+\note[item]{Parmi d'autres choses, ICU est une bibliothèque offrant le support d'Unicode et de l'internationalisation}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\subsection*{Formatage}
+\begin{frame}[fragile]
+	\frametitle{Boost.Format\titlehfill{}1/4}
+	\begin{itemize}
+		\item Alternative intégrée à C++20
+		\item Formatage de chaînes de caractères
+		\item Proche de \lstinline|printf()| mais \textit{type-safe} et extensible
+		\item Basé sur une chaîne de format et la surcharge de l'opérateur \lstinline|%|
+		\item \textit{Placeholders} numérotés (\lstinline|%X%| ou \lstinline+%|X$|+) indiquant la donnée à utiliser
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+cout << format{"%2%/%1%/%3%"} % 12 % 5 % 2014 << '\n';
+// Affiche 5/12/2014\end{lstlisting}
+
+	\begin{itemize}
+		\item \textit{Placeholders} non-numérotés (\lstinline+%||+) prenant les données dans l'ordre
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+cout << format{"%|| %|| %||"} % 12 % 5 % 2014 << '\n';
+// Affiche 12 5 2014\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.Format\titlehfill{}2/4}
+	\begin{itemize}
+		\item Spécification dans la chaîne de format à la \lstinline|printf()|
+		\begin{itemize}
+			\item Alignement, présence du signe ou de la base et padding
+			\item Taille et précision
+			\item Type (uniquement pour le format de sortie)
+		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Note}
+		\begin{itemize}
+			\item Contrairement à \lstinline|printf()|, le type dans le spécifieur de format n'impose pas le type de la variable
+			\item Les \lstinline|h|, \lstinline|l| et \lstinline|L| dans le type sont acceptés mais n'ont aucun effet
+		\end{itemize}
+	\end{block}
+
+	\begin{lstlisting}[language=C++]
+cout << format{"%|1$+|"} % 12 << '\n';
+// Affiche +12
+cout << format{"%|1$#x|"} % 12 << '\n';
+// Affiche 0xc\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.Format\titlehfill{}3/4}
+	\begin{itemize}
+		\item Spécification sur la valeur avec \lstinline|io::group()|
+	\end{itemize}
+
+	\begin{block}{Note}
+		S'applique à toutes les occurrences de la valeur dans la chaîne
+	\end{block}
+
+	\begin{lstlisting}[language=C++]
+cout << format{"%1% %2% %1%"} %
+        io::group(showpos, 1) % 2 << '\n';
+// Affiche +1 2 +1\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.Format\titlehfill{}4/4}
+	\begin{block}{Motivations}
+		\begin{itemize}
+			\item Plus expressif et souple que le formatage des flux
+			\item \textit{Type-safe} et extensible
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Alternatives}
+		\lstinline|{fmt}|, SafeFormat, FastFormat,  tinyformat
+
+\note[item]{Il est question de rajouter le formatage dans la bibliothèque standard en C++20 en se basant sur \lstinline|{fmt}|}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.StringAlgorithms\titlehfill{}1/5}
+	\begin{itemize}
+		\item Manipulation des chaînes de caractères
+		\item Changement de casse
+		\begin{itemize}
+			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item Avec ou sans prise en compte de la locale
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string foo{"Boost"};
+cout << to_upper_copy(foo) << '\n'; // BOOST\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.StringAlgorithms\titlehfill{}2/5}
+	\begin{itemize}
+		\item Suppression de caractères
+		\begin{itemize}
+			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item Suppression de la première, dernière, i\ieme{} ou toutes occurrences d'un caractère
+			\item Suppression de n caractères en début ou fin de chaîne
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string foo{"Boost"};
+cout << erase_all_copy(foo, "o") << '\n'; // Bst\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.StringAlgorithms\titlehfill{}3/5}
+	\begin{itemize}
+		\item Recherche de sous-chaîne
+		\begin{itemize}
+			\item Recherche de la première, dernière ou i\ieme{} occurrence
+			\item Récupération des n premiers ou derniers caractères de la chaîne
+		\end{itemize}
+		\item Concaténation de chaînes
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<string> foo{"foo1", "foo2", "foo3"};
+cout << join(foo, "-");   // foo1-foo2-foo3\end{lstlisting}
+
+	\begin{itemize}
+		\item Découpage de chaîne
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string foo = "Boost C++ Libraries";
+vector<string> bar;
+split(bar, foo, is_space());
+// bar : "Boost", "C++", "Libraries"\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.StringAlgorithms\titlehfill{}4/5}
+	\begin{itemize}
+		\item Remplacement de caractères
+		\begin{itemize}
+			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item Remplacement de la première, dernière, i\ieme{} ou toutes occurrences d'un caractère
+			\item Remplacement de n caractères en début ou fin de chaîne
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string foo{"Boost"};
+cout << replace_all_copy(foo, "o", "0") << '\n';
+// B00st\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.StringAlgorithms\titlehfill{}5/5}
+	\begin{itemize}
+		\item \textit{Trimming}
+		\begin{itemize}
+			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item A droite, à gauche ou aux deux extrémités
+			\item Variante éliminant les doublons \og d'espaces\fg{} dans la chaîne
+			\item Variante remplaçant les \og espaces\fg{} dans la chaîne par une autre séquence de caractères
+			\item Variante prenant un prédicat de choix des caractères
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string foo{"    Boost    "};
+cout << trim_left_copy(foo) << '\n';  // "Boost    "
+cout << trim_right_copy(foo) << '\n'; // "    Boost"
+cout << trim_copy(foo) << '\n';       // "Boost"
+
+string foo{"    Boost    Lib    "};
+cout << trim_all_copy(foo) << '\n';   // "Boost Lib"\end{lstlisting}
+\end{frame}
+
+\subsection*{Doublons C++11 et suivants}
+\begin{frame}[fragile]
+	\frametitle{Autres doublons avec la bibliothèque standard}
+	\begin{itemize}
+		\item \lstinline|Boost.Regex| : gestion d'expressions rationnelles
+		\begin{itemize}
+			\item Sensiblement identique aux \textit{regex} de C++11
+		\end{itemize}
+		\item \lstinline|Boost.Bind| similaire \lstinline|std::bind()|
+		\item \lstinline|Boost.LexicalCast| : conversion entre chaîne et nombre
+		\begin{itemize}
+			\item API totalement différente de \lstinline|std::to_string()| et \lstinline|std::stoX()|
+		\end{itemize}
+	\end{itemize}
+
+	\begin{exampleblock}{Do}
+		Préférez la bibliothèque standard à Boost lorsque c'est possible
+	\end{exampleblock}
+\end{frame}
+
+\subsection*{Conteneur}
+\begin{frame}[fragile]
+	\frametitle{Boost.CircularBuffer}
+	\begin{itemize}
+		\item Buffer circulaire dont la taille est définie à la création
+		\item API compatible avec la bibliothèque standard
+		\item \lstinline|push_back()| permet d'ajouter un élément au buffer
+		\item \ldots{} en écrasant le plus ancien si besoin
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+unsigned int CpuAlarm::getCurrentAlarmLevel() {
+  m_lastCpuUseValues.push_back(getCurrentValue());
+  unsigned int averageCpu = 0;
+
+  for(auto it : m_lastCpuUseValues)
+    averageCpu += it;
+
+  averageCpu /= m_lastCpuUseValues.size();
+  return averageCpu; }\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.LockFree}
+	\begin{itemize}
+		\item Conteneur lock-free
+		\begin{itemize}
+			\item \lstinline|lockfree::queue|
+			\item \lstinline|lockfree::stack|
+			\item \lstinline|lockfree::spsc_queue| : file \textit{lock-free} optimisée pour le cas \og producteur unique / consommateur unique\fg{}
+		\end{itemize}
+		\item API compatible avec la bibliothèque standard
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Autres conteneurs de Boost}
+	\begin{itemize}
+		\item \lstinline|Boost.Array| similaire à \lstinline|std::array|
+		\item \lstinline|Boost.Unordered| similaire aux tables de hachage de la bibliothèque standard
+
+\note[item]{Présence historique datant d'avant l'intégration des équivalents dans la bibliothèque standard}
+
+		\item \lstinline|Boost.Heap| \textit{priority queues} (plus riches que \lstinline|std::priority_queue|)
+		\item \lstinline|Boost.MultiIndex| conteneurs indexés selon plusieurs critères
+		\item \lstinline|Boost.Bimap| map indexée par les deux entrées
+		\item \lstinline|Boost.MultiArray| tableaux multi-dimensionnels
+		\item \lstinline|Boost.Intrusive| support à la création de conteneurs intrusifs
+
+\note[item]{Conteneurs intrusifs stockent les objets originaux et non des copies}
+\note[item]{Objectif : les performances}
+\note[item]{Impacts : ne fonctionne que pour les objets prévus pour}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Tokenisation}
+\begin{frame}[fragile]
+	\frametitle{Boost.Tokeniser}
+	\begin{itemize}
+		\item \textit{Tokenisation} d'une chaîne (ou d'une séquence) de caractères
+		\item Itération sur les \textit{token}
+	\end{itemize}
+
+
+\note[item]{\textit{Tokenisation} en anglais et parfois en franglais mais ne doit pas être confondue avec la \textit{tokenisation} cryptographique. Ici c'est la \textit{tokenisation} de l'analyse lexicale, c'est à dire le découpage en lexème}
+
+
+	\begin{lstlisting}[language=C++]
+char_separator<char> sep("[]");
+tokenizer<char_separator<char>> tokens(data, sep);
+
+for(const std::string& text : tokens)
+{ ... }\end{lstlisting}
+\end{frame}
+
+\subsection*{Entrée/sortie}
+\begin{frame}[fragile]
+	\frametitle{Boost.Asio\titlehfill{}1/2}
+	\begin{itemize}
+		\item Gestion des entrées/sorties en mode synchrone ou asynchrone
+		\item Encapsulation des sockets bas-niveau
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+io_service io_service;
+tcp::acceptor acceptor(io_service, 
+                       tcp::endpoint(tcp::v4(), 13));
+
+for(;;) {
+  tcp::socket socket(io_service);
+  acceptor.accept(socket);
+  ...}\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boost.Asio\titlehfill{}2/2}
+	\begin{lstlisting}[language=C++]
+io_service io_service;
+tcp::resolver resolver(io_service);
+tcp::resolver::query query("127.0.0.1", "daytime");
+tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
+tcp::socket socket(io_service);
+connect(socket, endpoint_iterator);\end{lstlisting}
+
+	\begin{itemize}
+		\item Mais également des ports séries et des timers
+	\end{itemize}
+\end{frame}
+
+\subsection*{Le reste}
+\begin{frame}[fragile]
+	\frametitle{Et bien d'autres}
+	\begin{itemize}
+		\item Pointeurs intelligents
+		\item Graphes
+		\item \textit{Ranges}
+		\item Algorithmes
+		\item Tribool
+		\item Programmation parallèle \& communication inter-processus
+		\item Système de signaux
+		\item Écriture de parseurs et générateurs
+		\item Programmation fonctionnelle
+		\item Support à la méta-programmation
+		\item Logs
+		\item Options en ligne de commande
+		\item Sérialisation
+		\item \ldots
+	\end{itemize}
+\end{frame}
+\end{document}

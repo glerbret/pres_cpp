@@ -1,0 +1,2097 @@
+\documentclass[C++.tex]{subfiles}
+\begin{document}
+
+\section{Retour sur C++98/C++03}
+\subsection*{Rappels}
+\begin{frame}
+	\frametitle{Rappels historiques}
+	\begin{itemize}
+		\item Développement de \og C with classes\fg{} par Bjarne Stroustrup dans les années 80 aux Bell labs
+		\item Renommé C++ en 1983
+		\item Première version publique de CFront et de \textit{The C++ Programming Language} en 1985
+		\item Première normalisation en 1998
+		\item Amendement en 2003
+		\item Un \textit{Technical Report} (TR1 publié en 2007) :
+		
+\note[item]{Les Technical Report (TR) ne sont pas normatifs (ISO : An informative document containing information of a different kind from that normally published in a normative document.).}
+		
+		\begin{itemize}
+			\item Partiellement implémenté par certains compilateurs ou Boost
+			\item Repris en partie dans les normes suivantes (C++11, 14 et 17) et TS
+			
+\note[item]{Les Technical Specification (TS) sont des documents normatifs ayant vocation a être intégrés dans la norme, ce sont essentiellement des preview (ISO : A normative document representing the technical consensus within an ISO committee).}
+			
+		\end{itemize}
+		\item Un projet de TR2 finalement transposé en \textit{Technical Specification}
+		
+\note[item]{Pas de publication de TR2 car changement des procédures au sein du comité ISO C++.}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{La \og philosophie\fg{} du C++}
+	\begin{itemize}
+		\item Langage multi-paradigme, impératif à typage statique déclaratif
+
+\note[item]{Procédural, objet, générique et Template metaprogramming}
+\note[item]{Typage statique déclaratif, impératif : vrai en C++98 plus nuancé après}
+\note[item]{déclaratif est un terme de mon choix (consensus ?). Explicite convient}
+\note[item]{Multi-paradigme, large choix d'outils, responsabilisation du développeur : tendance des langages industriels mainstream (Java - lambda, generic, code dans les interfaces-, C\#, Php, Python, ECMAScript)}
+
+		\item A visée généraliste
+
+\note[item]{General Purpose : par opposition à Fortran, Cobol, R ou l'assembleur}
+
+		\item Initialement, ajout des classes (Simula) au C : le \textit{C with classes}
+		\item Forte compatibilité avec le C : vaste sous-ensemble commun proche du C
+
+\note[item]{Sous-ensemble variable au fil des normes C (89/90, 99, 11) et C++}
+\note[item]{Trop proche du C pour certains, pas assez pour d'autres qui souhaiteraient que le sous-ensemble commun soit le C}
+\note[item]{Héritage - bas niveau - du C est probablement une part du succès}
+\note[item]{meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type char, pas de cast implicite depuis void)}
+
+		\item \textit{Zero-overhead abstraction} : Ne payons pas pour ce que nous n'utilisons pas
+		\item Large panel d'outils variés pour des développeurs responsables
+		\item Compatibilité ascendante forte mais pas absolue
+
+\note[item]{Il y a eu des ruptures au passage à C++11}
+
+		\item Évolutions par les bibliothèques plutôt que par le langage
+
+\note[item]{En particulier via la bibliothèque standard}
+
+		\item Pas de \og magie\fg{} dans la bibliothèque standard
+
+\note[item]{Le contenu de la bibliothèque standard pourrait être écrit dans une bibliothèque tierce (contrairement aux string java)}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Normalisation}
+	\begin{itemize}
+		\item Normalisé par l'ISO : \url{http://www.open-std.org/JTC1/SC22/WG21/}
+
+\note[item]{Sous-comité 22, Working group 21}
+
+		\item Comité distinct de celui du C, mais des membres en commun dont certains pour l'échange entre groupes
+
+\note[item]{C : Working group 14}
+
+		\item Pas de propriétaire du C++
+
+\note[item]{Pas de propriétaire donc libre de droit, mais la norme ISO définitive est payante}
+
+		\item Actualité de normalisation, et du C++ en général, sur \href{https://isocpp.org/}{isocpp.org}
+
+\note[item]{Également une FAQ plutôt bien sur C++, ainsi qu'un guide de bonnes pratiques, les drafts de la norme et les propositions}
+
+		\item Une conférence annuelle : \href{http://cppcon.org/}{cppcon}
+
+\note[item]{Avec une chaîne youtube et un GIT contenant les supports}
+	\end{itemize}
+
+	\begin{alertblock}{isocpp.org n'est pas le site du comité}
+		isocpp.org n'est pas le site officiel du comité de normalisation mais celui de \textit{Standard C++ Foundation} dont le but est la promotion du C++\\
+		Les deux sont cependant très proches et partagent de nombreux membres
+
+\note[item]{Membres communs entre isocpp.org et comité : Bjarne Stroustrup, Herb Sutter (président de isocpp et secrétaire du comité)}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Norme \& support}
+	\begin{itemize}
+		\item Compilateur :
+		\begin{itemize}
+			\item GCC : \href{https://gcc.gnu.org/projects/cxx-status.html}{gcc.gnu.org/projects/cxx-status.html}
+			\item Clang (LLVM) : \href{http://clang.llvm.org/cxx_status.html}{clang.llvm.org/cxx\_status.html}
+			\item Visual studio : \href{https://msdn.microsoft.com/fr-fr/library/hh567368.aspx}{msdn.microsoft.com/fr-fr/library/hh567368.aspx}
+		\end{itemize}
+		\item Bibliothèque standard :
+		\begin{itemize}
+			\item GCC : \href{https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html}{gcc.gnu.org/onlinedocs/libstdc++/manual/status.html}
+			\item Clang : \url{http://libcxx.llvm.org/cxx1z_status.html}
+		\end{itemize}
+		\item Vision globale : \href{http://en.cppreference.com/w/cpp/compiler_support}{en.cppreference.com/w/cpp/compiler\_support}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Gestion des erreurs}
+\begin{frame}
+	\frametitle{Erreurs - Code retour\titlehfill{}1/2}
+
+\note[item]{Mécanisme typique du C}
+
+	\begin{itemize}
+		\item Plusieurs variantes :
+		\begin{itemize}
+			\item Code retour dédié
+			\item Valeur particulière indiquant un échec (\lstinline|NULL|, \lstinline|-1|)
+			\item Récupération de la dernière erreur (\lstinline|errno|, \lstinline|GetLastError()|)
+		\end{itemize}
+		\item \og Un test toutes les deux lignes de code\fg{}
+		\item Nécessite de gérer \og à la main\fg{} la remontée de la pile d'appel
+		\item Adapté au traitement local des erreurs, pas au traitement \og plus haut\fg{}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs -  Code retour\titlehfill{}2/2}
+	\begin{alertblock}{Problèmes}
+		\begin{itemize}
+			\item Impact négatif sur la lisibilité
+			\item Souvent délaissé dans un contexte d'enseignement ou de formation
+
+\note[item]{Preuve de la gestion d'erreurs délaissée : la présente présentation}
+
+			\item Finalement beaucoup de code avec une gestion d'erreur déficiente
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Erreurs - Exception\titlehfill{}1/2}
+	\begin{itemize}
+		\item Lancée par un \lstinline|throw|\dots{}
+		\item \dots{} et attrapée un \lstinline|catch()| depuis un bloc \lstinline|try|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+try
+{
+  ...
+  // Lancement d'une exception
+  throw logic_error("Oups !");
+  ...
+}
+catch(logic_error& e)
+{
+  // Traitement de l'exception
+}\end{lstlisting}
+
+\note[item]{Pour gagner de la place : pas d'include, indentation discutable, pas de main, pas de gestion d'erreur, pas de std dans les exemples de cette présentation}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs - Exception\titlehfill{}2/2}
+	\begin{itemize}
+		\item De n'importe quel type (y compris entier) \dots{}
+		\item \dots{} mais il est recommandé qu'elles héritent de \lstinline|std::exception| (via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autre)
+		\item \lstinline{catch(...)} pour attraper les exceptions de tout type
+		\item Les exceptions non attrapées terminent le programme
+		\item Pas de \lstinline[keywordstyle=\color{black}]|finally|
+		\item Utilisées par la bibliothèque standard (p.ex. \lstinline|std::bad_alloc|)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs - Critiques des exceptions\titlehfill{}1/2}
+	\begin{itemize}
+		\item Fréquemment critiquées, parfois interdites par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide)}
+		\item Des arguments très variés :
+		\begin{itemize}
+			\item \og Je ne comprends pas\fg{}, \og Ça ne sert à rien\fg{}, \ldots
+			\item Impact négatif sur les performances
+		\end{itemize}
+
+		\pause
+
+		\begin{block}{Non, pas vraiment}
+			\begin{itemize}
+				\item Recevable à l'origine, mais maintenant une exception non levée ne coute quasiment rien
+				\item Souvent étayée par une comparaison avec une non gestion d'erreur : est-ce pertinent ? 
+			\end{itemize}
+		\end{block}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs - Critiques des exceptions\titlehfill{}2/2}
+	\begin{itemize}
+		\item Des arguments très variés :
+		\begin{itemize}
+			\item Mauvais support par les différents outils
+		\end{itemize}
+
+		\begin{block}{Très variable}
+			\begin{itemize}
+				\item Correctement supportées par les compilateurs actuels
+				\item Inégalement gérées par les outils d'analyse, de documentation, \ldots
+			\end{itemize}
+		\end{block}
+
+		\begin{itemize}
+			\item Code plus complexe à analyser
+			\item Difficiles à introduire dans une large base de code sans exception
+
+\note[item]{L'argument de la difficulté d'introduction est à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)}
+
+			\item Absence d'ABI normalisée
+
+\note[item]{Mais le problème d'ABI est plus large que les seules exceptions}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs - Exception safety\titlehfill{}1/2}
+	\begin{itemize}
+		\item \textit{No-throw guarantee} : l'opération ne peut pas échouer (p.ex. \lstinline|swap|)
+
+\note[item]{No-throw : les exceptions internes sont attrapées et traitées en interne}
+
+		\item \textit{Strong exception safety} : pas d'effet de bord, état conservé
+
+\note[item]{Strong : les objets sur lesquels opèrent la fonction (paramètres ou classe dont la fonction est membre) conservent leur valeur d'avant l'appel (Commit or rollback)}
+
+		\item \textit{Basic exception safety} : invariants conservés, pas de fuite
+
+\note[item]{Basic (No-leak guarantee) : les valeurs peuvent être différentes mais elles restent valides}
+\note[item]{On ne peut pas poursuivre l'opération et des données \og transactionnelles\fg{} peuvent avoir été perdues mais on est encore capable de travailler et notamment de traiter l'erreur}
+
+		\item \textit{No exception safety} : aucune garantie
+	\end{itemize}
+
+	\begin{exampleblock}{Do}
+		Privilégiez les garanties les plus fortes possibles (\textit{no-throw} et \textit{strong})
+	\end{exampleblock}
+
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item Évitez la garantie faible
+			\item Évitez absolument le \textit{No exception safety}
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Erreurs - Exception safety\titlehfill{}2/2}
+	\begin{exampleblock}{Do}
+		Utilisez l'idiome \og \textit{copy-and-swap}\fg{} pour la \textit{Strong exception safety}
+	\end{exampleblock}
+
+\note[item]{Voir Exceptionnal C++ et got}
+
+	\begin{lstlisting}[language=C++]
+class A {
+public:
+  A(const A&);
+  A& operator=(A);
+  friend void swap(A& lhs, A& rhs); };  // Nothrow
+
+A& A::operator=(A other) {              // Copy
+  swap(*this, other);                   // And swap
+  return *this;}\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs - Exceptions et bonnes pratiques}
+	\begin{exampleblock}{Do}
+		\textit{Throw by value, catch by reference} (\og C++ Coding Standard\fg{} chap. 73)
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Utilisez des types dédiés héritant de \lstinline|std::exception|
+			\item Définissez des hiérarchies d'exceptions
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item N'utilisez jamais les exceptions pour contrôler le flux d'exécution
+			\item Réservez les exceptions au signalement d'erreurs
+
+\note[item]{Il est tentant d'utiliser des exceptions pour sortir d'un ensemble complexe de boucles imbriquées\\
+C'est la solution de facilité mais ce n'est pas la bonne solution\\
+La solution correcte est de simplifier le code, d'utiliser les algorithmes standard et d'utiliser les instructions de contrôle}
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Erreurs - Et \lstinline|assert| ?}
+	\begin{itemize}
+		\item Arrête le programme si l'expression est évalué à 0 \ldots
+		\item \ldots{} et affiche au moins l'expression, le fichier et la ligne
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+assert(expression);\end{lstlisting}
+
+	\begin{itemize}
+		\item Sans effet lorsque \lstinline|NDEBUG| est défini :
+		\begin{itemize}
+			\item Coût nul en \textit{Release}
+			\item Inutilisable pour les erreurs d'exécution et le contrôle des entrées
+		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Objectifs}
+		Traquer les erreurs de programmation et les violations de contrat interne
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Erreurs - Conclusion}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Utilisez exceptions ou codes retour pour les erreurs d'exécution et la vérification des données externes
+			\item Réservez \lstinline|assert| pour les erreurs de programmation et la vérification des contrats internes
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		Préférez, pour les erreurs, les exceptions aux codes retour (\og C++ Coding Standard\fg{} chap. 72)
+
+\note[item]{Pour la remontée d'erreur, pas pour la remontée d'information normale même dégradé (p.ex. pour dire qu'un élément n'est pas trouvé dans un conteneur)}
+	\end{exampleblock}
+
+	\begin{alertblock}{Don't}
+		Jamais d'\lstinline|assert| pour les erreurs d'exécution et le contrôle des entrées
+	\end{alertblock}
+\end{frame}
+
+\subsection*{Gestion des ressources}
+\begin{frame}[fragile]
+	\frametitle{Gestion des ressources - Gestion manuelle\titlehfill{}1/3}
+	\begin{alertblock}{Premier problème}
+		Comment gérer les erreurs ?
+	\end{alertblock}
+
+	\begin{itemize}
+		\item Solution C : \textit{Single Entry Single Exit}, bloc unique de libération
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+FILE* file = NULL;
+char* memory = NULL;
+...
+memory = malloc(50);
+if(!memory) goto err;
+...
+file = fopen("bar.txt", "r");
+if(!file) goto err;
+...
+err:
+free(memory);
+if(file) fclose(file);\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources - Gestion manuelle\titlehfill{}2/3}
+	\begin{itemize}
+		\item Laborieux et source d'erreur
+		\item Difficile à mettre en place en présence d'exception (pas de SESE)
+	\end{itemize}
+
+	\onslide<2>
+	\begin{block}{Quiz : Comment éviter les fuites mémoires ici ?}
+		\begin{lstlisting}[language=C++]
+char* memory1 = NULL;
+char* memory2 = NULL;
+...
+memory1 = new char[50];
+...
+memory2 = new char[200];
+...
+delete[] memory1;
+delete[] memory2;\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources - Gestion manuelle\titlehfill{}3/3}
+	\begin{alertblock}{Second problème}
+		Comment copier des classes possédant des ressources ?
+	\end{alertblock}
+
+	\begin{itemize}
+		\item Constructeurs et opérateurs générés copient les adresses des pointeurs
+		\item La double libération est une erreur
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+struct Foo {
+public:
+  Foo() : bar(new char[50]) {}
+  ~Foo() { delete[] bar; }
+
+private:
+  char* bar; };\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - Gestion manuelle et bonnes pratiques}
+	\begin{exampleblock}{Do}
+		Si une classe manipule une ressource brute, elle doit :
+		\begin{itemize}
+			\item Soit définir constructeur de copie et opérateur d'affectation
+			\item Soit les déclarer privés sans les définir (classe non copiable)
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		\textit{Big Rule of three} : si vous devez définir l'une des trois fonctions de base que sont le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
+
+\note[item]{Ou les \og désactiver\fg{} en les déclarant sans les définir}
+
+	\end{exampleblock}
+
+\note[item]{Forme canonique orthodoxe de Coplien}
+\note[item]{Thèse de Coplien : \textit{Multi-paradigm Design}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - RAII\titlehfill{}1/4}
+	\begin{itemize}
+		\item \textit{Resource Acquisition Is Initialization}
+		\item Acquisition des ressources lors de l'initialisation de l'objet \ldots
+		\item \ldots{} et libération automatique lors de sa destruction
+
+\note[item]{Proche du try with resource de Java ou du with de Python}
+
+		\item Propriété intrinsèque des objets \og par design\fg{}
+
+\note[item]{Intrinséque à la classe contrairement à Java ou Python}
+
+		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \lstinline|auto_ptr|)
+		\item Conséquences :
+		\begin{itemize}
+			\item Les objets sont créés dans un état cohérent, testable et utilisable
+			\item Les ressources sont automatiquement libérées à la destruction de l'objet
+
+\note[item]{Et de façon déterministe}
+			
+			\item Les capsules RAII se copient sans effort
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - RAII\titlehfill{}2/4}
+	\begin{exampleblock}{Do}
+		Faites des constructeurs qui construisent des objets :
+		\begin{itemize}
+			\item Cohérents
+			\item Utilisables
+			\item Si possible, complètement initialisés
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{alertblock}{Don't}
+		Évitez les couples constructeur \og vide\fg{} et fonction d'initialisation
+
+\note[item]{Régle générique, il existe des contre exemples}
+	\end{alertblock}
+
+	\begin{alertblock}{Don't}
+		Évitez les couples constructeur \og vide\fg{} et ensemble de mutateurs
+
+\note[item]{Ca ne signifie pas qu'il n'y ait pas de setter, seulement que le constructeur doit être \og complet\fg{}}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources - RAII\titlehfill{}3/4}
+	\begin{alertblock}{Attention : signalement d'erreur}
+		\begin{itemize}
+			\item Pas d'erreur ni d'exception pour les destructeurs
+			\item Libération de ressources peut échouer (p.ex. \lstinline|flush| lors de la fermeture de fichier)
+
+\note[item]{Problème rare qui concerne peu d'objets et uniquement dans des cas extrèmes}
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{lstlisting}[language=C++]
+{
+  ifstream src("input.txt");
+  ofstream dst("output.txt");
+  copyFiles(src, dst);
+}
+
+removeFile(src);
+// Potentielle perte de donnees\end{lstlisting}
+
+\note[item]{Le problème se résoud en forçant l'écriture (flush) en fin de la fonction copyFiles() et en remontant une exception en cas d'erreur}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources - RAII\titlehfill{}4/4}
+	\begin{alertblock}{Attention : \lstinline|std::auto_ptr|}
+		\begin{itemize}
+			\item \lstinline|std::auto_ptr| est copiable
+			\item Cette copie transfère la responsabilité de la ressource
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{lstlisting}[language=C++]
+void foo(auto_ptr<int> bar) {}
+
+auto_ptr<int> bar(new int(5));
+foo(bar);
+// Erreur : bar n'est plus utilisable
+cout << *bar << "\n";\end{lstlisting}
+
+\note[item]{Heureusement, auto\_ptr est déprécié en C++11 et remplacé par unique\_ptr qui fonctionne mieux (sémantique de déplacement)}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - Loi de Déméter\titlehfill{}1/3}
+
+\note[item]{À strictement parler, ça ne concerne pas la gestion des ressources en terme de libération mais d'accès}
+\note[item]{Permet de mettre en place RAII et de limiter les accès non contrôlés et pertes de responsabilité}
+
+	\begin{itemize}
+		\item \ldots Ou principe de connaissance minimale
+		\item \og Ne parlez qu'à vos amis proches\fg{}
+		\item Un objet \textit{A} peut utiliser les services d'un deuxième objet \textit{B} \ldots
+		\item \ldots{} mais ne doit pas utiliser \textit{B} pour accéder à un troisième objet
+
+\note[item]{Dis autrement : Les amis de mes amis sont de parfaits inconnus}
+
+		\item En particulier, une classe n'expose pas ses données
+
+		\begin{block}{Exceptions}
+			Les agrégats et les conteneurs dont le rôle est de contenir des données
+		\end{block}
+	\end{itemize}
+
+	\begin{block}{Objectifs}
+		\begin{itemize}
+			\item Mise en place de RAII
+			\item Meilleure encapsulation
+			\item Respect des patterns SOLID et GRASP
+
+\note[item]{Notamment le principe ouvert-fermé, l'inversion de dépendance et le couplage faible}
+
+			\item Meilleure lisibilité, maintenabilité et réutilisabilité
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - Loi de Déméter\titlehfill{}2/3}
+	\begin{exampleblock}{Do, agrégats}
+		\begin{itemize}
+			\item Utilisez des structures plutôt que des classes
+			\item Laissez les membres publics
+			\item Fournissez, éventuellement, des constructeurs initialisant les données
+		\end{itemize}
+
+\note[item]{Pas de fonction de services dans les agrégats, éventuellement des fonctions techniques}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, conteneurs}
+		Respectez l'interface et la logique des conteneurs standard
+
+\note[item]{Interface standard aussi utile pour point suivant (conteneurs/algorithmes)}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, classes de service}
+		\begin{itemize}
+			\item Exposez des services non des données
+			\item Pas de données publiques
+			\item Limitez les accesseurs et encore plus les mutateurs
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources - Loi de Déméter\titlehfill{}3/3}
+	\begin{block}{Conseil}
+		\begin{itemize}
+			\item N'hésitez pas à étendre l'interface de classe avec des fonctions libres
+
+\note[item]{Interface étendue : opérateur d'IO, de calcul, etc.}
+
+			\item Pensez à l'amitié pour implémenter cette interface étendue
+			\item Implémentez-la en terme de fonctions membres (p.ex. + à partir de +=)
+		\end{itemize}
+	\end{block}
+
+	\begin{lstlisting}[language=C++]
+class Foo {
+public:
+  Foo& operator+=(const Foo& other); };
+
+Foo operator+(Foo lhs, const Foo& rhs) {
+  return lhs += rhs; }\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - Et le Garage Collector ?}
+	\begin{itemize}
+		\item Pas de GC dans le langage ni dans la bibliothèque standard
+		\item \ldots{} mais un sujet de discussion récurrent
+
+\note[item]{Sujet de discussion récurrent et très disputé}
+
+		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm}) \ldots
+		\item \ldots{} mais limité par manque de support par le langage
+
+\note[item]{Support GC meilleur en C++11 mais pas parfait}
+
+		\item Fondamentalement non déterministe : acceptable pour la mémoire pas pour d'autres ressources
+
+\note[item]{Problème avec d'autres types de ressource : raison d'être du try with resource de Java}
+
+		\item Beaucoup plus adapté à la gestion des structures cycliques
+
+\note[item]{Difficulté de la gestion des cycles en RAII : \lstinline|std::shared_ptr| ou \lstinline|std::weak_ptr|, ou responsabilité déléguée à un tiers ?}
+
+		\item D'autres avantages pour la mémoire (compactage, recyclage, \ldots)
+	\end{itemize}
+
+	\begin{block}{Wait and see}
+		Un complément à RAII, pas un concurrent ni un remplaçant\\
+		Indisponible à ce jour mais peut-être plus tard \ldots
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - Conclusion\titlehfill{}1/2}
+	\begin{exampleblock}{Do}
+		Utilisez RAII
+		\begin{itemize}
+			\item Préférez les classes RAIIsantes de la bibliothèque standard aux ressources brutes
+			\item Encapsulez les ressources dans des capsules RAII standard
+			\item Concevez vos classes en respectant le RAII
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		Respectez Déméter
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ressources - Conclusion\titlehfill{}2/2}
+	\begin{alertblock}{Don't}
+		Pas de \lstinline|delete| dans le code applicatif
+
+\note[item]{\lstinline|delete| possible dans les classes de plus bas niveau qui définissent des capsules RAII}
+	\end{alertblock}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Sous Linux, méfiez-vous de l'\textit{Optimistic Memory Allocator}
+
+\note[item]{Retourne une adresse lors d'un \lstinline|new| ou d'un \lstinline|malloc()| sans allocation avec peu de contrôle}
+\note[item]{Allocation uniquement lors de l'usage de la mémoire}
+\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du uptime, de la priorité ou du propriétaire ?) mais jamais \lstinline|init|}
+\note[item]{Pourquoi OMA : les soft demandent plus de mémoire que ce qu'ils utilisent}
+
+			\item Pensez à paramétrer correctement l'OS
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\subsection*{STL}
+\begin{frame}
+	\frametitle{STL\titlehfill{}1/3}
+	\begin{itemize}
+		\item \textit{Standard Template Library} : partie de la bibliothèque standard comprenant :
+
+\note[item]{Formellement, la STL n'existe plus dans la norme C++ actuelle.}
+
+		\begin{itemize}
+			\item Classes conteneurs et \lstinline|std::basic_string| : données
+
+\note[item]{\lstinline|std::basic_string| n'est pas vraiment un conteneur. Certes, il contient, est template et a une interface \og conteneurs\fg{}. Mais a une sémantique particulière (chaînes de caractères) et n'est pas remplaçable du fait de cette sémantique et possède des algorithmes spécifiques}
+\note[item]{\lstinline|std::string| est une instanciation de \lstinline|std::basic_string|}
+
+			\item Itérateurs : parcours des conteneurs
+			\item Algorithmes : manipulation des données via les itérateurs
+
+\note[item]{Via des itérateurs donc sans connaissance du conteneur ni de la structure de donnée}
+
+		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Note}
+		Également quelques algorithmes manipulant directement des données (p.ex. \lstinline|std::min()|)
+	\end{block}
+
+	\begin{itemize}
+		\item Conçue initialement par Alexander Stepanov :
+		\begin{itemize}
+			\item Promoteur de la programmation générique
+
+\note[item]{Programmation générique : template en C++, generics en Java}
+\note[item]{Programmation générique = polymorphisme paramétrique}
+
+			\item Sceptique vis à vis de la POO
+
+\note[item]{Pour Stepanov : POO = hoax (canular)}
+\note[item]{Stepanov a de vrais arguments derrière son affirmation qui en outre cible davantage, amha, le marketing survendeur (silver bullet) et les promesses non tenues que la POO elle-même}
+\note[item]{Contrairement à une idée reçue, Stepanov ne s'oppose pas à l'abstraction et à encapsulation mais à la façon dont la POO prétend y répondre}
+
+		\end{itemize}
+		\item Basée sur les templates, pas de POO
+
+\note[item]{Pas de POO dans la STL : utilisation de classes (abstraction, modularité) mais ni polymorphisme de sous-typage ni dynamic dispatch}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL\titlehfill{}2/3}
+	\begin{block}{Intérêts}
+		\begin{itemize}
+			\item n conteneurs et m algorithmes, seulement m implémentations
+
+\note[item]{Seulement m implémentations vs. n * m pour modèle objet avec algorithme sous forme de fonction membre}
+
+			\item Tout nouvel algorithme est disponible sur tous conteneurs compatibles
+			\item Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
+
+\note[item]{Compatible, c'est à dire que le conteneur fournit un itérateur permettant les opérations requises par l'algorithme}
+
+			\item Changement de conteneur à effort réduit
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Pour aller plus loin}
+		\cite{effStl} de Scott Meyers
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL\titlehfill{}3/3}
+	\begin{block}{A nuancer}
+		Malgré tout des algorithmes en fonction interne sur certains conteneurs :
+		\begin{itemize}
+			\item Accès par itérateurs insuffisant (p.ex. \lstinline|std::list|)
+			\item Habitudes et historiques (p.ex. \lstinline|std::string|)
+			\item Performances (p.ex. \lstinline|map.find()|)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\subsection*{STL - Conteneurs}
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs - Généralités}
+	\begin{itemize}
+		\item Contient des objets copiables et non constants
+
+\note[item]{En C++11 et suivante : copiables ou déplaçable}
+\note[item]{On peut avoir des conteneurs const et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de const}
+
+		\item \ldots{} qui peuvent être les adresses d'autres objets
+
+		\begin{alertblock}{Conteneurs de pointeurs}
+			Pas de libération des objets \og pointés\fg{}
+		\end{alertblock}
+
+		\item \ldots{} accessibles via un itérateur
+		\item Possibilité, en général, de fournir une politique d'allocation
+
+\note[item]{Généralement mais n'est pas vrai pour tous les conteneurs}
+
+		\item Vu des algorithmes, tout ce qui fournit une paire d'itérateurs est un conteneur
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs - Conteneurs séquentiels\titlehfill{}1/3}
+	\begin{itemize}
+		\item \lstinline|std::vector|
+		\begin{itemize}
+			\item Tableau de taille variable
+			\item Éléments contigus
+			\item Accès indexé
+			\item Croissance en temps amorti
+			\item Modifications en fin de vecteur (couteux ailleurs)
+
+\note[item]{Couteux d'insérer/retirer ailleurs qu'en fin car il faut déplacer les données}
+\note[item]{Possible d'échanger puis de retirer à la fin (si l'ordre n'est pas important)}
+
+			\item Compatible avec l'organisation mémoire des tableaux C (\lstinline|T* ptr = &vec[0];|)
+		\end{itemize}
+	\end{itemize}
+
+	\begin{alertblock}{Attention : \lstinline|std::vector<bool>| n'est pas un vecteur de booléen}
+		\begin{itemize}
+			\item Ne remplit pas tous les pré-requis des conteneurs
+			\item \lstinline|operator[]| ne retourne pas le booléen mais un objet \textit{proxy} vers celui-ci
+			\item Voir \cite{effStl} item 18
+
+\note[item]{Impossible de prendre l'adresse de \lstinline|v[0]| d'un \lstinline|vector<bool>|}
+
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{exampleblock}{Le conteneur par défaut}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - Conteneurs séquentiels\titlehfill{}2/3}
+	\begin{itemize}
+		\item \lstinline|std::list|
+		\begin{itemize}
+			\item Liste doublement chaînée
+			\item Accès bidirectionnel non indexé
+			\item Modification n'importe où à faible coût
+			\item Plusieurs algorithmes membres (tri, fusion, renversement, suppression, élimination de doublon)
+
+\note[item]{Algorithme membre pour la liste car accès non indexé}
+		\end{itemize}
+
+		\item \lstinline|std::deque|
+		\begin{itemize}
+			\item \textit{Double-ended queue}
+			\item Proche de \lstinline|std::vector| mais extensible aux deux extrémités
+			\item Accès indexé
+			\item Éléments non nécessairement contigus
+			\item Non compatible avec l'organisation mémoire des tableaux C
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - Conteneurs séquentiels\titlehfill{}3/3}
+	\begin{itemize}
+		\item \lstinline|std::string|
+		\begin{itemize}
+			\item Alias de \lstinline|std::basic_string<char>|
+			\item Stockage de chaînes de caractères
+			\item Manipulation de \og \textit{bytes}\fg{} et non de caractères encodés
+
+			\begin{alertblock}{\lstinline|std::string| et UTF-8}
+				\lstinline|length()| et \lstinline|size()| retournent la taille en nombre de \textit{bytes} non de caractères
+			\end{alertblock}
+
+			\item Contiguïté non garantie en C++98/03 (mais respectée en pratique)
+
+\note[item]{Pas d'implémentation non contigüe connue}
+
+			\item Un cousin peu utilisé pour les caractères larges : \lstinline|std::wstring|
+
+			\begin{alertblock}{Une API trop riche}
+				\begin{itemize}
+					\item De nombreuses fonctions membres qui gagneraient à être libres et génériques
+					\item Voir \href{http://www.gotw.ca/gotw/084.htm}{GotW \#84 : Monoliths "Unstrung"}
+				\end{itemize}
+			\end{alertblock}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - Conteneurs associatifs}
+	\begin{itemize}
+		\item Quatre saveurs :
+		\begin{itemize}
+			\item \lstinline|std::map| : clés-valeurs, ordonné par la clé, unicité des clés
+			\item \lstinline|std::multimap| : clés-valeurs, ordonné par la clé, multiplicité des clés
+			\item \lstinline|std::set| : valeurs ordonnées et uniques
+			\item \lstinline|std::multiset| : valeurs ordonnées et non-uniques
+		\end{itemize}
+
+		\begin{alertblock}{Pas des tables de hachage}
+			Généralement implémentés sous forme d'arbres binaires de recherche balancés (\textit{red-black tree} le plus souvent)
+		\end{alertblock}
+
+		\item Le critère d'ordre est configurable (strictement inférieur par défaut)
+
+		\begin{alertblock}{Attention}
+			Le critère d'ordre est un ordre strict
+		\end{alertblock}
+
+		\item Algorithmes membres (recherche) avec pour motivation les performances
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - Adaptateurs\titlehfill{}1/2}
+	\begin{itemize}
+		\item Basés sur un autre conteneur pour proposer une API simplifiée
+		\item Avantages et inconvénients du conteneur sous-jacent
+		\item \lstinline|std::stack| : 
+		\begin{itemize}
+			\item Pile LIFO
+			\item Basée sur \lstinline|std::vector|, \lstinline|std::list| ou \lstinline|std::deque|
+		\end{itemize} 
+		\item \lstinline|std::queue| :  
+		\begin{itemize}
+			\item File FIFO
+			\item Basée sur \lstinline|std::deque| ou \lstinline|std::list|
+		\end{itemize} 
+		\item \lstinline|std::priority_queue| :
+		\begin{itemize}
+			\item File dont l'élément de tête est toujours le plus grand
+			\item Basée sur \lstinline|std::vector| ou \lstinline|std::deque|
+			\item Critère d'ordre configurable (strictement inférieur par défaut)
+		\end{itemize} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs - Adaptateurs\titlehfill{}2/2}
+	\begin{lstlisting}[language=C++]
+stack<int, vector<int> > foo;
+for(int i=0; i<5; ++i) foo.push(i);
+
+// Affiche 4 3 2 1 0
+while(!foo.empty()) {
+  cout << ' ' << foo.top();
+  foo.pop(); }\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - conteneurs non-STL}
+
+\note[item]{valarray est laissé de côté, pas vraiment un conteneur}
+
+	\begin{itemize}
+		\item \lstinline|std::bitset| :
+		\begin{itemize}
+			\item Tableau de bits de taille fixe (paramètre template)
+			\item Conçu pour réduite l'empreinte mémoire
+			\item Pas d'itérateur ni d'interface \og STL\fg{}
+			\begin{block}{\lstinline|std::bitset| et \lstinline|std::vector<bool>|}
+				L'objectif de gain mémoire étant déjà adressé par \lstinline|std::bitset| plus adapté, pourquoi \lstinline|std::vector<bool>| n'est-il pas un vrai conteneur de booléen ?
+			\end{block}
+		\end{itemize}
+		\item Conteneurs non-standard :
+		\begin{itemize}
+			\item Listes simplement chaînées
+			\item Tables de hachage
+			\item Tableaux de taille fixe
+			\item Tampons circulaires
+			\item Arbres et graphes
+			\item Des variantes des conteneurs STL (p.ex. les \og \textit{ropes}\fg{})
+
+\note[item]{Ropes : chaîne découpée en morceaux reliés par une liste ou un arbre}
+\note[item]{Ropes : performance de modification au milieu, de découpage, etc., permettent le partage de sous-chaînes, résolvent le problème d'\textbf{espace d'adressage} pas assez grand malgré une mémoire libre largement suffisante, certaine localité des données permettant de bénéficier des lignes de caches (par rapport à une liste)}
+\note[item]{Ropes : alternative possible aux vector même si deque rempli déjà en partie ce rôle}
+\note[item]{En toute rigueur, string pouvait être implémenter sous forme de ropes en C++98/03, plus en C++11}
+\note[item]{Variantes ciblant un autre compromis : listes en tableau, ropes, map \og à plat\fg{}, etc.}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - \lstinline|std::pair|}
+	\begin{itemize}
+		\item Couple de deux valeurs
+		\item Pas un conteneur
+		\begin{itemize}
+			\item Type de retour de la recherche sur les \lstinline|std::map| (couple clé-valeur)
+			\item Candidat pour construire des vecteurs indexés par un non-numérique
+		\end{itemize}
+		\item \lstinline|std::make_pair| construit une paire
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - Choix du conteneur\titlehfill{}1/2}
+	\begin{exampleblock}{Do, par défaut}
+		\begin{itemize}
+			\item \lstinline|std::vector|
+			\item \lstinline|std::string| pour les chaînes de caractères
+		\end{itemize}
+	\end{exampleblock}		
+
+	\begin{exampleblock}{Do, performances}
+		Une seule règle : mesurez avec des données réelles sur la configuration cible
+	\end{exampleblock}
+
+	\begin{alertblock}{Flux d'octets}
+		Un flux d'octets est un \lstinline|std::vector<unsigned char>|, pas un \lstinline|std::vector<char>| et encore moins \lstinline|std::string|
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conteneurs - Choix du conteneur\titlehfill{}2/2}
+	\begin{block}{Conseils}
+		\begin{itemize}
+			\item Voir \cite{effStl} item 1
+			\item Pensez à \lstinline|reserve()|
+			\item Une insertion \og en vrac\fg{} suivie d'un tri peut être plus efficace qu'une insertion en place
+
+\note[item]{Insertion en vrac : vector vs. list}
+\note[item]{Voir overload 134 (août 2016) sur big O et les performances vector/string. Et l'importance de la localité des données}
+
+			\item Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
+
+\note[item]{vector de pair : vector vs. map}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\subsection*{STL - Itérateurs}
+\begin{frame}
+	\frametitle{STL Itérateurs - Généralités}
+	\begin{itemize}
+		\item Abstraction permettant de parcourir des collections d'objets
+		\item Interaction entre les conteneurs et les algorithmes
+		\item Interface similaire à celle d'un pointeur
+		\item Quatre types d'itérateurs :
+		\begin{itemize}
+			\item \lstinline|iterator| et \lstinline|const_iterator|
+			\item \lstinline|reverse_iterator| et \lstinline|const_reverse_iterator|
+
+\note[item]{Les \lstinline|const_iterator| sont des itérateurs itérant sur des valeurs constantes, ils peuvent être utilisés pour lire des données mais pas pour les écrire}
+
+		\end{itemize}
+		\item Itérateurs sur un conteneur : \lstinline|begin()| et \lstinline|end()|
+		\item Reverse itérateurs sur un conteneur : \lstinline|rbegin()| et \lstinline|rend()|
+		\item Les paires d'itérateurs doivent appartenir au même conteneur
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		Les itérateurs de fin pointent un élément après le dernier (\og \textit{past the end}\fg{}) et ne doivent pas être déréférencés
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Itérateurs - Catégories et opérations}
+	\begin{columns}[T]
+		\begin{column}{0.80\textwidth}
+			\begin{itemize}
+				\item Opérations communes : copie, affectation et incrémentation
+				\item Une hiérarchie de cinq catégories d'itérateurs :
+				\begin{itemize}
+					\item \textit{Input} : égalité (\lstinline|==| et \lstinline|\!=|) et lecture
+					\item \textit{Output} : écriture
+					\item \textit{Forward} : construction par défaut et \og \textit{multi-pass}\fg{}.
+
+\note[item]{multi\_pass signifie que \lstinline|a == b| implique \lstinline|++a == ++b| et qu'utiliser un itérateur sur une séquence ne modifie pas ce que référence un autre itérateur indépendant, c'est à dire que \lstinline|b=a; ++b; *a;| est équivalent à \lstinline|*a|}
+
+					\item \textit{Bidirectional} : décrémentation
+					\item \textit{Random access} : offset (\lstinline|+|, \lstinline|-|, \lstinline|+=|, \lstinline|-=| et \lstinline|[]|) et comparaison (\lstinline|<|, \lstinline|<=|, \lstinline|>|, \lstinline|>=|)
+				\end{itemize}
+			\end{itemize}
+		\end{column}
+
+		\begin{column}{0.20\textwidth}
+			\centering
+			\adjincludegraphics[height=0.5\textheight]{input_src/C++/Iterator_hierarchie.png}
+		\end{column}
+	\end{columns}
+
+	\begin{alertblock}{Attention}
+		Seules les versions mutables de \textit{Forward}, \textit{Bidirectional} et \textit{Random access} itérateurs sont des \textit{Output} itérateurs.
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Itérateurs - Catégories et conteneurs}
+	\begin{tabular}{ | p{5cm} | p{5cm} |}
+		\hline
+		Conteneur & Catégorie \\ 
+		\hline
+		\lstinline{std::vector} & \textit{Random access} \\ 
+		\hline
+		\lstinline{std::deque} & \textit{Random access} \\ 
+		\hline
+		\lstinline{std::list} & \textit{Bidirectionnal} \\ 
+		\hline
+		\lstinline{std::map} et \lstinline{std::multimap} & \textit{Bidirectionnal} \\ 
+		\hline
+		\lstinline{std::set} et \lstinline{std::multiset} & \textit{Bidirectionnal} \\ 
+		\hline
+	\end{tabular} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Itérateurs - Itérateur d'insertion}
+	\begin{itemize}
+		\item Itérateurs de type \textit{Output}
+		\item Insertion de nouveaux éléments plutôt que modification d'éléments existants
+
+\note[item]{Les itérateurs classiques pointent sur des éléments existants du conteneur}
+
+		\item Trois types :
+		\begin{itemize}
+			\item Insertion en queue de conteneur : \lstinline|back_inserter|
+			\item Insertion en tête : \lstinline|front_inserter|
+			\item Insertion à la position courante : \lstinline|inserter|
+
+\note[item]{La disponibilité de tel ou tel itérateur d'insertion dépend du conteneur}
+
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{STL -Algorithmes}
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Foncteurs\titlehfill{}1/2}
+	\begin{itemize}
+		\item Un foncteur est une instance de classe définissant un \lstinline|operator()()|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+class LessThan {
+public:
+  explicit LessThan(int threshold)
+    : m_threshold(threshold) {}
+  bool operator() (int value) { 
+    return value <= m_threshold;}
+
+private:
+  int const m_threshold; };
+
+LessThan func(10);
+cout << func(5) << "\n";   // Affiche 1\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Algorithmes - Foncteurs\titlehfill{}2/2}
+	\begin{itemize}
+		\item Avantage : possèdent données membres
+		\item Plusieurs foncteurs standard encapsulant les opérateurs : \lstinline|plus|, \lstinline|minus|, \lstinline|equal|, \lstinline|less|, \ldots
+		\item Construction de foncteur :
+		\begin{itemize}
+			\item Depuis des pointeurs de fonctions : \lstinline|prt_fun|
+			\item Depuis des fonctions membres : \lstinline|mem_fun|, \lstinline|mem_fun1|, \ldots
+			\item En niant d'autres foncteurs : \lstinline|not1|, \lstinline|not2|
+			\item En fixant des paramètres : \lstinline|bind1st|, \lstinline|bind2nd|
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Algorithmes - Prédicats}
+	\begin{itemize}
+		\item Un prédicat est un \og appelable\fg{} (foncteur ou pointeur de fonction) retournant un booléen (ou un type convertible en booléen)
+		\item Utilisés par de nombreux algorithmes
+		\item De nombreux algorithmes utilisent un prédicat par défaut (p.ex. \lstinline|<| ou \lstinline|==|) qui peut être remplacé
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Parcours\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::for_each()| parcourt un ensemble d'éléments \ldots
+		\item \ldots{} et applique un foncteur à chaque élément
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+void print(int i) { cout << i << ' '; }
+
+vector<int> foo{4, 5, 9 ,12};
+for_each(foo.begin(), foo.end(), print);\end{lstlisting}
+
+	\begin{alertblock}{Syntaxe}
+		Les exemples utilisent une initialisation de conteneur introduite pas C++11
+	\end{alertblock}
+
+	\begin{itemize}
+		\item Version du map/apply fonctionnel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Parcours\titlehfill{}2/2}
+	\begin{itemize}
+		\item Retourne le foncteur passé en paramètre
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+struct Aggregate {
+  Aggregate() : m_sum(0) {}
+  void operator() (int i) { m_sum += i;}
+  int m_sum; };
+
+vector<int> foo{4, 5, 9 ,12};
+for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30\end{lstlisting}
+
+	\begin{itemize}
+		\item Candidat pour le fold/reduce fonctionnel
+		\item Pas de sémantique, faible utilité
+
+\note[item]{Pas de sémantique : simple parcours}
+\note[item]{Gain limité par rapport à for, d'autant que le code est coupé en deux et encore plus par rapport aux algos}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Recherche linéaire\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::find()| recherche une valeur \ldots
+		\item \ldots{} et retourne un itérateur sur celle-ci
+		\item \ldots{} ou l'itérateur de fin si la valeur n'est pas présente
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 9 ,12};
+vector<int>::iterator it1;
+vector<int>::iterator it2
+
+// it1 pointe sur foo[1]
+it1 = find(foo.begin(), foo.end(), 5);
+// Et it2 sur foo.end()
+it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Recherche linéaire\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::find_if()| recherche depuis un prédicat
+
+		\begin{block}{Variante \og \_if\fg{}}
+			Les algorithmes suffixés par \_if utilise un prédicat plutôt qu'une valeur
+		\end{block}
+
+		\item \lstinline|std::find_first_of()| recherche la première occurrence d'un élément
+		\item \lstinline|std::search()| recherche la première occurrence d'un sous-ensemble
+		\item \lstinline|std::find_end()| recherche la dernière occurrence d'un sous-ensemble
+		\item \lstinline|std::adjacent_find()| recherche deux éléments consécutifs égaux
+		\item \lstinline|std::search_n()| recherche la première suite de n éléments consécutifs égaux à une valeur donnée
+
+\note[item]{\lstinline|find_first_of()|, \lstinline|find_end()|, \lstinline|adjacent_find()|, \lstinline|search()| et \lstinline|search_n()| peuvent prendre un prédicat de comparaison, sinon c'est la comparaison par défaut qui s'applique}
+\note[item]{Toutes retournent un itérateur sur l'élément (le premier dans le cas de la recherche d'un ensemble) recherché}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}1/3}
+	\begin{itemize}
+		\item Pré-requis : ensemble trié
+		\item \lstinline|std::lower_bound()| retourne un itérateur sur le première élément non strictement inférieur à la valeur recherchée \ldots
+
+\note[item]{Formulation \og n'est pas strictement inférieur\fg{} semble être une tournure compliquée pour supérieur ou égal, mais c'est précisément ce que fait la fonction et c'est important si on fourni un prédicat de comparaison}
+\note[item]{Un prédicat de comparaison peut être fourni, sinon c'est < qui s'applique}
+\note[item]{Bien entendu, l'ensemble doit être trié au sens du prédicat}
+
+		\item \ldots{} et l'itérateur de fin si un tel élément n'existe pas
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 7, 9, 12};
+
+// Affiche 7
+cout << *lower_bound(foo.begin(), foo.end(), 6);
+// Affiche 9
+cout << *lower_bound(foo.begin(), foo.end(), 9);\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}2/3}
+	\begin{itemize}
+		\item \lstinline|std::upper_bound()| retourne un itérateur sur le première élément strictement supérieur à la valeur recherchée 
+		\item \lstinline|std::equal_range()| retourne la paire (\lstinline|lower_bound|, \lstinline|upper_bound|)
+
+		\begin{alertblock}{Attention}
+			\lstinline|std::lower_bound()|, \lstinline|std::upper_bound()| et \lstinline|std::equal_range()| retourne un résultat qui peut ne pas être la valeur recherchée
+		\end{alertblock}
+
+		\item \lstinline|std::binary_search()| indique si l'élément cherché est présent
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}3/3}
+	\begin{alertblock}{Attention}
+		Pas de fonction de recherche dichotomique retournant l'élément cherché s'il existe, il faut bâtir cette recherche sur ces fonctions élémentaires
+	\end{alertblock}
+
+	\begin{lstlisting}[language=C++]
+vector<int>::iterator foo(vector<int> vec, int val) {
+  vector<int>::iterator it = 
+    lower_bound(vec.begin(), vec.end(), val);
+  if(it != vec.end() && *it == val) return it;
+  else return vec.end(); }
+
+vector<int> bar{1, 5, 8, 13, 25, 42};
+foo(bar, 12);  // vec.end
+foo(bar, 13);  // iterateur sur 13
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Comptage}
+	\begin{itemize}
+		\item \lstinline|std::count()| compte le nombre d'éléments égaux à la valeur fournie
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 3, 9, 5, 5 ,12};
+
+// Affiche 3
+cout << count(foo.begin(), foo.end(), 5);
+// Affiche 0
+cout << count(foo.begin(), foo.end(), 2);\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::count_if()| compte le nombre d'éléments satisfaisant le prédicat
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Comparaison\titlehfill{}1/3}
+	\begin{itemize}
+		\item \lstinline|std::equal()| teste l'égalité de deux ensembles (valeur et position)
+	\end{itemize}
+
+\note[item]{Possibilité de fournir un prédicat de comparaison (== sinon)}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 9, 12};
+vector<int> bar{4, 5, 12, 9};
+
+equal(foo.begin(), foo.end(), foo.begin());  // true
+equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Comparaison\titlehfill{}2/3}
+	\begin{alertblock}{Attention}
+		\lstinline|std::equal()| ne vérifie pas les tailles des deux ensembles
+	\end{alertblock}
+
+\note[item]{Il compare sur la taille du premier ensemble (pour lequel il y a un couple begin/end)}
+\note[item]{Il faut donc s'assurer au préalable des tailles et vérifier les overflow}
+\note[item]{C++14 ajoute des surcharges de \lstinline|std::equal()| testant la taille}
+
+	\begin{block}{Et \lstinline|operator==| ?}
+		\lstinline|operator==()| sur des conteneurs teste la taille et le contenu
+	\end{block}
+
+	\begin{exampleblock}{Do}
+		Préférez l'opérateur \lstinline|==| à \lstinline|std::equal()| pour comparer un conteneur complet
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Comparaison\titlehfill{}3/3}
+	\begin{itemize}
+		\item \lstinline|std::mistmatch()| retourne une paire d'itérateurs sur les premiers éléments différents
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 9, 12};
+vector<int> var{4, 5, 12, 9};
+
+pair<vector<int>::iterator,
+vector<int>::iterator> res;
+res = mismatch(foo.begin(), foo.end(), bar.begin());
+// Affiche 9 12
+cout << *res.first << " " << *res.second;\end{lstlisting}
+
+	\begin{itemize}
+		\item Ou l'itérateur de fin en cas d'égalité
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Remplissage\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::fill()| remplit l'ensemble avec la valeur en paramètre
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo(4);
+
+fill(foo.begin(), foo.end(), 12);
+// foo : 12 12 12 12\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::fill_n()| idem avec un ensemble défini par sa taille
+	\end{itemize}
+
+	\begin{block}{Constructeur et remplissage}
+		Les constructeurs des conteneurs séquentiels permettent de remplir le conteneur avec une valeur donnée : \lstinline|vector<int> foo(4, 12);|
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Remplissage\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::generate()| valorise les éléments à partir d'un générateur
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int gen() {
+  static int i = 0;
+  i += 5;
+  return i; }
+
+vector<int> foo(4);
+generate(foo.begin(), foo.end(), gen);  // 5 10 15 20\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::generate_n()| idem avec un ensemble défini par sa taille
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Copie}
+	\begin{itemize}
+		\item \lstinline|std::copy()| copie les éléments (du début vers la fin)
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 9, 12};
+vector<int> bar;
+
+copy(foo.begin(), foo.end(), back_inserter(bar));\end{lstlisting}
+
+\note[item]{Notez l'usage de \lstinline|back_inserter| (et alerte sur taille).}
+\note[item]{L'itérateur du second ensemble ne doit pas pointé un élément du premier ensemble.}
+\note[item]{\lstinline|std::copy()| : l'itérateur du second ensemble est l'itérateur de début.}
+
+	\begin{itemize}
+		\item \lstinline|std::copy_backward()| copie les éléments (de la fin vers le début)
+	\end{itemize}
+
+\note[item]{\lstinline|std::copy_backward()| : l'itérateur du second ensemble est son itérateur de fin}
+\note[item]{L'ordre relatif est préservé}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item À la taille du second ensemble
+			\item Aux ensembles non-disjoints
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Échange}
+	\begin{itemize}
+		\item \lstinline|std::swap()| échange deux objets
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int x=10, y=20;   // x:10 y:20
+swap(x,y);        // x:20 y:10\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::swap_ranges()| échange des éléments de deux ensembles
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo (5,10); // foo: 10 10 10 10 10
+vector<int> bar (5,33); // bar: 33 33 33 33 33
+
+swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
+// foo : 10 33 33 33 10, bar : 10 10 10 33 33\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::iter_swap()| échange deux objets pointés par des itérateurs
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Remplacement\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::replace()| remplace toutes les occurrences d'une valeur par une autre
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 7, 9 ,12, 5};
+
+replace(foo.begin(), foo.end(), 5, 8); 
+// foo : 4 8 7 9 12 8\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::replace_if()| remplace toutes les éléments vérifiés par le prédicat par une valeur donnée
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Remplacement\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
+		\begin{block}{Variante \og \_copy\fg{}}
+			Les algorithmes suffixés par \_copy fonctionne comme l'algorithme de base en troquant la modification en place contre une copie du résultat
+		\end{block}
+		\item \lstinline|std::replace_copy_if()| copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiés par le prédicat par une valeur donnée
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Suppression\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::remove()| \og élimine\fg{} les éléments égaux à une valeur donnée
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+remove(foo.begin(), foo.end(), 5);    // foo : 4 7 9 9 ...\end{lstlisting}
+
+\note[item]{La comparaison se fait via l'opérateur == et n'est pas paramètrable}
+
+	\pause
+
+	\begin{alertblock}{\lstinline|std::remove()| ne supprime pas}
+		\lstinline|std::remove()| ramène simplement  les éléments à conserver vers le début de l'ensemble et retourne l'itérateur correspond à la nouvelle fin
+	\end{alertblock}
+
+\note[item]{\lstinline|std::remove()| ne supprime pas car les algorithmes ne peuvent pas modifier le conteneur, en particulier sa taille, mais seulement le contenu de ses éléments}
+
+	\pause
+
+	\begin{block}{L'idiome \textit{Erase-Remove}}
+		La suppression réelle des éléments passent par un appel à la fonction membre \lstinline|erase()| sur les éléments situés après l'itérateur retourné par \lstinline|std::remove()|
+	
+		\begin{lstlisting}[language=C++]
+foo.erase(remove(foo.begin(),foo.end(),5),foo.end());\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Suppression\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::remove_if()| \og élimine\fg{} les éléments vérifiant le prédicat
+		\item \lstinline|std::remove_copy()| copie les éléments différents d'une valeur donnée
+		\item \lstinline|std::remove_copy_if()| copie les éléments ne vérifiant pas le prédicat
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Suppression des doublons}
+	\begin{itemize}
+		\item \lstinline|std::unique()| \og élimine\fg{} les éléments consécutifs égaux sauf le premier
+	\end{itemize}
+
+\note[item]{Tout comme remove, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé}
+\note[item]{Un prédicat de comparaison peut être fourni, sinon \lstinline|operator==| est utilisé}
+\note[item]{L'ordre relatif est préservé, important si la comparaison ne se fait que sur une partie d'un élément composite}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+
+unique(foo.begin(), foo.end());
+// foo : 4 5 7 9 5 ... \end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::unique_copy()| copie l'ensemble en ne conservant qu'un des éléments consécutifs égaux
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Transformation\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::transform()| applique une transformation à tous les éléments d'un ensemble \ldots
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int doubleValue(int i) { return 2 * i;}
+
+vector<int> foo{4, 5, 7, 9};
+vector<int> bar(4);
+transform(foo.begin(), foo.end(), bar.begin(), doubleValue);
+// bar : 8 10 14 18\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Transformation\titlehfill{}2/2}
+	\begin{itemize}
+		\item \ldots{} ou de deux en stockant le résultat dans un troisième
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 7, 9};
+vector<int> bar{2, 3, 6, 1};
+vector<int> baz(4);
+
+transform(foo.begin(), foo.end(), bar.begin(), 
+          baz.begin(), plus<int>());
+// baz : 6 8 13 10\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Rotation}
+	\begin{itemize}
+		\item \lstinline|std::rotate()| effectue une rotation de l'ensemble, le nouveau début est fourni par un itérateur
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 5, 7, 9, 12};
+
+rotate(foo.begin(), foo.begin() + 2, foo.end());
+// foo : 7 9 12 4 5\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::rotate_copy()| effectue une rotation et copie le résultat
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Partitionnement\titlehfill{}1/3}
+	\begin{itemize}
+		\item \lstinline|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+bool isOdd(int i) { return (i%2)==1; }
+
+vector<int> foo{4, 13, 28, 9 , 54};
+partition(foo.begin(), foo.end(), isOdd);
+// foo : 9 13 28 4 54 (ou {9 13 4 28 54} ou ...)\end{lstlisting}
+
+\note[item]{Le prédicat isOdd sera utilisé par la suite sans être redéfini à chaque fois}
+
+	\begin{itemize}
+		\item \ldots{} et retourne un itérateur sur le début de la seconde partie
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		L'ordre relatif n'est pas conservé
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Partitionnement\titlehfill{}2/3}
+	\begin{itemize}
+		\item \lstinline|std::stable_partition()| partitionne en conservant l'ordre relatif
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 13, 28, 9 , 54};
+
+stable_partition(foo.begin(), foo.end(), isOdd);
+// foo : 13 9 4 28 54\end{lstlisting}
+
+	\pause
+
+	\begin{block}{Pourquoi deux fonctions ?}
+		La performance, la stabilité est couteuse en temps et pas toujours nécessaire
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Partitionnement\titlehfill{}3/3}
+	\begin{itemize}
+		\item \lstinline|std::nth_element()| réordonne les éléments de sorte que :
+		\begin{itemize}
+			\item L'élément situé sur l'itérateur pivot soit celui qui serait à cette place si l'ensemble était trié
+			\item Que les éléments situés avant ne soient pas supérieurs
+			\item Que les éléments situés après ne soient pas inférieurs
+			\item Pas d'ordre particulier au sein des deux sous-ensembles
+		\end{itemize}
+	\end{itemize}
+
+\note[item]{Possibilité de fournir un prédicat de comparaison, \lstinline|operator<| par défaut}
+\note[item]{Formulation \og pas supérieur\fg{} étrange mais gère le cas des égalités avec le pivot et la sémantique de l'opérateur fourni}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+nth_element(foo.begin(), foo.begin() + 3, foo.end());
+// foo : 2 1 3 4 5 9 6 7 8\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Tri\titlehfill{}1/2}
+
+\note[item]{Possibilité de fournir un prédicat de comparaison, operator< par défaut}
+
+	\begin{itemize}
+		\item \lstinline|std::sort()| trie un ensemble
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{4, 13, 28, 9 , 54};
+
+sort(foo.begin(), foo.end());
+// foo : 4 9 13 28 54\end{lstlisting}
+
+	\begin{alertblock}{Attention}
+		L'ordre relatif des éléments égaux n'est pas conservé
+
+\note[item]{Utile si on test une partie des champs d'une structure par exemple}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item \lstinline|std::stable_sort()| trie l'ensemble en conservant l'ordre relatif
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Tri\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant\ldots
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+partial_sort(foo.begin(), foo.begin() + 3, foo.end());
+// foo : 1 2 3 9 8 7 6 5 4\end{lstlisting}
+
+	\begin{itemize}
+		\item \ldots{} les autres éléments n'ont pas d'ordre particulier
+		\item \lstinline|std::partial_sort_copy()| copie l'ensemble ordonné à l'image de \lstinline|std::partial_sort()|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Mélange}
+	\begin{itemize}
+		\item \lstinline|std::random_shuffle()| réordonne aléatoirement l'ensemble
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+random_shuffle(foo.begin(), foo.end());
+// foo : 1 8 3 7 9 4 2 6 5\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Fusion}
+	\begin{itemize}
+		\item \lstinline|std::merge()| fusionne deux ensembles triés dans un troisième
+	\end{itemize}
+
+\note[item]{Ce troisième ensemble est bien entendu trié lui aussi}
+\note[item]{Possibilité de fournir un prédicat de comparaison (operator< par défaut)}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 5, 6, 8};
+vector<int> bar{2, 5};
+vector<int> baz;
+
+merge(foo.begin(), foo.end(), 
+      bar.begin(), bar.end(), 
+      back_inserter(baz));
+// baz : 1 2 5 5 6 8\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::inplace_merge()| fusionne deux sous-ensembles "sur place"
+	\end{itemize}
+
+\note[item]{En fait il fusionne le début trié d'un ensemble avec le reste trié de ce même ensemble dans l'ensemble en question}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Opérations ensemblistes\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|std::includes()| vérifie si tous les éléments d'un ensemble trié sont présents dans un autre ensemble
+
+\note[item]{Ici, ensemble prend un sens plus \og mathématique\fg{}, et notamment sans répétition de valeur}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 5, 6, 8};
+vector<int> bar{2, 5};
+vector<int> baz{1, 6};
+
+includes(foo.begin(), foo.end(), 
+         bar.begin(), bar.end());   // faux
+includes(foo.begin(), foo.end(), 
+         baz.begin(), baz.end());   // vrai\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Opérations ensemblistes\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::set_union()| : union de deux ensembles triés
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 5, 6, 8};
+vector<int> bar{2, 5};
+vector<int> baz;
+
+set_union(foo.begin(), foo.end(), bar.begin(),
+          bar.end(), back_inserter(baz));
+// baz : 1 2 5 6 8\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::set_intersection()| : intersection de deux ensembles triés
+		\item \lstinline|std::set_difference()| : différence de deux ensembles triés
+		\item \lstinline|std::set_symmetric_difference()| : différence symétrique de deux ensembles triés
+
+\note[item]{\lstinline|set_difference()| conserve les éléments présents dans le premier ensemble mais pas dans le second alors que \lstinline|set_symmetric_difference()| conserve les éléments présents dans un des ensembles mais pas dans l'autre}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Gestion de \og tas\fg{}}
+	\begin{itemize}
+		\item Le tas (\textit{heap}) est une structure permettant la récupération rapide de l'élément de plus grande valeur
+		\item \lstinline|std::make_heap()| forme un tas depuis un ensemble
+		\item \lstinline|std::pop_heap()| déplace l'élément de plus haute valeur en fin d'ensemble
+		\item \lstinline|std::push_heap()| ajoute l'élément en fin d'ensemble au tas
+
+		\begin{block}{\textit{push}, \textit{pop} et structure de tas}
+			\lstinline|std::pop_heap()| et \lstinline|std::push_heap()| maintiennent la structure de tas
+		\end{block}
+
+		\item \lstinline|std::sort_heap()| tri le tas
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Min-max}
+
+\note[item]{Possibilité de fournir la fonction de comparaison (operator< par défaut)}
+
+	\begin{itemize}
+		\item \lstinline|std::min()| détermine le minimum de deux éléments
+		\item \lstinline|std::max()| détermine le maximum de deux éléments
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+min(52, 6);  // 6
+max(52, 6);  // 52\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::min_element()| détermine le plus petit élément d'un ensemble
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{18, 5, 6, 8};
+min_element(foo.begin(), foo.end()); // Sur 5 \end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::max_element()| détermine le plus grand élément d'un ensemble
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Numérique\titlehfill{}1/4}
+	\begin{itemize}
+		\item \lstinline|std::accumulate()| \og ajoute\fg{} tous les éléments de l'ensemble
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{18, 5, 6, 8};
+
+accumulate(foo.begin(), foo.end(), 1, multiplies<int>());
+// 4320 \end{lstlisting}
+
+	\begin{itemize}
+		\item Opérateur et valeur initiale configurables
+		\item \textit{Reduce}/\textit{fold} fonctionnel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Numérique\titlehfill{}2/4}
+	\begin{itemize}
+		\item \lstinline|std::adjacent_difference()| effectue la \og différence\fg{} entre chaque élément de l'ensemble et celui qui le précède
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{18, 5, 6, 8};
+vector<int> bar;
+
+adjacent_difference(foo.begin(), foo.end(), 
+                    back_inserter(bar), minus<int>());
+// bar : 18 -13 1 2\end{lstlisting}
+
+	\begin{itemize}
+		\item Opérateur configurable
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Numérique\titlehfill{}3/4}
+	\begin{itemize}
+		\item \lstinline|std::inner_product()| \og produit scalaire\fg{} de deux ensembles
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 2, 3, 4};
+vector<int> bar{2, 3, 4, 5};
+
+inner_product(foo.begin(), foo.end(), bar.begin(), 0);
+// 40\end{lstlisting}
+
+	\begin{itemize}
+		\item Opérateurs et valeur configurables
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Numérique\titlehfill{}4/4}
+	\begin{itemize}
+		\item \lstinline|std::partial_sum()| \og somme\fg{} partielle d'un ensemble
+		\item Chaque élément de l'ensemble de sortie est égal à la somme des éléments d'indice inférieur ou égal de l'ensemble de départ
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 2, 3, 4};
+vector<int> bar;
+
+partial_sum(foo.begin(), foo.end(), back_inserter(bar));
+// bar : 1 3 6 10\end{lstlisting}
+
+	\begin{itemize}
+		\item Opérateur configurable
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Algorithmes - Au delà des conteneurs\titlehfill{}1/3}
+	\begin{itemize}
+		\item Itérateurs définissables hors des conteneurs :
+		\begin{itemize}
+			\item Abstraction du parcours
+			\item Sémantique de pointeurs
+		\end{itemize}
+		\item Algorithmes indépendants du conteneur
+		\item Utilisables sur d'autres ensembles de données
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Au delà des conteneurs\titlehfill{}2/3}
+	\begin{itemize}
+		\item Tableaux C
+		\begin{itemize}
+			\item Pas un conteneur ?
+
+\note[item]{Pas un conteneur, c'est discutable car il contient bien}
+\note[item]{Mais très différent des conteneurs classiques : frustre, minimaliste, rudimentaire, pas de réelle sémantique, peu d'intelligence}
+\note[item]{Plus un tableau bas niveau}
+
+			\begin{itemize}
+				\item Sémantique : Tableau ou pointeur ? Statique ou dynamique ?
+				\item Service : Taille ? Copie ?
+			\end{itemize}
+			\item Simple pointeur comme itérateur
+			\begin{itemize}
+				\item Début : adresse du premier élément
+				\item Fin : adresse suivant le dernier élément
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int foo[4];
+
+fill(foo, foo + 4, 5);  // foo : 5 5 5 5\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes - Au delà des conteneurs\titlehfill{}3/3}
+	\begin{itemize}
+		\item Flux
+		\begin{itemize}
+			\item \lstinline|istream_iterator| : \textit{input} itérateur
+			\begin{itemize}
+				\item Début : depuis un flux entrant
+				\item Fin : constructeur par défaut
+			\end{itemize}
+			\item \lstinline|ostream_iterator| : \textit{output} itérateur
+			\begin{itemize}
+				\item Depuis un flux sortant, séparateur configurable
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{5, 6, 12, 89};
+ostream_iterator<int> out_it (cout, ", ");
+
+copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
+
+	\begin{itemize}
+		\item Buffers de flux : \lstinline|istreambuf_iterator| et \lstinline|ostreambuf_iterator|
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		Le séparateur est ajouté après chaque élément, y compris le dernier
+	\end{alertblock}
+\end{frame}
+
+\subsection*{STL - Conclusion}
+\begin{frame}
+	\frametitle{STL Conclusion \titlehfill{}1/4}
+	\begin{exampleblock}{Do}
+		Préférez les conteneurs aux tableaux C
+	\end{exampleblock}
+
+	\begin{alertblock}{Attention}
+		\lstinline|operator[]| ne vérifie pas les bornes
+
+\note[item]{Même si une implémentation peut mettre une assertion dessus et produire une erreur à l'exécution en debug, p.ex. sur les TU. Et une implémentation de qualité devrait le faire}
+	\end{alertblock}
+
+
+	\begin{alertblock}{Don't}
+		N'utilisez pas d'itérateur invalidé
+
+\note[item]{Certaines opérations, par exemple l'ajout dans un vecteur, peuvent invalider les itérateurs sur le conteneur.}
+	\end{alertblock}
+
+	\begin{alertblock}{Attention}
+		Ne stockez pas objets polymorphiques dans les conteneurs ou uniquement via des pointeurs intelligents
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conclusion \titlehfill{}2/4}
+	\begin{exampleblock}{Do, performances}
+		Mesurez !
+	\end{exampleblock}
+
+	\begin{block}{Conseils, performances}
+		\begin{itemize}
+			\item Réfléchissez à votre utilisation des données
+
+\note[item]{Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, \ldots}
+\note[item]{La première interrogation étant : ce traitement est-il nécessaire ?}
+
+			\item Méfiez-vous des complexités brutes
+
+\note[item]{La complexité n'est pas/peu significative pour de petits volumes de données, p.ex. les tris par insertion ou sélection (O($n^{2}$)) plus efficaces que des tris en O($n\ln n$)}
+\note[item]{Les complexités moyennes ne sont pas pertinentes pour des données particuliers, p.ex. tri par insertion efficace sur ensembles presque triés, peu de permutation du tri par sélection donc efficace pour des données lourdes à déplacer}
+\note[item]{Mais à ne pas négliger malgré tout}
+		\end{itemize}
+	\end{block}
+
+	\begin{exampleblock}{Do}
+		Préférez les algorithmes standard aux algorithmes tierces, aux algorithmes \og maisons\fg{} et aux boucles
+
+\note[item]{Exception à l'usage d'algorithmes standard : exception inopportune et initialisation à zéro}
+\note[item]{Et dans cet ordre : standard, tierce, maison, boucle}
+	\end{exampleblock}
+
+	\begin{block}{Un petit bémol}
+		En terme de performance, les algorithmes standard sont généralement très bons mais, étant génériques, pas forcément optimaux dans pour situation particulière
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conclusion \titlehfill{}3/4}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Faites vos propres algorithmes plutôt que des boucles
+			\item Faites des algorithmes génériques et compatibles
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		Respectez la sémantique des algorithmes :
+		\begin{itemize}
+			\item Le bon algorithme pour la bonne opération
+			\item Définissez la sémantique de vos algorithmes et choisissez un nom explicite
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		Préférez les prédicats \og purs\fg{}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{STL Conclusion \titlehfill{}4/4}
+	\begin{exampleblock}{Do}
+		Vérifiez que les ensembles de destination aient une taille suffisante
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Vérifiez les pré-conditions des algorithmes (p.ex. ensemble trié)
+			\item Vérifiez le type d'itérateur requis
+			\item Vérifiez les complexités garanties
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{block}{Aller plus loin}
+		Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms (Marshall Clow)}
+
+\note[item]{Conf cppcon 2016 sur les algorithmes en général et sur comment faire ces propres algorithmes}
+	\end{block}
+\end{frame}
+\end{document}

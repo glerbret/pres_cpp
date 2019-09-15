@@ -1,0 +1,238 @@
+\documentclass[C++.tex]{subfiles}
+\begin{document}
+
+\section{Et ensuite ?}
+
+\begin{frame}
+	\frametitle{Présentation}
+	\begin{itemize}
+		\item C++20 ne marque pas la fin des évolutions du C++
+		\item Plusieurs sujets proposés et non pris en compte dans les versions actuelles
+		\item Plusieurs TS publiés et non intégrés ou en cours d'étude
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Surcharge de l'opérateur point (\lstinline|operator.()|)
+		\begin{itemize}
+			\item Si l'opérateur est défini, les opérations sont transférés à son résultat
+			\item \ldots{} sauf celles spécifiquement déclarées membres
+			\item Réalisation de \og \textit{smart reference}\fg{} (p.ex. proxy)
+		\end{itemize}
+		\item \textit{Unified Call Syntax}
+		\begin{itemize}
+			\item \lstinline|f(x,y)| appelle \lstinline|x.f(y)| si \lstinline|f(x,y)| n'est pas trouvé
+			\item Généralisation de \lstinline|std::begin()| et co. directement dans le langage
+		\end{itemize}
+		\item \lstinline|std::expected| contenant un statut et une valeur optionnelle : retour d'un compte rendu d'exécution de la fonction et, éventuellement, d'une valeur
+
+\note[item]{permet de se passer d'exception dans les contextes où elles ne sont pas adaptées, de ne pas utiliser un paramètre en sortie pour le statut ou la valeur et de ne pas définir des structures/classes ad-hoc tout en proposant une API plus adaptée que pair ou tuple}
+
+		\item \textit{Procedural function interfaces} : framework pour la vérification statique de partie du programme
+
+\note[item]{Annotations de types claim / assertion permettant à des outils d'analyse de vérifier la correction du programme}
+\note[item]{Recouvre les points du TS contract mais est plus ambitieux}
+
+		\item Support de l'Unicode
+		\item Support des entrées/sorties audio
+		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
+
+\note[item]{C'est à dire de ne plus pouvoir écrire \lstinline|[x,y]| comme indice d'un conteneur classique}
+\note[item]{L'expression \lstinline|[x,y]| revient à utiliser y comme indice mais en ayant évalué x}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Ajout de nouveaux \og conteneurs\fg{}:
+		\begin{itemize}
+			\item Adaptateurs \lstinline|std::flat_map| et \lstinline|std::flat_multimap| : map depuis une paire de conteneurs séquentiels
+			\item \lstinline|std::mdspan| : vues multidimensionnels (et indiçage associé \lstinline|[x,y,z]|)
+
+\note[item]{La dépréciation de l'opérateur virgule dans les indices est un préalable à ce type de conteneur}
+		\end{itemize}
+
+		\item Nouveaux pointeurs intelligents :
+		\begin{itemize}
+			\item \lstinline|out_ptr| : manipulation de \lstinline|T**| en paramètres de retour des API C
+			\item \lstinline|retain_ptr| : pointeur intrusif manipulant le comptage de référence interne d'un objet
+		\end{itemize}
+		\item Création de pointeurs intelligents avec une valeur par défaut
+		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>()|
+		\begin{itemize}
+			\item Dépréciation des conversions entre énumération et flottant
+			\item Dépréciation des conversions entre énumérations
+			\item Dépréciation de la comparaison \og \textit{two-way}\fg{} entre type tableau
+			\item Comparaison \og \textit{three-way}\fg{} entre \textit{unscoped} énumération et type entier
+
+\note[item]{\textit{unscoped} énumération, c'est à dire les \lstinline|enum| par opposition aux \lstinline|enum class|}
+
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item \textit{Pattern matching} via \lstinline|inspect| :
+	
+		\begin{lstlisting}[language=C++]
+inspect (p) {  		// std::pair
+  [0, 0]: cout << "on origin";
+  [0, y]: cout << "on y-axis";
+  [x, 0]: cout << "on x-axis";
+  [x, y]: cout << x << ',' << y;}
+
+inspect (shape) {	// Sous-type
+  (as<Circle> ? [r]): cout << 3.14 * r * r;
+  (as<Rectangle> ? [w, h]): cout << w * h;}\end{lstlisting}
+
+		\begin{block}{Mais aussi}
+			Sur les types entiers, les chaînes, les \textit{tuples}, les \lstinline|std::variant|, \ldots
+		\end{block}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Ajout de \lstinline|volatile_load<T>| et \lstinline|volatile_store<T>|
+		\item \textit{Compile Time Regular Expression}
+		\item \lstinline|std::embed()| : rendre disponible au \textit{runtime} des ressources externes
+
+\note[item]{P.ex. pour embarquer une image dans l'application}
+\note[item]{Sans aller lire au \textit{runtime} le fichier contenant la ressource}
+\note[item]{Et sans passer par des conversions externes vers des tableaux de \textit{bytes} injectés dans un fichier d'en-tête}
+
+		\item Gestion des UUID
+		\item Amélioration de la déduction template dans les constructeurs : agrégats, alias et constructeurs hérités
+
+\note[item]{Terme normatif : \textit{Class Template Argument Deduction}}
+\note[item]{Pas de déduction dans ces trois cas pour l'instant}
+
+		\item Implémentations \textit{freestanding} : intégration du plus grand sous-ensemble possible de la bibliothèque standard qui ne présente pas de \textit{memory overhead} ni ne nécessite de support de l'OS
+
+\note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
+
+		\item Contrôle du \textit{layout} des classes
+
+\note[item]{Au travers d'un attribut permettant de définir si nous souhaitons privilégier la taille, la vitesse ou l'ordre de déclaration}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Méta-classes pour construire des types de classes (dont les classes elles-mêmes) ayant des contraintes, des comportements par défaut et des opérations par défaut (\lstinline|class|, \lstinline|struct|, \lstinline|enum class|, \textit{interface}, \textit{value})
+		\item Répétition compile-time d'une expression : \textit{Expansion statement}
+		
+			\begin{lstlisting}[language=C++]
+auto foo = make_tuple(0, 'a', 3.14);
+for... (auto elem : tup)  
+  cout << elem << "\n"\end{lstlisting}
+			
+			\begin{itemize}
+				\item Pas une boucle : duplication de l'expression pour chaque élément
+				\item Éléments de type différent
+				\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
+			\end{itemize}
+		\item Exceptions légères
+
+\note[item]{Appelées \textit{Zero-overhead deterministic exceptions}}
+
+		\item Ajout \textit{floating-point types} de plus petite taille
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TS - Contracts}
+	\begin{itemize}
+		\item Retiré du draft C++20 et création d'un groupe d'étude en juillet 2019
+
+\note[item]{Ne sera donc finalement pas en C++20, probablement en 2023}
+
+		\item Support de la programmation par contrat
+		\item Remplacement de la vérification à coup d'assert et de la documentation via commentaire @pre, @post et @invariant
+		\item Initialement, plusieurs propositions \og concurrentes\fg{}
+		\item \ldots{}mais un compromis à émerger
+		\item Utilisation d'attributs \lstinline|[[assert:x]], |\lstinline|[[expects:x]]| et \lstinline|[[ensure:x]]|
+
+\note[item]{\lstinline|[[assert:x]]| : invariants et autres vérifications}
+\note[item]{\lstinline|[[expects:x]]| : préconditions}
+\note[item]{\lstinline|[[ensure:x]]| : postconditions}
+
+		\item Possibilité de les marquer \lstinline|audit| pour ne les activer qu'à la demande
+		\item Possibilité de les marquer \lstinline|axiom| pour ne pas générer de code \textit{runtime} (\textit{compile-time} uniquement)
+		\item Les contrats de fonctions membres publiques peuvent utiliser des membres privés ou protégés
+		\item Intégration des contrats à la bibliothèque standard
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TS - Networking TS}
+	\begin{itemize}
+		\item Publié en avril 2018
+		\item Très probablement intégré à C++23
+		\item Partiellement basé sur Boost.Asio
+		\item Modèle asynchrone
+		\item Gestion de timer
+		\item Gestion de buffer et de flux orientés buffer
+		\item Gestion de sockets et de flux \og socket\fg{}
+		\item Gestion d'IPv4, IPv6, TCP, UDP
+		\item Manipulation d'adresses IP
+		\item Pas de protocoles de plus haut niveau actuellement
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TS - Les autres\titlehfill{}1/2}
+	\begin{itemize}
+		\item \textit{Library fundamentals 2} : évolutions de la bibliothèque standard
+		\begin{itemize}
+
+\note[item]{Les listes de fonctionnalités des TS ne sont pas exhaustives}
+
+			\item Pointeurs intelligents non possédant
+			\item Nouveaux algorithmes
+
+		\end{itemize}
+		\item \textit{Library fundamentals 3} :
+		\begin{itemize}
+			\item \textit{Generic Scope Guard}
+			\item \textit{RAII wrapper}
+		\end{itemize}
+	
+		\item \textit{Parallelism} 2 : publié en juin 2018
+		\item \textit{Transactional Memory} : publié
+		\item \textit{Numerics}
+		\item \textit{Array extension} : taille non connue à la compilation
+		\item \textit{2D Graphics} (io2d) : API C++ au dessus de Cairo, différé
+
+\note[item]{Mais le projet io2d en lui-même continue}
+\note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
+		
+		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
+
+\note[item]{Plusieurs sujets derrière ceci : réflexion statique, métaprogrammation, code compile-time, génération et injection, métaclasses, \ldots}
+\note[item]{Dans un premier temps, il s'agit de réflexion statique}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TS - Les autres\titlehfill{}2/2}
+	\begin{itemize}
+		\item \textit{Concurrency} 1 : publié
+		\begin{itemize}
+			\item \lstinline|future.then()|
+		\end{itemize}
+		\item \textit{Concurrency} 2
+		\begin{itemize}
+			\item \textit{Synchronic} : meilleure abstraction pour atomique permettant de tirer partie des caractéristiques logicielles et matérielles de la plateforme
+			\item \textit{Executor} permettant de spécifier où s'exécute telle tâche (\textit{a priori} pour C++23)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\end{document}

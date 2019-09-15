@@ -1,0 +1,88 @@
+% Insertion du sommaire de chaque section beamer
+\AtBeginSection[]
+{
+	\begin{frame}<beamer>{Sommaire}
+	\tableofcontents[currentsection,currentsubsection,hideothersubsections,sectionstyle=show/shaded]
+	\end{frame}
+}
+
+\mode<presentation>
+
+% Style
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{infolines}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+
+\beamertemplatenavigationsymbolsempty
+\setbeamercolor{structure}{fg=teal, bg=teal!40}
+
+% Coloration des blocs
+\definecolor{example_green}{RGB}{0,0.6,0}
+\setbeamercolor{block title}{bg=teal,fg=white}
+\setbeamercolor{block title example}{bg=green!60!black,fg=white}
+
+% Definition d'un hfill complet pour les titres
+\newcommand{\titlehfill}{\hskip0pt plus 1filll}
+
+% Format de la bibliographie
+\setbeamertemplate{frametitle continuation}[from second]
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=teal}
+\setbeamercolor*{bibliography entry location}{fg=teal}
+\setbeamercolor*{bibliography entry note}{fg=teal}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+% Ajoute une page note même vide
+\makeatletter 
+\def\beamer@framenotesbegin{%   
+	\gdef\beamer@noteitems{}%   
+	\gdef\beamer@notes{{}}%  
+}
+\makeatother
+
+\mode
+<all>
+
+% Format de code
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+
+\definecolor{code_green}{rgb}{0,0.6,0}
+\definecolor{code_gray}{rgb}{0.5,0.5,0.5}
+\definecolor{code_mauve}{rgb}{0.58,0,0.82}
+\lstset{
+	backgroundcolor=\color{white},      % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\small\ttfamily,         % the size of the fonts that are used for the code
+	breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                    % sets automatic line breaking
+	captionpos=b,                       % sets the caption-position to bottom
+	commentstyle=\color{code_green},    % comment style
+	deletekeywords={...},               % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},             % if you want to add LaTeX within your code
+	extendedchars=true,                 % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=shadowbox,	                % adds a frame around the code
+	rulesepcolor=\color{code_gray},
+	keepspaces=true,                    % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},          % keyword style
+	language=C++,                       % the language of the code
+	otherkeywords={*,std, final, override, size_t, char8_t, char16_t, char32_t},              % if you want to add more keywords to the set
+	numbers=none,                       % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=0pt,                      % how far the line-numbers are from the code
+	numberstyle=\tiny\color{code_gray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                   % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,             % underline spaces within strings only
+	showtabs=false,                     % show tabs within strings adding particular underscores
+	stepnumber=2,                       % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{code_mauve},     % string literal style
+	tabsize=2,	                        % sets default tabsize to 2 spaces
+	title=\lstname,                     % show the filename of files included with \lstinputlisting; also try caption instead of title
+	captionpos=b,  
+	abovecaptionskip=0em,
+	belowcaptionskip=0em,
+	aboveskip=1em,
+	belowskip=0em,
+  upquote=true
+}
