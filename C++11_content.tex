@@ -530,7 +530,7 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 	\end{itemize}
 
 	\begin{center}
-		\includegraphics[height=1\textheight]{input_src/copie.png}
+		\includegraphics[height=0.7\textheight]{input_src/copie.png}
 	\end{center}
 \end{frame}
 
@@ -541,7 +541,7 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 	\end{itemize}
 
 	\begin{center}
-		\includegraphics[height=1\textheight]{input_src/deplacement.png}
+		\includegraphics[height=0.4\textheight]{input_src/deplacement.png}
 	\end{center}
 \end{frame}
 
@@ -599,17 +599,21 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 \begin{frame}
 	\frametitle{Sémantique de déplacement\titlehfill{}6/7}
 	\begin{block}{\textit{Rule of five}}
-		Les classes respectant la \textit{Rule of three} devraient définir également constructeur et opérateur d'affectation par déplacement
+		Si une classe déclare destructeur, constructeur par copie, constructeur par déplacement, affectation par copie ou affectation par déplacement, alors elle doit définir les cinq
 
 \note[item]{\textit{Rule of five} car constructeur par déplacement et opérateur d'affectation par déplacement ne sont pas générés implicitement si une autre des trois fonctions est déclarée par l'utilisateur}
 \note[item]{Contrairement à \textit{Rule of three}, l'absence des constructeur et opérateur d'affectation par déplacement n'est pas une erreur grave, mais une optimisation manquée}
+\note[item]{J'utilise déclare et non défini pour considérer \lstinline|=default| et \lstinline|=delete| qui peuvent être valables}
 	\end{block}
 
 	\begin{block}{\textit{Rule of zero}}
-		Classes sans gestion explicite d'\textit{ownership} : aucune de ces cinq fonctions
+		Lorsque c'est possible, n'en définissez aucune
 
-\note[item]{C'est à dire sans membres qu'il faut explicitement libérés, fermés, \ldots}
-\note[item]{Ce devrait être le cas par défaut.}
+\note[item]{\textit{Rule of zero} s'applique typiquement aux classes sans gestion explicite d'\textit{ownership}, c'est à dire sans membres qu'il faut explicitement libérés, fermés, \ldots. Ce qui devrait être le cas par défaut.}
+	\end{block}
+
+	\begin{block}{Aller plus loin}
+		Voir \href{https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf}{Élégance, style épuré et classe (Loïc Joly)}
 	\end{block}
 \end{frame}
 
