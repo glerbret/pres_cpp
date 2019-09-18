@@ -1060,12 +1060,17 @@ while(!foo.empty()) {
 				\begin{itemize}
 					\item \textit{Input} : égalité (\lstinline|==| et \lstinline|\!=|) et lecture
 					\item \textit{Output} : écriture
-					\item \textit{Forward} : construction par défaut et \og \textit{multi-pass}\fg{}.
+					\item \textit{Forward} : Parcours multiples possibles
 
-\note[item]{multi\_pass signifie que \lstinline|a == b| implique \lstinline|++a == ++b| et qu'utiliser un itérateur sur une séquence ne modifie pas ce que référence un autre itérateur indépendant, c'est à dire que \lstinline|b=a; ++b; *a;| est équivalent à \lstinline|*a|}
+\note[item]{Qu'il est possible de reformuler par \og L'incrément ne consomme pas de donnée\fg{}}
+\note[item]{Plus formellement, \lstinline|a == b| implique \lstinline|++a == ++b| et qu'utiliser un itérateur sur une séquence ne modifie pas ce que référence un autre itérateur indépendant, c'est à dire que \lstinline|b=a; ++b; *a;| est équivalent à \lstinline|*a|}
 
 					\item \textit{Bidirectional} : décrémentation
-					\item \textit{Random access} : offset (\lstinline|+|, \lstinline|-|, \lstinline|+=|, \lstinline|-=| et \lstinline|[]|) et comparaison (\lstinline|<|, \lstinline|<=|, \lstinline|>|, \lstinline|>=|)
+					\item \textit{Random access} : 
+					\begin{itemize}
+						\item Déplacement d'un nombre arbitraire (\lstinline|+|, \lstinline|-|, \lstinline|+=|, \lstinline|-=| et \lstinline|[]|)
+						\item Comparaison (\lstinline|<|, \lstinline|<=|, \lstinline|>|, \lstinline|>=|)
+					\end{itemize} 
 				\end{itemize}
 			\end{itemize}
 		\end{column}
@@ -1104,6 +1109,9 @@ while(!foo.empty()) {
 	\frametitle{STL Itérateurs - Itérateur d'insertion}
 	\begin{itemize}
 		\item Itérateurs de type \textit{Output}
+
+\note[item]{En fait, ce sont des adaptateurs d'itérateurs}
+
 		\item Insertion de nouveaux éléments plutôt que modification d'éléments existants
 
 \note[item]{Les itérateurs classiques pointent sur des éléments existants du conteneur}

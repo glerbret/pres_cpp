@@ -875,7 +875,7 @@ midpoint(5, 2);     // 4\end{lstlisting}
 
 \note[item]{Grâce à l'opérateur de comparaison adéquate}
 
-		\item \lstinline|std::counted_iterator| : adaptateur d'itérateur avec un fonctionnement similaire à l'itérateur sousjacent mais conservant la distance à la fin du range
+		\item \lstinline|std::counted_iterator| : adaptateur d'itérateur avec un fonctionnement similaire à l'itérateur sous-jacent mais conservant la distance à la fin du range
 	\end{itemize}
 \end{frame}
 
@@ -1066,6 +1066,7 @@ auto years = figures | views::elements<1>;
 			\item \lstinline|keys_view| : la vue des clés de chaque \lstinline|std::pair| d'une vue de \lstinline|std::pair|
 			\item \lstinline|values_view| : la vue des valeurs de chaque \lstinline|std::pair| d'une vue de \lstinline|std::pair|
 		\end{itemize}
+	\item Possible d'utiliser les algorithmes opérants sur les \textit{ranges}
 	\end{itemize}
 \end{frame}
 
@@ -1081,6 +1082,14 @@ for(int i : ints |
             view::filter(even) | 
             view::transform(square))
   cout << i << ' '; // 0 4 16\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+vector<int> foo{1, 1, 2, 2, 3, 3, 5, 5, 5, 6, 9}, bar;
+
+auto odd = [](int i){ return 1 == i % 2; };
+
+copy(foo | view::filter(odd) | unique{}, 
+     back_inserter(bar)); // 1 3 5 9\end{lstlisting}
 \end{frame}
 
 \subsection*{Flux}
