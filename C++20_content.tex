@@ -75,7 +75,12 @@
 \begin{frame}[fragile]
 	\frametitle{Information à la compilation}
 	\begin{itemize}
-		\item Entête \lstinline|<version>| : informations sur la version du standard
+		\item Entête \lstinline|<version>| : informations de version
+		\begin{itemize}
+			\item Contenu \textit{implementation-dependent}
+			\item Typiquement : version du standard, version de la bibliothèque, \textit{release date}, copyright, \ldots
+		\end{itemize}
+		
 		\item \lstinline|source_location| : position dans le code source
 		\begin{itemize}
 			\item Fichier, ligne, colonne et fonction courante
@@ -667,6 +672,13 @@ map.find("def"sv);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{\lstinline|std::list| et \lstinline|forward_list|}
+	\begin{itemize}
+		\item \lstinline|remove()|, \lstinline|remove_if()| et \lstinline|unique()| retourne le nombre d'éléments supprimés
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Suppression d'éléments}
 	\begin{itemize}
 		\item \lstinline|erase()| supprime les éléments égaux à la valeur fournie
@@ -916,6 +928,14 @@ midpoint(5, 2);     // 4\end{lstlisting}
 		\item \lstinline|RandomAccessRange| : \textit{range} fournissant \lstinline|random_access_iterator|
 		\item \lstinline|ContiguousRange| : \textit{range} fournissant \lstinline|contiguous_iterator|
 	\end{itemize}
+
+	\begin{block}{En résumé}
+		\begin{itemize}
+			\item Conteneurs : possession, copie profonde
+			\item Vues : référence, copie superficielle
+		\end{itemize}
+	\end{block}
+
 \end{frame}
 
 \begin{frame}
@@ -960,7 +980,7 @@ for(int i : std::views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}1/5}
+	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}1/6}
 	\begin{itemize}
 		\item Appliquent filtres et transformations aux \textit{ranges}
 		\item Associés, pour certains, à un \textit{range adaptor closure object}
@@ -972,7 +992,7 @@ for(int i : std::views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}2/5}
+	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}2/6}
 	\begin{itemize}
 		\item Peuvent être chaînés avec une syntaxe \og appel de fonction\fg{} \ldots
 
@@ -999,7 +1019,7 @@ range | adaptor(args...);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}3/5}
+	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}3/6}
 	\begin{itemize}
 		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
 
@@ -1008,28 +1028,55 @@ range | adaptor(args...);\end{lstlisting}
 		\begin{itemize}
 			\item \lstinline|all_view| : tous les éléments du range
 			\item \lstinline|ref_view| : références sur les éléments du range
-			\item \lstinline|filter_view| : tous les éléments satisfaisants un prédicat 
-			\item \lstinline|transform_view| : les éléments transformés par l'application d'une fonction 
-			\item \lstinline|take_view| : les N premiers éléments
-			\item \lstinline|take_while_view| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
-			\item \lstinline|drop_view| : tous les éléments sauf les N premiers
-			\item \lstinline|drop_while_view| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
-			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \textit{range}
+			\item \lstinline|filter_view| : tous les éléments satisfaisants un prédicat
 
 			\begin{lstlisting}[language=C++]
-vector<string> ss{"hello", " ", "world", "!"};
-join_view greeting{ss};
-for(char ch : greeting)
-  cout << ch;  // hello world!\end{lstlisting}
-			\end{itemize}
+vector<int> ints{0, 1, 2, 3, 4, 5};
+auto even = [](int i){ return (i % 2) == 0;},
+
+auto rng = ints | view::filter(even); //0, 2, 4\end{lstlisting}
+ 
+			\item \lstinline|transform_view| : les éléments transformés par l'application d'une fonction 
+			\begin{lstlisting}[language=C++]
+vector<int> ints{0, 1, 2, 3, 4, 5};
+auto double = [](int i){ return 2 * i;},
+
+//0, 2, 4, 6, 8, 10
+auto rng = ints | view::transform(double);\end{lstlisting}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}4/5}
+	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}4/6}
+	\begin{itemize}
+		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
+
+		\begin{itemize}
+			\item \lstinline|take_view| : les N premiers éléments
+			\item \lstinline|take_while_view| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
+			\item \lstinline|drop_view| : tous les éléments sauf les N premiers
+			\item \lstinline|drop_while_view| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
+			\item \lstinline|common_view| convertit une vue en \lstinline|common_range|
+			\item \lstinline|reverse_view| : éléments en sens inverse
+			\item \lstinline|istream_view| : vue par application successive de \lstinline|operator>>| sur un flux
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}5/6}
 	\begin{itemize}
 		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
 		\begin{itemize}
+			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \textit{range}
+
+\begin{lstlisting}[language=C++]
+vector<string> ss{"hello", " ", "world", "!"};
+join_view greeting{ss};
+for(char ch : greeting)
+cout << ch;  // hello world!\end{lstlisting}
+
 			\item \lstinline|split_view| sépare un \textit{range} en élément sur un délimiteur donné
 			
 			\begin{lstlisting}[language=C++]
@@ -1041,15 +1088,12 @@ for(auto word : sentence) {
    cout << " *"; }
    // the *quick *brown *fox *\end{lstlisting}
 			
-			\item \lstinline|common_view| convertit une vue en \lstinline|common_range|
-			\item \lstinline|reverse_view| : éléments en sens inverse
-			\item \lstinline|istream_view| : vue par application successive de \lstinline|operator>>| sur un flux
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}5/5}
+	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}6/6}
 	\begin{itemize}
 		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
 		\begin{itemize}
@@ -1075,7 +1119,7 @@ auto years = figures | views::elements<1>;
 	\begin{lstlisting}[language=C++]
 vector<int> ints{0, 1, 2, 3, 4, 5};
 
-auto even = [](int i){ return 0 == i % 2; };
+auto even = [](int i){ return (i % 2) == 0; };
 auto square = [](int i) { return i * i; };
 
 for(int i : ints | 
@@ -1086,7 +1130,7 @@ for(int i : ints |
 	\begin{lstlisting}[language=C++]
 vector<int> foo{1, 1, 2, 2, 3, 3, 5, 5, 5, 6, 9}, bar;
 
-auto odd = [](int i){ return 1 == i % 2; };
+auto odd = [](int i){ return (i % 2) == 1; };
 
 copy(foo | view::filter(odd) | unique{}, 
      back_inserter(bar)); // 1 3 5 9\end{lstlisting}
@@ -1388,9 +1432,12 @@ for(size_t i = 0; const auto& bar : foo) {
 
 \subsection*{Constexpr}
 \begin{frame}[fragile]
-	\frametitle{Évolutions de \lstinline|constexpr|\titlehfill{}1/2}
+	\frametitle{\lstinline|consteval|}
 	\begin{itemize}
 		\item Spécificateur \lstinline|consteval| : impose une évaluation \textit{compile-time}
+
+\note[item]{\textit{constrexpr} le permet mais ne l'impose pas}
+
 		\begin{itemize}
 			\item \lstinline|consteval| implique \lstinline|inline|
 		\end{itemize}
@@ -1404,10 +1451,29 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 		\begin{alertblock}{Restriction}
 			Pas de pointeur dans des contextes \lstinline|consteval|
 		\end{alertblock}
+	\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{\lstinline|constinit|}
+	\begin{itemize}
+		\item Spécificateur \lstinline|constinit| : impose une initialisation durant la phase \textit{static initialization}
+		\begin{itemize}
+			\item Uniquement sur des objets dont la \textit{storage duration} est \textit{static} ou \textit{thread}
+			\item Mal-formé en cas d'initialisation dynamique
+			\item Adresse le \textit{static initialization order fiasco}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Évolutions de \lstinline|constexpr|\titlehfill{}1/2}
+	\begin{itemize}
 		\item Initialisation triviale dans des contextes \lstinline|constexpr|
 		\item \lstinline|std::is_constant_evaluated()| pour savoir si l'évaluation est \textit{compile-time}
 		\item Prise en compte étendue de \lstinline|constexpr| dans la bibliothèque standard
+
+\note[item]{Notamment \lstinline|std::string| et \lstinline|std::vector|}
 	\end{itemize}
 \end{frame}
 
@@ -1986,7 +2052,7 @@ baz(7);  // 31\end{lstlisting}
 \note[item]{Conservation du terme anglais car verrou est ambigu (\textit{latch} ou \textit{lock})}
 
 	\begin{itemize}
-		\item \lstinline|std::latch| compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro
+		\item \lstinline|std::latch| compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro 
 		\begin{itemize}
 			\item Création avec la valeur initiale du compteur
 			\item \lstinline|count_down()| décrémente le compteur
