@@ -1488,7 +1488,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 				\item Comporte comme \textit{no-ops} en \textit{compile-time}
 				\item Ne peut pas lancer d'exception \textit{compile-time}
 			\end{itemize}
-			\item Utilisation de \lstinline|dynamic_cast| dans du code \lstinline|constexpr|
+			\item Utilisation de \lstinline|dynamic_cast| et \lstinline|typeid| dans du code \lstinline|constexpr|
 			\item Déclaration de fonctions virtuelles \lstinline|constexpr|
 			\item Utilisation de \lstinline|asm|
 		\end{itemize}
@@ -2003,6 +2003,7 @@ baz(7);  // 31\end{lstlisting}
 		\item Ajout de \lstinline|std::atomic<std::shared_ptr<T>>|
 		\item Ajout de \lstinline|std::atomic<>| sur les types flottant
 		\item \lstinline|std::atomic_ref| applique des modifications atomiques sur des données non-atomiques qu'il référence
+		\item \lstinline|wait()|, \lstinline|notify_one()| et \lstinline|notify_all()| pour attendre le changement d'état d'un \lstinline|std::atomic|
 	\end{itemize}
 \end{frame}
 
