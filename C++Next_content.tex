@@ -21,6 +21,7 @@
 			\item \ldots{} sauf celles spécifiquement déclarées membres
 			\item Réalisation de \og \textit{smart reference}\fg{} (p.ex. proxy)
 		\end{itemize}
+		\item Surcharge de \lstinline|operator?:|
 		\item \textit{Unified Call Syntax}
 		\begin{itemize}
 			\item \lstinline|f(x,y)| appelle \lstinline|x.f(y)| si \lstinline|f(x,y)| n'est pas trouvé
@@ -71,6 +72,11 @@
 \note[item]{\textit{unscoped} énumération, c'est à dire les \lstinline|enum| par opposition aux \lstinline|enum class|}
 
 		\end{itemize}
+
+		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
+
+\note[item]{P.ex. si le standard C++23 supprimme les coversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 2023|}
+
 	\end{itemize}
 \end{frame}
 
@@ -117,9 +123,13 @@ inspect (shape) {	// Sous-type
 
 \note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
 
-		\item Contrôle du \textit{layout} des classes
+		\item \textit{Layout} des classes
+		\begin{itemize}
+			\item Suppression de la possibilité donné au compilateur de réordonner les membres ayant des visibilités différentes
+			\item Contrôle du \textit{layout} via un attribut permettant de privilégier la taille, la vitesse ou l'ordre de déclaration
+		\end{itemize}
 
-\note[item]{Au travers d'un attribut permettant de définir si nous souhaitons privilégier la taille, la vitesse ou l'ordre de déclaration}
+\note[item]{Deux propositions différentes, mais pas incompatibles}
 	\end{itemize}
 \end{frame}
 
@@ -144,8 +154,111 @@ for... (auto elem : tup)
 \note[item]{Appelées \textit{Zero-overhead deterministic exceptions}}
 
 		\item Ajout \textit{floating-point types} de plus petite taille
+		\item Réservation des attributs globaux et de l'espace de nom d'attributs \lstinline|std|
+		\item Changement de contexte \textit{stackful} : \lstinline|fiber_context|
 	\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
+
+			\begin{lstlisting}[language=C++]
+std::tuple<X, Y, Z> f();
+
+auto [...xs] = f();
+auto [x, ...rest] = f();
+auto [x,y,z, ...rest] = f();
+auto [x, ...rest, z] = f();
+auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
+
+\note[item]{Proche dans l'esprit de ce qui se fait en Python 3}
+
+		\item Accès bas-niveau aux IO : \lstinline|file_handle| et \lstinline|path_handle|
+		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
+		\item invocation concurrente
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Parsing de texte
+			\begin{itemize}
+				\item Pendant du formatage de texte introduit en C++20
+				\item Alternative sûr, robuste à \lstinline|sscanf()|
+				\item Extensible aux types utilisateurs
+				\item Compatible avec les itérateurs et les \textit{ranges}
+			\end{itemize}
+
+			\begin{lstlisting}[language=C++]
+string key;
+int value;
+scan("answer = 42", "{} = {}", key, value);
+//    ~~~~~~~~~~~~~  ~~~~~~~~~  ~~~~~~~~~~
+//        entree       format    arguments
+// key : "answer", value : 42\end{lstlisting}
+
+			\begin{lstlisting}[language=C++]
+string key;
+chrono::seconds time;
+scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Algèbre linéaire basé sur un sous-ensemble de \href{https://www.netlib.org/blas/}{BLAS} (vecteur, matrice, \ldots)
+		\item Support des unités physiques :
+		\begin{itemize}
+			\item Gestion des quantités et dimensions
+			\item Supports des unités de base, dérivées, des multiples et des sous-multiples
+			\item Conversion et opérations entre unités
+		\end{itemize}
+
+		\begin{lstlisting}[language=C++]
+static_assert(10km / 2 == 5km);
+
+static_assert(1h == 3600s);
+static_assert(1km + 1m == 1001m);
+
+static_assert(1km / 1s == 1000mps);
+static_assert(2kmph * 2h == 4km);
+static_assert(2km / 2kmph == 1h);
+
+static_assert(1000 / 1s == 1kHz);
+
+static_assert(10km / 5km == 2);\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Manipulation des nombres
+		\begin{itemize}
+			\item Détection et gestion des débordements
+			\item Gestion des arrondis
+			\item Entiers larges
+			\item Rationnel
+			\item \textit{Proxy} pour manipuler la représentation interne des entiers
+		\end{itemize}
+		\item Concept pour les algorithmes numériques
+		\item \lstinline|constexpr| dans la bibliothèque standard (\lstinline|std::list|, \lstinline|std::deque|, \ldots)
+
+\note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
+
+		\item \lstinline|std::breakpoint| : point d'arrêt de debug dans le programme
+		\item Support des \textit{executor}
+		\item Unification et amélioration des API asynchrones
+
+\note[item]{Qu'il s'agisse de coroutines, d'algorithmes paralléles, d'\textit{executor} ou autre}
+
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{TS - Contracts}
@@ -213,7 +326,8 @@ for... (auto elem : tup)
 
 \note[item]{Mais le projet io2d en lui-même continue}
 \note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
-		
+
+		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
 		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
 
 \note[item]{Plusieurs sujets derrière ceci : réflexion statique, métaprogrammation, code compile-time, génération et injection, métaclasses, \ldots}

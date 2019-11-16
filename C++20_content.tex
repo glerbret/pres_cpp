@@ -262,10 +262,13 @@ U u{.b = "foo"}; \end{lstlisting}
 		\item Cinq types de retour possibles :
 		\begin{itemize}
 			\item \lstinline|std::strong_ordering| : ordre et égalité
-			\item \lstinline|std::strong_equality| : égalité
+			\item \lstinline|std::equality| : égalité
 			\item \lstinline|std::weak_ordering| : ordre et équivalence
-			\item \lstinline|std::weak_equality| : équivalence
+			\item \lstinline|std::weak_equivalence| : équivalence (maintien en cours de discussion)
 			\item \lstinline|std::partial_ordering| : ordre partiel
+			\item Potentiellement \lstinline|partial_equality|
+
+\note[item]{Encore un certain flottement autour de la notion d'équalité/équivalence et du traitement associé. Potentiellement des changements d'ici la sortie du standard et des adaptations dans les versions suivantes}
 		\end{itemize}
 
 \note[item]{Égalité implique substitualité (formellement $a == b <==> f(a) == f(b)$), ce n'est pas le cas pour l'équivalence}
@@ -624,6 +627,8 @@ string foo = "Hello world";
 
 foo.starts_with("Hello");   // true
 foo.ends_with("monde");     // false\end{lstlisting}
+
+		\item \lstinline|std::string_view| constructible depuis une paire d'itérateurs
 	\end{itemize}
 \end{frame}
 
@@ -645,7 +650,7 @@ cout << foo.contains(38) << "\n";  // false\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Conteneurs associatifs\titlehfill{}2/2}
 	\begin{itemize}
-		\item Optimisation de la recherche hétérogène dans des conteneurs ordonnés
+		\item Optimisation de la recherche hétérogène dans des conteneurs non-ordonnés
 		\begin{itemize}
 			\item Fourniture d'une classe exposant
 			\begin{itemize}
@@ -701,13 +706,13 @@ erase_if(bar, [](pair<int, int> i) {return i.first > 20;});
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::span|\titlehfill{}1/2}
 	\begin{itemize}
-		\item Fournit une vue sur un ensemble contigu
+		\item Fournit une vue sur un conteneur contigu
 
 \note[item]{Donc entre autres sur des tableaux C, \lstinline|std::vector|, \lstinline|std::array|, et éventuellement \lstinline|std::string|}
 \note[item]{Il s'agit d'une vue, les données restent stockées par le conteneur original}
 
 		\item Similaire à \lstinline|std::string_view|
-		\item Constructible depuis un ensemble, début/taille, début/fin ou \lstinline|std::span|
+		\item Constructible depuis un conteneur, un couple début/taille, un couple début/fin, un \textit{range} ou un autre \lstinline|std::span|
 
 	\begin{lstlisting}[language=C++]
 array<int, 5> foo = {0, 1, 2, 3, 4};
@@ -915,6 +920,7 @@ midpoint(5, 2);     // 4\end{lstlisting}
 		\item \lstinline|View| : \textit{range} fournissant copie, déplacement et affectation en temps constant
 		\item \lstinline|ViewableRange| : \textit{range} convertible en \lstinline|View|
 		\item \lstinline|CommonRange| : \textit{range} dont itérateurs et sentinelle ont le même type
+		\item \lstinline|reconstructible_range| : \textit{range} pouvant être reconstruit après une séparation en deux itérateurs
 	\end{itemize}
 \end{frame}
 
@@ -1185,7 +1191,10 @@ cin >> setw(24) >> a;\end{lstlisting}
 	
 		\item \lstinline|std::format()| et \lstinline|std::vformat()| retournent une chaîne de caractères
 		\item \lstinline|std::format_to()| et \lstinline|std::vformat_to()| écrivent dans un flux
-		\item Prise en compte de \textit{locale}
+		\item Formatage \textit{locale-specific} ou \textit{locale-independent}
+
+\note[item]{Par défaut, la locale n'est pas prise en compte, mais peut l'être si souhaité}
+
 		\item Format sous forme de chaînes utilisant \{\} comme \textit{placeholder}
 
 		\begin{block}{En attendant C++20}
@@ -1471,9 +1480,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 	\begin{itemize}
 		\item Initialisation triviale dans des contextes \lstinline|constexpr|
 		\item \lstinline|std::is_constant_evaluated()| pour savoir si l'évaluation est \textit{compile-time}
-		\item Prise en compte étendue de \lstinline|constexpr| dans la bibliothèque standard
-
-\note[item]{Notamment \lstinline|std::string| et \lstinline|std::vector|}
+		\item Prise en compte étendue de \lstinline|constexpr| dans la bibliothèque standard (\lstinline|std::string|, \lstinline|std::vector|, algorithmes numériques, \ldots)
 	\end{itemize}
 \end{frame}
 
@@ -2002,6 +2009,7 @@ baz(7);  // 31\end{lstlisting}
 	\begin{itemize}
 		\item Ajout de \lstinline|std::atomic<std::shared_ptr<T>>|
 		\item Ajout de \lstinline|std::atomic<>| sur les types flottant
+		\item Ajout de l'initialisation par défaut de \lstinline|std::atomic<>|
 		\item \lstinline|std::atomic_ref| applique des modifications atomiques sur des données non-atomiques qu'il référence
 		\item \lstinline|wait()|, \lstinline|notify_one()| et \lstinline|notify_all()| pour attendre le changement d'état d'un \lstinline|std::atomic|
 	\end{itemize}
