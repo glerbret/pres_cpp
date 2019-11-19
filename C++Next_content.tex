@@ -9,6 +9,10 @@
 		\item C++20 ne marque pas la fin des évolutions du C++
 		\item Plusieurs sujets proposés et non pris en compte dans les versions actuelles
 		\item Plusieurs TS publiés et non intégrés ou en cours d'étude
+		\item Des évolutions dans l'organisation
+		\begin{itemize}
+			\item Création d'un ABI Review Group en charge de l'étude des impacts sur l'ABI des évolutions
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -84,22 +88,101 @@
 	\frametitle{Propositions diverses}
 	\begin{itemize}
 		\item \textit{Pattern matching} via \lstinline|inspect| :
-	
-		\begin{lstlisting}[language=C++]
-inspect (p) {  		// std::pair
+		\begin{itemize}
+			\item Sur des entiers
+
+			\begin{lstlisting}[language=C++]
+inspect (x) {
+  0  : cout << "Aucun";
+  1  : cout << "Un";
+  __ : cout << "Plusieurs"; }\end{lstlisting}
+
+\note[item]{Proche dans l'esprit de \lstinline|switch/case| avec une syntaxe plus légère et sans \textit{fallback}}
+
+			\item Sur des chaînes
+
+			\begin{lstlisting}[language=C++]
+inspect (x) {
+  "zero": cout << "Aucun";
+  "un"  : cout << "Un";
+  __    : cout << "Plusieurs";\end{lstlisting}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item \textit{Pattern matching} via \lstinline|inspect| :
+		\begin{itemize}
+			\item Sur des \textit{tuple-like}
+
+\note[item]{\lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, aggrégats et les classes implémentant l'interface \textit{tuple}}
+
+			\begin{lstlisting}[language=C++]
+inspect (p) {
   [0, 0]: cout << "on origin";
   [0, y]: cout << "on y-axis";
   [x, 0]: cout << "on x-axis";
-  [x, y]: cout << x << ',' << y;}
+  [x, y]: cout << x << ',' << y;}\end{lstlisting}
 
-inspect (shape) {	// Sous-type
-  (as<Circle> ? [r]): cout << 3.14 * r * r;
-  (as<Rectangle> ? [w, h]): cout << w * h;}\end{lstlisting}
+			\item Sur les \lstinline|std::variant| et \lstinline|std::any|
 
-		\begin{block}{Mais aussi}
-			Sur les types entiers, les chaînes, les \textit{tuples}, les \lstinline|std::variant|, \ldots
-		\end{block}
+			\begin{lstlisting}[language=C++]
+inspect (v) {
+<int> i  : cout << "Entier " << i;
+<float> f: cout << "Reel " << f;\end{lstlisting}
+		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item \textit{Pattern matching} via \lstinline|inspect| :
+		\begin{itemize}
+			\item Sur les types polymorphiques
+
+			\begin{lstlisting}[language=C++]
+inspect (shape) {
+  <Circle> [r]      : cout << 3.14 * r * r;
+  <Rectangle> [w, h]: cout << w * h;}\end{lstlisting}
+
+\note[item]{Alternative bienvenue aux enfilades de \lstinline|dynamic_cast|}
+
+			\item Version sous forme d'expressions
+
+\note[item]{Et non de \textit{statement}}
+
+			\begin{lstlisting}[language=C++]
+int get_area(const Shape& shape) {
+  return inspect (shape) {
+    <Circle> [r]       => cout << 3.14 * r * r;
+    <Rectangle> [w, h] => cout << w * h;} }\end{lstlisting}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item \textit{Pattern matching} via \lstinline|inspect| :
+		\begin{itemize}
+			\item Avec une garde
+
+			\begin{lstlisting}[language=C++]
+inspect (p) {
+  [x, y] if(x > y): cout << x << "superieur a" << y;\end{lstlisting}
+
+			\item Et bien d'autres fonctionnalités \ldots
+		\end{itemize}
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		Prise en compte de la première correspondance et non de la meilleure
+
+\note[item]{Mais ça peut changer d'ici l'acceptation dans le standard}
+	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -126,10 +209,16 @@ inspect (shape) {	// Sous-type
 		\item \textit{Layout} des classes
 		\begin{itemize}
 			\item Suppression de la possibilité donné au compilateur de réordonner les membres ayant des visibilités différentes
-			\item Contrôle du \textit{layout} via un attribut permettant de privilégier la taille, la vitesse ou l'ordre de déclaration
+
+\note[item]{Au sein d'une visibilité, les membres doivent conserver leur ordre}
+\note[item]{En pratique, cette liberté n'est pas utilisée par les compilateurs}
+
+			\item Contrôle du \textit{layout} pour privilégier la taille ou l'ordre de déclaration
+			\item Voire la vitesse, l'ordre alphabétique ou les lignes de cache
+			\item Contrôle de l'alignement (remplaçant de \lstinline|#pragma pack(N)|)
 		\end{itemize}
 
-\note[item]{Deux propositions différentes, mais pas incompatibles}
+\note[item]{Deux propositions différentes mais pas incompatibles. La première étant en fait un prérequis}
 	\end{itemize}
 \end{frame}
 
@@ -154,7 +243,7 @@ for... (auto elem : tup)
 \note[item]{Appelées \textit{Zero-overhead deterministic exceptions}}
 
 		\item Ajout \textit{floating-point types} de plus petite taille
-		\item Réservation des attributs globaux et de l'espace de nom d'attributs \lstinline|std|
+		\item Réservation des attributs l'espace de noms global d'attribut globaux et de l'espace de nom d'attributs \lstinline|std|
 		\item Changement de contexte \textit{stackful} : \lstinline|fiber_context|
 	\end{itemize}
 \end{frame}
@@ -237,28 +326,98 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Manipulation des nombres
-		\begin{itemize}
-			\item Détection et gestion des débordements
-			\item Gestion des arrondis
-			\item Entiers larges
-			\item Rationnel
-			\item \textit{Proxy} pour manipuler la représentation interne des entiers
-		\end{itemize}
 		\item Concept pour les algorithmes numériques
 		\item \lstinline|constexpr| dans la bibliothèque standard (\lstinline|std::list|, \lstinline|std::deque|, \ldots)
 
 \note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
 
 		\item \lstinline|std::breakpoint| : point d'arrêt de debug dans le programme
-		\item Support des \textit{executor}
+		\item \textit{Executor} : abstraction gérant où et comment s'exécute un code dans un environnement concurrent
 		\item Unification et amélioration des API asynchrones
 
 \note[item]{Qu'il s'agisse de coroutines, d'algorithmes paralléles, d'\textit{executor} ou autre}
 
+		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
+		\item Autoriser les conversions entiers vers booléens dans les \lstinline|static_assert| et \lstinline|if constexpr|
+		\item Constructeur par déplacement \lstinline|=relocates| : similaire à \lstinline|=default| avec la garantie de pouvoir remplacer \og déplacement puis destruction\fg{} par des appels à \lstinline|memcpy() |
+
+\note[item]{Donc de permettre des optimisations aux compilateurs}
+
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Attribut \lstinline|assume(expression)| indique que l'expression est vraie et que le compilateur peut utiliser cette hypothèse dans ses optimisations
+		\item PFA (\textit{Proxy}, \textit{Facade}, \textit{Addresser}) : programmation polymorphique via \textit{type erasure}
+
+\note[item]{Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites}
+
+		\item Interdiction de l'appel de \lstinline|operator=()| sur des temporaires
+
+\note[item]{Ce n'est pas permis sur les types built-in mais possible sur les autres, avec tous les problèmes que ça peut poser}
+
+		\item Retarder l'échec de \lstinline|static_assert(false)| dans des contextes template jusqu'à l'instanciation
+
+		\begin{lstlisting}[language=C++]
+template<typenameT>int my_func(constT&) {
+  if constexpr(is_integral_v<T>) { 
+    return 1; } 
+  else if constexpr(is_convertible_v<string, T>) { 
+    return 2 ;}
+  else {
+    // C++20 : echec de compilation systematique
+    static_assert(false); } }\end{lstlisting}
+
+\note[item]{Erreur en C++20 et précédent. L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Généralisation et simplification des \textit{variadic templates} (\textit{pack})
+		\begin{itemize}
+			\item Déclaration possible partout où une variable peut être déclarée
+
+			\begin{lstlisting}[language=C++]
+template <typename... Ts>
+struct tuple { Ts... elems; };\end{lstlisting}
+
+			\item Indexation des \textit{packs}
+
+			\begin{lstlisting}[language=C++]
+struct tuple_element<I, tuple<Ts...>> {
+  using type = Ts...[I]; };\end{lstlisting}
+
+			\item \og \textit{Unpack}\fg{} de \lstinline|std::tuple| à la volée
+
+			\begin{lstlisting}[language=C++]
+int sum(int x, int y, int z) { return x + y + z; }
+
+tuple<int, int, int> point{1, 2, 3};
+int s = sum(point.elems...);\end{lstlisting}
+
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Propositions diverses}
+  \begin{itemize}
+	\item Possibilité d'instancier certains template au runtime (JIT limité aux templates)
+
+\note[item]{P.ex. pour des matrices dont la taille n'est pas connue à la compilation}
+
+	\item Mécanismes pour vérifier à la compilation qu'un type à la même représentation mémoire  qu'un autre
+
+\note[item]{P.ex. une structure de deux \lstinline|float| et un tableau de deux \lstinline|float|}
+
+	\item Voire pour forcer à avoir la représentation du type cible
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
 	\frametitle{TS - Contracts}
@@ -297,6 +456,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 		\item Gestion d'IPv4, IPv6, TCP, UDP
 		\item Manipulation d'adresses IP
 		\item Pas de protocoles de plus haut niveau actuellement
+		\item Gestion de la sécurité (demande post-TS)
 	\end{itemize}
 \end{frame}
 
@@ -320,24 +480,34 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 	
 		\item \textit{Parallelism} 2 : publié en juin 2018
 		\item \textit{Transactional Memory} : publié
-		\item \textit{Numerics}
-		\item \textit{Array extension} : taille non connue à la compilation
-		\item \textit{2D Graphics} (io2d) : API C++ au dessus de Cairo, différé
-
-\note[item]{Mais le projet io2d en lui-même continue}
-\note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
-
-		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
-		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
-
-\note[item]{Plusieurs sujets derrière ceci : réflexion statique, métaprogrammation, code compile-time, génération et injection, métaclasses, \ldots}
-\note[item]{Dans un premier temps, il s'agit de réflexion statique}
+		\item \textit{Numerics}: manipulation des nombres
+		\begin{itemize}
+			\item Détection et gestion des débordements
+			\item Gestion des arrondis
+			\item Entiers larges
+			\item Rationnel
+			\item \textit{Proxy} pour manipuler la représentation interne des entiers
+		\end{itemize}
+	
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{TS - Les autres\titlehfill{}2/2}
 	\begin{itemize}
+		\item \textit{Array extension} : taille non connue à la compilation
+		\item \textit{2D Graphics} (io2d) : API C++ au dessus de Cairo, différé
+
+\note[item]{Mais le projet io2d en lui-même continue}
+\note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
+
+		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
+
+\note[item]{Plusieurs sujets derrière ceci : réflexion statique, métaprogrammation, code compile-time, génération et injection, métaclasses, \ldots}
+\note[item]{Dans un premier temps, il s'agit de réflexion statique}
+
+		\item \textit{Reflection V2}
+
 		\item \textit{Concurrency} 1 : publié
 		\begin{itemize}
 			\item \lstinline|future.then()|
