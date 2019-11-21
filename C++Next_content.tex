@@ -40,7 +40,6 @@
 \note[item]{Annotations de types claim / assertion permettant à des outils d'analyse de vérifier la correction du programme}
 \note[item]{Recouvre les points du TS contract mais est plus ambitieux}
 
-		\item Support de l'Unicode
 		\item Support des entrées/sorties audio
 		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
 
@@ -238,19 +237,19 @@ for... (auto elem : tup)
 				\item Éléments de type différent
 				\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
 			\end{itemize}
-		\item Exceptions légères
-
-\note[item]{Appelées \textit{Zero-overhead deterministic exceptions}}
-
+		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
 		\item Ajout \textit{floating-point types} de plus petite taille
-		\item Réservation des attributs l'espace de noms global d'attribut globaux et de l'espace de nom d'attributs \lstinline|std|
-		\item Changement de contexte \textit{stackful} : \lstinline|fiber_context|
+		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
+
+\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
+		
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
+		\item Changement de contexte \textit{stackful} : \lstinline|fiber_context|
 		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
 
 			\begin{lstlisting}[language=C++]
@@ -411,12 +410,77 @@ int s = sum(point.elems...);\end{lstlisting}
 
 \note[item]{P.ex. pour des matrices dont la taille n'est pas connue à la compilation}
 
-	\item Mécanismes pour vérifier à la compilation qu'un type à la même représentation mémoire  qu'un autre
+	\item \lstinline|if consteval| similaire à \lstinline|if(is_constant_evaluated())| mais permettant l'appel de fonctions immédiates (\lstinline|consteval|)
+
+	\begin{lstlisting}[language=C++]
+consteval int f(int i) { return i; }
+
+constexpr int g(int i) {
+	if consteval { return f(i) + 1;	} 
+	else { return 42; } }
+
+consteval int h(int i) {
+	return f(i) + 1; } \end{lstlisting}
+
+\note[item]{Le même exemple avec \lstinline|if(is_constant_evaluated())| serait incorrect}
+\note[item]{En outre, c'est probablement plus lisible et ne nécessite pas de fichier d'en-tête}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Mécanismes pour vérifier à la compilation qu'un type à la même représentation mémoire  qu'un autre
 
 \note[item]{P.ex. une structure de deux \lstinline|float| et un tableau de deux \lstinline|float|}
 
-	\item Voire pour forcer à avoir la représentation du type cible
-  \end{itemize}
+		\item Voire pour forcer à avoir la représentation du type cible
+		\item Accès aux octets sous-jacent d'un objet
+		\begin{itemize}
+			\item Nouvelle catégorie d'objet : \textit{contiguous-layout}
+			\begin{itemize}
+				\item Ne contient que des types scalaires ou des classes sans fonction ni base virtuelles
+				\item N'hérite pas de objet non \textit{contiguous-layout}
+			\end{itemize}
+			\item Contiguïté garantie
+			\item Représentation sous forme de tableau
+			\item Obtention d'un pointeur sur représentation via \lstinline|reinterpret_cast| vers \lstinline|char|, \lstinline|unsigned char| ou \lstinline|std::byte|
+			\item Conversion pointeur sur représentation vers pointeur sur objet via \lstinline|reinterpret_cast|
+		\end{itemize}
+
+		\begin{block}{Et actuellement ?}
+			Formellement : comportement indéfini\\
+			En pratique : comportement actuel des compilateurs 
+		\end{block}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Génération d'opérateurs à la demande par \lstinline|=default|
+		\begin{itemize}
+			\item \lstinline|operatorX=()| à partir de \lstinline|operatorX()|
+			\item incrément et décrément préfixés à partir de l'addition et de la soustraction
+			\item incrément et décrément postfixés à partir des versions préfixés
+			\item \lstinline|operator->()| et \lstinline|operator->*()| à partir de \lstinline|operator*()| et \lstinline|operator.()|
+
+\note[item]{A priori \lstinline|operator->()| et \lstinline|operator->*()| seront générés par défaut, mais cette génération sera désactivable avec \lstinline|=delete|}
+\note[item]{Dans la continuité des opérateurs de comparaisons}
+
+		\end{itemize}
+	
+		\item Utilisation de caractères Unicode via leur nom ou alias préfixé par \lstinline|\N|
+
+		\begin{lstlisting}[language=C++]
+"\N{LATIN CAPITAL LETTER A}"
+"\N{NBSP}"\end{lstlisting}
+
+		\item \lstinline|std::tag_invoke| mécanisme générique de configuration du comportement (\textit{policy})
+
+\note[item]{Traditionnellement fait via des tags \og template\fg{}, mais ça pose des soucis de résolution de nom que \lstinline|std::tag_invoke| devrait résoudre}
+
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
