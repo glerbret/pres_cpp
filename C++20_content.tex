@@ -1665,25 +1665,26 @@ void foo(auto a, auto b) {...};\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Concepts - Utilisation template\titlehfill{}1/4}
 	\begin{itemize}
-		\item Utilisable via la liste des paramètres template
+		\item Utilisable via une \textit{Requires clause}
+
+		\begin{lstlisting}[language=C++]
+template<typename T> requires Incrementable<T>
+void foo(T);\end{lstlisting}
+
+		\item \ldots via une \textit{Trailing requires clause}
+
+		\begin{lstlisting}[language=C++]
+template<typename T>
+void foo(T) requires Incrementable<T>;\end{lstlisting}
+		
+		
+		\item \ldots via des paramètres templates contraints
 
 		\begin{lstlisting}[language=C++]
 template<Decrementable T>
 void foo(T);\end{lstlisting}
 
-		\item \ldots Ou via une clause \lstinline|requires|
-
-\note[item]{On note les deux syntaxes : \textit{clause requires} et \textit{trailing clause requires}}
-
-		\begin{lstlisting}[language=C++]
-template<typename T> requires Incrementable<T>;
-void foo(T)\end{lstlisting}
-
-		\item \ldots Ou les deux
-
-		\begin{lstlisting}[language=C++]
-template<Decrementable T>
-void foo(T) requires Incrementable<T>;\end{lstlisting}
+		\item \ldots ou via des combinaisons de ces syntaxes
 	\end{itemize}
 \end{frame}
 
