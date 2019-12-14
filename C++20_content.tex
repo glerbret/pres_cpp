@@ -1573,7 +1573,7 @@ auto& [y] = x;\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-template<std::chrono::seconds seconds>
+template<chrono::seconds seconds>
 class fixed_timer { /* ... */ };\end{lstlisting}
 
 \note[item]{En C++17, il fallait utiliser un type entier, p.ex. \lstinline|size_t|}
@@ -1605,7 +1605,7 @@ f(4.2, 0); // erreur, int ou double\end{lstlisting}
 
 		\begin{lstlisting}[language=C++]
 template<class T>
-void g(T, std::type_identity_t<T>);
+void g(T, type_identity_t<T>);
 
 g(4.2, 0); // OK, g<double>\end{lstlisting}
 	\end{itemize}
@@ -1825,8 +1825,8 @@ concept Addable = requires (T x) { x + x; };\end{lstlisting}
 		\begin{lstlisting}[language=C++]
 template <class T, class U = T>
 concept Swappable = requires(T&& t, U&& u) {
-  swap(std::forward<T>(t), std::forward<U>(u));
-  swap(std::forward<U>(u), std::forward<T>(t)); };\end{lstlisting}
+  swap(forward<T>(t), forward<U>(u));
+  swap(forward<U>(u), forward<T>(t)); };\end{lstlisting}
 
 	\end{itemize}
 \end{frame}
@@ -1950,7 +1950,7 @@ auto foo = []<typename T>(vector<T> bar) { ... };\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 auto foo = []<typename T>(vector<T> const& vec) { 
-  cout<< std::size(vec) << '\n';
+  cout<< size(vec) << '\n';
   cout<< vec.capacity() << '\n'; };\end{lstlisting}
 
 \note[item]{Cet exemple impose l'utilisation d'un vecteur}
