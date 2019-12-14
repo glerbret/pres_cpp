@@ -1,0 +1,11 @@
+*.aux
+*.dvi
+*.log
+*.nav
+*.out
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+c\+\+*.pdf
