@@ -916,23 +916,23 @@ midpoint(5, 2);     // 4\end{lstlisting}
 			\end{itemize}
 		\end{itemize}
 
-		\item \lstinline|SizedRange| : \textit{range} fournissant sa taille en temps constant
-		\item \lstinline|View| : \textit{range} fournissant copie, déplacement et affectation en temps constant
+		\item \lstinline|SizedRange| : taille en temps constant
+		\item \lstinline|View| : copie, déplacement et affectation en temps constant
 		\item \lstinline|ViewableRange| : \textit{range} convertible en \lstinline|View|
-		\item \lstinline|CommonRange| : \textit{range} dont itérateurs et sentinelle ont le même type
-		\item \lstinline|reconstructible_range| : \textit{range} pouvant être reconstruit après une séparation en deux itérateurs
+		\item \lstinline|CommonRange| : itérateurs et sentinelle ont le même type
+		\item \lstinline|reconstructible_range| : reconstructible après une séparation en deux itérateurs
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Ranges - Concepts\titlehfill{}2/2}
 	\begin{itemize}
-		\item \lstinline|InputRange| : \textit{range} fournissant des \lstinline|input_iterator|
-		\item \lstinline|OutputRange| : \textit{range} fournissant des \lstinline|output_iterator|
-		\item \lstinline|ForwardRange| : \textit{range} fournissant \lstinline|forward_iterator|
-		\item \lstinline|BidirectionalRange| : \textit{range} fournissant \lstinline|bidirectional_iterator|
-		\item \lstinline|RandomAccessRange| : \textit{range} fournissant \lstinline|random_access_iterator|
-		\item \lstinline|ContiguousRange| : \textit{range} fournissant \lstinline|contiguous_iterator|
+		\item \lstinline|InputRange| : fournit des \lstinline|input_iterator|
+		\item \lstinline|OutputRange| : fournit des \lstinline|output_iterator|
+		\item \lstinline|ForwardRange| : fournit \lstinline|forward_iterator|
+		\item \lstinline|BidirectionalRange| : fournit \lstinline|bidirectional_iterator|
+		\item \lstinline|RandomAccessRange| : fournit \lstinline|random_access_iterator|
+		\item \lstinline|ContiguousRange| : fournit \lstinline|contiguous_iterator|
 	\end{itemize}
 
 	\begin{block}{En résumé}
@@ -972,15 +972,15 @@ midpoint(5, 2);     // 4\end{lstlisting}
 	
 		\begin{lstlisting}[language=C++]
 for(int i : views::iota{1, 10})
-  std::cout << i << ' ';
+  cout << i << ' ';
   // 1 2 3 4 5 6 7 8 9\end{lstlisting}
 	
 		\item \lstinline|std::views::counted| crée un range depuis un itérateur et un nombre d'éléments
 	
 		\begin{lstlisting}[language=C++]
 int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-for(int i : std::views::counted(a, 3))
-  std::cout << i << ' ';
+for(int i : views::counted(a, 3))
+  cout << i << ' ';
   // 1 2 3\end{lstlisting}
 	\end{itemize}
 \end{frame}
@@ -994,6 +994,7 @@ for(int i : std::views::counted(a, 3))
 			\item Prends un unique paramètre \lstinline|viewable_range|
 			\item Retourne une \lstinline|view|
 		\end{itemize}
+		\item Évaluation paresseuse des \lstinline|view|
 	\end{itemize}
 \end{frame}
 
@@ -1010,7 +1011,6 @@ D(C(R));\end{lstlisting}
 		\begin{lstlisting}[language=C++]
 R | C | D;\end{lstlisting}
 
-		\item Évaluation paresseuse des pipelines
 		\item Peuvent prendre plusieurs arguments
 
 \note[item]{Plusieurs syntaxes pour prendre les arguments}
