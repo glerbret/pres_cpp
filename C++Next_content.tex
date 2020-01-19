@@ -212,8 +212,7 @@ inspect (p) {
 \note[item]{Au sein d'une visibilité, les membres doivent conserver leur ordre}
 \note[item]{En pratique, cette liberté n'est pas utilisée par les compilateurs}
 
-			\item Contrôle du \textit{layout} pour privilégier la taille ou l'ordre de déclaration
-			\item Voire la vitesse, l'ordre alphabétique ou les lignes de cache
+			\item Contrôle du \textit{layout} pour privilégier la taille, l'ordre de déclaration, la visibilité, la vitesse, l'ordre alphabétique, les lignes de cache ou les règles d'une version antérieure du C++ ou d'un autre langage
 			\item Contrôle de l'alignement (remplaçant de \lstinline|#pragma pack(N)|)
 		\end{itemize}
 
@@ -480,6 +479,53 @@ consteval int h(int i) {
 
 \note[item]{Traditionnellement fait via des tags \og template\fg{}, mais ça pose des soucis de résolution de nom que \lstinline|std::tag_invoke| devrait résoudre}
 
+		\item Ajout de suffixes pour les littéraux \lstinline|std::size_t|, \lstinline|std::ptrdiff_t|
+		\item \lstinline|std::colony| : conteneur de type \og tableau de \textit{buckets}\fg{}
+		\item Ajout d'entiers larges : \lstinline|wide_integer<128, unsigned>|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item \lstinline|static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
+		
+\note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
+	
+		\item Nouveau trait \lstinline|std::is_narrowing_convertible|
+		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
+		\item Constructeurs par déplacement \lstinline|=bitcopies|
+		\item API \og itérateurs\fg{} de génération des nombres aléatoire
+		\item Surcharge \og \textit{ranges}\fg{} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
+		\item Concept \lstinline|reconstructible_range| : \textit{range} reconstructible après une séparation en deux itérateurs
+		\item Fonctions statistiques (moyenne, médiane, variance, \ldots)
+		\item \lstinline|span| de taille fixe
+		\item Paramètre template universel
+
+\note[item]{Utile pour la création de méta-fonctions template high-order, pour avoir des \lstinline|static_assert(false)| dependants et pour certains tests sur les types}
+
+		\item Autoriser les templates dans les classes locales
+		\item Ajout de \lstinline|operator[]| à \lstinline|std::initializer_list|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Prise en charge de \lstinline|std::string_view| par \lstinline|std::from_chars|
+		\item Relâchement des contraintes sur les tableaux \og C\fg{}: initialisation des tableaux d'agrégats, copies de tableaux, tableau comme type de retour
+
+\note[item]{Copies des tableaux membres en particulier}
+
+		\item Opérateur pipeline \lstinline!operator|>()! :  \lstinline!x|>f(y)! équivalent à \lstinline|f(x, y)|
+		\item Ajout d'un paramètre \og pas\fg{} à \lstinline|std::iota_view|
+		\item Modification du constructeur de \lstinline|std::string| depuis un caractère pour interdire les autres numériques (entiers ou flottants)
+
+\note[item]{Il s'agit d'empêcher les initialisations depuis des numériques via la conversion en char}
+
+		\item Suppression de \lstinline|NULL| et interdiction de \lstinline|0| comme pointeur nul
+		\item Évolutions des modules : communication d'informations aux outils de \textit{build}
+		\item Ajout d'une boucle \lstinline|do_until|
 	\end{itemize}
 \end{frame}
 
