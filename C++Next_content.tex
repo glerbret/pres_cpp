@@ -12,6 +12,8 @@
 		\item Des évolutions dans l'organisation
 		\begin{itemize}
 			\item Création d'un ABI Review Group en charge de l'étude des impacts sur l'ABI des évolutions
+			\item Processus d'évaluation des propositions d'évolutions pour réduire le risque d'erreur
+			\item Groupe \og \textit{Undefined Behavior}\fg{} dont le rôle est de documenter les comportements \og \textit{undefined}\fg{} et \og \textit{unspecified}\fg{}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -57,6 +59,12 @@
 			\item \lstinline|std::mdspan| : vues multidimensionnels (et indiçage associé \lstinline|[x,y,z]|)
 
 \note[item]{La dépréciation de l'opérateur virgule dans les indices est un préalable à ce type de conteneur}
+
+			\item \lstinline|static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
+
+\note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
+
+			\item \lstinline|queue| concurrente
 		\end{itemize}
 
 		\item Nouveaux pointeurs intelligents :
@@ -75,11 +83,6 @@
 \note[item]{\textit{unscoped} énumération, c'est à dire les \lstinline|enum| par opposition aux \lstinline|enum class|}
 
 		\end{itemize}
-
-		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
-
-\note[item]{P.ex. si le standard C++23 supprimme les coversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 2023|}
-
 	\end{itemize}
 \end{frame}
 
@@ -237,11 +240,11 @@ for... (auto elem : tup)
 				\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
 			\end{itemize}
 		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
-		\item Ajout \textit{floating-point types} de plus petite taille
-		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
+		\item Capture mutable partielle par les lambdas
+		\item Déduction de \lstinline|this| (\lstinline|const| ou non, \lstinline|&|, \lstinline|&&|) : adaptation de fonctions membres aux qualifiers de \lstinline|this|
 
-\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
-		
+\note[item]{Ce qui va permettre d'éliminer du code \textit{boilerplate}, p.ex. les couples de surcharges \lstinline|const|/non \lstinline|const|}
+
 	\end{itemize}
 \end{frame}
 
@@ -330,17 +333,13 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
 
 		\item \lstinline|std::breakpoint| : point d'arrêt de debug dans le programme
-		\item \textit{Executor} : abstraction gérant où et comment s'exécute un code dans un environnement concurrent
+		\item Bibliothèques de support des coroutines
 		\item Unification et amélioration des API asynchrones
 
 \note[item]{Qu'il s'agisse de coroutines, d'algorithmes paralléles, d'\textit{executor} ou autre}
 
 		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
 		\item Autoriser les conversions entiers vers booléens dans les \lstinline|static_assert| et \lstinline|if constexpr|
-		\item Constructeur par déplacement \lstinline|=relocates| : similaire à \lstinline|=default| avec la garantie de pouvoir remplacer \og déplacement puis destruction\fg{} par des appels à \lstinline|memcpy() |
-
-\note[item]{Donc de permettre des optimisations aux compilateurs}
-
 	\end{itemize}
 \end{frame}
 
@@ -488,11 +487,9 @@ consteval int h(int i) {
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item \lstinline|static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
-		
-\note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
-	
+
 		\item Nouveau trait \lstinline|std::is_narrowing_convertible|
+		\item Trait et fonctions pour garantir des conversions sans perte
 		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
 		\item Constructeurs par déplacement \lstinline|=bitcopies|
 		\item API \og itérateurs\fg{} de génération des nombres aléatoire
@@ -526,10 +523,84 @@ consteval int h(int i) {
 		\item Suppression de \lstinline|NULL| et interdiction de \lstinline|0| comme pointeur nul
 		\item Évolutions des modules : communication d'informations aux outils de \textit{build}
 		\item Ajout d'une boucle \lstinline|do_until|
+		\item Élision de copie des objets de retour nommés (NRVO) garantie
+
+\note[item]{NRVO : \textit{Named Return Value Optimization}}
+\note[item]{L'élision de copie des objets retournés est déjà garantie pour des prvalues en C++17}
+
+		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
+
+\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
+
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Opération \og \textit{relocate}\fg{} (équivalent à déplacement puis destruction)
+
+\note[item]{L'opération \og relocate\fg{} est généralement implémentable par un simple \lstinline|memcpy()| sur l}
+\note[item]{L'idée est de permettre certaines optimisations sur les objets correspondant}
+
+		\begin{itemize}
+			\item Définition de la notion \og \textit{relocatable}\fg{} 
+			\item Ajout du concept \lstinline|Relocatable|
+
+\note[item]{En gros, si j'ai bien compris, il s'agit d'objet sur lesquels \lstinline|swap()| peut être appelé}
+
+			\item Définition de la notion de \og \textit{trivial relocatability}\fg{}
+
+\note[item]{Objets respectant la règle du 0 (pas de définition utilisateur de constructeur de copie/déplacement, d'opérateur d'affection par copie/déplacement ni de destructeur)}
+
+			\item Ajout des traits \lstinline|is_relocatable|, \lstinline|is_nothrow_relocatable| et \lstinline|is_trivially_relocatable|
+			\item Ajout de l'attribut \lstinline|[[trivially_relocatable]]| pour indiquer un type \textit{trivial relocatability}
+			\item Ajout d'algorithmes gérant cette opération : \lstinline|std::relocate_at|, \lstinline|std::uninitialized_relocate| et \lstinline|std::uninitialized_relocate_n|
+		\end{itemize}
+
+
+\note[item]{Par défaut, la capture n'est pas mutable}
+\note[item]{Il est déjà possible de changer ce comportement via le mot-clé \lstinline|mutable| mais il s'applique à tous les paramètres capturés}
+
+		\item Évolution de \textit{floating-point types}
+		\begin{itemize}
+			\item Ajout de types de petites tailles (16 bits)
+			\item Alias indiquant la taille (\lstinline|floatX_t|)
+			\item Ajout des suffixes littéraux correspondants
+			\item Cadre pour l'introduction d'autres types par une implémentation
+		\end{itemize}
+
+		\item Extension de \lstinline|=delete| à d'autres construction (notamment aux variables template)
+
+\note[item]{La proposition intiale ne concernait que les variables template, mais elle a inspiré le comité}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
+
+\note[item]{P.ex. si le standard C++23 supprimme les coversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 2023|}
+\note[item]{Pour l'instant pas de consensus trouvé, mais d'importants problèmes.}
+
+		\item Améliorations du générateur aléatoire
+		\item Construction de \lstinline|std::stack| et \lstinline|std::queue| depuis une paire d'itérateurs
+
+			\begin{lstlisting}[language=C++]
+vector<int> v(42);
+queue q(v.begin(), v.end());
+stack s(v.begin(), v.end());
+\end{lstlisting}
+
+\note[item]{En C++20 et précédent, il faut indiquer le type et utiliser une liste d'initialisation construite via la paire d'itérateur : \lstinline|queue<int> q({v.begin(), v.end()});|}
+		
+		\item Dépréciation de la construction d'un \lstinline|std::string| depuis un caractère
+		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{TS - Contracts}
 	\begin{itemize}
 		\item Retiré du draft C++20 et création d'un groupe d'étude en juillet 2019
@@ -612,11 +683,14 @@ consteval int h(int i) {
 \note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
 
 		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
+		\begin{itemize}
+			\item Introspection
+			\item Méta-programmation et code compile-time
+			\item Injection
+			\item Méta-classes
+		\end{itemize}
 
-\note[item]{Plusieurs sujets derrière ceci : réflexion statique, métaprogrammation, code compile-time, génération et injection, métaclasses, \ldots}
 \note[item]{Dans un premier temps, il s'agit de réflexion statique}
-
-		\item \textit{Reflection V2}
 
 		\item \textit{Concurrency} 1 : publié
 		\begin{itemize}
@@ -625,7 +699,7 @@ consteval int h(int i) {
 		\item \textit{Concurrency} 2
 		\begin{itemize}
 			\item \textit{Synchronic} : meilleure abstraction pour atomique permettant de tirer partie des caractéristiques logicielles et matérielles de la plateforme
-			\item \textit{Executor} permettant de spécifier où s'exécute telle tâche (\textit{a priori} pour C++23)
+			\item \textit{Executor} permettant de spécifier où et comment s'exécute un code dans un environnement concurrent (\textit{a priori} pour C++23)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
