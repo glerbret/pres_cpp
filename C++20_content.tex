@@ -2020,11 +2020,28 @@ baz(7);  // 31\end{lstlisting}
 	\begin{itemize}
 		\item Nouvelle variante de \textit{thread} : \lstinline|std::jthread|
 		\begin{itemize}
-			\item Peut être arrêté par l'appel à \lstinline|request_stop()|
 			\item Automatiquement arrêté et joint lors de la destruction
-		\end{itemize}
 
 \note[item]{Qui est finalement un motif classique de l'usage des \textit{threads}}
+
+\begin{lstlisting}[language=C++]
+int main() { thread t(foo); }  // Erreur (terminate)\end{lstlisting}
+
+\note[item]{Il faut rajouter un appel à \lstinline|join| pour corriger ce problème}
+
+\begin{lstlisting}[language=C++]
+int main() { jthread t(foo); } // OK\end{lstlisting}
+
+			\item Peut être arrêté par l'appel à \lstinline|request_stop()|
+
+\begin{lstlisting}[language=C++]
+void foo(stop_token st) {
+  while(!st.stop_requested()) { /* ... */ }}
+
+jthread t(foo);
+// ...
+t.request_stop();\end{lstlisting}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
