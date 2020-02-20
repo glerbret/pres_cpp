@@ -1182,9 +1182,10 @@ cin >> setw(24) >> a;\end{lstlisting}
 
 \note[item]{Par formatage \og à la C\fg{} j'entends ce qui est utilisé par \lstinline|printf| et équivalent}
 
-				\item Les flux sont complexes et peu propices à l'internationalisation et la localisation
+				\item Les flux sont complexes, peu propices à l'internationalisation et la localisation, les formatteurs sont globaux
 
 \note[item]{Peu propices à la localisation car le format et l'ordre des éléments est dans le code lui-même et ne peut pas être sortie facilement}
+\note[item]{Les formatteurs sont globaux, ainsi l'injection de \lstinline|std::hex| dans un flux va passer tous les affichages des entiers en héxadécimal jusqu'à un changement explicite et pas uniquement celui concerné}
 			\end{itemize}
 		\end{block}
 
@@ -1309,14 +1310,20 @@ format("{:%F %T}", chrono::system_clock::now());
 	\begin{itemize}
 		\item Via \lstinline|std::format()|, \lstinline|std::vformat()|, \lstinline|std::format_to()| et \lstinline|std::vformat_to()|
 		\begin{lstlisting}[language=C++]
-enum class foo : unsigned {};
+enum class Foo : unsigned {};
 
 template <>
-struct formatter<foo> : std::formatter<unsigned> {
-  auto format(foo s, format_context& ctx) {
+struct formatter<Foo> : std::formatter<unsigned> {
+  auto format(Foo s, format_context& ctx) {
     return format_to(ctx.out(), 
                      "{:02x}", 
-                     static_cast<unsigned>(s)); }};\end{lstlisting}
+                     static_cast<unsigned>(s)); }};
+                     
+Foo foo = ...;
+format("{}\fg{}, foo);\end{lstlisting}
+
+\note[item]{Mécanisme assez proche de celui des types utilisateur dans les flux, on fournit une fonction qui formate et passe dans le flux / format plus haut}
+
 	\end{itemize}
 \end{frame}
 
