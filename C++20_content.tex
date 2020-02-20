@@ -1320,7 +1320,7 @@ struct formatter<Foo> : std::formatter<unsigned> {
                      static_cast<unsigned>(s)); }};
                      
 Foo foo = ...;
-format("{}\fg{}, foo);\end{lstlisting}
+format("{}", foo);\end{lstlisting}
 
 \note[item]{Mécanisme assez proche de celui des types utilisateur dans les flux, on fournit une fonction qui formate et passe dans le flux / format plus haut}
 
