@@ -1172,7 +1172,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format|\titlehfill{}1/3}
+	\frametitle{\lstinline|std::format| - Présentation}
 	\begin{itemize}
 		\item API de formatage inspiré de la bibliothèque  \href{https://github.com/fmtlib/fmt}{\{fmt\}}
 		
@@ -1187,9 +1187,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 \note[item]{Peu propices à la localisation car le format et l'ordre des éléments est dans le code lui-même et ne peut pas être sortie facilement}
 			\end{itemize}
 		\end{block}
-	
-		\item \lstinline|std::format()| et \lstinline|std::vformat()| retournent une chaîne de caractères
-		\item \lstinline|std::format_to()| et \lstinline|std::vformat_to()| écrivent dans un flux
+
 		\item Formatage \textit{locale-specific} ou \textit{locale-independent}
 
 \note[item]{Par défaut, la locale n'est pas prise en compte, mais peut l'être si souhaité}
@@ -1203,67 +1201,122 @@ cin >> setw(24) >> a;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format|\titlehfill{}2/3}
+	\frametitle{\lstinline|std::format| - Référencement des valeurs}
 	\begin{itemize}
-		\item Deux types d'indexation :
+		\item Deux types de référencement :
 		\begin{itemize}
-			\item Automatique
+			\item Positionnel
 	
 			\begin{lstlisting}[language=C++]
 format("{} et {}", "a", "b"); // "a et b"\end{lstlisting}
 	
-			\item Manuelle
+			\item indexé
 	
 			\begin{lstlisting}[language=C++]
 format("{1} et {0}", "a", "b"); // "b et a"
 format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 	
-\note[item]{Par contre on ne peut pas mixer}
-\note[item]{Mais ça permet de répéter une valeur}
-		\end{itemize}
-
-
-		\item Un ensemble de \textit{formatters} standard :
-		\begin{itemize}
-			\item Alignement
-
-			\begin{lstlisting}[language=C++]
-format("{:6}", 42);    // "    42"
-format("{:6}", 'x');   // "x     "
-format("{:*<6}", 'x'); // "x*****"
-format("{:*>6}", 'x'); // "*****x"
-format("{:*^6}", 'x'); // "**x***"\end{lstlisting}
-
+\note[item]{Le référencement indexé permet de répéter une valeur et de gérer la position dans la chaîne de format (utile pour la localisation)}
+	
+			\begin{alertblock}{Limite}
+				Il n'est pas possible de mixer les deux types
+			\end{alertblock}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format|\titlehfill{}3/3}
+	\frametitle{\lstinline|std::format| - Alignement}
 	\begin{itemize}
-		\item Un ensemble de \textit{formatters} standard :
-		\begin{itemize}
-			\item Présence du signe pour les numériques
+		\item Alignement par défaut dépendant du type
 
 			\begin{lstlisting}[language=C++]
+format("{:6}", 42);    // "    42"
+format("{:6}", 'x');   // "x     "\end{lstlisting}
+
+		\item Possibilité de fournir un caractère de \textit{padding}
+
+			\begin{lstlisting}[language=C++]
+format("{:*6}", 42);    // "****42"\end{lstlisting}
+
+		\item Possibilité de choisir son alignement
+
+			\begin{lstlisting}[language=C++]
+format("{:*<6}", 'x'); // "x*****"
+format("{:*>6}", 'x'); // "*****x"
+format("{:*^6}", 'x'); // "**x***"\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Nombres}
+	\begin{itemize}
+		\item Gestion du signe
+
+		\begin{lstlisting}[language=C++]
 format("{0:},{0:+},{0:-},{0: }", 1); // "1,+1,1, 1"
 format("{0:},{0:+},{0:-},{0: }", -1);// "-1,-1,-1,-1"\end{lstlisting}
 
-			\item Format des numériques
+		\item Base et format
 
-			\begin{lstlisting}[language=C++]
-format("{:+06d}", 120);      // "+00120"
-format("{:#06x}", 0xa);      // "0x000a"
-// "101010 42 52 2a"
-format("{0:b} {0:d} {0:o} {0:x}", 42); 
-format("{0:#x} {0:#X}", 42); // "0x2a 0X2A"\end{lstlisting}
+\note[item]{Le \og formatteur\fg{} indique uniquement la base, pas le type précis de la valeur comme en C (\lstinline|int|, \lstinline|short|, \lstinline|long|, \lstinline|long long|) avec toutes les erreurs que cela entraîne}
 
-\note[item]{\lstinline|\#| affiche la base sur des entiers et le point numérique, même inutile, sur des flottants}
-\note[item]{les 0 avant la taille affiche les zéros non significatifs}
+		\begin{lstlisting}[language=C++]
+format("{:d}", 42);    // 42
+format("{:x}", 42);    // 2a
+format("{:X}", 42);    // 2A
+format("{:b}", 42);    // 101010
+format("{:o}", 42);    // 52\end{lstlisting}
 
+		\item Affichage de la base
+
+		\begin{lstlisting}[language=C++]
+format("{:#x}", 42); 	// 0x2a\end{lstlisting}
+
+\note[item]{\lstinline|\#| affiche également le point numérique, même inutile, sur des flottants}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Dates et heures}
+	\begin{itemize}
+		\item Format basé sur \lstinline|strftime|
+		\begin{itemize}
+			\item \lstinline|%y| l'année sur deux digits
+			\item \lstinline|%m| le mois
+			\item \lstinline|%d| le jour dans le mois
+			\item \lstinline|%u| ou \lstinline|%w| le jour dans la semaine
+
+\note[item]{1 à 7 avec 1 lundi pour u, 0 à 6 avec 0 pour dimanche pour w}
+
+			\item \lstinline|%H| ou \lstinline|%I| l'heure
+
+\note[item]{Repectivement sur 24h et 12h}
+			
+			\item \lstinline|%M| les minutes
+			\item \lstinline|%S| les secondes
+			\item \ldots
 		\end{itemize}
 
-		\item Possibilité de créer ses propres \textit{formatters}
+		\begin{lstlisting}[language=C++]
+format("{:%F %T}", chrono::system_clock::now());
+// AAAA-MM-JJ HH:mm:ss"\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Types utilisateur}
+	\begin{itemize}
+		\item Via \lstinline|std::format()|, \lstinline|std::vformat()|, \lstinline|std::format_to()| et \lstinline|std::vformat_to()|
+		\begin{lstlisting}[language=C++]
+enum class foo : unsigned {};
+
+template <>
+struct formatter<foo> : std::formatter<unsigned> {
+  auto format(foo s, format_context& ctx) {
+    return format_to(ctx.out(), 
+                     "{:02x}", 
+                     static_cast<unsigned>(s)); }};\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
