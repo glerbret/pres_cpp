@@ -368,14 +368,13 @@ template<typenameT>int my_func(constT&) {
     static_assert(false); } }\end{lstlisting}
 
 \note[item]{Erreur en C++20 et précédent. L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
-
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Généralisation et simplification des \textit{variadic templates} (\textit{pack})
+		\item Généralisation et simplification des \textit{parameters pack}
 		\begin{itemize}
 			\item Déclaration possible partout où une variable peut être déclarée
 
@@ -388,6 +387,37 @@ struct tuple { Ts... elems; };\end{lstlisting}
 			\begin{lstlisting}[language=C++]
 struct tuple_element<I, tuple<Ts...>> {
   using type = Ts...[I]; };\end{lstlisting}
+
+			\item \textit{Slicing} de \textit{packs}
+
+			\begin{lstlisting}[language=C++]
+auto x = Foo(a1, [:]t1..., [3:]t2..., a2);
+bar([1:]t1..., a3, [0]t1);\end{lstlisting}
+
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Généralisation et simplification des \textit{parameters pack}
+		\begin{itemize}
+			\item \textit{Pack} de taille fixe
+
+			\begin{lstlisting}[language=C++]
+template<unsigned int N>
+struct my_vector {
+  my_vector(int...[N] v) : values{v...} {}};\end{lstlisting}
+
+			\item \textit{Variadic function} homogène
+
+			\begin{lstlisting}[language=C++]
+template <class T>
+void f(T... vs);\end{lstlisting}
+
+\note[item]{La fonction prend un nombre quelconque de paramètres, mais tous du type T}
+
 
 			\item \og \textit{Unpack}\fg{} de \lstinline|std::tuple| à la volée
 
