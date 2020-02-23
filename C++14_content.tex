@@ -225,7 +225,7 @@ int baz = 010'00;       // 512\end{lstlisting}
 auto foo = "abcd"s;   // string\end{lstlisting}
 
 	\begin{block}{Note}
-		Remplace avantageusement \lstinline|std::string("abcd")| dans de nombreux contextes (p.ex. assertions cppunit)
+		Remplace avantageusement \lstinline|std::string("abcd")| dans de nombreux contextes
 	\end{block}
 \end{frame}
 
@@ -314,13 +314,6 @@ auto foo = [] (auto in) { cout << in << '\n'; };
 
 foo(2);
 foo("azerty"s);\end{lstlisting}
-
-	\begin{block}{Mais aussi}
-		Ajout des paramètres par défaut aux lambdas
-
-	\begin{lstlisting}[language=C++]
-auto foo = [] (int bar = 12) { cout << bar << '\n'; };\end{lstlisting}
-	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -400,6 +393,10 @@ void foo(void(* bar)(int))
 foo([](int x) { std::cout << x << std::endl; });\end{lstlisting}
 
 		\item Peuvent être \lstinline|noexecpt|
+		\item Ajout des paramètres par défaut aux lambdas
+	
+		\begin{lstlisting}[language=C++]
+auto foo = [] (int bar = 12) { cout << bar << '\n'; };\end{lstlisting}
 	\end{itemize}
 \end{frame}
 

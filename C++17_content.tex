@@ -173,8 +173,6 @@ cout << foo(a) << ' ' << foo(ptr);  // 10 5\end{lstlisting}
 
 	\begin{exampleblock}{Do}
 		Remplace avantageusement certaines constructions basées sur une suite de spécialisations de template et SFINAE, une imbrication illisible d'opérateur ternaire ou l'utilisation de \lstinline|#if|
-
-\note[item]{Prendre garde à OCP malgré tout}
 	\end{exampleblock}
 \end{frame}
 
@@ -378,7 +376,7 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 \begin{frame}[fragile]
 	\frametitle{Ordre d'évaluation}
 	\begin{itemize}
-		\item Ordre d'évaluation fixé :
+		\item Ordre d'évaluation fixé
 		\begin{itemize}
 			\item De gauche à droite pour les expressions post-fixées
 
@@ -516,9 +514,6 @@ Foo bar = {42} // Erreur\end{lstlisting}
 		\item Stockage de bits
 		\item Pas un type caractère ni \og arithmétique\fg{}
 		\item Remplace les solutions à base de \lstinline|unsigned char|
-
-\note[item]{Voire \lstinline|char| ou \lstinline|signed char|, mais qui sont globalement de moins bon candidat pour un flux d'octet}
-
 		\item Globalement un \lstinline|enum class| construit sur un \lstinline|unsigned char|
 		\item Supporte les opérations binaires (décalage, et, ou, non)
 		\item Supporte les constructions depuis un type entier \ldots
@@ -606,7 +601,7 @@ foo.merge(bar);
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::map| : modification et ajout}
 
-\note[item]{Fonctionne sur \lstinline|map| mais aussi \lstinline|multimap| et sur les versions unordered}
+\note[item]{Fonctionne sur \lstinline|std::map| mais aussi sur \lstinline|std::unordered_map|}
 
 	\begin{itemize}
 		\item \lstinline|try_emplace()| : tentative de construction \og en place\fg{}
@@ -624,7 +619,7 @@ foo.insert_or_assign(2, "foo2bis");
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|emplace_back()|, \lstinline|emplace_front()| et conteneurs séquentiels}
+	\frametitle{\lstinline|emplace_back()|, \lstinline|emplace_front()|}
 	\begin{itemize}
 		\item \lstinline|emplace_back()| et \lstinline|emplace_front()| retournent une référence sur l'élément ajouté dans un conteneur séquentiel
 	\end{itemize}
@@ -747,7 +742,7 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 	\end{itemize}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|variant| aux unions brutes
+		Préférez \lstinline|std::variant| aux unions brutes
 	\end{exampleblock}
 
 	\begin{alertblock}{Restrictions}
@@ -756,7 +751,7 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 \note[item]{Mais peut contenir plusieurs fois le même type (avec des qualifiers cv identiques ou non)}
 \note[item]{\lstinline|Boost.Monostate| permet de créer des \lstinline|variant| \og vides\fg{}}
 
-		Le premier type doit être \textit{default-constructible} pour que le \lstinline|std::variant| le soit
+		\lstinline|std::variant| est \textit{default-constructible} si le premier type l'est\\
 
 \note[item]{Le \lstinline|variant| contient alors le premier type initialisé par défaut}
 	\end{alertblock}
@@ -832,9 +827,6 @@ baz("azerty"); // 6
 	\frametitle{Fold expression\titlehfill{}1/5}
 	\begin{itemize}
 		\item Applique un opérateur binaire à un \textit{parameter pack}
-
-\note[item]{Dis autrement c'est du \textit{fold} (ou \textit{reduce}) appliqué en \textit{compile-time} sur des paramètres templates non-types}
-
 		\item Support du \textit{right fold} \lstinline|(pack op ...)|
 		\item \ldots{} et du \textit{left fold} : \lstinline|(... op pack)|
 		\item Éventuellement avec un valeur initiale : \lstinline|(pack op ... op init)| ou \lstinline|(init op ... op pack)|
@@ -975,7 +967,7 @@ Baz baz(0); // OK (Ambigu en C++11)\end{lstlisting}
 
 \subsection*{Exception}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|noexcept| dans le typage}
+	\frametitle{\lstinline|noexcept|}
 	\begin{itemize}
 		\item \lstinline|noexcept| fait partie du type des fonctions
 
@@ -1139,7 +1131,6 @@ foo2();          // 5\end{lstlisting}
 	\frametitle{Capture de \lstinline|*this|}
 	\begin{itemize}
 		\item Capture \lstinline|*this| par valeur
-		\item Utilisation de \lstinline|*this| dans la spécification de capture
 
 \note[item]{Jusqu'à présent, on ne pouvait pas capturer la classe courante, seulement des attributs de celle-ci}
 	\end{itemize}
@@ -1178,7 +1169,7 @@ AddEleven(5);   // 16\end{lstlisting}
 	\frametitle{Lambdas et expressions constantes\titlehfill{}2/3}
 	\begin{itemize}
 		\item Déclaration \lstinline|constexpr| d'une lambda possible 
-		\item Définit explicitement un appel \lstinline|constexpr| \ldots
+		\item Explicitement via \lstinline|constexpr|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1186,7 +1177,7 @@ auto ID = [] (int n) constexpr { return n; };
 constexpr int I = ID(3);\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots{}appel implicitement \lstinline|constexpr| lorsque les exigences sont satisfaites
+		\item Implicitement \lstinline|constexpr| lorsque les exigences sont satisfaites
 	\end{itemize}
 
 \note[item]{Les lambdas sont donc \lstinline|constexpr| par défaut}
@@ -1323,7 +1314,7 @@ foo(T, Ts...) { }\end{lstlisting}
 namespace [[ Attribut ]] foo {}\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots{}Et aux valeurs d'une énumération (énumérateurs)
+		\item Et aux valeurs d'une énumération
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1463,7 +1454,7 @@ int foo(int, long) {}\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::shared_mutex|}
 	\begin{itemize}
-		\item Similaire à \lstinline|std::_mutex| avec deux niveaux d'accès
+		\item Similaire à \lstinline|std::mutex| avec deux niveaux d'accès
 		\begin{itemize}
 			\item Exclusif : possible si le verrou n'est pas pris
 			\item Partagé : possible si le verrou n'est pas pris en exclusif
@@ -1554,8 +1545,6 @@ apply(foo, baz);\end{lstlisting}
 	\begin{itemize}
 		\item Supporte la déduction de type
 
-\note[item]{Comme tout objet en C++17 avec la déduction de type dans les constructeurs}
-
 	\begin{lstlisting}[language=C++]
 optional foo(10);	// std::optional<int>\end{lstlisting}
 
@@ -1582,8 +1571,6 @@ auto bar = make_optional<complex<double>>(3.0, 4.0);\end{lstlisting}
 		\item Changement de la valeur via \lstinline|reset|, \lstinline|swap|, \lstinline|emplace| ou \lstinline|operator=()|
 		\item Comparaison naturelle des valeurs contenues 
 
-\note[item]{Pour le coup, là on est différent des pointeurs}
-
 		\begin{lstlisting}[language=C++]
 optional<int> deux(2), dix(10);
 
@@ -1605,7 +1592,7 @@ cout << (none == nullopt) << '\n';  // true\end{lstlisting}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::optional|\titlehfill{}4/4}
-	\begin{alertblock}{\lstinline|std::optional<bool>| et \lstinline|std::optional<T*>| pertinents ?}
+	\begin{alertblock}{\lstinline|std::optional<bool>| et \lstinline|std::optional<T*>|}
 		Probablement plus pertinent d'utiliser :
 		\begin{itemize}
 			\item Des booléens \og trois états\fg{} (Boost.tribool)
@@ -1629,9 +1616,6 @@ cout << (none == nullopt) << '\n';  // true\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|void*| \textit{type-safe} contenant un objet de n'importe quel type (ou vide)
 		\item Introduction d'une forme de typage dynamique au sein de C++
-
-\note[item]{Mais dans la bibliothèque standard et non le langage}
-
 		\item Issue de Boost.Any
 		\item Type contenu dépend de la valeur assignée
 
@@ -1757,7 +1741,7 @@ cout << bar.size() << " - " << bar << '\n';
 	\begin{exampleblock}{Performances}
 		\begin{itemize}
 			\item Souvent meilleures que les fonctionnalités équivalentes de \lstinline|string| \ldots
-			\item \ldots mais pas toujours, donc mesurez
+			\item \ldots{} mais pas toujours, donc mesurez
 		\end{itemize} 
 
 \note[item]{Et que boost.split}
@@ -1859,7 +1843,7 @@ bar.c_str();       // const char*\end{lstlisting}
 			\item Date de dernière écriture : \lstinline|last_write_time()|
 			\item Suppression : \lstinline|remove()|, \lstinline|remove_all()|
 
-\note[item]{Différence remove et remove\_all: suppression récursive pour le second}
+\note[item]{Différence \lstinline|remove| et \lstinline|remove_all| : suppression récursive pour le second}
 
 			\item Changement de nom : \lstinline|rename()|
 			\item Changement de taille : \lstinline|resize_file()|
@@ -1891,9 +1875,9 @@ bar.c_str();       // const char*\end{lstlisting}
 	\end{exampleblock}
 
 	\begin{block}{En attendant C++17 \ldots}
-		Utilisez Boost.Filesystem (ou une autre bibliothèque tierce équivalente)
+		Utilisez Boost.Filesystem
 
-\note[item]{Qt, POCO, etc. L'idée est d'avoir un code portable, mieux typé et moins source d'erreur}
+\note[item]{Ou Qt, POCO, etc. L'idée est d'avoir un code portable, mieux typé et moins source d'erreur}
 \note[item]{Préférence pour Boost car proche de ce que sera std}
 	\end{block}
 \end{frame}
@@ -1928,7 +1912,7 @@ for_each(execution::par, begin(foo), end(foo), bar);\end{lstlisting}
 		\item \lstinline|std::reduce()| \og ajoute\fg{} tous les éléments de l'ensemble
 	\end{itemize}
 
-	\begin{block}{Différence entre \lstinline|std::reduce()| et \lstinline|std::accumulate()| ?}
+	\begin{block}{\lstinline|std::reduce()| ou \lstinline|std::accumulate()| ?}
 		L'ordre des \og additions\fg{} n'est pas spécifié dans le cas de \lstinline|std::reduce()|
 
 \note[item]{Le résultat n'est donc pas déterministe dans le cas d'opérations non associatives ou non commutatives (car \lstinline|std::reduce()| regroupe et réarrange les opérations)}

@@ -91,7 +91,7 @@
 	\begin{itemize}
 		\item \textit{Pattern matching} via \lstinline|inspect| :
 		\begin{itemize}
-			\item Sur des entiers
+			\item Entiers
 
 			\begin{lstlisting}[language=C++]
 inspect (x) {
@@ -101,7 +101,7 @@ inspect (x) {
 
 \note[item]{Proche dans l'esprit de \lstinline|switch/case| avec une syntaxe plus légère et sans \textit{fallback}}
 
-			\item Sur des chaînes
+			\item Chaînes de caractères
 
 			\begin{lstlisting}[language=C++]
 inspect (x) {
@@ -117,7 +117,7 @@ inspect (x) {
 	\begin{itemize}
 		\item \textit{Pattern matching} via \lstinline|inspect| :
 		\begin{itemize}
-			\item Sur des \textit{tuple-like}
+			\item \textit{Tuple-like}
 
 \note[item]{\lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, aggrégats et les classes implémentant l'interface \textit{tuple}}
 
@@ -128,7 +128,7 @@ inspect (p) {
   [x, 0]: cout << "on x-axis";
   [x, y]: cout << x << ',' << y;}\end{lstlisting}
 
-			\item Sur les \lstinline|std::variant| et \lstinline|std::any|
+			\item \lstinline|std::variant| et \lstinline|std::any|
 
 			\begin{lstlisting}[language=C++]
 inspect (v) {
@@ -143,7 +143,7 @@ inspect (v) {
 	\begin{itemize}
 		\item \textit{Pattern matching} via \lstinline|inspect| :
 		\begin{itemize}
-			\item Sur les types polymorphiques
+			\item Types polymorphiques
 
 			\begin{lstlisting}[language=C++]
 inspect (shape) {
@@ -152,15 +152,13 @@ inspect (shape) {
 
 \note[item]{Alternative bienvenue aux enfilades de \lstinline|dynamic_cast|}
 
-			\item Version sous forme d'expressions
-
-\note[item]{Et non de \textit{statement}}
+			\item Variante sous forme d'expressions (et non de \textit{statement})
 
 			\begin{lstlisting}[language=C++]
 int get_area(const Shape& shape) {
   return inspect (shape) {
-    <Circle> [r]       => cout << 3.14 * r * r;
-    <Rectangle> [w, h] => cout << w * h;} }\end{lstlisting}
+    <Circle> [r]       => 3.14 * r * r;
+    <Rectangle> [w, h] => w * h;} }\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -170,7 +168,7 @@ int get_area(const Shape& shape) {
 	\begin{itemize}
 		\item \textit{Pattern matching} via \lstinline|inspect| :
 		\begin{itemize}
-			\item Avec une garde
+			\item Support des gardes
 
 			\begin{lstlisting}[language=C++]
 inspect (p) {
@@ -241,6 +239,9 @@ for... (auto elem : tup)
 			\end{itemize}
 		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
 		\item Capture mutable partielle par les lambdas
+
+\note[item]{Par défaut, capture \lstinline|const|, possible de la rendre modifiable via \lstinline|mutable|, mais tous les données capturées sont alors mutable. Ici il est question de n'avoir que certaines données modifiables}
+
 		\item Déduction de \lstinline|this| (\lstinline|const| ou non, \lstinline|&|, \lstinline|&&|) : adaptation de fonctions membres aux qualifiers de \lstinline|this|
 
 \note[item]{Ce qui va permettre d'éliminer du code \textit{boilerplate}, p.ex. les couples de surcharges \lstinline|const|/non \lstinline|const|}
@@ -277,7 +278,7 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 		\item Parsing de texte
 			\begin{itemize}
 				\item Pendant du formatage de texte introduit en C++20
-				\item Alternative sûr, robuste à \lstinline|sscanf()|
+				\item Alternative sûre et robuste à \lstinline|sscanf()|
 				\item Extensible aux types utilisateurs
 				\item Compatible avec les itérateurs et les \textit{ranges}
 			\end{itemize}
@@ -355,7 +356,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 
 \note[item]{Ce n'est pas permis sur les types built-in mais possible sur les autres, avec tous les problèmes que ça peut poser}
 
-		\item Retarder l'échec de \lstinline|static_assert(false)| dans des contextes template jusqu'à l'instanciation
+		\item Retarder à l'instanciation l'échec de \lstinline|static_assert(false)| dans des template
 
 		\begin{lstlisting}[language=C++]
 template<typenameT>int my_func(constT&) {
@@ -380,7 +381,7 @@ template<typenameT>int my_func(constT&) {
 
 			\begin{lstlisting}[language=C++]
 template <typename... Ts>
-struct tuple { Ts... elems; };\end{lstlisting}
+struct Foo { Ts... elems; };\end{lstlisting}
 
 			\item Indexation des \textit{packs}
 
@@ -458,19 +459,19 @@ consteval int h(int i) {
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Mécanismes pour vérifier à la compilation qu'un type à la même représentation mémoire  qu'un autre
+		\item Vérification à la compilation qu'un type à la même représentation mémoire  qu'un autre
 
 \note[item]{P.ex. une structure de deux \lstinline|float| et un tableau de deux \lstinline|float|}
 
-		\item Voire pour forcer à avoir la représentation du type cible
+		\item \ldots Voire forcer à avoir la représentation du type cible
 		\item Accès aux octets sous-jacent d'un objet
 		\begin{itemize}
 			\item Nouvelle catégorie d'objet : \textit{contiguous-layout}
 			\begin{itemize}
 				\item Ne contient que des types scalaires ou des classes sans fonction ni base virtuelles
 				\item N'hérite pas de objet non \textit{contiguous-layout}
+				\item Contiguïté garantie
 			\end{itemize}
-			\item Contiguïté garantie
 			\item Représentation sous forme de tableau
 			\item Obtention d'un pointeur sur représentation via \lstinline|reinterpret_cast| vers \lstinline|char|, \lstinline|unsigned char| ou \lstinline|std::byte|
 			\item Conversion pointeur sur représentation vers pointeur sur objet via \lstinline|reinterpret_cast|
@@ -550,6 +551,7 @@ consteval int h(int i) {
 
 \note[item]{Il s'agit d'empêcher les initialisations depuis des numériques via la conversion en char}
 
+		\item Voire dépréciation de la construction d'un \lstinline|std::string| depuis un caractère
 		\item Suppression de \lstinline|NULL| et interdiction de \lstinline|0| comme pointeur nul
 		\item Évolutions des modules : communication d'informations aux outils de \textit{build}
 		\item Ajout d'une boucle \lstinline|do_until|
@@ -557,6 +559,7 @@ consteval int h(int i) {
 
 \note[item]{NRVO : \textit{Named Return Value Optimization}}
 \note[item]{L'élision de copie des objets retournés est déjà garantie pour des prvalues en C++17}
+\note[item]{C'est déjà une optimisation réalisée par certains compilateur}
 
 		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
 
@@ -624,9 +627,7 @@ stack s(v.begin(), v.end());
 \end{lstlisting}
 
 \note[item]{En C++20 et précédent, il faut indiquer le type et utiliser une liste d'initialisation construite via la paire d'itérateur : \lstinline|queue<int> q({v.begin(), v.end()});|}
-		
-		\item Dépréciation de la construction d'un \lstinline|std::string| depuis un caractère
-		
+
 	\end{itemize}
 \end{frame}
 

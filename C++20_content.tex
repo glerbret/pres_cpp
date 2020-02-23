@@ -1196,7 +1196,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 		\item Format sous forme de chaînes utilisant \{\} comme \textit{placeholder}
 
 		\begin{block}{En attendant C++20}
-			Utilisez \{fmt\}, Boost.Format ou une bibliothèque tierce équivalente
+			Utilisez \{fmt\} ou Boost.Format
 		\end{block}
 	\end{itemize}
 \end{frame}
@@ -1401,6 +1401,7 @@ double* a = new double[]{1, 2, 3};\end{lstlisting}
 
 \note[item]{Et bien d'autre, notamment en prenant en compte ou non la locale}
 \note[item]{Similaire à \lstinline|strftime()|}
+\note[item]{Et identique à ceux utilisés dans \lstinline|std::format|}
 
 		\end{itemize}
 	\end{itemize}
@@ -1422,7 +1423,7 @@ double* a = new double[]{1, 2, 3};\end{lstlisting}
 					Le premier jour de la semaine est le dimanche
 				\end{alertblock}
 
-				\item Et les différentes combinaisons permettant de construire une date complète
+				\item Et différentes combinaisons permettant de construire une date complète
 			\end{itemize}
 			\item Constantes représentant les jours de la semaine et les mois
 			\item Suffixes littéraux \lstinline|y| et \lstinline|d| marquant les années et les jours
@@ -1464,7 +1465,7 @@ zoned_time zt = {"Asia/Tokyo", tp};\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\textit{Timezone}\titlehfill{}2/2}
 	\begin{block}{En attendant C++20}
-		Utilisez Boost.Date\_Time (ou une bibliothèque tierce équivalente)
+		Utilisez Boost.Date\_Time
 	\end{block}
 
 	\begin{block}{Pour aller plus loin}
@@ -1893,14 +1894,14 @@ concept Swappable = requires(T&& t, U&& u) {
 \begin{frame}[fragile]
 	\frametitle{Concepts - Définition\titlehfill{}2/4}
 	\begin{itemize}
-		\item Y compris sans qualificateur
+		\item Y compris en retirant des qualificateurs
 
 		\begin{lstlisting}[language=C++]
 template<class T> concept Addable = requires(
   const remove_reference_t<T>& a,
   const remove_reference_t<T>& b) { a + b; };\end{lstlisting}
 
-		\item Ou sur les types de retour
+		\item Ou en imposant les types de retour
 
 		\begin{lstlisting}[language=C++]
 template<class T> concept Comparable = requires(
