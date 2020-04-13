@@ -204,6 +204,9 @@ now.time_of_day().seconds();\end{lstlisting}
 	\frametitle{Boost.Format\titlehfill{}1/4}
 	\begin{itemize}
 		\item Alternative intégrée à C++20
+
+\note[item]{Alternative, car cette fois, ce n'est pas Boost.format qui a été repris mais une autre bibliothéque}
+
 		\item Formatage de chaînes de caractères
 		\item Proche de \lstinline|printf()| mais \textit{type-safe} et extensible
 		\item Basé sur une chaîne de format et la surcharge de l'opérateur \lstinline|%|
@@ -211,16 +214,14 @@ now.time_of_day().seconds();\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-cout << format{"%2%/%1%/%3%"} % 12 % 5 % 2014 << '\n';
-// Affiche 5/12/2014\end{lstlisting}
+format{"%2%/%1%/%3%"} % 12 % 5 % 2014; // 5/12/2014\end{lstlisting}
 
 	\begin{itemize}
 		\item \textit{Placeholders} non-numérotés (\lstinline+%||+) prenant les données dans l'ordre
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-cout << format{"%|| %|| %||"} % 12 % 5 % 2014 << '\n';
-// Affiche 12 5 2014\end{lstlisting}
+format{"%|| %|| %||"} % 12 % 5 % 2014; // 12 5 2014\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -242,10 +243,8 @@ cout << format{"%|| %|| %||"} % 12 % 5 % 2014 << '\n';
 	\end{block}
 
 	\begin{lstlisting}[language=C++]
-cout << format{"%|1$+|"} % 12 << '\n';
-// Affiche +12
-cout << format{"%|1$#x|"} % 12 << '\n';
-// Affiche 0xc\end{lstlisting}
+format{"%|1$+|"} % 12;  // +12
+format{"%|1$#x|"} % 12;	// 0xc\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -259,9 +258,8 @@ cout << format{"%|1$#x|"} % 12 << '\n';
 	\end{block}
 
 	\begin{lstlisting}[language=C++]
-cout << format{"%1% %2% %1%"} %
-        io::group(showpos, 1) % 2 << '\n';
-// Affiche +1 2 +1\end{lstlisting}
+format{"%1% %2% %1%"} % io::group(showpos, 1) % 2; 
+// +1 2 +1\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -293,7 +291,7 @@ cout << format{"%1% %2% %1%"} %
 
 	\begin{lstlisting}[language=C++]
 string foo{"Boost"};
-cout << to_upper_copy(foo) << '\n'; // BOOST\end{lstlisting}
+to_upper_copy(foo); // BOOST\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -309,7 +307,7 @@ cout << to_upper_copy(foo) << '\n'; // BOOST\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 string foo{"Boost"};
-cout << erase_all_copy(foo, "o") << '\n'; // Bst\end{lstlisting}
+erase_all_copy(foo, "o"); // Bst\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -325,7 +323,7 @@ cout << erase_all_copy(foo, "o") << '\n'; // Bst\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 vector<string> foo{"foo1", "foo2", "foo3"};
-cout << join(foo, "-");   // foo1-foo2-foo3\end{lstlisting}
+join(foo, "-");   // foo1-foo2-foo3\end{lstlisting}
 
 	\begin{itemize}
 		\item Découpage de chaîne
@@ -351,8 +349,7 @@ split(bar, foo, is_space());
 
 	\begin{lstlisting}[language=C++]
 string foo{"Boost"};
-cout << replace_all_copy(foo, "o", "0") << '\n';
-// B00st\end{lstlisting}
+replace_all_copy(foo, "o", "0");  // B00st\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -370,12 +367,12 @@ cout << replace_all_copy(foo, "o", "0") << '\n';
 
 	\begin{lstlisting}[language=C++]
 string foo{"    Boost    "};
-cout << trim_left_copy(foo) << '\n';  // "Boost    "
-cout << trim_right_copy(foo) << '\n'; // "    Boost"
-cout << trim_copy(foo) << '\n';       // "Boost"
+trim_left_copy(foo);  // "Boost    "
+trim_right_copy(foo); // "    Boost"
+trim_copy(foo);       // "Boost"
 
 string foo{"    Boost    Lib    "};
-cout << trim_all_copy(foo) << '\n';   // "Boost Lib"\end{lstlisting}
+trim_all_copy(foo);   // "Boost Lib"\end{lstlisting}
 \end{frame}
 
 \subsection*{Doublons C++11 et suivants}

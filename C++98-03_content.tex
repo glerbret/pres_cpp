@@ -510,7 +510,7 @@ private:
 	\begin{alertblock}{Gestion des erreurs}
 		\begin{itemize}
 			\item Pas d'erreur ni d'exception pour les destructeurs
-			\item Libération de ressources peut échouer (p.ex. \lstinline|flush| lors de la fermeture de fichier)
+			\item La libération peut échouer (p.ex. \lstinline|flush| lors de la fermeture de fichier)
 
 \note[item]{Problème rare qui concerne peu d'objets et uniquement dans des cas extrèmes}
 		\end{itemize}
@@ -520,13 +520,13 @@ private:
 {
   ifstream src("input.txt");
   ofstream dst("output.txt");
-  copyFiles(src, dst);
+  copy_files(src, dst);
 }
 
-removeFile(src);
+remove_file(src);
 // Potentielle perte de donnees\end{lstlisting}
 
-\note[item]{Le problème se résoud en forçant l'écriture (flush) en fin de la fonction copyFiles() et en remontant une exception en cas d'erreur}
+\note[item]{Le problème se résoud en forçant l'écriture (flush) en fin de la fonction \lstinline|copy_files()| et en remontant une exception en cas d'erreur}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1547,7 +1547,7 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...\end{lstlisting}
 	\pause
 
 	\begin{block}{Idiome \textit{Erase-Remove}}
-		La suppression réelle des éléments passent par un appel à la fonction membre \lstinline|erase()| sur les éléments situés après l'itérateur retourné par \lstinline|std::remove()|
+		Suppression via un appel à \lstinline|erase()| sur les éléments après le nouvel itérateur de fin
 	
 		\begin{lstlisting}[language=C++]
 foo.erase(remove(foo.begin(),foo.end(),5),foo.end());\end{lstlisting}
@@ -1590,11 +1590,11 @@ unique(foo.begin(), foo.end());  // 4 5 7 9 5 ... \end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-int doubleValue(int i) { return 2 * i;}
+int double_val(int i) { return 2 * i;}
 
 vector<int> foo{4, 5, 7, 9};
 vector<int> bar(4);
-transform(foo.begin(), foo.end(), bar.begin(), doubleValue);
+transform(foo.begin(), foo.end(), bar.begin(), double_val);
 // 8 10 14 18\end{lstlisting}
 \end{frame}
 
@@ -1638,13 +1638,13 @@ rotate(foo.begin(), foo.begin() + 2, foo.end());
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-bool isOdd(int i) { return (i%2)==1; }
+bool is_odd(int i) { return (i%2)==1; }
 
 vector<int> foo{4, 13, 28, 9 , 54};
-partition(foo.begin(), foo.end(), isOdd);
+partition(foo.begin(), foo.end(), is_odd);
 // 9 13 28 4 54 ou 9 13 4 28 54 ou ...)\end{lstlisting}
 
-\note[item]{Le prédicat isOdd sera utilisé par la suite sans être redéfini à chaque fois}
+\note[item]{Le prédicat \lstinline|is_odd| sera utilisé par la suite sans être redéfini à chaque fois}
 
 	\begin{itemize}
 		\item \ldots{} et retourne un itérateur sur le début de la seconde partie
@@ -1664,7 +1664,7 @@ partition(foo.begin(), foo.end(), isOdd);
 	\begin{lstlisting}[language=C++]
 vector<int> foo{4, 13, 28, 9 , 54};
 
-stable_partition(foo.begin(), foo.end(), isOdd);
+stable_partition(foo.begin(), foo.end(), is_odd);
 // 13 9 4 28 54\end{lstlisting}
 
 	\pause

@@ -266,7 +266,7 @@ auto foo = 5i;        // complex<double>\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 tuple<int, long, long> foo{42, 58L, 9L};
 
-cout << get<int>(foo);     // 42\end{lstlisting}
+get<int>(foo);	// 42\end{lstlisting}
 
 	\pause
 
@@ -292,9 +292,9 @@ constexpr T PI = T(3.1415926535897932385);
 template<>
 constexpr const char* PI<const char*> = "pi";
 
-cout << PI<int>;          // 3
-cout << PI<double>;       // 3.14159
-cout << PI<const char*>;  // pi\end{lstlisting}
+PI<int>;          // 3
+PI<double>;       // 3.14159
+PI<const char*>;  // pi\end{lstlisting}
 
 	\begin{block}{Sous silence \ldots}
 		\lstinline|std::integer_sequence|
@@ -360,7 +360,7 @@ baz();  // 82\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 auto foo = make_unique<int>(42);
 auto bar = [ foo = move(foo) ](int i) {
-cout << *foo * i << '\n'; };
+  cout << *foo * i << '\n'; };
 
 bar(5);  // Affiche 210\end{lstlisting}
 
@@ -510,7 +510,7 @@ warning: 'void bar()' is deprecated: utilisez foo\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Un même thread ne doit pas prendre un mutex qu'il possède déjà, même en accès partagé
+		Un thread ne doit pas prendre un mutex qu'il possède déjà, même en accès partagé
 	\end{alertblock}
 \end{frame}
 

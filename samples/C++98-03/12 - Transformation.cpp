@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 
-static int doubleValue(int i)
+static int double_val(int i)
 {
   return 2 * i;
 }
@@ -13,7 +13,7 @@ int main()
     std::vector<int> foo{4, 5, 7, 9};
     std::vector<int> bar(4);
 
-    std::transform(foo.begin(), foo.end(), bar.begin(), doubleValue);
+    std::transform(foo.begin(), foo.end(), bar.begin(), double_val);
     for(size_t i = 0; i < bar.size(); ++i)
     {
       std::cout << bar[i] << ' ';

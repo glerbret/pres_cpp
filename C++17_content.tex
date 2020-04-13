@@ -40,9 +40,7 @@
 		\item Suppression des spécifications d'exception
 	\end{itemize}
 		
-	\begin{block}{Mais \ldots}
-		les fonctions ne levant pas d'exception peuvent être marquées \lstinline|noexcept()|
-	\end{block}
+\note[item]{Mais les fonctions ne levant pas d'exception peuvent être marquées \lstinline|noexcept()|}
 \end{frame}
 
 \subsection*{include}
@@ -1214,7 +1212,7 @@ add(3, 4)()   // 7\end{lstlisting}
 int foo(int i) {
   return i + 42;}
 
-cout << invoke(&foo, 8);  // 50\end{lstlisting}
+invoke(&foo, 8);  // 50\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1230,7 +1228,7 @@ struct Foo {
     return i + 42; } };
 
 Foo foo;
-cout << invoke(&Foo::bar, foo, 8);  // 50\end{lstlisting}
+invoke(&Foo::bar, foo, 8);  // 50\end{lstlisting}
 
 	\begin{block}{Motivation}
 		Une syntaxe unique d'appel de \textit{callable}
@@ -1248,8 +1246,7 @@ bool LessThan10(int a) 	{
   return a < 10; }
 	
 vector foo = { 1, 6, 3, 8, 14, 42, 2 };
-auto n = count_if(begin(foo), end(foo), not_fn(LessThan10)); 
-cout << n << '\n'; // 2\end{lstlisting}
+count_if(begin(foo), end(foo), not_fn(LessThan10)); // 2\end{lstlisting}
 
 	\begin{block}{Dépréciation}
 		Dépréciation de \lstinline|std::not1| et \lstinline|std::not2|
@@ -1574,19 +1571,19 @@ auto bar = make_optional<complex<double>>(3.0, 4.0);\end{lstlisting}
 		\begin{lstlisting}[language=C++]
 optional<int> deux(2), dix(10);
 
-cout << (dix > deux) << '\n';   // true	
-cout << (dix < deux) << '\n';   // false
-cout << (dix == 10) << '\n';    // true\end{lstlisting}
+dix > deux;   // true	
+dix < deux;   // false
+dix == 10;    // true\end{lstlisting}
 
 		\item \ldots En prenant en compte \lstinline|std::nullopt|
 
 		\begin{lstlisting}[language=C++]
 optional<int> none, dix(10);
 
-cout << (dix > none) << '\n';       // true	
-cout << (dix < none) << '\n';       // false
-cout << (none == 10) << '\n';       // false
-cout << (none == nullopt) << '\n';  // true\end{lstlisting}
+dix > none;       // true	
+dix < none;       // false
+none == 10;       // false
+none == nullopt;  // true\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -1662,8 +1659,8 @@ a.emplace<std::complex<double>>(3.0, 4.0);
 
 		\begin{lstlisting}[language=C++]
 any a = 1;
-cout << any_cast<int>(a) << '\n';  // 1
-cout << any_cast<bool>(a) << '\n'; // Lance bad_any_cast\end{lstlisting}
+any_cast<int>(a);  // 1
+any_cast<bool>(a); // Lance bad_any_cast\end{lstlisting}
 
 		\item ou récupère l'adresse \ldots
 		\item \ldots{} et retourne \lstinline|nullptr| si le type demandé n'est pas correct

@@ -5,7 +5,7 @@
 using std::begin;
 using std::end;
 
-static bool isOdd(int i)
+static bool is_odd(int i)
 {
   return (i%2)==1;
 }
@@ -27,7 +27,7 @@ int main()
 
   {
     std::vector<int> bar;
-    std::copy_if(begin(foo), end(foo), std::back_inserter(bar), isOdd);
+    std::copy_if(begin(foo), end(foo), std::back_inserter(bar), is_odd);
 
     for(size_t i = 0; i < bar.size(); ++i)
     {

@@ -48,8 +48,8 @@
 		\item Hérités de C99 (\lstinline[keywordstyle=\color{black}]|cstdint| et \lstinline|cinttypes|)
 	\end{itemize}
 
-	\begin{block}{Intégration depuis C99}
-		Outre les nouveaux types : \textit{variadic macro}, \lstinline|__func__|, concaténation de chaînes littérales, \ldots
+	\begin{block}{Depuis C99}
+		Ainsi que \textit{variadic macro}, \lstinline|__func__|, concaténation de chaînes littérales, \ldots
 
 \note[item]{En pratique déjà supportés par certains compilateurs sous forme d'extensions}
 	\end{block}
@@ -227,6 +227,8 @@
 \note[item]{Formellement : pas de données membres non-statiques dans la classe la plus dérivée et au plus une classe de base avec des données membres non-statiques ou pas de clase de base avec des données membres non-statiques}
 
 			\item Pas de classe de base du type de la première donnée membre non-statique
+
+			\pause
 
 			\begin{block}{En résumé}
 				Organisation mémoire similaire aux structures C
@@ -847,7 +849,7 @@ vector<int> foo(2);  // 0 0\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|auto|\titlehfill{}1/6}
 	\begin{itemize}
-		\item Déduction (inférence) de type
+		\item Déduction (ou inférence) de type
 
 \note[item]{Les deux termes se trouvent. Notammment car c'est une forme simple (par rapport à des langages fonctionnels comme Caml ou Haskell) de l'inférence.}
 
@@ -1028,7 +1030,7 @@ decltype( (a) ) e;     // int&\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|declval|}
 	\begin{itemize}
-		\item Permet l'utilisation de fonctions membres dans \lstinline|decltype| sans appel au constructeur
+		\item Utilisation de fonctions membres dans \lstinline|decltype| sans construction
 		\item Typiquement sur des templates acceptant des types sans constructeur commun mais avec une fonction membre commune
 	\end{itemize}
 	
@@ -1060,9 +1062,9 @@ auto add(int a, int b) -> decltype(a + b) {
 	\end{itemize}
 
 	\onslide<2>
-	\begin{block}{Quiz : Que mettre à la place des XXX ? T, U, autre chose ?}
+	\begin{block}{Quiz : T, U ou autre chose ?}
 		\begin{lstlisting}[language=C++]
-template<typename T, typename U> XXX add(T a, U b) {
+template<typename T, typename U> ??? add(T a, U b) {
   return a + b; }\end{lstlisting}
 
 \note[item]{Vrai problème sur les templates avant C++11}
@@ -1119,8 +1121,8 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 		\begin{lstlisting}[language=C++]
 array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9};
-cout << get<2>(foo) << '\n';  // 9
-cout << get<8>(foo) << '\n';  // Erreur de compilation\end{lstlisting}
+get<2>(foo) << '\n';  // 9
+get<8>(foo) << '\n';  // Erreur de compilation\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1349,7 +1351,7 @@ bit_and<unsigned char>());
 	\begin{lstlisting}[language=C++]
 vector<int> foo{1, 4, 5, 9, 12};
 
-find_if_not(begin(foo), end(foo), isOdd); // 4\end{lstlisting}
+find_if_not(begin(foo), end(foo), is_odd); // 4\end{lstlisting}
 
 \note[item]{Similaire à \lstinline|std::find_if| avec le prédicat nié, mais sémantiquement plus clair}
 \end{frame}
@@ -1365,9 +1367,9 @@ vector<int> foo{1, 4, 5, 9, 12};
 vector<int> bar{1, 5, 9};
 vector<int> baz{4, 12};
 
-all_of(begin(foo), end(foo), isOdd); // False
-all_of(begin(bar), end(bar), isOdd); // True
-all_of(begin(baz), end(baz), isOdd); // False\end{lstlisting}
+all_of(begin(foo), end(foo), is_odd); // False
+all_of(begin(bar), end(bar), is_odd); // True
+all_of(begin(baz), end(baz), is_odd); // False\end{lstlisting}
 
 	\begin{itemize}
 		\item Retourne vrai si l'ensemble est vide
@@ -1385,9 +1387,9 @@ vector<int> foo{1, 4, 5, 9, 12};
 vector<int> bar{1, 5, 9};
 vector<int> baz{4, 12};
 
-any_of(begin(foo), end(foo), isOdd); // True
-any_of(begin(bar), end(bar), isOdd); // True
-any_of(begin(baz), end(baz), isOdd); // False\end{lstlisting}
+any_of(begin(foo), end(foo), is_odd); // True
+any_of(begin(bar), end(bar), is_odd); // True
+any_of(begin(baz), end(baz), is_odd); // False\end{lstlisting}
 
 	\begin{itemize}
 		\item Retourne faux si l'ensemble est vide
@@ -1405,9 +1407,9 @@ vector<int> foo{1, 4, 5, 9, 12};
 vector<int> bar{1, 5, 9};
 vector<int> baz{4, 12};
 
-none_of(begin(foo), end(foo), isOdd); // False
-none_of(begin(bar), end(bar), isOdd); // False
-none_of(begin(baz), end(baz), isOdd); // True\end{lstlisting}
+none_of(begin(foo), end(foo), is_odd); // False
+none_of(begin(bar), end(bar), is_odd); // False
+none_of(begin(baz), end(baz), is_odd); // True\end{lstlisting}
 
 	\begin{itemize}
 		\item Retourne vrai si l'ensemble est vide
@@ -1451,7 +1453,7 @@ copy_n(begin(foo), 3, back_inserter(bar)); // 1 4 5\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 vector<int> foo{1, 4, 5, 9, 12}, bar;
 
-copy_if(begin(foo), end(foo), back_inserter(bar), isOdd);
+copy_if(begin(foo), end(foo), back_inserter(bar), is_odd);
 // 1 5 9\end{lstlisting}
 \end{frame}
 
@@ -1483,8 +1485,8 @@ move(begin(foo), end(foo), back_inserter(bar));\end{lstlisting}
 vector<int> foo{4, 5, 9, 12};
 vector<int> bar{9, 5, 4, 12};
 
-is_partitioned(begin(foo), end(foo), isOdd); // false
-is_partitioned(begin(bar), end(bar), isOdd); // true\end{lstlisting}
+is_partitioned(begin(foo), end(foo), is_odd); // false
+is_partitioned(begin(bar), end(bar), is_odd); // true\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1497,7 +1499,7 @@ is_partitioned(begin(bar), end(bar), isOdd); // true\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 vector<int> foo{9, 5, 4, 12};
 
-partition_point(begin(foo), end(foo), isOdd); // 4\end{lstlisting}
+partition_point(begin(foo), end(foo), is_odd); // 4\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1609,27 +1611,31 @@ iota(begin(foo), end(foo), 50); // 50 51 52 53 54\end{lstlisting}
 	\frametitle{\textit{Range-based for loop}\titlehfill{}1/3}
 	\begin{itemize}
 		\item Itération sur un \og conteneur\fg{} complet
-	\end{itemize}
 
 	\begin{lstlisting}
 vector<int> foo{4, 8, 12, 37};
 for(int var : foo)
   cout << var << " ";    // Affiche 4 8 12 37\end{lstlisting}
 
-	\begin{itemize}
 		\item Compatible avec \lstinline|auto|
-	\end{itemize}
 
 	\begin{lstlisting}
 vector<int> foo{4, 8, 12, 37};
 for(auto var : foo)
   cout << var << " ";    // Idem\end{lstlisting}
+
+		\item Utilisable sur tout conteneur
+		\begin{itemize}
+			\item Exposant \lstinline|begin()| et \lstinline|end()|
+			\item Utilisable avec \lstinline|std::begin()| et \lstinline|std::end()|
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\textit{Range-based for loop}\titlehfill{}2/3}
-	\begin{alertblock}{Modification}
-		Pour modifier les éléments du conteneur la variable d'itération doit être une référence
+	\begin{alertblock}{Modification des éléments}
+		La variable d'itération doit être une référence
 	\end{alertblock}
 
 	\begin{lstlisting}
@@ -1637,20 +1643,12 @@ vector<int> foo(4);
 
 for(auto& var : foo)
   var = 5;    // foo : 5 5 5 5\end{lstlisting}
-
-	\begin{itemize}
-		\item Utilisable sur tout conteneur
-		\begin{itemize}
-			\item Exposant \lstinline|begin()| et \lstinline|end()| ou
-			\item Utilisable avec \lstinline|std::begin()| et \lstinline|std::end()|
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\textit{Range-based for loop}\titlehfill{}3/3}
 	\begin{exampleblock}{Do}
-		Préférez \textit{range-based for loop} aux boucles for classiques et à l'algorithme \lstinline|std::for_each()|
+		Préférez \textit{range-based for loop} aux boucles classiques et à \lstinline|std::for_each()|
 	\end{exampleblock}
 
 	\begin{block}{Conseils}
@@ -1686,7 +1684,7 @@ for(auto& var : foo)
 	\end{itemize}
 
 	\begin{lstlisting}
-cout << stoi("56"); // Affiche 56\end{lstlisting}
+stoi("56"); // 56\end{lstlisting}
 
 	\begin{itemize}
 		\item S'arrêtent sur le premier caractère non convertible
@@ -1700,7 +1698,7 @@ cout << stoi("56"); // Affiche 56\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}
-cout << to_string(56); // Affiche 56\end{lstlisting}
+to_string(56); // "56"\end{lstlisting}
 
 	\begin{itemize}
 		\item \lstinline|std::to_wstring()| : conversion vers une chaîne de caractères larges
@@ -2152,8 +2150,8 @@ struct Bar : Foo {
 	\begin{block}{Objectifs}
 		\begin{itemize}
 			\item Documentaire
-			\item Détecter les non-reports de modification lors d'un refactoring
-			\item Permettre aux outils d'analyse de code de détecter des redéfinitions involontaires
+			\item Détection des non-reports de modifications lors d'un refactoring
+			\item Détection des redéfinitions involontaires par les outils d'analyse statique
 		\end{itemize}
 	\end{block}
 
@@ -2162,10 +2160,9 @@ struct Bar : Foo {
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Utilisez \lstinline|virtual| uniquement à la base de l'arbre d'héritage et \lstinline|override| sur les redéfinitions
+		Utilisez \lstinline|virtual| à la base de l'arbre d'héritage et \lstinline|override| sur les redéfinitions
 
 \note[item]{Si une fonction est virtuelle, toutes ces redéfinitions le sont qu'elles soient ou non marquées comme tel}
-\note[item]{En C++98/03 certaines personnes, dont moi, pensaient qu'il était intéressant de indiquer virtual sur chaque redéfinition à fin de documentation. En C++11 ce n'est plus utile car override implique virtual tout en apportant plus de précision}
 	\end{exampleblock}
 \end{frame}
 
@@ -2316,7 +2313,7 @@ catch(...) {
 		\item \lstinline|std::nested_exception| contient une exception imbriquée
 		\item \lstinline|nested_ptr()| récupère un pointeur sur l'exception imbriquée
 		\item \lstinline|rethrow_nested()| relance l'exception imbriquée
-		\item \lstinline|std::rethrow_if_nested()| relance l'exception imbriquée si elle existe, ne fait rien sinon
+		\item \lstinline|std::rethrow_if_nested()| relance l'exception imbriquée si elle existe
 		\item \lstinline|std::throw_with_nested()| lance une exception embarquant l'exception courante
 	\end{itemize}
 
@@ -2380,7 +2377,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };\end{lstlisting}
 \note[item]{Les fonctions d'ordre supérieur apparaissaient également dans le design de la STL}
 
 	\begin{itemize}
-		\item Wrapper encapsulant un appelable de n'importe quel type
+		\item Encapsule un appelable de n'importe quel type
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -2418,7 +2415,7 @@ bar(foo, 5);   // 10\end{lstlisting}
 	\end{block}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de  \lstinline|std::mem_fun|, \lstinline|std::ptr_fun| et consort
+		Dépréciation de  \lstinline|std::mem_fun|, \lstinline|std::ptr_fun| et consorts
 
 \note[item]{Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes. Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)}
 	\end{block}
@@ -2443,7 +2440,7 @@ baz(3, 2, 1, 2, 3);   // 3\end{lstlisting}
 \note[item]{Avec auto, il est possible de passer autant de paramètres surnuméraires que souhaiter}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de \lstinline|std::bind1st|, \lstinline|std::bind2nd| et consort
+		Dépréciation de \lstinline|std::bind1st| et \lstinline|std::bind2nd|
 
 \note[item]{Version C++98 mais limités car ne pouvait que convertir une fonction binaire en fonction unaire en bindant le premier ou le second paramètre}
 	\end{block}
@@ -2568,7 +2565,7 @@ auto foo = [] {return 5;};\end{lstlisting}
 	\frametitle{\lstinline|std::reference_wrapper|}
 	\begin{itemize}
 		\item Encapsule un objet en émulant un référence
-		\item \lstinline|std::ref()| et \lstinline|std::cref()| pour construire
+		\item Construction par \lstinline|std::ref()| et \lstinline|std::cref()|
 		\item Copiable
 	\end{itemize}
 
@@ -3351,13 +3348,13 @@ cout << r.num << "/" << r.den;   // 13/2\end{lstlisting}
 	\frametitle{Durées\titlehfill{}1/2}
 	\begin{itemize}
 		\item Classe template \lstinline|std::chrono::duration| représente une durée
-		\item Unité dépendante d'un ratio (paramètre template) avec la seconde
+		\item Unité dépendante d'un ratio avec la seconde
 		\item Six instanciations standard : \textit{hours}, \textit{minutes}, \textit{seconds}, \textit{milliseconds}, \textit{microseconds} et \textit{nanosecond}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 milliseconds foo(500);  // 500 ms
-cout << foo.count();    // 500\end{lstlisting}
+foo.count();    // 500\end{lstlisting}
 
 	\begin{itemize}
 		\item \lstinline|count()| retourne la valeur
@@ -3418,7 +3415,7 @@ foo /= 2;     // 255\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 system_clock::time_point today = system_clock::now();
-cout << today.time_since_epoch().count() << "\n";\end{lstlisting}
+today.time_since_epoch().count();\end{lstlisting}
 
 	\begin{itemize}
 		\item \lstinline|to_time_t()| converti en \lstinline|time_t|
@@ -3428,7 +3425,7 @@ cout << today.time_since_epoch().count() << "\n";\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 system_clock::time_point today = system_clock::now();
 time_t tt = system_clock::to_time_t(today);
-cout << ctime(&tt) << "\n";\end{lstlisting}
+ctime(&tt);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3578,10 +3575,10 @@ cout << foo;        // Affiche 5 15\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 atomic_flag foo = ATOMIC_FLAG_INIT;
 
-cout << foo.test_and_set() << "\n";  // 0
-cout << foo.test_and_set() << "\n";  // 1
+foo.test_and_set();  // 0
+foo.test_and_set();  // 1
 foo.clear();
-cout << foo.test_and_set() << "\n";  // 0\end{lstlisting}
+foo.test_and_set();  // 0\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3663,7 +3660,7 @@ this_thread::sleep_for(chrono::seconds(5));\end{lstlisting}
 	\begin{itemize}
 		\item Verrou pour l'accès exclusif à une section de code
 		\item \lstinline|lock()| verrouille le mutex (en attendant sa libération s'il est déjà verrouillé)
-		\item \lstinline|try_lock()| verrouille le mutex s'il est libre et retourne \lstinline|false| dans le cas contraire
+		\item \lstinline|try_lock()| verrouille le mutex s'il est libre, retourne \lstinline|false| sinon
 		\item \lstinline|unlock()| relâche le mutex
 	\end{itemize}
 
@@ -3672,7 +3669,7 @@ this_thread::sleep_for(chrono::seconds(5));\end{lstlisting}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item \lstinline|std::recursive_mutex| est une variante de \lstinline|std::mutex| verrouillable plusieurs fois par un même thread
+		\item \lstinline|std::recursive_mutex| variante verrouillable plusieurs fois par un même thread
 
 \note[item]{Il faut le relâcher autant de fois pour qu'il soit effectivement non verrouillé}
 	\end{itemize}

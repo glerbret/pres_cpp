@@ -642,8 +642,8 @@ foo.ends_with("monde");     // false\end{lstlisting}
 		\begin{lstlisting}[language=C++]
 map<int, string> foo{{1, "foo"}, {42, "bar"}};
 
-cout << foo.contains(42) << "\n";  // true
-cout << foo.contains(38) << "\n";  // false\end{lstlisting}
+foo.contains(42);  // true
+foo.contains(38);  // false\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -732,7 +732,7 @@ span<int> s2(foo.data(), 3);\end{lstlisting}
 array<int, 5> foo = {0, 1, 2, 3, 4};
 span<int> bar{ foo.data(), 4 };
 
-cout << bar.front() << "\n";    // 0\end{lstlisting}
+bar.front();    // 0\end{lstlisting}
 
 		\item \lstinline|first()|, \lstinline|last()| : construction de \textit{sous-span}
 
@@ -1080,7 +1080,7 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 vector<string> ss{"hello", " ", "world", "!"};
 join_view greeting{ss};
 for(char ch : greeting)
-cout << ch;  // hello world!\end{lstlisting}
+  cout << ch;  // hello world!\end{lstlisting}
 
 			\item \lstinline|split_view| sépare un \textit{range} en élément sur un délimiteur donné
 			
@@ -1090,9 +1090,9 @@ split_view sentence{str, ' '};
 for(auto word : sentence) {
   for(char ch : word)
     cout << ch;
-   cout << " *"; }
-   // the *quick *brown *fox *\end{lstlisting}
-			
+  cout << " *"; }
+  // the *quick *brown *fox *\end{lstlisting}
+
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1209,7 +1209,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 			\item Positionnel
 	
 			\begin{lstlisting}[language=C++]
-format("{} et {}", "a", "b"); // "a et b"\end{lstlisting}
+format("{} et {}", "a", "b"); 	// "a et b"\end{lstlisting}
 	
 			\item indexé
 	
@@ -1232,8 +1232,8 @@ format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 		\item Alignement par défaut dépendant du type
 
 			\begin{lstlisting}[language=C++]
-format("{:6}", 42);    // "    42"
-format("{:6}", 'x');   // "x     "\end{lstlisting}
+format("{:6}", 42);    	// "    42"
+format("{:6}", 'x');   	// "x     "\end{lstlisting}
 
 		\item Possibilité de fournir un caractère de \textit{padding}
 
@@ -1243,9 +1243,9 @@ format("{:*6}", 42);    // "****42"\end{lstlisting}
 		\item Possibilité de choisir son alignement
 
 			\begin{lstlisting}[language=C++]
-format("{:*<6}", 'x'); // "x*****"
-format("{:*>6}", 'x'); // "*****x"
-format("{:*^6}", 'x'); // "**x***"\end{lstlisting}
+format("{:*<6}", 'x'); 	// "x*****"
+format("{:*>6}", 'x'); 	// "*****x"
+format("{:*^6}", 'x'); 	// "**x***"\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -1255,8 +1255,8 @@ format("{:*^6}", 'x'); // "**x***"\end{lstlisting}
 		\item Gestion du signe
 
 		\begin{lstlisting}[language=C++]
-format("{0:},{0:+},{0:-},{0: }", 1); // "1,+1,1, 1"
-format("{0:},{0:+},{0:-},{0: }", -1);// "-1,-1,-1,-1"\end{lstlisting}
+format("{0:},{0:+},{0:-},{0: }", 1); 	// "1,+1,1, 1"
+format("{0:},{0:+},{0:-},{0: }", -1);	// "-1,-1,-1,-1"\end{lstlisting}
 
 		\item Base et format
 
@@ -1272,7 +1272,7 @@ format("{:o}", 42);    // 52\end{lstlisting}
 		\item Affichage de la base
 
 		\begin{lstlisting}[language=C++]
-format("{:#x}", 42); 	// 0x2a\end{lstlisting}
+format("{:#x}", 42);   // 0x2a\end{lstlisting}
 
 \note[item]{\lstinline|\#| affiche également le point numérique, même inutile, sur des flottants}
 	\end{itemize}
