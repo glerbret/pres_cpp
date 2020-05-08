@@ -684,6 +684,24 @@ map.find("def"sv);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{\lstinline|std::array|}
+	\begin{itemize}
+		\item \lstinline|std::to_array()| construit un \lstinline|std::array| depuis un tableau C
+
+		\begin{lstlisting}[language=C++]
+auto foo = to_array("foo");\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+auto foo = to_array({1, 2, 5, 42});\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+long foo[] = {1, 2, 5, 42};
+auto bar = to_array(foo);\end{lstlisting}
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Suppression d'éléments}
 	\begin{itemize}
 		\item \lstinline|erase()| supprime les éléments égaux à la valeur fournie
