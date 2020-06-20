@@ -255,20 +255,14 @@ U u{.b = "foo"}; \end{lstlisting}
 			\item $(a <=> b) == 0$ si $a$ et $b$ sont équivalents
 
 \note[item]{Mécanisme similaire au fonctionnement de \lstinline|strcmp|, \lstinline|memcmp|, \ldots}
-\note[item]{Si on teste seulement l'égalité, c'est 0 et >0}
 \note[item]{Un retour non numérique, p.ex. \lstinline|Nan|, indique des valeurs non ordonnées}
 
 		\end{itemize}
-		\item Cinq types de retour possibles :
+		\item Trois types de retour possibles :
 		\begin{itemize}
 			\item \lstinline|std::strong_ordering| : ordre et égalité
-			\item \lstinline|std::equality| : égalité
 			\item \lstinline|std::weak_ordering| : ordre et équivalence
-			\item \lstinline|std::weak_equivalence| : équivalence (maintien en cours de discussion)
 			\item \lstinline|std::partial_ordering| : ordre partiel
-			\item Potentiellement \lstinline|partial_equality|
-
-\note[item]{Encore un certain flottement autour de la notion d'équalité/équivalence et du traitement associé. Potentiellement des changements d'ici la sortie du standard et des adaptations dans les versions suivantes}
 		\end{itemize}
 
 \note[item]{Égalité implique substitualité (formellement $a == b <==> f(a) == f(b)$), ce n'est pas le cas pour l'équivalence}
@@ -286,15 +280,16 @@ U u{.b = "foo"}; \end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|operator<=>()|\titlehfill{}2/2}
 	\begin{itemize}
-		\item \lstinline|operator<=>()| déclenche la génération par le compilateur des autres opérateurs de comparaison en fonction du type de retour
+		\item \lstinline|operator<=>()| déclenche la génération :
 		\begin{itemize}
 			\item Opérateurs d'ordre (\lstinline|<|, \lstinline|<=|, \lstinline|>| et \lstinline|>=|) via \lstinline|operator<=>()|
 			\item \lstinline|operator==()| via \lstinline|operator==()| des bases et membres
 			\item \lstinline|operator!=()| via \lstinline|operator==()|
-
-\note[item]{Uniquement \lstinline|operator==()| et \lstinline|operator!=()| si retour de type \textit{equality}}
-
 		\end{itemize}
+
+		\begin{block}{\lstinline|==, !=|}
+			\lstinline|operator==()| et \lstinline|operator!=()| uniquement pour des retours de type \og égalité\fg{}
+		\end{block}
 
 		\begin{alertblock}{\lstinline|==, !=, <=>|}
 			\lstinline|operator==()| et \lstinline|operator!=()| ne sont pas générés à partir de \lstinline|operator<=>()|
@@ -313,8 +308,6 @@ U u{.b = "foo"}; \end{lstlisting}
 \note[item]{La génération implicite n'a donc lieu que s'il n'y a pas de version explicite}
 
 		\item Supporté par la bibliothèque standard
-
-\note[item]{Ce qui est rare, généralement les changements du langage ne sont pris en compte dans la bibliothèque standard que dans les versions suivantes}
 	\end{itemize}
 
 	\begin{block}{Fun fact}
@@ -372,6 +365,8 @@ namespace A {
 			En C++20, la bibliothèque standard n'utilise pas les modules
 
 \note[item]{La bibliothèque standard est restée aux inclusions}
+\note[item]{Mais peut être importée via \lstinline|import|}
+
 		\end{alertblock}
 	\end{itemize}
 \end{frame}
