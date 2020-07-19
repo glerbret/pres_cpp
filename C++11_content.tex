@@ -1651,6 +1651,8 @@ for(auto& var : foo)
 		Préférez \textit{range-based for loop} aux boucles classiques et à \lstinline|std::for_each()|
 	\end{exampleblock}
 
+\note[item]{\lstinline|std::for_each()| n'a plus d'intérêt en C++11 mais redevient utile en C++17 avec les politiques d'exécution parallélisées}
+
 	\begin{block}{Conseils}
 		\begin{itemize}
 			\item Contrairement à for(;;), l'indice de l'itération n'est pas disponible
