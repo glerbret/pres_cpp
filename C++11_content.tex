@@ -2449,7 +2449,7 @@ baz(3, 2, 1, 2, 3);   // 3\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{lambda et fermeture\titlehfill{}1/3}
+	\frametitle{lambda et fermeture\titlehfill{}1/4}
 	\begin{block}{Vocabulaire}
 		\begin{itemize}
 			\item Lambda : fonction anonyme
@@ -2460,7 +2460,20 @@ baz(3, 2, 1, 2, 3);   // 3\end{lstlisting}
 	\pause
 
 	\begin{itemize}
-		\item Syntaxe : \lstinline|[capture](parametres) -> type_retour {instructions}|
+		\item \lstinline|[capture](parametres) specificateur -> type_retour {instructions}|
+
+		\begin{lstlisting}[language=C++]
+int bar = 4;
+auto foo = [&bar] (int a) -> int { bar*=a; return a;};
+
+int baz = foo(5);
+// bar : 20, baz : 5\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{lambda et fermeture\titlehfill{}2/4}
+	\begin{itemize}
 		\item Capture :
 		\begin{itemize}
 			\item{} [ ] : pas de capture
@@ -2472,19 +2485,7 @@ baz(3, 2, 1, 2, 3);   // 3\end{lstlisting}
 			\item{} [=, \&z] : capture z par référence et le reste par copie
 			\item{} [\&, z] : capture z par valeur et le reste par référence
 		\end{itemize}
-	\end{itemize}
-\end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{lambda et fermeture\titlehfill{}2/3}
-	\begin{lstlisting}[language=C++]
-int bar = 4;
-auto foo = [&bar] (int a) -> int { bar*=a; return a;};
-
-int baz = foo(5);
-// bar : 20, baz : 5\end{lstlisting}
-
-	\begin{itemize}
 		\item La capture de variables membres se fait par la capture de  \lstinline|this|
 
 		\begin{itemize}
@@ -2499,8 +2500,13 @@ int baz = foo(5);
 			\item Soit via \lstinline|[=]| ou \lstinline|[&]|
 
 \note[item]{Plusieurs changements autour de la capture explicite ou implicite de \lstinline|this| dans les verisons suivantes}
-
 		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{lambda et fermeture\titlehfill{}3/4}
+	\begin{itemize}
 		\item La capture préserve la constante des variables capturées
 
 \note[item]{Même avec \lstinline|mutable|}
@@ -2509,23 +2515,29 @@ int baz = foo(5);
 
 \note[item]{Dans l'exemple ci-dessus, \lstinline|bar| ne peut donc pas être une variable globale}
 	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		Par défaut, les variables capturées par copie ne sont pas modifiables.
+	
+		\begin{lstlisting}[language=C++]
+int i = 5;
+	
+auto foo = [=] () { cout << ++i << "\n"; };      // Erreur
+auto bar = [=] () mutable { cout << ++i << "\n"; };  // OK\end{lstlisting}
+	
+\note[item]{Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale}
+	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{lambda et fermeture\titlehfill{}3/3}
-	\begin{alertblock}{Attention}
-		Par défaut, les variables capturées par copie ne sont pas modifiables.
-
-		\begin{lstlisting}[language=C++]
-int i = 5;
-
-auto foo = [=] () { cout << ++i << "\n"; };      // Erreur
-auto bar = [=] () mutable { cout << ++i << "\n"; };  // OK\end{lstlisting}
-
-\note[item]{Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale}
-	\end{alertblock}
-
+	\frametitle{lambda et fermeture\titlehfill{}4/4}
 	\begin{itemize}
+		\item Spécificateurs:
+		\begin{itemize}
+			\item \lstinline|mutable| : modification possible des variables capturées par copie
+			\item \lstinline|noexcept| : ne lève pas d'exception
+		\end{itemize}
+
 		\item Le type de retour peut être omis s'il n'y a qu'une instruction et qu'il s'agit d'un \lstinline|return|
 	
 \note[item]{Restrictions levées dans les versions récentes}
