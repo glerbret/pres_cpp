@@ -132,7 +132,7 @@
 		\begin{itemize}
 			\item Conversion vers non signé est toujours bien défini
 
-\note[item]{C'est l'unique valeur de la destination congruent à la source module $2^N$ où N est le nombre de bits de la destination}
+\note[item]{C'est l'unique valeur de la destination congruent à la source modulo $2^N$ où N est le nombre de bits de la destination}
 
 			\item Décalage à gauche : même résultat que celui du type non signé correspondant
 			\item Décalage à droite : décalage arithmétique avec extension du signe
@@ -1263,7 +1263,7 @@ format("{:*^6}", 'x'); 	// "**x***"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Nombres}
+	\frametitle{\lstinline|std::format| - Nombres entiers}
 	\begin{itemize}
 		\item Gestion du signe
 
@@ -1288,6 +1288,33 @@ format("{:o}", 42);    // 52\end{lstlisting}
 format("{:#x}", 42);   // 0x2a\end{lstlisting}
 
 \note[item]{\lstinline|\#| affiche également le point numérique, même inutile, sur des flottants}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Nombres flottants}
+	\begin{itemize}
+		\item Gestion de l'arrondit
+
+		\begin{lstlisting}[language=C++]
+format("{:f}", 1.5);				// "1.500000"
+format("{:.0f},{.22f}", 1.5, 1.3);	// "2 1.30...0444089"\end{lstlisting}
+
+		\item Et du padding
+
+		\begin{lstlisting}[language=C++]
+format("{0:05.2f}, {0:.2f}", 1.5); // "01.50, 1.50"\end{lstlisting}
+
+		\item Notation scientifique
+
+\begin{lstlisting}[language=C++]
+	format("{:E}", 1.5); 			// "1.500000E+00"\end{lstlisting}
+
+		 \item Affichage en héxadécimal
+
+\begin{lstlisting}[language=C++]
+	format("{:a}", 1.5); 			// " 0x1.8p+0"
+	format("{:A}", 1.3); 			// "0X1.4CCCCCCCCCCCDP+0"\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -1337,6 +1364,18 @@ format("{}", foo);\end{lstlisting}
 
 \note[item]{Mécanisme assez proche de celui des types utilisateur dans les flux, on fournit une fonction qui formate et passe dans le flux / format plus haut}
 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Redirection de flux}
+	\begin{itemize}
+		\item Redirection vers un \lstinline|std::ostream|
+		\begin{lstlisting}[language=C++]
+print(cerr, "Erreur systeme {}\n", 7);
+
+ofstream error_file("log.txt");
+print(error_file, "Erreur systeme {}\n", 7);\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
