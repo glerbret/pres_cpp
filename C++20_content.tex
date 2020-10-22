@@ -684,15 +684,21 @@ map.find("def"sv);\end{lstlisting}
 		\item \lstinline|std::to_array()| construit un \lstinline|std::array| depuis un tableau C
 
 		\begin{lstlisting}[language=C++]
+auto foo = to_array({1, 2, 5, 42});
+
+long foo[] = {1, 2, 5, 42};
+auto bar = to_array(foo);
+
+auto foo = to_array<long>({1, 2, 5, 42});\end{lstlisting}
+
+		\item Y compris une chaîne C
+
+		\begin{lstlisting}[language=C++]
 auto foo = to_array("foo");\end{lstlisting}
 
-	\begin{lstlisting}[language=C++]
-auto foo = to_array({1, 2, 5, 42});\end{lstlisting}
-
-	\begin{lstlisting}[language=C++]
-long foo[] = {1, 2, 5, 42};
-auto bar = to_array(foo);\end{lstlisting}
-
+		\begin{alertblock}{\lstinline|0| terminal}
+			Le \lstinline|0| terminal est un élément du tableau
+		\end{alertblock}
 	\end{itemize}
 \end{frame}
 
@@ -843,23 +849,42 @@ popcount(6u);  // 2\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Mathématiques}
+	\frametitle{Mathématiques\titlehfill{}1/2}
 	\begin{itemize}
-		\item \lstinline|std::lerp()| interpolation linéaire entre deux valeurs flottantes
+		\item Définition de constantes mathématiques : $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
+
+\note[item]{$\gamma$ est la constante de Euler-Mascheroni et $\Phi$ le nombre d'or}
+
 		\item \lstinline|std::midpoint()| : demi-somme de deux valeurs (entières ou flottantes)
 
 		\begin{block}{Règle d'arrondi}
-			La demi-somme d'entiers est entière et arrondie, si nécessaire, vers le premier paramètre
+			La demi-somme d'entiers est entière et arrondie vers le premier paramètre
 		\end{block}
 		
 		\begin{lstlisting}[language=C++]
 midpoint(2, 4);     // 3
 midpoint(2, 5);     // 3
 midpoint(5, 2);     // 4\end{lstlisting}
+	\end{itemize}
+\end{frame}
 
-		\item Définition de constantes mathématiques : $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
+\begin{frame}[fragile]
+\frametitle{Mathématiques\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|std::lerp()| interpolation linéaire entre deux valeurs flottantes
 
-\note[item]{$\gamma$ est la constante de Euler-Mascheroni et $\Phi$ le nombre d'or}
+		\begin{lstlisting}[language=C++]
+lerp(10, 20, 0);    // 10
+lerp(10, 20, 0.1);  // 11
+lerp(10, 20, 0.2);  // 12
+lerp(10, 20, 0.3);  // 13
+lerp(10, 20, 0.4);  // 14
+lerp(10, 20, 0.5);  // 15
+lerp(10, 20, 0.6);  // 16
+lerp(10, 20, 0.7);  // 17
+lerp(10, 20, 0.8);  // 18
+lerp(10, 20, 0.9);  // 19
+lerp(10, 20, 1);    // 20\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -2100,17 +2125,19 @@ auto delay_invoke(F f, Args... args) {
 \begin{frame}[fragile]
 	\frametitle{\textit{Binding}}
 	\begin{itemize}
-		\item \lstinline|std::bind_front()| attache les arguments fournis aux premiers paramètres de l'appelable
+		\item \lstinline|std::bind_front()| assigne les arguments fournis aux premiers paramètres de l'appelable
 
 	\begin{lstlisting}[language=C++]
 int foo(int a, int b, int c, int d) {
 	return a * b * c + d; }
 
-auto bar = bind(&foo, 2, 3, 4, _1);
-bar(6);  // 30
-
 auto baz = bind_front(&foo, 2, 3, 4);
-baz(7);  // 31\end{lstlisting}
+baz(7);  // 31
+
+// Equivalent a
+
+auto bar = bind(&foo, 2, 3, 4, _1);
+bar(6);  // 30\end{lstlisting}
 
 		\item \lstinline|std::reference_wrapper| accepte les types incomplets
 
