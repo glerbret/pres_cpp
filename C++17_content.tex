@@ -725,6 +725,10 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 
 		\item \ldots et un code erreur
 	\end{itemize}
+
+	\begin{alertblock}{API bas-niveau}
+		Pas d'exception, pas de gestion mémoire, pas de locale
+	\end{alertblock}
 \end{frame}
 
 \subsection*{Variant}
@@ -1271,6 +1275,9 @@ sqrt(T t);
 template <typename T>
 enable_if_t<is_integral_v<T>, T>
 sqrt(T t);\end{lstlisting}
+
+\note[item]{Dans la continuité de \_t du C++14}
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1752,6 +1759,9 @@ cout << bar.size() << " - " << bar << '\n';
 	\frametitle{Mémoire}
 	\begin{itemize}
 		\item \lstinline|std::shared_ptr| et \lstinline|std::weak_ptr| sur des tableaux
+
+	\begin{lstlisting}[language=C++]
+std::shared_ptr<int[]> foo(new int[10]);\end{lstlisting}
 
 \begin{alertblock}{Pas de \lstinline|std::make_shared()|}
 	\lstinline|std::make_shared()| ne supporte pas les tableaux en C++17
