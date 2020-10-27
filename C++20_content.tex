@@ -1179,6 +1179,31 @@ copy(foo | view::filter(odd) | unique{},
      back_inserter(bar)); // 1 3 5 9\end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Ranges - Projections}
+	\begin{itemize}
+		\item Paramètres des algorithmes pré-traitant les éléments du \textit{range}
+
+		\begin{lstlisting}[language=C++]
+vector foo { -1, 2, -3, 4, -5, 6 };
+sort(foo, {}, [](int i) { return abs(i); }); 
+// -1 2 -3 4 -5 6\end{lstlisting}
+
+\note[item]{La paire d'accolade vide indique d'utiliser la fonction de comparaison par défaut (\lstinline|ranges::less|)}
+
+		\item Ou extrayant une données des éléments du \textit{range}
+
+		\begin{lstlisting}[language=C++]
+struct Task { string desc;
+              unsigned int priority { 0 };};
+
+vector<Task> tasks { { "AAA", 10 }, {"BBB", 5 }, 
+                     { "CCC", 8 }, { "DDD", 12 }};
+sort(tasks, greater{}, &Task::priority);
+// DDD, AAA, CCC, BBB\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
 \subsection*{Flux}
 \begin{frame}[fragile]
 	\frametitle{Gestion des flux}
