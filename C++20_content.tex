@@ -849,6 +849,14 @@ popcount(6u);  // 2\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{Comparaison d'entiers}
+	\begin{itemize}
+		\item Ajout de fonctions de comparaison d'entier : \lstinline|std::cmp_equal|, \lstinline|std::cmp_not_equal|, \lstinline|std::cmp_less|, \lstinline|std::cmp_greated|, \lstinline|std::cmp_less_equal| et \lstinline|std::cmp_greater_equal|
+		\item Permettent la comparaison signé / non signé sans promotion
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Mathématiques\titlehfill{}1/2}
 	\begin{itemize}
 		\item Définition de constantes mathématiques : $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
@@ -2135,6 +2143,7 @@ map<string, int, decltype(greater)> foo;\end{lstlisting}
 			\item Capture explicite par \lstinline|[=, this]|
 			\item Capture implicite par \lstinline|[&]| toujours présente
 		\end{itemize}
+		\item Capture de \textit{structured binding}
 		\item Expansion des \textit{parameter packs} lors de la capture
 
 		\begin{lstlisting}[language=C++]

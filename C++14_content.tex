@@ -338,7 +338,7 @@ foo("azerty"s);   // 1\end{lstlisting}
 \note[item]{On parle parfois de renommage des captures}
 
 	\begin{itemize}
-		\item Création de variables depuis les variables locales
+		\item Création de variables capturées depuis des variables locales ou des constantes
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -347,8 +347,11 @@ int foo = 42;
 auto bar = [ &x = foo ]() { --x; };
 bar();  // foo : 41
 
-auto baz = [ y = 2*foo ]() { cout << y << '\n'; };
-baz();  // 82\end{lstlisting}
+auto baz = [ y = 10 ]() { cout << y << '\n'; };
+baz();  // 10
+
+auto qux = [ z = 2*foo ]() { cout << z << '\n'; };
+qux();  // 82\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -392,7 +395,7 @@ void foo(void(* bar)(int))
 		
 foo([](int x) { std::cout << x << std::endl; });\end{lstlisting}
 
-		\item Peuvent être \lstinline|noexecpt|
+		\item Peuvent être \lstinline|noexcept|
 		\item Ajout des paramètres par défaut aux lambdas
 	
 		\begin{lstlisting}[language=C++]

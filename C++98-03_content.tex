@@ -180,9 +180,17 @@ catch(logic_error& e)
 	\frametitle{Erreurs - Exception\titlehfill{}2/2}
 	\begin{itemize}
 		\item De n'importe quel type \dots{}
-		\item \dots{} mais recommandé d'héritent de \lstinline|std::exception| via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autre
+		\item \dots{} mais recommandé d'hériter de \lstinline|std::exception| via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autres
 		\item \lstinline{catch(...)} pour attraper les exceptions de tout type
-		\item Les exceptions non attrapées terminent le programme
+		\item Compatibles avec le \textit{stack unwinding}
+
+\note[item]{Les objets sur la pile sont détruits lors de la sortie d'une fonction même via la levée d'une exception}
+\note[item]{Cette destruction se fait dans l'ordre inverse de la création des objets}
+
+		\item Les exceptions non attrapées provoquent l'appel de \lstinline|std::terminate()|
+
+\note[item]{Sortie du programme sans \textit{stack unwinding}}
+
 		\item Pas de \lstinline[keywordstyle=\color{black}]|finally|
 		\item Utilisées par la bibliothèque standard (p.ex. \lstinline|std::bad_alloc|)
 	\end{itemize}
@@ -244,11 +252,15 @@ catch(logic_error& e)
 \begin{frame}
 	\frametitle{Erreurs - Exception safety\titlehfill{}1/2}
 	\begin{itemize}
-		\item \textit{No-throw guarantee} : l'opération ne peut pas échouer (p.ex. \lstinline|swap|)
+		\item \textit{No-throw guarantee} : l'opération ne peut pas échouer
 
 \note[item]{\textit{No-throw} : les exceptions internes sont attrapées et traitées en interne}
 
-		\item \textit{Strong exception safety} : pas d'effet de bord, état conservé
+		\begin{exampleblock}{Do}
+			Les destructeurs, les opérations de déplacement et \lstinline|swap()| doivent être \lstinline|noexcept|
+		\end{exampleblock}
+
+		\item \textit{Strong exception safety} : pas d'effet de bord, pas de fuite, état conservé
 
 \note[item]{\textit{Strong} : les objets sur lesquels opèrent la fonction (paramètres ou classe dont la fonction est membre) conservent leur valeur d'avant l'appel (\textit{Commit or rollback})}
 
@@ -261,7 +273,7 @@ catch(logic_error& e)
 	\end{itemize}
 
 	\begin{exampleblock}{Do}
-		Privilégiez les garanties les plus fortes possibles (\textit{no-throw} et \textit{strong})
+		Privilégiez les garanties les plus fortes possibles (\textit{strong} ou \textit{no-throw})
 	\end{exampleblock}
 
 	\begin{alertblock}{Don't}
@@ -295,7 +307,7 @@ A& A::operator=(A other) {              // Copy
 \begin{frame}
 	\frametitle{Erreurs - Exceptions et bonnes pratiques}
 	\begin{exampleblock}{Do}
-		\textit{Throw by value, catch by reference} (\cite{coding} chap. 73)
+		\textit{Throw by value, catch by const reference} (\cite{coding} chap. 73)
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
@@ -308,10 +320,20 @@ A& A::operator=(A other) {              // Copy
 		\end{itemize}
 	\end{exampleblock}
 
+	\begin{exampleblock}{Do}
+		Capturez uniquement là où vous savez traiter l'erreur
+	\end{exampleblock}
+
 	\begin{alertblock}{Don't}
 		\begin{itemize}
 			\item N'utilisez jamais les exceptions pour contrôler le flux d'exécution
+			\item Ni pour gérer les \og échecs attendus\fg{}
+
+\note[item]{Par exemple l'absence d'un élément dans une collection lors de la recherche}
+
 			\item Réservez les exceptions au signalement d'erreurs
+
+\note[item]{Donc pas pour la gestion locale des erreurs non plus}
 
 \note[item]{Il est tentant d'utiliser des exceptions pour sortir d'un ensemble complexe de boucles imbriquées\\
 C'est la solution de facilité mais ce n'est pas la bonne solution\\
@@ -479,6 +501,10 @@ private:
 			\item Les capsules RAII se copient sans effort
 		\end{itemize}
 	\end{itemize}
+
+	\begin{exampleblock}{Do}
+		Utilisez RAII pour vos objets
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}
@@ -488,7 +514,7 @@ private:
 		\begin{itemize}
 			\item Cohérents
 			\item Utilisables
-			\item Si possible, complètement initialisés
+			\item Complètement initialisés (si possible)
 		\end{itemize}
 	\end{exampleblock}
 
@@ -1143,10 +1169,12 @@ while(!foo.empty()) {
 
 \subsection*{STL -Algorithmes}
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Foncteurs\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - \textit{Function Object}\titlehfill{}1/2}
 	\begin{itemize}
-		\item Un foncteur est une instance de classe définissant \lstinline|operator()()|
-	\end{itemize}
+		\item Un \textit{Function Object} est une instance de classe définissant \lstinline|operator()()|
+
+\note[item]{Appelés aussi functor en anglais on foncteur en français}
+		\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 class LessThan {
@@ -1164,18 +1192,18 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Algorithmes - Foncteurs\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - \textit{Function Object}\titlehfill{}2/2}
 	\begin{itemize}
 		\item Possèdent données membres
 
 \note[item]{Ce qui représente un avantage sur les fonctions libres}
 
-		\item Plusieurs foncteurs standard encapsulant les opérateurs : \lstinline|plus|, \lstinline|minus|, \lstinline|equal|, \lstinline|less|, \ldots
-		\item Construction de foncteurs
+		\item Plusieurs \textit{Function Objects} standard encapsulant les opérateurs : \lstinline|plus|, \lstinline|minus|, \lstinline|equal|, \lstinline|less|, \ldots
+		\item Construction de \textit{Function Objects}
 		\begin{itemize}
 			\item Depuis des pointeurs de fonctions : \lstinline|prt_fun|
 			\item Depuis des fonctions membres : \lstinline|mem_fun|, \lstinline|mem_fun1|, \ldots
-			\item En niant d'autres foncteurs : \lstinline|not1|, \lstinline|not2|
+			\item En niant d'autres \textit{Function Objects} : \lstinline|not1|, \lstinline|not2|
 			\item En fixant des paramètres : \lstinline|bind1st|, \lstinline|bind2nd|
 		\end{itemize}
 	\end{itemize}
@@ -1184,7 +1212,7 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 \begin{frame}
 	\frametitle{STL Algorithmes - Prédicats}
 	\begin{itemize}
-		\item Un prédicat est un \og appelable\fg{} (foncteur ou pointeur de fonction) retournant un booléen (ou un type convertible en booléen)
+		\item Un prédicat est un \og appelable\fg{} (\textit{Function Object} ou pointeur de fonction) retournant un booléen (ou un type convertible en booléen)
 		\item Utilisés par de nombreux algorithmes
 		\item De nombreux algorithmes utilisent un prédicat par défaut (p.ex. \lstinline|<| ou \lstinline|==|) qui peut être remplacé
 	\end{itemize}
@@ -1215,7 +1243,7 @@ for_each(foo.begin(), foo.end(), print);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Parcours\titlehfill{}2/2}
 	\begin{itemize}
-		\item Retourne le foncteur passé en paramètre
+		\item Retourne le \textit{Function Object} passé en paramètre
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]

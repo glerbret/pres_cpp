@@ -368,6 +368,13 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 \note[item]{Type algébrique : type somme de types produit}
 \note[item]{Type produit : analogue sur les types du produit cartésien sur les ensembles}
 \note[item]{Type somme : analogue sur les types de l'union disjointe}
+
+	\begin{alertblock}{Limite}
+		Pas de capture de \textit{structured binding} par les lambdas
+	\end{alertblock}
+
+\note[item]{Possible de passer par la capture généralisée}
+
 \end{frame}
 
 \subsection*{Ordre d'évaluation}
@@ -736,6 +743,9 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 	\frametitle{\lstinline|variant|\titlehfill{}1/3}
 	\begin{itemize}
 		\item Union \textit{type-safe} contenant une valeur d'un type choisi parmi n
+		
+\note[item]{D'un point de vue type algébrique, il s'agit d'un type somme}
+		
 		\item Issue de Boost.Variant
 		\item Type contenu dépend de la valeur assignée
 		\item \lstinline|get<>()| récupère la valeur \ldots
@@ -1150,7 +1160,6 @@ struct Foo {
 
 auto baz = Foo{"baz"}.bar();
 baz();     // Affiche baz\end{lstlisting}
-
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1619,6 +1628,10 @@ none == nullopt;  // true\end{lstlisting}
 	\frametitle{\lstinline|std::any|\titlehfill{}1/4}
 	\begin{itemize}
 		\item \lstinline|void*| \textit{type-safe} contenant un objet de n'importe quel type (ou vide)
+		\item Implémentation de \textit{Type-erasure}
+		
+\note[item]{Pour les données, tout comme \lstinline|std::function| est un \textit{type-erasure} pour les appelables}
+		
 		\item Introduction d'une forme de typage dynamique au sein de C++
 		\item Issue de Boost.Any
 		\item Type contenu dépend de la valeur assignée

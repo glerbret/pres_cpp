@@ -1980,6 +1980,8 @@ ofstream file{filename};\end{lstlisting}
 		\item \lstinline|=delete| peut aussi s'appliquer aux fonctions héritées pour les supprimer
 	\end{itemize}
 
+\note[item]{Pour être précis, la fonction n'est plus appelable mais est encore prise en compte lors du \textit{Name Lookup}}
+
 	\begin{lstlisting}[language=C++]
 class Foo {
   public: Foo(int) {}
@@ -2487,6 +2489,8 @@ int baz = foo(5);
 		\end{itemize}
 
 		\item La capture de variables membres se fait par la capture de  \lstinline|this|
+
+\note[item]{Capture des variables locales ou des variables membres uniquement, pas des variables globales}
 
 		\begin{itemize}
 			\item Soit explicitement via \lstinline|[this]|
