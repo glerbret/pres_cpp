@@ -1,0 +1,76 @@
+\documentclass[C++.tex]{subfiles}
+\begin{document}
+
+\section{C++23}
+\subsection*{Présentation}
+\begin{frame}
+	\frametitle{Présentation}
+	\begin{itemize}
+		\item Travaux lancés à l'été 2020
+		\item Dernier Working Draft : \href{https://github.com/cplusplus/draft/releases/download/n4868/n4868.pdf}{n4868}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Organisation}
+\begin{frame}
+	\frametitle{Changements d'organisation du comité}
+	\begin{itemize}
+		\item Création d'un Study Group pour la liaison C/C++ (SG22) : aide à l'apprentissage et à l'adoption des évolutions
+	\end{itemize}
+\end{frame}
+
+\subsection*{Suffixes littéraux}
+\begin{frame}[fragile]
+	\frametitle{Suffixes littéraux}
+	\begin{itemize}
+		\item Ajout du suffixe \lstinline|uz| (ou \lstinline|zu|) pour \lstinline|size_t|
+		\item Ajout du suffixe \lstinline|z| pour les \og \lstinline|signed|\fg{} \lstinline|size_t|
+
+\note[item]{Le type entier signé correspondant à \lstinline|size_t|}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Conteneurs}
+\begin{frame}[fragile]
+	\frametitle{Chaînes de caractères}
+	\begin{itemize}
+		\item \lstinline|std::basic_string::contains()| teste la présence d'une sous-chaîne
+
+		\begin{lstlisting}[language=C++]
+string foo = "Hello world";
+	
+foo.contains("Hello");   // true
+foo.contains("monde");   // false\end{lstlisting}
+	\end{itemize}
+
+\note[item]{Comparaison \textit{case-sensitive} comme toutes les fonctions de recherche dans des \lstinline|std::string|}
+
+\end{frame}
+
+\subsection*{Debug}
+\begin{frame}[fragile]
+	\frametitle{Bibliothèque de \textit{Stacktrace}}
+	\begin{itemize}
+		\item Basée sur Boost::stacktrace
+		\item Récupératoon de la \textit{stacktrace} actuelle
+		\item Parcours des entrées de la \textit{stacktrace}
+		\item Récupération de la description, de la ligne et du fichier des entrées
+	\end{itemize}
+\end{frame}
+
+\subsection*{Traits}
+\begin{frame}[fragile]
+	\frametitle{Traits}
+	\begin{itemize}
+		\item Ajout du trait \lstinline|is_scoped_enum| pour déterminer si un type est un \lstinline|enum class|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Multi-threading}
+\begin{frame}[fragile]
+	\frametitle{Atomiques}
+	\begin{itemize}
+		\item Support des \lstinline|atomics| C
+	\end{itemize}
+\end{frame}
+\end{document}

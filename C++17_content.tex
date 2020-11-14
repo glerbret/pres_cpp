@@ -1632,7 +1632,10 @@ none == nullopt;  // true\end{lstlisting}
 		
 \note[item]{Pour les données, tout comme \lstinline|std::function| est un \textit{type-erasure} pour les appelables}
 		
-		\item Introduction d'une forme de typage dynamique au sein de C++
+		\item Introduction d'une forme de \og typage dynamique\fg{} au sein de C++
+
+\note[item]{Ce n'est pas réellement du typage dynamique : ce n'est pas dans le langage mais une classe \textit{type-erasure} dans la bibliothèque standard et les instances restent typées statiquement avec le type \lstinline|std::any| mais en terme d'utilisation ça rend un service équivalent}
+
 		\item Issue de Boost.Any
 		\item Type contenu dépend de la valeur assignée
 
