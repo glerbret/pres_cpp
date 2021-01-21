@@ -2226,6 +2226,7 @@ t.request_stop();\end{lstlisting}
 		\item \lstinline|std::counting_semaphore|
 		\begin{itemize}
 			\item Création avec la valeur maximale de possesseurs
+			\item \lstinline|max()| retourne le nombre maximal de possesseurs
 			\item \lstinline|release()| relâche, une ou plusieurs fois, le sémaphore
 
 \note[item]{Incrémente le compteur de la valeur en paramètre, 1 par défaut}
@@ -2238,9 +2239,8 @@ t.request_stop();\end{lstlisting}
 
 \note[item]{Décrémente le compteur de 1 s'il n'est pas nul et retourne \lstinline|true| dans ce cas, et \lstinline|false| si le compteur est nul}
 
-			\item \lstinline|try_acquire_until()| tente de prendre le sémaphore en attendant un temps donné si besoin
-
-\note[item]{Idem \lstinline|acquire()| avec une durée d'attente}
+			\item \lstinline|try_acquire_for()| tente de prendre le sémaphore en attendant la durée donnée si besoin
+			\item \lstinline|try_acquire_until()| tente de prendre le sémaphore en attendant jusqu'à un temps donné si besoin
 
 		\end{itemize}
 		\item \lstinline|std::binary_semaphore|	instantiation de \lstinline|std::counting_semaphore| pour un unique possesseur
