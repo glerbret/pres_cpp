@@ -659,7 +659,7 @@ stack s(v.begin(), v.end());
 	\frametitle{TS - Networking TS}
 	\begin{itemize}
 		\item Publié en avril 2018
-		\item Très probablement intégré à C++23
+		\item Possiblement intégré à C++23
 		\item Partiellement basé sur Boost.Asio
 		\item Modèle asynchrone
 		\item Gestion de timer
@@ -668,8 +668,15 @@ stack s(v.begin(), v.end());
 		\item Gestion d'IPv4, IPv6, TCP, UDP
 		\item Manipulation d'adresses IP
 		\item Pas de protocoles de plus haut niveau actuellement
-		\item Gestion de la sécurité (demande post-TS)
+		\item Demande post-TS : gestion de la sécurité (a priori par possible)
 	\end{itemize}
+
+	\begin{alertblock}{Scope ?}
+		Une partie du comité ne souhaitent pas que des fonctionnalités de haut-niveau, comme le réseau, soient intégrées au standard
+	\end{alertblock}
+
+\note[item]{En outre, la cryptographie ne peut pas être intégré au standard pour différentes raisons (rythme d'évolution différent entre le standard et la crypto, pas de processus pour gérer les failles de sécurité, problème légal d'exporter de la crypto dans certains pays dont les États-Unis d'Amérique)}
+
 \end{frame}
 
 \begin{frame}
