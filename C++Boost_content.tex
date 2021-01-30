@@ -68,9 +68,9 @@
 	\begin{itemize}
 		\item Intégrée à C++17
 		\item Fonctionnement identique entre Boost et C++17
-		\item Ajout de \lstinline|boost::filesystem::fstream| compatible avec \lstinline|std::fstream| pour ouvrir un fichier depuis un \textit{path}
+		\item Ajout de \lstinline|boost::filesystem::fstream| compatible avec \lstinline|std::fstream| pour ouvrir un fichier depuis un chemin
 
-\note[item]{Contrairement à la bibliothèque standard, Boost n'a pas pu créé une surcharge de \lstinline|std::fstream| prenant en paramètre un path (pas de modification de std hors de la bibliothèque standard)}
+\note[item]{Contrairement à la bibliothèque standard, Boost n'a pas pu créé une surcharge de \lstinline|std::fstream| prenant en paramètre un chemin (pas de modification de \lstinline|std| hors de la bibliothèque standard)}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -95,7 +95,7 @@ ofs << "Hello, world!\n";\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Boost.DateTime\titlehfill{}2/7}
 	\begin{itemize}
-		\item Récupération de la date et heure courante dans la timezone locale
+		\item Récupération de la date et heure courante dans la \textit{timezone} locale
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -185,8 +185,6 @@ now.time_of_day().seconds();\end{lstlisting}
 	\frametitle{Boost.DateTime\titlehfill{}7/7}
 	\begin{exampleblock}{Do}
 		Préférez \lstinline|Boost.DateTime| aux classes \textit{home-made}
-
-\note[item]{Oui je pense à SMACTTools::DateTime ici}
 	\end{exampleblock}
 
 	\begin{block}{Pour aller plus loin}
@@ -208,7 +206,7 @@ now.time_of_day().seconds();\end{lstlisting}
 	\begin{itemize}
 		\item Alternative intégrée à C++20
 
-\note[item]{Alternative, car cette fois, ce n'est pas Boost.format qui a été repris mais une autre bibliothéque}
+\note[item]{Alternative, car cette fois, ce n'est pas Boost.format qui a été repris mais une autre bibliothèque}
 
 		\item Formatage de chaînes de caractères
 		\item Proche de \lstinline|printf()| mais \textit{type-safe} et extensible
@@ -232,7 +230,7 @@ format{"%|| %|| %||"} % 12 % 5 % 2014; // 12 5 2014\end{lstlisting}
 	\begin{itemize}
 		\item Spécification dans la chaîne de format à la \lstinline|printf()|
 		\begin{itemize}
-			\item Alignement, présence du signe ou de la base et padding
+			\item Alignement, présence du signe ou de la base et \textit{padding}
 			\item Taille et précision
 			\item Type (uniquement pour le format de sortie)
 		\end{itemize}
@@ -240,7 +238,7 @@ format{"%|| %|| %||"} % 12 % 5 % 2014; // 12 5 2014\end{lstlisting}
 
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Contrairement à \lstinline|printf()|, le type dans le spécifieur de format n'impose pas le type de la variable
+			\item Contrairement à \lstinline|printf()|, le type dans le spécificateur de format n'impose pas le type de la variable
 			\item Les \lstinline|h|, \lstinline|l| et \lstinline|L| dans le type sont acceptés mais n'ont aucun effet
 		\end{itemize}
 	\end{block}
@@ -402,9 +400,9 @@ trim_all_copy(foo);   // "Boost Lib"\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Boost.CircularBuffer}
 	\begin{itemize}
-		\item Buffer circulaire dont la taille est définie à la création
+		\item Tampon circulaire dont la taille est définie à la création
 		\item API compatible avec la bibliothèque standard
-		\item \lstinline|push_back()| permet d'ajouter un élément au buffer
+		\item \lstinline|push_back()| permet d'ajouter un élément au tampon
 		\item \ldots{} en écrasant le plus ancien si besoin
 	\end{itemize}
 
@@ -443,7 +441,7 @@ unsigned int CpuAlarm::getCurrentAlarmLevel() {
 
 		\item \lstinline|Boost.Heap| \textit{priority queues} (plus riches que \lstinline|std::priority_queue|)
 		\item \lstinline|Boost.MultiIndex| conteneurs indexés selon plusieurs critères
-		\item \lstinline|Boost.Bimap| map indexée par les deux entrées
+		\item \lstinline|Boost.Bimap| \lstinline|map| indexée par les deux entrées
 		\item \lstinline|Boost.MultiArray| tableaux multi-dimensionnels
 		\item \lstinline|Boost.Intrusive| support à la création de conteneurs intrusifs
 
@@ -478,7 +476,7 @@ for(const std::string& text : tokens)
 	\frametitle{Boost.Asio\titlehfill{}1/2}
 	\begin{itemize}
 		\item Gestion des entrées/sorties en mode synchrone ou asynchrone
-		\item Encapsulation des sockets bas-niveau
+		\item Encapsulation des \textit{sockets} bas-niveau
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -503,7 +501,7 @@ tcp::socket socket(io_service);
 connect(socket, endpoint_iterator);\end{lstlisting}
 
 	\begin{itemize}
-		\item Mais également des ports séries et des timers
+		\item Mais également des ports séries et des \textit{timers}
 	\end{itemize}
 \end{frame}
 

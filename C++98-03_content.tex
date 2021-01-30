@@ -21,7 +21,7 @@
 			\item Partiellement implémenté par certains compilateurs ou Boost
 			\item Repris en partie dans les normes suivantes (C++11, 14 et 17) et TS
 			
-\note[item]{Les Technical Specification (TS) sont des documents normatifs ayant vocation a être intégrés dans la norme, ce sont essentiellement des \textit{preview}}
+\note[item]{\textit{Les Technical Specification} (TS) sont des documents normatifs ayant vocation a être intégrés dans la norme, ce sont essentiellement des \textit{preview}}
 \note[item]{Définition des TS par l'ISO : \textit{A normative document representing the technical consensus within an ISO committee}}
 			
 		\end{itemize}
@@ -36,8 +36,8 @@
 	\begin{itemize}
 		\item Langage multi-paradigme
 
-\note[item]{Procédural, objet, générique et Template metaprogramming}
-\note[item]{Tendance des langages industriels mainstream (Java - lambda, generic, code dans les interfaces-, C\#, Php, Python, ECMAScript)}
+\note[item]{Procédural, objet, générique et \textit{Template metaprogramming}}
+\note[item]{Tendance des langages industriels \textit{mainstream} (Java - lambda, \lstinline|generic|, code dans les interfaces-, C\#, Php, Python, ECMAScript)}
 
 		\item Essentiellement impératif à typage statique déclaratif
 
@@ -46,7 +46,7 @@
 
 		\item A visée généraliste
 
-\note[item]{General Purpose : par opposition à Fortran, Cobol, R ou l'assembleur}
+\note[item]{\textit{General Purpose} : par opposition à Fortran, Cobol, R ou l'assembleur}
 
 		\item À l'origine, ajout des classes (issues Simula) au C
 		\item Forte compatibilité avec le C : vaste sous-ensemble commun proche du C
@@ -54,7 +54,7 @@
 \note[item]{Sous-ensemble variable au fil des normes C (89/90, 99, 11) et C++}
 \note[item]{Trop proche pour certains, pas assez pour d'autres qui souhaiteraient que le sous-ensemble commun soit le C}
 \note[item]{Héritage - bas niveau - du C est probablement une part du succès}
-\note[item]{meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type char, pas de cast implicite depuis void)}
+\note[item]{meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type \lstinline|char|, pas de conversion implicite depuis \lstinline|void|)}
 
 		\item \textit{Zero-overhead abstraction} : \og Ne payons pas pour ce que nous n'utilisons pas\fg{}
 		\item Compatibilité ascendante forte mais pas absolue
@@ -67,7 +67,7 @@
 
 		\item Pas de \og magie\fg{} dans la bibliothèque standard
 
-\note[item]{Le contenu de la bibliothèque standard pourrait être écrit dans une bibliothèque tierce (contrairement aux string java)}
+\note[item]{Le contenu de la bibliothèque standard pourrait être écrit dans une bibliothèque tierce (contrairement aux \lstinline|string| java)}
 	\end{itemize}
 \end{frame}
 
@@ -82,14 +82,14 @@
 
 \note[item]{C : Working group 14}
 
-		\item \ldots mais des membres en commun, dont certains pour l'échange entre groupes
+		\item \ldots mais des membres en commun
 		\item Pas de propriétaire du C++
 
 \note[item]{Pas de propriétaire donc libre de droit, mais la norme ISO définitive est payante}
 
 		\item Actualité de normalisation, et du C++ en général, sur \href{https://isocpp.org/}{isocpp.org}
 
-\note[item]{Également une FAQ plutôt bien sur C++, ainsi qu'un guide de bonnes pratiques, les drafts de la norme et les propositions}
+\note[item]{Également une FAQ plutôt bien sur C++, ainsi qu'un guide de bonnes pratiques, les \textit{drafts} de la norme et les propositions}
 
 	\begin{alertblock}{Pas le site du comité}
 		isocpp.org n'est pas le site officiel du comité de normalisation mais celui de \textit{Standard C++ Foundation} dont le but est la promotion du C++\\
@@ -100,7 +100,7 @@
 
 		\item Une conférence annuelle : \href{http://cppcon.org/}{cppcon}
 
-\note[item]{Avec une chaîne youtube et un GIT contenant les supports}
+\note[item]{Avec une chaîne Youtube et un GIT contenant les supports}
 	\end{itemize}
 \end{frame}
 
@@ -179,8 +179,8 @@ catch(logic_error& e)
 \begin{frame}
 	\frametitle{Erreurs - Exception\titlehfill{}2/2}
 	\begin{itemize}
-		\item De n'importe quel type \dots{}
-		\item \dots{} mais recommandé d'hériter de \lstinline|std::exception| via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autres
+		\item De n'importe quel type
+		\item \ldots{} mais recommandé d'hériter de \lstinline|std::exception| via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autres
 		\item \lstinline{catch(...)} pour attraper les exceptions de tout type
 		\item Compatibles avec le \textit{stack unwinding}
 
@@ -287,7 +287,7 @@ catch(logic_error& e)
 \begin{frame}[fragile]
 	\frametitle{Erreurs - Exception safety\titlehfill{}2/2}
 	\begin{exampleblock}{Do}
-		Utilisez l'idiome \og \textit{copy-and-swap}\fg{} pour la \textit{Strong exception safety}
+		Utilisez l'idiome \textit{copy-and-swap} pour la \textit{Strong exception safety}
 	\end{exampleblock}
 
 \note[item]{Voir Exceptionnal C++ et GotW}
@@ -481,7 +481,7 @@ private:
 \note[item]{C'est à dire : \textit{Resource Acquisition Is Initialization}}
 
 	\begin{itemize}
-		\item Acquisition des ressources lors de l'initialisation de l'objet \ldots
+		\item Acquisition des ressources lors de l'initialisation de l'objet
 		\item \ldots{} et libération automatique lors de sa destruction
 
 \note[item]{Proche du try with resources de Java ou du with de Python}
@@ -538,7 +538,7 @@ private:
 			\item Pas d'erreur ni d'exception pour les destructeurs
 			\item La libération peut échouer (p.ex. \lstinline|flush| lors de la fermeture de fichier)
 
-\note[item]{Problème rare qui concerne peu d'objets et uniquement dans des cas extrèmes}
+\note[item]{Problème rare qui concerne peu d'objets et uniquement dans des cas extrêmes}
 		\end{itemize}
 	\end{alertblock}
 
@@ -552,7 +552,7 @@ private:
 remove_file(src);
 // Potentielle perte de donnees\end{lstlisting}
 
-\note[item]{Le problème se résoud en forçant l'écriture (flush) en fin de la fonction \lstinline|copy_files()| et en remontant une exception en cas d'erreur}
+\note[item]{Le problème se résout en forçant l'écriture (\lstinline|flush|) en fin de la fonction \lstinline|copy_files()| et en remontant une exception en cas d'erreur}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -585,17 +585,17 @@ cout << *bar << "\n";\end{lstlisting}
 	\begin{itemize}
 		\item \ldots Ou principe de connaissance minimale
 		\item \og Ne parlez qu'à vos amis proches\fg{}
-		\item Un objet \textit{A} peut utiliser les services d'un deuxième objet \textit{B} \ldots
-		\item \ldots{} mais ne doit pas utiliser \textit{B} pour accéder à un troisième objet
+		\item Un objet \lstinline|A| peut utiliser les services d'un deuxième objet \lstinline|B|
+		\item \ldots{} mais ne doit pas utiliser \lstinline|B| pour accéder à un troisième objet
 
-\note[item]{Dis autrement : Les amis de mes amis sont de parfaits inconnus}
+\note[item]{Dit autrement : Les amis de mes amis sont de parfaits inconnus}
 
 		\item En particulier, une classe n'expose pas ses données
 
 		\begin{block}{Exceptions}
 			Les agrégats et les conteneurs dont le rôle est de contenir des données
 
-\note[item]{Agrégat désigne ici des classes, ou structures, qui agrége un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'\textit{aggregate} du standard}
+\note[item]{Agrégat désigne ici des classes, ou structures, qui agrège un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'\textit{aggregate} du standard}
 \note[item]{Certains (p.ex. Loïc Joly) utilisent aussi le terme d'agglomérat, ce qui évite la confusion}
 		\end{block}
 	\end{itemize}
@@ -673,7 +673,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 		\item Fondamentalement non déterministe : adapté à la mémoire pas aux autres ressources
 
-\note[item]{Inadaptation à d'autres types de ressource est la raison d'être du try with resource de Java}
+\note[item]{Inadaptation à d'autres types de ressource est la raison d'être du \textit{try with resource} de Java}
 
 		\item Particulièrement adapté à la gestion des structures cycliques
 
@@ -722,8 +722,8 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 \note[item]{Retourne une adresse lors d'un \lstinline|new| ou d'un \lstinline|malloc()| sans allocation avec peu de contrôle}
 \note[item]{Allocation uniquement lors de l'usage de la mémoire}
-\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du uptime, de la priorité ou du propriétaire ?) mais jamais \lstinline|init|}
-\note[item]{Pourquoi OMA : les soft demandent plus de mémoire que ce qu'ils utilisent réellement}
+\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais \lstinline|init|}
+\note[item]{Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement}
 
 			\item Pensez à paramétrer correctement l'OS
 		\end{itemize}
@@ -732,7 +732,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 \subsection*{STL}
 \begin{frame}
-	\frametitle{STL - \textit{Standard Template Library}\titlehfill{}1/3}
+	\frametitle{STL - Standard Template Library\titlehfill{}1/3}
 	\begin{itemize}
 		\item Partie de la bibliothèque standard comprenant
 
@@ -760,24 +760,24 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\begin{itemize}
 			\item Promoteur de la programmation générique
 
-\note[item]{Programmation générique : template en C++, generics en Java}
+\note[item]{Programmation générique : template en C++, \lstinline|generic| en Java}
 \note[item]{Programmation générique = polymorphisme paramétrique}
 
 			\item Sceptique vis à vis de la POO
 
 \note[item]{Pour Stepanov : POO = hoax (canular)}
-\note[item]{Stepanov a de vrais arguments et cible davantage, amha, le marketing survendeur (silver bullet) et les promesses non tenues que la POO elle-même}
+\note[item]{Stepanov a de vrais arguments et cible davantage, à mon avis, le marketing survendeur (\textit{silver bullet}) et les promesses non tenues que la POO elle-même}
 \note[item]{Contrairement à une idée reçue, Stepanov ne s'oppose pas à l'abstraction et à encapsulation mais à la façon dont la POO prétend y répondre}
 
 		\end{itemize}
 		\item Basée sur les templates, pas de POO
 
-\note[item]{Pas de POO dans la STL : utilisation de classes (abstraction, modularité) mais ni polymorphisme de sous-typage ni dynamic dispatch}
+\note[item]{Pas de POO dans la STL : utilisation de classes (abstraction, modularité) mais ni polymorphisme de sous-typage ni \textit{dynamic dispatch}}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL - \textit{Standard Template Library}\titlehfill{}2/3}
+	\frametitle{STL - Standard Template Library\titlehfill{}2/3}
 	\begin{block}{Intérêts}
 		\begin{itemize}
 			\item $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
@@ -799,7 +799,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL - \textit{Standard Template Library}\titlehfill{}3/3}
+	\frametitle{STL - Standard Template Library\titlehfill{}3/3}
 	\begin{block}{A nuancer}
 		Malgré tout des algorithmes en fonction interne sur certains conteneurs
 		\begin{itemize}
@@ -817,7 +817,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\item Contient des objets copiables et non constants
 
 \note[item]{En C++11 et suivante : copiables ou déplaçable}
-\note[item]{On peut avoir des conteneurs const et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de const}
+\note[item]{On peut avoir des conteneurs \lstinline|const| et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de \lstinline|const|}
 
 		\item \ldots{} qui peuvent être les adresses d'autres objets
 
@@ -985,7 +985,7 @@ while(!foo.empty()) {
 \begin{frame}
 	\frametitle{STL Conteneurs - conteneurs non-STL}
 
-\note[item]{valarray est laissé de côté, pas vraiment un conteneur}
+\note[item]{\lstinline|std::valarray| est laissé de côté, pas vraiment un conteneur}
 
 	\begin{itemize}
 		\item \lstinline|std::bitset| :
@@ -1010,8 +1010,8 @@ while(!foo.empty()) {
 
 \note[item]{\textit{Ropes} : chaîne découpée en morceaux reliés par une liste ou un arbre}
 \note[item]{\textit{Ropes} : performance de modification au milieu, de découpage, etc., permettent le partage de sous-chaînes, résolvent le problème d'\textbf{espace d'adressage} pas assez grand malgré une mémoire libre largement suffisante, certaine localité des données permettant de bénéficier des lignes de caches (par rapport à une liste)}
-\note[item]{\textit{Ropes} : alternative possible aux vector même si deque rempli déjà en partie ce rôle}
-\note[item]{En toute rigueur, \lstinline|std::string| pouvait être implémenter sous forme de ropes en C++98/03, plus en C++11}
+\note[item]{\textit{Ropes} : alternative possible aux \lstinline|std::vector| même si \lstinline|std::deque| rempli déjà en partie ce rôle}
+\note[item]{En toute rigueur, \lstinline|std::string| pouvait être implémenter sous forme de \textit{ropes} en C++98/03, plus en C++11}
 \note[item]{Variantes ciblant un autre compromis : listes en tableau, \textit{ropes}, \textit{map} \og à plat\fg{}, etc.}
 		\end{itemize}
 	\end{itemize}
@@ -1056,7 +1056,7 @@ while(!foo.empty()) {
 			\item Pensez à \lstinline|reserve()|
 			\item Une insertion \og en vrac\fg{} suivie d'un tri peut être plus efficace qu'une insertion en place
 
-\note[item]{Insertion en vrac : vector vs. list}
+\note[item]{Insertion en vrac : \lstinline|std::vector| vs. \lstinline|std::list|}
 \note[item]{Voir overload 134 (août 2016) sur big O et les performances \lstinline|std::vector|/\lstinline|std::string|. Et l'importance de la localité des données}
 
 			\item Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
@@ -1169,11 +1169,11 @@ while(!foo.empty()) {
 
 \subsection*{STL -Algorithmes}
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - \textit{Function Object}\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Function Object\titlehfill{}1/2}
 	\begin{itemize}
 		\item Un \textit{Function Object} est une instance de classe définissant \lstinline|operator()()|
 
-\note[item]{Appelés aussi functor en anglais on foncteur en français}
+\note[item]{Appelés aussi \textit{functor} en anglais on foncteur en français}
 		\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1192,7 +1192,7 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Algorithmes - \textit{Function Object}\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Function Object\titlehfill{}2/2}
 	\begin{itemize}
 		\item Possèdent données membres
 
@@ -1236,7 +1236,7 @@ for_each(foo.begin(), foo.end(), print);\end{lstlisting}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item Version du map/apply fonctionnel
+		\item Version du \textit{map/apply} fonctionnel
 	\end{itemize}
 \end{frame}
 
@@ -1256,18 +1256,18 @@ vector<int> foo{4, 5, 9 ,12};
 for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30\end{lstlisting}
 
 	\begin{itemize}
-		\item Candidat pour le fold/reduce fonctionnel
+		\item Candidat pour le \textit{fold/reduce} fonctionnel
 		\item Pas de sémantique, faible utilité
 
 \note[item]{Pas de sémantique : simple parcours}
-\note[item]{Gain limité par rapport à for, d'autant que le code est coupé en deux et encore plus par rapport aux algos}
+\note[item]{Gain limité par rapport à for, d'autant que le code est coupé en deux et encore plus par rapport aux algorithmes}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Recherche linéaire\titlehfill{}1/2}
 	\begin{itemize}
-		\item \lstinline|std::find()| recherche une valeur \ldots
+		\item \lstinline|std::find()| recherche une valeur
 		\item \ldots{} et retourne un itérateur sur celle-ci
 		\item \ldots{} ou l'itérateur de fin si la valeur n'est pas présente
 	\end{itemize}
@@ -1288,8 +1288,8 @@ it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|std::find_if()| recherche depuis un prédicat
 
-		\begin{block}{Variante \og \_if\fg{}}
-			Les algorithmes suffixés par \_if utilise un prédicat plutôt qu'une valeur
+		\begin{block}{Variante \og \lstinline|_if|\fg{}}
+			Les algorithmes suffixés par \lstinline|_if| utilise un prédicat plutôt qu'une valeur
 		\end{block}
 
 		\item \lstinline|std::find_first_of()| recherche la première occurrence d'un élément
@@ -1307,7 +1307,7 @@ it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
 	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}1/3}
 	\begin{itemize}
 		\item Pré-requis : ensemble trié
-		\item \lstinline|std::lower_bound()| retourne un itérateur sur le première élément non strictement inférieur à la valeur recherchée \ldots
+		\item \lstinline|std::lower_bound()| retourne un itérateur sur le première élément non strictement inférieur à la valeur recherchée
 
 \note[item]{Formulation \og n'est pas strictement inférieur\fg{} semble être une tournure compliquée pour supérieur ou égal, mais c'est précisément ce que fait la fonction et c'est important si on fourni un prédicat de comparaison}
 \note[item]{Un prédicat de comparaison peut être fourni, sinon c'est < qui s'applique}
@@ -1395,8 +1395,8 @@ equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
 		\lstinline|std::equal()| ne vérifie pas les tailles des deux ensembles
 	\end{alertblock}
 
-\note[item]{Il compare sur la taille du premier ensemble (pour lequel il y a un couple begin/end)}
-\note[item]{Il faut donc s'assurer au préalable des tailles et vérifier les overflow}
+\note[item]{Il compare sur la taille du premier ensemble (pour lequel il y a un couple \textit{begin/end})}
+\note[item]{Il faut donc s'assurer au préalable des tailles et vérifier les \textit{overflow}}
 \note[item]{C++14 ajoute des surcharges de \lstinline|std::equal()| testant la taille}
 
 	\begin{block}{Et \lstinline|operator==| ?}
@@ -1545,8 +1545,8 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8\end{lstlisting}
 	\frametitle{STL Algorithmes - Remplacement\titlehfill{}2/2}
 	\begin{itemize}
 		\item \lstinline|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
-		\begin{block}{Variante \og \_copy\fg{}}
-			Les algorithmes suffixés par \_copy fonctionne comme l'algorithme de base en troquant la modification en place contre une copie du résultat
+		\begin{block}{Variante \og \lstinline|_copy|\fg{}}
+			Les algorithmes suffixés par \lstinline|_copy| fonctionne comme l'algorithme de base en troquant la modification en place contre une copie du résultat
 		\end{block}
 		\item \lstinline|std::replace_copy_if()| copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
 	\end{itemize}
@@ -1562,7 +1562,7 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8\end{lstlisting}
 vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
 remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...\end{lstlisting}
 
-\note[item]{La comparaison se fait via l'opérateur == et n'est pas paramètrable}
+\note[item]{La comparaison se fait via l'opérateur \lstinline|==| et n'est pas paramétrable}
 
 	\pause
 
@@ -1597,7 +1597,7 @@ foo.erase(remove(foo.begin(),foo.end(),5),foo.end());\end{lstlisting}
 		\item \lstinline|std::unique()| \og élimine\fg{} les éléments consécutifs égaux sauf le premier
 	\end{itemize}
 
-\note[item]{Tout comme remove, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé}
+\note[item]{Tout comme \lstinline|remove|, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé}
 \note[item]{Un prédicat de comparaison peut être fourni, sinon \lstinline|operator==| est utilisé}
 \note[item]{L'ordre relatif est préservé, important si la comparaison ne se fait que sur une partie d'un élément composite}
 
@@ -1727,7 +1727,7 @@ nth_element(foo.begin(), foo.begin() + 3, foo.end());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Tri\titlehfill{}1/2}
 
-\note[item]{Possibilité de fournir un prédicat de comparaison, operator< par défaut}
+\note[item]{Possibilité de fournir un prédicat de comparaison, \lstinline|operator<| par défaut}
 
 	\begin{itemize}
 		\item \lstinline|std::sort()| trie un ensemble
@@ -1787,7 +1787,7 @@ random_shuffle(foo.begin(), foo.end());
 	\end{itemize}
 
 \note[item]{Ce troisième ensemble est bien entendu trié lui aussi}
-\note[item]{Possibilité de fournir un prédicat de comparaison (operator< par défaut)}
+\note[item]{Possibilité de fournir un prédicat de comparaison (\lstinline|operator<| par défaut)}
 
 	\begin{lstlisting}[language=C++]
 vector<int> foo{1, 5, 6, 8};
@@ -1868,7 +1868,7 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Min-max}
 
-\note[item]{Possibilité de fournir la fonction de comparaison (operator< par défaut)}
+\note[item]{Possibilité de fournir la fonction de comparaison (\lstinline|operator<| par défaut)}
 
 	\begin{itemize}
 		\item \lstinline|std::min()| détermine le minimum de deux éléments
@@ -1906,7 +1906,7 @@ accumulate(foo.begin(), foo.end(), 1, multiplies<int>());
 
 	\begin{itemize}
 		\item Opérateur et valeur initiale configurables
-		\item \textit{Reduce}/\textit{fold} fonctionnel
+		\item \textit{Reduce/fold} fonctionnel
 	\end{itemize}
 \end{frame}
 

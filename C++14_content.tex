@@ -95,7 +95,7 @@ auto bar3() { return bar1(); }           // string\end{lstlisting}
 
 \subsection*{Initialisation}
 \begin{frame}[fragile]
-	\frametitle{\textit{Aggregate Initialisation}}
+	\frametitle{Aggregate Initialisation}
 	\begin{itemize}
 		\item Devient compatible avec l'initialisation par défaut des membres
 		\item \ldots{} les membres non explicitement initialisés le sont par défaut
@@ -163,7 +163,7 @@ vector<int> bar = exchange(foo, {10, 11});
 
 \subsection*{string}
 \begin{frame}[fragile]
-	\frametitle{\textit{Quoted string}}
+	\frametitle{Quoted string}
 	\begin{itemize}
 		\item Insertion et extraction de chaînes avec guillemets
 	\end{itemize}
@@ -214,13 +214,13 @@ int baz = 010'00;       // 512\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{User-defined literals} standard\titlehfill{}1/3}
+	\frametitle{User-defined literals standard\titlehfill{}1/3}
 
-\note[item]{Dans la bibliothéque et non dans le langage}
-\note[item]{Notons l'absence de \_}
+\note[item]{Dans la bibliothèque et non dans le langage}
+\note[item]{Notons l'absence de \lstinline|_|}
 
 	\begin{itemize}
-		\item Suffixe \og s\fg{} sur les chaînes : \lstinline|std::string|
+		\item Suffixe \lstinline|s| sur les chaînes : \lstinline|std::string|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -232,9 +232,9 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{User-defined literals} standard\titlehfill{}2/3}
+	\frametitle{User-defined literals standard\titlehfill{}2/3}
 	\begin{itemize}
-		\item Suffixe \og h\fg{}, \og min\fg{}, \og s\fg{}, \og ms\fg{}, \og us\fg{} et \og ns\fg{} : \lstinline|std::chrono::duration| dans l'unité correspondante
+		\item Suffixe \lstinline|h|, \lstinline|min|, \lstinline|s|, \lstinline|ms|, \lstinline|us| et \lstinline|ns| : \lstinline|std::chrono::duration| dans l'unité correspondante
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -242,16 +242,16 @@ auto foo = 60s;       // chrono::seconds
 auto bar = 5min;      // chrono::minutes\end{lstlisting}
 
 	\begin{block}{Note}
-		Suffixe \og s\fg{} utilisé pour \lstinline|std::string| et pour les secondes mais sans ambiguïté car dépendant du type de littéral auquel il s'applique
+		Suffixe \lstinline|s| utilisé pour \lstinline|std::string| et pour les secondes mais sans ambiguïté car dépendant du type de littéral auquel il s'applique
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{User-defined literals} standard\titlehfill{}3/3}
+	\frametitle{User-defined literals standard\titlehfill{}3/3}
 	\begin{itemize}
-		\item Suffixe \og if\fg{} : nombre imaginaire de type \lstinline|std::complex<float>|
-		\item Suffixe \og i\fg{} : nombre imaginaire de type \lstinline|std::complex<double>|
-		\item Suffixe \og il\fg{} : nombre imaginaire de type \lstinline|std::complex<long double>|
+		\item Suffixe \lstinline|if| : nombre imaginaire de type \lstinline|std::complex<float>|
+		\item Suffixe \lstinline|i| : nombre imaginaire de type \lstinline|std::complex<double>|
+		\item Suffixe \lstinline|il| : nombre imaginaire de type \lstinline|std::complex<long double>|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -260,7 +260,7 @@ auto foo = 5i;        // complex<double>\end{lstlisting}
 
 \subsection*{tuple}
 \begin{frame}[fragile]
-	\frametitle{Adressage des tuples par le type}
+	\frametitle{Adressage des \lstinline|std::tuple| par le type}
 	\begin{itemize}
 		\item Utilisation du type plutôt que de l'indice
 	\end{itemize}
@@ -273,7 +273,7 @@ get<int>(foo);	// 42\end{lstlisting}
 	\pause
 
 	\begin{alertblock}{Attention}
-		Uniquement s'il n'y a qu'une occurrence du type dans le tuple
+		Uniquement s'il n'y a qu'une occurrence du type dans le \lstinline|std::tuple|
 	\begin{lstlisting}[language=C++]
 get<long>(foo);     // Erreur\end{lstlisting}
 	\end{alertblock}
@@ -305,7 +305,7 @@ PI<const char*>;  // pi\end{lstlisting}
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{\textit{Generic lambdas}}
+	\frametitle{Generic lambdas}
 	\begin{itemize}
 		\item Lambdas utilisables sur différents types de paramètres
 		\item Déduction du type des paramètres déclarés \lstinline|auto|
@@ -319,7 +319,7 @@ foo("azerty"s);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Variadic lambdas}}
+	\frametitle{Variadic lambdas}
 	\begin{itemize}
 		\item Lambda à nombre de paramètres variable
 		\item Suffixe \lstinline|...| à \lstinline|auto|
@@ -440,7 +440,7 @@ add_const_t<const int> B;
 add_const_t<const int*> C;\end{lstlisting}
 \end{frame}
 
-\subsection*{Pointeur intelligent}
+\subsection*{Pointeurs intelligents}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::make_unique|}
 	\begin{itemize}
@@ -464,7 +464,7 @@ unique_ptr<int> foo = make_unique<int>(42);\end{lstlisting}
 	\frametitle{Attribut \lstinline|[[ deprecated ]]|\titlehfill{}1/2}
 	\begin{itemize}
 		\item Indique qu'une entité (variable, fonction, classe, \ldots) est dépréciée
-		\item Émission possible d'un warning sur l'utilisation d'une entité \lstinline|deprecated|
+		\item Émission possible d'un avertissement sur l'utilisation d'une entité \lstinline|deprecated|
 
 \note[item]{Peut car il n'y a pas d'obligation dans la norme. En pratique c'est le cas}
 	\end{itemize}

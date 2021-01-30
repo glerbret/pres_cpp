@@ -11,9 +11,9 @@
 		\item Plusieurs TS publiés et non intégrés ou en cours d'étude
 		\item Des évolutions dans l'organisation
 		\begin{itemize}
-			\item Création d'un ABI Review Group en charge de l'étude des impacts sur l'ABI des évolutions
+			\item Création d'un \textit{ABI Review Group} en charge de l'étude des impacts sur l'ABI des évolutions
 			\item Processus d'évaluation des propositions d'évolutions pour réduire le risque d'erreur
-			\item Groupe \og \textit{Undefined Behavior}\fg{} dont le rôle est de documenter les comportements \og \textit{undefined}\fg{} et \og \textit{unspecified}\fg{}
+			\item Groupe \textit{Undefined Behavior} dont le rôle est de documenter les comportements \textit{undefined} et \textit{unspecified}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -25,7 +25,7 @@
 		\begin{itemize}
 			\item Si l'opérateur est défini, les opérations sont transférés à son résultat
 			\item \ldots{} sauf celles spécifiquement déclarées membres
-			\item Réalisation de \og \textit{smart reference}\fg{} (p.ex. proxy)
+			\item Réalisation de \textit{smart reference} (p.ex. \textit{proxy})
 		\end{itemize}
 		\item Surcharge de \lstinline|operator?:|
 		\item \textit{Unified Call Syntax}
@@ -35,12 +35,12 @@
 		\end{itemize}
 		\item \lstinline|std::expected| contenant un statut et une valeur optionnelle : retour d'un compte rendu d'exécution de la fonction et, éventuellement, d'une valeur
 
-\note[item]{permet de se passer d'exception dans les contextes où elles ne sont pas adaptées, de ne pas utiliser un paramètre en sortie pour le statut ou la valeur et de ne pas définir des structures/classes ad-hoc tout en proposant une API plus adaptée que pair ou tuple}
+\note[item]{permet de se passer d'exception dans les contextes où elles ne sont pas adaptées, de ne pas utiliser un paramètre en sortie pour le statut ou la valeur et de ne pas définir des structures/classes ad hoc tout en proposant une API plus adaptée que \lstinline|std::pair| ou \lstinline|std::tuple|}
 
-		\item \textit{Procedural function interfaces} : framework pour la vérification statique de partie du programme
+		\item \textit{Procedural function interfaces} : \textit{framework} pour la vérification statique de partie du programme
 
 \note[item]{Annotations de types claim / assertion permettant à des outils d'analyse de vérifier la correction du programme}
-\note[item]{Recouvre les points du TS contract mais est plus ambitieux}
+\note[item]{Recouvre les points du TS \textit{contract} mais est plus ambitieux}
 
 		\item Support des entrées/sorties audio
 		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
@@ -55,12 +55,12 @@
 	\begin{itemize}
 		\item Ajout de nouveaux \og conteneurs\fg{}:
 		\begin{itemize}
-			\item Adaptateurs \lstinline|std::flat_map| et \lstinline|std::flat_multimap| : map depuis une paire de conteneurs séquentiels
+			\item Adaptateurs \lstinline|std::flat_map| et \lstinline|std::flat_multimap| : \lstinline|map| depuis une paire de conteneurs séquentiels
 			\item \lstinline|std::mdspan| : vues multidimensionnels (et indiçage associé \lstinline|[x,y,z]|)
 
 \note[item]{La dépréciation de l'opérateur virgule dans les indices est un préalable à ce type de conteneur}
 
-			\item \lstinline|static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
+			\item \lstinline|std::static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
 
 \note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
 
@@ -78,7 +78,7 @@
 			\item Dépréciation des conversions entre énumération et flottant
 			\item Dépréciation des conversions entre énumérations
 			\item Dépréciation de la comparaison \og \textit{two-way}\fg{} entre type tableau
-			\item Comparaison \og \textit{three-way}\fg{} entre \textit{unscoped} énumération et type entier
+			\item Comparaison \textit{three-way} entre \textit{unscoped} énumération et type entier
 
 \note[item]{\textit{unscoped} énumération, c'est à dire les \lstinline|enum| par opposition aux \lstinline|enum class|}
 
@@ -119,7 +119,7 @@ inspect (x) {
 		\begin{itemize}
 			\item \textit{Tuple-like}
 
-\note[item]{\lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, aggrégats et les classes implémentant l'interface \textit{tuple}}
+\note[item]{\lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, agrégats et les classes implémentant l'interface \textit{tuple}}
 
 			\begin{lstlisting}[language=C++]
 inspect (p) {
@@ -217,7 +217,7 @@ inspect (p) {
 			\item Contrôle de l'alignement (remplaçant de \lstinline|#pragma pack(N)|)
 		\end{itemize}
 
-\note[item]{Deux propositions différentes mais pas incompatibles. La première étant en fait un prérequis}
+\note[item]{Deux propositions différentes mais pas incompatibles. La première étant en fait un pré-requis}
 	\end{itemize}
 \end{frame}
 
@@ -225,7 +225,7 @@ inspect (p) {
 	\frametitle{Propositions diverses}
 	\begin{itemize}
 		\item Méta-classes pour construire des types de classes (dont les classes elles-mêmes) ayant des contraintes, des comportements par défaut et des opérations par défaut (\lstinline|class|, \lstinline|struct|, \lstinline|enum class|, \textit{interface}, \textit{value})
-		\item Répétition compile-time d'une expression : \textit{Expansion statement}
+		\item Répétition \textit{compile-time} d'une expression : \textit{Expansion statement}
 		
 			\begin{lstlisting}[language=C++]
 auto foo = make_tuple(0, 'a', 3.14);
@@ -275,7 +275,7 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Parsing de texte
+		\item \textit{Parsing} de texte
 			\begin{itemize}
 				\item Pendant du formatage de texte introduit en C++20
 				\item Alternative sûre et robuste à \lstinline|sscanf()|
@@ -337,7 +337,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 		\item Bibliothèques de support des coroutines
 		\item Unification et amélioration des API asynchrones
 
-\note[item]{Qu'il s'agisse de coroutines, d'algorithmes paralléles, d'\textit{executor} ou autre}
+\note[item]{Qu'il s'agisse de coroutines, d'algorithmes parallèles, d'\textit{executor} ou autre}
 
 		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
 		\item Autoriser les conversions entiers vers booléens dans les \lstinline|static_assert| et \lstinline|if constexpr|
@@ -354,7 +354,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 
 		\item Interdiction de l'appel de \lstinline|operator=()| sur des temporaires
 
-\note[item]{Ce n'est pas permis sur les types built-in mais possible sur les autres, avec tous les problèmes que ça peut poser}
+\note[item]{Ce n'est pas permis sur les types \textit{built-in} mais possible sur les autres, avec tous les problèmes que ça peut poser}
 
 		\item Retarder à l'instanciation l'échec de \lstinline|static_assert(false)| dans des template
 
@@ -435,7 +435,7 @@ int s = sum(point.elems...);\end{lstlisting}
 \begin{frame}[fragile]
   \frametitle{Propositions diverses}
   \begin{itemize}
-	\item Possibilité d'instancier certains template au runtime (JIT limité aux templates)
+	\item Possibilité d'instancier certains template au \textit{runtime} (JIT limité aux templates)
 
 \note[item]{P.ex. pour des matrices dont la taille n'est pas connue à la compilation}
 
@@ -507,7 +507,7 @@ consteval int h(int i) {
 
 		\item \lstinline|std::tag_invoke| mécanisme générique de configuration du comportement (\textit{policy})
 
-\note[item]{Traditionnellement fait via des tags \og template\fg{}, mais ça pose des soucis de résolution de nom que \lstinline|std::tag_invoke| devrait résoudre}
+\note[item]{Traditionnellement fait via des \textit{tags} \og template\fg{}, mais ça pose des soucis de résolution de nom que \lstinline|std::tag_invoke| devrait résoudre}
 
 		\item Ajout de suffixes pour les littéraux \lstinline|std::size_t|, \lstinline|std::ptrdiff_t|
 		\item \lstinline|std::colony| : conteneur de type \og tableau de \textit{buckets}\fg{}
@@ -530,7 +530,7 @@ consteval int h(int i) {
 		\item \lstinline|span| de taille fixe
 		\item Paramètre template universel
 
-\note[item]{Utile pour la création de méta-fonctions template high-order, pour avoir des \lstinline|static_assert(false)| dependants et pour certains tests sur les types}
+\note[item]{Utile pour la création de méta-fonctions template \textit{high-order}, pour avoir des \lstinline|static_assert(false)| dépendants et pour certains tests sur les types}
 
 		\item Autoriser les templates dans les classes locales
 		\item Ajout de \lstinline|operator[]| à \lstinline|std::initializer_list|
@@ -558,7 +558,7 @@ consteval int h(int i) {
 		\item Élision de copie des objets de retour nommés (NRVO) garantie
 
 \note[item]{NRVO : \textit{Named Return Value Optimization}}
-\note[item]{L'élision de copie des objets retournés est déjà garantie pour des prvalues en C++17}
+\note[item]{L'élision de copie des objets retournés est déjà garantie pour des \textit{prvalues} en C++17}
 \note[item]{C'est déjà une optimisation réalisée par certains compilateur}
 
 		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
@@ -573,7 +573,7 @@ consteval int h(int i) {
 	\begin{itemize}
 		\item Opération \og \textit{relocate}\fg{} (équivalent à déplacement puis destruction)
 
-\note[item]{L'opération \og relocate\fg{} est généralement implémentable par un simple \lstinline|memcpy()| sur l}
+\note[item]{L'opération \og \textit{relocate}\fg{} est généralement implémentable par un simple \lstinline|memcpy()| sur l}
 \note[item]{L'idée est de permettre certaines optimisations sur les objets correspondant}
 
 		\begin{itemize}
@@ -605,7 +605,7 @@ consteval int h(int i) {
 
 		\item Extension de \lstinline|=delete| à d'autres construction (notamment aux variables template)
 
-\note[item]{La proposition intiale ne concernait que les variables template, mais elle a inspiré le comité}
+\note[item]{La proposition initiale ne concernait que les variables template, mais elle a inspiré le comité}
 	\end{itemize}
 \end{frame}
 
@@ -614,7 +614,7 @@ consteval int h(int i) {
 	\begin{itemize}
 		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
 
-\note[item]{P.ex. si le standard C++23 supprimme les coversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 2023|}
+\note[item]{P.ex. si le standard C++23 supprime les conversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 2023|}
 \note[item]{Pour l'instant pas de consensus trouvé, mais d'importants problèmes.}
 
 		\item Améliorations du générateur aléatoire
@@ -634,19 +634,19 @@ stack s(v.begin(), v.end());
 \begin{frame}[fragile]
 	\frametitle{TS - Contracts}
 	\begin{itemize}
-		\item Retiré du draft C++20 et création d'un groupe d'étude en juillet 2019
+		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
 
 \note[item]{Ne sera donc finalement pas en C++20, probablement en 2023}
 
 		\item Support de la programmation par contrat
-		\item Remplacement de la vérification à coup d'assert et de la documentation via commentaire @pre, @post et @invariant
+		\item Remplacement de la vérification à coup d'\lstinline|assert| et de la documentation via commentaire \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
 		\item Initialement, plusieurs propositions \og concurrentes\fg{}
 		\item \ldots{}mais un compromis à émerger
 		\item Utilisation d'attributs \lstinline|[[assert:x]], |\lstinline|[[expects:x]]| et \lstinline|[[ensure:x]]|
 
 \note[item]{\lstinline|[[assert:x]]| : invariants et autres vérifications}
-\note[item]{\lstinline|[[expects:x]]| : préconditions}
-\note[item]{\lstinline|[[ensure:x]]| : postconditions}
+\note[item]{\lstinline|[[expects:x]]| : pré-conditions}
+\note[item]{\lstinline|[[ensure:x]]| : post-combustions}
 
 		\item Possibilité de les marquer \lstinline|audit| pour ne les activer qu'à la demande
 		\item Possibilité de les marquer \lstinline|axiom| pour ne pas générer de code \textit{runtime} (\textit{compile-time} uniquement)
@@ -662,9 +662,9 @@ stack s(v.begin(), v.end());
 		\item Possiblement intégré à C++23
 		\item Partiellement basé sur Boost.Asio
 		\item Modèle asynchrone
-		\item Gestion de timer
-		\item Gestion de buffer et de flux orientés buffer
-		\item Gestion de sockets et de flux \og socket\fg{}
+		\item Gestion de \textit{timer}
+		\item Gestion de tampon et de flux orientés tampon
+		\item Gestion de \textit{sockets} et de flux \og \textit{socket}\fg{}
 		\item Gestion d'IPv4, IPv6, TCP, UDP
 		\item Manipulation d'adresses IP
 		\item Pas de protocoles de plus haut niveau actuellement
@@ -675,7 +675,7 @@ stack s(v.begin(), v.end());
 		Une partie du comité ne souhaitent pas que des fonctionnalités de haut-niveau, comme le réseau, soient intégrées au standard
 	\end{alertblock}
 
-\note[item]{En outre, la cryptographie ne peut pas être intégré au standard pour différentes raisons (rythme d'évolution différent entre le standard et la crypto, pas de processus pour gérer les failles de sécurité, problème légal d'exporter de la crypto dans certains pays dont les États-Unis d'Amérique)}
+\note[item]{En outre, la cryptographie ne peut pas être intégré au standard pour différentes raisons (rythme d'évolution différent entre le standard et la cryptographie, pas de processus pour gérer les failles de sécurité, problème légal d'exporter de la cryptographie dans certains pays dont les États-Unis d'Amérique)}
 
 \end{frame}
 
@@ -723,7 +723,7 @@ stack s(v.begin(), v.end());
 		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
 		\begin{itemize}
 			\item Introspection
-			\item Méta-programmation et code compile-time
+			\item Méta-programmation et code \textit{compile-time}
 			\item Injection
 			\item Méta-classes
 		\end{itemize}
@@ -737,7 +737,7 @@ stack s(v.begin(), v.end());
 		\item \textit{Concurrency} 2
 		\begin{itemize}
 			\item \textit{Synchronic} : meilleure abstraction pour atomique permettant de tirer partie des caractéristiques logicielles et matérielles de la plateforme
-			\item \textit{Executor} permettant de spécifier où et comment s'exécute un code dans un environnement concurrent (\textit{a priori} pour C++23)
+			\item \textit{Executor} permettant de spécifier où et comment s'exécute un code dans un environnement concurrent (a priori pour C++23)
 		\end{itemize}
 	\end{itemize}
 \end{frame}

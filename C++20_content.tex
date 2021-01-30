@@ -237,13 +237,13 @@ U u{.b = "foo"}; \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{endianess}}
+	\frametitle{Endianess}
 	\begin{itemize}
 		\item Définition d'une énumération \lstinline|std::endian|
 		\begin{itemize}
 			\item \lstinline|little| : \textit{little-endian}
 			\item \lstinline|big| : \textit{big-endian}
-			\item \lstinline|native| : l'\textit{endianess} du système
+			\item \lstinline|native| : \textit{endianess} du système
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -299,7 +299,7 @@ U u{.b = "foo"}; \end{lstlisting}
 			\lstinline|operator==()| et \lstinline|operator!=()| ne sont pas générés à partir de \lstinline|operator<=>()|
 		\end{alertblock}
 
-\note[item]{Initialement, \lstinline|operator==()| et \lstinline|operator!=()| aussi résolu via \lstinline|operator<=>()|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le fallback sur \lstinline|operator<=>()| (p.ex. court-circuit sur la taille de conteneurs)}
+\note[item]{Initialement, \lstinline|operator==()| et \lstinline|operator!=()| aussi résolu via \lstinline|operator<=>()|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le \textit{fallback} sur \lstinline|operator<=>()| (p.ex. court-circuit sur la taille de conteneurs)}
 
 		\item Possible de marquer ces autres opérateurs \lstinline|=default|
 
@@ -321,7 +321,7 @@ U u{.b = "foo"}; \end{lstlisting}
 
 \subsection*{Namespace}
 \begin{frame}[fragile]
-	\frametitle{\textit{Nested namespace}}
+	\frametitle{Nested namespace}
 	\begin{itemize}
 		\item Extension des \textit{nested namespaces} aux \textit{inline namespaces}
 	\end{itemize}
@@ -336,7 +336,7 @@ namespace A {
     namespace C {
       int i; } } }\end{lstlisting}
 
-\note[item]{Rappel, un \textit{inline namespace} permet de traiter ses membres comme s'ils appartenaient au \lstinline|namespace| supérieur}
+\note[item]{Rappel, un \textit{inline namespace} permet de traiter ses membres comme s'ils appartenaient au namespace supérieur}
 \end{frame}
 
 \subsection*{Modules}
@@ -376,7 +376,7 @@ namespace A {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - \textit{Interface Unit}}
+	\frametitle{Modules - Interface Unit}
 	\begin{itemize}
 		\item L'\textit{Interface Unit} commence par un préambule
 		\begin{itemize}
@@ -402,7 +402,7 @@ export {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - \textit{Implementation Unit}}
+	\frametitle{Modules - Implementation Unit}
 	\begin{itemize}
 		\item L'\textit{Implementation Unit} commence par un préambule
 		\begin{itemize}
@@ -457,7 +457,7 @@ module foo:part;\end{lstlisting}
 	\begin{itemize}
 		\item Les partitions sont un détail d'implémentation non visibles hors du module
 
-\note[item]{Concrétement, hors du module on importe le module dans son ensemble}
+\note[item]{Concrètement, hors du module on importe le module dans son ensemble}
 
 		\item Une partition peut être importée dans une \textit{Implementation Unit}
 		\item \ldots En important uniquement le nom de la partition
@@ -476,9 +476,9 @@ export :part2;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Export de \textit{namespace}}
+	\frametitle{Modules - Export de namespace}
 	\begin{itemize}
-		\item Un nom de \textit{namespace} est exporté s'il est déclaré \lstinline|export|
+		\item Un nom de namespace est exporté s'il est déclaré \lstinline|export|
 		\item \ldots Ou implicitement si un de ses éléments est exporté
 	
 		\begin{lstlisting}[language=C++]
@@ -489,7 +489,7 @@ namespace B {
   export int n;       // B::n et B sont exportes
   int m; }            // B::m n'est pas exporte\end{lstlisting}
 	
-		\item Les éléments d'une partie exportée d'un \textit{namespace} sont exportés
+		\item Les éléments d'une partie exportée d'un namespace sont exportés
 	
 		\begin{lstlisting}[language=C++]
 // C::m est exporte mais pas C::n
@@ -500,7 +500,7 @@ export namespace C { int m; }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Implémentation \textit{inline}}
+	\frametitle{Modules - Implémentation inline}
 	\begin{itemize}
 		\item Interface et implémentation dans un unique fichier
 		\item En séparant les deux parties
@@ -602,6 +602,7 @@ export import "bar.h"\end{lstlisting}
 		\item Dépréciation de \lstinline|reserve()| sans paramètre
 
 		\begin{block}{Réduction à la capacité utile}
+
 \note[item]{Oui car avant, \lstinline|std::basic_string::reserve()| sans paramètre permettait de réduire la capacité en fonction de la taille effective}
 
 			Utilisez \lstinline|shrink_to_fit()| et non \lstinline|reserve()|
@@ -635,7 +636,7 @@ foo.ends_with("monde");     // false\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|contains()| teste la présence d'une clé
 
-\note[item]{Pour tous les conteneurs associatif, aussi bien map que set, \textit{ordered} qu'\textit{unordered} et single que multi}
+\note[item]{Pour tous les conteneurs associatif, aussi bien \lstinline|map| que \lstinline|set|, \textit{ordered} qu'\textit{unordered} et single que multi}
 
 		\begin{lstlisting}[language=C++]
 map<int, string> foo{{1, "foo"}, {42, "bar"}};
@@ -653,7 +654,7 @@ foo.contains(38);  // false\end{lstlisting}
 			\item Fourniture d'une classe exposant
 			\begin{itemize}
 				\item Les différents foncteurs de calcul du hash
-				\item Le tag \lstinline|transparent_key_equal|
+				\item Le \textit{tag} \lstinline|transparent_key_equal|
 			\end{itemize}
 			\item Suppression des conversions de type inutiles
 		\end{itemize}
@@ -746,7 +747,7 @@ span<int> s2(foo.data(), 3);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::span|\titlehfill{}2/2}
 	\begin{itemize}
-		\item \lstinline|begin()|, \lstinline|end()|, \ldots : itérateurs sur le span
+		\item \lstinline|begin()|, \lstinline|end()|, \ldots : itérateurs sur le \lstinline|std::span|
 		\item \lstinline|size()|, \lstinline|empty()| : taille et vacuité
 		\item \lstinline|operator[]()|, \lstinline|front()|, \lstinline|back()| : accès à un élément
 
@@ -764,7 +765,7 @@ span<int> bar{ foo.data(), 4 };
 
 span<int> baz = bar.first(2);   // 0, 1\end{lstlisting}
 
-		\item \textit{structured binding} sur des \textit{span} de taille fixe
+		\item \textit{structured binding} sur des \lstinline|std::span| de taille fixe
 	\end{itemize}
 \end{frame}
 
@@ -1012,7 +1013,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{Factory}}
+	\frametitle{Ranges - Factory}
 	\begin{itemize}
 		\item \lstinline|std::views::empty| crée une vue vide
 		\item \lstinline|std::views::single| crée une vue d'un unique élément
@@ -1034,7 +1035,7 @@ for(int i : views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}1/6}
+	\frametitle{Ranges - range adaptators\titlehfill{}1/6}
 	\begin{itemize}
 		\item Appliquent filtres et transformations aux \textit{ranges}
 		\item Associés, pour certains, à un \textit{range adaptor closure object}
@@ -1047,7 +1048,7 @@ for(int i : views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}2/6}
+	\frametitle{Ranges - range adaptators\titlehfill{}2/6}
 	\begin{itemize}
 		\item Peuvent être chaînés avec une syntaxe \og appel de fonction\fg{} \ldots
 
@@ -1073,11 +1074,11 @@ range | adaptor(args...);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}3/6}
+	\frametitle{Ranges - range adaptators\titlehfill{}3/6}
 	\begin{itemize}
-		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
+		\item Plusieurs adapteurs fournis par la bibliothèque standard :
 
-\note[item]{Les \textit{adaptators} \lstinline|XXX_view| ont des \textit{closure object} de la forme \lstinline|views::XXX|}
+\note[item]{Les adapteurs \lstinline|XXX_view| ont des \textit{closure object} de la forme \lstinline|views::XXX|}
 
 		\begin{itemize}
 			\item \lstinline|all_view| : tous les éléments du range
@@ -1102,9 +1103,9 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}4/6}
+	\frametitle{Ranges - range adaptators\titlehfill{}4/6}
 	\begin{itemize}
-		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
+		\item Plusieurs adapteurs fournis par la bibliothèque standard :
 
 		\begin{itemize}
 			\item \lstinline|take_view| : les N premiers éléments
@@ -1119,9 +1120,9 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}5/6}
+	\frametitle{Ranges - range adaptators\titlehfill{}5/6}
 	\begin{itemize}
-		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
+		\item Plusieurs adapteurs fournis par la bibliothèque standard :
 		\begin{itemize}
 			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \textit{range}
 
@@ -1147,9 +1148,9 @@ for(auto word : sentence) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - \textit{range adaptators}\titlehfill{}6/6}
+	\frametitle{Ranges - range adaptators\titlehfill{}6/6}
 	\begin{itemize}
-		\item Plusieurs \textit{adaptors} fournis par la bibliothèque standard :
+		\item Plusieurs adapteurs fournis par la bibliothèque standard :
 		\begin{itemize}
 			\item \lstinline|elements_view| : la vue des N\textsuperscript{e} éléments de chaque \textit{tuple} d'une vue de \textit{tuple-likes}
 
@@ -1223,7 +1224,7 @@ sort(tasks, greater{}, &Task::priority);
 		\begin{itemize}
 			\item Classe tampon synchrone : \lstinline|std::basic_syncbuf|
 			\item Classe flux bufferisé synchrone : \lstinline|std::basic_osyncstream|
-			\item \lstinline|emit()| transfère le buffer vers le flux de sortie
+			\item \lstinline|emit()| transfère le tampon vers le flux de sortie
 		\end{itemize}
 
 \note[item]{Exemple issue de la norme}
@@ -1248,7 +1249,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Présentation}
 	\begin{itemize}
-		\item API de formatage inspiré de la bibliothèque  \href{https://github.com/fmtlib/fmt}{\{fmt\}}
+		\item API de formatage inspiré de la bibliothèque \href{https://github.com/fmtlib/fmt}{\{fmt\}}
 		
 		\begin{block}{Motivations}
 			\begin{itemize}
@@ -1256,10 +1257,10 @@ cin >> setw(24) >> a;\end{lstlisting}
 
 \note[item]{Par formatage \og à la C\fg{} j'entends ce qui est utilisé par \lstinline|printf| et équivalent}
 
-				\item Les flux sont complexes, peu propices à l'internationalisation et la localisation, les formatteurs sont globaux
+				\item Les flux sont complexes, peu propices à l'internationalisation et la localisation, les formateurs sont globaux
 
 \note[item]{Peu propices à la localisation car le format et l'ordre des éléments est dans le code lui-même et ne peut pas être sortie facilement}
-\note[item]{Les formatteurs sont globaux, ainsi l'injection de \lstinline|std::hex| dans un flux va passer tous les affichages des entiers en héxadécimal jusqu'à un changement explicite et pas uniquement celui concerné}
+\note[item]{Les formateurs sont globaux, ainsi l'injection de \lstinline|std::hex| dans un flux va passer tous les affichages des entiers en hexadécimal jusqu'à un changement explicite et pas uniquement celui concerné}
 			\end{itemize}
 		\end{block}
 
@@ -1267,7 +1268,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 
 \note[item]{Par défaut, la locale n'est pas prise en compte, mais peut l'être si souhaité}
 
-		\item Format sous forme de chaînes utilisant \{\} comme \textit{placeholder}
+		\item Format sous forme de chaînes utilisant \lstinline|{}| comme \textit{placeholder}
 
 		\begin{block}{En attendant C++20}
 			Utilisez \{fmt\} ou Boost.Format
@@ -1334,7 +1335,7 @@ format("{0:},{0:+},{0:-},{0: }", -1);	// "-1,-1,-1,-1"\end{lstlisting}
 
 		\item Base et format
 
-\note[item]{Le \og formatteur\fg{} indique uniquement la base, pas le type précis de la valeur comme en C (\lstinline|int|, \lstinline|short|, \lstinline|long|, \lstinline|long long|) avec toutes les erreurs que cela entraîne}
+\note[item]{Le \og formateur\fg{} indique uniquement la base, pas le type précis de la valeur comme en C (\lstinline|int|, \lstinline|short|, \lstinline|long|, \lstinline|long long|) avec toutes les erreurs que cela entraîne}
 
 		\begin{lstlisting}[language=C++]
 format("{:d}", 42);    // 42
@@ -1361,7 +1362,7 @@ format("{:#x}", 42);   // 0x2a\end{lstlisting}
 format("{:f}", 1.5);				// "1.500000"
 format("{:.0f},{.22f}", 1.5, 1.3);	// "2 1.30...0444089"\end{lstlisting}
 
-		\item Et du padding
+		\item Et du \textit{padding}
 
 		\begin{lstlisting}[language=C++]
 format("{0:05.2f}, {0:.2f}", 1.5); // "01.50, 1.50"\end{lstlisting}
@@ -1371,7 +1372,7 @@ format("{0:05.2f}, {0:.2f}", 1.5); // "01.50, 1.50"\end{lstlisting}
 \begin{lstlisting}[language=C++]
 	format("{:E}", 1.5); 			// "1.500000E+00"\end{lstlisting}
 
-		 \item Affichage en héxadécimal
+		 \item Affichage en hexadécimal
 
 \begin{lstlisting}[language=C++]
 	format("{:a}", 1.5); 			// " 0x1.8p+0"
@@ -1393,7 +1394,7 @@ format("{0:05.2f}, {0:.2f}", 1.5); // "01.50, 1.50"\end{lstlisting}
 
 			\item \lstinline|%H| ou \lstinline|%I| l'heure
 
-\note[item]{Repectivement sur 24h et 12h}
+\note[item]{Respectivement sur 24h et 12h}
 			
 			\item \lstinline|%M| les minutes
 			\item \lstinline|%S| les secondes
@@ -1509,7 +1510,7 @@ double* a = new double[]{1, 2, 3};\end{lstlisting}
 			\item \lstinline|%b| et \lstinline|%B| :  le nom du mois dans la locale (abrégé ou complet)
 			\item \lstinline|%d| : le numéro du jour dans le mois
 			\item \lstinline|%U| : le numéro de la semaine
-			\item \lstinline|%Z| : l'abbréviation de la \textit{timezone}
+			\item \lstinline|%Z| : l'abréviation de la \textit{timezone}
 			\item \ldots
 
 \note[item]{Et bien d'autre, notamment en prenant en compte ou non la locale}
@@ -1550,7 +1551,7 @@ auto date2 = Sunday[3]/may/2016y;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Timezone}\titlehfill{}1/2}
+	\frametitle{Timezone\titlehfill{}1/2}
 	\begin{itemize}
 		\item Gestion des \textit{timezones}
 		\begin{itemize}
@@ -1576,24 +1577,24 @@ zoned_time zt = {"Asia/Tokyo", tp};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Timezone}\titlehfill{}2/2}
+	\frametitle{Timezone\titlehfill{}2/2}
 	\begin{block}{En attendant C++20}
-		Utilisez Boost.Date\_Time
+		Utilisez Boost.DateTime
 	\end{block}
 
 	\begin{block}{Pour aller plus loin}
 		\href{http://site.icu-project.org/home}{ICU} supporte de nombreux calendriers et mécanismes de localisation
 
 \note[item]{ICU : \textit{International Components for Unicode}}
-\note[item]{ICU peut être une alternative à Boost.Date\_Time}
+\note[item]{ICU peut être une alternative à Boost.DateTime}
 	\end{block}
 \end{frame}
 
-\subsection*{range-based for loop}
+\subsection*{Range-based for loop}
 \begin{frame}[fragile]
-	\frametitle{Évolutions des \textit{range-based for loop}}
+	\frametitle{Évolutions des range-based for loop}
 	\begin{itemize}
-		\item Initialisation dans les \textit{range-based for loop}
+		\item Initialisation dans les range-based for loop
 
 		\begin{lstlisting}[language=C++]
 vector<int> foo{1, 8, 5, 56, 42};
@@ -1601,7 +1602,7 @@ for(size_t i = 0; const auto& bar : foo) {
   cout << bar << " " << i << "\n";
   ++i; }\end{lstlisting}
 
-		\item Cohérence entre \textit{begin} et \textit{end} :
+		\item Cohérence entre \lstinline|begin()| et \lstinline|end()| :
 		\begin{itemize}
 			\item \og Début\fg{} et \og début + taille\fg{}
 			\item fonctions membres \lstinline|begin()| et \lstinline|end()|
@@ -1618,7 +1619,7 @@ for(size_t i = 0; const auto& bar : foo) {
 	\begin{itemize}
 		\item Spécificateur \lstinline|consteval| : impose une évaluation \textit{compile-time}
 
-\note[item]{\textit{constrexpr} le permet mais ne l'impose pas}
+\note[item]{\lstinline|constrexpr| le permet mais ne l'impose pas}
 
 		\begin{itemize}
 			\item \lstinline|consteval| implique \lstinline|inline|
@@ -1677,7 +1678,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 
 \subsection*{structured binding}
 \begin{frame}[fragile]
-	\frametitle{Évolutions des \textit{structured binding}\titlehfill{}1/2}
+	\frametitle{Évolutions des structured binding\titlehfill{}1/2}
 	\begin{itemize}
 		\item Extension à tous les membres visibles (et plus uniquement publics)
 
@@ -1703,7 +1704,7 @@ auto f2 = [=] { return b; };\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolutions des \textit{structured binding}\titlehfill{}2/2}
+	\frametitle{Évolutions des structured binding\titlehfill{}2/2}
 	\begin{itemize}
 		\item Recherche de \lstinline|get()| : seules les fonctions membres templates dont le premier paramètre template n'est pas un type sont retenues
 
@@ -1731,7 +1732,7 @@ auto& [y] = x;\end{lstlisting}
 \subsection*{Template}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Non-Type Template Parameters}}
+	\frametitle{Non-Type Template Parameters}
 	\begin{itemize}
 		\item Utilisation possible de classes
 		\begin{itemize}
@@ -2007,7 +2008,7 @@ concept Swappable = requires(T&& t, U&& u) {
 \begin{frame}[fragile]
 	\frametitle{Concepts - Définition\titlehfill{}2/4}
 	\begin{itemize}
-		\item Y compris en retirant des qualificateurs
+		\item Y compris en retirant des qualifieurs
 
 		\begin{lstlisting}[language=C++]
 template<class T> concept Addable = requires(
@@ -2085,7 +2086,7 @@ template<class T> concept totally_ordered =
 		\begin{itemize}
 			\item marquage \lstinline|[[nodiscard]]| des constructeurs est autorisé
 
-\note[item]{Auparavant, gcc levait un warning}
+\note[item]{Auparavant, GCC levait un avertissement}
 
 			\item Vérification également lors des conversions via les constructeurs
 
@@ -2160,7 +2161,7 @@ auto delay_invoke(F f, Args... args) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Binding}}
+	\frametitle{Binding}
 	\begin{itemize}
 		\item \lstinline|std::bind_front()| assigne les arguments fournis aux premiers paramètres de l'appelable
 
@@ -2195,13 +2196,13 @@ bar(6);  // 30\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Thread}}
+	\frametitle{Thread}
 	\begin{itemize}
-		\item Nouvelle variante de \textit{thread} : \lstinline|std::jthread|
+		\item Nouvelle variante de thread : \lstinline|std::jthread|
 		\begin{itemize}
 			\item Automatiquement arrêté et joint lors de la destruction
 
-\note[item]{Qui est finalement un motif classique de l'usage des \textit{threads}}
+\note[item]{Qui est finalement un motif classique de l'usage des threads}
 
 \begin{lstlisting}[language=C++]
 int main() { thread t(foo); }  // Erreur (terminate)\end{lstlisting}
@@ -2247,12 +2248,12 @@ t.request_stop();\end{lstlisting}
 			\item \lstinline|try_acquire_until()| tente de prendre le sémaphore en attendant jusqu'à un temps donné si besoin
 
 		\end{itemize}
-		\item \lstinline|std::binary_semaphore|	instantiation de \lstinline|std::counting_semaphore| pour un unique possesseur
+		\item \lstinline|std::binary_semaphore|	instanciation de \lstinline|std::counting_semaphore| pour un unique possesseur
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{synchronisation - \textit{latch}}
+	\frametitle{synchronisation - latch}
 
 \note[item]{Conservation du terme anglais car verrou est ambigu (\textit{latch} ou \textit{lock})}
 
@@ -2275,14 +2276,14 @@ t.request_stop();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{synchronisation - barrière}
 	\begin{itemize}
-		\item \lstinline|std::barrier| attend qu'un certain nombre de \textit{threads} n'atteigne la barrière
+		\item \lstinline|std::barrier| attend qu'un certain nombre de threads n'atteigne la barrière
 		\begin{itemize}
-			\item Création avec le nombre de \textit{threads} attendus
+			\item Création avec le nombre de threads attendus
 			\item \lstinline|arrive()| décrémente le compteur
 			\item \lstinline|wait()| attends que le compteur atteigne zéro
 			\item \lstinline|arrive_and_wait()| décrémente le compteur et attends qu'il atteigne zéro
 			\item \lstinline|arrive_and_drop()| décrémente le compteur ainsi que la valeur initiale
-			\item Une fois zéro atteint, les \textit{threads} en attente sont débloqués et le compteur reprends la valeur initiale décrémentée du nombre de \textit{threads} \og \textit{droppés}\fg{}
+			\item Une fois zéro atteint, les threads en attente sont débloqués et le compteur reprends la valeur initiale décrémentée du nombre de threads \og \textit{droppés}\fg{}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
