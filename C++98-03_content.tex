@@ -666,14 +666,10 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\frametitle{Ressources - Et le Garage Collector ?}
 	\begin{itemize}
 		\item Pas de GC dans le langage ni dans la bibliothèque standard
-		\item \ldots{} mais un sujet de discussion récurrent
-
-\note[item]{Sujet de discussion récurrent et très disputé}
-
 		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm})
 		\item \ldots{} mais limité par manque de support par le langage
 
-\note[item]{Support GC meilleur en C++11 mais pas parfait}
+\note[item]{Support GC meilleur en C++11 mais pas parfait, non implémenté par les compilateurs et qui risquent d'être supprimé}
 
 		\item Fondamentalement non déterministe : adapté à la mémoire pas aux autres ressources
 
@@ -684,11 +680,15 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \note[item]{Difficulté de la gestion des cycles en RAII : \lstinline|std::shared_ptr| ou \lstinline|std::weak_ptr|, ou responsabilité déléguée à un tiers ?}
 
 		\item D'autres avantages pour la mémoire (compactage, recyclage, \ldots)
+
+\note[item]{Mais ces fonctionnalités évoluées des GC ne sont probablement pas compatibles avec le fonctionnement du C++}
 	\end{itemize}
 
 	\begin{block}{Wait and see}
 		Un complément à RAII, pas un concurrent ni un remplaçant\\
-		Indisponible à ce jour mais peut-être plus tard \ldots
+		Indisponible à ce jour
+
+\note[item]{Et visiblement, ce n'est pas près d'arriver, le support minimal de C++11 n'a été implémenté par aucun compilateur et risque d'être supprimé de la norme, et pas de travaux sur le sujet}
 	\end{block}
 \end{frame}
 
