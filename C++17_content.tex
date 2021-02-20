@@ -1756,13 +1756,17 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::string_view|\titlehfill{}1/3}
 	\begin{itemize}
-		\item \lstinline|std::basic_string_view| référence une séquence contiguë de caractères
-		\item Quatre spécialisations standard (une pour chaque type de caractère)
+		\item \lstinline|std::basic_string_view| : vue sur une séquence contiguë de caractères
+		\item Quatre spécialisations standard (une pour chaque type de caractères)
 
 \note[item]{Soit \lstinline|char|, \lstinline|wchar|, \lstinline|char16_t| et \lstinline|char32_t|}
 
 		\item Référence non possédante sur une séquence pré-existante
 		\item Pas de modification de la séquence depuis la vue
+		\item Constructible depuis \lstinline|std::string|, une chaîne C ou un pointeur et une taille
+
+\note[item]{Une chaîne C : un char* null-terminé}
+
 	\end{itemize}
 
 	\begin{alertblock}{Attention !}
