@@ -1085,8 +1085,12 @@ while(!foo.empty()) {
 	\end{itemize}
 
 	\begin{alertblock}{Itérateurs de fin}
-		Pointent un élément après le dernier et ne doivent pas être déréférencés
+		Pointent un élément après le dernier\\
+		Ne doivent pas être déréférencés ni incrémentés
 	\end{alertblock}
+
+\note[item]{Un élément après la fin permet de représenter des ensemble vide (si \lstinline|begin| et \lstinline|end| référence le même élément)}
+
 \end{frame}
 
 \begin{frame}
