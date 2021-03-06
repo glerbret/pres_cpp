@@ -20,6 +20,21 @@
 	\end{itemize}
 \end{frame}
 
+\subsection*{Types}
+\begin{frame}[fragile]
+	\frametitle{Énumérations}
+	\begin{itemize}
+		\item \lstinline|std::to_underlying| convertit une énumération vers le type sous-jacent
+
+\note[item]{Permet de remplacer les \lstinline|static_cast<XXXX>()|, qui présente un risque d'oubli de modification lors d'un changement du type sous-jacent}
+
+\begin{lstlisting}[language=C++]
+enum class FOO : uint32_t { A = 0xABCDEF };
+
+auto bar = std::to_underlying(FOO::A); // uint32_t\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
 \subsection*{Suffixes littéraux}
 \begin{frame}[fragile]
 	\frametitle{Suffixes littéraux}
@@ -48,6 +63,24 @@ foo.contains("monde");   // false\end{lstlisting}
 
 \end{frame}
 
+\subsection*{Itérateurs}
+\begin{frame}[fragile]
+	\frametitle{Input range adaptator et \lstinline|counted_iterator|}
+	\begin{itemize}
+		\item Corrections d'\lstinline|iterator_category|
+		\item Rend valide en C++23 du code invalide en C++20
+	\end{itemize}
+\end{frame}
+
+\subsection*{Ranges}
+\begin{frame}[fragile]
+	\frametitle{Boorowed ranges}
+	\begin{itemize}
+		\item Corrections sur les \lstinline|std::ranges|
+		\item Rend valide en C++23 du code invalide en C++20
+	\end{itemize}
+\end{frame}
+
 \subsection*{Debug}
 \begin{frame}[fragile]
 	\frametitle{Bibliothèque de \textit{Stacktrace}}
@@ -57,6 +90,17 @@ foo.contains("monde");   // false\end{lstlisting}
 		\item Parcours des entrées de la \textit{stacktrace}
 		\item Récupération de la description, de la ligne et du fichier des entrées
 	\end{itemize}
+\end{frame}
+
+\subsection*{Programmation fonctionnelle}
+\begin{frame}[fragile]
+	\frametitle{Suppression de \lstinline|()| dans les lambdas}
+		\begin{itemize}
+			\item \lstinline|()| optionnelles en l'absence de paramètres, y compris pour les lambdas mutables
+
+\note[item]{Elles étaient optionnelles dans tous les autres cas (lambdas sans spécificateurs, \lstinline|noexcept|, avec un type de retour explicite, \lstinline|constexpr|, \lstinline|consteval|, $\ldots$)}
+
+		\end{itemize}
 \end{frame}
 
 \subsection*{Traits}
@@ -74,4 +118,28 @@ foo.contains("monde");   // false\end{lstlisting}
 		\item Support des \lstinline|atomics| C
 	\end{itemize}
 \end{frame}
+
+\subsection*{Durées et temps}
+\begin{frame}[fragile]
+	\frametitle{Contraintes sur \lstinline|time_point::clock|}
+	\begin{itemize}
+		\item Relâchement des contraintes sur \lstinline|time_point::clock|
+		\item Plus grande flexibilité du type d'horloge
+		\item Permet des horloges \textit{stateful}, des horloges externes
+		\item Permet la représentation d'un \textit{time of day} par un \lstinline|time_point| particulier
+	\end{itemize}
+\end{frame}
+
+\subsection*{Variant}
+\begin{frame}[fragile]
+	\frametitle{Héritage de \lstinline|std::variant|}
+	\begin{itemize}
+		\item Héritage de \lstinline|std::variant| autorisé
+		\item \lstinline|std::visit()| restreints aux \lstinline|std::variant|
+
+\note[item]{Et donc des dérivés en question}
+\note[item]{Auparavant, les Variants de \lstinline|std::visit| pouvaient être formellement de n'importe quel type}
+	\end{itemize}
+\end{frame}
+
 \end{document}
