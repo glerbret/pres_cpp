@@ -1253,11 +1253,12 @@ cin >> setw(24) >> a;\end{lstlisting}
 		
 		\begin{block}{Motivations}
 			\begin{itemize}
-				\item Le formatage \og à la C\fg{} ne supporte pas les types utilisateurs et est peu sûr
+				\item Formatage \og à la C\fg{} non extensible et peu sûr
 
+\note[item]{Non extensible : ne supporte pas le types utilisateurs}
 \note[item]{Par formatage \og à la C\fg{} j'entends ce qui est utilisé par \lstinline|printf| et équivalent}
 
-				\item Les flux sont complexes, peu propices à l'internationalisation et la localisation, les formateurs sont globaux
+				\item Flux complexes, peu performants, peu propices à l'internationalisation et la localisation, formateurs globaux
 
 \note[item]{Peu propices à la localisation car le format et l'ordre des éléments est dans le code lui-même et ne peut pas être sortie facilement}
 \note[item]{Les formateurs sont globaux, ainsi l'injection de \lstinline|std::hex| dans un flux va passer tous les affichages des entiers en hexadécimal jusqu'à un changement explicite et pas uniquement celui concerné}
@@ -1269,10 +1270,55 @@ cin >> setw(24) >> a;\end{lstlisting}
 \note[item]{Par défaut, la locale n'est pas prise en compte, mais peut l'être si souhaité}
 
 		\item Format sous forme de chaînes utilisant \lstinline|{}| comme \textit{placeholder}
+		\item Compatible avec Unicode
 
 		\begin{block}{En attendant C++20}
 			Utilisez \{fmt\} ou Boost.Format
 		\end{block}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - API\titlehfill{}1/2}
+	\begin{itemize}
+		\item \lstinline|format()| retourne une chaîne
+
+		\begin{lstlisting}[language=C++]
+format("{}", "a"); 	// "a"\end{lstlisting}
+
+		\item \lstinline|format_to()| formate dans un \lstinline|output_iterator|
+
+		\begin{lstlisting}[language=C++]
+vector<char> foo;
+format_to(back_inserter(foo), "{}", "a");\end{lstlisting}
+
+\note[item]{L'\lstinline|output_iterator| est retourné par \lstinline|format_to()|}
+
+		\item \lstinline|format_to_n()| formate dans un \lstinline|output_iterator| avec une taille limite
+
+		\begin{lstlisting}[language=C++]
+array<char, 4> foo;
+format_to_n(foo.data(), foo.size(), "{}", "a");\end{lstlisting}
+
+\note[item]{Troncature à la taille indiquée si nécessaire}
+
+		\begin{block}{Retour}
+			\lstinline|format_to_n()| retourne l'\lstinline|output_iterator| et la taille sans troncature
+		\end{block}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - API\titlehfill{}2/2}
+	\begin{itemize}
+		\item \lstinline|formatted_size()| retourne la taille nécessaire au formatage
+		\item \lstinline|vformat()| et \lstinline|vformat_to()| arguments regroupés dans un \og tuple\fg{}
+
+		\begin{lstlisting}[language=C++]
+vformat("{}", make_format_args("a"));\end{lstlisting}
+
+		\item Variations \lstinline|wchar| et \lstinline|locale|
 	\end{itemize}
 \end{frame}
 
@@ -1302,6 +1348,24 @@ format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Spécificateurs}
+	\begin{itemize}
+		\item Introduits par \og : \fg{}
+
+			\begin{lstlisting}[language=C++]
+format("{:6}", 42);    	// "    42"
+format("{0:6}", 42);    // "    42"\end{lstlisting}
+
+		\item Définissent l'alignement, le \textit{padding}, le format, \ldots
+		\item Deux jeux standard
+		\begin{itemize}
+			\item Types arithmétiques, pointeurs et chaînes
+			\item \lstinline|std::chrono| : \textit{clocks}, \textit{duration} et \textit{time points}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Alignement}
 	\begin{itemize}
 		\item Alignement par défaut dépendant du type
@@ -1310,12 +1374,12 @@ format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 format("{:6}", 42);    	// "    42"
 format("{:6}", 'x');   	// "x     "\end{lstlisting}
 
-		\item Possibilité de fournir un caractère de \textit{padding}
+		\item Fourniture du caractère de \textit{padding}
 
 			\begin{lstlisting}[language=C++]
 format("{:*6}", 42);    // "****42"\end{lstlisting}
 
-		\item Possibilité de choisir son alignement
+		\item Choix de l'alignement
 
 			\begin{lstlisting}[language=C++]
 format("{:*<6}", 'x'); 	// "x*****"
@@ -1325,58 +1389,96 @@ format("{:*^6}", 'x'); 	// "**x***"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Nombres entiers}
+	\frametitle{\lstinline|std::format| - Signe}
 	\begin{itemize}
-		\item Gestion du signe
+		\item Uniquement sur les négatifs : '\lstinline|-|'
+
+\note[item]{Uniquement sur les négatifs est le comportement par défaut}
+
+		\item Sur toutes les valeurs : '\lstinline|+|'
+		\item Uniquement sur les négatifs en réservant l'espace : '\lstinline| |'
 
 		\begin{lstlisting}[language=C++]
 format("{0:},{0:+},{0:-},{0: }", 1); 	// "1,+1,1, 1"
 format("{0:},{0:+},{0:-},{0: }", -1);	// "-1,-1,-1,-1"\end{lstlisting}
-
-		\item Base et format
-
-\note[item]{Le \og formateur\fg{} indique uniquement la base, pas le type précis de la valeur comme en C (\lstinline|int|, \lstinline|short|, \lstinline|long|, \lstinline|long long|) avec toutes les erreurs que cela entraîne}
-
-		\begin{lstlisting}[language=C++]
-format("{:d}", 42);    // 42
-format("{:x}", 42);    // 2a
-format("{:X}", 42);    // 2A
-format("{:b}", 42);    // 101010
-format("{:o}", 42);    // 52\end{lstlisting}
-
-		\item Affichage de la base
-
-		\begin{lstlisting}[language=C++]
-format("{:#x}", 42);   // 0x2a\end{lstlisting}
-
-\note[item]{\lstinline|\#| affiche également le point numérique, même inutile, sur des flottants}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Nombres flottants}
+	\frametitle{\lstinline|std::format| - Zéros non significatifs}
 	\begin{itemize}
-		\item Gestion de l'arrondit
+		\item Gestion des zéros non significatifs
 
 		\begin{lstlisting}[language=C++]
-format("{:f}", 1.5);				// "1.500000"
-format("{:.0f},{.22f}", 1.5, 1.3);	// "2 1.30...0444089"\end{lstlisting}
+format("{:+06d}", 120);	// "+00120"\end{lstlisting}
+	\end{itemize}
+\end{frame}
 
-		\item Et du \textit{padding}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Format\titlehfill{}1/2}
+	\begin{itemize}
+		\item Entiers : décimal, octal, binaire ou hexadécimal
+
+		\begin{lstlisting}[language=C++]
+format("{:d}", 42);    // "42"
+format("{:x}", 42);    // "2a"
+format("{:X}", 42);    // "2A"
+format("{:b}", 42);    // "101010"
+format("{:o}", 42);    // "52"\end{lstlisting}
+
+		\item Caractères : valeur numérique ou caractères
+
+\begin{lstlisting}[language=C++]
+	format("{:X}", 'A');   // "41"
+	format("{:c}", 'A');   // "A"\end{lstlisting}
+
+		\item Booléens : chaîne ou nombre
+
+		\begin{lstlisting}[language=C++]
+format("{:d}", true);    // "1"
+format("{:s}", true);    // "true"\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Format\titlehfill{}2/2}
+	\begin{itemize}
+		\item Flottants : fixe, scientifique, \og court\fg{} ou hexadécimal
+
+		\begin{lstlisting}[language=C++]
+format("{:.6f}", 392.65);   // "392.650000"
+format("{:.6g}", 392.65);   // "392.65"
+format("{:.6e}", 392.65);   // "3.9265e+02"
+format("{:.6E}", 392.65);   // "3.9265E+02"
+format("{:.6a}", 42.);    	// "1.5p+5"\end{lstlisting}
+
+\note[item]{Format court : fixe sur les petites nombres, scientifique sur les grands}
+\note[item]{Par défaut court : .6g}
+
+		\item Choix de la précision pour les flottants
+
+		\begin{lstlisting}[language=C++]
+format("{:.6f}", 1.5);				// "1.500000"
+format("{:.0f},{.22f}", 1.5, 1.3);	// "2 1.30...0444089"\end{lstlisting}
 
 		\begin{lstlisting}[language=C++]
 format("{0:05.2f}, {0:.2f}", 1.5); // "01.50, 1.50"\end{lstlisting}
+	\end{itemize}
+\end{frame}
 
-		\item Notation scientifique
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Forme alternative}
+	\begin{itemize}
+		\item Affichage de la base des entiers
 
-\begin{lstlisting}[language=C++]
-	format("{:E}", 1.5); 			// "1.500000E+00"\end{lstlisting}
+		\begin{lstlisting}[language=C++]
+format("{:#x}", 42);   // "0x2a"\end{lstlisting}
 
-		 \item Affichage en hexadécimal
+		\item Affichage du point décimal et de l'ensemble de la précision des flottants
+		\begin{lstlisting}[language=C++]
+format("{:.6g}", 392.65);   // "392.65"
+format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
 
-\begin{lstlisting}[language=C++]
-	format("{:a}", 1.5); 			// " 0x1.8p+0"
-	format("{:A}", 1.3); 			// "0X1.4CCCCCCCCCCCDP+0"\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -1408,37 +1510,55 @@ format("{:%F %T}", chrono::system_clock::now());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Types utilisateur}
+	\frametitle{\lstinline|std::format| - Gestion des erreurs}
 	\begin{itemize}
-		\item Via \lstinline|std::format()|, \lstinline|std::vformat()|, \lstinline|std::format_to()| et \lstinline|std::vformat_to()|
-		\begin{lstlisting}[language=C++]
-enum class Foo : unsigned {};
+		\item Émission d'une exception \lstinline|std::format_error|
+		\begin{itemize}
+			\item Chaîne de format invalide
+			\item Spécificateurs non cohérents avec le type fournit
+			\item Absence de valeur
+			\item Exception levée par un formateur
+		\end{itemize}
 
-template <>
-struct formatter<Foo> : std::formatter<unsigned> {
-  auto format(Foo s, format_context& ctx) {
-    return format_to(ctx.out(), 
-                     "{:02x}", 
-                     static_cast<unsigned>(s)); }};
-                     
-Foo foo = ...;
-format("{}", foo);\end{lstlisting}
-
-\note[item]{Mécanisme assez proche de celui des types utilisateur dans les flux, on fournit une fonction qui formate et passe dans le flux / format plus haut}
-
+		\begin{block}{Valeur surnuméraire}
+			Les valeurs surnuméraires ne sont pas des erreurs et sont ignorées
+		\end{block}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Redirection de flux}
+	\frametitle{\lstinline|std::format| - Types utilisateur\titlehfill{}1/2}
 	\begin{itemize}
-		\item Redirection vers un \lstinline|std::ostream|
+		\item Par spécialisation de \lstinline|std::formatter<>|
+		
 		\begin{lstlisting}[language=C++]
-print(cerr, "Erreur systeme {}\n", 7);
+template<>
+struct formatter<T> {
+	template <class ParseContext>
+	auto parse(ParseContext& parse_ctx);
 
-ofstream error_file("log.txt");
-print(error_file, "Erreur systeme {}\n", 7);\end{lstlisting}
+	template <class FormatContext>
+	auto format(const T& value, FormatContext& fmt_ctx);};\end{lstlisting}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Types utilisateur\titlehfill{}2/2}
+	\begin{lstlisting}[language=C++]
+struct MyComplex { double real; double imag;};
+
+template <>
+struct formatter<MyComplex> {
+	template <class ParseContext>
+	auto parse(ParseContext& parse_ctx) { 
+		return parse_ctx.begin(); }
+
+	template <class FormatContext>
+	auto format(const T& value, FormatContext& fmt_ctx) {
+		return format_to(fmt_ctx.out(), "{}+{}i", 
+		                 value.real, value.imag); } };
+
+format("{}", MyComplex{1, 2});	// "(1+2i)"\end{lstlisting}
 \end{frame}
 
 \subsection*{Mémoire}
