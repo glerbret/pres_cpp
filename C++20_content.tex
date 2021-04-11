@@ -39,6 +39,7 @@
 		\item Dépréciation partielle de \lstinline|volatile|
 
 \note[item]{Seules certaines constructions à base de \lstinline|volatile| sont dépréciées, les constructions jugées utiles sont conservées}
+\note[item]{Les constructions dépréciées sont : incrémentation/décrémentation de \lstinline|volatile|, utilisation du résultat d'une affectation à un \lstinline|volatile|, opérateurs \lstinline|op=| sur un \lstinline|volatile|, \lstinline|volatile| sur les valeurs de retour, un \lstinline|volatile| sur les paramètres, \lstinline|volatile| sur les \textit{structured binding}}
 
 		\item Suppression des membres dépréciés de \lstinline|std::reference_wrapper| : \lstinline|result_type|, \lstinline|argument_type|, \lstinline|first_argument_type| et \lstinline|second_argument_type|
 	\end{itemize}
@@ -148,6 +149,11 @@
 \begin{frame}[fragile]
 	\frametitle{Caractères}
 	\begin{itemize}
+		\item \lstinline|char16_t| et \lstinline|char32_t| contraints : caractères UTF-16 et UTF-32
+
+\note[item]{Auparavant, ils pouvaient représenter ces caractères, mais ce n'était pas une obligation et pouvaient représenter d'autres codages de caractères larges. Ce n'est plus le cas}
+\note[item]{Et les \textit{Universal character name} doivent correspondre à des \textit{code points} ISO/IEC 10646}
+
 		\item Type \lstinline|char8_t| pour les caractères
 		\begin{itemize}
 			\item Pendant UTF-8 de \lstinline|char16_t| et \lstinline|char32_t|
@@ -227,12 +233,20 @@ U u{.b = "foo"}; \end{lstlisting}
 		\end{block}
 
 		\begin{block}{Motivations}
-			Utilisation des fonctions transférant les arguments à un constructeur sur des agrégats
+			Fonctions transférant les arguments à un constructeur sur des agrégats
 		\end{block}
 
 \note[item]{Exemple de fonctions transférant les arguments à un constructeur :  (\lstinline|std::make_unique()| ou \lstinline|emplace_back()|)}
 
 		\item Initialisation par défaut des champs de bits
+		
+		\begin{lstlisting}[language=C++]
+struct S {
+  int a : 1 {0},
+  int b : 1 = 1;}; \end{lstlisting}
+
+\note[item]{Avant C++20, il fallait définir un constructeur}
+
 	\end{itemize}
 \end{frame}
 
@@ -245,6 +259,99 @@ U u{.b = "foo"}; \end{lstlisting}
 			\item \lstinline|big| : \textit{big-endian}
 			\item \lstinline|native| : \textit{endianess} du système
 		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{using enum}
+	\begin{itemize}
+		\item Utilisation d'\lstinline|using| sur une \lstinline|enum class|
+
+		\begin{lstlisting}[language=C++]
+enum class color { red, green, blue };
+using enum color;
+
+if(c1 == green) {/*...*/} \end{lstlisting}
+
+		\item Sur une valeur de l'énumération
+
+		\begin{lstlisting}[language=C++]
+enum class color { red, green, blue };
+using enum color::green;
+
+if(c1 == green) {/*...*/}\end{lstlisting}
+
+		\item Sur une \textit{unscoped} \lstinline|enum|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conversion pointeur-booléen}
+	\begin{itemize}
+		\item Conversion pointeur vers booléen devient \textit{narrowing}
+		
+\note[item]{Et donc interdite dans tous les contextes où les conversion \textit{narrowing} ne sont pas autorisées}
+
+		\item \lstinline|nullptr| reste autorisé dans les initialisations directes
+		
+		\begin{lstlisting}[language=C++]
+struct Foo {
+  int i;
+  bool b; };
+		
+void* p;
+Foo foo{1, p};       // erreur
+bool b1{p};          // erreur
+bool b2 = p;         // OK
+bool b3{nullptr};    // OK
+bool b4 = nullptr;   // erreur
+bool b5 = {nullptr}; // erreur
+if(p){/*...*/}       // OK\end{lstlisting}
+
+\note[item]{Casse du code, mais simple à corriger et plus cohérent}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Classe}
+\begin{frame}[fragile]
+	\frametitle{Spécifications d'exception et \lstinline|=default|}
+	\begin{itemize}
+		\item Possibilité de définir des spécifications d'exception des fonctions \lstinline|=default| différentes de celles de la fonction implicite
+		
+		\begin{lstlisting}[language=C++]
+struct S {
+  // Valide en C++20
+  // Invalide en C++17 (constructeur implicite noexcept)
+  S() noexcept(false) = default; };\end{lstlisting}
+
+	\end{itemize}
+\end{frame}
+
+\subsection*{Sémantique de déplacement}
+\begin{frame}[fragile]
+	\frametitle{Sémantique de déplacement}
+	\begin{itemize}
+		\item Davantage de déplacements possibles
+		
+		\begin{lstlisting}[language=C++]
+unique_ptr<T> f0(unique_ptr<T> && ptr) { return ptr; }
+
+string f1(string && x) { return x; }
+
+struct Foo{};
+
+void f2(Foo w) { throw w; }
+
+struct Bar {
+  B(Foo); };
+
+Bar f3() {
+  Foo w;
+  return w; }\end{lstlisting}
+
+\note[item]{Tous ces exemples sont des cas où il y a une copie en C++17 et un déplacement possible en C++20}
+\note[item]{Il y a plusieurs autres cas}
+
 	\end{itemize}
 \end{frame}
 
@@ -303,7 +410,7 @@ U u{.b = "foo"}; \end{lstlisting}
 
 		\item Possible de marquer ces autres opérateurs \lstinline|=default|
 
-\note[item]{Mais non obligatoire pour les opérateurs d'ordre générés dès que \lstinline|operator<=>()| est présent. Mais \lstinline|=default| permet de prendre son adresse}
+\note[item]{Mais non obligatoire pour les opérateurs d'ordre générés dès que \lstinline|operator<=>()| est présent. Mais \lstinline|=default| permet de prendre leurs adresses}
 \note[item]{\lstinline|=default| utile pour générer \lstinline|operator!=()| ou \lstinline|operator==()| en l'absence de \lstinline|operator<=>()|}
 \note[item]{Un opérateur \lstinline|=default| qui ne peut pas être généré reste bien \textit{deleted}}
 
@@ -1565,7 +1672,7 @@ format("{}", MyComplex{1, 2});	// "(1+2i)"\end{lstlisting}
 
 \subsection*{Mémoire}
 \begin{frame}[fragile]
-	\frametitle{Gestion mémoire}
+	\frametitle{Tableaux}
 	\begin{itemize}
 		\item Support des tableaux par \lstinline|std::make_shared()|
 
@@ -1576,6 +1683,28 @@ shared_ptr<double[]> foo = make_shared<double[]>(1024);\end{lstlisting}
 
 		\begin{lstlisting}[language=C++]
 double* a = new double[]{1, 2, 3};\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Destruction}
+	\begin{itemize}
+		\item \lstinline|std::destroying_delete_t| : pas de destruction avant l'appel à \lstinline|delete()|
+
+		\begin{block}{Intérêt}
+			Conserver des informations nécessaire à la libération
+		\end{block}
+
+		\begin{lstlisting}[language=C++]
+struct Foo {
+  void operator delete(Foo* ptr, destroying_delete_t) {
+    const size_t realSize = ...;
+    ptr->~Foo();
+    ::operator delete(ptr, realSize); } };\end{lstlisting}
+		
+		\begin{alertblock}{Ne pas oublier}
+			La destruction doit être appelée explicitement
+		\end{alertblock}
 	\end{itemize}
 \end{frame}
 
@@ -1724,24 +1853,30 @@ for(size_t i = 0; const auto& bar : foo) {
   cout << bar << " " << i << "\n";
   ++i; }\end{lstlisting}
 
-		\item Cohérence entre \lstinline|begin()| et \lstinline|end()| :
+		\item Seuls des couples \lstinline|begin()|, \lstinline|end()| cohérents sont utilisés :
 		\begin{itemize}
 			\item \og Début\fg{} et \og début + taille\fg{}
 			\item fonctions membres \lstinline|begin()| et \lstinline|end()|
 			\item fonctions libres \lstinline|std::begin()| et \lstinline|std::end()|
 		\end{itemize}
 
-\note[item]{Auparavant, \textit{range-based for loop} était utilisable avec des éléments présentant une des deux fonctions membres seulement et l'autre en libre}
+		\begin{block}{Intérêt}
+			Itération (via des fonctions libres) d'éléments ayant une fonction membre \lstinline|begin()| ou \lstinline|begin()| mais pas les deux
+		\end{block}
+
+\note[item]{Fonction membre qui n'est probablement pas une fonction d'itération}
+\note[item]{Auparavant la fonction membre était utilisé bien qu'incohérente}
+
 	\end{itemize}
 \end{frame}
 
-\subsection*{Constexpr}
+\subsection*{Compile-time}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|consteval|}
 	\begin{itemize}
-		\item Spécificateur \lstinline|consteval| : impose une évaluation \textit{compile-time}
+		\item \lstinline|consteval| : impose une évaluation \textit{compile-time}
 
-\note[item]{\lstinline|constrexpr| le permet mais ne l'impose pas}
+\note[item]{\lstinline|constrexpr| permet une évaluation \textit{compile-time} mais ne l'impose pas}
 
 		\begin{itemize}
 			\item \lstinline|consteval| implique \lstinline|inline|
@@ -1762,7 +1897,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|constinit|}
 	\begin{itemize}
-		\item Spécificateur \lstinline|constinit| : impose une initialisation durant la phase \textit{static initialization}
+		\item \lstinline|constinit| : impose une initialisation durant la phase \textit{static initialization}
 		\begin{itemize}
 			\item Uniquement sur des objets dont la \textit{storage duration} est \textit{static} ou \textit{thread}
 			\item Mal-formé en cas d'initialisation dynamique
@@ -1785,15 +1920,21 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 	\begin{itemize}
 		\item Assouplissement des restrictions de \lstinline|constexpr|
 		\begin{itemize}
-			\item Utilisation d'\lstinline|union| dans du code \lstinline|constexpr|
-			\item Utilisation de \lstinline|try {} catch()| dans du code \lstinline|constexpr|
+			\item Fonctions virtuelles \lstinline|constexpr|
+			\item Utilisation d'\lstinline|union|
+			\item Utilisation de \lstinline|try {} catch()|
 			\begin{itemize}
 				\item Comporte comme \textit{no-ops} en \textit{compile-time}
 				\item Ne peut pas lancer d'exception \textit{compile-time}
 			\end{itemize}
-			\item Utilisation de \lstinline|dynamic_cast| et \lstinline|typeid| dans du code \lstinline|constexpr|
-			\item Déclaration de fonctions virtuelles \lstinline|constexpr|
+			\item Utilisation de \lstinline|dynamic_cast| et \lstinline|typeid|
 			\item Utilisation de \lstinline|asm|
+			\begin{itemize}
+				\item Uniquement si le code \lstinline|asm| n'est pas évalué en \textit{compile-time}
+
+\note[item]{Par exemple, on peut avoir une branche \og C++\fg{} pour le \textit{compile-time} et une branche asm pour le \textit{run-time} avec un choix via \lstinline|std::is_constant_evaluated()|}
+
+			\end{itemize}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1884,7 +2025,7 @@ entity<"hello"> e;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolutions des templates}
+	\frametitle{Évolutions des templates\titlehfill{}1/2}
 	\begin{itemize}
 		\item \lstinline|typename| optionnel lorsque seul un nom de type est possible
 		
@@ -1904,6 +2045,23 @@ template<class T>
 void g(T, type_identity_t<T>);
 
 g(4.2, 0); // OK, g<double>\end{lstlisting}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Évolutions des templates\titlehfill{}2/2}
+	\begin{itemize}
+		\item Déduction de type sur les alias de template
+		
+		\begin{lstlisting}[language=C++]
+template<typename T>
+using IntPair = std::pair<int, T>;
+
+// C++ 17
+IntPair<double> p0{1, 2.0}; 
+
+// C++ 20
+IntPair p1{1, 2.0};   // std::pair<int, double>\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -2198,12 +2356,8 @@ template<class T> concept totally_ordered =
 
 \note[item]{Fourni au compilateur des information lui permettant des optimisations plus pertinentes}
 
-			\begin{alertblock}{Avec parcimonie}
-				Les compilateurs savent déjà déterminer les branches les plus probables, généralement mieux que nous 
-			\end{alertblock}
+			\item \lstinline|[[no_unique_address]]| : indique qu'un membre non statique ne nécessite pas une adresse unique
 
-			\item \lstinline|[[no_unique_address]]| : l'adresse d'un membre peut être partagée
-		
 \note[item]{Et permettre l'EMO (\textit{Empty Member Optimisation})}
 		\end{itemize}
 
@@ -2227,7 +2381,10 @@ template<class T> concept totally_ordered =
 \begin{frame}[fragile]
 	\frametitle{Évolutions des lambdas\titlehfill{}1/2}
 	\begin{itemize}
-		\item Utilisables dans des environnements non évalués
+		\item Utilisables dans des contextes non évalués
+
+\note[item]{Contextes non évalués : \lstinline|sizeof()|, \lstinline|typeid()| ou \lstinline|decltype()|}
+
 		\item Utilisation de paramètres templates pour les lambdas génériques
 
 		\begin{lstlisting}[language=C++]
@@ -2270,6 +2427,9 @@ map<string, int, decltype(greater)> foo;\end{lstlisting}
 		\item Dépréciation de la capture implicite de \lstinline|this| par \lstinline|[=]|
 		\begin{itemize}
 			\item Capture explicite par \lstinline|[=, this]|
+
+\note[item]{\lstinline|this| est capturé par référence}
+
 			\item Capture implicite par \lstinline|[&]| toujours présente
 		\end{itemize}
 		\item Capture de \textit{structured binding}
