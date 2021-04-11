@@ -1930,27 +1930,29 @@ void foo(auto a, auto b) {...};\end{lstlisting}
 			\item Intégration du TS acceptée en juillet 2017
 
 \note[item]{Mais pas en C++17, il fallait le support par les compilateurs avant pour valider le concept}
+
 		\end{itemize}
 		\item Définir des contraintes sur les paramètres templates et l'inférence de type
 		\begin{itemize}
-			\item Diagnostics plus clair
-			\item Meilleur documentation du code
+			\item Meilleurs diagnostics
+			\item Meilleure documentation du code
 			\item Aide à la déduction de type
 			\item Aide à la résolution de spécialisation
 
 \note[item]{Basé du coup sur un \og nom\fg{} et non sur la structure (typage nominal/structurel)}
 
 		\end{itemize}
-		\item Propositions visiblement abandonnées
+		\item Propositions abandonnées / mises de côté
 		\begin{itemize}
 			\item \textit{Axiom} : spécification de propriétés sémantiques d'un concept
 
+\note[item]{Les concepts actuels se basent sur la structure et des propriétés syntaxiques (p.ex. l'opération d'addition est présent)}
 \note[item]{Exemple d'\textit{axiom} : associativité ou commutativité}
-\note[item]{Intérêt des \textit{axiom} : meilleur documentation du code, informations au compilateur (meilleurs avertissement et diagnostics, meilleures optimisations)}
+\note[item]{Intérêt des \textit{axiom} : meilleure documentation, informations au compilateur (meilleurs avertissement et diagnostics, meilleures optimisations)}
 
-			\item \textit{Concept map} : transformation entre un concept et un type ne le satisfaisant pas
+			\item \textit{Concept map} : transformation d'un type non-comptable vers un concept
 
-\note[item]{Exemple de \textit{concept map} : Utilisation de type définissant \lstinline|>| vers un concept attendant \lstinline|<|, implémentation du concept de pile (\textit{stack}) vers \lstinline|std::vector|}
+\note[item]{Exemple de \textit{concept map} : Utilisation de type définissant l'inégalité stricte et la comparaison vers un concept attendant l'inégalité large, implémentation du concept de pile (\textit{stack}) par \lstinline|std::vector|}
 
 		\end{itemize}
 	\end{itemize}
@@ -1988,7 +1990,6 @@ void foo(T);\end{lstlisting}
 		\item Utilisable depuis un concept nommé
 
 		\begin{lstlisting}[language=C++]
-// On suppose le concept Addable existant
 template<typename T> requires Addable<T>
 T add(T a, T b) { return a + b; }\end{lstlisting}
 
@@ -2131,14 +2132,16 @@ concept Swappable = requires(T&& t, U&& u) {
 		\item Y compris en retirant des qualifieurs
 
 		\begin{lstlisting}[language=C++]
-template<class T> concept Addable = requires(
+template<class T>
+concept Addable = requires(
   const remove_reference_t<T>& a,
   const remove_reference_t<T>& b) { a + b; };\end{lstlisting}
 
 		\item Ou en imposant les types de retour
 
 		\begin{lstlisting}[language=C++]
-template<class T> concept Comparable = requires(
+template<class T>
+concept Comparable = requires(T a, T b) {
 { a == b } -> boolean;
 { a != b } -> boolean; };\end{lstlisting}
 	\end{itemize}
@@ -2166,8 +2169,8 @@ concept constructible_from =
 		\item Depuis d'autres concepts
 
 		\begin{lstlisting}[language=C++]
-template<class T>
-concept semiregular = copyable<T> && default_constructible<T>;\end{lstlisting}
+template<class T> concept semiregular = 
+  copyable<T> && default_constructible<T>;\end{lstlisting}
 
 		\item En combinant différentes méthodes
 
