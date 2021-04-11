@@ -392,6 +392,8 @@ export import b;\end{lstlisting}
 
 		\item Suivi du corps exportant des symboles via le mot-clé \lstinline|export|
 
+\note[item]{Les symboles \og internal linkage\fg{} ne sont bien entendu pas exportables}
+
 		\begin{lstlisting}[language=C++]
 export int i;
 export void bar(int j);
@@ -503,14 +505,14 @@ export namespace C { int m; }\end{lstlisting}
 	\frametitle{Modules - Implémentation inline}
 	\begin{itemize}
 		\item Interface et implémentation dans un unique fichier
-		\item En séparant les deux parties
+		\item Implémentation dans un fragment \lstinline|private|
 
 		\begin{lstlisting}[language=C++]
 export module m;
 struct s;
 export using s_ptr = s*;
 
-module : private;
+module :private;
 struct s {};\end{lstlisting}
 
 		\pause
