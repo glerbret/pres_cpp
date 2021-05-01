@@ -1,10 +1,8 @@
 #include <iostream>
 #include <string_view>
-
-// Version experimental car pas de compilateur en version definitive
-#include <experimental/source_location>
+#include <source_location>
  
-void log(const std::string_view& message, const std::experimental::source_location& location = std::experimental::source_location::current())
+void log(const std::string_view& message, const std::source_location& location = std::source_location::current())
 {
   std::cout << location.file_name() << ":"
             << location.line() << " "
