@@ -762,10 +762,13 @@ foo.contains(38);  // false\end{lstlisting}
 		\begin{itemize}
 			\item Fourniture d'une classe exposant
 			\begin{itemize}
-				\item Les différents foncteurs de calcul du hash
-				\item Le \textit{tag} \lstinline|transparent_key_equal|
+				\item Différents foncteurs de calcul du hash
+				\item \textit{Tag} \lstinline|transparent_key_equal| sur une comparaison transparente
+
+\note[item]{C'est à dire un foncteur exposant le tag \lstinline|is_transparent|}
+
 			\end{itemize}
-			\item Suppression des conversions de type inutiles
+			\item Suppression de conversions inutiles
 		\end{itemize}
 
 		\begin{lstlisting}[language=C++]
@@ -778,9 +781,9 @@ struct string_hash {
 	size_t operator()(const char* txt) const   {
 	  return hash_type{}(txt); } };
 
-unordered_map<string, int, string_hash> map = ...;
-map.find("abc");
-map.find("def"sv);\end{lstlisting}
+unordered_map<string, int, string_hash> foo = ...;
+foo.find("abc");
+foo.find("def"sv);\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
