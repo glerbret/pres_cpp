@@ -13,5 +13,5 @@ int main()
   std::cout << *it2 << ' ' << *(it2 - 1) << ' ' << *(it2 + 2) << '\n';
 
   std::vector<int>::iterator it3 = std::search_n(foo.begin(), foo.end(), 3, 8);
-  std::cout << *it3 << ' ' << *(it3 - 1) << ' ' << *(it3 + 2) << '\n';
+  std::cout << *it3 << ' ' << *(it3 - 1) << ' ' << *(it3 + 3) << '\n';
 }

@@ -2,7 +2,7 @@
 #include <string>
 
 template<typename ... T>
-auto sum(T ... t)
+typename std::common_type<T...>::type sum(T ... t) sum(T ... t)
 {
   typename std::common_type<T...>::type result{};
   std::initializer_list<int>{ (result += t, 0)... };

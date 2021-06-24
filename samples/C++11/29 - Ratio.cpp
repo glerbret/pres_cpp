@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ratio>
 
-
 int main()
 {
   {
