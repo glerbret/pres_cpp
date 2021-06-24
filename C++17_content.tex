@@ -29,7 +29,7 @@
 	\end{itemize}
 
 	\begin{block}{Note}
-		Les digraphes ne sont pas concernés pour l'instant
+		Les digraphes ne sont pas concernés
 	\end{block}
 
 	\begin{itemize}
@@ -43,16 +43,14 @@
 		\item Suppression des anciens mécanismes fonctionnels : \lstinline|std::bind1st()|, \lstinline|std::bind2nd()|, \ldots
 		\item Suppression des spécifications d'exception
 	\end{itemize}
-		
-\note[item]{Mais les fonctions ne levant pas d'exception peuvent être marquées \lstinline|noexcept()|}
 \end{frame}
 
 \subsection*{include}
 \begin{frame}[fragile]
 	\frametitle{Disponibilité des en-têtes : \lstinline|__has_include|}
 	\begin{itemize}
-		\item Permet de savoir si un fichier d'en-tête est présent \ldots
-		\item et donc si une fonctionnalité est disponible
+		\item Teste la présence d'un fichier d'en-tête
+		\item Et donc la disponibilité d'une fonctionnalité
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -83,7 +81,7 @@ inline int foo = 42;\end{lstlisting}
 class Foo { static inline int bar = 42;};\end{lstlisting}
 
 	\begin{alertblock}{Don't}
-		Pas une justification aux variables globales
+		Ne justifie pas l'usage de variables globales
 	\end{alertblock}
 \end{frame}
 
@@ -91,7 +89,7 @@ class Foo { static inline int bar = 42;};\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Nested namespace}
 	\begin{itemize}
-		\item Nouvelle manière de définir des imbrications de namespaces via l'opérateur \lstinline|::| 
+		\item Simplification des imbrications de namespaces via l'opérateur \lstinline|::| 
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -166,21 +164,21 @@ cout << foo(a) << ' ' << foo(ptr);  // 10 5\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|if constexpr|\titlehfill{}3/4}
 	\begin{block}{Note}
-		Les deux branches doivent être syntaxiquement correctes mais pas nécessairement sémantiquement valides
+		Les branches doivent être syntaxiquement correctes mais pas nécessairement sémantiquement valides
 	\end{block}
 
 	\begin{block}{Note}
-		Les deux branches peuvent avoir des types retour différents sans remettre en cause la déduction de type retour
+		Les branches peuvent avoir des types retour différents sans remettre en cause la déduction de type retour
 	\end{block}
 
 	\begin{exampleblock}{Do}
-		Remplace avantageusement certaines constructions basées sur une suite de spécialisations de template et SFINAE, une imbrication illisible d'opérateur ternaire ou l'utilisation de \lstinline|#if|
+		Préférez \lstinline|if constexpr| aux suites de spécialisations de template et SFINAE, aux imbrications de ternaires ou à \lstinline|#if|
 	\end{exampleblock}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|if constexpr|\titlehfill{}4/4}
-	\begin{block}{Le \textit{hello world} de la récursion}
+	\begin{block}{\textit{hello world} de la récursion}
 		\begin{lstlisting}[language=C++]
 template<int  N>
 constexpr int fibo(){ return fibo<N-1>()+fibo<N-2>(); }
@@ -225,14 +223,14 @@ else                    cout << -foo;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{if init statement\titlehfill{}2/2}
 	\begin{itemize}
-		\item Alternative intéressante à certaines constructions peu lisibles
+		\item Alternative à certaines constructions peu lisibles
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 if((bool ret = foo()) == true) ...\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots{} ou injectant un symbole inutile au delà du branchement
+		\item \ldots{} injectant un symbole inutile au delà du branchement
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -240,7 +238,7 @@ bool ret = foo();
 if(ret) ...\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots{} ou nécessitant l'introduction d'une portée supplémentaire
+		\item \ldots{} nécessitant l'introduction d'une portée supplémentaire
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -253,7 +251,6 @@ if(ret) ...\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{switch init statement}
 	\begin{itemize}
-		\item Pendant du \textit{if init statement}
 		\item Initialisation dans le \lstinline|switch()|
 		\item Utilisable dans le corps du \lstinline|switch()|
 	\end{itemize}
@@ -268,7 +265,7 @@ switch(int foo = 42; bar) {
 \begin{frame}[fragile]
 	\frametitle{Structured binding\titlehfill{}1/5}
 	\begin{itemize}
-		\item Décompose automatiquement des types composés en de multiples variables
+		\item Décomposition automatique des types composés en multiples variables
 
 		\begin{lstlisting}[language=C++]
 auto [liste de nom] = expression;\end{lstlisting}
@@ -276,19 +273,13 @@ auto [liste de nom] = expression;\end{lstlisting}
 		\item Sur des types dont les données membres non statiques
 		\begin{itemize}
 			\item Sont toutes publiques
-			\item Sont toutes des membres directs du type ou de la même classe de base publique
+			\item Sont toutes des membres de l'objet ou de la même classe de base publique
 			\item Ne sont pas des unions anonymes
 		\end{itemize}
 
 		\item Et sur les classes implémentant \lstinline|get<>()|, \lstinline|tuple_size| et \lstinline|tuple_element|	
 		
-		\item Notamment : 
-		\begin{itemize}
-			\item \lstinline|std::tuple|
-			\item \lstinline|std::pair|
-			\item \lstinline|std::array|
-			\item tableaux C
-		\end{itemize}
+		\item Notamment \lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, tableaux C
 	\end{itemize}
 \end{frame}
 
@@ -324,7 +315,7 @@ auto [ i, s ] = Foo{};\end{lstlisting}
 tuple<int, long, string> foo();
 const auto [x,y,z] = foo();\end{lstlisting}
 
-		\item \ldots{}avec les références
+		\item Avec les références
 
 		\begin{lstlisting}[language=C++]
 auto& [refX,refY,refZ] = monTuple;\end{lstlisting}
@@ -333,20 +324,19 @@ auto& [refX,refY,refZ] = monTuple;\end{lstlisting}
 	\begin{alertblock}{Attention}
 		La portée de l'objet référencé doit être supérieure à celle des références
 	\end{alertblock}
-
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Structured binding\titlehfill{}4/5}
 	\begin{itemize}
-		\item \ldots{}avec \textit{range-based for loop}
+		\item Avec \textit{range-based for loop}
 
 		\begin{lstlisting}[language=C++]
 map<int, string> myMap;    
 for(const auto& [k,v] : myMap) 
 { ... } \end{lstlisting}
 
-		\item \ldots{}avec \textit{if init statement}
+		\item Avec \textit{if init statement}
 
 		\begin{lstlisting}[language=C++]
 if(auto [iter, succeeded] = myMap.insert(value); succeeded)
@@ -358,7 +348,7 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 	\frametitle{Structured binding\titlehfill{}5/5}
 	\begin{block}{Objectif}
 		Meilleure lisibilité\\
-		Remplace des usage de \lstinline|std::tie()|
+		Remplacement de \lstinline|std::tie()|
 	\end{block}
 
 	\begin{block}{Nom}
@@ -389,7 +379,7 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 		\begin{itemize}
 			\item De gauche à droite pour les expressions post-fixées
 
-\note[item]{donc fonction avant paramètre, classe/structure avant membre, tableau avant indice}
+\note[item]{Donc fonction avant paramètre, classe/structure avant membre, tableau avant indice}
 
 			\item De droite à gauche pour les affectations
 			\item De gauche à droite pour les décalages
@@ -399,9 +389,9 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 
 \subsection*{Copy elision}
 \begin{frame}[fragile]
-	\frametitle{Élision de copie garantie\titlehfill{}1/2}
+	\frametitle{Élision de copie\titlehfill{}1/2}
 	\begin{itemize}
-		\item Élision de copie garantie pour les objets créés dans l'instruction de retour
+		\item Élision garantie pour les objets créés dans l'instruction de retour
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -415,10 +405,10 @@ T g() {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Élision de copie garantie\titlehfill{}2/2}
+	\frametitle{Élision de copie\titlehfill{}2/2}
 
 	\begin{itemize}
-		\item Élision de copie garantie  lors de l'initialisation de la définition d'une variable locale
+		\item Élision garantie lors de la définition d'une variable locale
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -450,7 +440,7 @@ Bar baz{{}, 1.25};   // Foo non intialise\end{lstlisting}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
-			\item Uniquement sur de l'héritage public et non virtuel
+			\item Uniquement sur de l'héritage public non virtuel
 			\item Pas de constructeur fourni par l'utilisateur (y compris hérité)
 			\item Pas de donnée membre non statique privée ou protégée
 			\item Pas de fonction virtuelle
@@ -487,7 +477,7 @@ auto x5{ 3 };         // int\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Initialisation des énumérations fortement typées\titlehfill{1/2}}
 	\begin{itemize}
-		\item Possibilité d'initialiser un \lstinline|enum class| avec une constante du type sous-jacent
+		\item Initialisation possible d'\lstinline|enum class| avec une constante du type sous-jacent
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -518,14 +508,14 @@ Foo bar = {42} // Erreur\end{lstlisting}
 
 \subsection*{Types}
 \begin{frame}[fragile]
-	\frametitle{Ajout de \lstinline|std::byte|}
+	\frametitle{\lstinline|std::byte|}
 	\begin{itemize}
 		\item Stockage de bits
 		\item Pas un type caractère ni \og arithmétique\fg{}
 		\item Remplace les solutions à base de \lstinline|unsigned char|
 		\item Globalement un \lstinline|enum class| construit sur un \lstinline|unsigned char|
 		\item Supporte les opérations binaires (décalage, et, ou, non)
-		\item Supporte les constructions depuis un type entier \ldots
+		\item Supporte les constructions depuis un type entier
 
 \note[item]{Grâce à l'assouplissement des règles sur l'initialisation des \lstinline|enum class| en C++17}
 
@@ -548,17 +538,16 @@ std::to_integer<unsigned int>(b); // 28-1C\end{lstlisting}
 		\item Objet \textit{node handle} pour le stockage et l'accès au nœud
 		\begin{itemize}
 			\item Déplaçable mais non copiable
-			\item Permet la modification de la clé
-			\item Détruit le nœud lors de sa destruction
+			\item Modification possible de la clé
+			\item Destruction du nœud lors de sa destruction
 		\end{itemize}
 		\item \lstinline|extract()| extrait le nœud du premier conteneur
 		\begin{itemize}
 			\item Nœud identifié par sa clé ou par un itérateur
 			\item retourne un \textit{node handle}
 		\end{itemize}
-		\item Nouvelle surcharge de \lstinline|insert()|
+		\item Surcharge de \lstinline|insert()| prenant un \textit{node handle} en paramètre
 		\begin{itemize}
-			\item Prend en paramètre un \textit{node handle}
 			\item Retourne une structure indiquant la réussite ou non de l'insertion
 			\item \ldots{} et, en cas d'échec, le \textit{node handle}
 		\end{itemize}
@@ -608,10 +597,7 @@ foo.merge(bar);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::map| : modification et ajout}
-
-\note[item]{Fonctionne sur \lstinline|std::map| mais aussi sur \lstinline|std::unordered_map|}
-
+	\frametitle{\lstinline|std::map| \& \lstinline|std::unordered_map|}
 	\begin{itemize}
 		\item \lstinline|try_emplace()| : tentative de construction \og en place\fg{}
 		\item \ldots sans effet, même pas un \og vol\fg{} de la valeur, si la clé existe déjà
@@ -630,7 +616,7 @@ foo.insert_or_assign(2, "foo2bis");
 \begin{frame}[fragile]
 	\frametitle{\lstinline|emplace_back()|, \lstinline|emplace_front()|}
 	\begin{itemize}
-		\item \lstinline|emplace_back()| et \lstinline|emplace_front()| retournent une référence sur l'élément ajouté dans un conteneur séquentiel
+		\item Retournent une référence sur l'élément ajouté
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -644,7 +630,6 @@ auto& val = foo.emplace_back(...);    // C++17\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 vector<vector<int>> foo;
 foo.emplace_back(3, 1).push_back(42); // foo : {{1 1 1 42}}\end{lstlisting}
-
 
 	\begin{block}{Note}
 		\lstinline|emplace()| renvoie toujours un itérateur
@@ -673,8 +658,6 @@ foo.emplace_back(3, 1).push_back(42); // foo : {{1 1 1 42}}\end{lstlisting}
 			\item Tableau C : pointeur sur la première case
 			\item \lstinline|initializer_list| : itérateur sur le premier élément
 		\end{itemize}
-
-\note[item]{Permet l'écriture de code plus générique fonctionnant avec des objets C ou des classes sans les méthodes membres adéquates au prix de l'écriture des surcharges nécessaires en tant que fonctions libres}
 	\end{itemize}	
 \end{frame}
 
@@ -734,7 +717,7 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 
 \note[item]{C'est à dire sur le caractères suivant le dernier écrit pour \lstinline|to_chars| ou le premier non converti pour \lstinline|from_chars()|}
 
-		\item \ldots et un code erreur
+		\item Et un code erreur
 	\end{itemize}
 
 	\begin{alertblock}{API bas-niveau}
@@ -775,10 +758,10 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 \note[item]{Les \lstinline|std::variant| vides peuvent être utile dans le cas de code template}
 
  		 \item Rend un \lstinline|std::variant| \textit{default constructible}
-		\end{itemize}
-	\end{block}
 
 \note[item]{Si \lstinline|std::monostate| est le premier élément du \lstinline|std::variant|, celui-ci devient \textit{default-constructible}}
+		\end{itemize}
+	\end{block}
 
 	\begin{exampleblock}{Do}
 		Préférez \lstinline|std::variant| aux unions brutes
@@ -788,13 +771,11 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::variant|\titlehfill{}2/4}
 	\begin{itemize}
-		\item \lstinline|get<>()| récupère la valeur depuis l'index ou le nom du type \ldots
-		\item \ldots{} et lève une exception si le type demandé n'est pas correct
+		\item \lstinline|get<>()| récupère la valeur depuis l'index ou le nom du type
+		\item Et lève une exception si le type demandé n'est pas correct
 		\item \lstinline|get_if<>()| retourne un pointeur sur la valeur ou \lstinline|nullptr|
-
 		\item \lstinline|std::holds_alternative<>()| teste le type contenu
 		\item \lstinline|index()| retourne l'index d'un type donnée
-
 		\item Construction en-place
 		
 		\begin{lstlisting}[language=C++]
@@ -874,7 +855,7 @@ baz("azerty"); // 6
 \begin{frame}[fragile]
 	\frametitle{Fold expression\titlehfill{}1/5}
 	\begin{itemize}
-		\item Applique un opérateur binaire à un \textit{parameter pack}
+		\item Application d'un opérateur binaire à un \textit{parameter pack}
 		\item Support du \textit{right fold} \lstinline|(pack op ...)|
 		\item \ldots{} et du \textit{left fold} : \lstinline|(... op pack)|
 		\item Éventuellement avec un valeur initiale : \lstinline|(pack op ... op init)| ou \lstinline|(init op ... op pack)|
@@ -967,7 +948,7 @@ push_back_vec(foo, 10, 20, 56);\end{lstlisting}
 
 \subsection*{Range-based for loop}
 \begin{frame}[fragile]
-	\frametitle{Contraintes de type range-based for loop}
+	\frametitle{Contraintes du range-based for loop}
 	\begin{itemize}
 		\item Utilisation possible de types différents pour \lstinline|end| et \lstinline|begin|
 		\item Permet de traiter des paires d'itérateurs
@@ -981,9 +962,9 @@ push_back_vec(foo, 10, 20, 56);\end{lstlisting}
 
 \subsection*{classe}
 \begin{frame}[fragile]
-	\frametitle{Modifications de l'héritage de constructeur}
+	\frametitle{Héritage de constructeur}
 	\begin{itemize}
-		\item Constructeurs hérités visibles avec leurs paramètres par défaut
+		\item Visibilité des constructeurs hérités avec leurs paramètres par défaut
 
 \note[item]{En C++11, les constructeurs avec paramètres par défaut (ou ellipses) étaient injectés en omettant valeurs par défaut (version avec le paramètre sans valeur par défaut et version sans le paramètre) et ellipse}
 
@@ -1033,7 +1014,7 @@ use_func(&my_func);       // Ne compile plus\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::uncaught_exceptions()|}
 	\begin{itemize}
-		\item \lstinline|std::uncaught_exceptions()| retourne le nombre d'exceptions lancées (ou relancées) et non encore attrapées du thread courant
+		\item Retourne le nombre d'exceptions lancées (ou relancées) et non encore attrapées du thread courant
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1041,7 +1022,7 @@ if(uncaught_exceptions())
 { ... }\end{lstlisting}
 
 	\begin{block}{Motivation}
-		Obtenir un comportement différent d'un destructeur en présence d'exception (p.ex. \textit{rollback})
+		Comportement différent d'un destructeur en présence d'exception (p.ex. \textit{rollback})
 	\end{block}
 \end{frame}
 
@@ -1050,7 +1031,7 @@ if(uncaught_exceptions())
 	\frametitle{Caractères littéraux UTF-8}
 	\begin{itemize}
 		\item Écriture de caractère UTF-8 préfixé par \lstinline|u8|
-		\item Lève une erreur si le caractère n'est pas représentable par un unique code point UTF-8
+		\item Erreur si le caractère n'est pas représentable par un unique code point UTF-8
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1064,8 +1045,8 @@ char x = u8'x';\end{lstlisting}
 	\frametitle{Déduction de template dans les constructeurs\titlehfill{}1/3}
 	\begin{itemize}
 		\item Déduction des paramètres templates d'une classe à la construction
-		\item Plus de déclaration explicite des paramètres template \ldots
-		\item \ldots{}ni de \textit{make helpers}
+		\item Plus de déclaration explicite des paramètres template
+		\item Ni de \textit{make helpers}
 	\end{itemize}
 
 \note[item]{Généralisation de la déduction de paramètres template aux constructeurs}
@@ -1100,7 +1081,7 @@ Foo([&](int i) {...});\end{lstlisting}
 \begin{frame}[fragile]
 \frametitle{Déduction de template dans les constructeurs\titlehfill{}3/3}
 	\begin{block}{Note}
-		Rend obsolète plusieurs \textit{make helper} (\lstinline|make_pair|, \lstinline|make_tuple|, etc.)
+		Rend obsolète plusieurs \textit{make helper} (\lstinline|make_pair|, \lstinline|make_tuple|, \ldots)
 	\end{block}
 
 	\begin{alertblock}{Attention}
@@ -1199,8 +1180,8 @@ baz();     // Affiche baz\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Lambdas et expressions constantes\titlehfill{}1/3}
 	\begin{itemize}
-		\item Lambdas autorisées dans les expressions constantes \ldots
-		\item si l'initialisation de chaque donnée capturée est possible dans l'expression constante
+		\item Lambdas autorisées dans les expressions constantes
+		\item Si l'initialisation de chaque capture est possible dans l'expression constante
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1213,7 +1194,7 @@ AddEleven(5);   // 16\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Lambdas et expressions constantes\titlehfill{}2/3}
 	\begin{itemize}
-		\item Déclaration \lstinline|constexpr| d'une lambda possible 
+		\item Déclaration \lstinline|constexpr| de lambda possible 
 		\item Explicitement via \lstinline|constexpr|
 	\end{itemize}
 
@@ -1265,8 +1246,8 @@ invoke(&foo, 8);  // 50\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::invoke()|\titlehfill{}2/2}
 	\begin{itemize}
-		\item Fonctionne également avec des fonctions membres \ldots
-		\item le premier paramètre fourni est l'objet à utiliser
+		\item Fonctionne également avec des fonctions membres
+		\item \ldots{}le premier paramètre fourni est l'objet à utiliser
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1278,14 +1259,14 @@ Foo foo;
 invoke(&Foo::bar, foo, 8);  // 50\end{lstlisting}
 
 	\begin{block}{Motivation}
-		Une syntaxe unique d'appel d'appelable
+		Syntaxe unique d'appel d'appelable
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::not_fn()|}
 	\begin{itemize}
-		\item Construit un \textit{function object} en niant un appelable
+		\item Construction de \textit{function object} en niant un appelable
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1318,9 +1299,6 @@ sqrt(T t);
 template <typename T>
 enable_if_t<is_integral_v<T>, T>
 sqrt(T t);\end{lstlisting}
-
-\note[item]{Dans la continuité de \lstinline|_t| du C++14}
-
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1394,7 +1372,7 @@ foo();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Attribut \lstinline|[[ fallthrough ]]|}
 	\begin{itemize}
-		\item Placé dans un \lstinline|switch| avant un \lstinline|case| ou \lstinline|default|
+		\item Dans un \lstinline|switch| avant un \lstinline|case| ou \lstinline|default|
 		\item Indique qu'un cas se poursuit intentionnellement dans le cas suivant
 		\item Incitation à ne pas lever d'avertissement dans ce cas
 	\end{itemize}
@@ -1458,7 +1436,7 @@ baz();  // Idealement : warning\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Attribut \lstinline|[[ maybe_unused ]]|\titlehfill{}1/2}
 	\begin{itemize}
-		\item Utilisable sur une classe, structure, fonction, variable, paramètre, \ldots
+		\item Sur une classe, structure, fonction, variable, paramètre, \ldots
 		\item Indique qu'un élément peut ne pas être utilisé
 		\item Incitation à ne pas lever d'avertissement en cas de non-utilisation
 	\end{itemize}
@@ -1527,7 +1505,7 @@ int foo(int, long) {}\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::scoped_lock|}
 	\begin{itemize}
-		\item \lstinline|std::scoped_lock| peut acquérir plusieurs mutex
+		\item Acquisition de plusieurs mutex
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1560,7 +1538,7 @@ array<int, 3> baz{1, 54, 3};
 apply(foo, baz);\end{lstlisting}
 
 	\begin{itemize}
-		\item De même, \lstinline|std::make_from_tuple()| permet de construire un objet depuis un \textit{tuple-like}
+		\item \lstinline|std::make_from_tuple()| permet de construire un objet depuis un \textit{tuple-like}
 	\end{itemize}
 \end{frame}
 
@@ -1605,7 +1583,7 @@ optional foo(10);	// std::optional<int>\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 optional<complex<double>> foo{in_place, 3.0, 4.0};\end{lstlisting}
 		
-		\item \ldots Y compris depuis un \lstinline|std::initializer_list|
+		\item Y compris depuis un \lstinline|std::initializer_list|
 	\begin{lstlisting}[language=C++]
 optional<vector<int>> foo(in_place, {1, 2, 3});\end{lstlisting}
 
@@ -1620,7 +1598,7 @@ auto bar = make_optional<complex<double>>(3.0, 4.0);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::optional|\titlehfill{}3/4}
 	\begin{itemize}
-		\item Changement de la valeur via \lstinline|reset|, \lstinline|swap|, \lstinline|emplace| ou \lstinline|operator=()|
+		\item Changement de la valeur via \lstinline|reset()|, \lstinline|swap()|, \lstinline|emplace()| ou \lstinline|operator=()|
 		\item Comparaison naturelle des valeurs contenues 
 
 		\begin{lstlisting}[language=C++]
@@ -1630,7 +1608,7 @@ dix > deux;   // true
 dix < deux;   // false
 dix == 10;    // true\end{lstlisting}
 
-		\item \ldots En prenant en compte \lstinline|std::nullopt|
+		\item En prenant en compte \lstinline|std::nullopt|
 
 		\begin{lstlisting}[language=C++]
 optional<int> none, dix(10);
@@ -1648,7 +1626,7 @@ none == nullopt;  // true\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::optional|\titlehfill{}4/4}
 	\begin{alertblock}{\lstinline|std::optional<bool>| ? \lstinline|std::optional<T*>| ?}
-		Probablement plus pertinent d'utiliser :
+		Plus pertinent d'utiliser :
 		\begin{itemize}
 			\item Des booléens \og trois états\fg{} (Boost.tribool)
 			\item Des pointeurs bruts
@@ -1661,7 +1639,7 @@ none == nullopt;  // true\end{lstlisting}
 \note[item]{Sémantique plus précise, pas de risque de tentative de libération ou de fuite mémoire, \lstinline|value()| et \lstinline|value_or()| permettent de simplifier l'usage}
 	\end{exampleblock}
 
-	\begin{block}{En attendant C++17 \ldots}
+	\begin{block}{En attendant C++17}
 		Utilisez Boost.Optional
 	\end{block}
 \end{frame}
@@ -1674,10 +1652,6 @@ none == nullopt;  // true\end{lstlisting}
 		
 \note[item]{Pour les données, tout comme \lstinline|std::function| est un \textit{type-erasure} pour les appelables}
 		
-		\item Introduction d'une forme de \og typage dynamique\fg{} au sein de C++
-
-\note[item]{Ce n'est pas réellement du typage dynamique : ce n'est pas dans le langage mais une classe \textit{type-erasure} dans la bibliothèque standard et les instances restent typées statiquement avec le type \lstinline|std::any| mais en terme d'utilisation ça rend un service équivalent}
-
 		\item Issue de Boost.Any
 		\item Type contenu dépend de la valeur assignée
 
@@ -1719,16 +1693,16 @@ a.emplace<std::complex<double>>(3.0, 4.0);
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::any|\titlehfill{}3/4}
 	\begin{itemize}
-		\item \lstinline|any_cast<Type>()| récupère la valeur \ldots
-		\item et lève une exception si le type demandé n'est pas correct
+		\item \lstinline|any_cast<Type>()| récupère la valeur
+		\item \ldots{}et lève une exception si le type demandé n'est pas correct
 
 		\begin{lstlisting}[language=C++]
 any a = 1;
 any_cast<int>(a);  // 1
 any_cast<bool>(a); // Lance bad_any_cast\end{lstlisting}
 
-		\item ou récupère l'adresse \ldots
-		\item \ldots{} et retourne \lstinline|nullptr| si le type demandé n'est pas correct
+		\item ou récupère l'adresse
+		\item \ldots{}et retourne \lstinline|nullptr| si le type demandé n'est pas correct
 
 		\begin{lstlisting}[language=C++]
 any a = 1;
@@ -1754,19 +1728,16 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::string_view|\titlehfill{}1/3}
+	\frametitle{\lstinline|std::basic_string_view|\titlehfill{}1/3}
 	\begin{itemize}
-		\item \lstinline|std::basic_string_view| : vue sur une séquence contiguë de caractères
-		\item Quatre spécialisations standard (une pour chaque type de caractères)
+		\item Vue sur une séquence contiguë de caractères
+		\item Quatre spécialisations standard (une par type de caractères)
 
 \note[item]{Soit \lstinline|char|, \lstinline|wchar|, \lstinline|char16_t| et \lstinline|char32_t|}
 
 		\item Référence non possédante sur une séquence pré-existante
 		\item Pas de modification de la séquence depuis la vue
 		\item Constructible depuis \lstinline|std::string|, une chaîne C ou un pointeur et une taille
-
-\note[item]{Une chaîne C : un char* null-terminé}
-
 	\end{itemize}
 
 	\begin{alertblock}{Attention !}
@@ -1809,7 +1780,7 @@ cout << bar.size() << " - " << bar << '\n';
 
 	\begin{exampleblock}{Performances}
 		\begin{itemize}
-			\item Souvent meilleures que les fonctionnalités équivalentes de \lstinline|string| \ldots
+			\item Souvent meilleures que les fonctionnalités équivalentes de \lstinline|string|
 			\item \ldots{} mais pas toujours, donc mesurez
 		\end{itemize} 
 
@@ -1841,7 +1812,7 @@ std::shared_ptr<int[]> foo(new int[10]);\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		Présence dans le TS d'un pointeur intelligent sans responsabilité (observateur) : \lstinline|observer_ptr|, mais n'est pas dans le périmètre accepté pour C++17
+		Présence dans le TS d'un pointeur intelligent sans responsabilité (observateur) : \lstinline|observer_ptr|, mais pas dans le périmètre accepté pour C++17
 	\end{block}
 \end{frame}
 
@@ -1869,8 +1840,8 @@ sample(begin(in), end(in), back_inserter(out),
 	\frametitle{PGCD et PPCM}
 	\begin{itemize}
 		\item Ajout des fonctions \lstinline|gcd| et \lstinline|lcm|
-		\item Initialement prévu pour des versions ultérieures \ldots
-		\item mais suffisamment simples et élémentaires pour C++17 
+		\item Initialement prévu pour des versions ultérieures
+		\item \ldots{}mais suffisamment simples et élémentaires pour C++17 
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1946,7 +1917,7 @@ bar.c_str();       // const char*\end{lstlisting}
 		Utilisez \textit{Filesystem} plutôt que les API C ou systèmes
 	\end{exampleblock}
 
-	\begin{block}{En attendant C++17 \ldots}
+	\begin{block}{En attendant C++17}
 		Utilisez Boost.Filesystem
 
 \note[item]{Ou Qt, POCO, etc. L'idée est d'avoir un code portable, mieux typé et moins source d'erreur}
@@ -1958,7 +1929,7 @@ bar.c_str();       // const char*\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Parallelism TS\titlehfill{}1/5}
 	\begin{itemize}
-		\item Ajout de surcharges \og parallèles\fg{} à de nombreux algorithmes standard
+		\item Surcharges \og parallèles\fg{} de nombreux algorithmes standard
 		\item Politiques d'exécution (séquentielle, parallèle et parallèle+vectorisée)
 	\end{itemize}
 
@@ -1969,8 +1940,7 @@ vector<int> foo {0, 5, 42, 58};
 for_each(execution::par, begin(foo), end(foo), bar);\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		Accès concurrents non gérés intrinsèquement par l'exécution parallèle\\
-		Responsabilité du développeur de choisir des structures de données et des foncteurs adressant ce point
+		Pas de gestion intrinsèque des accès concurrents
 	\end{alertblock}
 \end{frame}
 

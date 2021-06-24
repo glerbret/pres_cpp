@@ -15,9 +15,9 @@
 				\item Domaines très variés
 				\item Antichambre de la bibliothèque standard
 				
-\note[item]{C'est moins vrai, de plus en plus de sujet rentre directement dans les sujets du comité sans passer par Boost}
+\note[item]{C'est de moins en moins vrai, de plus en plus de sujet rentre directement dans les sujets du comité sans passer par Boost}
 
-				\item Licence permissive (proche MIT ou BSD)
+				\item Licence permissive (proche MIT et BSD)
 				\item Portable
 				\item Haut niveau d'exigence (y compris documentaire)
 				\item Processus de revue strict et transparent
@@ -52,14 +52,10 @@
 		\item \ldots{} à deux ou trois détails syntaxiques prés
 		\begin{itemize}
 			\item Changement de namespace
-			\item \lstinline|std::nullopt| devient \lstinline|boost::none|
+			\item \lstinline|boost::none| devient \lstinline|std::nullopt|
 			\item \lstinline|polymorphic_relaxed_get()| devient \lstinline|std::get_if()|
 		\end{itemize}
 	\end{itemize}
-
-	\begin{exampleblock}{Do}
-		Utilisez Boost.Optional, Boost.Any et Boost.Variant si votre bibliothèque standard n'est pas C++17
-	\end{exampleblock}
 \end{frame}
 
 \subsection*{Filesystem}
@@ -68,7 +64,7 @@
 	\begin{itemize}
 		\item Intégrée à C++17
 		\item Fonctionnement identique entre Boost et C++17
-		\item Ajout de \lstinline|boost::filesystem::fstream| compatible avec \lstinline|std::fstream| pour ouvrir un fichier depuis un chemin
+		\item \lstinline|boost::filesystem::fstream| compatible avec \lstinline|std::fstream| pour ouvrir un fichier depuis un chemin
 
 \note[item]{Contrairement à la bibliothèque standard, Boost n'a pas pu créé une surcharge de \lstinline|std::fstream| prenant en paramètre un chemin (pas de modification de \lstinline|std| hors de la bibliothèque standard)}
 	\end{itemize}
@@ -274,8 +270,6 @@ format{"%1% %2% %1%"} % io::group(showpos, 1) % 2;
 
 	\begin{block}{Alternatives}
 		\lstinline|{fmt}|, SafeFormat, FastFormat,  tinyformat
-
-\note[item]{Il est question de rajouter le formatage dans la bibliothèque standard en C++20 en se basant sur \lstinline|{fmt}|}
 	\end{block}
 \end{frame}
 
@@ -285,7 +279,7 @@ format{"%1% %2% %1%"} % io::group(showpos, 1) % 2;
 		\item Manipulation des chaînes de caractères
 		\item Changement de casse
 		\begin{itemize}
-			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item En-place ou en copiant
 			\item Avec ou sans prise en compte de la locale
 		\end{itemize}
 	\end{itemize}
@@ -300,9 +294,9 @@ to_upper_copy(foo); // BOOST\end{lstlisting}
 	\begin{itemize}
 		\item Suppression de caractères
 		\begin{itemize}
-			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item En-place ou en copiant
 			\item Suppression de la première, dernière, i\ieme{} ou toutes occurrences d'un caractère
-			\item Suppression de n caractères en début ou fin de chaîne
+			\item Suppression de $n$ caractères en début ou fin de chaîne
 		\end{itemize}
 	\end{itemize}
 
@@ -320,21 +314,19 @@ erase_all_copy(foo, "o"); // Bst\end{lstlisting}
 			\item Récupération des n premiers ou derniers caractères de la chaîne
 		\end{itemize}
 		\item Concaténation de chaînes
-	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
+		\begin{lstlisting}[language=C++]
 vector<string> foo{"foo1", "foo2", "foo3"};
 join(foo, "-");   // foo1-foo2-foo3\end{lstlisting}
 
-	\begin{itemize}
 		\item Découpage de chaîne
-	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
+		\begin{lstlisting}[language=C++]
 string foo = "Boost C++ Libraries";
 vector<string> bar;
 split(bar, foo, is_space());
 // bar : "Boost", "C++", "Libraries"\end{lstlisting}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -342,9 +334,9 @@ split(bar, foo, is_space());
 	\begin{itemize}
 		\item Remplacement de caractères
 		\begin{itemize}
-			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item En-place ou en copiant
 			\item Remplacement de la première, dernière, i\ieme{} ou toutes occurrences d'un caractère
-			\item Remplacement de n caractères en début ou fin de chaîne
+			\item Remplacement de $n$ caractères en début ou fin de chaîne
 		\end{itemize}
 	\end{itemize}
 
@@ -358,10 +350,10 @@ replace_all_copy(foo, "o", "0");  // B00st\end{lstlisting}
 	\begin{itemize}
 		\item \textit{Trimming}
 		\begin{itemize}
-			\item Avec modification de la chaîne ou génération d'une nouvelle chaîne
+			\item En-place ou en copiant
 			\item A droite, à gauche ou aux deux extrémités
 			\item Variante éliminant les doublons \og d'espaces\fg{} dans la chaîne
-			\item Variante remplaçant les \og espaces\fg{} dans la chaîne par une autre séquence de caractères
+			\item Variante remplaçant les \og espaces\fg{} par une autre séquence de caractères
 			\item Variante prenant un prédicat de choix des caractères
 		\end{itemize}
 	\end{itemize}

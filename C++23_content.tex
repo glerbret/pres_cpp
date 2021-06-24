@@ -39,7 +39,7 @@ if not consteval {...}
 if ! consteval {...}\end{lstlisting}
 
 		\begin{alertblock}{Attention}
-			Les accolades sont obligatoires, même avec une unique instruction
+			Accolades sont obligatoires, même avec une unique instruction
 		\end{alertblock}
 
 	\end{itemize}
@@ -86,8 +86,8 @@ class Foo {	static_assert(N, "Message"); };\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Suffixes littéraux}
 	\begin{itemize}
-		\item Ajout du suffixe \lstinline|uz| (ou \lstinline|zu|) pour \lstinline|size_t|
-		\item Ajout du suffixe \lstinline|z| pour les \og \lstinline|signed|\fg{} \lstinline|size_t|
+		\item Suffixe \lstinline|uz| (ou \lstinline|zu|) pour \lstinline|size_t|
+		\item Suffixe \lstinline|z| pour les \og \lstinline|signed|\fg{} \lstinline|size_t|
 
 \note[item]{Le type entier signé correspondant à \lstinline|size_t|}
 	\end{itemize}
@@ -97,7 +97,7 @@ class Foo {	static_assert(N, "Message"); };\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Chaînes de caractères}
 	\begin{itemize}
-		\item \lstinline|std::basic_string::contains()| teste la présence d'une sous-chaîne
+		\item \lstinline|contains()| teste la présence d'une sous-chaîne
 
 		\begin{lstlisting}[language=C++]
 string foo = "Hello world";
@@ -107,16 +107,16 @@ foo.contains("monde");   // false\end{lstlisting}
 
 \note[item]{Comparaison \textit{case-sensitive} comme toutes les fonctions de recherche dans des \lstinline|std::string|}
 
-		\item Erreur de compilation sur la construction de \lstinline|std::string| depuis \lstinline|nullptr|
+		\item Interdiction de la construction de \lstinline|std::string| depuis \lstinline|nullptr|
 
-\note[item]{Avant c'était un comportement indéfini}
+\note[item]{Erreur de compilation, avant c'était un comportement indéfini}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Généralisation \lstinline|starts_with| et \lstinline|ends_with|}
+	\frametitle{\lstinline|starts_with()| \& \lstinline|ends_with()|}
 	\begin{itemize}
-		\item Généralisation de \lstinline|starts_with| et \lstinline|ends_with| aux ranges
+		\item Généralisation de \lstinline|starts_with()| et \lstinline|ends_with()| aux ranges
 
 		\begin{lstlisting}[language=C++]
 auto foo = view::iota(0, 50);
@@ -139,14 +139,14 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 	\frametitle{\lstinline|out_ptr| et \lstinline|inout_ptr|}
 	\begin{itemize}
 		\item Abstraction entre \textit{smart pointers} et API C
-		\item Automatise les appels à \lstinline|reset()| et \lstinline|release()| des \textit{smart pointers}
-		\item \textit{Exception-safe} : smart pointer rétablie au retour de l'API C
+		\item Automatisation des appels à \lstinline|reset()| et \lstinline|release()|
+		\item \textit{Exception-safe} : \textit{smart pointer} rétabli au retour de l'API C
 
-\note[item]{Pas possible de lever une exception dans le code C++ avant de rétablir le \textit{smart pointer}}
+\note[item]{Pas d'exception dans le code C++ avant le rétablissement du \textit{smart pointer}}
 
 		\item Permet le passage comme pointeur C \lstinline|void*| ou \lstinline|void**|
 		\item Permet la conversion vers un type de pointeur arbitraire
-		\item \lstinline|inout_ptr| supporte la libération par l'API C
+		\item \lstinline|inout_ptr| permet la libération par l'API C
 	\end{itemize}
 \end{frame}
 
@@ -163,11 +163,11 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{Suppression de \lstinline|()| dans les lambdas}
+	\frametitle{Lambdas}
 		\begin{itemize}
-			\item \lstinline|()| optionnelles en l'absence de paramètres, y compris pour les lambdas mutables
+			\item \lstinline|()| optionnelles en l'absence de paramètres dans les lambdas mutables
 
-\note[item]{Elles étaient optionnelles dans tous les autres cas (lambdas sans spécificateurs, \lstinline|noexcept|, avec un type de retour explicite, \lstinline|constexpr|, \lstinline|consteval|, $\ldots$)}
+\note[item]{Elles étaient optionnelles dans tous les autres cas}
 
 		\end{itemize}
 \end{frame}
@@ -176,7 +176,7 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Traits}
 	\begin{itemize}
-		\item Ajout du trait \lstinline|is_scoped_enum| pour déterminer si un type est un \lstinline|enum class|
+		\item Trait \lstinline|is_scoped_enum| pour déterminer si un type est un \lstinline|enum class|
 	\end{itemize}
 \end{frame}
 
@@ -190,7 +190,7 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 
 \subsection*{Durées et temps}
 \begin{frame}[fragile]
-	\frametitle{Contraintes sur \lstinline|time_point::clock|}
+	\frametitle{\lstinline|time_point::clock|}
 	\begin{itemize}
 		\item Relâchement des contraintes sur \lstinline|time_point::clock|
 		\item Plus grande flexibilité du type d'horloge
@@ -201,13 +201,13 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 
 \subsection*{Variant}
 \begin{frame}[fragile]
-	\frametitle{Héritage de \lstinline|std::variant|}
+	\frametitle{\lstinline|std::variant|}
 	\begin{itemize}
-		\item Héritage de \lstinline|std::variant| autorisé
+		\item Héritage de \lstinline|std::variant| possible
 		\item \lstinline|std::visit()| restreints aux \lstinline|std::variant|
 
 \note[item]{Et donc des dérivés en question}
-\note[item]{Auparavant, les Variants de \lstinline|std::visit| pouvaient être formellement de n'importe quel type}
+\note[item]{Auparavant, les variants de \lstinline|std::visit| pouvaient être formellement de n'importe quel type}
 	\end{itemize}
 \end{frame}
 

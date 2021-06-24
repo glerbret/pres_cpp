@@ -12,8 +12,6 @@
 		\item Changement moins important
 		\item Mais loin d'une simple version correctrice
 		\item Support complet par GCC, Clang et Visual C++
-
-\note[item]{Et de tous les compilateurs récents}
 	\end{itemize}
 \end{frame}
 
@@ -78,7 +76,7 @@ auto fact(unsigned int x) {
 \begin{frame}[fragile]
 	\frametitle{\lstinline|decltype(auto)|}
 	\begin{itemize}
-		\item Détermine le type retour en conservant la référence
+		\item Déduction du type retour en conservant la référence
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -97,8 +95,8 @@ auto bar3() { return bar1(); }           // string\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Aggregate Initialisation}
 	\begin{itemize}
-		\item Devient compatible avec l'initialisation par défaut des membres
-		\item \ldots{} les membres non explicitement initialisés le sont par défaut
+		\item Compatible avec l'initialisation par défaut des membres
+		\item \ldots{} initialisation par défaut des membres non explicitement initialisés
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -128,7 +126,7 @@ ni == nd;    // Erreur de compilation\end{lstlisting}
 	\begin{alertblock}{Attention}
 		\textit{Null forward iterator} non comparables avec des itérateurs \og classiques\fg{}
 
-\note[item]{But ? Pouvoir créer un itérateur sans l'initialiser avec un conteneur existant. Assez limité de mon point de vue}
+\note[item]{But ? Pouvoir créer un itérateur sans l'initialiser avec un conteneur existant}
 	\end{alertblock}
 \end{frame}
 
@@ -312,7 +310,7 @@ PI<int>;          // 3
 PI<double>;       // 3.14159
 PI<const char*>;  // pi\end{lstlisting}
 
-	\begin{block}{Sous silence \ldots}
+	\begin{block}{Sous silence}
 		\lstinline|std::integer_sequence|
 	\end{block}
 \end{frame}
@@ -350,9 +348,6 @@ foo("azerty"s);   // 1\end{lstlisting}
 
 \begin{frame}[fragile]
 	\frametitle{Capture généralisée\titlehfill{}1/2}
-
-\note[item]{On parle parfois de renommage des captures}
-
 	\begin{itemize}
 		\item Création de variables capturées depuis des variables locales ou des constantes
 	\end{itemize}
@@ -402,7 +397,7 @@ struct Bar {
 
 \note[item]{Il n'y a plus les restrictions de C++11 (une seule instruction, de type \lstinline|return|)}
 
-		\item Une lambda qui ne capture rien peut être convertie en pointeur de fonction
+		\item Conversion possible de lambda sans capture en pointeur de fonction
 
 \note[item]{Donc passable à des fonctions C attendant un pointeur de fonction en paramètre}
 
@@ -458,7 +453,7 @@ add_const_t<const int*> C;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::make_unique|}
 	\begin{itemize}
-		\item Alloue et construit l'objet dans le \lstinline|std::unique_ptr|
+		\item Allocation et construction de l'objet dans le \lstinline|std::unique_ptr|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -478,9 +473,9 @@ unique_ptr<int> foo = make_unique<int>(42);\end{lstlisting}
 	\frametitle{Attribut \lstinline|[[ deprecated ]]|\titlehfill{}1/2}
 	\begin{itemize}
 		\item Indique qu'une entité (variable, fonction, classe, \ldots) est dépréciée
-		\item Émission possible d'un avertissement sur l'utilisation d'une entité \lstinline|deprecated|
+		\item Émission possible d'avertissement sur l'utilisation d'une entité \lstinline|deprecated|
 
-\note[item]{Peut car il n'y a pas d'obligation dans la norme. En pratique c'est le cas}
+\note[item]{Possible car il n'y a pas d'obligation dans la norme. En pratique c'est le cas}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -517,7 +512,7 @@ warning: 'void bar()' is deprecated: utilisez foo\end{lstlisting}
 			\item Exclusif : possible si le verrou n'est pas pris
 			\item Partagé : possible si le verrou n'est pas pris en exclusif
 		\end{itemize}
-		\item Même API que \lstinline|std::timed_mutex|  pour l'accès exclusif
+		\item Même API que \lstinline|std::timed_mutex| pour l'accès exclusif
 		\item API similaire pour l'accès partagé
 		\begin{itemize}
 			\item \lstinline|lock_shared|
@@ -537,7 +532,7 @@ warning: 'void bar()' is deprecated: utilisez foo\end{lstlisting}
 	\frametitle{\lstinline|std::shared_lock|}
 	\begin{itemize}
 		\item Capsule RAII sur les mutex partagés
-		\item Supporte les mutex verrouillés ou non
+		\item Support des mutex verrouillés ou non
 		\item Relâche le mutex à la destruction
 		\item Similaire à \lstinline|std::unique_lock| mais en accès partagée
 	\end{itemize}
