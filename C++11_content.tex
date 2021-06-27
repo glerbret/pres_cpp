@@ -59,7 +59,7 @@
 \begin{frame}[fragile]
 	\frametitle{Nouveaux types entiers\titlehfill{}2/3}
 	\begin{itemize}
-		\item \lstinline|int<N>_t|, \lstinline|uint<N>_t| : types entiers de N bits
+		\item \lstinline|int<N>_t|, \lstinline|uint<N>_t| : entiers de N bits
 		\begin{itemize}
 			\item N = 8, 16, 32 ou 64
 			\item \lstinline|int<N>_t| obligatoirement en complément à 2
@@ -71,9 +71,9 @@
 			\item Pas de bit de \textit{padding}
 			\item Optionnels
 		\end{itemize}
-		\item \lstinline|int_least<N>_t|, \lstinline|uint_least<N>_t| : plus petits types entiers d'au moins N bits
-		\item \lstinline|int_fast<N>_t|, \lstinline|uint_fast<N>_t| : plus rapides types entiers d'au moins N bits
-		\item \lstinline|intptr_t| et \lstinline|uintptr_t| : type entier capable de contenir une adresse
+		\item \lstinline|int_least<N>_t|, \lstinline|uint_least<N>_t| : plus petits entiers d'au moins N bits
+		\item \lstinline|int_fast<N>_t|, \lstinline|uint_fast<N>_t| : plus rapides entiers d'au moins N bits
+		\item \lstinline|intptr_t| et \lstinline|uintptr_t| : entier capable de contenir une adresse
 		\begin{itemize}
 			\item Doit pouvoir être reconvertit en \lstinline|void*| avec une valeur égale au pointeur original
 			\item Optionnels
@@ -144,9 +144,8 @@
 		\end{itemize}
 	\end{itemize}
 
-	\begin{block}{En C++14}
-		Suppression de la contrainte \og Pas d'initialisation \textit{brace-or-equal-initializers} des données membres non-statiques\fg{}
-	\end{block}
+\note[item]{Suppression de la contrainte \og Pas d'initialisation \textit{brace-or-equal-initializers} des données membres non-statiques\fg{} en C++14}
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -221,7 +220,7 @@
 			\item Pas de fonction virtuelle 
 			\item Pas de classe de base virtuelle
 			\item Même accessibilité de toutes les données membres non-statique
-			\item Données membres non-statiques localisées dans une unique classe de l'arbre d'héritage
+			\item Données membres non-statiques dans une unique classe de l'arbre d'héritage
 
 \note[item]{Formellement : pas de données membres non-statiques dans la classe la plus dérivée et au plus une classe de base avec des données membres non-statiques ou pas de classe de base avec des données membres non-statiques}
 
@@ -252,11 +251,11 @@
 \begin{frame}[fragile]
 	\frametitle{POD Généralisé - Objectifs}
 	\begin{itemize}
-		\item Opérations réservées au POD deviennent accessibles aux classes de la sous-notion correspondante
+		\item Opérations POD deviennent accessibles à la sous-notion correspondante
 		\item Relâchement / adaptation de certaines contraintes
 		\begin{itemize}
 			\item Constructeurs ou destructeurs déclarés \lstinline|=default| autorisés
-			\item Données membres non-statiques ne sont plus nécessairement publiques
+			\item Données membres non-statiques plus nécessairement publiques
 
 \note[item]{Mais doivent toutes avoir la même portée, car en C++, le compilateur peut réordonner les données de portées différentes}
 
@@ -935,14 +934,10 @@ auto j = 2UL\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
 
-	\onslide<2-3>
+	\pause
+	
 	\begin{block}{Quiz}
 		Type de retour de \lstinline|std::list<std::string>::size()| ?
-	\end{block}
-
-	\onslide<3>
-	\begin{block}{Réponse}
-		\lstinline|std::list<std::string>::size_type|
 	\end{block}
 \end{frame}
 
@@ -1331,7 +1326,7 @@ find_if_not(begin(foo), end(foo), is_odd); // 4\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Comparaison\titlehfill{}1/4}
 	\begin{itemize}
-		\item \lstinline|std::all_of()| indique si tous les éléments de l'ensemble vérifient un prédicat
+		\item \lstinline|std::all_of()| teste si tous les éléments de l'ensemble vérifient un prédicat
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1351,7 +1346,7 @@ all_of(begin(baz), end(baz), is_odd); // False\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Comparaison\titlehfill{}2/4}
 	\begin{itemize}
-		\item \lstinline|std::any_of()| indique si au moins un élément de l'ensemble vérifie un prédicat
+		\item \lstinline|std::any_of()| teste si au moins un élémentvérifie un prédicat
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1371,7 +1366,7 @@ any_of(begin(baz), end(baz), is_odd); // False\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Comparaison\titlehfill{}3/4}
 	\begin{itemize}
-		\item \lstinline|std::none_of()| indique si aucun élément de l'ensemble ne vérifie le prédicat
+		\item \lstinline|std::none_of()| teste si aucun élément ne vérifie le prédicat
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1391,7 +1386,7 @@ none_of(begin(baz), end(baz), is_odd); // True\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Comparaison\titlehfill{}4/4}
 	\begin{itemize}
-		\item \lstinline|std::is_permutation()| indique si un ensemble est la permutation d'un autre
+		\item \lstinline|std::is_permutation()| teste si un ensemble est la permutation d'un autre
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1685,11 +1680,11 @@ to_string(56); // "56"\end{lstlisting}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::sto<X>()| à \lstinline|sscanf()|, \lstinline|atoi()| ou \lstinline|strto<X>()|
+		Préférez \lstinline|std::sto...()| à \lstinline|sscanf()|, \lstinline|atoi()| ou \lstinline|strto...()|
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::to_string()| à \lstinline|s(n)printf()| ou \lstinline|itoa()|
+		Préférez \lstinline|std::to_string()| à \lstinline|snprintf()| ou \lstinline|itoa()|
 	\end{exampleblock}
 
 	\begin{block}{Alternative et complément}
@@ -1763,15 +1758,13 @@ u8R"(Message\n en une seule \n ligne)";\end{lstlisting}
 
 \note[item]{Les identifiants non préfixés sont réservé pour le standard}
 
-		\item Définit via \lstinline|operator "" suffixe()|
+		\item Définit via \lstinline|operator""suffixe()|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 class Foo {
-public:
-  explicit Foo(int a) : m_a{a} {}
-private :
-  int m_a; };
+public: explicit Foo(int a) : m_a{a} {}
+private : int m_a; };
 
 Foo operator""_f(unsigned long long int a) {
   return Foo(a);}
@@ -1856,19 +1849,14 @@ auto bar = make_tuple(5, 'e', 98L); // OK\end{lstlisting}
 	\frametitle{\lstinline|std::tuple|\titlehfill{}2/4}
 	\begin{itemize}
 		\item Fonction de déstructuration : \lstinline|std::tie()|
-		\begin{itemize}
-			\item Et une constante pour ignorer des éléments : \lstinline|std::ignore|
-			\item En fait, construction d'un \lstinline|std::tuple| de référence sur les paramètres fournis
-		\end{itemize}
-	\end{itemize}
+		\item Et une constante pour ignorer des éléments : \lstinline|std::ignore|
 
-	\begin{lstlisting}[language=C++]
+		\begin{lstlisting}[language=C++]
 int a; long b;
 tie(a, ignore, b) = foo;\end{lstlisting}
 
 \note[item]{C++17 introduit les \textit{structured binding} qui améliore grandement la déstructuration en proposant une syntaxe plus simple et claire}
 
-	\begin{itemize}
 		\item Fonction template d'accès aux éléments du \lstinline|std::tuple| par l'indice
 	\end{itemize}
 
@@ -2233,7 +2221,7 @@ void foo() noexcept(true) {}\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|noexcept|\titlehfill{}2/2}
 	\begin{itemize}
-		\item Opérateur \lstinline|noexcept()| teste, en \textit{compile-time}, si une expression peut ou non lever une exception
+		\item Opérateur \lstinline|noexcept()| teste, au \textit{compile-time}, si une expression peut ou non lever une exception
 		\item Pour appel de fonction, teste si la fonction est \lstinline|noexcept|
 
 \note[item]{Combinable avec le spécificateur}
@@ -2370,7 +2358,7 @@ function<int(int, int)> bar = foo;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::mem_fn|}
 	\begin{itemize}
-		\item Conversion d'une fonction membre en \textit{function object} prenant une instance en paramètre
+		\item Convertit une fonction membre en \textit{function object} prenant une instance en paramètre
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -3627,8 +3615,8 @@ this_thread::sleep_for(chrono::seconds(5));\end{lstlisting}
 \note[item]{À l'échéance, le thread n'interrompt pas les autres pour reprendre la main}
 	\end{alertblock}
 
-	\begin{block}{Note}
-		\lstinline|sleep_for()| et \lstinline|sleep_until()| sont des attentes passives, les autres threads continuent de s'exécuter
+	\begin{block}{Attentes passives}
+		Les autres threads continuent de s'exécuter
 	\end{block}
 \end{frame}
 

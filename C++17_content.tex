@@ -511,9 +511,11 @@ Foo bar = {42} // Erreur\end{lstlisting}
 	\frametitle{\lstinline|std::byte|}
 	\begin{itemize}
 		\item Stockage de bits
-		\item Pas un type caractère ni \og arithmétique\fg{}
+		\item Pas un type caractère ni arithmétique
 		\item Remplace les solutions à base de \lstinline|unsigned char|
-		\item Globalement un \lstinline|enum class| construit sur un \lstinline|unsigned char|
+
+\note[item]{Globalement un \lstinline|enum class| construit sur un \lstinline|unsigned char|}
+
 		\item Supporte les opérations binaires (décalage, et, ou, non)
 		\item Supporte les constructions depuis un type entier
 
@@ -535,7 +537,7 @@ std::to_integer<unsigned int>(b); // 28-1C\end{lstlisting}
 	\frametitle{Déplacement de nœuds entre conteneurs associatifs\titlehfill{}1/2}
 	\begin{itemize}
 		\item Déplacement de nœuds entre conteneurs associatifs de même type
-		\item Objet \textit{node handle} pour le stockage et l'accès au nœud
+		\item Objet \textit{node handle} : stockage et accès au nœud
 		\begin{itemize}
 			\item Déplaçable mais non copiable
 			\item Modification possible de la clé
@@ -663,7 +665,7 @@ foo.emplace_back(3, 1).push_back(42); // foo : {{1 1 1 42}}\end{lstlisting}
 
 \subsection*{Itérateurs}
 \begin{frame}
-	\frametitle{Nouvelle catégorie d'itérateur : \lstinline|ContiguousIterator|}
+	\frametitle{\lstinline|ContiguousIterator|}
 	\begin{itemize}
 		\item Basé sur \lstinline|RandomAccessIterator|
 		\item Mais sur des conteneurs \og à stockage contigu\fg{}
@@ -1578,7 +1580,7 @@ apply(foo, baz);\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 optional foo(10);	// std::optional<int>\end{lstlisting}
 
-		\item Supporte la construction \og en-place\fg{}
+		\item Supporte la construction en-place
 		
 	\begin{lstlisting}[language=C++]
 optional<complex<double>> foo{in_place, 3.0, 4.0};\end{lstlisting}
@@ -1665,17 +1667,17 @@ a = true;   // bool\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::any|\titlehfill{}2/4}
 	\begin{itemize}
-		\item Supporte la construction \og en-place\fg{}
+		\item Supporte la construction en-place
 
 			\begin{lstlisting}[language=C++]
 any a(in_place_type<complex<double>>, 3.0, 4.0);\end{lstlisting}
 
-		\item Existence du \textit{helper} \lstinline|std::make_any|
+		\item \textit{Helper} \lstinline|std::make_any|
 
 			\begin{lstlisting}[language=C++]
 any a = make_any<complex<double>>(3.0, 4.0);\end{lstlisting}
 
-		\item Changement de valeur (et éventuellement de type) via l'affectation
+		\item Changement de valeur, éventuellement de type, via l'affectation
 
 			\begin{lstlisting}[language=C++]
 std::any a = 1;

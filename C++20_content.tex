@@ -154,7 +154,7 @@
 \note[item]{Auparavant, ils pouvaient représenter ces caractères, mais ce n'était pas une obligation et pouvaient représenter d'autres codages de caractères larges}
 \note[item]{Et les \textit{Universal character name} doivent correspondre à des \textit{code points} ISO/IEC 10646}
 
-		\item Type \lstinline|char8_t| pour les caractères
+		\item Type \lstinline|char8_t| pour les caractères UTF-8
 		\begin{itemize}
 			\item Pendant UTF-8 de \lstinline|char16_t| et \lstinline|char32_t|
 			\item Similaire en terme de taille, d'alignement, de conversion à \lstinline|unsigned char|
@@ -225,7 +225,7 @@ U u{.b = "foo"}; \end{lstlisting}
 	\begin{itemize}
 		\item Initialisation des agrégats via des données parenthésées
 
-		\begin{block}{Différences entre \lstinline|\{\}| et \lstinline|()| }
+		\begin{block}{Différences \lstinline|\{\}| \lstinline|()| }
 			\begin{itemize}
 				\item \lstinline|{}| permet l'utilisation d'\textit{initializer list}
 				\item \lstinline|()| permet les conversions avec perte de précision
@@ -253,7 +253,7 @@ struct S {
 \begin{frame}[fragile]
 	\frametitle{Endianess}
 	\begin{itemize}
-		\item Définition d'une énumération \lstinline|std::endian|
+		\item Énumération \lstinline|std::endian|
 		\begin{itemize}
 			\item \lstinline|little| : \textit{little-endian}
 			\item \lstinline|big| : \textit{big-endian}
@@ -316,7 +316,7 @@ if(p){/*...*/}       // OK\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Spécifications d'exception et \lstinline|=default|}
 	\begin{itemize}
-		\item Possibilité de définir des spécifications d'exception des fonctions \lstinline|=default| différentes de celles de la fonction implicite
+		\item Définition possible de spécifications d'exception des fonctions \lstinline|=default| différentes de celles de la fonction implicite
 		
 		\begin{lstlisting}[language=C++]
 struct S {
@@ -391,7 +391,7 @@ Bar f3() {
 \begin{frame}[fragile]
 	\frametitle{\lstinline|operator<=>()|\titlehfill{}2/2}
 	\begin{itemize}
-		\item \lstinline|operator<=>()| déclenche la génération :
+		\item \lstinline|operator<=>()| déclenche la génération
 		\begin{itemize}
 			\item Opérateurs d'ordre (\lstinline|<|, \lstinline|<=|, \lstinline|>| et \lstinline|>=|) via \lstinline|operator<=>()|
 			\item \lstinline|operator==()| via \lstinline|operator==()| des bases et membres
@@ -403,7 +403,7 @@ Bar f3() {
 		\end{block}
 
 		\begin{alertblock}{\lstinline|==, !=, <=>|}
-			\lstinline|operator==()| et \lstinline|operator!=()| ne sont pas générés à partir de \lstinline|operator<=>()|
+			Pas de génération de \lstinline|operator==()| et \lstinline|operator!=()| à partir de \lstinline|operator<=>()|
 		\end{alertblock}
 
 \note[item]{Initialement, \lstinline|operator==()| et \lstinline|operator!=()| aussi résolu via \lstinline|operator<=>()|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le \textit{fallback} sur \lstinline|operator<=>()| (p.ex. court-circuit sur la taille de conteneurs)}
@@ -706,14 +706,14 @@ export import "bar.h"\end{lstlisting}
 
 		\item Dépréciation de \lstinline|reserve()| sans paramètre
 
-		\begin{block}{Réduction à la capacité utile}
+		\begin{exampleblock}{Réduction à la capacité utile}
 
 \note[item]{Oui car avant, \lstinline|std::basic_string::reserve()| sans paramètre permettait de réduire la capacité en fonction de la taille effective}
 
 			Utilisez \lstinline|shrink_to_fit()| et non \lstinline|reserve()|
 
 \note[item]{La capacité est alors supérieure ou égale à la taille}
-		\end{block}
+		\end{exampleblock}
 	\end{itemize}
 \end{frame}
 
@@ -825,11 +825,6 @@ vector<int> foo {5, 12, 2, 56, 18, 33};
 erase_if(foo, [](int i) {return i > 20;});
 // 5 12 2 18\end{lstlisting}
 
-		\begin{lstlisting}[language=C++]
-map<int, int> bar{{5, 1}, {12, 2}, {2, 3}, {42, 4}};
-erase_if(bar, [](pair<int, int> i) {return i.first > 20;});
-// 2-3 5-1 12-2 \end{lstlisting}
-
 		\item Remplacement de l'idiome \og \textit{Erase-remove}\fg{} 
 		\item Remplacement de la fonction membre \lstinline|erase()|
 	\end{itemize}
@@ -869,9 +864,6 @@ bar.front();    // 0\end{lstlisting}
 		\item \lstinline|first()|, \lstinline|last()| : construction de \textit{sous-span}
 
 		\begin{lstlisting}[language=C++]
-array<int, 5> foo = {0, 1, 2, 3, 4};
-span<int> bar{ foo.data(), 4 };
-
 span<int> baz = bar.first(2);   // 0, 1\end{lstlisting}
 
 		\item \textit{structured binding} sur des \lstinline|std::span| de taille fixe
@@ -887,7 +879,7 @@ span<int> baz = bar.first(2);   // 0, 1\end{lstlisting}
 		\item \ldots retournent un itérateur vers la fin (resp. début) du nouvel ensemble
 
 		\begin{block}{Taille et décalage}
-			Si le décalage est plus grand que la taille de l'ensemble, l'opération est sans effet
+			Opération sans effet, si le décalage est supérieur la taille de l'ensemble
 		\end{block}
 
 		\begin{lstlisting}[language=C++]
@@ -1067,7 +1059,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 
 \note[item]{Ce qui revient aux paires d'itérateurs classiques}
 
-				\item Le type vide \lstinline|std::default_sentinel_t| marquant la fin d'un range et utilisable avec des itérateurs gérant la limite du range
+				\item \lstinline|std::default_sentinel_t| pour les itérateurs gérant la limite du range
 
 \note[item]{\lstinline|std::default_sentinel_t| est donc utilisable avec \lstinline|std::counted_iterator|}
 \note[item]{Ce qui est appelé \textit{counted range} et est un range représenté par un itérateur de début et un nombre d'éléments}
@@ -1091,6 +1083,8 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 		\item \lstinline|RandomAccessRange| : fournit \lstinline|random_access_iterator|
 		\item \lstinline|ContiguousRange| : fournit \lstinline|contiguous_iterator|
 	\end{itemize}
+
+	\pause
 
 	\begin{block}{En résumé}
 		\begin{itemize}
@@ -1393,6 +1387,7 @@ format_to(back_inserter(foo), "{}", "a");\end{lstlisting}
 
 \note[item]{\lstinline|output_iterator| est retourné par \lstinline|format_to()|}
 
+
 		\item \lstinline|format_to_n()| formate dans un \lstinline|output_iterator| avec une taille limite
 
 		\begin{lstlisting}[language=C++]
@@ -1401,9 +1396,6 @@ format_to_n(foo.data(), foo.size(), "{}", "a");\end{lstlisting}
 
 \note[item]{Troncature à la taille indiquée si nécessaire}
 
-		\begin{block}{Retour}
-			\lstinline|format_to_n()| retourne l'\lstinline|output_iterator| et la taille sans troncature
-		\end{block}
 	\end{itemize}
 \end{frame}
 
@@ -1439,7 +1431,7 @@ format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 \note[item]{Le référencement indexé permet de répéter une valeur et de gérer la position dans la chaîne de format (utile pour la localisation)}
 	
 			\begin{alertblock}{Limite}
-				Il n'est pas possible de mixer les deux types
+				Impossible de mixer les deux types
 			\end{alertblock}
 		\end{itemize}
 	\end{itemize}
@@ -1518,23 +1510,22 @@ format("{:+06d}", 120);	// "+00120"\end{lstlisting}
 		\item Entiers : décimal, octal, binaire ou hexadécimal
 
 		\begin{lstlisting}[language=C++]
-format("{:d}", 42);    // "42"
-format("{:x}", 42);    // "2a"
-format("{:X}", 42);    // "2A"
-format("{:b}", 42);    // "101010"
-format("{:o}", 42);    // "52"\end{lstlisting}
+format("{:d}", 42);           // "42"
+format("{:x} {:X}", 42, 42);  // "2a 2A"
+format("{:b}", 42);           // "101010"
+format("{:o}", 42);           // "52"\end{lstlisting}
 
 		\item Caractères : valeur numérique ou caractères
 
 \begin{lstlisting}[language=C++]
-	format("{:X}", 'A');   // "41"
-	format("{:c}", 'A');   // "A"\end{lstlisting}
+format("{:X}", 'A');          // "41"
+format("{:c}", 'A');          // "A"\end{lstlisting}
 
 		\item Booléens : chaîne ou nombre
 
 		\begin{lstlisting}[language=C++]
-format("{:d}", true);    // "1"
-format("{:s}", true);    // "true"\end{lstlisting}
+format("{:d}", true);         // "1"
+format("{:s}", true);         // "true"\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
@@ -1850,7 +1841,7 @@ for(size_t i = 0; const auto& bar : foo) {
 		\end{itemize}
 
 		\begin{block}{Intérêt}
-			Itération (via des fonctions libres) d'éléments ayant une fonction membre \lstinline|begin()| ou \lstinline|begin()| mais pas les deux
+			Itération (via des fonctions libres) d'éléments ayant une fonction membre \lstinline|begin()| ou \lstinline|end()| mais pas les deux
 		\end{block}
 
 \note[item]{Fonction membre qui n'est probablement pas une fonction d'itération}
@@ -1900,7 +1891,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 	\begin{itemize}
 		\item Initialisation triviale dans des contextes \lstinline|constexpr|
 		\item \lstinline|std::is_constant_evaluated()| pour savoir si l'évaluation est \textit{compile-time}
-		\item Prise en compte dans la bibliothèque standard
+		\item Prise en compte accrue dans la bibliothèque standard
 		
 \note[item]{\lstinline|std::string|, \lstinline|std::vector|, algorithmes numériques, \ldots}
 	\end{itemize}
@@ -1938,7 +1929,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 
 \note[item]{\textit{structured binding} sur les membres privés depuis une fonction membre ou amis}
 	
-		\item Plus proche de variables \og classiques\fg{}
+		\item Plus proche de variables classiques
 		\begin{itemize}
 			\item Capture par les lambdas (copie et référence)
 
@@ -1952,7 +1943,7 @@ auto f1 = [a] { return a; };
 auto f2 = [=] { return b; };\end{lstlisting}
 
 			\item Déclaration \lstinline|inline|, \lstinline|extern|, \lstinline|static|, \lstinline|thread_local| ou \lstinline|constexpr| possible
-			\item Possibilité de les marquer \lstinline|[[maybe_unused]]|
+			\item Possibilité de marquer \lstinline|[[maybe_unused]]|
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -2369,7 +2360,7 @@ template<class T> concept totally_ordered =
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{Lambdas\titlehfill{}1/2}
+	\frametitle{Lambdas\titlehfill{}1/3}
 	\begin{itemize}
 		\item Utilisables dans des contextes non évalués
 
@@ -2403,7 +2394,7 @@ auto foo = []<typename T>(vector<T> const& vec) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Lambdas\titlehfill{}2/2}
+	\frametitle{Lambdas\titlehfill{}2/3}
 	\begin{itemize}
 		\item Lambda \textit{stateless} assignables et constructibles par défaut
 
@@ -2423,14 +2414,20 @@ map<string, int, decltype(greater)> foo;\end{lstlisting}
 			\item Capture implicite par \lstinline|[&]| toujours présente
 		\end{itemize}
 		\item Capture de \textit{structured binding}
-		\item Expansion des \textit{parameter packs} lors de la capture
+	\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Lambdas\titlehfill{}3/3}
+	\begin{itemize}
+		\item Expansion des \textit{parameter packs} lors de la capture
+		
 		\begin{lstlisting}[language=C++]
 template<class F, class... Args>
 auto delay_invoke(F f, Args... args) {
-  return [f=move(f),...args=move(args)]()->decltype(auto) 
-    {return invoke(f, args...);};}\end{lstlisting}
-
+	return [f=move(f),...args=move(args)]()->decltype(auto) 
+	{return invoke(f, args...);};}\end{lstlisting}
+		
 		\item Peuvent être \lstinline|consteval|
 	\end{itemize}
 \end{frame}
@@ -2491,10 +2488,10 @@ int main() { jthread t(foo); } // OK\end{lstlisting}
 
 \begin{lstlisting}[language=C++]
 void foo(stop_token st) {
-  while(!st.stop_requested()) { /* ... */ }}
+  while(!st.stop_requested()) { ... }}
 
 jthread t(foo);
-// ...
+...
 t.request_stop();\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
@@ -2652,7 +2649,7 @@ while(g.next()) cout << g.value() << endl;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::create_directory()|}
 	\begin{itemize}
-		\item \lstinline|std::create_directory()| échoue si l'élément terminal existe et n'est pas un répertoire
+		\item Échec de \lstinline|std::create_directory()| si l'élément terminal existe et n'est pas un répertoire
 	\end{itemize}
 
 \begin{lstlisting}[language=C++]

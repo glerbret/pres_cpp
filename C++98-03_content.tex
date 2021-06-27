@@ -101,7 +101,7 @@
 		\begin{itemize}
 			\item GCC : \href{https://gcc.gnu.org/projects/cxx-status.html}{C++ Standards Support in GCC}
 			\item Clang (LLVM) : \href{http://clang.llvm.org/cxx_status.html}{C++ Support in Clang}
-			\item Visual studio : \href{https://docs.microsoft.com/fr-fr/cpp/overview/visual-cpp-language-conformance?view=msvc-160}{Tableau de conformité du langage Microsoft C++ et de la bibliothèque standard}
+			\item Visual studio : \href{https://docs.microsoft.com/fr-fr/cpp/overview/visual-cpp-language-conformance?view=msvc-160}{Tableau de conformité du langage Microsoft C++}
 		\end{itemize}
 		\item Bibliothèque standard
 		\begin{itemize}
@@ -179,7 +179,7 @@ catch(logic_error& e) {
 \begin{frame}
 	\frametitle{Erreurs - Critiques des exceptions\titlehfill{}1/2}
 	\begin{itemize}
-		\item Critiquées, voire interdites par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide)}
+		\item Critiquées, voire interdites, par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide)}
 		\item Arguments très variés :
 		\begin{itemize}
 			\item \og Je ne comprends pas\fg{}, \og Ça ne sert à rien\fg{}, \ldots
@@ -190,7 +190,7 @@ catch(logic_error& e) {
 
 		\begin{block}{Pas vraiment}
 			\begin{itemize}
-				\item Recevable à l'origine
+				\item Vrai à l'origine
 				\item Actuellement une exception non levée ne coute quasiment rien
 				\item Souvent comparée à une non gestion d'erreur. Est-ce pertinent ? 
 			\end{itemize}
@@ -350,7 +350,7 @@ assert(expression);\end{lstlisting}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Utilisez exceptions ou codes retour pour les erreurs d'exécution et la vérification des données externes
-			\item Réservez \lstinline|assert| pour les erreurs de programmation et la vérification des contrats internes
+			\item Réservez \lstinline|assert| aux erreurs de programmation et à la vérification des contrats internes
 		\end{itemize}
 	\end{exampleblock}
 
@@ -1135,7 +1135,7 @@ while(!foo.empty()) {
 	\end{itemize}
 \end{frame}
 
-\subsection*{STL -Algorithmes}
+\subsection*{STL - Algorithmes}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Function Object\titlehfill{}1/2}
 	\begin{itemize}
@@ -1270,7 +1270,7 @@ it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
 		\item \lstinline|std::search()| recherche la première occurrence d'un sous-ensemble
 		\item \lstinline|std::find_end()| recherche la dernière occurrence d'un sous-ensemble
 		\item \lstinline|std::adjacent_find()| recherche deux éléments consécutifs égaux
-		\item \lstinline|std::search_n()| recherche la première suite de n éléments consécutifs égaux à une valeur donnée
+		\item \lstinline|std::search_n()| recherche la première suite de n éléments consécutifs égaux à une valeur
 
 \note[item]{\lstinline|find_first_of()|, \lstinline|find_end()|, \lstinline|adjacent_find()|, \lstinline|search()| et \lstinline|search_n()| peuvent prendre un prédicat de comparaison, sinon c'est la comparaison par défaut qui s'applique}
 \note[item]{Toutes retournent un itérateur sur l'élément (le premier dans le cas de la recherche d'un ensemble) recherché}

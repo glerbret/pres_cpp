@@ -149,13 +149,9 @@ ni == nd;    // Erreur de compilation\end{lstlisting}
 	\frametitle{Algorithmes}
 	\begin{itemize}
 		\item Surcharge de \lstinline|std::equal()|, \lstinline|std::mismatch()| et de \lstinline|std::is_permutation()| prenant deux paires complètes d'itérateurs
-	\end{itemize}
 
-	\begin{block}{Note}
-		Il n'est donc plus nécessaire de tester la taille auparavant
-	\end{block}
+\note[item]{Il n'est donc plus nécessaire de tester la taille auparavant}
 
-	\begin{itemize}
 		\item \lstinline|std::exchange()| change la valeur d'un objet et retourne l'ancienne
 
 \note[item]{Pas un algorithme à proprement parler, comme \lstinline|std::swap|}
@@ -167,7 +163,7 @@ vector<int> bar = exchange(foo, {10, 11});
 // foo : 10 11, bar : 1, 2, 3\end{lstlisting}
 
 	\begin{block}{Dépréciation}
-		\lstinline|std::random_shuffle()| est déprécié
+		Dépréciation de \lstinline|std::random_shuffle()|
 
 \note[item]{Remplacé par \lstinline|std::shuffle()| qui permet un meilleur aléa}
 	\end{block}
@@ -229,7 +225,6 @@ int baz = 010'00;       // 512\end{lstlisting}
 	\frametitle{User-defined literals standard\titlehfill{}1/3}
 
 \note[item]{Dans la bibliothèque et non dans le langage}
-\note[item]{Notons l'absence de \lstinline|_|}
 
 	\begin{itemize}
 		\item Suffixe \lstinline|s| sur les chaînes : \lstinline|std::string|
@@ -246,7 +241,7 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{User-defined literals standard\titlehfill{}2/3}
 	\begin{itemize}
-		\item Suffixe \lstinline|h|, \lstinline|min|, \lstinline|s|, \lstinline|ms|, \lstinline|us| et \lstinline|ns| : \lstinline|std::chrono::duration| dans l'unité correspondante
+		\item Suffixe \lstinline|h|, \lstinline|min|, \lstinline|s|, \lstinline|ms|, \lstinline|us| et \lstinline|ns| : \lstinline|std::chrono::duration|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -309,10 +304,6 @@ constexpr const char* PI<const char*> = "pi";
 PI<int>;          // 3
 PI<double>;       // 3.14159
 PI<const char*>;  // pi\end{lstlisting}
-
-	\begin{block}{Sous silence}
-		\lstinline|std::integer_sequence|
-	\end{block}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -506,8 +497,7 @@ warning: 'void bar()' is deprecated: utilisez foo\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::shared_timed_mutex|}
 	\begin{itemize}
-		\item Similaire à \lstinline|std::timed_mutex|
-		\item \ldots{}avec deux niveaux d'accès
+		\item Similaire à \lstinline|std::timed_mutex| avec deux niveaux d'accès
 		\begin{itemize}
 			\item Exclusif : possible si le verrou n'est pas pris
 			\item Partagé : possible si le verrou n'est pas pris en exclusif

@@ -25,13 +25,13 @@
 		\item \textit{Unified Call Syntax}
 		\begin{itemize}
 			\item \lstinline|f(x, ...)| appelle \lstinline|x.f(...)| si \lstinline|f(x, ...)| n'est pas trouvé
-			\item Généralisation de \lstinline|std::begin()| et co. directement dans le langage
+			\item Généralisation de \lstinline|std::begin()| et co. dans le langage
 		\end{itemize}
 		\item \lstinline|std::expected| contenant statut et valeur optionnelle : retour du compte rendu d'exécution et, éventuellement, de la valeur
 
 \note[item]{permet de se passer d'exception dans les contextes où elles ne sont pas adaptées, de ne pas utiliser un paramètre en sortie pour le statut ou la valeur et de ne pas définir des structures/classes ad hoc tout en proposant une API plus adaptée que \lstinline|std::pair| ou \lstinline|std::tuple|}
 
-		\item \textit{Procedural function interfaces} : \textit{framework} pour la vérification statique de partie du programme
+		\item \textit{Procedural function interfaces} : vérification statique de partie du programme
 
 \note[item]{Annotations de types claim / assertion permettant à des outils d'analyse de vérifier la correction du programme}
 \note[item]{Recouvre les points du TS \textit{contract} mais est plus ambitieux}
@@ -258,7 +258,7 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 
 		\item Accès bas-niveau aux IO : \lstinline|file_handle| et \lstinline|path_handle|
 		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
-		\item invocation concurrente
+		\item Invocation concurrente
 	\end{itemize}
 \end{frame}
 
@@ -399,8 +399,7 @@ bar([1:]t1..., a3, [0]t1);\end{lstlisting}
 			\item \textit{Pack} de taille fixe
 
 			\begin{lstlisting}[language=C++]
-template<unsigned int N>
-struct my_vector {
+template<unsigned int N> struct my_vector {
   my_vector(int...[N] v) : values{v...} {}};\end{lstlisting}
 
 			\item \textit{Variadic function} homogène
@@ -491,8 +490,8 @@ int s = sum(point.elems...);\end{lstlisting}
 		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
 		\item Constructeurs par déplacement \lstinline|=bitcopies|
 		\item API \og itérateurs\fg{} de génération des nombres aléatoire
-		\item Surcharge \og \textit{ranges}\fg{} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
-		\item Concept \lstinline|reconstructible_range| \textit{range} reconstructible après une séparation en deux itérateurs
+		\item Surcharge \textit{ranges} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
+		\item \textit{Range} reconstructible après une séparation en deux itérateurs
 		\item Fonctions statistiques (moyenne, médiane, variance, \ldots)
 		\item \lstinline|span| de taille fixe
 		\item Paramètre template universel
@@ -566,7 +565,7 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item Cadre pour l'introduction d'autres types par une implémentation
 		\end{itemize}
 
-		\item Extension de \lstinline|=delete| à d'autres construction (notamment aux variables template)
+		\item Extension de \lstinline|=delete| à d'autres construction (variables template)
 
 \note[item]{La proposition initiale ne concernait que les variables template, mais elle a inspiré le comité}
 	\end{itemize}
