@@ -226,13 +226,16 @@
 
 			\item Pas de classe de base du type de la première donnée membre non-statique
 
-			\pause
-
-			\begin{block}{En résumé}
-				Organisation mémoire similaire aux structures C
-			\end{block}
 		\end{itemize}
 	\end{itemize}
+
+	\pause
+
+	\begin{block}{En résumé}
+		\begin{itemize}
+			\item Organisation mémoire similaire aux structures C
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -252,7 +255,7 @@
 	\frametitle{POD Généralisé - Objectifs}
 	\begin{itemize}
 		\item Opérations POD deviennent accessibles à la sous-notion correspondante
-		\item Relâchement / adaptation de certaines contraintes
+		\item Relâchement et adaptation de certaines contraintes
 		\begin{itemize}
 			\item Constructeurs ou destructeurs déclarés \lstinline|=default| autorisés
 			\item Données membres non-statiques plus nécessairement publiques
@@ -267,7 +270,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Quelques conséquences}
+	\frametitle{POD Généralisé - Conséquences}
 	\begin{itemize}
 		\item \textit{standard layout}
 		\begin{itemize}
@@ -318,7 +321,9 @@ V2::foo();  // Affiche V2
 foo();      // Affiche V2\end{lstlisting}
 
 	\begin{block}{Motivation}
-		Évolution de bibliothèque et conservation des versions précédentes
+		\begin{itemize}
+			\item Évolution de bibliothèque et conservation des versions précédentes
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -365,7 +370,9 @@ foo(0);        // Version int
 foo(nullptr);  // Version pointeur\end{lstlisting}
 
 	\begin{exampleblock}{Do}
-		Utilisez \lstinline|nullptr| plutôt que \lstinline|0| ou \lstinline|NULL|
+		\begin{itemize}
+			\item Utilisez \lstinline|nullptr| plutôt que \lstinline|0| ou \lstinline|NULL|
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -381,11 +388,15 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 // Erreur de compilation indiquant "Taille incorrecte"\end{lstlisting}
 
 	\begin{exampleblock}{Do}
-		Utilisez \lstinline|static_assert| pour vérifier à la compilation ce qui peut l'être
+		\begin{itemize}
+			\item Utilisez \lstinline|static_assert| pour vérifier à la compilation ce qui peut l'être
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Préférez les vérifications \textit{compile-time} ou \textit{link-time} aux vérifications \textit{run-time}
+		\begin{itemize}
+			\item Préférez les vérifications \textit{compile-time} ou \textit{link-time} aux vérifications \textit{run-time}
+		\end{itemize}
 
 \note[item]{Typez correctement, définissez \lstinline|const| ce qui l'est par construction, pas de conversion implicite (et donc des constructeurs explicites), garantissez les invariants par construction si possible}
 \note[item]{Et plusieurs autres points dans ce qui suit : opérateurs de conversion explicite, \lstinline|enum class|, \lstinline|override|, etc.}
@@ -449,13 +460,18 @@ const int a = 42;
 char bar[a];\end{lstlisting}
 
 	\begin{alertblock}{\textit{Variable-Length Array}}
-		Les extensions types VLA n'ont aucun rapport avec \lstinline|constexpr|, ce sont des mécanismes \textit{run-time}
+		\begin{itemize}
+			\item Pas de rapport entre VLA et \lstinline|constexpr|
+			\item VLA est un mécanisme \textit{run-time}
+		\end{itemize}
 	\end{alertblock}
 
 \note[item]{VLA est une fonctionnalité C, non reprise en C++, mais proposée sous forme d'extension par certains compilateurs. Elle consiste à accepter les tableaux de taille définie au \textit{run-time}}
 
 	\begin{exampleblock}{Do}
-		Déclarez \lstinline|constexpr| les constantes et fonctions évaluables en \textit{compile-time}
+		\begin{itemize}
+			\item Déclarez \lstinline|constexpr| les constantes et fonctions évaluables en \textit{compile-time}
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -494,13 +510,17 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 
 			\item Copie inutile lorsque l'objet source est immédiatement détruit
 		\end{itemize}
+	\end{itemize}
 
-		\begin{block}{Optimisation des copies}
-			Partiellement adressé en C++98/03 : élision de copie et (N)RVO 
+	\begin{block}{Optimisation des copies}
+		\begin{itemize}
+			\item Partiellement adressé en C++98/03 : élision de copie et (N)RVO
+		\end{itemize}
 
 \note[item]{Optimisations autorisées même lorsque le comportement observable est modifié}
-		\end{block}
+	\end{block}
 
+	\begin{itemize}
 		\item Échange de données légères plutôt que copie profonde
 
 \note[item]{\lstinline|auto_prt| était une tentative (ratée) d'avoir des éléments déplaçables et non copiables. A surtout montrer que c'est bancal sans support du langage (déplacement systématique et implicite même lorsque le pointeur initial continue à vivre)}
@@ -511,11 +531,13 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 			\item Type déplaçable
 			\item Instance sur le point d'être détruite ou explicitement déplaçable
 		\end{itemize}
-
-		\begin{alertblock}{Attention}
-			Les données ne sont plus présentes dans l'objet initial
-		\end{alertblock}
 	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Les données ne sont plus présentes dans l'objet initial
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \begin{frame}
@@ -558,11 +580,15 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 		\end{itemize}
 
 		\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots ?}
-			Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337} §3.10
+			\begin{itemize}
+				\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337} §3.10
+			\end{itemize}
 		\end{block}
 
 		\begin{block}{\lstinline|std::forward()| ?}
-			Objectif : le \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385})
+			\begin{itemize}
+				\item Objectif : \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385})
+			\end{itemize}
 		\end{block}
 	\end{itemize}
 \end{frame}
@@ -574,21 +600,23 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 		\begin{itemize}
 			\item Constructeur par déplacement \lstinline|T(const T&&)|
 			\item Opérateur d'affectation par déplacement \lstinline|T& operator=(const T&&)|
-
-			\begin{block}{Génération implicite}
-				Pas de constructeur par copie, d'opérateur d'affectation, de destructeur, ni l'autre \og opérateur\fg{} de déplacement \textit{user-declared}
-			\end{block}
-		
-			\begin{alertblock}{\textit{user-declared} ? \textit{user-provided} ?}
-				\begin{itemize}
-					\item \textit{user-declared} : la fonction est déclarée par l'utilisateur, y compris en \lstinline|=default| 
-					\item \textit{user-provided} : le corps de la fonction est fourni par l'utilisateur
-
-\note[item]{Pour faire simple un fonction \lstinline|=default| est \textit{user-declared} mais pas \textit{user-provided}. Dans le cas de la génération implicite des opérations de déplacement, c'est bien le \textit{user-declared} qui désactive.}
-				\end{itemize}
-			\end{alertblock}
 		\end{itemize}
 	\end{itemize}
+
+	\begin{block}{Génération implicite}
+		\begin{itemize}
+			\item Pas de constructeur par copie, d'opérateur d'affectation, de destructeur, ni l'autre \og opérateur\fg{} de déplacement \textit{user-declared}
+		\end{itemize}
+	\end{block}
+		
+	\begin{alertblock}{\textit{user-declared} ? \textit{user-provided} ?}
+		\begin{itemize}
+			\item \textit{user-declared} : la fonction est déclarée par l'utilisateur, y compris en \lstinline|=default| 
+			\item \textit{user-provided} : le corps de la fonction est fourni par l'utilisateur
+
+\note[item]{Pour faire simple un fonction \lstinline|=default| est \textit{user-declared} mais pas \textit{user-provided}. Dans le cas de la génération implicite des opérations de déplacement, c'est bien le \textit{user-declared} qui désactive.}
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \begin{frame}
@@ -629,12 +657,14 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 		\end{itemize}
 	\end{block}
 
-	\begin{alertblock}{Bonnes pratiques ?}
-		Nombreux débats sur les bonnes pratiques (existantes et nouvelles)
+	\begin{block}{Bonnes pratiques}
+		\begin{itemize}
+			\item Nombreux débats sur les bonnes pratiques (existantes et nouvelles)
+		\end{itemize}
 
 \note[item]{Débats sur les bonnes pratiques : nouvelles bonnes pratiques à définir et impact sur existant (\textit{rule of three}, élision de copie et RVO, forme canonique des opérateurs, surcharges)}
 \note[item]{La situation a pu évoluer, je n'ai pas trop suivi le sujet}
-	\end{alertblock}
+	\end{block}
 \end{frame}
 
 \subsection*{Initialisation}
@@ -695,13 +725,18 @@ MaClasse(initializer_list<value_type> itemList);\end{lstlisting}
 \begin{frame}[fragile]
 \frametitle{Initializer list\titlehfill{}4/4}
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::initializer_list| aux insertions successives
+		\begin{itemize}
+			\item Préférez \lstinline|std::initializer_list| aux insertions successives
+		\end{itemize}
 	\end{exampleblock}
 
 	\pause
 
 	\begin{alertblock}{Don't}
-		N'utilisez pas \lstinline|std::initializer_list| pour copier ou transformer, utilisez les algorithmes et constructeurs idoines
+		\begin{itemize}
+			\item N'utilisez pas \lstinline|std::initializer_list| pour copier ou transformer
+			\item Utilisez les algorithmes et constructeurs idoines
+		\end{itemize}
 
 \note[item]{meilleure sémantique, plus évolutif et probablement plus performant}
 	\end{alertblock}
@@ -793,7 +828,9 @@ f({2});\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Uniform Initialization\titlehfill{}5/6}
 	\begin{alertblock}{Attention}
-		Pas de troncature avec \lstinline|{}|
+		\begin{itemize}
+			\item Pas de troncature avec \lstinline|{}|
+		\end{itemize}
 
 		\begin{lstlisting}[language=C++]
 int foo{2.5};  // Erreur\end{lstlisting}
@@ -802,7 +839,9 @@ int foo{2.5};  // Erreur\end{lstlisting}
 	\pause
 
 	\begin{alertblock}{Attention}
-		Si le constructeur par \lstinline|std::initializer_list| existe, il est utilisé
+		\begin{itemize}
+			\item Si le constructeur par \lstinline|std::initializer_list| existe, il est utilisé
+		\end{itemize}
 
 		\begin{lstlisting}[language=C++]
 vector<int> foo{2};  // 2
@@ -824,55 +863,52 @@ vector<int> foo(2);  // 0 0\end{lstlisting}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez l'initialisation \lstinline|{}| aux autres formes
+		\begin{itemize}
+			\item Préférez l'initialisation \lstinline|{}| aux autres formes
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
 \subsection*{Déduction de type}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|auto|\titlehfill{}1/6}
+	\frametitle{\lstinline|auto|\titlehfill{}1/5}
 	\begin{itemize}
 		\item Déduction (ou inférence) de type
 
-\note[item]{Les deux termes se trouvent. Notamment car c'est une forme simple (par rapport à des langages fonctionnels comme Caml ou Haskell) de l'inférence.}
+\note[item]{Les deux termes se trouvent. Forme simple (par rapport à des langages fonctionnels comme Caml ou Haskell) de l'inférence.}
 
 		\item Type déduit de l'initialisation
 	\end{itemize}
 
 	\pause
 
-	\begin{alertblock}{Inférence de type $\neq$ typage dynamique}
-		Deux notions orthogonales, le typage reste statique
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Inférence de type $\neq$ typage dynamique
+			\item Inférence de type $\neq$ typage faible
+			\item Typage dynamique $\neq$ typage faible
+		\end{itemize}
 	\end{alertblock}
 
-	\begin{alertblock}{Inférence de type $\neq$ typage faible}
-		Encore deux notions orthogonales
-	\end{alertblock}
-
-	\begin{alertblock}{typage dynamique $\neq$ typage faible}
-		Toujours deux notions orthogonales
-
-\note[item]{Contre-exemple le C est statiquement typé mais pas très fortement (conversions implicites) et moins que ne l'est le Python pourtant dynamiquement typé}
+\note[item]{C statiquement typé mais pas très fortement (conversions implicites), moins que Python pourtant dynamiquement typé}
 \note[item]{Pour le C++, la remarque est partiellement vraie, mais il élimine malgré tout certains typages implicites, offre beaucoup plus d'outils pour un bon typage et surtout encourage un typage fort. La faiblesse résiduelle est une conséquence de l'héritage du C et de la forte compatibilité avec celui-ci et n'est en pratique utilisée que dans la partie \og bas niveau\fg{} du C++}
-	\end{alertblock}
-\end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{\lstinline|auto|\titlehfill{}2/6}
-	\begin{block}{Typage \& vocabulaire}
+	\pause
+
+	\begin{block}{Vocabulaire}
 		\begin{itemize}
 			\item Statique : type porté par la variable et ne varie pas
-			\item Dynamique : type porté par la valeur, le type de la variable change au fil des affectations
-			\item Absence : variable non typée, le type est imposé par l'opération
+			\item Dynamique : type porté par la valeur
+			\item Absence : variable non typée, type imposé par l'opération
 			\item Parfois une distinction \textit{compile-time} / \textit{run-time}
-
-\note[item]{La distinction \textit{run-time} / \textit{compile-time} est globalement compatible, au moins à première vue, avec l'explication au dessus mais est à mon sens trop ad hoc et surtout laisse imaginer que typage dynamique = interprété et typage statique = compilé et que l'on ne peut faire aucune vérifications statique de types en typage dynamique ce qui n'est pas totalement vrai (voir linter)}
 		\end{itemize}
+		
+\note[item]{Distinction \textit{run-time} / \textit{compile-time} globalement compatible mais laisse penser que typage dynamique = interprété et typage statique = compilé et que l'on ne peut faire aucune vérifications statique de types en typage dynamique ce qui n'est pas totalement vrai (voir linter)}
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|auto|\titlehfill{}3/6}
+	\frametitle{\lstinline|auto|\titlehfill{}2/5}
 	\begin{itemize}
 		\item \lstinline|auto| définit une variable dont le type est déduit
 	\end{itemize}
@@ -886,7 +922,9 @@ auto i = 2;  // int\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Référence, \lstinline|const| et \lstinline|volatile| sont perdus durant la déduction
+		\begin{itemize}
+			\item Référence, \lstinline|const| et \lstinline|volatile| perdus durant la déduction
+		\end{itemize}
 
 		\begin{lstlisting}[language=C++]
 const int i = 2;
@@ -895,7 +933,7 @@ auto j = i;  // int \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|auto|\titlehfill{}4/6}
+	\frametitle{\lstinline|auto|\titlehfill{}3/5}
 	\begin{itemize}
 		\item Combinaison possible avec \lstinline|const|, \lstinline|volatile| ou \lstinline|&|
 	\end{itemize}
@@ -917,14 +955,18 @@ auto j = 2UL\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|auto|\titlehfill{}5/6}
+	\frametitle{\lstinline|auto|\titlehfill{}4/5}
 	\begin{itemize}
 		\item Tendance forte : \textit{Almost Always Auto} (AAA)
+	\end{itemize}
 
-		\begin{block}{Pour aller plus loin}
-			Voir \href{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}{GotW 94 : AAA Style}
-		\end{block}
+	\begin{block}{Pour aller plus loin}
+		\begin{itemize}
+			\item Voir \href{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}{GotW 94 : AAA Style}
+		\end{itemize}
+	\end{block}
 
+	\begin{itemize}
 		\item Plusieurs avantages
 		\begin{itemize}
 			\item Variables forcément initialisées
@@ -937,12 +979,14 @@ auto j = 2UL\end{lstlisting}
 	\pause
 	
 	\begin{block}{Quiz}
-		Type de retour de \lstinline|std::list<std::string>::size()| ?
+		\begin{itemize}
+			\item Type de retour de \lstinline|std::list<std::string>::size()| ?
+		\end{itemize}
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|auto|\titlehfill{}6/6}
+	\frametitle{\lstinline|auto|\titlehfill{}5/5}
 	\begin{itemize}
 		\item Limitations - solutions
 		\begin{itemize}
@@ -956,14 +1000,18 @@ auto j = 2UL\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Compatibilité}
-		\lstinline|auto| présent en C++98/03 avec un sens radicalement différent
+		\begin{itemize}
+			\item \lstinline|auto| présent en C++98/03 avec un sens radicalement différent
+		\end{itemize}
 
 \note[item]{Sens en C++98/03 : variable de type automatique (c'est à dire sur la pile) par opposition à statique. Inutile car c'est le cas par défaut et donc inutilisé}
 \note[item]{Un cas où la compatibilité ascendante entre C++98/03 et C++11 a été rompue}
 	\end{alertblock}
 
 	\begin{block}{Dépréciation}
-		Mot-clé \lstinline|register| également déprécié
+		\begin{itemize}
+			\item Mot-clé \lstinline|register| également déprécié
+		\end{itemize}
 
 \note[item]{\lstinline|register| est supprimé en C++17}
 	\end{block}
@@ -1012,7 +1060,9 @@ decltype(foo().bar()) n2 = 5;               // Erreur
 decltype(std::declval<foo>().bar()) n2 = 5; // OK, int\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		Uniquement dans des contextes non évalués
+		\begin{itemize}
+			\item Uniquement dans des contextes non évalués
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -1056,7 +1106,9 @@ auto add(T a, U b) -> decltype(a + b) {
   return a + b; }\end{lstlisting}
 
 	\begin{exampleblock}{do}
-		Utilisez la déduction du type retour dans vos fonctions templates
+		\begin{itemize}
+			\item Utilisez la déduction du type retour dans vos fonctions templates
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -1115,9 +1167,9 @@ accumulate(foo.begin(), foo.end(), 0); // 61\end{lstlisting}
 		\end{itemize}
 		\item Versions non ordonnées de \lstinline|std::map|, \lstinline|std::multimap|, \lstinline|std::set| et \lstinline|std::multiset|
 
-		\begin{block}{Pourquoi unordered ?}
+		\begin{block}{\textit{Unordered} ?}
 			\begin{itemize}
-				\item Trop nombreuses implémentations \lstinline|hash_XXX| existantes
+				\item Nombreuses implémentations \lstinline|hash_XXX| existantes
 				\item Structures fondamentalement non ordonnées
 			\end{itemize}
 		\end{block}
@@ -1144,7 +1196,7 @@ foo.shrink_to_fit();
 		\item \lstinline|data()| récupère le \og tableau C\fg{} d'un \lstinline|std::vector|
 	\end{itemize}
 
-	\begin{block}{\lstinline|foo.data()| ou \lstinline|&foo[0]|}
+	\begin{block}{\lstinline|foo.data()| ? \lstinline|&foo[0]| ?}
 		\begin{itemize}
 			\item Comportement identique
 			\item Préférez \lstinline|foo.data()| sémantiquement plus clair
@@ -1155,7 +1207,7 @@ foo.shrink_to_fit();
 \begin{frame}[fragile]
 	\frametitle{Conteneurs\titlehfill{}5/6}
 	\begin{itemize}
-		\item \lstinline|emplace()|, \lstinline|emplace_back()| et \lstinline|emplace_front()| construisent directement dans le conteneur depuis les paramètres d'un des constructeurs de l'élément
+		\item \lstinline|emplace()|, \lstinline|emplace_back()| et \lstinline|emplace_front()| construisent dans le conteneur depuis les paramètres d'un des constructeurs de l'élément
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1167,7 +1219,9 @@ vector<Point> foo;
 foo.emplace_back(2, 5);\end{lstlisting}
 
 	\begin{block}{Objectif}
-		Éliminer les copies inutiles restantes et gagner en performance
+		\begin{itemize}
+			\item Éliminer les copies inutiles restantes et gagner en performance
+		\end{itemize}
 
 \note[item]{Copies présentes malgré l'élision de copie, (N)RVO et la sémantique de déplacement}
 \note[item]{On gagne aussi en lisibilité (moins de ligne, pas de construction juste pour pousser, pas d'introduction d'un nom sans utilité)}
@@ -1207,13 +1261,13 @@ foo.emplace_back(2, 5);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Itérateurs\titlehfill{}1/4}
 	\begin{itemize}
-		\item Fonctions membres \lstinline|cbegin()|, \lstinline|cend()|, \lstinline|crbegin()| et \lstinline|rcend()| permettant d'obtenir systématiquement des \lstinline|const_iterator|
+		\item Fonctions membres \lstinline|cbegin()|, \lstinline|cend()|, \lstinline|crbegin()| et \lstinline|rcend()| retournant des \lstinline|const_iterator|
 
 \note[item]{Les fonctions \lstinline|begin()|, \lstinline|end()|, etc. retournent des \lstinline|const_iterator| si le conteneur est \lstinline|const|, des \lstinline|iterator| dans le cas contraire}
 
 		\item Fonctions libres \lstinline|std::begin()| et \lstinline|std::end()|
 		\begin{itemize}
-			\item conteneur : équivalente aux fonctions membres
+			\item conteneur : appel des fonctions membres
 			\item tableau C : adresse du premier élément et suivant le dernier élément
 		\end{itemize}
 	\end{itemize}
@@ -1229,8 +1283,7 @@ accumulate(begin(bar), end(bar), 0);  // 14\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Itérateurs\titlehfill{}2/4}
 	\begin{itemize}
-		\item Fonctions libres \lstinline|std::begin()| et \lstinline|std::end()| (cont.)
-		\begin{itemize}
+		\item [] \begin{itemize}
 			\item Compatibles avec les conteneurs non-STL proposant \lstinline|begin()| et \lstinline|end()|
 			\item Surchargeable sans modification du conteneur pour les autres
 
@@ -1254,15 +1307,21 @@ const char* begin(const Foo& foo) {
 \begin{frame}[fragile]
 	\frametitle{Itérateurs\titlehfill{}3/4}
 	\begin{block}{Conseils}
-		\lstinline|using std::begin| et \lstinline|using std::end| pour permettre l'ADL malgré la surcharge
+		\begin{itemize}
+			\item \lstinline|using std::begin| et \lstinline|using std::end| permet l'ADL malgré la surcharge
+		\end{itemize}
 	\end{block}
 
 	\begin{alertblock}{Don't}
-		N'ouvrez pas le namespace \lstinline|std| pour spécialiser
+		\begin{itemize}
+			\item N'ouvrez pas le namespace \lstinline|std| pour spécialiser
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::begin()| et \lstinline|std::end()| aux fonctions membres
+		\begin{itemize}
+			\item Préférez \lstinline|std::begin()| et \lstinline|std::end()| aux fonctions membres
+		\end{itemize}
 
 \note[item]{Plus générique (à commencer par tableau C), coût à priori nul}
 	\end{exampleblock}
@@ -1565,11 +1624,15 @@ iota(begin(foo), end(foo), 50); // 50 51 52 53 54\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Conclusion}
 	\begin{exampleblock}{Do}
-		Continuez à suivre les règles C++98/03 à propos des algorithmes
+		\begin{itemize}
+			\item Continuez à suivre les règles C++98/03 à propos des algorithmes
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Privilégiez la sémantique lorsque plusieurs algorithmes sont utilisables
+		\begin{itemize}
+			\item Privilégiez la sémantique lorsque plusieurs algorithmes sont utilisables
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -1602,7 +1665,9 @@ for(auto var : foo)
 \begin{frame}[fragile]
 	\frametitle{Range-based for loop\titlehfill{}2/3}
 	\begin{alertblock}{Modification des éléments}
-		La variable d'itération doit être une référence
+		\begin{itemize}
+			\item La variable d'itération doit être une référence
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{lstlisting}
@@ -1615,7 +1680,9 @@ for(auto& var : foo)
 \begin{frame}
 	\frametitle{Range-based for loop\titlehfill{}3/3}
 	\begin{exampleblock}{Do}
-		Préférez \textit{range-based for loop} aux boucles classiques et à \lstinline|std::for_each()|
+		\begin{itemize}
+			\item Préférez \textit{range-based for loop} aux boucles classiques et à \lstinline|std::for_each()|
+		\end{itemize}
 	\end{exampleblock}
 
 \note[item]{\lstinline|std::for_each()| n'a plus d'intérêt en C++11 mais redevient utile en C++17 avec les politiques d'exécution parallélisées}
@@ -1630,7 +1697,9 @@ for(auto& var : foo)
 	\end{block}
 
 	\begin{exampleblock}{Do}
-		Utilisez l'inférence de type sur la variable d'itération
+		\begin{itemize}
+			\item Utilisez l'inférence de type sur la variable d'itération
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -1676,19 +1745,27 @@ to_string(56); // "56"\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::string| \& conversions\titlehfill{}3/3}
 	\begin{alertblock}{Attention}
-		Pas de fonction \lstinline|std::stoui()| de conversion vers un \lstinline|unsigned int|
+		\begin{itemize}
+			\item Pas de fonction \lstinline|std::stoui()| de conversion vers un \lstinline|unsigned int|
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::sto...()| à \lstinline|sscanf()|, \lstinline|atoi()| ou \lstinline|strto...()|
+		\begin{itemize}
+			\item Préférez \lstinline|std::sto...()| à \lstinline|sscanf()|, \lstinline|atoi()| ou \lstinline|strto...()|
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::to_string()| à \lstinline|snprintf()| ou \lstinline|itoa()|
+		\begin{itemize}
+			\item Préférez \lstinline|std::to_string()| à \lstinline|snprintf()| ou \lstinline|itoa()|
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{block}{Alternative et complément}
-		Boost.Lexical\_cast permet également de telles conversions et quelques autres
+		\begin{itemize}
+			\item Boost.Lexical\_cast permet de telles conversions et quelques autres
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1791,7 +1868,9 @@ Foo operator""_b(const char* str) {
 Foo foo = 0110_b;  // 6\end{lstlisting}
 
 	\begin{alertblock}{Restrictions}
-		Uniquement pour les littéraux numériques
+		\begin{itemize}
+			\item Uniquement pour les littéraux numériques
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -1835,7 +1914,7 @@ tuple<int, char, long> foo;\end{lstlisting}
 tuple<int, char, long> foo = make_tuple(5, 'e', 98L);\end{lstlisting}
 
 	\begin{block}{\lstinline|std::make_tuple| ou constructeur ?}
-		\lstinline|std::make_tuple()| permet de déduire les types, pas le constructeur
+		\lstinline|std::make_tuple()| permet la déduction de types, pas le constructeur
 
 		\begin{lstlisting}[language=C++]
 auto foo{5, 'e', 98L};              // KO
@@ -1850,13 +1929,15 @@ auto bar = make_tuple(5, 'e', 98L); // OK\end{lstlisting}
 	\begin{itemize}
 		\item Fonction de déstructuration : \lstinline|std::tie()|
 		\item Et une constante pour ignorer des éléments : \lstinline|std::ignore|
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 int a; long b;
 tie(a, ignore, b) = foo;\end{lstlisting}
 
 \note[item]{C++17 introduit les \textit{structured binding} qui améliore grandement la déstructuration en proposant une syntaxe plus simple et claire}
 
+	\begin{itemize}
 		\item Fonction template d'accès aux éléments du \lstinline|std::tuple| par l'indice
 	\end{itemize}
 
@@ -1864,7 +1945,9 @@ tie(a, ignore, b) = foo;\end{lstlisting}
 char c = get<1>(foo);\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		Les indices commencent à 0
+		\begin{itemize}
+			\item Les indices commencent à 0
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -1897,12 +1980,16 @@ tuple_element<0, decltype(baz)>::type first;  // int\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::tuple|\titlehfill{}4/4}
 	\begin{alertblock}{Don't}
-		N'utilisez pas \lstinline|std::tuple| pour remplacer une structure\\
-		\lstinline|std::tuple| permet de regrouper localement des éléments sans lien sémantique
+		\begin{itemize}
+			\item N'utilisez pas \lstinline|std::tuple| pour remplacer une structure
+			\item \lstinline|std::tuple| regroupe localement des éléments sans lien sémantique
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::tuple| de retour aux paramètres OUT
+		\begin{itemize}
+			\item Préférez \lstinline|std::tuple| de retour aux paramètres OUT
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -1953,11 +2040,15 @@ class Foo {
 \begin{frame}[fragile]
 	\frametitle{\lstinline|=default| \& \lstinline|=delete|\titlehfill{}2/2}
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|=default| à une implémentation manuelle qui aurait le même effet
+		\begin{itemize}
+			\item Préférez \lstinline|=default| à une implémentation manuelle qui aurait le même effet
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|=delete| à une déclaration privée sans définition
+		\begin{itemize}
+			\item Préférez \lstinline|=delete| à une déclaration privée sans définition
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{block}{\lstinline|=default| ou non définition ?}
@@ -1987,7 +2078,9 @@ struct Foo{
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez l'initialisation des membres à l'initialisation par constructeurs pour les initialisations avec une valeur connue à la compilation
+		\begin{itemize}
+			\item Préférez l'initialisation des membres à l'initialisation par constructeurs pour les initialisations avec une valeur connue à la compilation
+		\end{itemize}
 
 \note[item]{Y compris pour les valeurs \og par défaut\fg{} modifiées dans seulement une petite partie des constructeurs}
 	\end{exampleblock}
@@ -2010,14 +2103,19 @@ struct Foo {
 \begin{frame}[fragile]
 	\frametitle{Délégation de constructeur\titlehfill{}2/2}
 	\begin{exampleblock}{Do}
-		Utilisez la délégation de constructeur pour mutualiser le code commun aux constructeurs
+		\begin{itemize}
+			\item Utilisez la délégation de constructeur pour mutualiser le code commun
+		\end{itemize}
 
 \note[item]{Historiquement, utilisation d'une fonction d'initialisation privée appelée par tous les constructeurs. L'inconvénient est que cette fonction est nécessairement dans le corps du constructeur donc après la construction de toutes les données membres ce qui conduit potentiellement à une construction inutile suivi d'une affectation et donc à une perte de temps aisément évitable}
 \note[item]{Règle historique liée : initialisez dans la liste d'initialisation et non dans le corps du constructeur}
 	\end{exampleblock}
 
 	\begin{alertblock}{Don't}
-		Évitez la délégation pour l'initialisation constante commune de membres, préférez l'initialisation d'attributs
+		\begin{itemize}
+			\item Évitez la délégation pour l'initialisation constante de membres
+			\item Préférez l'initialisation d'attributs
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -2057,13 +2155,17 @@ struct Bar : Foo {
   Bar() : Foo(5) {}};\end{lstlisting}
 
 	\begin{alertblock}{Valeurs par défaut}
-		Génération de toutes les combinaisons de constructeurs sans valeur par défaut correspondantes au constructeur de base avec des valeurs par défaut
+		\begin{itemize}
+			\item Génération de toutes les combinaisons de constructeurs sans valeur par défaut correspondantes au constructeur de base avec des valeurs par défaut
+		\end{itemize}
 
 \note[item]{Ainsi \lstinline|Foo(int, int = 2)| va injecter \lstinline|Bar(int)| et \lstinline|Bar(int, int)|}
 	\end{alertblock}
 
 	\begin{alertblock}{Héritage multiple}
-		Héritage impossible de deux constructeurs avec la même signature
+		\begin{itemize}
+			\item Héritage impossible de deux constructeurs avec la même signature
+		\end{itemize}
 	\end{alertblock}
 
 \note[item]{Mécanisme intéressant pour les classes dérivées sans données membres ou avec des données membres initialisables par attribut}
@@ -2117,11 +2219,16 @@ struct Bar : Foo {
 	\end{block}
 
 	\begin{exampleblock}{Do}
-		Marquez \lstinline|override| les fonctions que vous redéfinissez
+		\begin{itemize}
+			\item Marquez \lstinline|override| les fonctions que vous redéfinissez
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Utilisez \lstinline|virtual| à la base de l'arbre d'héritage et \lstinline|override| sur les redéfinitions
+		\begin{itemize}
+			\item Utilisez \lstinline|virtual| à la base de l'arbre d'héritage
+			\item Utilisez \lstinline|override| sur les redéfinitions
+		\end{itemize}
 
 \note[item]{Si une fonction est virtuelle, toutes ces redéfinitions le sont qu'elles soient ou non marquées comme tel}
 	\end{exampleblock}
@@ -2163,7 +2270,9 @@ struct Baz : Bar {
   void f(int); };    // Erreur\end{lstlisting}
 
 	\begin{exampleblock}{Do}
-		Utilisez \lstinline|final| avec parcimonie
+		\begin{itemize}
+			\item Utilisez \lstinline|final| avec parcimonie
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -2211,8 +2320,10 @@ void foo() noexcept {}\end{lstlisting}
 void foo() noexcept(true) {}\end{lstlisting}
 
 	\begin{block}{Dépréciation}
-		Les spécifications d'exception sont dépréciées\\
-		Voir \href{http://www.gotw.ca/publications/mill22.htm}{A Pragmatic Look at Exception Specifications} (Herb Sutter)
+		\begin{itemize}
+			\item Les spécifications d'exception sont dépréciées
+			\item Voir \href{http://www.gotw.ca/publications/mill22.htm}{A Pragmatic Look at Exception Specifications} (Herb Sutter)
+		\end{itemize}
 
 \note[item]{En pratique, seule \lstinline|throw()| était utilisée et utilisable et a été remplacée par \lstinline|noexcept|}
 	\end{block}
@@ -2231,7 +2342,9 @@ void foo() noexcept(true) {}\end{lstlisting}
 noexcept(foo()); // true\end{lstlisting}
 
 	\begin{exampleblock}{Do}
-		Marquez \lstinline|noexcept| les fonctions qui sémantiquement ne jette pas d'exception
+		\begin{itemize}
+			\item Marquez \lstinline|noexcept| les fonctions qui sémantiquement ne jette pas d'exception
+		\end{itemize}
 
 \note[item]{Insister sur le sémantiquement. Qu'elle ne jette pas d'exception en pratique n'est pas une raison de la marquer \lstinline|noexcept|, il faut que jeter une exception n'est pas de sens pour elle (\lstinline|noexcept| par design)}
 	\end{exampleblock}
@@ -2259,7 +2372,9 @@ catch(...) {
   rethrow_exception(bar); } \end{lstlisting}
 
 	\begin{block}{Motivation}
-		Faire passer la barrière des threads aux exceptions
+		\begin{itemize}
+			\item Faire passer la barrière des threads aux exceptions
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -2317,11 +2432,15 @@ enum class Foo : unsigned char { BAR1, BAR2 };\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Énumérations fortement typées\titlehfill{}2/2}
 	\begin{exampleblock}{Do}
-		Préférez les énumérations fortement typées
+		\begin{itemize}
+			\item Préférez les énumérations fortement typées
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{block}{Bémol}
-		Pas de manière simple et robuste de récupérer la valeur ou l'intitulé de l'énuméré
+		\begin{itemize}
+			\item Pas de méthode simple et robuste pour récupérer la valeur ou l'intitulé de l'énuméré
+		\end{itemize}
 
 \note[item]{Fonctions de conversions manuelles, \lstinline|static_cast| pour le type mais il n'y a pas vraiment de vérification. Des tentatives, plutôt réussies pour certaines, à coup de \lstinline|template| ou de \lstinline|define|}
 	\end{block}
@@ -2349,7 +2468,9 @@ function<int(int, int)> bar = foo;\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		Les foncteurs ne sont pas transmis aux algorithmes par ce mécanisme mais par des paramètres templates identifiés aux types internes du compilateur
+		\begin{itemize}
+			\item Les foncteurs ne sont pas transmis aux algorithmes par ce mécanisme mais par des paramètres templates identifiés aux types internes du compilateur
+		\end{itemize}
 	
 \note[item]{Types internes moins génériques et non accessibles mais plus efficaces}
 	\end{block}
@@ -2369,11 +2490,15 @@ std::function<int(Foo, int)> bar = mem_fn(&Foo::f);
 bar(foo, 5);   // 10\end{lstlisting}
 
 	\begin{block}{Note}
-		Type de retour non spécifié mais stockable dans \lstinline|std::function|
+		\begin{itemize}
+			\item Type de retour non spécifié mais stockable dans \lstinline|std::function|
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de \lstinline|std::mem_fun|, \lstinline|std::ptr_fun| et consorts
+		\begin{itemize}
+			\item Dépréciation de \lstinline|std::mem_fun|, \lstinline|std::ptr_fun| et consorts
+		\end{itemize}
 
 \note[item]{Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes. Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)}
 	\end{block}
@@ -2398,7 +2523,9 @@ baz(3, 2, 1, 2, 3);   // 3\end{lstlisting}
 \note[item]{Avec auto, il est possible de passer autant de paramètres surnuméraires que souhaiter}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de \lstinline|std::bind1st| et \lstinline|std::bind2nd|
+		\begin{itemize}
+			\item Dépréciation de \lstinline|std::bind1st| et \lstinline|std::bind2nd|
+		\end{itemize}
 
 \note[item]{Version C++98 mais limités car ne pouvait que convertir une fonction binaire en fonction unaire en liant le premier ou le second paramètre}
 	\end{block}
@@ -2445,13 +2572,19 @@ int baz = foo(5);
 		\item La capture de variables membres se fait par la capture de  \lstinline|this|
 		\begin{itemize}
 			\item Soit explicitement via \lstinline|[this]|
+		\end{itemize}
+	\end{itemize}
 
-			\begin{alertblock}{Capture de \lstinline|this|}
-				Capture du pointeur, non de l'objet
+	\begin{alertblock}{Capture de \lstinline|this|}
+		\begin{itemize}
+			\item Capture du pointeur, non de l'objet
+		\end{itemize}
 	
 \note[item]{C++14 permet la capture d'une copie de l'objet}
-			\end{alertblock}
+	\end{alertblock}
 			
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Soit via \lstinline|[=]| ou \lstinline|[&]|
 
 \note[item]{Plusieurs changements autour de la capture explicite ou implicite de \lstinline|this| dans les versions suivantes}
@@ -2472,7 +2605,9 @@ int baz = foo(5);
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Par défaut, les variables capturées par copie ne sont pas modifiables
+		\begin{itemize}
+			\item Par défaut, les variables capturées par copie ne sont pas modifiables
+		\end{itemize}
 	
 		\begin{lstlisting}[language=C++]
 int i = 5;
@@ -2509,24 +2644,32 @@ auto foo = [] {return 5;};\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{lambda, \lstinline|std::function|, \ldots - Conclusion}
 	\begin{exampleblock}{Do}
-		Préférez les lambdas aux \lstinline|std::function|
+		\begin{itemize}
+			\item Préférez les lambdas aux \lstinline|std::function|
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Préférez les lambdas à \lstinline|std::bind()|
+		\begin{itemize}
+			\item Préférez les lambdas à \lstinline|std::bind()|
+		\end{itemize}
 	\end{exampleblock}
 
 \note[item]{Les lambdas sont généralement plus efficaces}
 
 	\begin{block}{Motivations}
-		Lisibilité, expressivité et performances \\
-		Voir \href{https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf}{practical\_performance\_practices.pdf}
+		\begin{itemize}
+			\item Lisibilité, expressivité et performances
+			\item Voir \href{https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf}{practical\_performance\_practices.pdf}
+		\end{itemize}
 
 \note[item]{Entre autres, il y a aussi des remarques intéressantes sur le choix des conteneurs, des pointeurs intelligents, sur \lstinline|std::endl|, etc.}
 	\end{block}
 
 	\begin{alertblock}{Attention}
-		Prenez garde à la durée de vie des variables capturées par référence
+		\begin{itemize}
+			\item Prenez garde à la durée de vie des variables capturées par référence
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -2618,7 +2761,9 @@ using Error = int;\end{lstlisting}
 extern template class std::vector<int>;\end{lstlisting}
 
 	\begin{block}{Objectif}
-		Réduction du temps de compilation
+		\begin{itemize}
+			\item Réduction du temps de compilation
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -2793,15 +2938,19 @@ foo("azert");    // Erreur\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{\lstinline|export| et compatibilité}
-		Rupture de comptabilité ascendante\\
-		Fonctionnalité implémentée sur un unique compilateur et inutilisée en pratique
+		\begin{itemize}
+			\item Rupture de comptabilité ascendante
+			\item Implémenté sur un unique compilateur et inutilisé en pratique
+		\end{itemize}
 
 \note[item]{Un seul front end EDG, utilisé par deux compilateurs (Comeau et ICC) mais la fonctionnalité n'était pas active chez Intel}
 \note[item]{Suppression soutenue par l'équipe d'EDG}
 	\end{block}
 
 	\begin{block}{Motivations}
-		Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1426.pdf}{N1426}
+		\begin{itemize}
+			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1426.pdf}{N1426}
+		\end{itemize}
 
 \note[item]{En gros les motivations sont : peu utile, peu demandé, compliqué à implémenter et compliqué à utiliser}
 	\end{block}
@@ -2993,7 +3142,9 @@ unique_ptr<int> p(new int);
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Ne pas utilisez le pointeur retourné par \lstinline|get()| pour libérer la ressource
+		\begin{itemize}
+			\item Ne pas utilisez le pointeur retourné par \lstinline|get()| pour libérer la ressource
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -3022,7 +3173,9 @@ std::unique_ptr<int[]> foo (new int[5]);
 for(int i=0; i<5; ++i) foo[i] = i;\end{lstlisting}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de \lstinline|std::auto_ptr| au profit de \lstinline|std::unique_ptr|
+		\begin{itemize}
+			\item Dépréciation de \lstinline|std::auto_ptr| au profit de \lstinline|std::unique_ptr|
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3074,7 +3227,9 @@ foo(shared_ptr<int>(new int(42)), bar());\end{lstlisting}
 	\end{block}
 
 	\begin{exampleblock}{Do}
-		Utilisez \lstinline|std::make_shared()| pour construire vos \lstinline|std::shared_ptr|
+		\begin{itemize}
+			\item Utilisez \lstinline|std::make_shared()| pour construire vos \lstinline|std::shared_ptr|
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -3087,7 +3242,9 @@ foo(shared_ptr<int>(new int(42)), bar());\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Objectif}
-		Rompre les cycles 
+		\begin{itemize}
+			\item Rompre les cycles 
+		\end{itemize}
 	\end{block}
 
 	\begin{lstlisting}[language=C++]
@@ -3123,11 +3280,15 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Pointeurs intelligents - Conclusion\titlehfill{}1/3}
 	\begin{alertblock}{Don't}
-		N'utilisez pas de pointeurs bruts possédants, utilisez des pointeurs intelligents
+		\begin{itemize}
+			\item N'utilisez pas de pointeurs bruts possédants
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Réfléchissez à la responsabilité de vos ressources
+		\begin{itemize}
+			\item Réfléchissez à la responsabilité de vos ressources
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
@@ -3143,34 +3304,46 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Pointeurs intelligents - Conclusion\titlehfill{}2/3}
 	\begin{exampleblock}{Do}
-		Brisez les cycles à l'aide de \lstinline|std::weak_ptr|
+		\begin{itemize}
+			\item Brisez les cycles à l'aide de \lstinline|std::weak_ptr|
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{alertblock}{Attention}
-		Passez par un \lstinline|std::unique_ptr| temporaire intermédiaire pour insérer des éléments dans un conteneur de \lstinline|std::unique_ptr| \\
-		Voir \href{https://accu.org/index.php/journals/2271}{Overload 134 - C++ Antipatterns}
+		\begin{itemize}
+			\item Passez par un \lstinline|std::unique_ptr| temporaire intermédiaire pour insérer des éléments dans un conteneur de \lstinline|std::unique_ptr|
+			\item Voir \href{https://accu.org/index.php/journals/2271}{Overload 134 - C++ Antipatterns}
+		\end{itemize}
 
 \note[item]{\lstinline|push_back| d'un pointeur brute n'est pas possible et \lstinline|emplace_back| peut échouer en laissant fuir le pointeur}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Transférez au plus tôt la responsabilité des objets alloués à un pointeur intelligent
+		\begin{itemize}
+			\item Transférez au plus tôt la responsabilité à un pointeur intelligent
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Pointeurs intelligents - Conclusion\titlehfill{}3/3}
 	\begin{block}{Pour aller plus loin}
-		Voir \href{http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/}{Pointeurs intelligents (Loïc Joly)}
+		\begin{itemize}
+			\item Voir \href{http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/}{Pointeurs intelligents (Loïc Joly)}
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Sous silence}
-		Allocateurs, mémoire non-initialisée, alignement, \ldots 
+		\begin{itemize}
+			\item Allocateurs, mémoire non-initialisée, alignement, \ldots
+		\end{itemize} 
 	\end{block}
 
 	\begin{block}{Mais aussi}
-		Des réflexions et contraintes sur les \textit{Garbage Collector}\\
-		\ldots{}mais pas de GC standard
+	\begin{itemize}
+		\item Des réflexions et contraintes sur les \textit{Garbage Collector}
+		\item Mais pas de GC standard
+	\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3239,7 +3412,9 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 // Attribut s'applique au return\end{lstlisting}
 
 	\begin{exampleblock}{Bonus}
-		Aussi une information à destination des développeurs
+		\begin{itemize}
+			\item Aussi une information à destination des développeurs
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -3253,15 +3428,22 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 [[ noreturn ]] void f() { throw "error"; }\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		Fonction qui ne retourne pas, et non qui ne retourne rien
+		\begin{itemize}
+			\item Qui ne retourne pas
+			\item Et non qui ne retourne rien
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{block}{Usage}
-		Boucle infinie, sortie de l'application, exception systématique
+		\begin{itemize}
+			\item Boucle infinie, sortie de l'application, exception systématique
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Sous silence}
-		\lstinline|[[ carries_dependency ]]|
+		\begin{itemize}
+			\item \lstinline|[[ carries_dependency ]]|
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3335,7 +3517,7 @@ cout << foo.count() * milliseconds::period::num /
 \begin{frame}[fragile]
 	\frametitle{Durées\titlehfill{}2/2}
 	\begin{itemize}
-		\item Opérateurs d'ajout, suppression, incrémentation, décrémentation, \ldots{} des durées
+		\item Opérateurs de manipulation des durées (ajout, suppression, \ldots{})
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -3359,7 +3541,9 @@ foo /= 2;     // 255\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Epoch}
-		Origine des temps de l'OS (1 janvier 1970 00h00 sur Unix)
+		\begin{itemize}
+			\item Origine des temps de l'OS (1 janvier 1970 00h00 sur Unix)
+		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
@@ -3396,7 +3580,7 @@ ctime(&tt);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Horloges\titlehfill{}2/3}
 	\begin{itemize}
-		\item \lstinline|std::chrono::steady_clock| : horloge monotone dédiée à la mesure des intervalles de temps
+		\item \lstinline|std::chrono::steady_clock| : horloge monotone de mesure des intervalles
 
 \note[item]{Monotone, c'est à dire que cette horloge n'est jamais réglée, en particulier une mise à l'heure durant la mesure n'a pas d'impact sur la mesure}
 \note[item]{Pas le cas de \lstinline|std::chrono::system_clock| qui mesure le temps par rapport à epoch et dont la valeur est impactée par la mise à l'heure}
@@ -3419,17 +3603,21 @@ duration_cast<duration<double>>(t2 - t1);\end{lstlisting}
 	\frametitle{Horloges\titlehfill{}3/3}
 	\begin{itemize}
 		\item \lstinline|std::chrono::high_resolution_clock| : horloge avec le plus petit intervalle entre deux \textit{ticks}
-		\item Peut être un synonyme de \lstinline|std::chrono::system_clock| ou \lstinline|std::chrono::steady_clock|
+		\item Possible synonyme de \lstinline|std::chrono::system_clock| ou \lstinline|std::chrono::steady_clock|
 	\end{itemize}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::clock::duration| aux entiers pour manipuler les durées
+		\begin{itemize}
+			\item Préférez \lstinline|std::clock::duration| aux entiers pour manipuler les durées
+		\end{itemize}
 
 \note[item]{Meilleur sémantique et meilleur typage}
 	\end{exampleblock}
 
 	\begin{alertblock}{Attention}
-		N'espérez pas une précision arbitrairement grande des horloges
+		\begin{itemize}
+			\item N'espérez pas une précision arbitrairement grande des horloges
+		\end{itemize}
 
 \note[item]{En particulier ne soyez pas certains de récupérer des durées précis à la nanoseconde sous prétexte qu'il y a une instanciation en nanosecondes}
 	\end{alertblock}
@@ -3524,7 +3712,9 @@ cout << foo;        // Affiche 5 15\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Mais aussi}
-		Plusieurs fonctions \og C-style\fg{}, similaires aux fonctions membres de \lstinline|std::atomic|, manipulant atomiquement des données
+		\begin{itemize}
+			\item Plusieurs fonctions \og C-style\fg{}, similaires aux fonctions membres de \lstinline|std::atomic|, manipulant atomiquement des données
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3610,13 +3800,17 @@ this_thread::sleep_for(chrono::seconds(5));\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Ne vous attendez pas à des attentes arbitrairement précises
+		\begin{itemize}
+			\item Ne vous attendez pas à des attentes arbitrairement précises
+		\end{itemize}
 
 \note[item]{À l'échéance, le thread n'interrompt pas les autres pour reprendre la main}
 	\end{alertblock}
 
 	\begin{block}{Attentes passives}
-		Les autres threads continuent de s'exécuter
+		\begin{itemize}
+			\item Les autres threads continuent de s'exécuter
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3630,7 +3824,9 @@ this_thread::sleep_for(chrono::seconds(5));\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		\lstinline|lock()| sur un mutex verrouillé par le même thread provoque un \textit{deadlock}
+		\begin{itemize}
+			\item \lstinline|lock()| sur un mutex verrouillé par le même thread provoque un \textit{deadlock}
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{itemize}
@@ -3667,7 +3863,9 @@ mutex foo;
 }  // Liberation du mutex\end{lstlisting}
 
 	\begin{block}{Note}
-		Gestion du mutex entièrement confiée au \textit{lock}
+		\begin{itemize}
+			\item Gestion du mutex entièrement confiée au \textit{lock}
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3700,7 +3898,9 @@ mutex foo;
 	\end{itemize}
 
 	\begin{block}{Note}
-		Gestion du mutex conservée, garantie de libération
+		\begin{itemize}
+			\item Gestion du mutex conservée, garantie de libération
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3736,7 +3936,9 @@ once_flag flag;
 call_once(flag, foo, 42, 'r');\end{lstlisting}
 
 	\begin{block}{Cas d'utilisation}
-		Appelle par un unique thread d'une fonction d'initialisation
+		\begin{itemize}
+			\item Appelle par un unique thread d'une fonction d'initialisation
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3769,10 +3971,12 @@ unique_lock<std::mutex> lck(mtx);
 cv.wait(lck);\end{lstlisting}
 
 	\begin{block}{Note}
-		Possibilité de fournir un prédicat :
 		\begin{itemize}
-			\item Blocage seulement s'il retourne \lstinline|false|
-			\item Déblocage seulement s'il retourne \lstinline|true|
+			\item Possibilité de fournir un prédicat
+			\begin{itemize}
+				\item Blocage seulement s'il retourne \lstinline|false|
+				\item Déblocage seulement s'il retourne \lstinline|true|
+			\end{itemize}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -3785,7 +3989,9 @@ cv.wait(lck);\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		\lstinline|wait_for()| et \lstinline|wait_until()| indique si l'exécution a repris suite à un timeout ou non
+		\begin{itemize}
+			\item \lstinline|wait_for()| et \lstinline|wait_until()| indique si l'exécution a repris suite à un timeout
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3797,7 +4003,9 @@ cv.wait(lck);\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Impossible de choisir quel thread notifié avec \lstinline|notify_one()|
+		\begin{itemize}
+			\item Impossible de choisir quel thread notifié avec \lstinline|notify_one()|
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{itemize}
@@ -3848,7 +4056,9 @@ for (auto& th : threads) th.join();\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		\lstinline|std::promise| et \lstinline|std::future| peuvent également manipuler des exceptions
+		\begin{itemize}
+			\item \lstinline|std::promise| et \lstinline|std::future| peuvent également manipuler des exceptions
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -3874,7 +4084,9 @@ for (auto& th : threads) th.join();\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Après un appel à \lstinline|share()|, le \lstinline|std:future| n'est plus valide
+		\begin{itemize}
+			\item Après un appel à \lstinline|share()|, le \lstinline|std:future| n'est plus valide
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{itemize}
@@ -3896,12 +4108,14 @@ for (auto& th : threads) th.join();\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		Deux politiques d'exécution de la fonction appelée
 		\begin{itemize}
-			\item Exécution asynchrone
-			\item Exécution différée à l'appel de \lstinline|wait()| ou \lstinline|get()|
+			\item Deux politiques d'exécution de la fonction appelée
+			\begin{itemize}
+				\item Exécution asynchrone
+				\item Exécution différée à l'appel de \lstinline|wait()| ou \lstinline|get()|
+			\end{itemize}
+			\item Par défaut le choix est laissé à l'implémentation
 		\end{itemize}
-		Par défaut le choix est laissé à l'implémentation
 	\end{block}
 \end{frame}
 
@@ -3927,7 +4141,9 @@ cout << bar.get() << "\n";\end{lstlisting}
 		\item \lstinline|get_future()| retourne le \lstinline|std::future| associé
 
 		\begin{alertblock}{Attention}
-			Un seul \lstinline|std::future| par \lstinline|std::promise| peut être récupéré
+			\begin{itemize}
+				\item Un seul \lstinline|std::future| par \lstinline|std::promise| peut être récupéré
+			\end{itemize}
 		\end{alertblock}
 	\end{itemize}
 \end{frame}
@@ -3968,7 +4184,9 @@ th1.join();\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Un seul \lstinline|std::future| par \lstinline|std::packaged_task| peut être récupéré
+		\begin{itemize}
+			\item Un seul \lstinline|std::future| par \lstinline|std::packaged_task| peut être récupéré
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -3980,7 +4198,9 @@ th1.join();\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{note}
-		\lstinline|reset()| permet d'appeler une nouvelle fois l'appelable
+		\begin{itemize}
+			\item \lstinline|reset()| permet d'appeler une nouvelle fois l'appelable
+		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
@@ -4008,7 +4228,6 @@ th1.join();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Conclusion\titlehfill{}1/2}
 	\begin{exampleblock}{Do}
-		Pour l'accès concurrent aux ressources, dans l'ordre :
 		\begin{itemize}
 			\item Évitez de partager variables et ressources
 			\item Préférez les partages en lecture seule
@@ -4017,33 +4236,48 @@ th1.join();\end{lstlisting}
 \note[item]{\lstinline|std::atomic|, conteneur \textit{lock-free}, conteneur \textit{thread-safe}, etc.}
 
 			\item Protégez l'accès par mutex ou autres barrières
+
+
 		\end{itemize}
+
+\note[item]{Dans cet ordre}
+
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do}
-		Encapsulez les mutex dans des \lstinline|std::lock_guard| ou \lstinline|std::unique_lock|
+		\begin{itemize}
+			\item Encapsulez les mutex dans des \lstinline|std::lock_guard| ou \lstinline|std::unique_lock|
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Conclusion\titlehfill{}2/2}
 	\begin{exampleblock}{Do}
-		Analysez vos cas d'utilisation pour choisir le bon outil
+		\begin{itemize}
+			\item Analysez vos cas d'utilisation pour choisir le bon outil
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{alertblock}{Attention}
-		Très faibles garanties de \textit{thread-safety} de la part des conteneurs standard
+		\begin{itemize}
+			\item Très faibles garanties de \textit{thread-safety} de la part des conteneurs standard
+		\end{itemize}
 
 \note[item]{En gros plusieurs threads peuvent lire un même conteneur et plusieurs threads peuvent lire ou écrire simultanément des conteneurs différents sans problème et c'est à peu prés tout}
 \note[item]{Mais telle ou telle implémentation peuvent proposer mieux}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Regardez Boost.Lockfree pour des structures de données \textit{thread-safe} et \textit{lock-free}
+		\begin{itemize}
+			\item Boost.Lockfree pour des structures de données \textit{thread-safe} et \textit{lock-free}
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{block}{Pour aller plus loin}
-		\cite{ConcInAction} d'Anthony Williams
+		\begin{itemize}
+			\item \cite{ConcInAction} d'Anthony Williams
+		\end{itemize}
 
 \note[item]{Anthony Williams est coauteur des propositions de \textit{multi-threading} dans C++11 et co-auteur de Boost.Thread}
 	\end{block}
@@ -4141,17 +4375,24 @@ regex_replace(s, r, "-"); // abcd-efg\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Expressions rationnelles (regex)\titlehfill{}6/6}
 	\begin{exampleblock}{Do}
-		Préférez les expressions rationnelles aux analyseurs \og à la main\fg{}
+		\begin{itemize}
+			\item Préférez les expressions rationnelles aux analyseurs \og à la main\fg{}
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{alertblock}{Don't}
-		N'utilisez pas les expressions rationnelles pour les traitements triviaux, préférez les algorithmes
+		\begin{itemize}
+			\item N'utilisez pas les expressions rationnelles pour les traitements triviaux
+			\item Préférez les algorithmes
+		\end{itemize}
 
 \note[item]{Traitements triviaux : recherche d'un caractère particulier, passage en majuscule, récupération des n premiers caractères}
  		\end{alertblock}
 
 	\begin{block}{Conseil}
-		Encapsulez les expressions rationnelles ayant une sémantique claire et utilisées plusieurs fois dans une fonction dédiée au nom évocateur
+		\begin{itemize}
+			\item Encapsulez les expressions rationnelles ayant une sémantique claire et utilisées plusieurs fois dans une fonction dédiée au nom évocateur
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -4164,8 +4405,10 @@ regex_replace(s, r, "-"); // abcd-efg\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Peut ne pas être présent sur certaines implémentations\\
-		Peut être un générateur pseudo-aléatoire (entropie nulle) sur d'autres
+		\begin{itemize}
+			\item Peut ne pas être présent sur certaines implémentations
+			\item Peut être un générateur pseudo-aléatoire (entropie nulle) sur d'autres
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{itemize}
@@ -4185,7 +4428,9 @@ gen.seed(system_clock::now().time_since_epoch().count());
 distribution(gen);\end{lstlisting}
 
 	\begin{exampleblock}{Do}
-		Préférez ces générateurs et distributions à \lstinline|rand()|
+		\begin{itemize}
+			\item Préférez ces générateurs et distributions à \lstinline|rand()|
+		\end{itemize}
 	\end{exampleblock}
 
 	\onslide<2>

@@ -17,7 +17,9 @@
 	\end{itemize}
 
 	\begin{block}{Note}
-		Voir \href{https://www.youtube.com/user/lefticus1/videos}{Vidéos C++ Weekly} (Jason Turner)
+		\begin{itemize}
+			\item Voir \href{https://www.youtube.com/user/lefticus1/videos}{Vidéos C++ Weekly} (Jason Turner)
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -29,7 +31,9 @@
 	\end{itemize}
 
 	\begin{block}{Note}
-		Les digraphes ne sont pas concernés
+		\begin{itemize}
+			\item Les digraphes ne sont pas concernés
+		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
@@ -81,7 +85,9 @@ inline int foo = 42;\end{lstlisting}
 class Foo { static inline int bar = 42;};\end{lstlisting}
 
 	\begin{alertblock}{Don't}
-		Ne justifie pas l'usage de variables globales
+		\begin{itemize}
+			\item Ne justifie pas l'usage de variables globales
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -141,7 +147,9 @@ else
 	\end{itemize}
 
 	\begin{block}{Note}
-		Conditions intégralement évaluables au \textit{compile-time}, pas de court-circuit
+		\begin{itemize}
+			\item Conditions intégralement évaluables au \textit{compile-time}, pas de court-circuit
+		\end{itemize}
 
 \note[item]{C'est à dire qu'en cas de condition composée (\lstinline|or|, \lstinline|and|), même si la première partie permet de résoudre la condition, il faut que le reste soit évaluable en \textit{compile-time}}
 	\end{block}
@@ -164,15 +172,21 @@ cout << foo(a) << ' ' << foo(ptr);  // 10 5\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|if constexpr|\titlehfill{}3/4}
 	\begin{block}{Note}
-		Les branches doivent être syntaxiquement correctes mais pas nécessairement sémantiquement valides
+		\begin{itemize}
+			\item Les branches doivent être syntaxiquement correctes mais pas nécessairement sémantiquement valides
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Note}
-		Les branches peuvent avoir des types retour différents sans remettre en cause la déduction de type retour
+		\begin{itemize}
+			\item Les branches peuvent avoir des types retour différents sans remettre en cause la déduction de type retour
+		\end{itemize}
 	\end{block}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|if constexpr| aux suites de spécialisations de template et SFINAE, aux imbrications de ternaires ou à \lstinline|#if|
+		\begin{itemize}
+			\item Préférez \lstinline|if constexpr| aux suites de spécialisations de template et SFINAE, aux imbrications de ternaires ou à \lstinline|#if|
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -266,10 +280,12 @@ switch(int foo = 42; bar) {
 	\frametitle{Structured binding\titlehfill{}1/5}
 	\begin{itemize}
 		\item Décomposition automatique des types composés en multiples variables
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 auto [liste de nom] = expression;\end{lstlisting}
 
+	\begin{itemize}
 		\item Sur des types dont les données membres non statiques
 		\begin{itemize}
 			\item Sont toutes publiques
@@ -310,19 +326,23 @@ auto [ i, s ] = Foo{};\end{lstlisting}
 	\frametitle{Structured binding\titlehfill{}3/5}
 	\begin{itemize}
 		\item Compatible avec \lstinline|const|
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 tuple<int, long, string> foo();
 const auto [x,y,z] = foo();\end{lstlisting}
 
+	\begin{itemize}
 		\item Avec les références
-
-		\begin{lstlisting}[language=C++]
-auto& [refX,refY,refZ] = monTuple;\end{lstlisting}
 	\end{itemize}
 
+	\begin{lstlisting}[language=C++]
+auto& [refX,refY,refZ] = monTuple;\end{lstlisting}
+
 	\begin{alertblock}{Attention}
-		La portée de l'objet référencé doit être supérieure à celle des références
+		\begin{itemize}
+			\item La portée de l'objet référencé doit être supérieure à celle des références
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -330,33 +350,41 @@ auto& [refX,refY,refZ] = monTuple;\end{lstlisting}
 	\frametitle{Structured binding\titlehfill{}4/5}
 	\begin{itemize}
 		\item Avec \textit{range-based for loop}
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 map<int, string> myMap;    
 for(const auto& [k,v] : myMap) 
 { ... } \end{lstlisting}
 
+	\begin{itemize}
 		\item Avec \textit{if init statement}
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 { ... }\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Structured binding\titlehfill{}5/5}
 	\begin{block}{Objectif}
-		Meilleure lisibilité\\
-		Remplacement de \lstinline|std::tie()|
+		\begin{itemize}
+			\item Meilleure lisibilité
+			\item Remplacement de \lstinline|std::tie()|
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Nom}
-		Appelé déstructuration (\textit{destructuring}) dans d'autres langages
+		\begin{itemize}
+			\item Appelé déstructuration (\textit{destructuring}) dans d'autres langages
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Et ensuite ?}
-		Un premier pas vers les types algébriques de données et le \textit{pattern matching}
+		\begin{itemize}
+			\item Un premier pas vers les types algébriques de données et le \textit{pattern matching}
+		\end{itemize}
 	\end{block}
 
 \note[item]{Type algébrique : type somme de types produit}
@@ -364,7 +392,9 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 \note[item]{Type somme : analogue sur les types de l'union disjointe}
 
 	\begin{alertblock}{Limite}
-		Pas de capture de \textit{structured binding} par les lambdas
+		\begin{itemize}
+			\item Pas de capture de \textit{structured binding} par les lambdas
+		\end{itemize}
 	\end{alertblock}
 
 \note[item]{Possible de passer par la capture généralisée}
@@ -406,7 +436,6 @@ T g() {
 
 \begin{frame}[fragile]
 	\frametitle{Élision de copie\titlehfill{}2/2}
-
 	\begin{itemize}
 		\item Élision garantie lors de la définition d'une variable locale
 	\end{itemize}
@@ -419,7 +448,9 @@ T t = f();   // Pas de copie\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		Élision de copies possibles avant C++17, garanties maintenant
+		\begin{itemize}
+			\item Élision de copies possibles avant C++17, garanties maintenant
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -634,7 +665,9 @@ vector<vector<int>> foo;
 foo.emplace_back(3, 1).push_back(42); // foo : {{1 1 1 42}}\end{lstlisting}
 
 	\begin{block}{Note}
-		\lstinline|emplace()| renvoie toujours un itérateur
+	\begin{itemize}
+		\item \lstinline|emplace()| renvoie toujours un itérateur
+	\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -723,7 +756,9 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{API bas-niveau}
-		Pas d'exception, pas de gestion mémoire, pas de locale
+		\begin{itemize}
+			\item Pas d'exception, pas de gestion mémoire, pas de locale
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -735,7 +770,6 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 		
 \note[item]{D'un point de vue type algébrique, il s'agit d'un type somme}
 		
-		\item Issue de Boost.Variant
 		\item Type contenu dépend de la valeur assignée
 	\end{itemize}
 
@@ -766,7 +800,9 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 	\end{block}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|std::variant| aux unions brutes
+		\begin{itemize}
+			\item Préférez \lstinline|std::variant| aux unions brutes
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -820,13 +856,17 @@ for(auto item : v)
   visit([](auto&& arg){cout << arg;}, item);\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		L'appelable doit être valide pour tous les types du \lstinline|std::variant| 
+		\begin{itemize}
+			\item L'appelable doit être valide pour tous les types du \lstinline|std::variant|
+		\end{itemize} 
 
 \note[item]{Et ce peut être une structure/classe présentant une surcharge de \lstinline|operator()| pour chacun des types}
 	\end{alertblock}
 
 	\begin{block}{En attendant C++17 \ldots}
-		Utilisez Boost.Variant
+		\begin{itemize}
+			\item Utilisez Boost.Variant
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -918,7 +958,9 @@ div(1.0, 2.0, 3.0);      // 1.5
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Un \textit{parameter pack} vide est une erreur pour les autres opérateurs
+		\begin{itemize}
+			\item Un \textit{parameter pack} vide est une erreur pour les autres opérateurs
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -976,7 +1018,9 @@ push_back_vec(foo, 10, 20, 56);\end{lstlisting}
 \note[item]{Le choix C++11 posait davantage de problèmes (pas de redéfinition avec valeur par défaut possible, multiples constructeurs par copie/déplacement, erreur de SFINAE, etc.)}
 
 	\begin{alertblock}{Attention}
-		Casse du code C++11 valide
+		\begin{itemize}
+			\item Casse du code C++11 valide
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{lstlisting}[language=C++]
@@ -1024,7 +1068,11 @@ if(uncaught_exceptions())
 { ... }\end{lstlisting}
 
 	\begin{block}{Motivation}
-		Comportement différent d'un destructeur en présence d'exception (p.ex. \textit{rollback})
+		\begin{itemize}
+			\item Comportement différent d'un destructeur en présence d'exception
+
+\note[item]{P.ex. rollback}
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1083,11 +1131,15 @@ Foo([&](int i) {...});\end{lstlisting}
 \begin{frame}[fragile]
 \frametitle{Déduction de template dans les constructeurs\titlehfill{}3/3}
 	\begin{block}{Note}
-		Rend obsolète plusieurs \textit{make helper} (\lstinline|make_pair|, \lstinline|make_tuple|, \ldots)
+		\begin{itemize}
+			\item Rend obsolète plusieurs \textit{make helper} (\lstinline|make_pair|, \lstinline|make_tuple|, \ldots)
+		\end{itemize}
 	\end{block}
 
 	\begin{alertblock}{Attention}
-		Ne permet pas la déduction partielle
+		\begin{itemize}
+			\item Ne permet pas la déduction partielle
+		\end{itemize}
 		
 		\begin{lstlisting}[language=C++]
 std::tuple<int> t(1, 2, 3);  // Erreur\end{lstlisting}
@@ -1261,7 +1313,9 @@ Foo foo;
 invoke(&Foo::bar, foo, 8);  // 50\end{lstlisting}
 
 	\begin{block}{Motivation}
-		Syntaxe unique d'appel d'appelable
+		\begin{itemize}
+			\item Syntaxe unique d'appel d'appelable
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1279,7 +1333,9 @@ vector foo = { 1, 6, 3, 8, 14, 42, 2 };
 count_if(begin(foo), end(foo), not_fn(LessThan10)); // 2\end{lstlisting}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de \lstinline|std::not1| et \lstinline|std::not2|
+		\begin{itemize}
+			\item Dépréciation de \lstinline|std::not1| et \lstinline|std::not2|
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1321,13 +1377,13 @@ sqrt(T t);\end{lstlisting}
 			\item \lstinline|std::disjunction| : \og OU\fg{} logique entre traits
 			\item \lstinline|std::negation| : négation d'un trait
 		\end{itemize}
+	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 // foo disponible si tous ls Ts... ont le meme type
 template<typename T, typename... Ts>
 std::enable_if_t<std::conjunction_v<std::is_same<T, Ts>...>>
 foo(T, Ts...) { }\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \subsection*{Attributs}
@@ -1413,7 +1469,9 @@ foo();  // Idealement : warning\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		Conversion implicite en \lstinline|void| pour supprimer l'avertissement
+		\begin{itemize}
+			\item Conversion implicite en \lstinline|void| pour supprimer l'avertissement
+		\end{itemize}
 		\begin{lstlisting}[language=C++]
 (void)foo();\end{lstlisting}
 
@@ -1456,7 +1514,10 @@ int foo([[ maybe_unused ]] int a,
 \begin{frame}[fragile]
 	\frametitle{Attribut \lstinline|[[ maybe_unused ]]|\titlehfill{}2/2}
 	\begin{block}{Avant C++17}
-		La méthode \og classique\fg{} pour supprimer l'avertissement sur la non-utilisation de paramètres consiste à ne pas les nommer
+		\begin{itemize}
+			\item Ne pas nommer les paramètres non utilisés
+		\end{itemize}
+	
 		\begin{lstlisting}[language=C++]
 int foo(int, long) {}\end{lstlisting}
 
@@ -1467,13 +1528,19 @@ int foo(int, long) {}\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Attributs C++17 - Conclusion}
 	\begin{exampleblock}{Do}
-		Utilisez les attributs pour indiquer vos intentions
+		\begin{itemize}
+			\item Utilisez les attributs pour indiquer vos intentions
+		\end{itemize}
 
 \note[item]{Au delà de l'information pour le compilateur et d'autres outils, c'est aussi une documentation à l'intention des lecteurs et correcteurs}
 	\end{exampleblock}
 
 	\begin{block}{Au delà du compilateur}
-		Prise en compte par d'autres outils (générateurs de documentation, analyseurs statique de code) souhaitable
+		\begin{itemize}
+			\item Prise en compte par d'autres outils souhaitable
+
+\note[item]{Autres outils : générateurs de documentation, analyseurs statique de code}
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1495,12 +1562,10 @@ int foo(int, long) {}\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{Attention}
-		Un thread ne doit pas prendre un mutex qu'il possède déjà, même en accès partagé
-	\end{alertblock}
-
 	\begin{block}{Note}
-		Équivalent non \og \textit{timed}\fg{} de \lstinline|std::shared_timed_mutex|
+		\begin{itemize}
+			\item Équivalent non \og \textit{timed}\fg{} de \lstinline|std::shared_timed_mutex|
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1548,22 +1613,31 @@ apply(foo, baz);\end{lstlisting}
 	\frametitle{\lstinline|std::optional|\titlehfill{}1/4}
 	\begin{itemize}
 		\item Gestion d'objet dont la présence est optionnelle
-		\item Issue de Boost.optional
+	\end{itemize}
 
-		\begin{alertblock}{Restriction}
-			Ne peut pas contenir des références, des tableaux C, \lstinline|void| ni être vide
-		\end{alertblock}
+	\begin{alertblock}{Restriction}
+		\begin{itemize}
+			\item Ne peut contenir des références, des tableaux C, \lstinline|void| ni être vide
+		\end{itemize}
+	\end{alertblock}
 
+	\begin{itemize}
 		\item Interface similaire à un pointeur
 		\begin{itemize}
 			\item Testable via \lstinline|operator bool()|
 			\item Accès à l'objet via \lstinline|operator*()|
 			\item Accès à un membre via \lstinline|operator->()|
+		\end{itemize}
+	\end{itemize}
 
-			\begin{alertblock}{Attention}
-				L'appel de \lstinline|operator*()| ou \lstinline|operator->()| sur un \lstinline|std::optional| vide est indéfini
-			\end{alertblock}
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item \lstinline|operator*()| ou \lstinline|operator->()| sur un \lstinline|std::optional| vide est indéfini
+		\end{itemize}
+	\end{alertblock}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item \lstinline|std::nullopt| indique l'absence de l'objet
 		\end{itemize}
 
@@ -1576,25 +1650,32 @@ apply(foo, baz);\end{lstlisting}
 	\frametitle{\lstinline|std::optional|\titlehfill{}2/4}
 	\begin{itemize}
 		\item Supporte la déduction de type
+	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 optional foo(10);	// std::optional<int>\end{lstlisting}
 
+	\begin{itemize}
 		\item Supporte la construction en-place
+	\end{itemize}
 		
 	\begin{lstlisting}[language=C++]
 optional<complex<double>> foo{in_place, 3.0, 4.0};\end{lstlisting}
 		
+	\begin{itemize}
 		\item Y compris depuis un \lstinline|std::initializer_list|
+	\end{itemize}
+
 	\begin{lstlisting}[language=C++]
 optional<vector<int>> foo(in_place, {1, 2, 3});\end{lstlisting}
 
+	\begin{itemize}
 		\item Existence du \textit{helper} \lstinline|std::make_optional|
+	\end{itemize}
 		
 	\begin{lstlisting}[language=C++]
 auto foo = make_optional(3.0);
 auto bar = make_optional<complex<double>>(3.0, 4.0);\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1602,17 +1683,20 @@ auto bar = make_optional<complex<double>>(3.0, 4.0);\end{lstlisting}
 	\begin{itemize}
 		\item Changement de la valeur via \lstinline|reset()|, \lstinline|swap()|, \lstinline|emplace()| ou \lstinline|operator=()|
 		\item Comparaison naturelle des valeurs contenues 
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 optional<int> deux(2), dix(10);
 
 dix > deux;   // true	
 dix < deux;   // false
 dix == 10;    // true\end{lstlisting}
 
+	\begin{itemize}
 		\item En prenant en compte \lstinline|std::nullopt|
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 optional<int> none, dix(10);
 
 dix > none;       // true	
@@ -1621,28 +1705,29 @@ none == 10;       // false
 none == nullopt;  // true\end{lstlisting}
 
 \note[item]{\lstinline|std::nullopt| est inférieur à toutes valeurs}
-
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::optional|\titlehfill{}4/4}
 	\begin{alertblock}{\lstinline|std::optional<bool>| ? \lstinline|std::optional<T*>| ?}
-		Plus pertinent d'utiliser :
 		\begin{itemize}
-			\item Des booléens \og trois états\fg{} (Boost.tribool)
-			\item Des pointeurs bruts
+			\item Utilisez des booléens \og trois états\fg{} (Boost.tribool)
+			\item Utilisez des pointeurs bruts
 		\end{itemize}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|optional| aux pointeurs bruts pour gérer des données optionnelles
+		\begin{itemize}
+			\item Préférez \lstinline|optional| aux pointeurs bruts pour gérer des données optionnelles
+		\end{itemize}
 
 \note[item]{Sémantique plus précise, pas de risque de tentative de libération ou de fuite mémoire, \lstinline|value()| et \lstinline|value_or()| permettent de simplifier l'usage}
 	\end{exampleblock}
 
 	\begin{block}{En attendant C++17}
-		Utilisez Boost.Optional
+		\begin{itemize}
+			\item Utilisez Boost.Optional
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1654,42 +1739,46 @@ none == nullopt;  // true\end{lstlisting}
 		
 \note[item]{Pour les données, tout comme \lstinline|std::function| est un \textit{type-erasure} pour les appelables}
 		
-		\item Issue de Boost.Any
 		\item Type contenu dépend de la valeur assignée
+	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 any a = 1;  // int
 a = 3.14;   // double
 a = true;   // bool\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::any|\titlehfill{}2/4}
 	\begin{itemize}
 		\item Supporte la construction en-place
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 any a(in_place_type<complex<double>>, 3.0, 4.0);\end{lstlisting}
 
+	\begin{itemize}
 		\item \textit{Helper} \lstinline|std::make_any|
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 any a = make_any<complex<double>>(3.0, 4.0);\end{lstlisting}
 
+	\begin{itemize}
 		\item Changement de valeur, éventuellement de type, via l'affectation
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 std::any a = 1;
 a = 3.14;
 \end{lstlisting}
 	
+	\begin{itemize}
 		\item \ldots ou \lstinline|emplace()|
-			\begin{lstlisting}[language=C++]
-a.emplace<std::complex<double>>(3.0, 4.0);
-\end{lstlisting}
-
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+a.emplace<std::complex<double>>(3.0, 4.0);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1697,20 +1786,22 @@ a.emplace<std::complex<double>>(3.0, 4.0);
 	\begin{itemize}
 		\item \lstinline|any_cast<Type>()| récupère la valeur
 		\item \ldots{}et lève une exception si le type demandé n'est pas correct
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 any a = 1;
 any_cast<int>(a);  // 1
 any_cast<bool>(a); // Lance bad_any_cast\end{lstlisting}
 
+	\begin{itemize}
 		\item ou récupère l'adresse
 		\item \ldots{}et retourne \lstinline|nullptr| si le type demandé n'est pas correct
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 any a = 1;
 int* foo = any_cast<int>(&a);
 int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1721,11 +1812,12 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 		\item \lstinline|type()| récupère l'information du type courant
 
 \note[item]{L'information de type récupérée ainsi est \textit{implementation-dependant} et non utilisable tel quel mais peut être comparé au retour de \lstinline|type_id|}
-
 	\end{itemize}
 
 	\begin{block}{En attendant C++17 \ldots}
-		Utilisez Boost.Any
+		\begin{itemize}
+			\item Utilisez Boost.Any
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1783,7 +1875,7 @@ cout << bar.size() << " - " << bar << '\n';
 	\begin{exampleblock}{Performances}
 		\begin{itemize}
 			\item Souvent meilleures que les fonctionnalités équivalentes de \lstinline|string|
-			\item \ldots{} mais pas toujours, donc mesurez
+			\item Mais pas toujours, donc mesurez
 		\end{itemize} 
 
 \note[item]{Et que boost.split}
@@ -1797,14 +1889,18 @@ cout << bar.size() << " - " << bar << '\n';
 	\frametitle{Mémoire}
 	\begin{itemize}
 		\item \lstinline|std::shared_ptr| et \lstinline|std::weak_ptr| sur des tableaux
+	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 std::shared_ptr<int[]> foo(new int[10]);\end{lstlisting}
 
-\begin{alertblock}{Pas de \lstinline|std::make_shared()|}
-	\lstinline|std::make_shared()| ne supporte pas les tableaux en C++17
-\end{alertblock}
+	\begin{alertblock}{Pas de \lstinline|std::make_shared()|}
+		\begin{itemize}
+			\item \lstinline|std::make_shared()| ne supporte pas les tableaux en C++17
+		\end{itemize}
+	\end{alertblock}
 
+	\begin{itemize}
 		\item Évolutions des allocateurs
 
 \note[item]{\textit{Type-erased allocator}, \textit{polymorphic allocator}, \textit{memory ressources}}
@@ -1814,7 +1910,10 @@ std::shared_ptr<int[]> foo(new int[10]);\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		Présence dans le TS d'un pointeur intelligent sans responsabilité (observateur) : \lstinline|observer_ptr|, mais pas dans le périmètre accepté pour C++17
+		\begin{itemize}
+			\item Pointeur intelligent sans responsabilité dans le TS \lstinline|observer_ptr|
+			\item Mais pas dans le périmètre accepté pour C++17
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -1857,7 +1956,6 @@ lcm(12, 18);   // 36\end{lstlisting}
 	\begin{itemize}
 		\item Gestion des systèmes de fichiers
 		\item Adapté à l'OS et au système de fichiers utilisés
-		\item Issue de Boost.Filesystem
 		\item Manipulation des chemins et noms de fichiers
 	\end{itemize}
 
@@ -1916,11 +2014,15 @@ bar.c_str();       // const char*\end{lstlisting}
 	\end{itemize}
 
 	\begin{exampleblock}{Do}
-		Utilisez \textit{Filesystem} plutôt que les API C ou systèmes
+		\begin{itemize}
+			\item Utilisez \textit{Filesystem} plutôt que les API C ou systèmes
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{block}{En attendant C++17}
-		Utilisez Boost.Filesystem
+		\begin{itemize}
+			\item Utilisez Boost.Filesystem
+		\end{itemize}
 
 \note[item]{Ou Qt, POCO, etc. L'idée est d'avoir un code portable, mieux typé et moins source d'erreur}
 \note[item]{Préférence pour Boost car proche de ce que sera std}
@@ -1942,7 +2044,9 @@ vector<int> foo {0, 5, 42, 58};
 for_each(execution::par, begin(foo), end(foo), bar);\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		Pas de gestion intrinsèque des accès concurrents
+		\begin{itemize}
+			\item Pas de gestion intrinsèque des accès concurrents
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
@@ -1957,7 +2061,9 @@ for_each(execution::par, begin(foo), end(foo), bar);\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{\lstinline|std::reduce()| ou \lstinline|std::accumulate()| ?}
-		L'ordre des \og additions\fg{} n'est pas spécifié dans le cas de \lstinline|std::reduce()|
+		\begin{itemize}
+			\item Ordre des \og additions\fg{} non spécifié dans le cas de \lstinline|std::reduce()|
+		\end{itemize}
 
 \note[item]{Le résultat n'est donc pas déterministe dans le cas d'opérations non associatives ou non commutatives (car \lstinline|std::reduce()| regroupe et réarrange les opérations)}
 \note[item]{Mais rend cet algorithme parallélisable contrairement à \lstinline|std::accumulate()|}
@@ -2004,7 +2110,9 @@ inclusive_scan(begin(foo), end(foo),
 	\end{itemize}
 
 	\begin{block}{Note}
-		La transformation n'est pas appliquée à la graine
+		\begin{itemize}
+			\item Transformation non appliquée à la graine
+		\end{itemize}
 	\end{block}
 \end{frame}
 

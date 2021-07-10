@@ -15,7 +15,7 @@
 \begin{frame}
 	\frametitle{Changements d'organisation du comité}
 	\begin{itemize}
-		\item Création d'un \textit{ABI Review Group} en charge de l'étude des impacts sur l'ABI des évolutions
+		\item Création d'un \textit{ABI Review Group} : étude des impacts sur l'ABI des évolutions
 		\item Création d'un \textit{Study Group} pour la liaison C/C++ (SG22)
 	\end{itemize}
 \end{frame}
@@ -26,24 +26,26 @@
 	\begin{itemize}
 		\item Branche prise en compte uniquement à la compilation
 		\item \lstinline|else| pour le code évalué au \textit{run-time}
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 if consteval {...}
 else {...}\end{lstlisting}
 
+	\begin{itemize}
 		\item Négation possible
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 if not consteval {...}
 // ou
 if ! consteval {...}\end{lstlisting}
 
-		\begin{alertblock}{Attention}
-			Accolades obligatoires, même avec une unique instruction
-		\end{alertblock}
-
-	\end{itemize}
-
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Accolades obligatoires, même avec une unique instruction
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \subsection*{Types}
@@ -53,12 +55,12 @@ if ! consteval {...}\end{lstlisting}
 		\item \lstinline|std::to_underlying| convertit une énumération vers le type sous-jacent
 
 \note[item]{Permet de remplacer les \lstinline|static_cast<XXXX>()|, qui présente un risque d'oubli de modification lors d'un changement du type sous-jacent}
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 enum class FOO : uint32_t { A = 0xABCDEF };
 
 auto bar = std::to_underlying(FOO::A); // uint32_t\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -98,8 +100,9 @@ class Foo {	static_assert(N, "Message"); };\end{lstlisting}
 	\frametitle{Chaînes de caractères}
 	\begin{itemize}
 		\item \lstinline|contains()| teste la présence d'une sous-chaîne
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 string foo = "Hello world";
 	
 foo.contains("Hello");   // true
@@ -107,6 +110,7 @@ foo.contains("monde");   // false\end{lstlisting}
 
 \note[item]{Comparaison \textit{case-sensitive} comme toutes les fonctions de recherche dans des \lstinline|std::string|}
 
+	\begin{itemize}
 		\item Interdiction de la construction de \lstinline|std::string| depuis \lstinline|nullptr|
 
 \note[item]{Erreur de compilation, avant c'était un comportement indéfini}
@@ -117,12 +121,12 @@ foo.contains("monde");   // false\end{lstlisting}
 	\frametitle{\lstinline|starts_with()| \& \lstinline|ends_with()|}
 	\begin{itemize}
 		\item Généralisation de \lstinline|starts_with()| et \lstinline|ends_with()| aux ranges
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 auto foo = view::iota(0, 50);
 auto bar = view::iota(0, 30);
 if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \subsection*{Itérateurs}

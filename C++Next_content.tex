@@ -85,8 +85,10 @@
 		\item \textit{Pattern matching} via \lstinline|inspect|
 		\begin{itemize}
 			\item Entiers
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 inspect(x) {
   0  : cout << "Aucun";
   1  : cout << "Un";
@@ -94,15 +96,17 @@ inspect(x) {
 
 \note[item]{Proche dans l'esprit de \lstinline|switch/case| avec une syntaxe plus légère et sans \textit{fallback}}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Chaînes de caractères
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 inspect(x) {
   "zero": cout << "Aucun";
   "un"  : cout << "Un";
   __    : cout << "Plusieurs";\end{lstlisting}
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -113,22 +117,26 @@ inspect(x) {
 			\item \textit{Tuple-like}
 
 \note[item]{\lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, agrégats et les classes implémentant l'interface \textit{tuple}}
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 inspect(p) {
   [0, 0]: cout << "on origin";
   [0, y]: cout << "on y-axis";
   [x, 0]: cout << "on x-axis";
   [x, y]: cout << x << ',' << y;}\end{lstlisting}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item \lstinline|std::variant| et \lstinline|std::any|
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 inspect(v) {
 <int> i  : cout << "Entier " << i;
 <float> f: cout << "Reel " << f;\end{lstlisting}
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -137,21 +145,25 @@ inspect(v) {
 		\item \textit{Pattern matching} via \lstinline|inspect|
 		\begin{itemize}
 			\item Types polymorphiques
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 inspect(shape) {
   <Circle> [r]      : cout << 3.14 * r * r;
   <Rectangle> [w, h]: cout << w * h;}\end{lstlisting}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Variante sous forme d'expressions (et non de \textit{statement})
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 int get_area(const Shape& shape) {
   return inspect(shape) {
     <Circle> [r]       => 3.14 * r * r;
     <Rectangle> [w, h] => w * h;} }\end{lstlisting}
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -160,17 +172,23 @@ int get_area(const Shape& shape) {
 		\item \textit{Pattern matching} via \lstinline|inspect|
 		\begin{itemize}
 			\item Support des gardes
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 inspect(p) {
   [x, y] if(x > y): cout << x << "superieur a" << y;\end{lstlisting}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Et bien d'autres fonctionnalités \ldots
 		\end{itemize}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Prise en compte de la première correspondance et non de la meilleure
+		\begin{itemize}
+			\item Prise en compte de la première correspondance et non de la meilleure
+		\end{itemize}
 
 \note[item]{Mais ça peut changer d'ici l'acceptation dans le standard}
 	\end{alertblock}
@@ -216,17 +234,19 @@ inspect(p) {
 	\begin{itemize}
 		\item Méta-classes : construction de types de classes (dont les classes elles-mêmes) ayant des contraintes, des comportements par défaut et des opérations par défaut (\lstinline|class|, \lstinline|struct|, \lstinline|enum class|, \textit{interface}, \textit{value})
 		\item Répétition \textit{compile-time} d'une expression : \textit{Expansion statement}
+	\end{itemize}
 		
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 auto foo = make_tuple(0, 'a', 3.14);
 for... (auto elem : tup)  
   cout << elem << "\n"\end{lstlisting}
 			
-			\begin{itemize}
-				\item Duplication de l'expression pour chaque élément (pas de boucle)
-				\item Éléments de type différent
-				\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
-			\end{itemize}
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item Duplication de l'expression pour chaque élément (pas de boucle)
+			\item Éléments de type différent
+			\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
+		\end{itemize}
 		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
 		\item Capture mutable partielle par les lambdas
 
@@ -244,8 +264,9 @@ for... (auto elem : tup)
 	\begin{itemize}
 		\item Changement de contexte \textit{stackful} : \lstinline|fiber_context|
 		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 std::tuple<X, Y, Z> f();
 
 auto [...xs] = f();
@@ -256,6 +277,7 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 
 \note[item]{Proche dans l'esprit de ce qui se fait en Python 3}
 
+	\begin{itemize}
 		\item Accès bas-niveau aux IO : \lstinline|file_handle| et \lstinline|path_handle|
 		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
 		\item Invocation concurrente
@@ -266,14 +288,15 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 	\frametitle{Propositions diverses}
 	\begin{itemize}
 		\item \textit{Parsing} de texte
-			\begin{itemize}
-				\item Pendant du formatage de texte introduit en C++20
-				\item Alternative sûre et robuste à \lstinline|sscanf()|
-				\item Extensible aux types utilisateurs
-				\item Compatible avec les itérateurs et les \textit{ranges}
-			\end{itemize}
+		\begin{itemize}
+			\item Pendant du formatage de texte introduit en C++20
+			\item Alternative sûre et robuste à \lstinline|sscanf()|
+			\item Extensible aux types utilisateurs
+			\item Compatible avec les itérateurs et les \textit{ranges}
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 string key;
 int value;
 scan("answer = 42", "{} = {}", key, value);
@@ -281,11 +304,10 @@ scan("answer = 42", "{} = {}", key, value);
 //        entree       format    arguments
 // key : "answer", value : 42\end{lstlisting}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 string key;
 chrono::seconds time;
 scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -298,8 +320,9 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 			\item Supports des unités de base, dérivées, multiples et sous-multiples
 			\item Conversion et opérations entre unités
 		\end{itemize}
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 static_assert(10km / 2 == 5km);
 
 static_assert(1h == 3600s);
@@ -312,7 +335,6 @@ static_assert(2km / 2kmph == 1h);
 static_assert(1000 / 1s == 1kHz);
 
 static_assert(10km / 5km == 2);\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -349,8 +371,9 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \note[item]{Ce n'est pas permis sur les types \textit{built-in} mais possible sur les autres, avec tous les problèmes que ça peut poser}
 
 		\item Retarder à l'instanciation l'échec de \lstinline|static_assert(false)| dans des template
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 template<typenameT>int my_func(constT&) {
   if constexpr(is_integral_v<T>) { 
     return 1; } 
@@ -361,7 +384,6 @@ template<typenameT>int my_func(constT&) {
     static_assert(false); } }\end{lstlisting}
 
 \note[item]{Erreur en C++20 et précédent. L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -370,25 +392,32 @@ template<typenameT>int my_func(constT&) {
 		\item Généralisation et simplification des \textit{parameters pack}
 		\begin{itemize}
 			\item Déclaration possible partout où une variable peut être déclarée
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 template <typename... Ts>
 struct Foo { Ts... elems; };\end{lstlisting}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Indexation des \textit{packs}
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 struct tuple_element<I, tuple<Ts...>> {
   using type = Ts...[I]; };\end{lstlisting}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item \textit{Slicing} de \textit{packs}
-
-			\begin{lstlisting}[language=C++]
-auto x = Foo(a1, [:]t1..., [3:]t2..., a2);
-bar([1:]t1..., a3, [0]t1);\end{lstlisting}
-
 		\end{itemize}
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto x = Foo(a1, [:]t1..., [3:]t2..., a2);
+bar([1:]t1..., a3, [0]t1);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -397,30 +426,36 @@ bar([1:]t1..., a3, [0]t1);\end{lstlisting}
 		\item Généralisation et simplification des \textit{parameters pack}
 		\begin{itemize}
 			\item \textit{Pack} de taille fixe
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 template<unsigned int N> struct my_vector {
   my_vector(int...[N] v) : values{v...} {}};\end{lstlisting}
 
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item \textit{Variadic function} homogène
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 template <class T>
 void f(T... vs);\end{lstlisting}
 
 \note[item]{La fonction prend un nombre quelconque de paramètres, mais tous du type T}
 
-
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item \og \textit{Unpack}\fg{} de \lstinline|std::tuple| à la volée
+		\end{itemize}
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 int sum(int x, int y, int z) { return x + y + z; }
 
 tuple<int, int, int> point{1, 2, 3};
 int s = sum(point.elems...);\end{lstlisting}
-
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -443,12 +478,14 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item Obtention d'un pointeur sur la représentation via \lstinline|reinterpret_cast| vers \lstinline|char|, \lstinline|unsigned char| ou \lstinline|std::byte|
 			\item Conversion pointeur sur représentation vers pointeur sur objet via \lstinline|reinterpret_cast|
 		\end{itemize}
-
-		\begin{block}{Et actuellement ?}
-			Formellement : comportement indéfini\\
-			En pratique : comportement actuel des compilateurs 
-		\end{block}
 	\end{itemize}
+
+	\begin{block}{Et actuellement ?}
+		\begin{itemize}
+			\item Formellement : comportement indéfini
+			\item En pratique : comportement actuel des compilateurs 
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -467,11 +504,13 @@ int s = sum(point.elems...);\end{lstlisting}
 		\end{itemize}
 	
 		\item Utilisation de caractères Unicode via leur nom ou alias préfixé par \lstinline|\N|
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 "\N{LATIN CAPITAL LETTER A}"
 "\N{NBSP}"\end{lstlisting}
 
+	\begin{itemize}
 		\item \lstinline|std::tag_invoke| : configuration du comportement (\textit{policy})
 
 \note[item]{Traditionnellement fait via des \textit{tags} \og template\fg{}, mais ça pose des soucis de résolution de nom que \lstinline|std::tag_invoke| devrait résoudre}
@@ -581,8 +620,9 @@ int s = sum(point.elems...);\end{lstlisting}
 
 		\item Améliorations du générateur aléatoire
 		\item Construction de \lstinline|std::stack| et \lstinline|std::queue| depuis une paire d'itérateurs
+	\end{itemize}
 
-			\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 vector<int> v(42);
 queue q(v.begin(), v.end());
 stack s(v.begin(), v.end());
@@ -590,7 +630,6 @@ stack s(v.begin(), v.end());
 
 \note[item]{En C++20 et précédent, il faut indiquer le type et utiliser une liste d'initialisation construite via la paire d'itérateur : \lstinline|queue<int> q({v.begin(), v.end()});|}
 
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]

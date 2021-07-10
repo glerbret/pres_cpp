@@ -134,8 +134,7 @@ to_simple_string(ptime);
 to_iso_string(ptime);
 // 20020131T100001,123456789
 to_iso_extended_string(ptime);
-// 2002-01-31T10:00:01,123456789
-\end{lstlisting}
+// 2002-01-31T10:00:01,123456789\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -180,7 +179,9 @@ now.time_of_day().seconds();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Boost.DateTime\titlehfill{}7/7}
 	\begin{exampleblock}{Do}
-		Préférez \lstinline|Boost.DateTime| aux classes \textit{home-made}
+		\begin{itemize}
+			\item Préférez \lstinline|Boost.DateTime| aux classes \textit{home-made}
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{block}{Pour aller plus loin}
@@ -251,7 +252,9 @@ format{"%|1$#x|"} % 12;	// 0xc\end{lstlisting}
 	\end{itemize}
 
 	\begin{block}{Note}
-		S'applique à toutes les occurrences de la valeur dans la chaîne
+		\begin{itemize}
+			\item S'applique à toutes les occurrences de la valeur dans la chaîne
+		\end{itemize}
 	\end{block}
 
 	\begin{lstlisting}[language=C++]
@@ -269,7 +272,9 @@ format{"%1% %2% %1%"} % io::group(showpos, 1) % 2;
 	\end{block}
 
 	\begin{block}{Alternatives}
-		\lstinline|{fmt}|, SafeFormat, FastFormat,  tinyformat
+		\begin{itemize}
+			\item \lstinline|{fmt}|, SafeFormat, FastFormat,  tinyformat
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -314,19 +319,21 @@ erase_all_copy(foo, "o"); // Bst\end{lstlisting}
 			\item Récupération des n premiers ou derniers caractères de la chaîne
 		\end{itemize}
 		\item Concaténation de chaînes
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 vector<string> foo{"foo1", "foo2", "foo3"};
 join(foo, "-");   // foo1-foo2-foo3\end{lstlisting}
 
+	\begin{itemize}
 		\item Découpage de chaîne
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 string foo = "Boost C++ Libraries";
 vector<string> bar;
 split(bar, foo, is_space());
 // bar : "Boost", "C++", "Libraries"\end{lstlisting}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -384,7 +391,9 @@ trim_all_copy(foo);   // "Boost Lib"\end{lstlisting}
 	\end{itemize}
 
 	\begin{exampleblock}{Do}
-		Préférez la bibliothèque standard à Boost lorsque c'est possible
+		\begin{itemize}
+			\item Préférez la bibliothèque standard à Boost lorsque c'est possible
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -451,9 +460,7 @@ unsigned int CpuAlarm::getCurrentAlarmLevel() {
 		\item Itération sur les \textit{token}
 	\end{itemize}
 
-
 \note[item]{\textit{Tokenisation} en anglais et parfois en franglais mais ne doit pas être confondue avec la \textit{tokenisation} cryptographique. Ici c'est la \textit{tokenisation} de l'analyse lexicale, c'est à dire le découpage en lexème}
-
 
 	\begin{lstlisting}[language=C++]
 char_separator<char> sep("[]");

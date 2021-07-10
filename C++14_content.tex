@@ -19,10 +19,10 @@
 \begin{frame}[fragile]
 	\frametitle{\lstinline|constexpr|}
 	\begin{itemize}
-		\item Fonctions membres \lstinline|constexpr| ne sont plus implicitement \lstinline|const|
+		\item Fonctions membres \lstinline|constexpr| plus implicitement \lstinline|const|
 		\item Relâchement des contraintes sur les fonctions \lstinline|constexpr|
 		\begin{itemize}
-			\item Variables locales (ni \lstinline|static|, ni \lstinline|thread_local| et obligatoirement initialisées)
+			\item Variables locales (ni \lstinline|static|, ni \lstinline|thread_local|, obligatoirement initialisées)
 			\item Objets mutables créés lors l'évaluation de l'expression constante
 			\item \lstinline|if|, \lstinline|switch|, \lstinline|while|, \lstinline|for|, \lstinline|do while|
 		\end{itemize}
@@ -124,7 +124,9 @@ nd != nd;    // false
 ni == nd;    // Erreur de compilation\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		\textit{Null forward iterator} non comparables avec des itérateurs \og classiques\fg{}
+		\begin{itemize}
+			\item \textit{Null forward iterator} non comparables avec des itérateurs \og classiques\fg{}
+		\end{itemize}
 
 \note[item]{But ? Pouvoir créer un itérateur sans l'initialiser avec un conteneur existant}
 	\end{alertblock}
@@ -163,7 +165,9 @@ vector<int> bar = exchange(foo, {10, 11});
 // foo : 10 11, bar : 1, 2, 3\end{lstlisting}
 
 	\begin{block}{Dépréciation}
-		Dépréciation de \lstinline|std::random_shuffle()|
+		\begin{itemize}
+			\item Dépréciation de \lstinline|std::random_shuffle()|
+		\end{itemize}
 
 \note[item]{Remplacé par \lstinline|std::shuffle()| qui permet un meilleur aléa}
 	\end{block}
@@ -217,7 +221,9 @@ int bar = 1'000;        // 1000
 int baz = 010'00;       // 512\end{lstlisting}
 
 	\begin{block}{Note}
-		Purement esthétique, aucune sémantique ni place réservée
+		\begin{itemize}
+			\item Purement esthétique, aucune sémantique ni place réservée
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -234,7 +240,9 @@ int baz = 010'00;       // 512\end{lstlisting}
 auto foo = "abcd"s;   // string\end{lstlisting}
 
 	\begin{block}{Note}
-		Remplace avantageusement \lstinline|std::string("abcd")| dans de nombreux contextes
+		\begin{itemize}
+			\item Remplace \lstinline|std::string("abcd")| dans de nombreux contextes
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -249,7 +257,9 @@ auto foo = 60s;       // chrono::seconds
 auto bar = 5min;      // chrono::minutes\end{lstlisting}
 
 	\begin{block}{Note}
-		Suffixe \lstinline|s| utilisé pour \lstinline|std::string| et pour les secondes mais sans ambiguïté car dépendant du type de littéral auquel il s'applique
+		\begin{itemize}
+			\item Suffixe \lstinline|s| utilisé pour \lstinline|std::string| et pour les secondes mais sans ambiguïté car dépendant du type de littéral auquel il s'applique
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -280,8 +290,11 @@ get<int>(foo);	// 42\end{lstlisting}
 	\pause
 
 	\begin{alertblock}{Attention}
-		Uniquement s'il n'y a qu'une occurrence du type dans le \lstinline|std::tuple|
-	\begin{lstlisting}[language=C++]
+		\begin{itemize}
+			\item Uniquement s'il n'y a qu'une occurrence du type dans le \lstinline|std::tuple|
+		\end{itemize}
+
+		\begin{lstlisting}[language=C++]
 get<long>(foo);     // Erreur\end{lstlisting}
 	\end{alertblock}
 \end{frame}
@@ -451,11 +464,15 @@ add_const_t<const int*> C;\end{lstlisting}
 unique_ptr<int> foo = make_unique<int>(42);\end{lstlisting}
 
 	\begin{alertblock}{Don't}
-		Plus de \lstinline|new| dans le code applicatif
+		\begin{itemize}
+			\item Plus de \lstinline|new| dans le code applicatif
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{block}{Note}
-		Utilisable pour construire dans un conteneur
+		\begin{itemize}
+			\item Utilisable pour construire dans un conteneur
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -514,7 +531,10 @@ warning: 'void bar()' is deprecated: utilisez foo\end{lstlisting}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
-		Un thread ne doit pas prendre un mutex qu'il possède déjà, même en accès partagé
+		\begin{itemize}
+			\item Un thread ne doit pas prendre un mutex qu'il possède déjà
+			\item Même en accès partagé
+		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
