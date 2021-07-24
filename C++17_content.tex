@@ -377,7 +377,7 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 
 	\begin{block}{Nom}
 		\begin{itemize}
-			\item Appelé déstructuration (\textit{destructuring}) dans d'autres langages
+			\item Déstructuration (\textit{destructuring}) dans d'autres langages
 		\end{itemize}
 	\end{block}
 
@@ -632,7 +632,7 @@ foo.merge(bar);
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::map| \& \lstinline|std::unordered_map|}
 	\begin{itemize}
-		\item \lstinline|try_emplace()| : tentative de construction \og en place\fg{}
+		\item \lstinline|try_emplace()| : tentative de construction en place
 		\item \ldots sans effet, même pas un \og vol\fg{} de la valeur, si la clé existe déjà
 		\item \lstinline|insert_or_assign()| : ajoute ou modifie un élément
 	\end{itemize}
@@ -775,13 +775,13 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 
 	\begin{alertblock}{Restrictions}
 		\begin{itemize}
-			\item Ne peut pas contenir des références, des tableaux C, \lstinline|void| ni être vide
+			\item Ne peut pas contenir de références, de tableaux C, \lstinline|void| ni être vide
 
 \note[item]{Mais peut contenir plusieurs fois le même type (avec des qualifiers cv identiques ou non)}
 \note[item]{Contenir plusieurs fois le même type peut être utile dans le cadre de code template}
 \note[item]{Mais peut contenir des \lstinline|std::array<>| (alternative aux tableaux C) et des \lstinline|std::reference_wrapper<>| (alternative aux références)}
 
-		\item \lstinline|std::variant| est \textit{default-constructible} si le premier type l'est
+		\item \lstinline|std::variant| \textit{default-constructible} seulement si le premier type l'est
 
 \note[item]{Le \lstinline|variant| contient alors le premier type initialisé par défaut}
 		\end{itemize}
@@ -1080,7 +1080,7 @@ if(uncaught_exceptions())
 \begin{frame}[fragile]
 	\frametitle{Caractères littéraux UTF-8}
 	\begin{itemize}
-		\item Écriture de caractère UTF-8 préfixé par \lstinline|u8|
+		\item Caractère UTF-8 préfixé par \lstinline|u8|
 		\item Erreur si le caractère n'est pas représentable par un unique code point UTF-8
 	\end{itemize}
 
@@ -1564,7 +1564,7 @@ int foo(int, long) {}\end{lstlisting}
 
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Équivalent non \og \textit{timed}\fg{} de \lstinline|std::shared_timed_mutex|
+			\item Équivalent \textit{non-timed} de \lstinline|std::shared_timed_mutex|
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -1632,7 +1632,7 @@ apply(foo, baz);\end{lstlisting}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
-			\item \lstinline|operator*()| ou \lstinline|operator->()| sur un \lstinline|std::optional| vide est indéfini
+			\item \lstinline|operator*()| ou \lstinline|operator->()| indéfini sur un \lstinline|std::optional| vide
 		\end{itemize}
 	\end{alertblock}
 

@@ -39,22 +39,14 @@
 \note[item]{Procédural, objet, générique et \textit{Template metaprogramming}}
 
 		\item Typage statique déclaratif
-
-\note[item]{Typage statique déclaratif : vrai en C++98 plus nuancé après}
-\note[item]{Déclaratif est un terme de mon choix (consensus ?). Explicite convient}
-
 		\item Généraliste
-
-\note[item]{\textit{General Purpose} : par opposition à Fortran, Cobol, R ou l'assembleur}
-
 		\item À l'origine, ajout des classes au C
 
 \note[item]{Classes issues de Simula}
 
 		\item Forte compatibilité avec le C : vaste sous-ensemble commun proche du C
 
-\note[item]{Héritage - bas niveau - du C est probablement une part du succès}
-\note[item]{meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type \lstinline|char|, pas de conversion implicite depuis \lstinline|void|)}
+\note[item]{Meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type \lstinline|char|, pas de conversion implicite depuis \lstinline|void|)}
 
 		\item \textit{Zero-overhead abstraction}
 		\item Compatibilité ascendante forte mais pas absolue
@@ -77,19 +69,21 @@
 		\item \ldots mais des membres en commun
 		\item Pas de propriétaire du C++
 
-\note[item]{Pas de propriétaire donc libre de droit, mais la norme ISO définitive est payante}
+\note[item]{Donc libre de droit, mais la norme ISO définitive est payante}
 
 		\item Actualité de normalisation, et du C++ en général, sur \href{https://isocpp.org/}{isocpp.org}
 
-\note[item]{Également une FAQ plutôt bien sur C++, ainsi qu'un guide de bonnes pratiques, les \textit{drafts} de la norme et les propositions}
+\note[item]{Également une FAQ plutôt bien sur C++, ainsi qu'un guide de bonnes pratiques, les \textit{drafts} de la norme et des propositions}
+	\end{itemize}
 
 	\begin{alertblock}{isocpp.org n'est pas le site du comité}
-		Mais celui de \textit{Standard C++ Foundation} dont le but est la promotion du C++\\
+		Site de \textit{Standard C++ Foundation} dont le but est la promotion du C++\\
 		Les deux sont cependant très proches et partagent de nombreux membres
 		
-		\note[item]{Membres communs entre isocpp.org et comité : Bjarne Stroustrup, Herb Sutter (président de isocpp et secrétaire du comité)}
+\note[item]{Membres communs entre isocpp.org et comité : Bjarne Stroustrup, Herb Sutter (président de isocpp et secrétaire du comité)}
 	\end{alertblock}
 
+	\begin{itemize}
 		\item Une conférence annuelle : \href{http://cppcon.org/}{cppcon}
 	\end{itemize}
 \end{frame}
@@ -114,7 +108,7 @@
 
 \subsection*{Gestion des erreurs}
 \begin{frame}
-	\frametitle{Erreurs - Code retour\titlehfill{}1/2}
+	\frametitle{Erreurs - Code retour}
 	\begin{itemize}
 		\item Plusieurs variantes
 		\begin{itemize}
@@ -122,14 +116,13 @@
 			\item Valeur particulière notant un échec (\lstinline|NULL|, \lstinline|-1|)
 			\item Récupération de la dernière erreur (\lstinline|errno|, \lstinline|GetLastError()|)
 		\end{itemize}
-		\item \og Un test toutes les deux lignes de code\fg{}
-		\item Gestion \og manuelle\fg{} de la remontée de la pile d'appel
+		\item Nécessite \og un test toutes les deux lignes\fg{}
+		\item Gestion manuelle de la remontée de la pile d'appel
 		\item Adapté au traitement local des erreurs, pas au traitement \og plus haut\fg{}
 	\end{itemize}
-\end{frame}
 
-\begin{frame}
-	\frametitle{Erreurs -  Code retour\titlehfill{}2/2}
+	\pause
+
 	\begin{alertblock}{Problèmes et limites}
 		\begin{itemize}
 			\item Impact négatif sur la lisibilité
@@ -142,7 +135,7 @@
 \begin{frame}[fragile]
 	\frametitle{Erreurs - Exception\titlehfill{}1/2}
 	\begin{itemize}
-		\item Lancée par \lstinline|throw|\dots{}
+		\item Lancée par \lstinline|throw|
 		\item Attrapée par \lstinline|catch()| depuis un bloc \lstinline|try|
 	\end{itemize}
 
@@ -153,7 +146,8 @@ try {
   throw logic_error("Oups !");
   ... }
 catch(logic_error& e) {
-  // Traitement de l'exception }\end{lstlisting}
+  // Traitement de l'exception 
+  ... }\end{lstlisting}
 \end{frame}
 
 \begin{frame}
@@ -167,11 +161,11 @@ catch(logic_error& e) {
 \note[item]{Les objets sur la pile sont détruits lors de la sortie d'une fonction même via la levée d'une exception}
 \note[item]{Destruction se fait dans l'ordre inverse de la création des objets}
 
+		\item Pas de \lstinline[keywordstyle=\color{black}]|finally|
 		\item Les exceptions non attrapées provoquent l'appel de \lstinline|std::terminate()|
 
 \note[item]{Sortie du programme sans \textit{stack unwinding}}
 
-		\item Pas de \lstinline[keywordstyle=\color{black}]|finally|
 		\item Utilisées par la bibliothèque standard (p.ex. \lstinline|std::bad_alloc|)
 	\end{itemize}
 \end{frame}
@@ -201,19 +195,20 @@ catch(logic_error& e) {
 \begin{frame}
 	\frametitle{Erreurs - Critiques des exceptions\titlehfill{}2/2}
 	\begin{itemize}
-		\item Arguments très variés :
-		\begin{itemize}
+		\item [] \begin{itemize}
 			\item Mauvais support par les différents outils
 		\end{itemize}
+	\end{itemize}
 
-		\begin{block}{Très variable}
-			\begin{itemize}
-				\item Correctement supportées par les compilateurs actuels
-				\item Inégalement gérées par les outils d'analyse, de documentation, \ldots
-			\end{itemize}
-		\end{block}
-
+	\begin{block}{Très variable}
 		\begin{itemize}
+			\item Correctement supportées par les compilateurs actuels
+			\item Inégalement gérées par les outils d'analyse, de documentation, \ldots
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Code plus complexe à analyser
 
 \note[item]{Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est noyé de code dédié à la gestion d'erreur}
@@ -233,27 +228,20 @@ catch(logic_error& e) {
 	\frametitle{Erreurs - Exception safety\titlehfill{}1/3}
 	\begin{itemize}
 		\item \textit{No-throw guarantee} : l'opération ne peut pas échouer
+	\end{itemize}
 
-\note[item]{\textit{No-throw} : exceptions internes attrapées et traitées en interne}
-
-		\begin{exampleblock}{Do}
-			\begin{itemize}
-				\item Destructeurs, déplacements et \lstinline|swap()| \lstinline|noexcept|
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Destructeurs, déplacements et \lstinline|swap()| \lstinline|noexcept|
 
 \note[item]{\lstinline|noexcept| est du C++11}
-			\end{itemize}
-		\end{exampleblock}
+		\end{itemize}
+	\end{exampleblock}
 
+	\begin{itemize}
 		\item \textit{Strong exception safety} : pas d'effet de bord, pas de fuite, état conservé
-
-\note[item]{\textit{Strong} : les objets sur lesquels opèrent la fonction (paramètres ou classe dont la fonction est membre) conservent leur valeur d'avant l'appel (\textit{Commit or rollback})}
-
-		\item \textit{Basic exception safety} : invariants conservés, pas de fuite
-
-\note[item]{\textit{Basic} (\textit{No-leak guarantee}) : les valeurs peuvent être différentes mais elles restent valides et cohérentes}
-\note[item]{On ne peut pas poursuivre l'opération et des données \og transactionnelles\fg{} peuvent avoir été perdues mais on est encore capable de travailler et notamment de traiter l'erreur}
-
-\item \textit{No exception safety} : aucune garantie
+		\item \textit{Basic exception safety} : pas de fuite, invariants conservés
+		\item \textit{No exception safety} : aucune garantie
 	\end{itemize}
 \end{frame}
 
@@ -281,8 +269,6 @@ catch(logic_error& e) {
 		\end{itemize}
 	\end{exampleblock}
 
-\note[item]{Voir Exceptionnal C++ et GotW}
-
 	\pause 
 
 	\begin{lstlisting}[language=C++]
@@ -309,7 +295,7 @@ A& A::operator=(A other) {              // Copy
 		\begin{itemize}
 			\item Utilisez des types dédiés héritant de \lstinline|std::exception|
 
-\note[item]{Idéalement via \lstinline|std::logic_error| ou \lstinline|std::runtime_error|}
+\note[item]{Idéalement via \lstinline|std::runtime_error|}
 
 			\item Définissez des hiérarchies d'exceptions
 		\end{itemize}
@@ -337,7 +323,7 @@ A& A::operator=(A other) {              // Copy
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Erreurs - Et \lstinline|assert| ?}
+	\frametitle{Erreurs - \lstinline|assert|}
 	\begin{itemize}
 		\item Arrête le programme si l'expression est évalué à 0
 		\item Affiche au moins l'expression, le fichier et la ligne
@@ -365,7 +351,7 @@ assert(expression);\end{lstlisting}
 	\frametitle{Erreurs - Conclusion}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Utilisez exceptions ou codes retour pour les erreurs d'exécution et la vérification des données externes
+			\item Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
 			\item Réservez \lstinline|assert| aux erreurs de programmation et à la vérification des contrats internes
 		\end{itemize}
 	\end{exampleblock}
@@ -459,18 +445,15 @@ private:
 	\begin{exampleblock}{\textit{Big Rule of three}}
 		Si vous devez définir l'une des trois fonctions de base que sont le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
 
-\note[item]{Ou les \og désactiver\fg{} en les déclarant sans les définir}
-
-	\end{exampleblock}
-
 \note[item]{Forme canonique orthodoxe de Coplien}
 \note[item]{Thèse de Coplien : \textit{Multi-paradigm Design}}
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Ressources - RAII\titlehfill{}1/2}
 
-\note[item]{C'est à dire : \textit{Resource Acquisition Is Initialization}}
+\note[item]{\textit{Resource Acquisition Is Initialization}}
 
 	\begin{itemize}
 		\item Acquisition des ressources lors de l'initialisation de l'objet
@@ -480,9 +463,9 @@ private:
 
 		\item Propriété intrinsèque des objets \og par design\fg{}
 
-\note[item]{Intrinsèque à la classe contrairement à Java ou Python où c'est une propriété de l'usage}
+\note[item]{Contrairement à Java ou Python où c'est une propriété de l'usage}
 
-		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \lstinline|auto_ptr|)
+		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \ldots)
 		\item Conséquences :
 		\begin{itemize}
 			\item Objets créés dans un état cohérent, testable et utilisable
@@ -509,7 +492,7 @@ private:
 			\begin{itemize}
 				\item Cohérents
 				\item Utilisables
-				\item Complètement initialisés (si possible)
+				\item Complètement initialisés
 			\end{itemize}
 		\end{itemize}
 	\end{exampleblock}
@@ -524,8 +507,6 @@ private:
 		\begin{itemize}
 			\item Évitez les couples constructeur \og vide\fg{} et ensemble de mutateurs
 		\end{itemize}
-
-\note[item]{Ca ne signifie pas qu'il n'y ait pas de setter, seulement que le constructeur doit être \og complet\fg{}}
 	\end{alertblock}
 \end{frame}
 
@@ -579,14 +560,8 @@ cout << *bar << "\n";\end{lstlisting}
 
 	\begin{itemize}
 		\item Principe de connaissance minimale
-
-\note[item]{\og Ne parlez qu'à vos amis proches\fg{}}
-
 		\item Un objet \lstinline|A| peut utiliser les services d'un deuxième objet \lstinline|B|
 		\item Mais ne doit pas utiliser \lstinline|B| pour accéder à un troisième objet
-
-\note[item]{Dit autrement : Les amis de mes amis sont de parfaits inconnus}
-
 		\item En particulier, une classe n'expose pas ses données
 	\end{itemize}
 
@@ -628,8 +603,6 @@ cout << *bar << "\n";\end{lstlisting}
 		\begin{itemize}
 			\item Respectez l'interface et la logique des conteneurs standard
 		\end{itemize}
-
-\note[item]{Interface standard aussi utile pour point suivant (conteneurs/algorithmes)}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do, classes de service}
@@ -666,10 +639,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\item Pas de GC dans le langage ni dans la bibliothèque standard
 		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm})
 		\item \ldots{} mais limité par manque de support par le langage
-		\item Fondamentalement non déterministe : adapté à la mémoire pas aux autres ressources
-
-\note[item]{Inadaptation à d'autres types de ressource est la raison d'être du \textit{try with resource} de Java}
-
+		\item Non déterministe : adapté à la mémoire pas aux autres ressources
 		\item Particulièrement adapté à la gestion des structures cycliques
 
 \note[item]{Gestion des cycles en RAII : \lstinline|std::shared_ptr| ou \lstinline|std::weak_ptr|, ou responsabilité déléguée à un tiers ?}
@@ -685,7 +655,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 			\item Indisponible à ce jour
 		\end{itemize}
 
-\note[item]{Et visiblement, ce n'est pas près d'arriver, le support minimal de C++11 n'a été implémenté par aucun compilateur et risque d'être supprimé de la norme, et pas de travaux sur le sujet}
+\note[item]{Et visiblement, pas près d'arriver, le support minimal de C++11 n'a été implémenté par aucun compilateur et risque d'être supprimé de la norme, et pas de travaux sur le sujet}
 
 	\end{block}
 \end{frame}
@@ -721,7 +691,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\begin{itemize}
 			\item Sous Linux, méfiez-vous de l'\textit{Optimistic Memory Allocator}
 
-\note[item]{Retourne une adresse lors d'un \lstinline|new| ou d'un \lstinline|malloc()| sans allocation avec peu de contrôle}
+\note[item]{Retourne une adresse lors d'un \lstinline|new| ou d'un \lstinline|malloc()| sans allocation et avec peu de contrôle}
 \note[item]{Allocation uniquement lors de l'usage de la mémoire}
 \note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais \lstinline|init|}
 \note[item]{Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement}
@@ -737,7 +707,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\begin{itemize}
 		\item Partie de la bibliothèque standard comprenant
 
-\note[item]{Formellement, la STL n'existe plus dans la norme C++ actuelle.}
+\note[item]{Formellement, la STL n'existe plus dans la norme C++ actuelle}
 
 		\begin{itemize}
 			\item Conteneurs et \lstinline|std::basic_string| : données
@@ -750,11 +720,13 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\end{itemize}
 
 	\begin{block}{Note}
-		Quelques algorithmes manipulant directement des données (p.ex. \lstinline|std::min()|)
+		\begin{itemize}
+			\item Quelques algorithmes manipulant directement des données (p.ex. \lstinline|std::min()|)
+		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
-		\item Conçue initialement par Alexander Stepanov :
+		\item Conçue initialement par Alexander Stepanov
 		\begin{itemize}
 			\item Promoteur de la programmation générique
 
@@ -780,9 +752,9 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\begin{itemize}
 			\item $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
 
-\note[item]{Seulement $m$ implémentations vs. $n * m$ pour modèle objet avec algorithme sous forme de fonctions membres}
+\note[item]{$m$ implémentations vs. $n * m$ pour modèle objet avec algorithme sous forme de fonctions membres}
 
-			\item Tout nouvel algorithme est disponible sur tous conteneurs compatibles
+			\item Tout nouvel algorithme est disponible sur tous les conteneurs compatibles
 			\item Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
 
 \note[item]{Compatible, c'est à dire que le conteneur fournit un itérateur permettant les opérations requises par l'algorithme}
@@ -792,7 +764,9 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\end{block}
 
 	\begin{block}{Pour aller plus loin}
-		\cite{effStl} de Scott Meyers
+		\begin{itemize}
+			\item \cite{effStl} de Scott Meyers
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -818,11 +792,15 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \note[item]{On peut avoir des conteneurs \lstinline|const| et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de \lstinline|const|}
 
 		\item \ldots{} qui peuvent être les adresses d'autres objets
+	\end{itemize}
 
-		\begin{alertblock}{Conteneurs de pointeurs}
-			Pas de libération automatique des objets \og pointés\fg{}
-		\end{alertblock}
+	\begin{alertblock}{Conteneurs de pointeurs}
+		\begin{itemize}
+			\item Pas de libération automatique des objets \og pointés\fg{}
+		\end{itemize}
+	\end{alertblock}
 
+	\begin{itemize}
 		\item \ldots{} accessibles via un itérateur
 		\item Fourniture possible d'une politique d'allocation
 		\item Vu des algorithmes, ce qui fournit une paire d'itérateurs, est un conteneur
@@ -859,12 +837,6 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 		\end{itemize}
 	\end{alertblock}
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Conteneur par défaut
-		\end{itemize}
-	\end{exampleblock}
 \end{frame}
 
 \begin{frame}
@@ -898,7 +870,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\begin{itemize}
 			\item Alias de \lstinline|std::basic_string<char>|
 			\item Stockage de chaînes de caractères
-			\item Manipulation de \og \textit{bytes}\fg{} et non de caractères encodés
+			\item Manipulation de \textit{bytes} et non de caractères encodés
 		\end{itemize}
 	\end{itemize}
 
@@ -1005,7 +977,7 @@ while(!foo.empty()) {
 \note[item]{\lstinline|std::valarray| laissé de côté, pas vraiment un conteneur}
 
 	\begin{itemize}
-		\item \lstinline|std::bitset| :
+		\item \lstinline|std::bitset|
 		\begin{itemize}
 			\item Tableau de bits de taille fixe (paramètre template)
 			\item Conçu pour réduite l'empreinte mémoire
@@ -1016,14 +988,14 @@ while(!foo.empty()) {
 			\end{block}
 
 		\end{itemize}
-		\item Conteneurs non-standard :
+		\item Conteneurs non-standard
 		\begin{itemize}
 			\item Listes simplement chaînées
 			\item Tables de hachage
 			\item Tableaux de taille fixe
 			\item Tampons circulaires
 			\item Arbres et graphes
-			\item Variantes de conteneurs \og STL\fg{} (p.ex. \og \textit{ropes}\fg{})
+			\item Variantes de conteneurs STL (p.ex. \textit{ropes})
 
 \note[item]{\textit{Ropes} : chaîne découpée en morceaux reliés par une liste ou un arbre. Permet les modification à l'intérieur de la chaîne, résout des problème d'espace mémoire contigu trop faible}
 \note[item]{\lstinline|std::string| peut être implémentée sous forme de \textit{ropes} en C++98/03, plus en C++11}
@@ -1063,7 +1035,7 @@ while(!foo.empty()) {
 	\begin{alertblock}{Flux d'octets}
 		\begin{itemize}
 			\item Utilisez \lstinline|std::vector<unsigned char>|
-			\item pas \lstinline|std::vector<char>| encore moins \lstinline|std::string|
+			\item Pas \lstinline|std::vector<char>| encore moins \lstinline|std::string|
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -1195,11 +1167,12 @@ while(!foo.empty()) {
 \subsection*{STL - Algorithmes}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Function Object\titlehfill{}1/2}
-	\begin{itemize}
-		\item Instance de classe définissant \lstinline|operator()()|
 
 \note[item]{Appelés \textit{functor} en anglais on foncteur en français}
-		\end{itemize}
+
+	\begin{itemize}
+		\item Instance de classe définissant \lstinline|operator()()|
+	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 class LessThan {
@@ -1238,9 +1211,6 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 	\frametitle{STL Algorithmes - Prédicats}
 	\begin{itemize}
 		\item \og Appelable\fg{} retournant un booléen (ou un type convertible en booléen)
-
-\note[item]{Foncteur ou pointeur de fonction}
-
 		\item Utilisés par de nombreux algorithmes
 		\item De nombreux algorithmes utilisent un prédicat par défaut (p.ex. \lstinline|<| ou \lstinline|==|)
 
@@ -1263,7 +1233,9 @@ vector<int> foo{4, 5, 9 ,12};
 for_each(foo.begin(), foo.end(), print);\end{lstlisting}
 
 	\begin{alertblock}{Syntaxe}
-		Les exemples utilisent une initialisation de conteneur introduite pas C++11
+		\begin{itemize}
+			\item Les exemples utilisent une initialisation de conteneur introduite pas C++11
+		\end{itemize}
 	\end{alertblock}
 
 	\begin{itemize}
@@ -1441,7 +1413,6 @@ equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
 	\end{alertblock}
 
 \note[item]{Comparaison sur la taille du premier ensemble (couple \lstinline|begin| - \lstinline|end|)}
-\note[item]{Vérification préalable des tailles et vérification des \textit{overflow}}
 \note[item]{C++14 ajoute des surcharges de \lstinline|std::equal()| testant la taille}
 
 	\begin{block}{Et \lstinline|operator==| ?}
@@ -1530,13 +1501,10 @@ vector<int> bar;
 
 copy(foo.begin(), foo.end(), back_inserter(bar));\end{lstlisting}
 
-\note[item]{\lstinline|std::copy()| : l'itérateur du second ensemble est l'itérateur de début.}
-
 	\begin{itemize}
 		\item \lstinline|std::copy_backward()| copie les éléments (de la fin vers le début)
 	\end{itemize}
 
-\note[item]{\lstinline|std::copy_backward()| : l'itérateur du second ensemble est son itérateur de fin}
 \note[item]{L'ordre relatif est préservé}
 
 	\begin{alertblock}{Attention}
@@ -1878,14 +1846,13 @@ merge(foo.begin(), foo.end(),
 	\frametitle{STL Algorithmes - Opérations ensemblistes\titlehfill{}1/2}
 	\begin{alertblock}{Attention}
 		\begin{itemize}
+			\item Ensemble sans répétition de valeur
 			\item Uniquement des ensembles triés
 		\end{itemize}
 	\end{alertblock}
 		
 	\begin{itemize}
 		\item \lstinline|std::includes()| vérifie si tous les éléments sont présents dans un autre ensemble
-
-\note[item]{Ici, ensemble prend un sens plus \og mathématique\fg{}, et notamment sans répétition de valeur}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -2070,7 +2037,6 @@ partial_sum(foo.begin(), foo.end(), back_inserter(bar));
 			\item Pas un conteneur :
 
 \note[item]{Il contient mais est très différent des conteneurs classiques : frustre, minimaliste, rudimentaire, pas de réelle sémantique, peu d'intelligence}
-\note[item]{Un tableau bas niveau}
 
 			\begin{itemize}
 				\item Sémantique : Tableau ou pointeur ? Statique ou dynamique ?
@@ -2237,7 +2203,9 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 	\end{exampleblock}
 
 	\begin{block}{Aller plus loin}
-		Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms (Marshall Clow)}
+		\begin{itemize}
+			\item Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms (Marshall Clow)}
+		\end{itemize}
 
 \note[item]{Conf cppcon 2016 sur les algorithmes en général et sur comment faire ces propres algorithmes}
 	\end{block}

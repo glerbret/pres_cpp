@@ -15,7 +15,7 @@
 \begin{frame}
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Surcharge de l'opérateur point (\lstinline|operator.()|)
+		\item Surcharge de \lstinline|operator.|
 		\begin{itemize}
 			\item Si l'opérateur est défini, les opérations sont transférés à son résultat
 			\item \ldots{} sauf celles spécifiquement déclarées membres
@@ -47,7 +47,7 @@
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Nouveaux \og conteneurs\fg{}:
+		\item Nouveaux conteneurs
 		\begin{itemize}
 			\item Adaptateurs \lstinline|std::flat_map| et \lstinline|std::flat_multimap| : \lstinline|map| depuis une paire de conteneurs séquentiels
 			\item \lstinline|std::mdspan| vues multidimensionnels (et indiçage associé \lstinline|[x,y,z]|)
@@ -66,7 +66,7 @@
 			\item \lstinline|retain_ptr| pointeur intrusif manipulant le comptage de référence interne
 			\item Création de pointeurs intelligents avec une valeur par défaut
 		\end{itemize}
-		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>()|
+		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>|
 		\begin{itemize}
 			\item Dépréciation des conversions entre énumération et flottant
 			\item Dépréciation des conversions entre énumérations
@@ -362,7 +362,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 	\frametitle{Propositions diverses}
 	\begin{itemize}
 		\item Attribut \lstinline|[[ assume(expression) ]]| indique que le compilateur peut supposer la véracité de l'expression pour l'optimisation
-		\item PFA (\textit{Proxy}, \textit{Facade}, \textit{Addresser}) : programmation polymorphique via \textit{type erasure}
+		\item\textit{Proxy}, \textit{Facade}, \textit{Addresser} : programmation polymorphique via \textit{type erasure}
 
 \note[item]{Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites}
 
@@ -493,12 +493,12 @@ int s = sum(point.elems...);\end{lstlisting}
 	\begin{itemize}
 		\item Génération d'opérateurs à la demande via \lstinline|=default|
 		\begin{itemize}
-			\item \lstinline|operatorX=()| à partir de \lstinline|operatorX()|
+			\item \lstinline|operatorX=| à partir de \lstinline|operatorX|
 			\item incrément et décrément préfixés à partir de l'addition et de la soustraction
 			\item incrément et décrément postfixés à partir des versions préfixés
-			\item \lstinline|operator->()| et \lstinline|operator->*()| à partir de \lstinline|operator*()| et \lstinline|operator.()|
+			\item \lstinline|operator->| et \lstinline|operator->*| à partir de \lstinline|operator*| et \lstinline|operator.|
 
-\note[item]{A priori \lstinline|operator->()| et \lstinline|operator->*()| seront générés par défaut, mais cette génération sera désactivable avec \lstinline|=delete|}
+\note[item]{A priori \lstinline|operator->| et \lstinline|operator->*| seront générés par défaut, mais cette génération sera désactivable avec \lstinline|=delete|}
 \note[item]{Dans la continuité des opérateurs de comparaisons}
 
 		\end{itemize}

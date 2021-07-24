@@ -56,7 +56,7 @@
 		\end{itemize}
 		\item Macros testant le support de fonctionnalité du langage
 		\begin{itemize}
-			\item \lstinline|__cpp_decltype| : support de \lstinline|decltype|
+			\item \lstinline[keywordstyle=\color{black}]|__cpp_decltype| : support de \lstinline|decltype|
 			\item \lstinline|__cpp_range_based_for| : support du \textit{range-based for loop}
 			\item \lstinline|__cpp_static_assert| : support de \lstinline|static_assert|
 			\item \ldots
@@ -158,7 +158,7 @@
 \note[item]{Auparavant, ils pouvaient représenter ces caractères, mais ce n'était pas une obligation et pouvaient représenter d'autres codages de caractères larges}
 \note[item]{Et les \textit{Universal character name} doivent correspondre à des \textit{code points} ISO/IEC 10646}
 
-		\item Type \lstinline|char8_t| pour les caractères UTF-8
+		\item \lstinline|char8_t| pour les caractères UTF-8
 		\begin{itemize}
 			\item Pendant UTF-8 de \lstinline|char16_t| et \lstinline|char32_t|
 			\item Similaire en terme de taille, d'alignement, de conversion à \lstinline|unsigned char|
@@ -502,7 +502,7 @@ namespace A {
 		\begin{itemize}
 			\item Nom du module à exporter
 			\item Suivi de l'import d'autres modules
-			\item \ldots Éventuellement ré-exportés par le module
+			\item Éventuellement ré-exportés par le module
 		\end{itemize}
 	\end{itemize}
 
@@ -562,7 +562,7 @@ void bar(int j) { return 3 * j; }\end{lstlisting}
 	\frametitle{Modules - Partitions\titlehfill{}1/2}
 	\begin{itemize}
 		\item Les modules peuvent être partitionnés sur plusieurs unités
-		\item \ldots les partitions fournissent alors un nom de partition
+		\item Les partitions fournissent alors un nom de partition
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -575,7 +575,7 @@ module foo:part;\end{lstlisting}
 
 	\begin{alertblock}{\textit{Primary Module Interface Unit}}
 		\begin{itemize}
-			\item Un et un seul \textit{Interface Unit} sans nom de partition par module
+			\item Une et une seule \textit{Interface Unit} sans nom de partition par module
 		\end{itemize}
 	\end{alertblock}
 
@@ -744,7 +744,7 @@ export import "bar.h"\end{lstlisting}
 
 	\begin{block}{Rappel}
 		\begin{itemize}
-			\item Après \lstinline|reserve()|, la capacité est \textbf{supérieure} ou égale à la capacité demandée
+			\item Après \lstinline|reserve()|, la capacité est supérieure ou égale à la capacité demandée
 		\end{itemize}
 	\end{block}
 
@@ -957,7 +957,7 @@ shift_right(bar.begin(), bar.end(), 1); // 5, 10, 15\end{lstlisting}
 		\item \lstinline|std::has_single_bit()| teste si un entier est une puissance de deux
 		\item \lstinline|std::bit_ceil()| plus petite puissance de deux non strictement inférieure
 		\item \lstinline|std::bit_floor()| plus grande puissance de deux non strictement supérieure
-		\item \lstinline|std::bit_width()| plus petit nombre de bits nécessaire pour représenter un entier
+		\item \lstinline|std::bit_width()| plus petit nombre de bits pour représenter un entier
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1072,7 +1072,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Évolutions de la bibliothèque standard}
 	\begin{itemize}
-		\item Utilisation de l'attribut \lstinline|[[nodiscard]]|
+		\item Utilisation de l'attribut \lstinline|[[ nodiscard ]]|
 		\item Utilisation de \lstinline|noexcept|
 		\item Optimisation d'algorithmes numériques via \lstinline|std::move()|
 
@@ -1513,7 +1513,7 @@ vformat("{}", make_format_args("a"));\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Référencement des valeurs}
 	\begin{itemize}
-		\item Deux types de référencement :
+		\item Deux types de référencement
 		\begin{itemize}
 			\item Positionnel
 		\end{itemize}
@@ -1544,7 +1544,7 @@ format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Spécificateurs}
 	\begin{itemize}
-		\item Introduits par \og : \fg{}
+		\item Introduits par '\lstinline|:|'
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1646,7 +1646,7 @@ format("{:s}", true);         // "true"\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Format\titlehfill{}2/2}
 	\begin{itemize}
-		\item Flottants : fixe, \og court\fg{}, scientifique ou hexadécimal
+		\item Flottants : fixe, court, scientifique ou hexadécimal
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1719,7 +1719,7 @@ format("{:%F %T}", chrono::system_clock::now());
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Gestion des erreurs}
 	\begin{itemize}
-		\item Émission d'une exception \lstinline|std::format_error|
+		\item Exception \lstinline|std::format_error|
 		\begin{itemize}
 			\item Chaîne de format invalide
 			\item Spécificateurs non cohérents avec le type fournit
@@ -1910,7 +1910,7 @@ struct Foo {
 			\end{itemize}
 			\item Constantes représentant les jours de la semaine et les mois
 			\item Suffixes littéraux \lstinline|y| et \lstinline|d| pour les années et les jours
-			\item \lstinline|operator/()| pour construire une date depuis un format \og humain\fg{}
+			\item \lstinline|operator/| pour construire une date depuis un format \og humain\fg{}
 		\end{itemize}
 	\end{itemize}
 
@@ -2073,7 +2073,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Structured binding\titlehfill{}1/2}
 	\begin{itemize}
-		\item Extension à tous les membres visibles (plus uniquement publics)
+		\item Extension à tous les membres visibles
 
 \note[item]{\textit{structured binding} sur les membres privés depuis une fonction membre ou amis}
 	
@@ -2095,7 +2095,7 @@ auto f2 = [=] { return b; };\end{lstlisting}
 	\begin{itemize}
 		\item [] \begin{itemize}
 			\item Déclaration \lstinline|inline|, \lstinline|extern|, \lstinline|static|, \lstinline|thread_local| ou \lstinline|constexpr| possible
-			\item Possibilité de marquer \lstinline|[[maybe_unused]]|
+			\item Possibilité de marquer \lstinline|[[ maybe_unused ]]|
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -2136,7 +2136,7 @@ auto& [y] = x;\end{lstlisting}
 		\begin{itemize}
 			\item \textit{strong structural equality}
 			\begin{itemize}
-				\item Classes de base et membres non statiques avec une \textit{defaulted} \lstinline|operator==()|
+				\item Classes de base et membres non statiques avec une \textit{defaulted} \lstinline|operator==|
 				\item Pas de référence
 				\item Pas de type flottant
 			\end{itemize}
@@ -2504,18 +2504,18 @@ template<class T> concept totally_ordered =
 	\begin{itemize}
 		\item Ajout d'attributs
 		\begin{itemize}
-			\item \lstinline|[[likely]]| et \lstinline|[[unlikely]]| probabilité de branches conditionnelles
+			\item \lstinline|[[ likely ]]| et \lstinline|[[ unlikely ]]| probabilité de branches conditionnelles
 
 \note[item]{Fourni au compilateur des information lui permettant des optimisations plus pertinentes}
 
-			\item \lstinline|[[no_unique_address]]| membre statique ne nécessitant pas une adresse unique
+			\item \lstinline|[[ no_unique_address ]]| membre statique ne nécessitant pas une adresse unique
 
 \note[item]{Et permettre l'EMO (\textit{Empty Member Optimisation})}
 		\end{itemize}
 
-		\item Extension de \lstinline|[[nodiscard]]| aux constructeurs
+		\item Extension de \lstinline|[[ nodiscard ]]| aux constructeurs
 		\begin{itemize}
-			\item Marquage \lstinline|[[nodiscard]]| des constructeurs autorisé
+			\item Marquage \lstinline|[[ nodiscard ]]| des constructeurs autorisé
 
 \note[item]{Auparavant, GCC levait un avertissement}
 
@@ -2523,9 +2523,9 @@ template<class T> concept totally_ordered =
 
 \note[item]{Constructeurs non \lstinline|explicit|}
 		\end{itemize}
-		\item Possibilité d'associer un message à \lstinline|[[nodiscard]]|
+		\item Possibilité d'associer un message à \lstinline|[[ nodiscard ]]|
 
-\note[item]{Pour indiquer la motivation du marquage \lstinline|[[nodiscard]]| ou l'erreur potentielle que cache la non-vérification du retour}
+\note[item]{Pour indiquer la motivation du marquage \lstinline|[[ nodiscard ]]| ou l'erreur potentielle que cache la non-vérification du retour}
 	\end{itemize}
 \end{frame}
 
@@ -2802,7 +2802,7 @@ t.request_stop();\end{lstlisting}
 
 \note[item]{C'est à dire qu'elle est vraiment terminée}
 
-			\item \lstinline|operator()()| et \lstinline|resume()| poursuit la coroutine
+			\item \lstinline|operator()| et \lstinline|resume()| poursuit la coroutine
 			\item \lstinline|destroy()| détruit la coroutine
 		\end{itemize}
 		\item Spécialisation de \textit{coroutine handle} sur une \textit{promise}

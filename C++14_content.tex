@@ -9,7 +9,7 @@
 		\item Approuvé le 16 août 2014
 		\item Dernier \textit{Working Draft} : \href{https://timsong-cpp.github.io/cppwp/n4140/draft.pdf}{N4140}
 		\item Dans la continuité de C++11
-		\item Changement moins important
+		\item Changements moins importants
 		\item Mais loin d'une simple version correctrice
 		\item Support complet par GCC, Clang et Visual C++
 	\end{itemize}
@@ -96,7 +96,7 @@ auto bar3() { return bar1(); }           // string\end{lstlisting}
 	\frametitle{Aggregate Initialisation}
 	\begin{itemize}
 		\item Compatible avec l'initialisation par défaut des membres
-		\item \ldots{} initialisation par défaut des membres non explicitement initialisés
+		\item Initialisation par défaut des membres non explicitement initialisés
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -139,8 +139,8 @@ ni == nd;    // Erreur de compilation\end{lstlisting}
 		\item Optimisation de la recherche hétérogène dans les conteneurs associatifs ordonnés
 		\item Fourniture d'une classe exposant
 		\begin{itemize}
-			\item La fonction de comparaison
-			\item Le \textit{tag} \lstinline|is_transparent|
+			\item Fonction de comparaison
+			\item \textit{Tag} \lstinline|is_transparent|
 		\end{itemize}
 		\item Suppression de conversions inutiles
 	\end{itemize}
@@ -202,7 +202,7 @@ cout << "out: '" << out << "'\n";
 \begin{frame}[fragile]
 	\frametitle{Littéraux binaires}
 	\begin{itemize}
-		\item Support des littéraux binaires grâce au préfixe \og 0b\fg{}
+		\item Support des littéraux binaires préfixés par \lstinline|0b|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -241,7 +241,7 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Remplace \lstinline|std::string("abcd")| dans de nombreux contextes
+			\item Remplace \lstinline|std::string("abcd")|
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -255,18 +255,12 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 auto foo = 60s;       // chrono::seconds
 auto bar = 5min;      // chrono::minutes\end{lstlisting}
-
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Suffixe \lstinline|s| utilisé pour \lstinline|std::string| et pour les secondes mais sans ambiguïté car dépendant du type de littéral auquel il s'applique
-		\end{itemize}
-	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{User-defined literals standard\titlehfill{}3/3}
 	\begin{itemize}
-		\item Suffixe \lstinline|if| : nombre imaginaire de type \lstinline|std::complex<float>|
+		\item Suffixe \lstinline[keywordstyle=\color{black}]|if| : nombre imaginaire de type \lstinline|std::complex<float>|
 		\item Suffixe \lstinline|i| : nombre imaginaire de type \lstinline|std::complex<double>|
 		\item Suffixe \lstinline|il| : nombre imaginaire de type \lstinline|std::complex<long double>|
 	\end{itemize}
