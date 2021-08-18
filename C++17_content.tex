@@ -403,18 +403,39 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 
 \subsection*{Ordre d'évaluation}
 \begin{frame}[fragile]
-	\frametitle{Ordre d'évaluation}
+	\frametitle{Ordre d'évaluation\titlehfill{}1/2}
 	\begin{itemize}
 		\item Ordre d'évaluation fixé
 		\begin{itemize}
 			\item De gauche à droite pour les expressions post-fixées
-
-\note[item]{Donc fonction avant paramètre, classe/structure avant membre, tableau avant indice}
-
 			\item De droite à gauche pour les affectations
 			\item De gauche à droite pour les décalages
 		\end{itemize}
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+// a avant b
+a.b;
+a->b,
+b @= a;
+a[b];
+a << b;
+a >> b;\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ordre d'évaluation\titlehfill{}2/2}
+	\begin{itemize}
+		\item Évaluation complète d'un paramètre avant celle du suivant
+	\end{itemize}
+	
+	\begin{lstlisting}[language=C++]
+f(a(x), b, c(y));
+// Lorsque x est evalue, a(x) l'est avant b, y ou c(y)\end{lstlisting}
+	
+	\begin{alertblock}{Ordre des paramètres}
+		Ordre d'évaluation des paramètres toujours non fixé
+	\end{alertblock}
 \end{frame}
 
 \subsection*{Copy elision}
