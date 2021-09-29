@@ -59,6 +59,7 @@
 \note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
 
 			\item \lstinline|queue| concurrente
+			\item \textit{Bucket array} (\lstinline|std::hive|) : plusieurs blocs liés entre eux d'éléments  avec un indicateur sur l'état de chaque élément (actif / effacé)
 		\end{itemize}
 
 		\item Pointeurs intelligents :
@@ -523,14 +524,11 @@ int s = sum(point.elems...);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-
 		\item Trait \lstinline|std::is_narrowing_convertible|
 		\item Trait et fonctions pour garantir des conversions sans perte
 		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
 		\item Constructeurs par déplacement \lstinline|=bitcopies|
 		\item API \og itérateurs\fg{} de génération des nombres aléatoire
-		\item Surcharge \textit{ranges} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
-		\item \textit{Range} reconstructible après une séparation en deux itérateurs
 		\item Fonctions statistiques (moyenne, médiane, variance, \ldots)
 		\item \lstinline|span| de taille fixe
 		\item Paramètre template universel
@@ -539,6 +537,25 @@ int s = sum(point.elems...);\end{lstlisting}
 
 		\item Templates dans les classes locales
 		\item Ajout de \lstinline|operator[]| à \lstinline|std::initializer_list|
+		\item Ajout de \lstinline|#warning| pour générer un avertissement à la compilation
+
+\note[item]{Déjà présent dans la plupart des compilateurs}
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Améliorations diverses des \textit{Ranges}
+		\begin{itemize}
+			\item Surcharge \textit{ranges} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
+			\item \textit{Range} reconstructible après une séparation en deux itérateurs
+			\item De nombreux nouveaux adaptateurs de \textit{Range} et constructeurs de \textit{View} : \lstinline|view::tail|, \lstinline|view::unbounded|, \lstinline|view::zip|, \lstinline|view::enumerate|, \lstinline|view::adjacent|, \ldots
+			\item De nombreux nouveaux algorithmes sur les \textit{Ranges} : \lstinline|ranges::fold|, \lstinline|ranges::sum|, \lstinline|ranges::reduce|, \lstinline|ranges::shift_left|, \lstinline|ranges::shift_right|, \ldots
+			\item Précision sur l'encodage des caractères 
+			\item \ldots
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -625,11 +642,21 @@ int s = sum(point.elems...);\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 vector<int> v(42);
 queue q(v.begin(), v.end());
-stack s(v.begin(), v.end());
-\end{lstlisting}
+stack s(v.begin(), v.end());\end{lstlisting}
 
 \note[item]{En C++20 et précédent, il faut indiquer le type et utiliser une liste d'initialisation construite via la paire d'itérateur : \lstinline|queue<int> q({v.begin(), v.end()});|}
 
+	\begin{itemize}
+		\item Ajout de \lstinline|std::unreachable()| pour indiquer un code inatteignable
+
+\note[item]{Permet de fournir l'information au compilateur pour ces optimisations, et de violer une assertion si on passe dedans}	
+\note[item]{P.ex. des valeurs non pertinentes dans un \lstinline|switch() case|, après un appel qui ne retourne pas, \ldots}
+
+		\item Équivalent \textit{move-only} de \lstinline|std::function| : \lstinline|std::any_invocable|
+		\item Évolution de l'API \lstinline|std::format| : fonction d'impression dans un \lstinline|std::ostream|
+		\item Localisation du formatage de \lstinline|std::chrono|
+		\item Utilisation de \textit{range based for loop} sur des temporaires
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -643,11 +670,9 @@ stack s(v.begin(), v.end());
 		\item Remplacement de la vérification via \lstinline|assert| et de la documentation via commentaire \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
 		\item Initialement, plusieurs propositions \og concurrentes\fg{}
 		\item \ldots{}mais un compromis à émerger
-		\item Utilisation d'attributs \lstinline|[[assert:x]], |\lstinline|[[expects:x]]| et \lstinline|[[ensure:x]]|
+		\item Utilisation d'attributs \lstinline|[[assert:x]]|, \lstinline|[[pre:x]]| et \lstinline|[[post:x]]|
 
-\note[item]{\lstinline|[[assert:x]]| : invariants et autres vérifications}
-\note[item]{\lstinline|[[expects:x]]| : pré-conditions}
-\note[item]{\lstinline|[[ensure:x]]| : post-combustions}
+\note[item]{Ou \lstinline|[[expects:x]]| et \lstinline|[[ensure:x]]| pour les préconditions et postconditions}
 
 		\item \lstinline|audit| pour ne les activer qu'à la demande
 		\item \lstinline|axiom| pour ne pas générer de code \textit{runtime} (\textit{compile-time} uniquement)
