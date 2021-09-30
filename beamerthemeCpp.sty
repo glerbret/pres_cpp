@@ -17,6 +17,38 @@
 \beamertemplatenavigationsymbolsempty
 \setbeamercolor{structure}{fg=teal, bg=teal!40}
 
+% Format de la page de titres
+\usepackage{graphicx}
+\defbeamertemplate*{title page}{customized}[1][colsep=-4bp,rounded=true,shadow=true]
+{
+	\vbox{}
+	\vfill
+	\begingroup
+	\centering
+	\begin{beamercolorbox}[sep=8pt,center,#1]{title}
+		\usebeamerfont{title}\inserttitle\par%
+		\ifx\insertsubtitle\@empty%
+		\else%
+		\vskip0.25em%
+		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+		\fi%     
+	\end{beamercolorbox}%
+	\vskip1em\par
+	\begin{beamercolorbox}[sep=8pt,center,#1]{author}
+		\usebeamerfont{author}\insertauthor
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+		\usebeamerfont{institute}\insertinstitute
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{date}
+		\usebeamerfont{date}\insertdate
+	\end{beamercolorbox}\vskip0.5em
+	{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+	\endgroup
+	\vskip 10mm plus 10fill
+	\hfill\includegraphics[height=12pt]{license.png}
+}
+
 % Coloration des blocs
 \definecolor{example_green}{RGB}{0,0.6,0}
 \setbeamercolor{block title}{bg=teal,fg=white}
