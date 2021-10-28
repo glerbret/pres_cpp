@@ -208,6 +208,10 @@ constexpr int fibo() {
   if constexpr (N>=2) return fibo<N-1>()+fibo<N-2>();
   else return N; }\end{lstlisting}
 	\end{block}
+
+%	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T%3E+auto+foo(T+t)%0A%7B%0A++if+constexpr+(std::is_pointer_v%3CT%3E)%0A++++return+*t%3B%0A++else%0A++++return+t%3B%0A%7D%0A%0Atemplate%3Cint+N%3E%0Aconstexpr+int+fibo()%0A%7B%0A++if+constexpr+(N%3E%3D2)%0A++++return+fibo%3CN-1%3E()%2Bfibo%3CN-2%3E()%3B%0A++else+return+N%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++int+a+%3D+10,+b+%3D+5%3B%0A++++int*+ptr+%3D+%26b%3B%0A++++std::cout+%3C%3C+foo(a)+%3C%3C+!'+!'+%3C%3C+foo(ptr)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::cout+%3C%3C+fibo%3C8%3E()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{if(init; condition) and switch(init; condition)}
@@ -260,6 +264,9 @@ if(ret) ...\end{lstlisting}
   bool ret = foo();
   if(ret) ...
 }\end{lstlisting}
+
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++int+bar+%3D+5%3B%0A%0A++++if(int+foo+%3D+42%3B+bar)%0A++++%7B%0A++++++std::cout+%3C%3C+foo+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++else%0A++++%7B%0A++++++std::cout+%3C%3C+-foo+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++%7D%0A%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -364,6 +371,11 @@ for(const auto& [k,v] : myMap)
 	\begin{lstlisting}[language=C++]
 if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 { ... }\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbACcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHp8HAl9d3ZlsMO177hzcBC8SXoH1u91%2Bj2ebgaxCYAE9wV8fn8AUcWEwksjIWinoCvI5aIQkRsrhDbl40kY9sw2AokkxVnthugQCBiQRomIFIcrBSbqcvA49gAxVCoT4mADs/Juez2wQIeyYfM%2BCtoAmAewiatuCtZ7NeNNMGzlMoAInq7rdJo5kGKJXt%2BKgIHMpbL1XszsDiAxHZLZZIzKQ9gBWAKh8xmAASVU10d50qtZo9VoFdrwDsNIGBoMwgKVoZzxveZJ1DTdHrlCp9y39OcxAGtMAB9PP0CDBqNmWPxyW9hTu1MQ5NS231e0sghskBwxGFwShsyXCsALyro5r09n89JxyXexX5bhMos3fDluttcwvv9p5HdzHAqVe0xwU3T%2B3Z69CqYhNQA4wwsVRSARUg1xMMMLWeGCXSrR8FQNGd2TQQkYUBPZVAwo49jADg8IIwFMIRHC3EIijiNwtcyMIqC3AYfDrwOZ8bXlFjtz/ACgJAsCoJgw4YIiSth04ndUKWZUqPI7DpIo/DaNIuSmLDBimMQlj0zYhUf31JD/yIHjQKRaDYPXBCxJzNCpKOTDZNs3CFIUuSlIc8iVLU9YNKvAUdM9PTkNnTFsSOItxJAUtVxYBEAFksR/WU2gOXs5AYRNLSjWUQ2SswLUwLxVHSscx0fX9nRICA0AYYYVQA8xYh4ptSAAN34vYQDfWKsXdAKOLKwKJPQuSm1o6N2py2jmtojzGK8sSfO0pC8CoCADMAqCLEIaJi2FVZMCwdA2sEzq4qSAA6YIlEaCAc0ZPBiEXAhixQiKCGIN5LggDYezMAAVYhUDwXlBzmUSWV2zB9v2nr2L8sSBpQSTaK24gAFpLiUKr0Gm9ZVNm5i/K0sr%2BGISqBBqtb6salq2o66LTphpC%2Bt6hHrNoka5LGjqxrkqblNxzyCc0r0FoWjgFloTgw14PwOC0UhUE4NxrGsFklhWfFvh4UgCE0cWFibEAww0fROEkGW9YVzheAUEATd1uXxdIOBYCQTBVEwZAALIChVuIYAFGUQwqiEBBUAAd1l7W0BYJI6CYGog5CWhQ4j2X5ZjuP6BiYAuC4ENM7oaIAHlCVTyPLfdz2bn922OF4KvkDqfBZd4fhBBEMR2CkGRBEUFR1Ed0hdDaAwjBQFXLH0PAIlt2A6XYCIJWGFqBm4aVpdBhWkhqOvUdZQTTEsawuGlG31dWPRWWCJOQ7DivuF4N7Ic4bXw/hJI9YlqWLaHxWOGwB7L2RBiBYQAByxFRrESQexgDIAdHnM6Zg9gQGVsfKeexcCEBIMlDYXA5hPy/gsBA5wsAxDdKQQ2xtTYcHNqQdOvB/42ztjrIhNCzC/3lkw1hjst7NWiGkZwkggA%3D%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:43,positionColumn:1,positionLineNumber:43,selectionStartColumn:1,selectionStartLineNumber:43,startColumn:1,startLineNumber:43),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++template+%3Cint+N%3E+auto%26+get()+const%0A++%7B%0A++++if+constexpr(N+%3D%3D+0)%0A++++%7B%0A++++++return+i%3B%0A++++%7D%0A++++else%0A++++%7B%0A++++++return+s%3B%0A++++%7D%0A++%7D%0A%0Aprivate:%0A++const+int+i+%3D+42%3B%0A++const+std::string+s%7B%22Hello%22%7D%3B%0A%7D%3B%0A%0Anamespace+std%0A%7B%0A++template%3C%3E%0A++struct+tuple_size%3CFoo%3E%0A++++:+std::integral_constant%3Cstd::size_t,+2%3E+%7B%7D%3B%0A%0A++template%3Cstd::size_t+N%3E%0A++struct+tuple_element%3CN,+Foo%3E%0A++%7B%0A++++using+type+%3D+decltype(std::declval%3CFoo%3E().get%3CN%3E())%3B%0A++%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++const+auto+%5B+i,+s+%5D+%3D+Foo%7B%7D%3B%0A++std::cout+%3C%3C+i+%3C%3C+!'+!'+%3C%3C+s+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -501,6 +513,9 @@ Bar baz{{}, 1.25};   // Foo non intialise\end{lstlisting}
 
 \note[item]{Bref les autres restrictions continuent de s'appliquer}
 \note[item]{Pour résumer, C++14 a levé l'interdiction de membres initialisés par défaut, et C++17 assoupli celle sur \og pas d'héritage\fg{}}
+
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+i%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++double+l%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Bar+bar%7B%7B42%7D,+1.25%7D%3B%0A++Bar+baz%7B%7B%7D,+1.25%7D%3B%0A%0A++std::cout+%3C%3C+bar.i+%3C%3C+!'+!'+%3C%3C+bar.l+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz.i+%3C%3C+!'+!'+%3C%3C+baz.l+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -582,6 +597,10 @@ std::byte b{5};
 b |= std::byte{2};
 b <<= 2;
 std::to_integer<unsigned int>(b); // 28-1C\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:16,positionColumn:6,positionLineNumber:16,selectionStartColumn:6,selectionStartLineNumber:16,startColumn:6,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccstddef%3E%0A%23include+%3Ciomanip%3E%0A%0Aint+main()%0A%7B%0A++std::byte+b%7B5%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%7C%3D+std::byte%7B2%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%3C%3C%3D+2%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+1%0A++b+%2B%3D+std::byte%7B2%7D%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -634,6 +653,9 @@ r.node.key() = 3;
 bar.insert(r.position, std::move(r.node));
 // foo : {}
 // bar : {{1,"foo1"}, {2,"bar2"}, {3,"bar2"}}\end{lstlisting}
+
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbFykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn4JdpgO6bX1BIVhkdFxrXUNTdlD3b3FpYMAlLaoXsTI7BzmAMzByN5YANQma25OCgTEmKz72CYaAILrm9uYewcsTIkXV7dmGwxbXrv7bmOxGCwHeNw%2BwQIOxewQgMw%2BJgA7FYbjsdsd0CAQC83gdIaR0QRMSAgSCLjt%2BKg9sikRYEuYzJSuAykQARAm0sykBmUswsxGstn7FHXNEYrE4gH4wnE0lGckRerUqzIrkMxXEPlmPkCoVrEVo/jECBoBjHHZMLxEcyxPYAVgsAGtSAA3Ex21k7EAU1CoeGo5UfNFiolYtBWp5uAE7R2R6NgDgAWgTcYOOxdqbcOxTCeFQepgoD4pQCyhAPjqztbgYuf1%2BaNJoE5st1rMtvdTtd7s93o1/tFgYDIeJ4bLB2jsfLaYTyY4mfT85zqzrAaFRdDJYjU6zuarNeXBplYdLi8r1drIvzGoAdMElA1qL7r5hVCcmA4IFwZvCVwOG6bmytVAbXtTs3Q9L0fT9fNaXzYdjy3cc00nJCdyTFNtwXTClzzVddXXEcT2ws991wv8SEbM0oRbYC21A51wJ7HY%2BxgmkhyPTcxyjZDT1necM2I7MD1YwsB2LUdT3dc9hIIhCuIrKTSN/fMaJ2Ygnk9G872iAhH1QZ9X2Id9dLMb8yMNCiAOooCQI7Bju0gyl%2BzRWD2PEojUJjXiMM8gTPJw38XPwsSNwk4jFIvetLKbazW3bB17Ig3t6mcwcB3gzj5xQ7i0L4zC/JyoShPMgt83cxDCt3aSSvK%2BS02LCJfQMWhEgQJh52IW8zR0zB0FPIrMM6hgMEwa9HUwABPOF%2Bp8wqhpG68cUSXrpvCvdItkzK1uq5SA3mrAxsm1a1k9NYSq07qH063I0gEAlixYVAXUwCB9swMzAp9Y0rItGy6Lsrskqg1LXPSjiws87KKzy3yZpkgc1xCwiKoU9b4Ys76Yt%2BuL6MBpiWLww8MohwqoendC53yuGSsR4mPMqkiNtuYKODmWhODtXg/A4LRSFQTgo0sax0QWJZHnWHhSAITRWbmR0QDtDR9E4SQuZlvnOF4BQQCV6WedZ0g4FgJAX3aICyAoCB6mABRlEMSohAQVAAHducltAWESOgmGqO2QloR2Xe53mPa9%2BgYmALguC5UO6GiAB5K1A9d9XTeQa5iBtzXSDT2p8G53h%2BEEEQxHYKQZEERQVHUfXSF0BIDCMFBrGsfQ8AibXYGYNgQEalICFdAZuERTnvz5xJqm1pMMX2VlTCFywuERLXReWPQMWCP2HadlPuF4E5MBWSXnaMxIZbZjm1dr/mOGwVQzaIdTVAADliRNYkkHZgGQZAdij68zA7AgILKwlgCS4EICQPYXwvz73PnMBAZwsAxDhKQeWitlYcFVqQYOvAb5ax1lLeBmCzBX15vgoh%2Bsx7PWIKkZwkggA}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -648,6 +670,10 @@ map<int, string> bar {{3,"bar2"}};
 
 foo.merge(bar);
 // foo : {{1,"foo1"}, {2,"foo2"}, {3,"bar2"}}\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo+%7B%7B1,%22foo1%22%7D,+%7B2,%22foo2%22%7D%7D%3B%0A++std::map%3Cint,+std::string%3E+bar+%7B%7B3,%22bar2%22%7D%7D%3B%0A%0A++foo.merge(bar)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -665,6 +691,10 @@ foo.insert_or_assign(3, "foo3");
 
 foo.insert_or_assign(2, "foo2bis");
 // foo : {{1,"foo1"}, {2,"foo2bis"}, {3,"foo3"}}\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo+%7B%7B1,%22foo1%22%7D,+%7B2,%22foo2%22%7D%7D%3B%0A%0A++foo.insert_or_assign(3,+%22foo3%22)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.insert_or_assign(2,+%22foo2bis%22)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -889,6 +919,10 @@ for(auto item : v)
 			\item Utilisez Boost.Variant
 		\end{itemize}
 	\end{block}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cnwcAXV7dmmwzbXnsHbgAbpgHCR3jc7j8Hk8gQ08IYCODbjdggRdiwmMEIHMPiZ4lYbrt9viPkSicN0CAQIC4QiAajSLsqLRUEwCIyKVSXkYLrtAYyAO4HAnXMl8p4AEX2ZjMqgAngAvBVy8xmYWkskU3ZUtBeNEAgG7TkgYCYRHPAiUkDct6xbAQQFzGGGsDrACsbgYrvVEMJZMBkt2XDVsRFYq1OqW%2BsOhuNpvNR0EFwdToNh123o9XvWodxfqJAsDgJ9os1lu1KCjzvTcbN9KTdogAtTMfTmc93tzvs%2Bmyouw0GvJlqp8YB6CWEXoycdJfDw5NdcOsWnOK7PdceCoeZ7m/7g6N89Hh2ZrPN9ubJY2G63frxEu3RLxYbLVuBoOIAONNOI8IbifZB5Wja7x2nyT5uoyXAaIyqoIFULKqnel75kyJAQEweqoLshCYCw2p8jiKFDq%2BeD5BAJhulYboSuhmHmAAbAxuwNMAOL4saurRm4hosdWbgZhwAnqvEEqMjhLCrs%2BxGRnqfFCVmnbPkhEIiR8HALLQnBurwfgcFopCoJw3GWNYRpLCsjwbDwpAEJo6kLAA1iAbrQZpHCSDpdkGZwvAKCA0G2Xp6mkHAsBIJgqggphZAUOhxDAAoyiGFUQgIKgAq6dZaAsEkdBshkSUhLQqXpbp%2BnZbl9AxMAXDBqQFV0NEADyeolRlXkRSC1zxX5HC8J1yB1Pgum8PwggiGI7BSDIgiKCo6hBaQuhtAYRgoNY1j6HgER%2BbAzBsCAESoKk7LAjE3DxNpcwLKgSQ1L1AC0FIHBKpgmZYXDxL55mrHoFLBIVKVpe13C8AQpxrNZArEEwSR2RpWmeYthkcNgkXINFuyqAAHPRD30ZIuzAMgyBBlwAB0Zi7BAxlWJYjK4IQJDSrEXBzGD8MLHBTBYDE2KkE5Ln6JwHmkGVvAo75/k2ZzwscGYSP6ZLMtBddpBnWkziSEAA%3D%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Pack exansion}
@@ -910,8 +944,11 @@ template <typename... Ts> struct Baz : Ts... {
 
 Baz<Foo, Bar> baz;
 baz(5);        // 15
-baz("azerty"); // 6
-\end{lstlisting}
+baz("azerty"); // 6\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:32,positionColumn:1,positionLineNumber:32,selectionStartColumn:1,selectionStartLineNumber:32,startColumn:1,startLineNumber:32),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++int+operator()(int+i)%0A++%7B%0A++++return+10+%2B+i%3B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar%0A%7B%0A++int+operator()(const+std::string%26+s)%0A++%7B%0A++++return+s.size()%3B%0A++%7D%0A%7D%3B%0A%0Atemplate+%3Ctypename...+Ts%3E%0Astruct+Baz+:+Ts...%0A%7B%0A++using+Ts::operator()...%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Baz%3CFoo,+Bar%3E+baz%3B%0A++std::cout+%3C%3C+baz(5)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz(%22azerty%22)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Fold expression}
@@ -1009,6 +1046,9 @@ void push_back_vec(std::vector<T>& v, Args&&... args)
 
 vector<int> foo;
 push_back_vec(foo, 10, 20, 56);\end{lstlisting}
+
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAA7GakAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cnwcAXV7dmmwzbXnsHbgAbpgHCR3jcPl5UkZdsw2ApEkwVrshugQCBaIRomIFAcrBCbgRMCxEgYiQCCABPRKMViYAB0jN212IwFx60uNwiqE8uzEtAgLLZjPpfNZClmHxMsXx112u1OBCWDF2EBF%2BzMADZzJqxWzJetZdKACJSwnE0lMcmHKk0uEMplC9mc660ATAXZumEKHyC8Xq%2Br6qUyj7yxXK1WBhQaiy7EUGo2xU0E65EklkzAU6m0tjqp3g67oRYReie/CAv3CplRyUQkM3MOYJXEFVqpkAej1ErxweTt3N6atmZt2ftefFBaLXhLj2I5crCgD4trt3rcoVTYjECju078Z7db7HzTlutbltOceIvzHI%2BgNQeHQuwAYp50MpiMECAudTql0G61leUIFRdE0C8AgnjcAE4yZAEYNAkB%2BGIAB3ep0ABG9sG3ZdZigmCwDWABWNwGEIg9VyPAdT2Hc9RzpXYABVSF2C8x0dCdbxue9H12RIoQQAB9CIkQAa0E4FkBAgg0RASSiGIAFGPeLVdkBFj8y1P9q2XYMgNVQF6X4hQhJE5BRJw/UWP3Q1ezNa4v12FgmGCCAV2lfSPNDeUURksDFkg%2BDDl82TuU8MREgQJh8OC/kIAIYgvEwFiEqSlLEuS3YqBxTA8KCtxdnIkiyLWWyG32JN7PlLzyvlRDwMCw4EN9VpdgSXZ1hYyQ8qa4KitI8iyvXE0qoq/S6r8lAApigraHnLh6Q0FizEWlj1kWnroL6jhCp2/KFXm1a2qO9aNE2gjiIG0rPMqlNqrXHyXzfD8vwgLglt2phCJY8wzGiAhfu7Ib7qo4aHp8xD5LBQ4vwuLKeQox7jNMsSJJBageRY97lo%2BojNQTUb5WQ7cINQXY8F2EB4dQFdHpq9dHvq6b9op/bCN2xGfJG2qQv8iCZo54rBpuo9buuDh5loTgiN4PwOC0UhUE4aDLGsFFFmWR4Nh4UgCE0CX5lEkAiKWqWOEkWX9cVzheAUEAlr1%2BWJdIOBYCQTBVBBUmyAoSyFGUQxKiEBBUBQuWdbQEk6CtdIA5CWhg9DuWFcjxI6H6YAuC4BJU/T4gAHkIMTsOrY9kEnRt0gy%2BQWp8Dl3h%2BEEEQxHYKQZEERQVHUJ3SF0VoDCMFBrGsfQ8AiO3YHtEAwqGUhgRibhYhl2Z5lQRJqjtjgAFpUQOY1TFVywuFiW2NZWPRUWCOOg5DkvuF4BLMFWHWUOIJhEn1yXpctnulY4bBPbIG9rsVQAAOTUW9NSSF2MAZAyBdhZ3pGYVUKsrCWBYrgQgJANTrC4LMB%2Bn95gIDOFgGIblSBGxNvoTgFtSDJ14H/W29tdaEOoRwMwP8FaMJYU7Fec9oipGcJIIAA%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Range-based for loop}
@@ -1147,6 +1187,10 @@ template<class Func> struct Foo {
   Func func; };
 
 Foo([&](int i) {...});\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:34,positionColumn:1,positionLineNumber:34,selectionStartColumn:1,selectionStartLineNumber:34,startColumn:1,startLineNumber:34),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cutility%3E%0A%0Atemplate%3Cclass+Func%3E+struct+Foo%0A%7B%0A++Foo(Func+f)+:+func(f)%0A++%7B%0A++%7D%0A%0A++void+operator()+(int+i)%0A++%7B%0A++++func(i)%3B%0A++%7D%0A%0A++Func+func%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::pair+p(2,+4.5)%3B%0A++++std::tuple+t(4,+3,+2.5)%3B%0A++%7D%0A%0A++%7B%0A++++int+a+%3D+2%3B%0A%0A++++Foo+foo(%5B%26%5D(int+i)+%7Bstd::cout+%3C%3C+a+*+i+%3C%3C+!'%5Cn!'%3B%7D)%3B%0A%0A++++foo(5)%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1301,6 +1345,10 @@ constexpr auto add = [] (int n, int m) {
   return [=] { return L() + R(); }; };
 
 add(3, 4)()   // 7\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzABspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIJX12gMw5iqScS7wQS71%2Bjo2PQAbowIB9dgw5ncTAB2Kw3Xa7U4EZYMfYAVgsDBMKIAIvtofDMIjiMiMZYuFwDhZcViIODYjDbpCsRCbiCWExgjSIdC7nCofS4XDhugQCglp8Dm4JV8fn9MICGBAUXN9ocpWB1ii3Ax1RSeVTmddedzYQKmF4iLsAJI4g42tGYnHAwSg5UPJ4vN58/GE4kU/V0vVwt0EZ6vd7Oy0qnHWiCxWn8gVCkVoc0qyWHK1ptUarU6gMmqFMm56vmB3Zmi3WqOoqzY3ZOz5g3GUhFI0F%2Bwu6k1BgTusMgyO2q3UuNdw2JgjC0WpiVSweqjM6zXa9b58ed4sF43jnuPEMe8vm1Dln7VzG1x0ghikcOfFjg7sCp/Pl%2Bv0uP1%2Bfr9wivHgJn%2B1YiZOsvVbIl2zpf0E2/GDX1/XYACUAKsICHWbb02xYDtGTHWC8OfMDkXPW00NAgk2wCGl9ksRDOUgzs13w/CGOg3Yk2ncUFzcE90FjG9JDmKjZ0XHMV1w/Vixwm4OAWWhOBRXg/A4LRSFQThJUsaw2KWFZMGo2IeFIAhNBkhYAGsQBRDR9E4SRFJM1TOF4BQQGs4zlJk0g4FgJBnkwZAjzICgIAaYAFGUQwqiEBBUAAdyUwy0BYJI6CYGoIpCWhoripSVKSlL6BiYAyTMUh8roaIAHlzWy%2BKHL85BrmIMKnNIBq6nwJTeH4QQRDEdgpBkQRFBUdQPNIXQ2gMIwUGsax9DwCIXNgZg2BACJUFSAhSEBGJuEhBS5gWVAkhqFyOAAWiFW1TE00lIWcnTVj0IVggyqKYrq7heAIU41kM2LiCYJITNk%2BT7PGtSOGwVR/MC3ZVAADniC74kkXZgGQZBdjJAA6Mx6w0qxLBvXBCBIfSuDmH7QYWBAziwGIaVICyrJsjg7NIXLeCh5zXKM2n2bMCGVN5gWPKOnbojSZxJCAA%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1338,6 +1386,10 @@ invoke(&Foo::bar, foo, 8);  // 50\end{lstlisting}
 			\item Syntaxe unique d'appel d'appelable
 		\end{itemize}
 	\end{block}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:28,startColumn:1,startLineNumber:28),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+i)%0A%7B%0A++return+i+%2B+42%3B%0A%7D%0A%0Astruct+Foo%0A%7B%0A++int+bar(int+i)%0A++%7B%0A++++return+i+%2B+42%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::cout+%3C%3C+std::invoke(%26foo,+8)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++Foo+foo%3B%0A++++std::cout+%3C%3C+std::invoke(%26Foo::bar,+foo,+8)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1472,6 +1524,10 @@ switch(foo) {
 
 \note[item]{Les compilateurs offraient déjà des mécanismes similaires (\lstinline|__attribute__ ((fallthrough));| ou \lstinline|[[gnu::fallthrough]]| sur GCC, voire des commentaires à un format précis)}
 \note[item]{Généralement pas d'avertissement sur des case vides (cas 1-2 ici)}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:12,positionColumn:6,positionLineNumber:12,selectionStartColumn:6,selectionStartLineNumber:12,startColumn:6,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+1%3B%0A%0A++switch(foo)%0A++%7B%0A++++case+1:%0A++++case+2:%0A++++++std::cout+%3C%3C+%22Cas+1-2%5Cn%22%3B%0A%23if+1%0A++++++%5B%5B+fallthrough+%5D%5D%3B%0A%23endif%0A%0A++++case+3:%0A++++++std::cout+%3C%3C+%22Cas+3%5Cn%22%3B%0A%0A++++case+4:%0A++++++std::cout+%3C%3C+%22Cas+4%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22Cas+default%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1512,6 +1568,10 @@ struct [[ nodiscard ]] Bar {};
 Bar baz() { return Bar{}; }
 
 baz();  // Idealement : warning\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%0A%5B%5B+nodiscard+%5D%5D+static+int+foo()%0A%7B%0A++return+5%3B%0A%7D%0A%0Astruct+%5B%5B+nodiscard+%5D%5D+Bar%0A%7B%0A%7D%3B%0A%0Astatic+Bar+baz()%0A%7B%0A++return+Bar%7B%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A++baz()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1530,6 +1590,10 @@ int foo([[ maybe_unused ]] int a,
 	\begin{itemize}
 		\item Ne devrait pas lever d'avertissement en cas d'utilisation
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:3,positionColumn:6,positionLineNumber:3,selectionStartColumn:6,selectionStartLineNumber:3,startColumn:6,startLineNumber:3),source:'%23include+%3Ciostream%3E%0A%0A%23if+0%0A%5B%5B+maybe_unused+%5D%5D+static+int+foo(%5B%5B+maybe_unused+%5D%5Dint+a,%0A++++++++++++++++++++++++++++++++++%5B%5B+maybe_unused+%5D%5D+int+b)%0A%23else%0Astatic+int+foo(int+a,%0A+++++++++++++++int+b)%0A%23endif%0A%7B%0A++return+0%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1628,6 +1692,10 @@ apply(foo, baz);\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|std::make_from_tuple()| permet de construire un objet depuis un \textit{tuple-like}
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:30,positionColumn:1,positionLineNumber:30,selectionStartColumn:1,selectionStartLineNumber:30,startColumn:1,startLineNumber:30),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Astatic+void+foo(int+a,+long+b,+std::string+c)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'+!'+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Astatic+void+bar(int+a,+int+b,+int+c)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'+!'+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::tuple+baz%7B42,+5L,+%22bar%22s%7D%3B%0A++++std::apply(foo,+baz)%3B%0A++%7D%0A%0A++%7B%0A++++std::array%3Cint,+3%3E+baz%7B42,+5,+12%7D%3B%0A++++std::apply(bar,+baz)%3B%0A++%7D%0A%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1750,6 +1818,10 @@ none == nullopt;  // true\end{lstlisting}
 			\item Utilisez Boost.Optional
 		\end{itemize}
 	\end{block}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxBIaGqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFccbaY9nkMQgRMxAQZPn5cFVVptfUEBWGR0bHxCnUNTVmtQ109RSUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4eoCdViF1e3ZpsM2157BzcXkctEIAE8Pjc7r8Hk83GgWAl6KpIV8fn8AYcAG6YBwkVGfCaOZC7IboEAgF5vWiA4IEC67fioCB03ZMWafEwAdisN12uzwVAgTCe2F2Gg5fP2PM%2B/P5pwISwYbIOvOu/O5ABFZbtKkoddy1XLdgqlaSCOSQAwvLRaFTVQaudqoU7OTdWSwmMEIJLbjKpYadfyyRSqWl3ocQyhUIjkYD0IsIvQPusxRF6oao8EAPpIpgrUi7dYAOniu0kpa1DqlwYtFLQwLhgN2ACp08Qm4ddmA1gBWNwMHvV241tnA1C7dMALyemvNls9AGtMNmwwII24owikZgUYcE14k5gU9gIL3S4WAGyljnrI1yreLAidtyt6cv7t9gdDu%2BO50j9VpXvWtLTXZgaUjOsQBxPFiFpQQT0neoICzBhcwMAsgNaXYzELdYtVvYDGRICA0AYIYxyIAVnxAN96l9Y1A1HED6yfD9CA/HtP2HRjXVHR9G0BZsh37Qc1l/AM%2BIAjV/UAljKVecNaCQjsDjnJkIEkMxCKDAUhXbBi5SYuSHyghtnyErs23qTivzEnijKk409WPUdjONeTzI/cwzCxPAsBMUSfIcmT/1Ct1APc0zQMU9dlPbWdiOZABabSQr0iADN0qLjQEizDmbazVIKrsRO/cSiKrUcXOy2SPPnVjBJK18fL8gKgrMMx0qqyKpMdIiozAsQVMSjTUp00cCGICE3Lqjy8o/dtiyxMQvEwH1bMC8ruqcuVRAIZAEFIgQKKjdN0FXWLwOzfMVgUBRzEvXVDJkojPLYyzX0wYsAHcECYAgNs%2B7jRJ/Srdp6/rdMGq7hoStSkogcb0oW4GlpW7wVxIrTZk20GKr/CLXuhqChogo4ENTXYsC8VQIDSiSTJh6l4PpKn8DpsoJuk6LGvytxmzO1BPDEBJ/pRsyPua3YIA50VqcwWnceBsr7IkgBOAB6TXdimtaSctLzgdlvBVDhBWlbx7aNe1xkxH1fjJaagWuxNs21IRrmrbV3l1f5W29dc3r/yhx2YpZw46QZBgBGPRnctJ2Hyaj9nTYgLnhwNvmPyFkXaDFpgJcNqWXdfN35ZjkJlel1WwauP36rlAPiH1sPs%2BNuXm0rzBq9LkHrd9xum51qh7aDhPi%2Bd5sIG72dPYlb2640Buh9t0faAdpmnf56fZ499Y5yja1bSpXvhLspetZ1wPCZdf8OHmWhOF7Xg/A4LRSFQTgBcsaxSUWZYjwNg8FIAQTQD95iLhAL2eIT8OCSFfuAz%2BnBeAKBAPEMB78H6kDgLAJAu5cTjjIBQYUxBgAKGUIYSoQgECoB%2Bm/EB246AAzSJQkItAaF0Lfh/Jh9AYjAC4FwXCvDogAHlgScPoUgghyBrhkLQRwXgMjaj4DfrwfgggRBiHYFIGQghFAqHUFg0guhWgGCMCgaw1h9B4AiGg2AzA2AgAiMLIYpAcQxG4FyF%2Bsx5hgQUclMkalTC/0sFwLkuxkoAHUxDKWibuKaTBUEAJWHoMkwQ2HUNoVI7gvApqYFWCAn6xAmAJHAY/Z%2BiDjFfw4NgVQhCiAdlUAADkvMlS8khdjAGQCSQRxYzAyx/lYSwhZcCEBIPsb4XBZh5PKfMBAZwsAxB9KQKBMD9CcAQaQbhvAamoPQaAuZGyOBmCqR/PZhysG%2BPcdEFIzhJBAA%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1840,10 +1912,14 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 			\item Utilisez Boost.Any
 		\end{itemize}
 	\end{block}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4eGAJ4XV7dmmwzbXnsHbi8jlohDe60uNzuPweTzcaBYiXoqnekJuwQIuxYTGCEFmHxMAHYrDddvsiR9SaShugQCBXrsmE8ACK7LgHYnXSm7am0tBA2EA7kEGl0hgvAD6oiGAPRFwgTFmAsOuzAawArG4GKr2fiSZTGQcWesAHRSHV6qnC3mLDEAwU80USqUEAHoRYRehyhVKtwq9Wa7XrDkU/XM3YEYheTDmzmUh1822He1WkARVCeMSJBAGpPKh2vSVMaWHNOeL2Ku3K7UarVrIO6z6bKi7DQhy0ihM%2BoUigvOmWCctd6sBuvBr6uPBUBtcpjGzAIgwrAHx1ALzDIw5urwe6PguUmjSkXaSY0aPH1i3d638yu%2B/NiwvFtwrtcbtxbnfvcHyiu533D2sY1JQkmWnMkOS5e8XgZMM2QvWN22vRM3GTHsHz7Q5ZW/cwADZvVvfYzDMXYAFpCOIgiACooMfF1MIHbCzDw38UKrf1APgyCU07AiaIw993U9RjmKHdjAwgslQNRWNCQkxDHQZCAHWCcVESYFZxQIF5El3Z9uNXRF11dQTd0ucEjwPI8TzPIC430m8/yvR1aOXfTX2M7chLM7Af1Ekwa3EkMQLA2S2yc%2BkcxZB0sQAa0wcVXlcjsDKRDzPz3b9LOPU9zzkpyeMcviizovTkvczcTK/Hz8McgDAr1YLpOA8lLyghlbPkgrWLvFNSwMWgsxzbqGWNbMFHFAA3MQo1xPyAtHMLIt2NUOvym0uwdPrM2zLtZzGybpswWbb1VP1duNLSdNxY1mDYY7arEhaGoJKTbhej4OHmWhODVXg/A4LRSFQTgUMsaxuUWZZHg2HhSAITRPvmGKQDVQ9vo4SQ/oRoHOF4BQQEPeGAc%2B0g4FgJB10wZAgRIchKHqYAFGUQxKiEBBUAAd3%2B2H4USOgmGqZmQloNnOf%2BwHebofpgC4LgzFISX6GIAB5IFRa57HKeQa5iEZ3HSC12p8H%2B3h%2BEEEQxHYKQZEERQVHUYnSF0VoDCMFBrGsfQ8AifHYFu9hSyGUgJv6bgCV%2B2Z5lQRJqnxjgSOpQ1TDBywuAJUiAHUxFoTP1wjJg8chlY9GpYIhdZ9mNe4XgI0wVZYY54gmESBGvp%2BrHHeBjhsFUKmaeIXZVAADhwkicMkXZgGQZBWS4Y1iIgUGrEsI9cEIEhCPWLhZhr1v5gQM4sBiXFSGR1H9E4THSHF3gu7xgm4b3i%2BODMDvAbvx/icj4PolSZxJCAA%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::basic_string_view|\titlehfill{}1/3}
+	\frametitle{\lstinline|std::string_view|\titlehfill{}1/3}
 	\begin{itemize}
 		\item Vue sur une séquence contiguë de caractères
 		\item Quatre spécialisations standard (une par type de caractères)
@@ -1904,6 +1980,9 @@ cout << bar.size() << " - " << bar << '\n';
 \note[item]{La contrepartie c'est qu'il n'y a pas de chaîne de construite ni de modification possible}
 \note[item]{Travailler à base de chaîne peut être plus rapide lorsque le compilateur peut optimiser correctement le code avec les chaîne, si on construit une chaîne au final p.ex.}
 	\end{exampleblock}
+
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cstring_view%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::string+foo+%3D+%22Lorem+ipsum+dolor+sit+amet,+consectetur+adipiscing+elit.+Sed+non+risus.%22%3B%0A%0A++++std::string_view+bar(%26foo%5B0%5D,+11)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A%0A++++foo%5B0%5D+%3D+!'l!'%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+!'%5Cn!'%3B%0A%0A++++bar.remove_suffix(6)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++char+foo%5B3%5D+%3D+%7B!'B!',+!'a!',+!'r!'%7D%3B%0A++++std::string_view+bar(foo,+sizeof+foo)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1956,6 +2035,10 @@ std::shared_ptr<int[]> foo(new int[10]);\end{lstlisting}
 string in = "abcdefgh", out;
 sample(begin(in), end(in), back_inserter(out), 
        5, mt19937{random_device{}()});\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:20,positionColumn:1,positionLineNumber:20,selectionStartColumn:1,selectionStartLineNumber:20,startColumn:1,startLineNumber:20),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cctime%3E%0A%0Aint+main()%0A%7B%0A++std::string+in+%3D+%22abcdefgh%22%3B%0A++std::string+out%3B%0A++std::mt19937+gen%7Bstatic_cast%3Cunsigned+long%3E(time(nullptr))%7D%3B%0A++std::sample(std::begin(in),+std::end(in),+std::back_inserter(out),+5,+gen)%3B%0A%0A++for(auto+it+:+out)%0A++%7B%0A++++std::cout+%3C%3C+it+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1969,6 +2052,10 @@ sample(begin(in), end(in), back_inserter(out),
 	\begin{lstlisting}[language=C++]
 gcd(12, 18);   // 6
 lcm(12, 18);   // 36\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::gcd(12,+18)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::lcm(12,+18)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Filesystem TS}
@@ -2135,6 +2222,10 @@ inclusive_scan(begin(foo), end(foo),
 			\item Transformation non appliquée à la graine
 		\end{itemize}
 	\end{block}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:18,positionColumn:2,positionLineNumber:18,selectionStartColumn:2,selectionStartLineNumber:18,startColumn:2,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+42,+58%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::exclusive_scan(std::begin(foo),+std::end(foo),+std::back_inserter(bar),+8)%3B%0A%0A++for+(const+auto+it+:+bar)%0A++%7B%0A%09++std::cout+%3C%3C+it+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A+'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Mathematical Special Functions}
