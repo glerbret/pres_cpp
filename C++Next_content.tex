@@ -66,6 +66,7 @@
 		\begin{itemize}
 			\item \lstinline|retain_ptr| pointeur intrusif manipulant le comptage de référence interne
 			\item Création de pointeurs intelligents avec une valeur par défaut
+			\item Comparaison entre pointeurs intelligents et pointeurs nus
 		\end{itemize}
 		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>|
 		\begin{itemize}
@@ -554,6 +555,7 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item De nombreux nouveaux adaptateurs de \textit{Range} et constructeurs de \textit{View} : \lstinline|view::tail|, \lstinline|view::unbounded|, \lstinline|view::zip|, \lstinline|view::enumerate|, \lstinline|view::adjacent|, \ldots
 			\item De nombreux nouveaux algorithmes sur les \textit{Ranges} : \lstinline|ranges::fold|, \lstinline|ranges::sum|, \lstinline|ranges::reduce|, \lstinline|ranges::shift_left|, \lstinline|ranges::shift_right|, \ldots
 			\item Précision sur l'encodage des caractères 
+			\item \lstinline|stride_view| vue sur des éléments éparses d'un \textit{range}
 			\item \ldots
 		\end{itemize}
 	\end{itemize}
@@ -659,6 +661,15 @@ stack s(v.begin(), v.end());\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Ajout du mode exclusif aux \lstinline|std::fstream|
+		\item \lstinline|operator template()| : extension du support des \textit{non-type template parameters}
+		\item Récupération d'une \textit{stacktrace} depuis une exception
+	\end{itemize}
+\end{frame}
+		
 \begin{frame}[fragile]
 	\frametitle{TS - Contracts}
 	\begin{itemize}
