@@ -85,6 +85,9 @@
 	\frametitle{Propositions diverses}
 	\begin{itemize}
 		\item \textit{Pattern matching} via \lstinline|inspect|
+
+\note[item]{Probablement pas en C++23}
+
 		\begin{itemize}
 			\item Entiers
 		\end{itemize}
@@ -675,7 +678,7 @@ stack s(v.begin(), v.end());\end{lstlisting}
 	\begin{itemize}
 		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
 
-\note[item]{Ne sera donc finalement pas en C++20, probablement en 2023}
+\note[item]{Ne sera donc finalement pas en C++20, probablement pas en 2023}
 
 		\item Support de la programmation par contrat
 		\item Remplacement de la vérification via \lstinline|assert| et de la documentation via commentaire \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
@@ -696,7 +699,7 @@ stack s(v.begin(), v.end());\end{lstlisting}
 	\frametitle{TS - Networking TS}
 	\begin{itemize}
 		\item Publié en avril 2018
-		\item Possiblement intégré à C++23
+		\item Probablement non intégré à C++23
 		\item Partiellement basé sur Boost.Asio
 		\item Modèle asynchrone
 		\item Gestion de \textit{timer}
@@ -705,7 +708,8 @@ stack s(v.begin(), v.end());\end{lstlisting}
 		\item Gestion d'IPv4, IPv6, TCP, UDP
 		\item Manipulation d'adresses IP
 		\item Pas de protocoles de plus haut niveau actuellement
-		\item Demande post-TS : gestion de la sécurité (a priori par possible)
+		\item Demande post-TS : gestion de la sécurité (a priori pas possible)
+		\item Modèle asynchrone différents de celui déjà présent en C++
 	\end{itemize}
 \end{frame}
 
@@ -744,7 +748,7 @@ stack s(v.begin(), v.end());\end{lstlisting}
 \note[item]{Mais le projet io2d en lui-même continue}
 \note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
 
-		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement en C++ 23
+		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement pas en C++ 23
 		\begin{itemize}
 			\item Introspection
 			\item Méta-programmation et code \textit{compile-time}
