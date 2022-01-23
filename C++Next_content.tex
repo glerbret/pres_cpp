@@ -41,6 +41,11 @@
 
 \note[item]{C'est à dire de ne plus pouvoir écrire \lstinline|[x,y]| comme indice d'un conteneur classique}
 \note[item]{L'expression \lstinline|[x,y]| revient à utiliser y comme indice mais en ayant évalué x}
+
+		\item Amélioration de la compatibilité et de la portabilité de \lstinline|char8_t|
+
+\note[item]{Permettre l'initialisation de table de \lstinline|char| ou \lstinline|unsigned char| depuis des chaînes littérales UTF-8 ou \lstinline|char8_t|}
+
 	\end{itemize}
 \end{frame}
 
@@ -350,7 +355,8 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 
 \note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
 
-		\item \lstinline|std::breakpoint| : point d'arrêt de debug dans le programme
+		\item \lstinline|std::breakpoint()| : point d'arrêt de debug dans le programme
+		\item \lstinline|std::is_debugger_present()| : savoir si l'exécution se fait dans un debugger
 		\item Bibliothèques de support des coroutines
 		\item Unification et amélioration des API asynchrones
 
@@ -677,6 +683,7 @@ stack s(v.begin(), v.end());\end{lstlisting}
 	\frametitle{TS - Contracts}
 	\begin{itemize}
 		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
+		\item Probablement pas en C++23 non plus, mais des propositions allégées existent
 
 \note[item]{Ne sera donc finalement pas en C++20, probablement pas en 2023}
 
