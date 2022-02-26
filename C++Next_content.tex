@@ -59,6 +59,7 @@
 
 \note[item]{La dépréciation de l'opérateur virgule dans les indices est un préalable à ce type de conteneur}
 
+			\item Interopérabilité tableaux C et \lstinline|std::mdspan|
 			\item \lstinline|std::static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
 
 \note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
@@ -66,12 +67,18 @@
 			\item \lstinline|queue| concurrente
 			\item \textit{Bucket array} (\lstinline|std::hive|) : plusieurs blocs liés entre eux d'éléments  avec un indicateur sur l'état de chaque élément (actif / effacé)
 		\end{itemize}
+	\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
 		\item Pointeurs intelligents :
 		\begin{itemize}
 			\item \lstinline|retain_ptr| pointeur intrusif manipulant le comptage de référence interne
 			\item Création de pointeurs intelligents avec une valeur par défaut
 			\item Comparaison entre pointeurs intelligents et pointeurs nus
+			\item \textit{hazard pointer} : unique écrivain, multiples lecteurs
 		\end{itemize}
 		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>|
 		\begin{itemize}
@@ -355,9 +362,14 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 
 \note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
 
-		\item \lstinline|std::breakpoint()| : point d'arrêt de debug dans le programme
-		\item \lstinline|std::is_debugger_present()| : savoir si l'exécution se fait dans un debugger
+		\item Fonctionnalité de debugging
+		\begin{itemize}
+			\item \lstinline|std::breakpoint()| : point d'arrêt dans le programme
+			\item \lstinline|std::breakpoint_if_debugging| : point d'arrêt si l'éxecution se fait dans un debugger
+			\item \lstinline|std::is_debugger_present()| : savoir si l'exécution se fait dans un debugger
+		\end{itemize}
 		\item Bibliothèques de support des coroutines
+		\item \lstinline|std::lazy<T>| : coroutines permettant l'évaluation différée
 		\item Unification et amélioration des API asynchrones
 
 \note[item]{Qu'il s'agisse de coroutines, d'algorithmes parallèles, d'\textit{executor} ou autre}
@@ -564,7 +576,8 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item De nombreux nouveaux adaptateurs de \textit{Range} et constructeurs de \textit{View} : \lstinline|view::tail|, \lstinline|view::unbounded|, \lstinline|view::zip|, \lstinline|view::enumerate|, \lstinline|view::adjacent|, \ldots
 			\item De nombreux nouveaux algorithmes sur les \textit{Ranges} : \lstinline|ranges::fold|, \lstinline|ranges::sum|, \lstinline|ranges::reduce|, \lstinline|ranges::shift_left|, \lstinline|ranges::shift_right|, \ldots
 			\item Précision sur l'encodage des caractères 
-			\item \lstinline|stride_view| vue sur des éléments éparses d'un \textit{range}
+			\item \lstinline|stride_view| : vue sur des éléments éparses d'un \textit{range}
+			\item \lstinline|views::concat| : vue sur la concaténation de plusieurs \textit{ranges}
 			\item \ldots
 		\end{itemize}
 	\end{itemize}
@@ -574,6 +587,7 @@ int s = sum(point.elems...);\end{lstlisting}
 	\frametitle{Propositions diverses}
 	\begin{itemize}
 		\item Prise en charge de \lstinline|std::string_view| par \lstinline|std::from_chars|
+		\item Support de \lstinline|std::string_view| par \lstinline|std::stringstream|
 		\item Relâchement des contraintes sur les tableaux \og C\fg{}: initialisation des tableaux d'agrégats, copies de tableaux, tableau comme type de retour
 
 \note[item]{Copies des tableaux membres en particulier}
