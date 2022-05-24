@@ -1505,13 +1505,16 @@ cin >> setw(24) >> a;\end{lstlisting}
 \note[item]{Par défaut, la locale n'est pas prise en compte, mais peut l'être si souhaité}
 
 		\item Format sous forme de chaînes utilisant \lstinline|{}| comme \textit{placeholder}
-		\item Compatible avec Unicode
 	\end{itemize}
 
 	\begin{block}{En attendant C++20}
 		\begin{itemize}
 			\item Utilisez \{fmt\} ou Boost.Format
 		\end{itemize}
+	\end{block}
+
+	\begin{block}{Voir aussi}
+		Overload 166
 	\end{block}
 \end{frame}
 
@@ -1556,57 +1559,66 @@ format_to_n(foo.data(), foo.size(), "{}", "a");\end{lstlisting}
 vformat("{}", make_format_args("a"));\end{lstlisting}
 
 	\begin{itemize}
-		\item Variations \lstinline|wchar| et \lstinline|locale|
+		\item Variantes \lstinline|wchar| et \lstinline|locale|
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Référencement des valeurs}
+	\frametitle{\lstinline|std::format| - \textit{Placeholder}}
 	\begin{itemize}
-		\item Deux types de référencement
+		\item Format général : \lstinline|{[arg-id][:format-spec]}|
 		\begin{itemize}
-			\item Positionnel
+			\item \lstinline|arg-id| : index, optionnel, de l'argument de la liste de paramètres
+			\item \lstinline|format-spec| : spécifications, optionnelles, du format
 		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Séquences d'échappement}
+		\begin{itemize}
+			\item \lstinline|{{| affiche \lstinline|{|
+			\item \lstinline|}}| affiche \lstinline|}|
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Identifiant d'arguments}
+	\begin{itemize}
+		\item Valeur optionnelle indiquant l'index du paramètre à afficher
+		\item Débute à 0
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+format("{1} et {0}", "a", "b"); // "b et a"
+format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
+
+	\begin{itemize}
+		\item En cas d'absence, les paramètres sont pris dans l'ordre d'apparition
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 format("{} et {}", "a", "b"); 	// "a et b"\end{lstlisting}
 	
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item indexé
-		\end{itemize}
-	\end{itemize}
-	
-	\begin{lstlisting}[language=C++]
-format("{1} et {0}", "a", "b"); // "b et a"
-format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
-	
-\note[item]{Le référencement indexé permet de répéter une valeur et de gérer la position dans la chaîne de format (utile pour la localisation)}
-	
 	\begin{alertblock}{Limite}
 		\begin{itemize}
-			\item Impossible de mixer les deux types
+			\item Impossible d'en omettre que certains
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Spécificateurs}
+	\frametitle{\lstinline|std::format| - Spécification de format}
 	\begin{itemize}
-		\item Introduits par '\lstinline|:|'
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-format("{:6}", 42);    	// "    42"
-format("{0:6}", 42);    // "    42"\end{lstlisting}
-
-	\begin{itemize}
-		\item Définissent l'alignement, le \textit{padding}, le format, \ldots
-		\item Deux jeux standard
+		\item Format général : \lstinline|[[fill]align][sign][#][0][width][prec][L][type]|
 		\begin{itemize}
-			\item Types arithmétiques, pointeurs et chaînes
-			\item \lstinline|std::chrono| : \textit{clocks}, \textit{duration} et \textit{time points}
+			\item \lstinline|fill| et \lstinline|align| : gestion de l'alignement
+			\item \lstinline|sign| : gestion du signe
+			\item \lstinline|#| : forme alternative
+			\item \lstinline|0| : gestion des zéros non significatifs
+			\item \lstinline|width| : taille minimal du champ
+			\item \lstinline|prec| : précision du champ
+			\item \lstinline|L| : prise en compte de la locale
+			\item \lstinline|type| : type à afficher
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1639,6 +1651,55 @@ format("{:*^6}", 'x'); 	// "**x***"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Taille minimale}
+	\begin{itemize}
+		\item Fournit la taille minimal du champ
+		\item Si le champ est plus long, il n'est pas tronqué
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+// "|  10| |          10|"
+format("|{0:4}| |{0:12}|", 10);
+// "|10000000| |    10000000|"
+format("|{0:4}| |{0:12}|", 1000000);\end{lstlisting}
+
+	\begin{itemize}
+		\item Possible de fournir la taille en paramètre via un \textit{placeholder}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+// "|  10| |          10|"
+format("|{0:{1}}| |{0:{2}}|", 10, 4, 12);\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format| - Précision}
+	\begin{itemize}
+		\item Introduit par un \lstinline|.|
+		\item Uniquement sur
+		\begin{itemize}
+			\item Les nombres flottants
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+format("{:.6f}", 392.65);   // "392.650000"\end{lstlisting}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item Les chaînes de caractères : troncature
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+format("{:.6}", azertyuiop);   // "azerty"\end{lstlisting}
+
+	\begin{itemize}
+		\item Possible de fournir la taille en paramètre via un \textit{placeholder}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Signe}
 	\begin{itemize}
 		\item Uniquement sur les négatifs : '\lstinline|-|'
@@ -1657,7 +1718,7 @@ format("{0:},{0:+},{0:-},{0: }", -1);	// "-1,-1,-1,-1"\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Zéros non significatifs}
 	\begin{itemize}
-		\item Gestion des zéros non significatifs
+		\item Affichage des zéros non significatifs
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1710,15 +1771,11 @@ format("{:.6a}", 42.);    	// "1.5p+5"\end{lstlisting}
 \note[item]{Par défaut court : .6g}
 
 	\begin{itemize}
-		\item Choix de la précision pour les flottants
+		\item Chaîne de caractère
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-format("{:.6f}", 1.5);              // "1.500000"
-format("{:.0f},{.22f}", 1.5, 1.3);  // "2 1.30...0444089"\end{lstlisting}
-
-	\begin{lstlisting}[language=C++]
-format("{0:05.2f}, {0:.2f}", 1.5);  // "01.50, 1.50"\end{lstlisting}
+format("{:s}", azerty); // "azerty"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1728,7 +1785,8 @@ format("{0:05.2f}, {0:.2f}", 1.5);  // "01.50, 1.50"\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-format("{:#x}", 42);   // "0x2a"\end{lstlisting}
+format("{:#x}", 42);   // "0x2a"
+format("{:#X}", 42);   // "0X2a"\end{lstlisting}
 
 	\begin{itemize}
 		\item Affichage du point décimal et de l'ensemble de la précision des flottants
