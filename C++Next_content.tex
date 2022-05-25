@@ -55,11 +55,16 @@
 		\item Nouveaux conteneurs
 		\begin{itemize}
 			\item Adaptateurs \lstinline|std::flat_map| et \lstinline|std::flat_multimap| : \lstinline|map| depuis une paire de conteneurs séquentiels
-			\item \lstinline|std::mdspan| vues multidimensionnels (et indiçage associé \lstinline|[x,y,z]|)
+			\item Adaptateurs \lstinline|std::flat_set| et \lstinline|std::flat_multiset|
+			\item \lstinline|std::mdspan| vues multidimensionnelles (et indiçage associé \lstinline|[x,y,z]|)
 
 \note[item]{La dépréciation de l'opérateur virgule dans les indices est un préalable à ce type de conteneur}
 
 			\item Interopérabilité tableaux C et \lstinline|std::mdspan|
+			\item \lstinline|std::mdarray| tableaux multidimensionnels
+			
+\note[item]{\lstinline|std::mdarray| possède les éléments alors que \lstinline|std::mdspan| n'est qu'une vue et ne possède pas}
+			
 			\item \lstinline|std::static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
 
 \note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
@@ -67,6 +72,7 @@
 			\item \lstinline|queue| concurrente
 			\item \textit{Bucket array} (\lstinline|std::hive|) : plusieurs blocs liés entre eux d'éléments  avec un indicateur sur l'état de chaque élément (actif / effacé)
 		\end{itemize}
+		\item Algorithme \lstinline|std::find_last| pour chercher depuis la fin d'un conteneur
 	\end{itemize}
 \end{frame}
 
@@ -680,7 +686,7 @@ stack s(v.begin(), v.end());\end{lstlisting}
 		\item Équivalent \textit{move-only} de \lstinline|std::function| : \lstinline|std::any_invocable|
 		\item Évolution de l'API \lstinline|std::format| : fonction d'impression dans un \lstinline|std::ostream|
 		\item Localisation du formatage de \lstinline|std::chrono|
-		\item Utilisation de \textit{range based for loop} sur des temporaires
+		\item Prise en charge des conteneurs et de \lstinline|filesystem::path| par \lstinline|std::format|
 	\end{itemize}
 \end{frame}
 
@@ -690,6 +696,10 @@ stack s(v.begin(), v.end());\end{lstlisting}
 		\item Ajout du mode exclusif aux \lstinline|std::fstream|
 		\item \lstinline|operator template()| : extension du support des \textit{non-type template parameters}
 		\item Récupération d'une \textit{stacktrace} depuis une exception
+		\item Possibilité d'implémenter \lstinline|operator()| sous forme de membre statique
+		\item Utilisation de \textit{range based for loop} sur des temporaires
+		\item Possibilité de définir des objets \lstinline|constexpr|
+		\item Possibilité de fournir un message à \lstinline|=delete| pour le diagnostic de compilation
 	\end{itemize}
 \end{frame}
 		
