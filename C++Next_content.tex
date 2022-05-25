@@ -594,6 +594,7 @@ int s = sum(point.elems...);\end{lstlisting}
 	\begin{itemize}
 		\item Prise en charge de \lstinline|std::string_view| par \lstinline|std::from_chars|
 		\item Support de \lstinline|std::string_view| par \lstinline|std::stringstream|
+		\item Concaténation de \lstinline|std::string| et \lstinline|std::string_view|
 		\item Relâchement des contraintes sur les tableaux \og C\fg{}: initialisation des tableaux d'agrégats, copies de tableaux, tableau comme type de retour
 
 \note[item]{Copies des tableaux membres en particulier}
@@ -613,10 +614,6 @@ int s = sum(point.elems...);\end{lstlisting}
 \note[item]{NRVO : \textit{Named Return Value Optimization}}
 \note[item]{L'élision de copie des objets retournés est déjà garantie pour des \textit{prvalues} en C++17}
 \note[item]{C'est déjà une optimisation réalisée par certains compilateur}
-
-		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
-
-\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
 
 	\end{itemize}
 \end{frame}
@@ -697,12 +694,33 @@ stack s(v.begin(), v.end());\end{lstlisting}
 		\item \lstinline|operator template()| : extension du support des \textit{non-type template parameters}
 		\item Récupération d'une \textit{stacktrace} depuis une exception
 		\item Possibilité d'implémenter \lstinline|operator()| sous forme de membre statique
+		\item Possibilité d'implémenter \lstinline|operator[]| sous forme de membre statique
 		\item Utilisation de \textit{range based for loop} sur des temporaires
 		\item Possibilité de définir des objets \lstinline|constexpr|
 		\item Possibilité de fournir un message à \lstinline|=delete| pour le diagnostic de compilation
+		\item \textit{Saturation arithmetic}
+		
+\note[item]{Saturation arithmetic : pas de débordement, on reste sur les valeurs min/max si elles sont dépassées lors d'une opération : 252 + 7 sur un char donne 255}
+
+		\item Surcharge de \lstinline|new| retournant la taille réellement allouée
+		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
+
+\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
+
 	\end{itemize}
 \end{frame}
-		
+
+\begin{frame}[fragile]
+	\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Spécialisation de \lstinline|std::hash| pour \lstinline|std::chrono|
+		\item Utilisation de tableaux C comme \textit{tuple-like}
+
+\note[item]{Déjà le cas pour \lstinline|std::array|, extension aux tableaux C}
+
+	\end{itemize}
+\end{frame}
+				
 \begin{frame}[fragile]
 	\frametitle{TS - Contracts}
 	\begin{itemize}
