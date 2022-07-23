@@ -28,6 +28,7 @@
 			\item Généralisation de \lstinline|std::begin()| et co. dans le langage
 		\end{itemize}
 		\item \lstinline|std::expected| contenant statut et valeur optionnelle : retour du compte rendu d'exécution et, éventuellement, de la valeur
+		\item \lstinline|operator??| pour tester \lstinline|std::expected|
 
 \note[item]{permet de se passer d'exception dans les contextes où elles ne sont pas adaptées, de ne pas utiliser un paramètre en sortie pour le statut ou la valeur et de ne pas définir des structures/classes ad hoc tout en proposant une API plus adaptée que \lstinline|std::pair| ou \lstinline|std::tuple|}
 
@@ -718,6 +719,9 @@ stack s(v.begin(), v.end());\end{lstlisting}
 
 \note[item]{Déjà le cas pour \lstinline|std::array|, extension aux tableaux C}
 
+		\item Construction de \lstinline|std::pair| depuis \lstinline|std::tuple| ou \lstinline|std::array|
+		\item Redéfinir \lstinline|std::to_string| en terme de \lstinline|std::format|
+		\item Rendre les \lstinline|<>| vides optionnels
 	\end{itemize}
 \end{frame}
 				
