@@ -20,6 +20,46 @@
 	\end{itemize}
 \end{frame}
 
+\subsection*{Compilation conditionnelle}
+\begin{frame}[fragile]
+	\frametitle{Avertissement}
+	\begin{itemize}
+		\item Ajout de \lstinline|#warning| pour générer un avertissement à la compilation
+		
+\note[item]{Déjà présent dans la plupart des compilateurs}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Types}
+\begin{frame}[fragile]
+	\frametitle{Types flottants étendus}
+	\begin{itemize}
+		\item Ajout de \lstinline|std::float16_t|, \lstinline|std::float32_t|, \lstinline|std::float64_t|, \lstinline|std::float128_t|
+		\begin{itemize}
+			\item Types flottants de tailles fixes
+			\item Ajout de types de petites tailles
+			\item Ajout des suffixes littéraux correspondants
+			\item Types de type IEEE N-bit
+		\end{itemize}
+		\item Ajout de \lstinline|std::bfloat16_t|
+		\begin{itemize}
+			\item Type 16 bits de type bfloat16
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{alertblock}{Pas d'alias}
+		Ces nouveaux types flottants doivent être des types indépendants et non des alias sur \lstinline|float|, \lstinline|double| et \lstinline|long double|
+	\end{alertblock}
+\end{frame}
+
+\subsection*{Attributs}
+\begin{frame}[fragile]
+	\frametitle{Nouveaux attributs}
+	\begin{itemize}
+		\item \lstinline|[[ assume(expression) ]]| indique que le compilateur peut supposer la véracité de l'expression pour l'optimisation
+	\end{itemize}
+\end{frame}
+
 \subsection*{if consteval}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|if consteval|}
@@ -95,6 +135,21 @@ class Foo {	static_assert(N, "Message"); };\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
+\subsection*{Opérateurs}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|operator[]|}
+	\begin{itemize}
+		\item Possibilité de définir \lstinline|operator[]| avec aucun ou plusieurs arguments
+		\item Y compris des arguments \textit{variadic}
+		\item Réécrirture de \lstinline|a[x][y][z]|
+		\begin{itemize}
+			\item \lstinline|a.operator[](x,y,z)| s'il existe
+			\item \lstinline|((a[x])[y])[z]| si aucune surcharge multi-paramètre de \lstinline|operator[]| n'est utilisable
+		\end{itemize}
+	\end{itemize}
+
+\end{frame}
+
 \subsection*{Conteneurs}
 \begin{frame}[fragile]
 	\frametitle{Chaînes de caractères}
@@ -118,6 +173,34 @@ foo.contains("monde");   // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{Adaptateurs de conteneurs associatifs}
+	\begin{itemize}
+		\item \lstinline|std::flat_map| et \lstinline|std::flat_multimap|
+		\begin{itemize}
+			\item Interface similaire à \lstinline|std::map| et \lstinline|std::multimap|
+			\item Mais davantage \textit{cache-friendly}
+			\item Clés et valeurs stockées dans deux conteneurs différents
+		\end{itemize}
+		\item \lstinline|std::flat_set| et \lstinline|std::flat_multiset|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::mdspan|}
+	\begin{itemize}
+		\item Vues multidimensionnelles
+		\item Possibilité de fournir un \textit{layout} configurable
+		\item Trois \textit{memory layouts} standard
+		\begin{itemize}
+			\item \lstinline|layout_right| : layout du C et du C++, lignes puis colonnes
+			\item \lstinline|layout_left| : layout de Fortran ou Matlab, colonnes puis lignes
+			\item \lstinline|layout_stride| 
+		\end{itemize}
+		\item Accès à un élément via operator[] multi-paramètres (\lstinline|[x,y,z]|)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{\lstinline|starts_with()| \& \lstinline|ends_with()|}
 	\begin{itemize}
 		\item Généralisation de \lstinline|starts_with()| et \lstinline|ends_with()| aux ranges
@@ -136,6 +219,43 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 		\item Corrections d'\lstinline|iterator_category|
 		\item Rend valide en C++23 du code invalide en C++20
 	\end{itemize}
+\end{frame}
+
+\subsection*{Algorithmes}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::find_last|}
+	\begin{itemize}
+		\item Recherche la dernière occurrence d'une valeur dans un conteneur
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Nouveaux algorithmes sur les \textit{ranges}}
+	\begin{itemize}
+		\item \lstinline|std::ranges::contains| teste si un range contient une valeur ou un sous-range
+		\item \lstinline|std::ranges::fold| version range de \lstinline|std::accumulate|
+	\end{itemize}
+
+\begin{lstlisting}[language=C++]
+std::vector<double> v = {0.25, 0.75};
+auto r = ranges::fold(v, 1, std::plus()); // 2\end{lstlisting}
+
+	\begin{itemize}
+		\item \lstinline|std::views::cartesian_product| construit une vue depuis le produit cartésien sur plusieurs conteneurs
+	\end{itemize}
+\end{frame}
+
+\subsection*{Flux}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::print|}
+	\begin{itemize}
+		\item Écriture dans \lstinline|std::cout| depuis une chaîne de format \lstinline|std::format|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+std::cout << std::format("Hello, {}!", name);
+// Devient
+std::print("Hello, {}!", name);\end{lstlisting}
 \end{frame}
 
 \subsection*{Pointeurs intelligents}
@@ -192,6 +312,15 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
+\subsection*{Coroutines}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::generator|}
+	\begin{itemize}
+		\item Générateur de coroutines synchrones
+	\end{itemize}
+\end{frame}
+
+
 \subsection*{Durées et temps}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|time_point::clock|}
@@ -212,6 +341,14 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 
 \note[item]{Et donc des dérivés en question}
 \note[item]{Auparavant, les variants de \lstinline|std::visit| pouvaient être formellement de n'importe quel type}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Module}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|import std|}
+	\begin{itemize}
+		\item Bibliothèque standard importable comme un module
 	\end{itemize}
 \end{frame}
 

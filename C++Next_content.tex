@@ -38,11 +38,6 @@
 \note[item]{Recouvre les points du TS \textit{contract} mais est plus ambitieux}
 
 		\item Support des entrées/sorties audio
-		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
-
-\note[item]{C'est à dire de ne plus pouvoir écrire \lstinline|[x,y]| comme indice d'un conteneur classique}
-\note[item]{L'expression \lstinline|[x,y]| revient à utiliser y comme indice mais en ayant évalué x}
-
 		\item Amélioration de la compatibilité et de la portabilité de \lstinline|char8_t|
 
 \note[item]{Permettre l'initialisation de table de \lstinline|char| ou \lstinline|unsigned char| depuis des chaînes littérales UTF-8 ou \lstinline|char8_t|}
@@ -55,13 +50,6 @@
 	\begin{itemize}
 		\item Nouveaux conteneurs
 		\begin{itemize}
-			\item Adaptateurs \lstinline|std::flat_map| et \lstinline|std::flat_multimap| : \lstinline|map| depuis une paire de conteneurs séquentiels
-			\item Adaptateurs \lstinline|std::flat_set| et \lstinline|std::flat_multiset|
-			\item \lstinline|std::mdspan| vues multidimensionnelles (et indiçage associé \lstinline|[x,y,z]|)
-
-\note[item]{La dépréciation de l'opérateur virgule dans les indices est un préalable à ce type de conteneur}
-
-			\item Interopérabilité tableaux C et \lstinline|std::mdspan|
 			\item \lstinline|std::mdarray| tableaux multidimensionnels
 			
 \note[item]{\lstinline|std::mdarray| possède les éléments alors que \lstinline|std::mdspan| n'est qu'une vue et ne possède pas}
@@ -391,7 +379,6 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Propositions diverses}
 	\begin{itemize}
-		\item Attribut \lstinline|[[ assume(expression) ]]| indique que le compilateur peut supposer la véracité de l'expression pour l'optimisation
 		\item\textit{Proxy}, \textit{Facade}, \textit{Addresser} : programmation polymorphique via \textit{type erasure}
 
 \note[item]{Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites}
@@ -566,10 +553,6 @@ int s = sum(point.elems...);\end{lstlisting}
 
 		\item Templates dans les classes locales
 		\item Ajout de \lstinline|operator[]| à \lstinline|std::initializer_list|
-		\item Ajout de \lstinline|#warning| pour générer un avertissement à la compilation
-
-\note[item]{Déjà présent dans la plupart des compilateurs}
-
 	\end{itemize}
 \end{frame}
 
@@ -581,7 +564,7 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item Surcharge \textit{ranges} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
 			\item \textit{Range} reconstructible après une séparation en deux itérateurs
 			\item De nombreux nouveaux adaptateurs de \textit{Range} et constructeurs de \textit{View} : \lstinline|view::tail|, \lstinline|view::unbounded|, \lstinline|view::zip|, \lstinline|view::enumerate|, \lstinline|view::adjacent|, \ldots
-			\item De nombreux nouveaux algorithmes sur les \textit{Ranges} : \lstinline|ranges::fold|, \lstinline|ranges::sum|, \lstinline|ranges::reduce|, \lstinline|ranges::shift_left|, \lstinline|ranges::shift_right|, \ldots
+			\item De nombreux nouveaux algorithmes sur les \textit{Ranges} : \lstinline|ranges::sum|, \lstinline|ranges::reduce|, \lstinline|ranges::shift_left|, \lstinline|ranges::shift_right|, \ldots
 			\item Précision sur l'encodage des caractères 
 			\item \lstinline|stride_view| : vue sur des éléments éparses d'un \textit{range}
 			\item \lstinline|views::concat| : vue sur la concaténation de plusieurs \textit{ranges}
@@ -640,14 +623,6 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item Traits \lstinline|is_relocatable|, \lstinline|is_nothrow_relocatable| et \lstinline|is_trivially_relocatable|
 			\item Attribut \lstinline|[[trivially_relocatable]]| : type \textit{trivial relocatability}
 			\item Algorithmes gérant cette opération : \lstinline|std::relocate_at|, \lstinline|std::uninitialized_relocate| et \lstinline|std::uninitialized_relocate_n|
-		\end{itemize}
-
-		\item Évolution de \textit{floating-point types}
-		\begin{itemize}
-			\item Types de petites tailles (16 bits)
-			\item Alias indiquant la taille (\lstinline|floatX_t|)
-			\item Suffixes littéraux correspondants
-			\item Cadre pour l'introduction d'autres types par une implémentation
 		\end{itemize}
 
 		\item Extension de \lstinline|=delete| à d'autres construction (variables template)

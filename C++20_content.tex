@@ -41,6 +41,11 @@
 \note[item]{Seules certaines constructions à base de \lstinline|volatile| sont dépréciées, les constructions jugées utiles sont conservées}
 \note[item]{Les constructions dépréciées sont : incrémentation/décrémentation de \lstinline|volatile|, utilisation du résultat d'une affectation à un \lstinline|volatile|, opérateurs \lstinline|op=| sur un \lstinline|volatile|, \lstinline|volatile| sur les valeurs de retour, un \lstinline|volatile| sur les paramètres, \lstinline|volatile| sur les \textit{structured binding}}
 
+		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
+
+\note[item]{C'est à dire de ne plus pouvoir écrire \lstinline|[x,y]| comme indice d'un conteneur classique}
+\note[item]{L'expression \lstinline|[x,y]| revient à utiliser y comme indice mais en ayant évalué x}
+
 		\item Suppression des membres dépréciés de \lstinline|std::reference_wrapper| : \lstinline|result_type|, \lstinline|argument_type|, \lstinline|first_argument_type| et \lstinline|second_argument_type|
 	\end{itemize}
 \end{frame}
