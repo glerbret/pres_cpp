@@ -61,7 +61,19 @@
 			\item \lstinline|queue| concurrente
 			\item \textit{Bucket array} (\lstinline|std::hive|) : plusieurs blocs liés entre eux d'éléments  avec un indicateur sur l'état de chaque élément (actif / effacé)
 		\end{itemize}
+		\item \lstinline|submdspan| : fonction retournant une vue sur un sous-ensemble d'un \lstinline|mdspan|
 		\item Algorithme \lstinline|std::find_last| pour chercher depuis la fin d'un conteneur
+		\item Configuration du nom et de la taille de la pile des threads
+		\item Possibilité pour les fonctions \lstinline|va_start| de prendre aucun argument
+		\item Autoriser les qualifiers sur les constructeurs
+		\begin{itemize}
+			\item Constructeurs \lstinline|const| pour construire des objets constants
+			\item Constructeurs non \lstinline|const| peuvent construire des objets constants et mutables
+		\end{itemize}
+		\item Ajout d'un \textit{statement} à \lstinline|break| appelé lors de la sortie de la boucle
+
+\note[item]{Alignement sur les évolutions C en cours}
+
 	\end{itemize}
 \end{frame}
 
