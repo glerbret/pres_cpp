@@ -263,6 +263,18 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 			\item Remplace \lstinline|std::string("abcd")|
 		\end{itemize}
 	\end{block}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Nécessite l'utilisation de \lstinline|using namespace std::literals|
+		\end{itemize}
+
+\note[item]{Ou \lstinline|using namespace std::string_literals| ou \lstinline|using namespace std::literals::string_literals|}
+
+	\end{alertblock}
+
+
+
 \end{frame}
 
 \begin{frame}[fragile]
