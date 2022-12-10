@@ -369,6 +369,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 
 \note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
 
+		\item \og{}Conversion\fg{} implicite de \lstinline|constexpr| vers \lstinline|consteval|
 		\item Fonctionnalité de debugging
 		\begin{itemize}
 			\item \lstinline|std::breakpoint()| : point d'arrêt dans le programme
@@ -671,7 +672,7 @@ stack s(v.begin(), v.end());\end{lstlisting}
 		\item Équivalent \textit{move-only} de \lstinline|std::function| : \lstinline|std::any_invocable|
 		\item Évolution de l'API \lstinline|std::format| : fonction d'impression dans un \lstinline|std::ostream|
 		\item Localisation du formatage de \lstinline|std::chrono|
-		\item Prise en charge des conteneurs et de \lstinline|filesystem::path| par \lstinline|std::format|
+		\item Support par \lstinline|std::format| de conteneurs,  \lstinline|filesystem::path|, \lstinline|std::thread_id|, \textit{stacktraces}, \lstinline|std::complex|, \lstinline|std::bitset|, \lstinline|std::error_code|, \lstinline|std::unique_ptr| et \lstinline|std::shared_ptr|
 	\end{itemize}
 \end{frame}
 
@@ -709,6 +710,31 @@ stack s(v.begin(), v.end());\end{lstlisting}
 		\item Construction de \lstinline|std::pair| depuis \lstinline|std::tuple| ou \lstinline|std::array|
 		\item Redéfinir \lstinline|std::to_string| en terme de \lstinline|std::format|
 		\item Rendre les \lstinline|<>| vides optionnels
+		\item Accès par les utilisateurs à la taille réellement allouée
+		\item Spécificateur de stockage des temporaires (\lstinline|constinit|, \lstinline|variable_scope|, \lstinline|block_scope|, \lstinline|statement_scope|)
+
+\note[item]{\lstinline|block_scope| : règle de durée de vie des littéraux C}
+\note[item]{\lstinline|statement_scope| : règle sur la durée de vie des temporaires en C++}
+
+		\item Interfaçage de \lstinline|std::bitset| avec \lstinline|std::string_view|
+		\item \textit{Zero-initialisation} des objets \og{}\textit{automatic storage duration}\fg{}
+		
+\note[item]{\textit{automatic storage duration}, c'est ce qui est sur la pile, donc globalement les variables locales}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Propositions diverses}
+	\begin{itemize}
+		\item Amélioration de l'ergonomie de \lstinline|std::integral_constant<int>|
+		\item Amélioration de l'ergonomie d'accès aux champs des \lstinline|std::tuple| :
+		
+		\begin{lstlisting}[language=C++]
+t[0ic]
+// Equivalent a
+std::get<0>(t)\end{lstlisting}
+		
+		\item Aide à la définition de nouveaux itérateurs : \lstinline|std::iterator_interface|
 	\end{itemize}
 \end{frame}
 				
