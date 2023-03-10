@@ -208,7 +208,7 @@ class S {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Initialisation des agrégats\titlehfill{}1/2}
+	\frametitle{Initialisation des agrégats}
 	\begin{itemize}
 		\item Initialisation nommée des membres d'un agrégat ou d'une union
 	
@@ -239,7 +239,7 @@ U u{.b = "foo"}; \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Initialisation des agrégats\titlehfill{}2/2}
+	\frametitle{Initialisation des agrégats}
 	\begin{itemize}
 		\item Initialisation des agrégats via des données parenthésées
 	\end{itemize}
@@ -381,7 +381,7 @@ Bar f3() {
 
 \subsection*{Opérateurs}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|operator<=>()|\titlehfill{}1/2}
+	\frametitle{\lstinline|operator<=>()|}
 	\begin{itemize}
 		\item Effectue une \og \textit{Three-way comparison}\fg{}
 		\begin{itemize}
@@ -413,7 +413,7 @@ Bar f3() {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|operator<=>()|\titlehfill{}2/2}
+	\frametitle{\lstinline|operator<=>()|}
 	\begin{itemize}
 		\item \lstinline|operator<=>()| déclenche la génération
 		\begin{itemize}
@@ -577,7 +577,7 @@ void bar(int j) { return 3 * j; }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Partitions\titlehfill{}1/2}
+	\frametitle{Modules - Partitions}
 	\begin{itemize}
 		\item Les modules peuvent être partitionnés sur plusieurs unités
 		\item Les partitions fournissent alors un nom de partition
@@ -603,7 +603,7 @@ module foo:part;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Partitions\titlehfill{}2/2}
+	\frametitle{Modules - Partitions}
 	\begin{itemize}
 		\item Les partitions sont un détail d'implémentation non visibles hors du module
 
@@ -700,7 +700,7 @@ import foo;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Code non-modulaire\titlehfill{}1/2}
+	\frametitle{Modules - Code non-modulaire}
 	\begin{itemize}
 		\item Inclusion d'en-têtes avant le préambule du module
 	\end{itemize}
@@ -725,7 +725,7 @@ import <version>\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Code non-modulaire\titlehfill{}2/2}
+	\frametitle{Modules - Code non-modulaire}
 	\begin{itemize}
 		\item Export possible des symboles inclus
 	\end{itemize}
@@ -747,7 +747,7 @@ export import "bar.h"\end{lstlisting}
 
 \subsection*{Conteneurs}
 \begin{frame}[fragile]
-	\frametitle{Chaînes de caractères\titlehfill{}1/2}
+	\frametitle{Chaînes de caractères}
 	\begin{itemize}
 		\item \lstinline|std::basic_string::reserve()| ne peut plus réduire la capacité
 		\begin{itemize}
@@ -782,7 +782,7 @@ export import "bar.h"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Chaînes de caractères\titlehfill{}2/2}
+	\frametitle{Chaînes de caractères}
 	\begin{itemize}
 		\item Ajout à \lstinline|std::basic_string| et \lstinline|std::string_view|
 		\begin{itemize}
@@ -807,7 +807,7 @@ foo.ends_with("monde");     // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Conteneurs associatifs\titlehfill{}1/2}
+	\frametitle{Conteneurs associatifs}
 	\begin{itemize}
 		\item \lstinline|contains()| teste la présence d'une clé
 
@@ -826,7 +826,7 @@ foo.contains(38);  // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Conteneurs associatifs\titlehfill{}2/2}
+	\frametitle{Conteneurs associatifs}
 	\begin{itemize}
 		\item Optimisation de la recherche hétérogène dans des conteneurs non-ordonnés
 		\begin{itemize}
@@ -918,7 +918,7 @@ erase_if(foo, [](int i) {return i > 20;});
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::span|\titlehfill{}1/2}
+	\frametitle{\lstinline|std::span|}
 	\begin{itemize}
 		\item Vue sur un conteneur contigu
 
@@ -936,7 +936,7 @@ span<int> s2(foo.data(), 3);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::span|\titlehfill{}2/2}
+	\frametitle{\lstinline|std::span|}
 	\begin{itemize}
 		\item \lstinline|begin()|, \lstinline|end()|, \ldots : itérateurs sur le \lstinline|std::span|
 		\item \lstinline|size()|, \lstinline|empty()| : taille et vacuité
@@ -1075,7 +1075,7 @@ popcount(6u);  // 2\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Mathématiques\titlehfill{}1/2}
+	\frametitle{Mathématiques}
 	\begin{itemize}
 		\item Définition de constantes mathématiques : $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
 
@@ -1101,7 +1101,7 @@ midpoint(5, 2);     // 4\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Mathématiques\titlehfill{}2/2}
+\frametitle{Mathématiques}
 	\begin{itemize}
 		\item \lstinline|std::lerp()| interpolation linéaire entre deux valeurs flottantes
 	\end{itemize}
@@ -1166,7 +1166,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Concepts\titlehfill{}1/2}
+	\frametitle{Ranges - Concepts}
 	\begin{itemize}
 		\item \lstinline|Range|
 		\begin{itemize}
@@ -1193,7 +1193,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Concepts\titlehfill{}2/2}
+	\frametitle{Ranges - Concepts}
 	\begin{itemize}
 		\item \lstinline|InputRange| : fournit des \lstinline|input_iterator|
 		\item \lstinline|OutputRange| : fournit des \lstinline|output_iterator|
@@ -1262,7 +1262,7 @@ for(int i : views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators\titlehfill{}1/6}
+	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item Appliquent filtres et transformations aux \textit{ranges}
 		\item Associés, pour certains, à un \textit{range adaptor closure object}
@@ -1275,7 +1275,7 @@ for(int i : views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators\titlehfill{}2/6}
+	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item Peuvent être chaînés avec une syntaxe \og appel de fonction\fg{}
 	\end{itemize}
@@ -1305,7 +1305,7 @@ range | adaptor(args...);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators\titlehfill{}3/6}
+	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item Plusieurs adapteurs fournis par la bibliothèque standard
 
@@ -1339,7 +1339,7 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators\titlehfill{}4/6}
+	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
 			\item \lstinline|take_view| : les N premiers éléments
@@ -1354,7 +1354,7 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators\titlehfill{}5/6}
+	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
 			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \textit{range}
@@ -1384,7 +1384,7 @@ for(auto word : sentence) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators\titlehfill{}6/6}
+	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
 			\item \lstinline|elements_view| : vue des N\textsuperscript{e} éléments de chaque \textit{tuple} d'une vue de \textit{tuple-likes}
@@ -1524,7 +1524,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - API\titlehfill{}1/2}
+	\frametitle{\lstinline|std::format| - API}
 	\begin{itemize}
 		\item \lstinline|format()| retourne une chaîne
 	\end{itemize}
@@ -1554,7 +1554,7 @@ format_to_n(foo.data(), foo.size(), "{}", "a");\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - API\titlehfill{}2/2}
+	\frametitle{\lstinline|std::format| - API}
 	\begin{itemize}
 		\item \lstinline|formatted_size()| retourne la taille nécessaire au formatage
 		\item \lstinline|vformat()| et \lstinline|vformat_to()| arguments regroupés dans un \og tuple\fg{}
@@ -1731,7 +1731,7 @@ format("{:+06d}", 120);	// "+00120"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Format\titlehfill{}1/2}
+	\frametitle{\lstinline|std::format| - Format}
 	\begin{itemize}
 		\item Entiers : décimal, octal, binaire ou hexadécimal
 	\end{itemize}
@@ -1760,7 +1760,7 @@ format("{:s}", true);         // "true"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Format\titlehfill{}2/2}
+	\frametitle{\lstinline|std::format| - Format}
 	\begin{itemize}
 		\item Flottants : fixe, court, scientifique ou hexadécimal
 	\end{itemize}
@@ -1849,7 +1849,7 @@ format("{:%F %T}", chrono::system_clock::now());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Types utilisateur\titlehfill{}1/2}
+	\frametitle{\lstinline|std::format| - Types utilisateur}
 	\begin{itemize}
 		\item Par spécialisation de \lstinline|std::formatter<>|
 	\end{itemize}
@@ -1865,7 +1865,7 @@ struct formatter<T> {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Types utilisateur\titlehfill{}2/2}
+	\frametitle{\lstinline|std::format| - Types utilisateur}
 	\begin{lstlisting}[language=C++]
 struct MyComplex { double real; double imag;};
 
@@ -2033,7 +2033,7 @@ auto date2 = Sunday[3]/may/2016y;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Timezone\titlehfill{}1/2}
+	\frametitle{Timezone}
 	\begin{itemize}
 		\item Gestion des \textit{timezones}
 		\begin{itemize}
@@ -2059,7 +2059,7 @@ zoned_time zt = {"Asia/Tokyo", tp};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Timezone\titlehfill{}2/2}
+	\frametitle{Timezone}
 	\begin{block}{En attendant C++20}
 		\begin{itemize}
 			\item Utilisez Boost.DateTime
@@ -2150,7 +2150,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|constexpr|\titlehfill{}1/2}
+	\frametitle{\lstinline|constexpr|}
 	\begin{itemize}
 		\item Initialisation triviale dans des contextes \lstinline|constexpr|
 		\item \lstinline|std::is_constant_evaluated()| pour savoir si l'évaluation est \textit{compile-time}
@@ -2161,7 +2161,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|constexpr|\titlehfill{}2/2}
+	\frametitle{\lstinline|constexpr|}
 	\begin{itemize}
 		\item Assouplissement des restrictions
 		\begin{itemize}
@@ -2186,7 +2186,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 
 \subsection*{structured binding}
 \begin{frame}[fragile]
-	\frametitle{Structured binding\titlehfill{}1/2}
+	\frametitle{Structured binding}
 	\begin{itemize}
 		\item Extension à tous les membres visibles
 
@@ -2220,7 +2220,7 @@ auto f2 = [=] { return b; };\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Structured binding\titlehfill{}2/2}
+	\frametitle{Structured binding}
 	\begin{itemize}
 		\item Recherche de \lstinline|get()| : seules les fonctions membres templates dont le premier paramètre template n'est pas un type sont retenues
 	\end{itemize}
@@ -2279,7 +2279,7 @@ entity<"hello"> e;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Templates\titlehfill{}1/2}
+	\frametitle{Templates}
 	\begin{itemize}
 		\item \lstinline|typename| optionnel lorsque seul un nom de type est possible
 		
@@ -2303,7 +2303,7 @@ g(4.2, 0); // OK, g<double>\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Templates\titlehfill{}2/2}
+	\frametitle{Templates}
 	\begin{itemize}
 		\item Déduction de type sur les alias de template
 	\end{itemize}
@@ -2375,7 +2375,7 @@ void foo(auto a, auto b) {...};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template\titlehfill{}1/4}
+	\frametitle{Concepts - Utilisation template}
 	\begin{itemize}
 		\item Utilisable via une \textit{Requires clause}
 	\end{itemize}
@@ -2406,7 +2406,7 @@ void foo(T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template\titlehfill{}2/4}
+	\frametitle{Concepts - Utilisation template}
 	\begin{itemize}
 		\item Utilisable depuis un concept nommé
 	\end{itemize}
@@ -2433,7 +2433,7 @@ void foo(T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template\titlehfill{}3/4}
+	\frametitle{Concepts - Utilisation template}
 	\begin{itemize}
 		\item Peuvent être composés
 	\end{itemize}
@@ -2450,7 +2450,7 @@ void foo(T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template\titlehfill{}4/4}
+	\frametitle{Concepts - Utilisation template}
 	\begin{itemize}
 		\item Support des \textit{parameters pack}
 	\end{itemize}
@@ -2466,7 +2466,7 @@ void foo(T...);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation inférence de type\titlehfill{}1/2}
+	\frametitle{Concepts - Utilisation inférence de type}
 	\begin{itemize}
 		\item Contraintes sur les paramètres (lambdas et fonctions templates)
 	\end{itemize}
@@ -2485,7 +2485,7 @@ auto bar() -> Constraint decltype(auto);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation inférence de type\titlehfill{}2/2}
+	\frametitle{Concepts - Utilisation inférence de type}
 	\begin{itemize}
 		\item Contraintes sur les variables
 	\end{itemize}
@@ -2537,7 +2537,7 @@ void foo(Constraint auto... T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition\titlehfill{}1/4}
+	\frametitle{Concepts - Définition}
 	\begin{itemize}
 		\item Peuvent être définis depuis des expressions
 	\end{itemize}
@@ -2554,7 +2554,7 @@ concept Swappable = requires(T&& t, U&& u) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition\titlehfill{}2/4}
+	\frametitle{Concepts - Définition}
 	\begin{itemize}
 		\item Y compris en retirant des qualifieurs
 	\end{itemize}
@@ -2577,7 +2577,7 @@ concept Comparable = requires(T a, T b) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition\titlehfill{}3/4}
+	\frametitle{Concepts - Définition}
 	\begin{itemize}
 		\item Depuis des \textit{traits}
 	\end{itemize}
@@ -2593,7 +2593,7 @@ concept constructible_from =
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition\titlehfill{}4/4}
+	\frametitle{Concepts - Définition}
 	\begin{itemize}
 		\item Depuis d'autres concepts
 	\end{itemize}
@@ -2653,7 +2653,7 @@ template<class T> concept totally_ordered =
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{Lambdas\titlehfill{}1/3}
+	\frametitle{Lambdas}
 	\begin{itemize}
 		\item Utilisables dans des contextes non évalués
 
@@ -2693,7 +2693,7 @@ auto foo = []<typename T>(vector<T> const& vec) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Lambdas\titlehfill{}2/3}
+	\frametitle{Lambdas}
 	\begin{itemize}
 		\item Lambda \textit{stateless} assignables et constructibles par défaut
 
@@ -2719,7 +2719,7 @@ map<string, int, decltype(greater)> foo;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Lambdas\titlehfill{}3/3}
+	\frametitle{Lambdas}
 	\begin{itemize}
 		\item Expansion des \textit{parameter packs} lors de la capture
 	\end{itemize}

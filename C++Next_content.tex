@@ -742,10 +742,7 @@ std::get<0>(t)\end{lstlisting}
 	\frametitle{TS - Contracts}
 	\begin{itemize}
 		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
-		\item Probablement pas en C++23 non plus, mais des propositions allégées existent
-
-\note[item]{Ne sera donc finalement pas en C++20, probablement pas en 2023}
-
+		\item Pas en C++23 non plus, mais des propositions allégées existent
 		\item Support de la programmation par contrat
 		\item Remplacement de la vérification via \lstinline|assert| et de la documentation via commentaire \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
 		\item Initialement, plusieurs propositions \og concurrentes\fg{}
@@ -780,7 +777,7 @@ std::get<0>(t)\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{TS - Les autres\titlehfill{}1/2}
+	\frametitle{TS - Les autres}
 	\begin{itemize}
 		\item \textit{Library fundamentals 2} : évolutions de la bibliothèque standard
 		\begin{itemize}
@@ -806,7 +803,7 @@ std::get<0>(t)\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{TS - Les autres\titlehfill{}2/2}
+	\frametitle{TS - Les autres}
 	\begin{itemize}
 		\item \textit{Array extension} : taille non connue à la compilation
 		\item \textit{2D Graphics} (io2d) : API C++ au dessus de Cairo, différé
@@ -814,7 +811,7 @@ std::get<0>(t)\end{lstlisting}
 \note[item]{Mais le projet io2d en lui-même continue}
 \note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
 
-		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}, probablement pas en C++ 23
+		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}
 		\begin{itemize}
 			\item Introspection
 			\item Méta-programmation et code \textit{compile-time}
@@ -828,10 +825,11 @@ std::get<0>(t)\end{lstlisting}
 		\begin{itemize}
 			\item \lstinline|future.then()|
 		\end{itemize}
-		\item \textit{Concurrency} 2
+		\item \textit{Concurrency} 2 : TS en \textit{international comment ballot}
 		\begin{itemize}
 			\item \textit{Synchronic} : meilleure abstraction pour \lstinline|atomic| permettant de tirer partie des caractéristiques logicielles et matérielles de la plateforme
-			\item \textit{Executor} spécifier où et comment s'exécute un code dans un environnement concurrent (a priori pour C++23)
+			\item \textit{Executor} spécifier où et comment s'exécute un code dans un environnement concurrent
+			\item \textit{hazard pointers}, \textit{read-copy-update data structure}
 		\end{itemize}
 	\end{itemize}
 \end{frame}

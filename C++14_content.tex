@@ -32,7 +32,7 @@
 
 \subsection*{Déduction de type}
 \begin{frame}[fragile]
-	\frametitle{Généralisation de la déduction du type retour\titlehfill{}1/2}
+	\frametitle{Généralisation de la déduction du type retour}
 	\begin{itemize}
 		\item Utilisable sur les lambdas complexes
 	\end{itemize}
@@ -55,7 +55,7 @@ auto bar(int x) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Généralisation de la déduction du type retour\titlehfill{}2/2}
+	\frametitle{Généralisation de la déduction du type retour}
 	\begin{itemize}
 		\item Y compris récursive
 	\end{itemize}
@@ -247,7 +247,7 @@ int baz = 010'00;       // 512\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{User-defined literals standard\titlehfill{}1/3}
+	\frametitle{User-defined literals standard}
 
 \note[item]{Dans la bibliothèque et non dans le langage}
 
@@ -278,7 +278,7 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{User-defined literals standard\titlehfill{}2/3}
+	\frametitle{User-defined literals standard}
 	\begin{itemize}
 		\item Suffixe \lstinline|h|, \lstinline|min|, \lstinline|s|, \lstinline|ms|, \lstinline|us| et \lstinline|ns| : \lstinline|std::chrono::duration|
 	\end{itemize}
@@ -289,7 +289,7 @@ auto bar = 5min;      // chrono::minutes\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{User-defined literals standard\titlehfill{}3/3}
+	\frametitle{User-defined literals standard}
 	\begin{itemize}
 		\item Suffixe \lstinline[keywordstyle=\color{black}]|if| : nombre imaginaire de type \lstinline|std::complex<float>|
 		\item Suffixe \lstinline|i| : nombre imaginaire de type \lstinline|std::complex<double>|
@@ -392,7 +392,7 @@ foo("azerty"s);   // 1\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Capture généralisée\titlehfill{}1/2}
+	\frametitle{Capture généralisée}
 	\begin{itemize}
 		\item Création de variables capturées depuis des variables locales ou des constantes
 	\end{itemize}
@@ -411,7 +411,7 @@ qux();  // 82\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Capture généralisée\titlehfill{}2/2}
+	\frametitle{Capture généralisée}
 	\begin{itemize}
 		\item Capture par déplacement
 	\end{itemize}
@@ -522,7 +522,7 @@ unique_ptr<int> foo = make_unique<int>(42);\end{lstlisting}
 
 \subsection*{Attributs}
 \begin{frame}[fragile]
-	\frametitle{Attribut \lstinline|[[ deprecated ]]|\titlehfill{}1/2}
+	\frametitle{Attribut \lstinline|[[ deprecated ]]|}
 	\begin{itemize}
 		\item Indique qu'une entité (variable, fonction, classe, \ldots) est dépréciée
 		\item Émission possible d'avertissement sur l'utilisation d'une entité \lstinline|deprecated|
@@ -541,7 +541,7 @@ int foo{42};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Attribut \lstinline|[[ deprecated ]]|\titlehfill{}2/2}
+	\frametitle{Attribut \lstinline|[[ deprecated ]]|}
 	\begin{itemize}
 		\item Possibilité de fournir un message explicatif
 	\end{itemize}

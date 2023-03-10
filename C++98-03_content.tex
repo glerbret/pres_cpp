@@ -84,6 +84,7 @@
 	\end{alertblock}
 
 	\begin{itemize}
+		\item Un repo GIT (draft et propositions) : https://github.com/cplusplus
 		\item Une conférence annuelle : \href{http://cppcon.org/}{cppcon}
 		\item Sites de référence sur C++ :
 		\begin{itemize}
@@ -138,7 +139,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Erreurs - Exception\titlehfill{}1/2}
+	\frametitle{Erreurs - Exception}
 	\begin{itemize}
 		\item Lancée par \lstinline|throw|
 		\item Attrapée par \lstinline|catch()| depuis un bloc \lstinline|try|
@@ -156,7 +157,7 @@ catch(logic_error& e) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Exception\titlehfill{}2/2}
+	\frametitle{Erreurs - Exception}
 	\begin{itemize}
 		\item Type quelconque
 		\item Idéalement héritant de \lstinline|std::exception| (via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autres)
@@ -176,7 +177,7 @@ catch(logic_error& e) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Critiques des exceptions\titlehfill{}1/2}
+	\frametitle{Erreurs - Critiques des exceptions}
 	\begin{itemize}
 		\item Critiquées, voire interdites, par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide)}
 		\item Arguments très variés :
@@ -198,7 +199,7 @@ catch(logic_error& e) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Critiques des exceptions\titlehfill{}2/2}
+	\frametitle{Erreurs - Critiques des exceptions}
 	\begin{itemize}
 		\item [] \begin{itemize}
 			\item Mauvais support par les différents outils
@@ -230,7 +231,7 @@ catch(logic_error& e) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Exception safety\titlehfill{}1/3}
+	\frametitle{Erreurs - Exception safety}
 	\begin{itemize}
 		\item \textit{No-throw guarantee} : l'opération ne peut pas échouer
 	\end{itemize}
@@ -251,7 +252,7 @@ catch(logic_error& e) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Exception safety\titlehfill{}2/3}
+	\frametitle{Erreurs - Exception safety}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Privilégiez les garanties les plus fortes possibles (\textit{strong} ou \textit{no-throw})
@@ -267,7 +268,7 @@ catch(logic_error& e) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Erreurs - Exception safety\titlehfill{}3/3}
+	\frametitle{Erreurs - Exception safety}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Utilisez l'idiome \textit{copy-and-swap} pour la \textit{Strong exception safety}
@@ -289,7 +290,7 @@ A& A::operator=(A other) {              // Copy
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Exceptions et bonnes pratiques\titlehfill{}1/2}
+	\frametitle{Erreurs - Exceptions et bonnes pratiques}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item \textit{Throw by value, catch by const reference} (\cite{coding} chap. 73)
@@ -314,7 +315,7 @@ A& A::operator=(A other) {              // Copy
 \end{frame}
 
 \begin{frame}
-	\frametitle{Erreurs - Exceptions et bonnes pratiques\titlehfill{}2/2}
+	\frametitle{Erreurs - Exceptions et bonnes pratiques}
 	\begin{alertblock}{Don't}
 		\begin{itemize}
 			\item N'utilisez jamais les exceptions pour contrôler le flux d'exécution
@@ -376,7 +377,7 @@ assert(expression);\end{lstlisting}
 
 \subsection*{Gestion des ressources}
 \begin{frame}[fragile]
-	\frametitle{Ressources - Gestion manuelle\titlehfill{}1/3}
+	\frametitle{Ressources - Gestion manuelle}
 	\begin{alertblock}{}
 		Comment gérer les erreurs ?
 	\end{alertblock}
@@ -401,7 +402,7 @@ free(memory);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ressources - Gestion manuelle\titlehfill{}2/3}
+	\frametitle{Ressources - Gestion manuelle}
 	\begin{block}{Quiz : Comment éviter les fuites mémoires ?}
 		\begin{lstlisting}[language=C++]
 char* memory1 = NULL;
@@ -417,7 +418,7 @@ delete[] memory2;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ressources - Gestion manuelle\titlehfill{}3/3}
+	\frametitle{Ressources - Gestion manuelle}
 	\begin{alertblock}{}
 		Comment copier des classes possédant des ressources ?
 	\end{alertblock}
@@ -456,7 +457,7 @@ private:
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ressources - RAII\titlehfill{}1/2}
+	\frametitle{Ressources - RAII}
 
 \note[item]{\textit{Resource Acquisition Is Initialization}}
 
@@ -490,7 +491,7 @@ private:
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ressources - RAII\titlehfill{}2/2}
+	\frametitle{Ressources - RAII}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Faites des constructeurs qui construisent des objets
@@ -516,7 +517,7 @@ private:
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ressources - Limites du RAII\titlehfill{}1/2}
+	\frametitle{Ressources - Limites du RAII}
 	\begin{alertblock}{Gestion des erreurs}
 		\begin{itemize}
 			\item Pas d'erreur ni d'exception dans les destructeurs
@@ -538,7 +539,7 @@ remove_file(src);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ressources - Limites du RAII\titlehfill{}2/2}
+	\frametitle{Ressources - Limites du RAII}
 	\begin{alertblock}{\lstinline|std::auto_ptr|}
 		\begin{itemize}
 			\item Copiable
@@ -559,7 +560,7 @@ cout << *bar << "\n";\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ressources - Loi de Déméter\titlehfill{}1/3}
+	\frametitle{Ressources - Loi de Déméter}
 
 \note[item]{À strictement parler, gestion de l'accès aux ressources pas de la libération}
 
@@ -593,7 +594,7 @@ cout << *bar << "\n";\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ressources - Loi de Déméter\titlehfill{}2/3}
+	\frametitle{Ressources - Loi de Déméter}
 	\begin{exampleblock}{Do, agrégats}
 		\begin{itemize}
 			\item Préférez les structures aux classes
@@ -620,7 +621,7 @@ cout << *bar << "\n";\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ressources - Loi de Déméter\titlehfill{}3/3}
+	\frametitle{Ressources - Loi de Déméter}
 	\begin{block}{Conseil}
 		\begin{itemize}
 			\item N'hésitez pas à étendre l'interface de classe avec des fonctions libres
@@ -666,7 +667,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ressources - Conclusion\titlehfill{}1/2}
+	\frametitle{Ressources - Conclusion}
 	\begin{exampleblock}{Do, RAII}
 		\begin{itemize}
 			\item Préférez les classes RAII de la bibliothèque standard aux ressources brutes
@@ -683,7 +684,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ressources - Conclusion\titlehfill{}2/2}
+	\frametitle{Ressources - Conclusion}
 	\begin{alertblock}{Don't}
 		\begin{itemize}
 			\item Pas de \lstinline|delete| dans le code applicatif
@@ -708,7 +709,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 \subsection*{STL}
 \begin{frame}
-	\frametitle{STL - Standard Template Library\titlehfill{}1/3}
+	\frametitle{STL - Standard Template Library}
 	\begin{itemize}
 		\item Partie de la bibliothèque standard comprenant
 
@@ -752,7 +753,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL - Standard Template Library\titlehfill{}2/3}
+	\frametitle{STL - Standard Template Library}
 	\begin{block}{Intérêts}
 		\begin{itemize}
 			\item $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
@@ -776,7 +777,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL - Standard Template Library\titlehfill{}3/3}
+	\frametitle{STL - Standard Template Library}
 	\begin{block}{À nuancer}
 		Algorithmes membres sur certains conteneurs
 		\begin{itemize}
@@ -813,7 +814,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Conteneurs - Conteneurs séquentiels\titlehfill{}1/3}
+	\frametitle{STL Conteneurs - Conteneurs séquentiels}
 	\begin{itemize}
 		\item \lstinline|std::vector|
 		\begin{itemize}
@@ -845,7 +846,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conteneurs - Conteneurs séquentiels\titlehfill{}2/3}
+	\frametitle{STL Conteneurs - Conteneurs séquentiels}
 	\begin{itemize}
 		\item \lstinline|std::list|
 		\begin{itemize}
@@ -869,7 +870,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conteneurs - Conteneurs séquentiels\titlehfill{}3/3}
+	\frametitle{STL Conteneurs - Conteneurs séquentiels}
 	\begin{itemize}
 		\item \lstinline|std::string|
 		\begin{itemize}
@@ -941,7 +942,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Conteneurs - Adaptateurs\titlehfill{}1/2}
+	\frametitle{STL Conteneurs - Adaptateurs}
 	\begin{itemize}
 		\item Basés sur un autre conteneur pour proposer une API simplifiée
 		\item Avantages et inconvénients du conteneur sous-jacent
@@ -971,7 +972,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Conteneurs - Adaptateurs\titlehfill{}2/2}
+	\frametitle{STL Conteneurs - Adaptateurs}
 	\begin{lstlisting}[language=C++]
 stack<int, vector<int> > foo;
 for(int i=0; i<5; ++i) foo.push(i);
@@ -1029,7 +1030,7 @@ while(!foo.empty()) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conteneurs - Choix du conteneur\titlehfill{}1/2}
+	\frametitle{STL Conteneurs - Choix du conteneur}
 	\begin{exampleblock}{Do, par défaut}
 		\begin{itemize}
 			\item \lstinline|std::string| pour les chaînes de caractères
@@ -1052,7 +1053,7 @@ while(!foo.empty()) {
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conteneurs - Choix du conteneur\titlehfill{}2/2}
+	\frametitle{STL Conteneurs - Choix du conteneur}
 	\begin{block}{Conseils}
 		\begin{itemize}
 			\item Voir \cite{effStl} item 1
@@ -1177,7 +1178,7 @@ while(!foo.empty()) {
 
 \subsection*{STL - Algorithmes}
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Function Object\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Function Object}
 
 \note[item]{Appelés \textit{functor} en anglais on foncteur en français}
 
@@ -1201,7 +1202,7 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Algorithmes - Function Object\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Function Object}
 	\begin{itemize}
 		\item Possèdent données membres
 
@@ -1231,7 +1232,7 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Parcours\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Parcours}
 	\begin{itemize}
 		\item \lstinline|std::for_each()| parcourt un ensemble d'éléments
 		\item \ldots{} et applique un traitement à chaque élément
@@ -1255,7 +1256,7 @@ for_each(foo.begin(), foo.end(), print);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Parcours\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Parcours}
 	\begin{itemize}
 		\item Retourne le \textit{Function Object} passé en paramètre
 	\end{itemize}
@@ -1279,7 +1280,7 @@ for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Recherche linéaire\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Recherche linéaire}
 	\begin{itemize}
 		\item \lstinline|std::find()| recherche une valeur
 		\item \ldots{} et retourne un itérateur sur celle-ci
@@ -1298,7 +1299,7 @@ it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Recherche linéaire\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Recherche linéaire}
 	\begin{itemize}
 		\item \lstinline|std::find_if()| recherche depuis un prédicat
 	\end{itemize}
@@ -1326,7 +1327,7 @@ it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}1/3}
+	\frametitle{STL Algorithmes - Recherche dichotomique}
 	\begin{itemize}
 		\item Pré-requis : ensemble trié
 		
@@ -1348,7 +1349,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}2/3}
+	\frametitle{STL Algorithmes - Recherche dichotomique}
 	\begin{itemize}
 		\item \lstinline|std::upper_bound()| retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée 
 		\item \lstinline|std::equal_range()| retourne la paire (\lstinline|lower_bound|, \lstinline|upper_bound|)
@@ -1366,7 +1367,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Recherche dichotomique\titlehfill{}3/3}
+	\frametitle{STL Algorithmes - Recherche dichotomique}
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item Pas de fonction de recherche dichotomique retournant l'élément cherché
@@ -1412,7 +1413,7 @@ count(foo.begin(), foo.end(), 2);  // 0\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Comparaison\titlehfill{}1/3}
+	\frametitle{STL Algorithmes - Comparaison}
 	\begin{itemize}
 		\item \lstinline|std::equal()| teste l'égalité de deux ensembles (valeur et position)
 	\end{itemize}
@@ -1428,7 +1429,7 @@ equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Comparaison\titlehfill{}2/3}
+	\frametitle{STL Algorithmes - Comparaison}
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item \lstinline|std::equal()| ne vérifie pas les tailles des deux ensembles
@@ -1452,7 +1453,7 @@ equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Comparaison\titlehfill{}3/3}
+	\frametitle{STL Algorithmes - Comparaison}
 	\begin{itemize}
 		\item \lstinline|std::mistmatch()| retourne une paire d'itérateurs sur les premiers éléments différents
 	\end{itemize}
@@ -1473,7 +1474,7 @@ mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Remplissage\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Remplissage}
 	\begin{itemize}
 		\item \lstinline|std::fill()| remplit l'ensemble avec la valeur fournie
 	\end{itemize}
@@ -1497,7 +1498,7 @@ vector<int> foo(4, 12);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Remplissage\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Remplissage}
 	\begin{itemize}
 		\item \lstinline|std::generate()| valorise les éléments à partir d'un générateur
 	\end{itemize}
@@ -1582,7 +1583,7 @@ swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Remplacement\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Remplacement}
 	\begin{itemize}
 		\item \lstinline|std::replace()| remplace toutes les occurrences d'une valeur par une autre
 	\end{itemize}
@@ -1598,7 +1599,7 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Remplacement\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Remplacement}
 	\begin{itemize}
 		\item \lstinline|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
 	\end{itemize}
@@ -1619,7 +1620,7 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Suppression\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Suppression}
 	\begin{itemize}
 		\item \lstinline|std::remove()| \og élimine\fg{} les éléments égaux à une valeur donnée
 	\end{itemize}
@@ -1652,7 +1653,7 @@ foo.erase(remove(foo.begin(),foo.end(),5),foo.end());\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Suppression\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Suppression}
 	\begin{itemize}
 		\item \lstinline|std::remove_if()| \og élimine\fg{} les éléments vérifiant le prédicat
 		\item \lstinline|std::remove_copy()| copie les éléments différents d'une valeur donnée
@@ -1690,7 +1691,7 @@ unique(foo.begin(), foo.end());  // 4 5 7 9 5 ... \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Transformation\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Transformation}
 	\begin{itemize}
 		\item \lstinline|std::transform()| applique une transformation aux éléments d'un ensemble
 	\end{itemize}
@@ -1705,7 +1706,7 @@ transform(foo.begin(), foo.end(), bar.begin(), double_val);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Transformation\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Transformation}
 	\begin{itemize}
 		\item Ou de deux ensembles en stockant le résultat dans un troisième
 	\end{itemize}
@@ -1742,7 +1743,7 @@ rotate(foo.begin(), foo.begin() + 2, foo.end());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Partitionnement\titlehfill{}1/3}
+	\frametitle{STL Algorithmes - Partitionnement}
 	\begin{itemize}
 		\item \lstinline|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots
 	\end{itemize}
@@ -1768,7 +1769,7 @@ partition(foo.begin(), foo.end(), is_odd);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Partitionnement\titlehfill{}2/3}
+	\frametitle{STL Algorithmes - Partitionnement}
 	\begin{itemize}
 		\item \lstinline|std::stable_partition()| partitionne en conservant l'ordre relatif
 	\end{itemize}
@@ -1789,7 +1790,7 @@ stable_partition(foo.begin(), foo.end(), is_odd);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Partitionnement\titlehfill{}3/3}
+	\frametitle{STL Algorithmes - Partitionnement}
 	\begin{itemize}
 		\item \lstinline|std::nth_element()| réordonne les éléments :
 		\begin{itemize}
@@ -1815,7 +1816,7 @@ nth_element(foo.begin(), foo.begin() + 3, foo.end());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Tri\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Tri}
 
 \note[item]{Possibilité de fournir un prédicat de comparaison, \lstinline|operator<| par défaut}
 
@@ -1842,7 +1843,7 @@ sort(foo.begin(), foo.end());  // 4 9 13 28 54\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Tri\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Tri}
 	\begin{itemize}
 		\item \lstinline|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant\ldots
 	\end{itemize}
@@ -1911,7 +1912,7 @@ merge(foo.begin(), foo.end(),
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Opérations ensemblistes\titlehfill{}1/2}
+	\frametitle{STL Algorithmes - Opérations ensemblistes}
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item Ensemble sans répétition de valeur
@@ -1935,7 +1936,7 @@ includes(foo.begin(), foo.end(),
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Opérations ensemblistes\titlehfill{}2/2}
+	\frametitle{STL Algorithmes - Opérations ensemblistes}
 	\begin{itemize}
 		\item \lstinline|std::set_union()| : union de deux ensembles
 	\end{itemize}
@@ -2019,7 +2020,7 @@ min_element(foo.begin(), foo.end()); // Sur 5 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Numérique\titlehfill{}1/4}
+	\frametitle{STL Algorithmes - Numérique}
 	\begin{itemize}
 		\item \lstinline|std::accumulate()| \og ajoute\fg{} tous les éléments de l'ensemble
 	\end{itemize}
@@ -2037,7 +2038,7 @@ accumulate(foo.begin(), foo.end(), 1, multiplies<int>());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Numérique\titlehfill{}2/4}
+	\frametitle{STL Algorithmes - Numérique}
 	\begin{itemize}
 		\item \lstinline|std::adjacent_difference()| \og différence\fg{} entre chaque élément et son prédécesseur
 	\end{itemize}
@@ -2056,7 +2057,7 @@ adjacent_difference(foo.begin(), foo.end(),
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Numérique\titlehfill{}3/4}
+	\frametitle{STL Algorithmes - Numérique}
 	\begin{itemize}
 		\item \lstinline|std::inner_product()| \og produit scalaire\fg{} de deux ensembles
 	\end{itemize}
@@ -2074,7 +2075,7 @@ inner_product(foo.begin(), foo.end(), bar.begin(), 0);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Numérique\titlehfill{}4/4}
+	\frametitle{STL Algorithmes - Numérique}
 	\begin{itemize}
 		\item \lstinline|std::partial_sum()| \og somme\fg{} partielle d'un ensemble
 		\item Chaque élément résultant est la somme des éléments d'indice inférieur ou égal de l'ensemble de départ
@@ -2097,7 +2098,7 @@ partial_sum(foo.begin(), foo.end(), back_inserter(bar));
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Algorithmes - Au delà des conteneurs\titlehfill{}1/3}
+	\frametitle{STL Algorithmes - Au delà des conteneurs}
 	\begin{itemize}
 		\item Itérateurs définissables hors des conteneurs
 		\begin{itemize}
@@ -2110,7 +2111,7 @@ partial_sum(foo.begin(), foo.end(), back_inserter(bar));
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Au delà des conteneurs\titlehfill{}2/3}
+	\frametitle{STL Algorithmes - Au delà des conteneurs}
 	\begin{itemize}
 		\item Tableaux C
 		\begin{itemize}
@@ -2137,7 +2138,7 @@ fill(foo, foo + 4, 5);  // 5 5 5 5\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Algorithmes - Au delà des conteneurs\titlehfill{}3/3}
+	\frametitle{STL Algorithmes - Au delà des conteneurs}
 	\begin{itemize}
 		\item Flux
 		\begin{itemize}
@@ -2175,7 +2176,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 
 \subsection*{STL - Conclusion}
 \begin{frame}
-	\frametitle{STL Conclusion \titlehfill{}1/4}
+	\frametitle{STL Conclusion}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Préférez les conteneurs aux tableaux C
@@ -2207,7 +2208,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conclusion \titlehfill{}2/4}
+	\frametitle{STL Conclusion}
 	\begin{exampleblock}{Do, performances}
 		\begin{itemize}
 			\item Mesurez !
@@ -2247,7 +2248,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conclusion \titlehfill{}3/4}
+	\frametitle{STL Conclusion}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Faites vos propres algorithmes plutôt que des boucles
@@ -2270,7 +2271,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{STL Conclusion \titlehfill{}4/4}
+	\frametitle{STL Conclusion}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Vérifiez que les ensembles de destination aient une taille suffisante

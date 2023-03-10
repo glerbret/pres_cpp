@@ -77,7 +77,7 @@ ofs << "Hello, world!\n";\end{lstlisting}
 
 \subsection*{DateTime}
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}1/7}
+	\frametitle{Boost.DateTime}
 	\begin{itemize}
 		\item Intégrée, en grande partie, à C++11 et C++20
 		\item Manipulation de dates et heures
@@ -89,7 +89,7 @@ ofs << "Hello, world!\n";\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}2/7}
+	\frametitle{Boost.DateTime}
 	\begin{itemize}
 		\item Récupération de la date et heure courante dans la \textit{timezone} locale
 	\end{itemize}
@@ -106,7 +106,7 @@ ptime date = second_clock::universal_time();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}3/7}
+	\frametitle{Boost.DateTime}
 	\begin{itemize}
 		\item Construction depuis une chaîne
 	\end{itemize}
@@ -120,7 +120,7 @@ ptime t(from_iso_string(ts))\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}4/7}
+	\frametitle{Boost.DateTime}
 	\begin{itemize}
 		\item Écriture sous forme de chaîne
 	\end{itemize}
@@ -138,7 +138,7 @@ to_iso_extended_string(ptime);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}5/7}
+	\frametitle{Boost.DateTime}
 	\begin{itemize}
 		\item Accesseurs sur un élément de la date
 	\end{itemize}
@@ -158,7 +158,7 @@ now.time_of_day().seconds();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}6/7}
+	\frametitle{Boost.DateTime}
 	\begin{itemize}
 		\item Fonctions de conversion
 		\begin{itemize}
@@ -177,7 +177,7 @@ now.time_of_day().seconds();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.DateTime\titlehfill{}7/7}
+	\frametitle{Boost.DateTime}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Préférez \lstinline|Boost.DateTime| aux classes \textit{home-made}
@@ -199,7 +199,7 @@ now.time_of_day().seconds();\end{lstlisting}
 
 \subsection*{Formatage}
 \begin{frame}[fragile]
-	\frametitle{Boost.Format\titlehfill{}1/4}
+	\frametitle{Boost.Format}
 	\begin{itemize}
 		\item Alternative intégrée à C++20
 
@@ -223,7 +223,7 @@ format{"%|| %|| %||"} % 12 % 5 % 2014; // 12 5 2014\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.Format\titlehfill{}2/4}
+	\frametitle{Boost.Format}
 	\begin{itemize}
 		\item Spécification dans la chaîne de format à la \lstinline|printf()|
 		\begin{itemize}
@@ -246,7 +246,7 @@ format{"%|1$#x|"} % 12;	// 0xc\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.Format\titlehfill{}3/4}
+	\frametitle{Boost.Format}
 	\begin{itemize}
 		\item Spécification sur la valeur avec \lstinline|io::group()|
 	\end{itemize}
@@ -263,7 +263,7 @@ format{"%1% %2% %1%"} % io::group(showpos, 1) % 2;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.Format\titlehfill{}4/4}
+	\frametitle{Boost.Format}
 	\begin{block}{Motivations}
 		\begin{itemize}
 			\item Plus expressif et souple que le formatage des flux
@@ -279,7 +279,7 @@ format{"%1% %2% %1%"} % io::group(showpos, 1) % 2;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.StringAlgorithms\titlehfill{}1/5}
+	\frametitle{Boost.StringAlgorithms}
 	\begin{itemize}
 		\item Manipulation des chaînes de caractères
 		\item Changement de casse
@@ -295,7 +295,7 @@ to_upper_copy(foo); // BOOST\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.StringAlgorithms\titlehfill{}2/5}
+	\frametitle{Boost.StringAlgorithms}
 	\begin{itemize}
 		\item Suppression de caractères
 		\begin{itemize}
@@ -311,7 +311,7 @@ erase_all_copy(foo, "o"); // Bst\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.StringAlgorithms\titlehfill{}3/5}
+	\frametitle{Boost.StringAlgorithms}
 	\begin{itemize}
 		\item Recherche de sous-chaîne
 		\begin{itemize}
@@ -337,7 +337,7 @@ split(bar, foo, is_space());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.StringAlgorithms\titlehfill{}4/5}
+	\frametitle{Boost.StringAlgorithms}
 	\begin{itemize}
 		\item Remplacement de caractères
 		\begin{itemize}
@@ -353,7 +353,7 @@ replace_all_copy(foo, "o", "0");  // B00st\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.StringAlgorithms\titlehfill{}5/5}
+	\frametitle{Boost.StringAlgorithms}
 	\begin{itemize}
 		\item \textit{Trimming}
 		\begin{itemize}
@@ -472,7 +472,7 @@ for(const std::string& text : tokens)
 
 \subsection*{Entrée/sortie}
 \begin{frame}[fragile]
-	\frametitle{Boost.Asio\titlehfill{}1/2}
+	\frametitle{Boost.Asio}
 	\begin{itemize}
 		\item Gestion des entrées/sorties en mode synchrone ou asynchrone
 		\item Encapsulation des \textit{sockets} bas-niveau
@@ -490,7 +490,7 @@ for(;;) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Boost.Asio\titlehfill{}2/2}
+	\frametitle{Boost.Asio}
 	\begin{lstlisting}[language=C++]
 io_service io_service;
 tcp::resolver resolver(io_service);
