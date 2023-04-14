@@ -41,7 +41,7 @@
 
 		\item Suppression de \lstinline|std::auto_ptr|
 		\item Suppression de \lstinline|std::random_shuffle()|
-		\item Suppression des anciens mécanismes fonctionnels : \lstinline|std::bind1st()|, \lstinline|std::bind2nd()|, \ldots
+		\item Suppression des anciens mécanismes fonctionnels : \lstinline|std::bind1st()|, \lstinline|std::bind2nd()|, \ldots{}
 		\item Suppression des spécifications d'exception
 	\end{itemize}
 \end{frame}
@@ -924,7 +924,7 @@ for(auto item : v)
 \note[item]{Et ce peut être une structure/classe présentant une surcharge de \lstinline|operator()| pour chacun des types}
 	\end{alertblock}
 
-	\begin{block}{En attendant C++17 \ldots}
+	\begin{block}{En attendant C++17 \ldots{}}
 		\begin{itemize}
 			\item Utilisez Boost.Variant
 		\end{itemize}
@@ -1202,7 +1202,7 @@ Foo([&](int i) { ... });\end{lstlisting}
 \frametitle{Déduction de template dans les constructeurs}
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Rend obsolète plusieurs \textit{make helper} (\lstinline|std::make_pair()|, \lstinline|std::make_tuple()|, \ldots)
+			\item Rend obsolète plusieurs \textit{make helper} (\lstinline|std::make_pair()|, \lstinline|std::make_tuple()|, \ldots{})
 		\end{itemize}
 	\end{block}
 
@@ -1263,7 +1263,7 @@ foo<std::vector, int> bar;\end{lstlisting}
 	\frametitle{Template \& contraintes d'utilisation}
 	\begin{itemize}
 		\item Évaluation constante de tous les arguments templates \og non-types\fg{}
-		\item Y compris pointeurs, références, pointeurs sur membres, \ldots
+		\item Y compris pointeurs, références, pointeurs sur membres, \ldots{}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1581,7 +1581,7 @@ baz();  // Idealement : warning\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Attribut \lstinline|[[ maybe_unused ]]|}
 	\begin{itemize}
-		\item Sur une classe, structure, fonction, variable, paramètre, \ldots
+		\item Sur une classe, structure, fonction, variable, paramètre, \ldots{}
 		\item Indique qu'un élément peut ne pas être utilisé
 		\item Incitation à ne pas lever d'avertissement en cas de non-utilisation
 	\end{itemize}
@@ -1901,7 +1901,7 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 \note[item]{L'information de type récupérée ainsi est \textit{implementation-dependant} et non utilisable tel quel mais peut être comparé au retour de \lstinline|type_id|}
 	\end{itemize}
 
-	\begin{block}{En attendant C++17 \ldots}
+	\begin{block}{En attendant C++17 \ldots{}}
 		\begin{itemize}
 			\item Utilisez Boost.Any
 		\end{itemize}
@@ -2081,7 +2081,7 @@ bar.c_str();       // const char*\end{lstlisting}
 			\item Création des liens : \lstinline|create_symlink()|, \lstinline|create_hard_link()|
 			\item Test d'existence : \lstinline|exists()|
 			\item Taille : \lstinline|file_size()|
-			\item Type : \lstinline|is_regular_file()|, \lstinline|is_directory()|, \lstinline|is_symlink()|, \lstinline|is_fifo()|, \lstinline|is_socket()|, \ldots
+			\item Type : \lstinline|is_regular_file()|, \lstinline|is_directory()|, \lstinline|is_symlink()|, \lstinline|is_fifo()|, \lstinline|is_socket()|, \ldots{}
 			\item Permissions : \lstinline|permissions()|
 			\item Date de dernière écriture : \lstinline|last_write_time()|
 			\item Suppression : \lstinline|remove()|, \lstinline|remove_all()|
@@ -2229,7 +2229,7 @@ inclusive_scan(begin(foo), end(foo),
 			\item Polynômes de Legendre
 			\item Polynômes de Hermite
 			\item Polynômes de Laguerre
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
 \end{frame}

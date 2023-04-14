@@ -66,7 +66,7 @@
 
 \note[item]{C : Working group 14}
 
-		\item \ldots mais des membres en commun
+		\item \ldots{} mais des membres en commun
 		\item Pas de propriétaire du C++
 
 \note[item]{Donc libre de droit, mais la norme ISO définitive est payante}
@@ -182,7 +182,7 @@ catch(logic_error& e) {
 		\item Critiquées, voire interdites, par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide)}
 		\item Arguments très variés :
 		\begin{itemize}
-			\item \og Je ne comprends pas\fg{}, \og Ça ne sert à rien\fg{}, \ldots
+			\item \og Je ne comprends pas\fg{}, \og Ça ne sert à rien\fg{}, \ldots{}
 			\item Impact négatif sur les performances
 		\end{itemize}
 
@@ -209,7 +209,7 @@ catch(logic_error& e) {
 	\begin{block}{Très variable}
 		\begin{itemize}
 			\item Correctement supportées par les compilateurs actuels
-			\item Inégalement gérées par les outils d'analyse, de documentation, \ldots
+			\item Inégalement gérées par les outils d'analyse, de documentation, \ldots{}
 		\end{itemize}
 	\end{block}
 
@@ -471,7 +471,7 @@ private:
 
 \note[item]{Contrairement à Java ou Python où c'est une propriété de l'usage}
 
-		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \ldots)
+		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \ldots{})
 		\item Conséquences
 		\begin{itemize}
 			\item Objets créés dans un état cohérent, testable et utilisable
@@ -647,7 +647,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\item \ldots{} mais limité par manque de support par le langage
 		\item Non déterministe : adapté à la mémoire pas aux autres ressources
 		\item Particulièrement adapté à la gestion des structures cycliques
-		\item D'autres avantages pour la mémoire (compactage, recyclage, \ldots)
+		\item D'autres avantages pour la mémoire (compactage, recyclage, \ldots{})
 
 \note[item]{Mais ces fonctionnalités évoluées des GC ne sont probablement pas compatibles avec le fonctionnement du C++}
 	\end{itemize}
@@ -847,7 +847,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 			\item Liste doublement chaînée
 			\item Accès bidirectionnel non indexé
 			\item Modification n'importe où à faible coût
-			\item Plusieurs algorithmes membres (tri, fusion, suppression, \ldots)
+			\item Plusieurs algorithmes membres (tri, fusion, suppression, \ldots{})
 
 \note[item]{Algorithmes membres pour la liste car accès non indexé}
 		\end{itemize}
@@ -1207,11 +1207,11 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 
 \note[item]{Ce qui représente un avantage sur les fonctions libres}
 
-		\item Foncteur standards : \lstinline|plus|, \lstinline|minus|, \lstinline|equal|, \lstinline|less|, \ldots
+		\item Foncteur standards : \lstinline|plus|, \lstinline|minus|, \lstinline|equal|, \lstinline|less|, \ldots{}
 		\item Constructibles
 		\begin{itemize}
 			\item Depuis des pointeurs de fonctions : \lstinline|prt_fun|
-			\item Depuis des fonctions membres : \lstinline|mem_fun|, \lstinline|mem_fun1|, \ldots
+			\item Depuis des fonctions membres : \lstinline|mem_fun|, \lstinline|mem_fun1|, \ldots{}
 			\item En niant d'autres foncteurs : \lstinline|not1|, \lstinline|not2|
 			\item En fixant des paramètres : \lstinline|bind1st|, \lstinline|bind2nd|
 		\end{itemize}
@@ -1741,7 +1741,7 @@ rotate(foo.begin(), foo.begin() + 2, foo.end());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Partitionnement}
 	\begin{itemize}
-		\item \lstinline|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots
+		\item \lstinline|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots{}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1837,7 +1837,7 @@ sort(foo.begin(), foo.end());  // 4 9 13 28 54\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes - Tri}
 	\begin{itemize}
-		\item \lstinline|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant\ldots
+		\item \lstinline|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant\ldots{}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -2214,7 +2214,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 		\begin{itemize}
 			\item Réfléchissez à votre utilisation des données
 
-\note[item]{Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, \ldots}
+\note[item]{Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, \ldots{}}
 \note[item]{La première interrogation étant : ce traitement est-il nécessaire ?}
 
 			\item Méfiez-vous des complexités brutes

@@ -57,14 +57,14 @@
 			\item \lstinline[keywordstyle=\color{black}]|__cpp_decltype| : support de \lstinline|decltype|
 			\item \lstinline|__cpp_range_based_for| : support du \textit{range-based for loop}
 			\item \lstinline|__cpp_static_assert| : support de \lstinline|static_assert|
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 		\item Macros testant le support de fonctionnalités par la bibliothèque standard
 		\begin{itemize}
 			\item \lstinline|__cpp_lib_any| : support de \lstinline|std::any|
 			\item \lstinline|__cpp_lib_chrono| : support de \lstinline|std::chrono|
 			\item \lstinline|__cpp_lib_gcd_lcm| : support des fonctions \lstinline|std::gcd()| et \lstinline|std::lcm|
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
 
@@ -84,7 +84,7 @@
 		\item Entête \lstinline|<version>| : informations de version
 		\begin{itemize}
 			\item Contenu \textit{implementation-dependent}
-			\item Version du standard, de la bibliothèque, \textit{release date}, copyright, \ldots
+			\item Version du standard, de la bibliothèque, \textit{release date}, copyright, \ldots{}
 		\end{itemize}
 		\item \lstinline|source_location| : position dans le code source
 		\begin{itemize}
@@ -382,7 +382,7 @@ Bar f3() {
 			\item $(a <=> b) > 0$ si $a > b$
 			\item $(a <=> b) == 0$ si $a$ et $b$ sont équivalents
 
-\note[item]{Mécanisme similaire au fonctionnement de \lstinline|strcmp|, \lstinline|memcmp|, \ldots}
+\note[item]{Mécanisme similaire au fonctionnement de \lstinline|strcmp|, \lstinline|memcmp|, \ldots{}}
 \note[item]{Un retour non numérique, p.ex. \lstinline|Nan|, indique des valeurs non ordonnées}
 
 		\end{itemize}
@@ -484,7 +484,7 @@ namespace A {
 
 			\item Nouveau niveau d'encapsulation
 			\item Plus grande robustesse (isolation des effets des macros)
-			\item Meilleurs prises en charge des bibliothèques par l'analyse statique, les optimiseurs, \ldots
+			\item Meilleurs prises en charge des bibliothèques par l'analyse statique, les optimiseurs, \ldots{}
 			\item Gestion des inclusions multiples sans garde
 			\item Compatible avec le système actuel d'inclusion
 
@@ -557,7 +557,7 @@ void bar(int j) { return 3 * j; }\end{lstlisting}
 
 	\pause
 
-	\begin{alertblock}{Mais \ldots}
+	\begin{alertblock}{Mais \ldots{}}
 		\begin{itemize}
 			\item Mais pas les autres unités de compilation même si elles importent le module
 		\end{itemize}
@@ -1805,7 +1805,7 @@ format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
 			\item \lstinline|%H|, \lstinline|%I| : heure (format 24h ou 12h)
 			\item \lstinline|%M| : minutes
 			\item \lstinline|%S| : secondes
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
 
@@ -1984,7 +1984,7 @@ struct Foo {
 			\item \lstinline|%d| : numéro du jour dans le mois
 			\item \lstinline|%U| : numéro de la semaine
 			\item \lstinline|%Z| : abréviation de la \textit{timezone}
-			\item \ldots
+			\item \ldots{}
 
 \note[item]{Et bien d'autre, notamment en prenant en compte ou non la locale}
 \note[item]{Similaire à \lstinline|strftime()|}
@@ -2535,20 +2535,20 @@ void foo(Constraint auto... T);\end{lstlisting}
 	\begin{itemize}
 		\item Nombreux concepts standards
 		\begin{itemize}
-			\item Relations entre types : \lstinline|same_as|, \lstinline|derived_from|, \lstinline|convertible_to|, \lstinline|common_with|, \ldots
-			\item Types numériques : \lstinline|integral|, \lstinline|signed_integral|, \lstinline|unsigned_integral|, \lstinline|floating_point|, \ldots
-			\item Opérations supportées : \lstinline|swappable|, \lstinline|destructible|, \lstinline|default_constructible|, \lstinline|move_constructible|, \lstinline|copy_constructible|, \ldots
-			\item Catégories de types : \lstinline|movable|, \lstinline|copyable|, \lstinline|semiregular|, \lstinline|regular|, \ldots
+			\item Relations entre types : \lstinline|same_as|, \lstinline|derived_from|, \lstinline|convertible_to|, \lstinline|common_with|, \ldots{}
+			\item Types numériques : \lstinline|integral|, \lstinline|signed_integral|, \lstinline|unsigned_integral|, \lstinline|floating_point|, \ldots{}
+			\item Opérations supportées : \lstinline|swappable|, \lstinline|destructible|, \lstinline|default_constructible|, \lstinline|move_constructible|, \lstinline|copy_constructible|, \ldots{}
+			\item Catégories de types : \lstinline|movable|, \lstinline|copyable|, \lstinline|semiregular|, \lstinline|regular|, \ldots{}
 
 \note[item]{\lstinline|semiregular| : \lstinline|copyable| et \lstinline|default_constructible|}
 \note[item]{\lstinline|regular| : \lstinline|semiregular| et \lstinline|equality_comparable|}
 
-			\item Comparaisons : \lstinline|boolean|, \lstinline|equality_comparable|, \lstinline|totally_ordered|, \ldots
-			\item \textit{Callable concepts} : \lstinline|invocable|, \lstinline|predicate|, \lstinline|strict_weak_order|, \ldots
+			\item Comparaisons : \lstinline|boolean|, \lstinline|equality_comparable|, \lstinline|totally_ordered|, \ldots{}
+			\item \textit{Callable concepts} : \lstinline|invocable|, \lstinline|predicate|, \lstinline|strict_weak_order|, \ldots{}
 
 \note[item]{\lstinline|predicate| : appelable et retourne un bool}
 
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -2693,7 +2693,7 @@ template<class T> concept totally_ordered =
 
 	\begin{block}{Usage}
 		\begin{itemize}
-			\item Spécification de contraintes sur paramètres : types identiques, itérateur, \ldots
+			\item Spécification de contraintes sur paramètres : types identiques, itérateur, \ldots{}
 		\end{itemize}
 	\end{block}
 

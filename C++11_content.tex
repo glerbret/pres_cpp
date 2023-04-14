@@ -17,7 +17,7 @@
 		\begin{itemize}
 			\item Utilisation de \textit{Technical Specification} et de groupes de travail dédiés
 			\item Pilotage par les dates plutôt que les fonctionnalités (\textit{train model})
-			\item Des versions fréquentes (3 ans : 2011, 2014, 2017, 2020, \ldots)
+			\item Des versions fréquentes (3 ans : 2011, 2014, 2017, 2020, \ldots{})
 			\item Voir \href{https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/}{Trip report: Winter ISO C++ standards meeting}
 		\end{itemize}
 		\item Support quasi-complet par GCC, Clang et Visual C++
@@ -75,7 +75,7 @@
 
 	\begin{block}{Depuis C99}
 	\begin{itemize}
-		\item Ainsi que \textit{variadic macro}, \lstinline|__func__|, concaténation de chaînes littérales, \ldots
+		\item Ainsi que \textit{variadic macro}, \lstinline|__func__|, concaténation de chaînes littérales, \ldots{}
 	\end{itemize}
 	\end{block}
 
@@ -143,7 +143,7 @@
 			\item Utilisation de \lstinline|reinterpret_cast|
 			\item Accès au début commun d'une union par un membre non actif
 			\item Utilisation des fonctions C \lstinline|qsort()| ou \lstinline|bsearch()|
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -777,7 +777,7 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 			\item \lstinline|std::forward()| convertit le paramètre en \textit{rvalue} s'il n'est pas une \textit{lvalue reference}
 		\end{itemize}
 
-		\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots ?}
+		\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots{} ?}
 			\begin{itemize}
 				\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337} §3.10
 			\end{itemize}
@@ -828,7 +828,7 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 	\begin{block}{\textit{Rule of zero}}
 		Lorsque c'est possible, n'en définissez aucune
 
-\note[item]{\textit{Rule of zero} s'applique typiquement aux classes sans gestion explicite d'\textit{ownership}, c'est à dire sans membres qu'il faut explicitement libérés, fermés, \ldots. Ce qui devrait être le cas par défaut}
+\note[item]{\textit{Rule of zero} s'applique typiquement aux classes sans gestion explicite d'\textit{ownership}, c'est à dire sans membres qu'il faut explicitement libérés, fermés, \ldots{}. Ce qui devrait être le cas par défaut}
 	\end{block}
 
 	\begin{block}{Pour aller plus loin}
@@ -842,7 +842,7 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 	\frametitle{Sémantique de déplacement}
 	\begin{block}{Dans la bibliothèque standard}
 		\begin{itemize}
-			\item Nombreuses classes standard déplaçables (thread, flux, \ldots)
+			\item Nombreuses classes standard déplaçables (thread, flux, \ldots{})
 
 \note[item]{Mutex et lock ne sont pas copiables ni déplaçables}
 
@@ -1366,7 +1366,7 @@ accumulate(foo.begin(), foo.end(), 0); // 61\end{lstlisting}
 		\item \lstinline|shrink_to_fit()| réduit la capacité des \lstinline|std::vector|, \lstinline|std::deque| et \lstinline|std::string| à leur taille
 	\end{itemize}
 
-\note[item]{Pour être précis, ce n'est pas nécessairement exactement à la taille ça peut être plus grand - à la discrétion de l'implémentation (performances, cohérence, \ldots) -, mais l'idée est là}
+\note[item]{Pour être précis, ce n'est pas nécessairement exactement à la taille ça peut être plus grand - à la discrétion de l'implémentation (performances, cohérence, \ldots{}) -, mais l'idée est là}
 
 	\begin{lstlisting}[language=C++]
 vector<int> foo{12, 25};
@@ -2388,7 +2388,7 @@ struct Foo {
 			\item Appelle le constructeur de base correspondant
 			\item Initialise les membres sans fournir de paramètres
 
-\note[item]{Donc initialisation d'attribut si présente, sinon constructeur par défaut (ou non initialisation pour \lstinline|int|, pointeur, \ldots) et erreur si un membre ne peut pas être construit}
+\note[item]{Donc initialisation d'attribut si présente, sinon constructeur par défaut (ou non initialisation pour \lstinline|int|, pointeur, \ldots{}) et erreur si un membre ne peut pas être construit}
 		\end{itemize}
 	\end{itemize}
 
@@ -3329,7 +3329,7 @@ is_base_of<Foo, Bar>::value;        // true
 is_base_of<Bar, Foo>::value;        // false\end{lstlisting}
 
 	\begin{itemize}
-		\item Et bien d'autres \ldots
+		\item Et bien d'autres \ldots{}
 	\end{itemize}
 \end{frame}
 
@@ -3368,7 +3368,7 @@ typedef make_unsigned<const unsigned>::type C;
 typedef make_unsigned<Foo>::type D;\end{lstlisting}
 
 	\begin{itemize}
-		\item Et bien d'autres \ldots
+		\item Et bien d'autres \ldots{}
 	\end{itemize}
 \end{frame}
 
@@ -3605,7 +3605,7 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 
 	\begin{block}{Sous silence}
 		\begin{itemize}
-			\item Allocateurs, mémoire non-initialisée, alignement, \ldots
+			\item Allocateurs, mémoire non-initialisée, alignement, \ldots{}
 		\end{itemize} 
 	\end{block}
 
@@ -3625,7 +3625,7 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 	\frametitle{Attributs}
 	\begin{itemize}
 		\item Syntaxe standard pour les directives de compilation \textit{inlines}
-		\item \ldots y compris celles spécifiques à un compilateur
+		\item \ldots{} y compris celles spécifiques à un compilateur
 		\item Remplace la directive \lstinline|#pragma|
 		\item Et les mots-clé propriétaires (\lstinline|__attribute__|, \lstinline|__declspec|)
 	\end{itemize}
@@ -3989,7 +3989,7 @@ cout << foo;        // Affiche 5 15\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Variables atomiques - \lstinline|std::atomic|}
 	\begin{itemize}
-		\item Plusieurs instanciations standards (\lstinline|std::atomic_bool|, \lstinline|std::atomic_int|, \ldots)
+		\item Plusieurs instanciations standards (\lstinline|std::atomic_bool|, \lstinline|std::atomic_int|, \ldots{})
 	\end{itemize}
 
 	\begin{block}{Mais aussi}
@@ -4575,7 +4575,7 @@ th1.join();\end{lstlisting}
 			\item Grammaire : \underline{ECMAScript}, basic POSIX, extended POSIX, awk, grep, egrep
 			\item Case sensitive ou non
 			\item Prise en compte de la locale
-			\item \ldots
+			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
 
@@ -4690,7 +4690,7 @@ regex_replace(s, r, "-"); // abcd-efg\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Nombres aléatoires}
 	\begin{itemize}
-		\item Générateurs pseudo-aléatoires initialisés par une graine (congruence linéaire, Mersenne, \ldots)
+		\item Générateurs pseudo-aléatoires initialisés par une graine (congruence linéaire, Mersenne, \ldots{})
 		\item Générateur aléatoire
 	\end{itemize}
 
@@ -4702,7 +4702,7 @@ regex_replace(s, r, "-"); // abcd-efg\end{lstlisting}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, \ldots)
+		\item Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, \ldots{})
 		\item Fonction de normalisation ramenant la séquence générée dans [0,1)
 	\end{itemize}
 \end{frame}

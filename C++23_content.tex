@@ -901,7 +901,7 @@ format("{:L%S}", sec(4.2));
 		\begin{itemize}
 			\item \lstinline|std::map| et équivalent : \lstinline|{k1: v1, k2: v2}|
 			\item \lstinline|std::set| et équivalent : \lstinline|{v1, v2}|
-			\item \lstinline|std::vector|, \lstinline|std::list|, \ldots : \lstinline|[v1, v2]|
+			\item \lstinline|std::vector|, \lstinline|std::list|, \ldots{} : \lstinline|[v1, v2]|
 		\end{itemize}
 		\item Formatage des \lstinline|std::thread::id|
 		\item Formatage des \lstinline|std::stacktrace|
@@ -1303,7 +1303,7 @@ views::repeat(17, 4);\end{lstlisting}
 		\item Nouveau concept de range : \lstinline|borrowed_range|
 		\item Range dont les itérateurs sur celui-ci reste valide après sa destruction
 		\item Des ranges inconditionnellement \textit{borrowed} : \lstinline|ref_view|, \lstinline|string_view|, \lstinline|empty_view| et \lstinline|iota_view|
-		\item Des ranges conditionnellement \textit{borrowed}, selon la vue sous-jacente : \lstinline|take_view|, \lstinline|drop_view|, \ldots
+		\item Des ranges conditionnellement \textit{borrowed}, selon la vue sous-jacente : \lstinline|take_view|, \lstinline|drop_view|, \ldots{}
 	\end{itemize}
 \end{frame}
 
