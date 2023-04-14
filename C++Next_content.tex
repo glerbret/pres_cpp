@@ -2,171 +2,114 @@
 \begin{document}
 
 \section{Et ensuite ?}
-
-\begin{frame}
+\subsection*{Présentation}
+\begin{frame}[fragile]
 	\frametitle{Présentation}
 	\begin{itemize}
-		\item C++20 ne marque pas la fin des évolutions du C++
+		\item C++23 ne marque pas la fin des évolutions du C++
 		\item Plusieurs sujets proposés et non pris en compte dans les versions actuelles
 		\item Plusieurs TS publiés et non intégrés ou en cours d'étude
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Propositions diverses}
+\subsection*{TS}
+\begin{frame}[fragile]
+	\frametitle{TS - Contracts}
 	\begin{itemize}
-		\item Surcharge de \lstinline|operator.|
-		\begin{itemize}
-			\item Si l'opérateur est défini, les opérations sont transférés à son résultat
-			\item \ldots{} sauf celles spécifiquement déclarées membres
-			\item Réalisation de \textit{smart reference} (p.ex. \textit{proxy})
-		\end{itemize}
-		\item Surcharge de \lstinline|operator?:|
-		\item \textit{Unified Call Syntax}
-		\begin{itemize}
-			\item \lstinline|f(x, ...)| appelle \lstinline|x.f(...)| si \lstinline|f(x, ...)| n'est pas trouvé
-			\item Généralisation de \lstinline|std::begin()| et co. dans le langage
-		\end{itemize}
-		\item \lstinline|std::expected| contenant statut et valeur optionnelle : retour du compte rendu d'exécution et, éventuellement, de la valeur
-		\item \lstinline|operator??| pour tester \lstinline|std::expected|
-
-\note[item]{permet de se passer d'exception dans les contextes où elles ne sont pas adaptées, de ne pas utiliser un paramètre en sortie pour le statut ou la valeur et de ne pas définir des structures/classes ad hoc tout en proposant une API plus adaptée que \lstinline|std::pair| ou \lstinline|std::tuple|}
-
-		\item \textit{Procedural function interfaces} : vérification statique de partie du programme
-
-\note[item]{Annotations de types claim / assertion permettant à des outils d'analyse de vérifier la correction du programme}
-\note[item]{Recouvre les points du TS \textit{contract} mais est plus ambitieux}
-
-		\item Support des entrées/sorties audio
-		\item Amélioration de la compatibilité et de la portabilité de \lstinline|char8_t|
-
-\note[item]{Permettre l'initialisation de table de \lstinline|char| ou \lstinline|unsigned char| depuis des chaînes littérales UTF-8 ou \lstinline|char8_t|}
-
+		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
+		\item Support de la programmation par contrat
+		\item Remplace la vérification via \lstinline|assert| 
+		\item Et la documentation via commentaires \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
+		\item Plusieurs propositions initiales concurrentes
+		\item \ldots{} mais un compromis à émerger
+		\item Utilisation d'attributs \lstinline|[[assert:x]]|, \lstinline|[[pre:x]]| et \lstinline|[[post:x]]|
+		\item Quatre comportements : \lstinline|assume|, \lstinline|ignore|, \lstinline|observe| et \lstinline|enforce|
+		\item Les contrats de fonctions membres publiques peuvent utiliser des membres privés ou protégés
+		\item Intégration des contrats à la bibliothèque standard
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{TS - Networking TS}
 	\begin{itemize}
-		\item Nouveaux conteneurs
-		\begin{itemize}
-			\item \lstinline|std::mdarray| tableaux multidimensionnels
-			
-\note[item]{\lstinline|std::mdarray| possède les éléments alors que \lstinline|std::mdspan| n'est qu'une vue et ne possède pas}
-			
-			\item \lstinline|std::static_vector| : \lstinline|vector| de capacité fixée en \textit{compile-time}
-
-\note[item]{Par rapport à \lstinline|std::array| : la taille n'est pas fixée, seulement la capacité et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
-
-			\item \lstinline|queue| concurrente
-			\item \textit{Bucket array} (\lstinline|std::hive|) : plusieurs blocs liés entre eux d'éléments  avec un indicateur sur l'état de chaque élément (actif / effacé)
-		\end{itemize}
-		\item \lstinline|submdspan| : fonction retournant une vue sur un sous-ensemble d'un \lstinline|mdspan|
-		\item Algorithme \lstinline|std::find_last| pour chercher depuis la fin d'un conteneur
-		\item Configuration du nom et de la taille de la pile des threads
-		\item Possibilité pour les fonctions \lstinline|va_start| de prendre aucun argument
-		\item Autoriser les qualifiers sur les constructeurs
-		\begin{itemize}
-			\item Constructeurs \lstinline|const| pour construire des objets constants
-			\item Constructeurs non \lstinline|const| peuvent construire des objets constants et mutables
-		\end{itemize}
-		\item Ajout d'un \textit{statement} à \lstinline|break| appelé lors de la sortie de la boucle
-
-\note[item]{Alignement sur les évolutions C en cours}
-
+		\item Publié en avril 2018
+		\item Partiellement basé sur Boost.Asio
+		\item Gestion de \textit{timer}
+		\item Gestion de tampon et de flux orientés tampon
+		\item Gestion de \textit{sockets} et de flux \textit{socket}
+		\item Gestion IPv4, IPv6, TCP, UDP
+		\item Manipulation d'adresses IP
+		\item Pas de protocoles de plus haut niveau actuellement
+		\item Demande post-TS : gestion de la sécurité (a priori pas possible)
+		\item Modèle asynchrone, différent de celui déjà présent en C++
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{TS - Pattern matching}
 	\begin{itemize}
-		\item Pointeurs intelligents :
-		\begin{itemize}
-			\item \lstinline|retain_ptr| pointeur intrusif manipulant le comptage de référence interne
-			\item Création de pointeurs intelligents avec une valeur par défaut
-			\item Comparaison entre pointeurs intelligents et pointeurs nus
-			\item \textit{hazard pointer} : unique écrivain, multiples lecteurs
-		\end{itemize}
-		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>|
-		\begin{itemize}
-			\item Dépréciation des conversions entre énumération et flottant
-			\item Dépréciation des conversions entre énumérations
-			\item Dépréciation de la comparaison \og \textit{two-way}\fg{} entre type tableau
-			\item Comparaison \textit{three-way} entre \textit{unscoped} énumération et type entier
-
-\note[item]{\textit{unscoped} énumération, c'est à dire les \lstinline|enum| par opposition aux \lstinline|enum class|}
-
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item \textit{Pattern matching} via \lstinline|inspect|
-
-\note[item]{Probablement pas en C++23}
-
+		\item Utilisation du mot clé \lstinline|inspect| et du \textit{wildcard} \lstinline|__|
+		\item Utilisable sur
 		\begin{itemize}
 			\item Entiers
+
+\note[item]{Proche dans l'esprit de \lstinline|switch/case| avec une syntaxe plus légère et sans \textit{fallthrough}}
 		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 inspect(x) {
-  0  : cout << "Aucun";
-  1  : cout << "Un";
-  __ : cout << "Plusieurs"; }\end{lstlisting}
-
-\note[item]{Proche dans l'esprit de \lstinline|switch/case| avec une syntaxe plus légère et sans \textit{fallback}}
+	0  => { cout << "Aucun"; }
+	1  => { cout << "Un"; }
+	__ => { cout << "Plusieurs"; } }\end{lstlisting}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
+		\item[] 
+		\begin{itemize}
 			\item Chaînes de caractères
 		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 inspect(x) {
-  "zero": cout << "Aucun";
-  "un"  : cout << "Un";
-  __    : cout << "Plusieurs";\end{lstlisting}
+	"zero" => { cout << "Aucun"; }
+	"un"   => { cout << "Un"; }
+	__     => { cout << "Plusieurs"; } }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{TS - Pattern matching}
 	\begin{itemize}
-		\item \textit{Pattern matching} via \lstinline|inspect|
+		\item[] 
 		\begin{itemize}
-			\item \textit{Tuple-like}
-
-\note[item]{\lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array|, agrégats et les classes implémentant l'interface \textit{tuple}}
+			\item \lstinline|std::tuple|, \lstinline|std::pair|, \lstinline|std::array| et tuple-like
 		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 inspect(p) {
-  [0, 0]: cout << "on origin";
-  [0, y]: cout << "on y-axis";
-  [x, 0]: cout << "on x-axis";
-  [x, y]: cout << x << ',' << y;}\end{lstlisting}
+	[0, 0] => { cout << "on origin"; }
+	[0, y] => { cout << "on y-axis"; }
+	[x, 0] => { cout << "on x-axis"; }
+	[x, y] => { cout << x << ',' << y; } }\end{lstlisting}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
+		\item [] 
+		\begin{itemize}
 			\item \lstinline|std::variant| et \lstinline|std::any|
 		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 inspect(v) {
-<int> i  : cout << "Entier " << i;
-<float> f: cout << "Reel " << f;\end{lstlisting}
+	<int> i   => { cout << "Entier " << i; }
+	<float> f => { cout << "Reel " << f; } }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{TS - Pattern matching}
 	\begin{itemize}
-		\item \textit{Pattern matching} via \lstinline|inspect|
+		\item[] 
 		\begin{itemize}
 			\item Types polymorphiques
 		\end{itemize}
@@ -174,176 +117,135 @@ inspect(v) {
 
 	\begin{lstlisting}[language=C++]
 inspect(shape) {
-  <Circle> [r]      : cout << 3.14 * r * r;
-  <Rectangle> [w, h]: cout << w * h;}\end{lstlisting}
+	<Circle> [r]       => { cout << 3.14 * r * r; }
+	<Rectangle> [w, h] => { cout << w * h; } }\end{lstlisting}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Variante sous forme d'expressions (et non de \textit{statement})
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-int get_area(const Shape& shape) {
-  return inspect(shape) {
-    <Circle> [r]       => 3.14 * r * r;
-    <Rectangle> [w, h] => w * h;} }\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item \textit{Pattern matching} via \lstinline|inspect|
-		\begin{itemize}
-			\item Support des gardes
-		\end{itemize}
+		\item Support des gardes
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 inspect(p) {
-  [x, y] if(x > y): cout << x << "superieur a" << y;\end{lstlisting}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Et bien d'autres fonctionnalités \ldots
-		\end{itemize}
-	\end{itemize}
+	[x, y] if(x > y) => { cout << x << "superieur a" << y; } }\end{lstlisting}
 
 	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Prise en compte de la première correspondance et non de la meilleure
-		\end{itemize}
-
-\note[item]{Mais ça peut changer d'ici l'acceptation dans le standard}
+		Prise en compte de la première correspondance et non de la meilleure
 	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{TS - Les autres}
 	\begin{itemize}
-		\item \lstinline|volatile_load<T>| et \lstinline|volatile_store<T>|
-		\item \textit{Compile Time Regular Expression}
-		\item \lstinline|std::embed()| ressources externes disponible au \textit{runtime} 
-
-\note[item]{P.ex. pour embarquer une image dans l'application sans aller lire au \textit{runtime} le fichier contenant la ressource}
-\note[item]{Et sans passer par des conversions externes vers des tableaux de \textit{bytes} injectés dans un fichier d'en-tête}
-
-		\item Gestion des UUID
-		\item Déduction template dans les constructeurs : agrégats, alias et constructeurs hérités
-
-\note[item]{Terme normatif : \textit{Class Template Argument Deduction}}
-\note[item]{Pas de déduction dans ces trois cas pour l'instant}
-
-		\item Implémentations \textit{freestanding} : plus grand sous-ensemble possible de la bibliothèque standard sans \textit{memory overhead} ni support par l'OS
-
-\note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
-
-		\item \textit{Layout} des classes
+		\item \textit{Library fundamentals 2} : évolutions de la bibliothèque standard
 		\begin{itemize}
-			\item Suppression de la possibilité pour le compilateur de réordonner les membres ayant des visibilités différentes
-
-\note[item]{Au sein d'une visibilité, les membres doivent conserver leur ordre}
-\note[item]{En pratique, cette liberté n'est pas utilisée par les compilateurs}
-
-			\item Contrôle du \textit{layout} pour privilégier taille, ordre de déclaration, visibilité, vitesse, ordre alphabétique, lignes de cache ou règles d'une version antérieure du C++ ou d'un autre langage
-			\item Contrôle de l'alignement (remplaçant de \lstinline|#pragma pack(N)|)
+			\item Partiellement intégré en C++17 et C++20
+			\item Pointeurs intelligents non possédant \lstinline|observer_ptr|
+			\item Nouveaux algorithmes
 		\end{itemize}
-
-\note[item]{Deux propositions différentes mais pas incompatibles. La première étant en fait un pré-requis}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Méta-classes : construction de types de classes (dont les classes elles-mêmes) ayant des contraintes, des comportements par défaut et des opérations par défaut (\lstinline|class|, \lstinline|struct|, \lstinline|enum class|, \textit{interface}, \textit{value})
-		\item Répétition \textit{compile-time} d'une expression : \textit{Expansion statement}
-	\end{itemize}
-		
-	\begin{lstlisting}[language=C++]
-auto foo = make_tuple(0, 'a', 3.14);
-for... (auto elem : tup)  
-  cout << elem << "\n"\end{lstlisting}
-			
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Duplication de l'expression pour chaque élément (pas de boucle)
-			\item Éléments de type différent
-			\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
-		\end{itemize}
-		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
-		\item Capture mutable partielle par les lambdas
-
-\note[item]{Par défaut, capture \lstinline|const|, possible de la rendre modifiable via \lstinline|mutable|, mais tous les données capturées sont alors mutable. Ici il est question de n'avoir que certaines données modifiables}
-
-		\item Déduction de \lstinline|this| (\lstinline|const| ou non, \lstinline|&|, \lstinline|&&|) : adaptation de fonctions membres aux qualifiers de \lstinline|this|
-
-\note[item]{Ce qui va permettre d'éliminer du code \textit{boilerplate}, p.ex. les couples de surcharges \lstinline|const|/non \lstinline|const|}
-
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Changement de contexte \textit{stackful} : \lstinline|fiber_context|
-		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-std::tuple<X, Y, Z> f();
-
-auto [...xs] = f();
-auto [x, ...rest] = f();
-auto [x,y,z, ...rest] = f();
-auto [x, ...rest, z] = f();
-auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
-
-\note[item]{Proche dans l'esprit de ce qui se fait en Python 3}
-
-	\begin{itemize}
-		\item Accès bas-niveau aux IO : \lstinline|file_handle| et \lstinline|path_handle|
-		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
-		\item Invocation concurrente
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item \textit{Parsing} de texte
+		\item \textit{Library fundamentals 3}
 		\begin{itemize}
-			\item Pendant du formatage de texte introduit en C++20
-			\item Alternative sûre et robuste à \lstinline|sscanf()|
-			\item Extensible aux types utilisateurs
-			\item Compatible avec les itérateurs et les \textit{ranges}
+			\item \textit{Scope Guard} : enregistrement d'un foncteur appelé à la sortie du scope
+			\item \textit{RAII wrapper}
+		\end{itemize}
+		\item \textit{Parallelism} 2 : publié en juin 2018
+		\item \textit{Transactional Memory} : publié
+		\item \textit{Numerics}: manipulation des nombres
+		\begin{itemize}
+			\item Détection et gestion des débordements
+			\item Gestion des arrondis
+			\item Entiers larges
+			\item Rationnel
+			\item \textit{Proxy} pour manipuler la représentation interne des entiers
 		\end{itemize}
 	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-string key;
-int value;
-scan("answer = 42", "{} = {}", key, value);
-//    ~~~~~~~~~~~~~  ~~~~~~~~~  ~~~~~~~~~~
-//        entree       format    arguments
-// key : "answer", value : 42\end{lstlisting}
-
-	\begin{lstlisting}[language=C++]
-string key;
-chrono::seconds time;
-scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{TS - Les autres}
 	\begin{itemize}
-		\item Algèbre linéaire basé sur un sous-ensemble de \href{https://www.netlib.org/blas/}{BLAS} (vecteur, matrice, \ldots)
-		\item Support des unités physiques
+		\item \textit{2D Graphics} (io2d) : API C++ au dessus de Cairo, différé
+
+\note[item]{Mais le projet io2d en lui-même continue}
+\note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
+
+		\item \textit{Reflection}
 		\begin{itemize}
-			\item Gestion des quantités et dimensions
-			\item Supports des unités de base, dérivées, multiples et sous-multiples
-			\item Conversion et opérations entre unités
+			\item Introspection
+			\item Méta-programmation et code \textit{compile-time}
+			\item Injection
+			\item Méta-classes
 		\end{itemize}
+
+\note[item]{Dans un premier temps, il s'agit de réflexion statique}
+
+		\item \textit{Concurrency} 1 : publié
+		\begin{itemize}
+			\item Partiellement intégré à C++20
+			\item \lstinline|future.then()|
+		\end{itemize}
+		\item \textit{Concurrency} 2
+		\begin{itemize}
+			\item \textit{hazard pointers} : unique écrivain, multiples lecteurs
+			\item \textit{read-copy-update data structure}
+		\end{itemize}
+		\item \textit{Linear Algebra}
+			\begin{itemize}
+				\item Basé sur un sous-ensemble de \href{https://www.netlib.org/blas/}{BLAS} (vecteur, matrice, \ldots)
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Syntaxe}
+\begin{frame}[fragile]
+	\frametitle{Vérification statique}
+	\begin{itemize}
+		\item \textit{Procedural function interfaces} 
+		\begin{itemize}
+			\item Annotations de types \textit{claim} / \textit{assertion}
+			\item Recouvre des points du contract TS mais plus ambitieux
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Encodage}
+\begin{frame}[fragile]
+	\frametitle{Encodage}
+	\begin{itemize}
+		\item Ajout de \lstinline|@|, \lstinline|$| et \lstinline|`| au jeu de caractères de base
+
+\note[item]{Ajoutés en C (C23)}
+\note[item]{Supportés par tous les encodages communément utilisés}
+
+		\item Ajout des algorithmes Unicode
+
+\note[item]{Algorithmes défini par Unicode pour travailler sur les séquences de code points}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Types}
+\begin{frame}[fragile]
+	\frametitle{Types}
+	\begin{itemize}
+		\item Relâchement des restrictions sur les \lstinline|typedef _t|
+		\item Mécanismes \textit{compile-time} vérifiant que deux type ont la même représentation mémoire
+
+\note[item]{P.ex. une structure de deux \lstinline|float| et un tableau de deux \lstinline|float|}
+
+		\item Ajout d'un type \og{}\textit{fixed point decimal}\fg{}
+		\item Entiers larges \lstinline|wide_integer<128, unsigned>|
+		\item Possibilité de définir des objets \lstinline|constexpr|
+		\item \textit{Zero-initialisation} des objets \textit{automatic storage duration}
+
+\note[item]{\textit{automatic storage duration}, c'est ce qui est sur la pile, donc globalement les variables locales}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Support des unités physiques}
+	\begin{itemize}
+		\item Gestion des quantités et dimensions
+		\item Supports des unités de base, dérivées, multiples et sous-multiples
+		\item Conversions et opérations entre unités
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -362,140 +264,8 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{Représentation mémoire}
 	\begin{itemize}
-		\item Concept pour les algorithmes numériques
-		\item \lstinline|constexpr| dans la bibliothèque standard (\lstinline|std::list|, \lstinline|std::deque|, \ldots)
-
-\note[item]{Poursuite de la prise en compte menée dans les versions précédentes}
-
-		\item \og{}Conversion\fg{} implicite de \lstinline|constexpr| vers \lstinline|consteval|
-		\item Fonctionnalité de debugging
-		\begin{itemize}
-			\item \lstinline|std::breakpoint()| : point d'arrêt dans le programme
-			\item \lstinline|std::breakpoint_if_debugging| : point d'arrêt si l'éxecution se fait dans un debugger
-			\item \lstinline|std::is_debugger_present()| : savoir si l'exécution se fait dans un debugger
-		\end{itemize}
-		\item Bibliothèques de support des coroutines
-		\item \lstinline|std::lazy<T>| : coroutines permettant l'évaluation différée
-		\item Unification et amélioration des API asynchrones
-
-\note[item]{Qu'il s'agisse de coroutines, d'algorithmes parallèles, d'\textit{executor} ou autre}
-
-		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
-		\item Instanciation possible de templates au \textit{runtime} (JIT limité aux templates)
-
-\note[item]{P.ex. pour des matrices dont la taille n'est pas connue à la compilation}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item\textit{Proxy}, \textit{Facade}, \textit{Addresser} : programmation polymorphique via \textit{type erasure}
-
-\note[item]{Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites}
-
-		\item Interdiction de l'appel de \lstinline|operator=()| sur des temporaires
-
-\note[item]{Ce n'est pas permis sur les types \textit{built-in} mais possible sur les autres, avec tous les problèmes que ça peut poser}
-
-		\item Retarder à l'instanciation l'échec de \lstinline|static_assert(false)| dans des template
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-template<typenameT>int my_func(constT&) {
-  if constexpr(is_integral_v<T>) { 
-    return 1; } 
-  else if constexpr(is_convertible_v<string, T>) { 
-    return 2 ;}
-  else {
-    // C++20 : echec de compilation systematique
-    static_assert(false); } }\end{lstlisting}
-
-\note[item]{Erreur en C++20 et précédent. L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Généralisation et simplification des \textit{parameters pack}
-		\begin{itemize}
-			\item Déclaration possible partout où une variable peut être déclarée
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-template <typename... Ts>
-struct Foo { Ts... elems; };\end{lstlisting}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Indexation des \textit{packs}
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-struct tuple_element<I, tuple<Ts...>> {
-  using type = Ts...[I]; };\end{lstlisting}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \textit{Slicing} de \textit{packs}
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-auto x = Foo(a1, [:]t1..., [3:]t2..., a2);
-bar([1:]t1..., a3, [0]t1);\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Généralisation et simplification des \textit{parameters pack}
-		\begin{itemize}
-			\item \textit{Pack} de taille fixe
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-template<unsigned int N> struct my_vector {
-  my_vector(int...[N] v) : values{v...} {}};\end{lstlisting}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \textit{Variadic function} homogène
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-template <class T>
-void f(T... vs);\end{lstlisting}
-
-\note[item]{La fonction prend un nombre quelconque de paramètres, mais tous du type T}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \og \textit{Unpack}\fg{} de \lstinline|std::tuple| à la volée
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-int sum(int x, int y, int z) { return x + y + z; }
-
-tuple<int, int, int> point{1, 2, 3};
-int s = sum(point.elems...);\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Vérification \textit{compile-time} que deux type ont la même représentation mémoire
-
-\note[item]{P.ex. une structure de deux \lstinline|float| et un tableau de deux \lstinline|float|}
-
-		\item Voire forcer un type à avoir la même représentation qu'un autre
 		\item Accès aux octets sous-jacent d'un objet
 		\begin{itemize}
 			\item Nouvelle catégorie d'objet \textit{contiguous-layout}
@@ -509,17 +279,132 @@ int s = sum(point.elems...);\end{lstlisting}
 			\item Conversion pointeur sur représentation vers pointeur sur objet via \lstinline|reinterpret_cast|
 		\end{itemize}
 	\end{itemize}
-
-	\begin{block}{Et actuellement ?}
-		\begin{itemize}
-			\item Formellement : comportement indéfini
-			\item En pratique : comportement actuel des compilateurs 
-		\end{itemize}
-	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{Relocate}
+	\begin{itemize}
+		\item Opération \textit{relocate} (déplacement puis destruction)
+
+\note[item]{Opération généralement implémentable par un simple \lstinline|memcpy()|}
+\note[item]{L'idée est de permettre certaines optimisations sur les objets correspondant}
+
+		\begin{itemize}
+			\item Définition de la notion \textit{relocatable}
+			\item Concept \lstinline|Relocatable|
+
+\note[item]{En gros, si j'ai bien compris, il s'agit d'objet sur lesquels \lstinline|swap()| peut être appelé}
+
+			\item Définition de la notion de \textit{trivial relocatability}
+
+\note[item]{Objets respectant la règle du 0 (pas de définition utilisateur de constructeur de copie/déplacement, d'opérateur d'affection par copie/déplacement ni de destructeur)}
+
+			\item Traits \lstinline|std::is_relocatable|, \lstinline|std::is_nothrow_relocatable| et \lstinline|std::is_trivially_relocatable|
+			\item Attribut \lstinline|[[ trivially_relocatable ]]|
+			\item Algorithmes gérant cette opération : \lstinline|std::relocate_at()|, \lstinline|std::uninitialized_relocate()| et \lstinline|std::uninitialized_relocate_n()|
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Contrôle de flux}
+\begin{frame}[fragile]
+	\frametitle{Contrôle de flux}
+	\begin{itemize}
+		\item Ajout d'une instruction à \lstinline|break| appelé lors de la sortie de la boucle
+
+\note[item]{Alignement sur des évolutions C en cours}
+
+		\item Ajout d'une boucle \lstinline|do_until|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{do expression}
+	\begin{itemize}
+		\item Ajout des \og{}\textit{do expression}\fg{} : instructions traités comme une expression
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int x = do { do return 42; };\end{lstlisting}
+
+	\begin{itemize}
+		\item[]
+		\begin{itemize}
+			\item Améliorations et simplifications des coroutines, du \textit{pattern matching}, \ldots{}
+			\item Introduit un nouveau scope mais pas de nouveau \textit{function scope}
+			\item \lstinline|do return| pour retourner une valeur dans un \textit{do expression}
+			\item Possibilité d'expliciter le type de retour
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|static_assert|}
+	\begin{itemize}
+		\item Retarder à l'instanciation l'échec de \lstinline|static_assert(false)| dans des templates
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+template<typenameT>int my_func(constT&) {
+  if constexpr(is_integral_v<T>) {
+    return 1; } 
+  else if constexpr(is_convertible_v<string, T>) {
+    return 2 ;}
+  else {
+    // C++20 : echec de compilation systematique
+    static_assert(false); } }\end{lstlisting}
+
+\note[item]{L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
+\end{frame}
+
+\subsection*{Fonctions}
+\begin{frame}[fragile]
+	\frametitle{Évolutions des fonctions}
+	\begin{itemize}
+		\item \textit{Unified Call Syntax}
+		\begin{itemize}
+			\item \lstinline|f(x, ...)| appelle \lstinline|x.f(...)| si \lstinline|f(x, ...)| n'est pas trouvé
+			\item Généralisation de \lstinline|std::begin()| et co. dans le langage
+		\end{itemize}
+		\item Possibilité pour les fonctions \lstinline|va_start| de ne prendre aucun argument
+		\item Élision de copie des objets de retour nommés (NRVO) garantie
+
+\note[item]{NRVO : \textit{Named Return Value Optimization}}
+\note[item]{L'élision de copie des objets retournés est déjà garantie pour des \textit{prvalues} en C++17}
+\note[item]{Optimisation déjà réalisée par certains compilateurs}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Opérateurs}
+\begin{frame}[fragile]
+	\frametitle{Opérateurs}
+	\begin{itemize}
+		\item Surcharge de \lstinline|operator.|
+		\begin{itemize}
+			\item Si l'opérateur est défini, les opérations sont transférés à son résultat
+			\item \ldots{} sauf celles définies comme fonctions membres
+			\item Réalisation de \textit{smart reference} (p.ex. \textit{proxy})
+		\end{itemize}
+		\item Surcharge de \lstinline|operator?:|
+		\item \lstinline|operator??| pour tester \lstinline|std::expected|
+		\item Évolutions des opérateurs de comparaison et de \lstinline|operator<=>|
+		\begin{itemize}
+			\item Dépréciation des conversions entre énumération et flottant
+			\item Dépréciation des conversions entre énumérations
+			\item Dépréciation de la comparaison \og \textit{two-way}\fg{} entre types tableaux
+			\item Comparaison \textit{three-way} entre \textit{unscoped} énumération et type entier
+
+\note[item]{\textit{unscoped} énumération, c'est à dire les \lstinline|enum| par opposition aux \lstinline|enum class|}
+
+		\end{itemize}
+		\item Interdiction de l'appel de \lstinline|operator=| sur des temporaires
+
+\note[item]{Interdit sur les types \textit{built-in} mais possible sur les autres, avec tous les problèmes que ça peut poser}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Opérateurs}
 	\begin{itemize}
 		\item Génération d'opérateurs à la demande via \lstinline|=default|
 		\begin{itemize}
@@ -532,305 +417,499 @@ int s = sum(point.elems...);\end{lstlisting}
 \note[item]{Dans la continuité des opérateurs de comparaisons}
 
 		\end{itemize}
-	
-		\item Utilisation de caractères Unicode via leur nom ou alias préfixé par \lstinline|\N|
+		\item Ajout de \lstinline|operator[]| à \lstinline|std::initializer_list|
+		\item Opérateur pipeline \lstinline!operator|>!
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-"\N{LATIN CAPITAL LETTER A}"
-"\N{NBSP}"\end{lstlisting}
+x|>f(y);
+
+// Equivalent a
+
+f(x, y);\end{lstlisting}
 
 	\begin{itemize}
-		\item \lstinline|std::tag_invoke| : configuration du comportement (\textit{policy})
-
-\note[item]{Traditionnellement fait via des \textit{tags} \og template\fg{}, mais ça pose des soucis de résolution de nom que \lstinline|std::tag_invoke| devrait résoudre}
-
-		\item \lstinline|std::colony| : conteneur de type \og tableau de \textit{buckets}\fg{}
-		\item Entiers larges : \lstinline|wide_integer<128, unsigned>|
+		\item \lstinline|operator template()| : extension du support des \textit{non-type template parameters}
 	\end{itemize}
 \end{frame}
 
+\subsection*{Classes}
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{Classes}
 	\begin{itemize}
-		\item Trait \lstinline|std::is_narrowing_convertible|
-		\item Trait et fonctions pour garantir des conversions sans perte
-		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
-		\item Constructeurs par déplacement \lstinline|=bitcopies|
-		\item API \og itérateurs\fg{} de génération des nombres aléatoire
-		\item Fonctions statistiques (moyenne, médiane, variance, \ldots)
-		\item \lstinline|span| de taille fixe
-		\item Paramètre template universel
-
-\note[item]{Utile pour la création de méta-fonctions template \textit{high-order}, pour avoir des \lstinline|static_assert(false)| dépendants et pour certains tests sur les types}
-
-		\item Templates dans les classes locales
-		\item Ajout de \lstinline|operator[]| à \lstinline|std::initializer_list|
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Améliorations diverses des \textit{Ranges}
+		\item Qualifieurs autorisés sur les constructeurs
 		\begin{itemize}
-			\item Surcharge \textit{ranges} de \lstinline|std::for_each_n|, \lstinline|std::clamp|, \lstinline|std::sample|, \lstinline|std::shift_left|, \lstinline|std::shift_right|
-			\item \textit{Range} reconstructible après une séparation en deux itérateurs
-			\item De nombreux nouveaux adaptateurs de \textit{Range} et constructeurs de \textit{View} : \lstinline|view::tail|, \lstinline|view::unbounded|, \lstinline|view::zip|, \lstinline|view::enumerate|, \lstinline|view::adjacent|, \ldots
-			\item De nombreux nouveaux algorithmes sur les \textit{Ranges} : \lstinline|ranges::sum|, \lstinline|ranges::reduce|, \lstinline|ranges::shift_left|, \lstinline|ranges::shift_right|, \ldots
-			\item Précision sur l'encodage des caractères 
-			\item \lstinline|stride_view| : vue sur des éléments éparses d'un \textit{range}
-			\item \lstinline|views::concat| : vue sur la concaténation de plusieurs \textit{ranges}
-			\item \ldots
+			\item Constructeurs \lstinline|const| pour construire systématiquement des objets constants
+			\item Constructeurs non \lstinline|const| peuvent construire des objets constants ou non
 		\end{itemize}
+		\item Déduction template dans les constructeurs d'agrégats et les alias
+		\item \textit{Layout} des classes
+		\begin{itemize}
+			\item Contrôle du \textit{layout} pour privilégier taille, ordre de déclaration, visibilité, vitesse, ordre alphabétique, lignes de cache ou règles d'une version antérieure du C++ ou d'un autre langage
+			\item Contrôle de l'alignement (remplaçant de \lstinline|#pragma pack(N)|)
+
+\note[item]{Deux propositions différentes mais compatibles, la première étant en fait un pré-requis}
+
+		\end{itemize}
+		\item Constructeurs par déplacement \lstinline|=bitcopies|
+		\item Extension de \lstinline|=delete| à d'autres construction (variables template)
+		\item \lstinline|=delete| avec un message pour le diagnostic de compilation
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{Méta-classes}
 	\begin{itemize}
+		\item Construction de types de classes (dont les classes elles-mêmes) ayant
+		\begin{itemize}
+			\item Des contraintes
+			\item Des comportements par défaut
+			\item Des opérations par défaut
+		\end{itemize}
+		\item \lstinline|class|, \lstinline|struct|, \lstinline|enum class|, \textit{interface}, \textit{value type}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Gestion d'erreur}
+\begin{frame}[fragile]
+	\frametitle{Gestion d'erreur}
+	\begin{itemize}
+		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
+		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
+	\end{itemize}
+\end{frame}
+
+\subsection*{Conteneurs}
+\begin{frame}[fragile]
+	\frametitle{Conteneurs}
+	\begin{itemize}
+		\item Nouveaux conteneurs
+			\begin{itemize}
+				\item Tableaux multidimensionnels \lstinline|std::mdarray|
+
+\note[item]{\lstinline|std::mdarray| possède les éléments alors que \lstinline|std::mdspan| n'est qu'une vue et ne possède pas}
+
+			\item Vecteur de capacité fixée en \textit{compile-time} \lstinline|std::static_vector|
+
+\note[item]{Contrairement à \lstinline|std::array| la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
+
+			\item Queue concurrente
+			\item \textit{Bucket array} \lstinline|std::hive| : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
+		\end{itemize}
+		\item \lstinline|std::submdspan()| retourne une vue sur un sous-ensemble d'un \lstinline|std::mdspan|
+		\item \lstinline|span| de taille fixe
+		\item Relâchement des contraintes sur les tableaux C
+		\begin{itemize}
+			\item Initialisation des tableaux d'agrégats
+			\item Copies de tableaux
+			\item Tableau comme type de retour
+		\end{itemize}
+
+\note[item]{Copies des tableaux membres en particulier}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Chaînes de caractères}
+	\begin{itemize}
+		\item Construction de \lstinline|std::string_view| depuis des chaînes implicites
 		\item Prise en charge de \lstinline|std::string_view| par \lstinline|std::from_chars|
 		\item Support de \lstinline|std::string_view| par \lstinline|std::stringstream|
 		\item Concaténation de \lstinline|std::string| et \lstinline|std::string_view|
-		\item Relâchement des contraintes sur les tableaux \og C\fg{}: initialisation des tableaux d'agrégats, copies de tableaux, tableau comme type de retour
-
-\note[item]{Copies des tableaux membres en particulier}
-
-		\item Opérateur pipeline \lstinline!operator|>()! :  \lstinline!x|>f(y)! équivalent à \lstinline|f(x, y)|
-		\item Ajout d'un paramètre \og pas\fg{} à \lstinline|std::iota_view|
 		\item Modification du constructeur de \lstinline|std::string| depuis un caractère pour interdire les autres numériques (entiers ou flottants)
 
 \note[item]{Il s'agit d'empêcher les initialisations depuis des numériques via la conversion en char}
 
 		\item Voire dépréciation de la construction d'un \lstinline|std::string| depuis un caractère
-		\item Suppression de \lstinline|NULL| et interdiction de \lstinline|0| comme pointeur nul
-		\item Évolutions des modules : communication d'informations aux outils de \textit{build}
-		\item Ajout d'une boucle \lstinline|do_until|
-		\item Élision de copie des objets de retour nommés (NRVO) garantie
-
-\note[item]{NRVO : \textit{Named Return Value Optimization}}
-\note[item]{L'élision de copie des objets retournés est déjà garantie pour des \textit{prvalues} en C++17}
-\note[item]{C'est déjà une optimisation réalisée par certains compilateur}
-
+		\item Interfaçage de \lstinline|std::bitset| avec \lstinline|std::string_view|
 	\end{itemize}
 \end{frame}
 
+\subsection*{Tuples}
 \begin{frame}[fragile]
-	\frametitle{Propositions diverses}
+	\frametitle{Tuples}
 	\begin{itemize}
-		\item Opération \og \textit{relocate}\fg{} (déplacement puis destruction)
-
-\note[item]{L'opération \og \textit{relocate}\fg{} est généralement implémentable par un simple \lstinline|memcpy()| sur l}
-\note[item]{L'idée est de permettre certaines optimisations sur les objets correspondant}
-
-		\begin{itemize}
-			\item Définition de la notion \og \textit{relocatable}\fg{} 
-			\item Concept \lstinline|Relocatable|
-
-\note[item]{En gros, si j'ai bien compris, il s'agit d'objet sur lesquels \lstinline|swap()| peut être appelé}
-
-			\item Définition de la notion de \og \textit{trivial relocatability}\fg{}
-
-\note[item]{Objets respectant la règle du 0 (pas de définition utilisateur de constructeur de copie/déplacement, d'opérateur d'affection par copie/déplacement ni de destructeur)}
-
-			\item Traits \lstinline|is_relocatable|, \lstinline|is_nothrow_relocatable| et \lstinline|is_trivially_relocatable|
-			\item Attribut \lstinline|[[trivially_relocatable]]| : type \textit{trivial relocatability}
-			\item Algorithmes gérant cette opération : \lstinline|std::relocate_at|, \lstinline|std::uninitialized_relocate| et \lstinline|std::uninitialized_relocate_n|
-		\end{itemize}
-
-		\item Extension de \lstinline|=delete| à d'autres construction (variables template)
-
-\note[item]{La proposition initiale ne concernait que les variables template, mais elle a inspiré le comité}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
-
-\note[item]{P.ex. si le standard C++23 supprime les conversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 2023|}
-\note[item]{Pour l'instant pas de consensus trouvé, mais d'importants problèmes}
-
-		\item Améliorations du générateur aléatoire
-		\item Construction de \lstinline|std::stack| et \lstinline|std::queue| depuis une paire d'itérateurs
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-vector<int> v(42);
-queue q(v.begin(), v.end());
-stack s(v.begin(), v.end());\end{lstlisting}
-
-\note[item]{En C++20 et précédent, il faut indiquer le type et utiliser une liste d'initialisation construite via la paire d'itérateur : \lstinline|queue<int> q({v.begin(), v.end()});|}
-
-	\begin{itemize}
-		\item Ajout de \lstinline|std::unreachable()| pour indiquer un code inatteignable
-
-\note[item]{Permet de fournir l'information au compilateur pour ces optimisations, et de violer une assertion si on passe dedans}	
-\note[item]{P.ex. des valeurs non pertinentes dans un \lstinline|switch() case|, après un appel qui ne retourne pas, \ldots}
-
-		\item Équivalent \textit{move-only} de \lstinline|std::function| : \lstinline|std::any_invocable|
-		\item Évolution de l'API \lstinline|std::format| : fonction d'impression dans un \lstinline|std::ostream|
-		\item Localisation du formatage de \lstinline|std::chrono|
-		\item Support par \lstinline|std::format| de conteneurs,  \lstinline|filesystem::path|, \lstinline|std::thread_id|, \textit{stacktraces}, \lstinline|std::complex|, \lstinline|std::bitset|, \lstinline|std::error_code|, \lstinline|std::unique_ptr| et \lstinline|std::shared_ptr|
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Ajout du mode exclusif aux \lstinline|std::fstream|
-		\item \lstinline|operator template()| : extension du support des \textit{non-type template parameters}
-		\item Récupération d'une \textit{stacktrace} depuis une exception
-		\item Possibilité d'implémenter \lstinline|operator()| sous forme de membre statique
-		\item Possibilité d'implémenter \lstinline|operator[]| sous forme de membre statique
-		\item Utilisation de \textit{range based for loop} sur des temporaires
-		\item Possibilité de définir des objets \lstinline|constexpr|
-		\item Possibilité de fournir un message à \lstinline|=delete| pour le diagnostic de compilation
-		\item \textit{Saturation arithmetic}
-		
-\note[item]{Saturation arithmetic : pas de débordement, on reste sur les valeurs min/max si elles sont dépassées lors d'une opération : 252 + 7 sur un char donne 255}
-
-		\item Surcharge de \lstinline|new| retournant la taille réellement allouée
-		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
-
-\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
-
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Spécialisation de \lstinline|std::hash| pour \lstinline|std::chrono|
+		\item Récupération d'un index depuis un type pour \lstinline|std::variant| et \lstinline|std::tuple|
 		\item Utilisation de tableaux C comme \textit{tuple-like}
 
 \note[item]{Déjà le cas pour \lstinline|std::array|, extension aux tableaux C}
 
-		\item Construction de \lstinline|std::pair| depuis \lstinline|std::tuple| ou \lstinline|std::array|
-		\item Redéfinir \lstinline|std::to_string| en terme de \lstinline|std::format|
-		\item Rendre les \lstinline|<>| vides optionnels
-		\item Accès par les utilisateurs à la taille réellement allouée
-		\item Spécificateur de stockage des temporaires (\lstinline|constinit|, \lstinline|variable_scope|, \lstinline|block_scope|, \lstinline|statement_scope|)
-
-\note[item]{\lstinline|block_scope| : règle de durée de vie des littéraux C}
-\note[item]{\lstinline|statement_scope| : règle sur la durée de vie des temporaires en C++}
-
-		\item Interfaçage de \lstinline|std::bitset| avec \lstinline|std::string_view|
-		\item \textit{Zero-initialisation} des objets \og{}\textit{automatic storage duration}\fg{}
-		
-\note[item]{\textit{automatic storage duration}, c'est ce qui est sur la pile, donc globalement les variables locales}
+		\item Amélioration de l'ergonomie d'accès aux champs des \lstinline|std::tuple|
 	\end{itemize}
-\end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Propositions diverses}
-	\begin{itemize}
-		\item Amélioration de l'ergonomie de \lstinline|std::integral_constant<int>|
-		\item Amélioration de l'ergonomie d'accès aux champs des \lstinline|std::tuple| :
-		
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 t[0ic]
+
 // Equivalent a
+
 std::get<0>(t)\end{lstlisting}
-		
-		\item Aide à la définition de nouveaux itérateurs : \lstinline|std::iterator_interface|
-	\end{itemize}
 \end{frame}
-				
+
+\subsection*{Itérateurs}
 \begin{frame}[fragile]
-	\frametitle{TS - Contracts}
+	\frametitle{Itérateurs}
 	\begin{itemize}
-		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
-		\item Pas en C++23 non plus, mais des propositions allégées existent
-		\item Support de la programmation par contrat
-		\item Remplacement de la vérification via \lstinline|assert| et de la documentation via commentaire \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
-		\item Initialement, plusieurs propositions \og concurrentes\fg{}
-		\item \ldots{}mais un compromis à émerger
-		\item Utilisation d'attributs \lstinline|[[assert:x]]|, \lstinline|[[pre:x]]| et \lstinline|[[post:x]]|
-
-\note[item]{Ou \lstinline|[[expects:x]]| et \lstinline|[[ensure:x]]| pour les préconditions et postconditions}
-
-		\item \lstinline|audit| pour ne les activer qu'à la demande
-		\item \lstinline|axiom| pour ne pas générer de code \textit{runtime} (\textit{compile-time} uniquement)
-		\item Les contrats de fonctions membres publiques peuvent utiliser des membres privés ou protégés
-		\item Intégration des contrats à la bibliothèque standard
+		\item API \og itérateurs\fg{} de génération des nombres aléatoire
+		\item \lstinline|std::iterator_interface| pour la définition de nouveaux itérateurs
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{TS - Networking TS}
+\subsection*{Algorithmes}
+\begin{frame}[fragile]
+	\frametitle{Algorithmes}
 	\begin{itemize}
-		\item Publié en avril 2018
-		\item Probablement non intégré à C++23
-		\item Partiellement basé sur Boost.Asio
-		\item Modèle asynchrone
-		\item Gestion de \textit{timer}
-		\item Gestion de tampon et de flux orientés tampon
-		\item Gestion de \textit{sockets} et de flux \og \textit{socket}\fg{}
-		\item Gestion d'IPv4, IPv6, TCP, UDP
-		\item Manipulation d'adresses IP
-		\item Pas de protocoles de plus haut niveau actuellement
-		\item Demande post-TS : gestion de la sécurité (a priori pas possible)
-		\item Modèle asynchrone différents de celui déjà présent en C++
+		\item \lstinline|std::find_last()| recherche depuis la fin d'un conteneur
+		\item Gestion des UUID
+		\item Fonctions statistiques (moyenne, médiane, variance, \ldots)
+		\item Améliorations du générateur aléatoire
+		\item Support de SIMD (\textit{Single Instruction on Multiple Data})
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{TS - Les autres}
+\subsection*{Ranges}
+\begin{frame}[fragile]
+	\frametitle{Ranges}
 	\begin{itemize}
-		\item \textit{Library fundamentals 2} : évolutions de la bibliothèque standard
+		\item Ajout d'un paramètre \og pas\fg{} à \lstinline|std::iota_view|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Traits}
+\begin{frame}[fragile]
+	\frametitle{Traits}
+	\begin{itemize}
+		\item Trait \lstinline|std::is_narrowing_convertible|
+		\item Traits et fonctions pour garantir des conversions sans perte
+		\item Trait indiquant si un type \textit{trivially default constructible} peut être initialisé en mettant tous les octets à 0
+		\item Amélioration de l'ergonomie de \lstinline|std::integral_constant<int>|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Programmation fonctionnelle}
+\begin{frame}[fragile]
+	\frametitle{Lambdas}
+	\begin{itemize}
+		\item Capture mutable partielle par les lambdas
+
+\note[item]{Par défaut, capture \lstinline|const|, possible de la rendre modifiable via \lstinline|mutable|, mais tous les données capturées sont alors mutable}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Attributs}
+\begin{frame}[fragile]
+	\frametitle{Attributs}
+	\begin{itemize}
+		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
+
+\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Expansion}
+\begin{frame}[fragile]
+	\frametitle{\textit{Expansion statement}}
+	\begin{itemize}
+		\item Répétition d'une expression au \textit{compile-time}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto foo = make_tuple(0, 'a', 3.14);
+for... (auto elem : tup)  
+  cout << elem << "\n"\end{lstlisting}
+
+	\begin{itemize}
+		\item [] 
 		\begin{itemize}
-			\item Pointeurs intelligents non possédant
-			\item Nouveaux algorithmes
-		\end{itemize}
-		\item \textit{Library fundamentals 3} :
-		\begin{itemize}
-			\item \textit{Generic Scope Guard}
-			\item \textit{RAII wrapper}
-		\end{itemize}
-		\item \textit{Parallelism} 2 : publié en juin 2018
-		\item \textit{Transactional Memory} : publié
-		\item \textit{Numerics}: manipulation des nombres
-		\begin{itemize}
-			\item Détection et gestion des débordements
-			\item Gestion des arrondis
-			\item Entiers larges
-			\item Rationnel
-			\item \textit{Proxy} pour manipuler la représentation interne des entiers
+			\item Duplication de l'expression pour chaque élément (pas de boucle)
+			\item Éléments de type différent
+			\item Utilisable sur \lstinline|std::tuple|, \lstinline|std::array|, classes destructurables, \ldots
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{TS - Les autres}
+\subsection*{Parameters pack}
+\begin{frame}[fragile]
+	\frametitle{Parameters pack}
 	\begin{itemize}
-		\item \textit{Array extension} : taille non connue à la compilation
-		\item \textit{2D Graphics} (io2d) : API C++ au dessus de Cairo, différé
-
-\note[item]{Mais le projet io2d en lui-même continue}
-\note[item]{Le comité ne voit pas d'intérêt à poursuivre les travaux sur les aspects graphiques pour le moment}
-
-		\item \textit{Reflection} : \textit{feature-complete}, TS en \og C++20\fg{}
+		\item Généralisation et simplification des \textit{parameters pack}
 		\begin{itemize}
-			\item Introspection
-			\item Méta-programmation et code \textit{compile-time}
-			\item Injection
-			\item Méta-classes
+			\item Déclaration possible partout où une variable peut être déclarée
 		\end{itemize}
+	\end{itemize}
 
-\note[item]{Dans un premier temps, il s'agit de réflexion statique}
+	\begin{lstlisting}[language=C++]
+template <typename... Ts>
+struct Foo { Ts... elems; };\end{lstlisting}
 
-		\item \textit{Concurrency} 1 : publié
+	\begin{itemize}
+		\item [] 
 		\begin{itemize}
-			\item \lstinline|future.then()|
+			\item Indexation des \textit{packs}
 		\end{itemize}
-		\item \textit{Concurrency} 2 : TS en \textit{international comment ballot}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+struct tuple_element<I, tuple<Ts...>>
+  { using type = Ts...[I]; };\end{lstlisting}
+
+	\begin{itemize}
+		\item [] 
 		\begin{itemize}
-			\item \textit{Synchronic} : meilleure abstraction pour \lstinline|atomic| permettant de tirer partie des caractéristiques logicielles et matérielles de la plateforme
-			\item \textit{Executor} spécifier où et comment s'exécute un code dans un environnement concurrent
-			\item \textit{hazard pointers}, \textit{read-copy-update data structure}
+			\item \textit{Slicing} de \textit{packs}
 		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+auto x = Foo(a1, [:]t1..., [3:]t2..., a2);
+bar([1:]t1..., a3, [0]t1);\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Parameters pack}
+	\begin{itemize}
+		\item []
+		\begin{itemize}
+			\item \textit{Pack} de taille fixe
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+template<unsigned int N> struct my_vector {
+  my_vector(int...[N] v) : values{v...} {}};\end{lstlisting}
+
+	\begin{itemize}
+		\item [] 
+		\begin{itemize}
+			\item \textit{Variadic function} homogène
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+template <class T>
+void f(T... vs);\end{lstlisting}
+
+\note[item]{La fonction prend un nombre quelconque de paramètres, mais tous du type T}
+
+	\begin{itemize}
+		\item [] 
+		\begin{itemize}
+			\item \textit{Unpack} de \lstinline|std::tuple| à la volée
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+int sum(int x, int y, int z) { return x + y + z; }
+
+tuple<int, int, int> point{1, 2, 3};
+int s = sum(point.elems...);\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Structured bindings}
+	\begin{itemize}
+		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+tuple<X, Y, Z> f();
+
+auto [...xs] = f();
+auto [x, ...rest] = f();
+auto [x,y,z, ...rest] = f();
+auto [x, ...rest, z] = f();
+auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
+\end{frame}
+
+\subsection*{Flux}
+\begin{frame}[fragile]
+	\frametitle{Flux}
+	\begin{itemize}
+		\item Redéfinition de \lstinline|std::to_string| en terme de \lstinline|std::format|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{std::scan}
+	\begin{itemize}
+		\item Pendant du formatage de texte introduit en C++20
+		\item Alternative sûre et robuste à \lstinline|sscanf()|
+		\item Extensible aux types utilisateurs
+		\item Compatible avec les itérateurs et les ranges
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+string key;
+int value;
+scan("answer = 42", "{} = {}", key, value);
+//    ~~~~~~~~~~~~~  ~~~~~~~~~  ~~~~~~~~~~
+//        entree       format    arguments
+// key : "answer", value : 42\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+string key;
+chrono::seconds time;
+scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
+\end{frame}
+
+\subsection*{Templates}
+\begin{frame}[fragile]
+	\frametitle{Templates}
+	\begin{itemize}
+		\item Instanciation possible de templates au \textit{runtime} (JIT limité aux templates)
+
+\note[item]{P.ex. pour des matrices dont la taille n'est pas connue à la compilation}
+
+		\item Paramètre template universel
+
+\note[item]{Utile pour la création de méta-fonctions template \textit{high-order}, pour avoir des \lstinline|static_assert(false)| dépendants et pour certains tests sur les types}
+
+		\item Templates dans les classes locales
+		\item Rendre les \lstinline|<>| vides optionnels
+	\end{itemize}
+\end{frame}
+
+\subsection*{Concepts}
+\begin{frame}[fragile]
+	\frametitle{Concepts}
+	\begin{itemize}
+		\item Concept pour les algorithmes numériques
+	\end{itemize}
+\end{frame}
+
+\subsection*{Polymorphismes}
+\begin{frame}[fragile]
+	\frametitle{Type erasure}
+	\begin{itemize}
+		\item Programmation polymorphique via \textit{type erasure} : \textit{Proxy}, \textit{Facade}, \textit{Addresser}
+
+\note[item]{Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Gestion mémoire}
+\begin{frame}[fragile]
+	\frametitle{Pointeurs}
+	\begin{itemize}
+		\item Suppression de \lstinline|NULL| et interdiction de \lstinline|0| comme pointeur nul
+		\item Surcharge de \lstinline|new| retournant la taille réellement allouée
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pointeurs intelligents}
+	\begin{itemize}
+		\item \lstinline|std::retain_ptr| pointeur intrusif manipulant le comptage de référence interne
+		\item Création de pointeurs intelligents avec une valeur par défaut
+		\item Comparaison entre pointeurs intelligents et pointeurs nus
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contrôle mémoire}
+	\begin{itemize}
+		\item Ajout de mécanismes de sécurité de l'usage mémoire
+
+\note[item]{Pour éviter l'usage d'un objet après libération ou suppression de ces dépendances}
+
+		\item Accès par les utilisateurs à la taille réellement allouée
+		\item Spécificateur de stockage des temporaires 
+		\begin{itemize}
+			\item \lstinline|constinit|
+			\item \lstinline|variable_scope|
+			\item \lstinline|block_scope| : durée de vie des littéraux C
+			\item \lstinline|statement_scope| : durée de vie des temporaires en C++
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Concurrence}
+\begin{frame}[fragile]
+	\frametitle{Concurrence}
+	\begin{itemize}
+		\item Version \lstinline|atomic| de minimum et maximum
+		\item Invocation concurrente
+		\item Configuration du nom et de la taille de la pile des threads
+		\item \lstinline|std::volatile_load<T>| et \lstinline|std::volatile_store<T>|
+		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
+		\item \lstinline|std::fiber_context| : changement de contexte \textit{stackfull} sans besoin de \textit{scheduler}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Coroutines}
+	\begin{itemize}
+		\item Bibliothèques de support des coroutines
+		\item \lstinline|std::lazy<T>| : coroutines permettant l'évaluation différée
+		\item Unification et amélioration des API asynchrones
+
+\note[item]{Qu'il s'agisse de coroutines, d'algorithmes parallèles, d'\textit{executor} ou autre}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Durées et temps}
+\begin{frame}[fragile]
+	\frametitle{Durées et temps}
+	\begin{itemize}
+		\item Spécialisation de \lstinline|std::hash| pour \lstinline|std::chrono|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Regex}
+\begin{frame}[fragile]
+	\frametitle{Regex}
+	\begin{itemize}
+		\item Ajout de regex \textit{compile-time}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Système de fichiers}
+\begin{frame}[fragile]
+	\frametitle{Système de fichiers}
+	\begin{itemize}
+		\item Accès bas-niveau aux IO : \lstinline|file_handle| et \lstinline|path_handle|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Interface utilisateur}
+\begin{frame}[fragile]
+	\frametitle{Interface utilisateur}
+	\begin{itemize}
+		\item Support des entrées/sorties audio
+		\item \lstinline|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Debug}
+	\begin{itemize}
+		\item \lstinline|std::breakpoint()| : point d'arrêt dans le programme
+		\item \lstinline|std::breakpoint_if_debugging| : point d'arrêt si l'exécution se fait dans un debugger
+		\item \lstinline|std::is_debugger_present()| permet de savoir si l'exécution se fait dans un debugger
+	\end{itemize}
+\end{frame}
+
+\subsection*{Compilation \& implémentation}
+\begin{frame}[fragile]
+	\frametitle{Module}
+	\begin{itemize}
+		\item Communication d'informations aux outils de \textit{build} par les modules
+		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
+
+\note[item]{P.ex. si le standard C++2z supprime les conversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \lstinline|epoch 202z|}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Compilation \& implémentation}
+	\begin{itemize}
+		\item \lstinline|std::embed()| ressources externes disponibles au \textit{runtime} 
+
+\note[item]{P.ex. pour embarquer une image dans l'application sans aller lire au \textit{runtime} le fichier contenant la ressource}
+\note[item]{Et sans passer par des conversions externes vers des tableaux de \textit{bytes} injectés dans un fichier d'en-tête}
+
+		\item Implémentations \textit{freestanding} : plus grand sous-ensemble possible de la bibliothèque standard sans \textit{memory overhead} ni support par l'OS
+
+\note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
 	\end{itemize}
 \end{frame}
 \end{document}

@@ -7,7 +7,7 @@
 	\frametitle{Présentation}
 	\begin{itemize}
 		\item Travaux techniques terminés en février 2023
-		\item Document final en cours de validation international
+		\item Document final en cours de validation internationale
 		\item Dernier \textit{Working Draft} : \href{https://github.com/cplusplus/draft/releases/download/n4917/n4917.pdf}{n4917}
 	\end{itemize}
 \end{frame}
@@ -39,7 +39,7 @@
 \begin{frame}[fragile]
 	\frametitle{Espaces en fin de ligne}
 	\begin{itemize}
-		\item Les espaces après le \lstinline|\| de séparation de ligne
+		\item Espaces ignorés après le \lstinline|\| de séparation de ligne
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -59,8 +59,8 @@ auto str = "\<space>
 
 	\begin{lstlisting}[language=C++]
 void foo(void) {
-	int x; 
-	x = 1;
+  int x;
+  x = 1;
 last: }\end{lstlisting}
 \end{frame}
 
@@ -69,7 +69,7 @@ last: }\end{lstlisting}
 	\frametitle{Compilation conditionnelle}
 	\begin{itemize}
 		\item Ajout de \lstinline|#elifdef| et \lstinline|#elifndef|
-		\item Equivalent à \lstinline|#elif defined| et \lstinline|#elif not defined|
+		\item Équivalent à \lstinline|#elif defined| et \lstinline|#elif not defined|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -83,12 +83,9 @@ last: }\end{lstlisting}
 		\item Se combine avec \lstinline|#if| et \lstinline|#elif|
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-#if FOO
-...
-#elifdef BAR
-...
-#endif\end{lstlisting}
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:3,endLineNumber:13,positionColumn:3,positionLineNumber:13,selectionStartColumn:3,selectionStartLineNumber:13,startColumn:3,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A+%0A//%23define+FOO%0A//%23define+BAR%0A%0Aint+main()%0A%7B%0A%23ifdef+FOO%0A++std::cout+%3C%3C+%22FOO%5Cn%22%3B%0A%23elifdef+BAR%0A++std::cout+%3C%3C+%22BAR%5Cn%22%3B%0A%23else%0A++std::cout+%3C%3C+%22Autre%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -98,19 +95,23 @@ last: }\end{lstlisting}
 
 \note[item]{Déjà présent dans la plupart des compilateurs}
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:11,positionColumn:1,positionLineNumber:11,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A+%0Aint+main()%0A%7B%0A%23warning+%22Programme+vide%22%0A%0A%23if+0%0A%23error+%22Programme+vide%22%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Durée de vie}
 \begin{frame}[fragile]
 	\frametitle{Gestion explicite de la durée de vie}
 	\begin{itemize}
-		\item \lstinline|std::start_lifetime_as| et \lstinline|std::start_lifetime_as_array| indiquent qu'un objet doit créé à l'emplacement mémoire fournit mais sans initialisation
+		\item \lstinline|std::start_lifetime_as| et \lstinline|std::start_lifetime_as_array| indiquent qu'un objet est créé mais sans initialisation
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 struct X { int a, b; };
 
-X* p = start_lifetime_as<X>(myMalloc(sizeof(struct X));
+X* p = start_lifetime_as<X>(malloc(sizeof(struct X));
 p->a = 1;
 p->b = 2;\end{lstlisting}
 \end{frame}
@@ -126,48 +127,47 @@ p->b = 2;\end{lstlisting}
 		\end{itemize}
 		\item Ajout de \lstinline|std::bfloat16_t|
 		\begin{itemize}
-			\item Compatible IEEE binary16
+			\item Type IEEE binary16
 			\item Support optionnel
 		\end{itemize}
 		\item Ajout des suffixes littéraux correspondant (\lstinline|f16|, \lstinline|f32|, \lstinline|f64|, \lstinline|f128| et \lstinline|bf16|)
-		\item Prise en compte par \lstinline|std::format|
-		\item Prise en compte par \lstinline|std::ostream| et \lstinline|std::istream|
+		\item Prise en compte par \lstinline|std::format|, \lstinline|std::ostream| et \lstinline|std::istream|
 		\item Prise en compte par \lstinline|std::numeric_limits| et \lstinline|std::is_floating_point|
-		\item Ajout des surcharges nécessaires dans \lstinline|<cmath>|, \lstinline|<complex>| et \lstinline|<atomic>|
+		\item Ajout de surcharges dans \lstinline|<cmath>|, \lstinline|<complex>| et \lstinline|<atomic>|
 	\end{itemize}
 
-	\begin{alertblock}{Pas d'alias}
-		Types indépendants et non des alias sur \lstinline|float|, \lstinline|double| ou \lstinline|long double|
+	\begin{alertblock}{Types indépendants}
+		Types indépendants (pas d'alias) de \lstinline|float|, \lstinline|double| ou \lstinline|long double|
 	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Évolutions de \lstinline|char8_t|}
 	\begin{itemize}
-		\item Initialisation possible d'un tableau de \lstinline|char| ou d'\lstinline|unsigned char| depuis une chaîne littérale UTF-8
+		\item Initialisation d'un tableau de \lstinline|char| ou d'\lstinline|unsigned char| depuis une chaîne littérale UTF-8
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Relâchement des contraintes de \lstinline|wchar_t|}
 	\begin{itemize}
-		\item Suppression de la contrainte :
-	\end{itemize}		
+		\item Suppression de la contrainte
+	\end{itemize}
 
 	\begin{block}{}
 		The values of type \lstinline|wchar_t| can represent distinct codes for all members of the largest extended character set specified among the supported locale
 	\end{block}
 
 	\begin{itemize}		
-		\item Permet d'utiliser \lstinline|wchar_t| pour représenter les caractères UTF-16 ou UCS-2 sur des systèmes supportant UTF-8
+		\item Permet l'utilisation de \lstinline|wchar_t| pour représenter des caractères UTF-16 ou UCS-2 sur des systèmes supportant UTF-8
 
-\note[item]{Tous les codes points Unicode (12 bits) ne sont pas représentables sur un \lstinline|wchar_t| 16 bits}
+\note[item]{Tous les codes points Unicode (21 bits) ne sont pas représentables sur un \lstinline|wchar_t| 16 bits}
 \note[item]{Déjà le cas sur Visual C++}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Conversion en booléen}
+	\frametitle{Conversions}
 	\begin{itemize}
 		\item Ajout d'une conversion implicite en booléen
 		\begin{itemize}
@@ -178,36 +178,22 @@ p->b = 2;\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 // Valide en C++23, pas en C++20
-if constexpr(flags & 0x01) {...}
-else {...}\end{lstlisting}
+if constexpr(flags & 0x01) { ... }
+else { ... }\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 // Valide en C++23, pas en C++20
 template <std::size_t N>
 class Foo {	static_assert(N, "Message"); };\end{lstlisting}
-\end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Conversion en \textit{prvalue}}
-
-\note[item]{C'est une \textit{decay-copy} (copie faible ?)}
+\note[item]{En pratique, ces codes étaient déjà acceptées, au moins sous GCC et clang}
 
 	\begin{itemize}
-		\item \lstinline|auto(x)| et \lstinline|auto{x}| convertit \lstinline|x| en \textit{prvalue}
+		\item \lstinline|auto(x)| et \lstinline|auto{x}| convertissent \lstinline|x| en \textit{prvalue}
 
+\note[item]{C'est une \textit{decay-copy} (copie faible ?)}
 \note[item]{\lstinline|auto a = x| construit une \textit{lvalue}, non une \textit{prvalue}}
-
 	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-void pop_front_alike(Container auto& x) {
-	std::erase(x.begin(), x.end(), auto(x.front())); }
-
-// Equivalent a 
-
-void pop_front_alike(Container auto& x) {
-	auto a = x.front();
-	std::erase(x.begin(), x.end(), a); }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -218,8 +204,12 @@ void pop_front_alike(Container auto& x) {
 
 	\begin{lstlisting}[language=C++]
 enum class FOO : uint32_t { A = 0xABCDEF };
-		
-auto bar = std::to_underlying(FOO::A); // uint32_t\end{lstlisting}
+
+auto bar = to_underlying(FOO::A); // uint32_t\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:17,positionColumn:6,positionLineNumber:17,selectionStartColumn:6,selectionStartLineNumber:17,startColumn:6,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cutility%3E%0A%23include+%3Ccstdint%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aenum+class+FOO+:+uint32_t+%0A%7B+%0A++A+%3D+0xABCDEF,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++auto+bar+%3D+std::to_underlying(FOO::A)%3B%0A%0A++assert(typeid(bar)+%3D%3D+typeid(uint32_t))%3B%0A%23if+0%0A++assert(typeid(bar)+%3D%3D+typeid(int))%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{constexpr}
@@ -239,23 +229,23 @@ auto bar = std::to_underlying(FOO::A); // uint32_t\end{lstlisting}
 				\item Paramètres non littéraux
 				\item Appel de fonctions non \lstinline|constexpr|
 			\end{itemize}
-
 			\item Code non évalué au \textit{compile-time} ou utilisable dans un contexte constant
 			\begin{itemize}
 				\item Variables \lstinline|static| ou \lstinline|thread_local|
 
 \note[item]{P.ex. une variable \lstinline|static| \lstinline|constexpr|}
 			\end{itemize}
-
 			\item Valeur non utilisée
-
-\note[item]{P.ex. \lstinline|sizeof *ptr|}
 			\begin{itemize}
 				\item Utilisation de pointeurs ou références inconnus
+
+\note[item]{P.ex. \lstinline|sizeof *ptr|}
 			\end{itemize}
 		\end{itemize}
+		\item Conversion implicite de fonctions \lstinline|constexpr| en \lstinline|consteval| 
 
-		\item Conversion implicite de fonctions \lstinline|constexpr| en \lstinline|consteval| lorsque la fonction ne peut qu'être invoquée au \textit{compile-time}
+\note[item]{Lorsque la fonction ne peut qu'être invoquée au \textit{compile-time}}
+
 		\item Davantage de \lstinline|constexpr| dans la bibliothèque standard
 	\end{itemize}
 \end{frame}
@@ -267,17 +257,21 @@ auto bar = std::to_underlying(FOO::A); // uint32_t\end{lstlisting}
 		\item Branche prise en compte si le code est évalué au \textit{compile-time}
 		\item Peut appeler des fonctions immédiate
 
-\note[item]{P.ex. Dans une fonction \lstinline|constexpr|}
+\note[item]{P.ex. dans une fonction \lstinline|constexpr|}
 
 		\item \lstinline|else| pour le code évalué au \textit{run-time}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-consteval int f(int i) { return i; }
+consteval int foo(int i) { return i; }
 
-constexpr int g(int i) {
-	if consteval { return f(i) + 1; } 
-	else { return 42; }}\end{lstlisting}
+constexpr int bar(int i) {
+  if consteval { return foo(i) + 1; } 
+  else { return 42; } }\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aconsteval+int+foo(int+i)%0A%7B%0A++return+i%3B%0A%7D%0A%0Aconstexpr+int+bar(int+i)%0A%7B%0A++if+consteval%0A++%7B%0A++++return+foo(i)+%2B+1%3B%0A++%7D%0A++else%0A++%7B%0A++++return+42%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+bar(5)+%3C%3C+%22%5Cn%22%3B%0A%0A++constexpr+int+baz+%3D+bar(10)%3B%0A++std::cout+%3C%3C+baz+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -287,9 +281,9 @@ constexpr int g(int i) {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-if not consteval {...}
+if not consteval { ... }
 // ou
-if ! consteval {...}\end{lstlisting}
+if ! consteval { ... }\end{lstlisting}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
@@ -315,12 +309,11 @@ if ! consteval {...}\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-using T = std::list<int>;
-const T& foo(const T& t) { return t; }
-T bar();
+const vector<int>& foo(const vector<int>& t) { return t; }
+vector<int> bar( return vector<int>{1, 2, 3}; );
 
 // Valide, duree de vie du retour de bar est etendu
-for (auto e : foo(bar())) {} }\end{lstlisting}
+for (auto e : foo(bar())) { ... }\end{lstlisting}
 \end{frame}
 
 \subsection*{init-statement}
@@ -331,26 +324,28 @@ for (auto e : foo(bar())) {} }\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-for(using T = int; T e : v)
-{...}\end{lstlisting}
+for(using T = int; T e : v) {
+  ... }\end{lstlisting}
 
 \note[item]{En C++20, il est possible d'utiliser \lstinline|typedef| dans l'\textit{init-statement}}
 
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+v%7B1,+2,+5%7D%3B%0A+%0A++for(using+T+%3D+int%3B+T+e+:+v)%0A++%7B%0A++++std::cout+%3C%3C+e+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Littéraux}
 \begin{frame}[fragile]
 	\frametitle{Encodage}
 	\begin{itemize}
-		\item Support par les compilateurs des fichiers sources en UTF-8
+		\item Support des fichiers sources en UTF-8
 
-\note[item]{Jusqu'à présent supporté par plusieurs compilateurs, mais pas imposé par le norme}
+\note[item]{Auparavant supporté par plusieurs compilateurs, pas imposé par la norme}
 
 		\item Encodage identique entre le préprocesseur et le code C++
 
-\note[item]{Avant les deux encodages pouvaient être différents}
+\note[item]{Auparavant les deux encodages pouvaient être différents}
 \note[item]{Et ainsi \lstinline|\#if 'A' == '\\x41'| et \lstinline|if('A' == 0x41)| donner des résultats différents}
-
 	\end{itemize}
 \end{frame}
 
@@ -361,9 +356,14 @@ for(using T = int; T e : v)
 		\item Suffixe \lstinline|z| pour le type entier signé correspondant à \lstinline|size_t|
 
 \note[item]{Typiquement le retour de \lstinline|std::ssize()|}
+\note[item]{Correspond à \lstinline|ptrdiff_t| ou \lstinline|ssize_t|}
 
 		\item \lstinline|z| utilisable pour les littéraux binaires, octaux ou hexadécimaux de \lstinline|size_t|
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctypeinfo%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+5uz%3B%0A++auto+j+%3D+5z%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(typeid(i)+%3D%3D+typeid(size_t))+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(typeid(i)+%3D%3D+typeid(int))+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(typeid(j)+%3D%3D+typeid(size_t))+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(typeid(j)+%3D%3D+typeid(ptrdiff_t))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -386,8 +386,9 @@ U"" L"";	// Invalide
 U"" u"";	// Invalide
 U"" u8"";	// Invalide\end{lstlisting}
 
-\note[item]{Si une des deux littéraux n'a pas de préfixe d'encodage, il est traité comme ayant le même encodage que l'autre littéral}
-
+	\begin{block}{Et si  ?}
+		Si une des chaînes n'a pas d'encodage, on utilise celui de la seconde
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -398,7 +399,7 @@ U"" u8"";	// Invalide\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 #define S(x) # x
-// C++20 : "K\\u00f6ppe" - C++23 : "Köppe"
+// C++23 : "Köppe"
 const char * s1 = S(Köppe);
 const char * s2 = S(K\u00f6ppe);\end{lstlisting}
 
@@ -406,12 +407,15 @@ const char * s2 = S(K\u00f6ppe);\end{lstlisting}
 
 	\begin{itemize}
 		\item Suppression des caractères littéraux larges non codables ou multi-caractères
-		\item Ajout d'un syntaxe pour les séquences d'échappement délimitée
+		\item Ajout de séquences d'échappement délimitées
+
+\note[item]{Délimitées et pas de taille fixe}
+
 		\begin{itemize}
-			\item \lstinline|\u{}| (en place de \lstinline|\u|) prenant un nombre arbitraire de chiffres hexadécimaux
-			\item \lstinline|\x{}| (en place de \lstinline|\x|) prenant un nombre arbitraire de chiffres hexadécimaux
-			\item \lstinline|\o{}| (en place de \lstinline|\<nnn>|) prenant un nombre arbitraire de chiffres octaux
-		\end{itemize} 
+			\item \lstinline|\u{}| prenant un nombre arbitraire de chiffres hexadécimaux
+			\item \lstinline|\x{}| prenant un nombre arbitraire de chiffres hexadécimaux
+			\item \lstinline|\o{}| prenant un nombre arbitraire de chiffres octaux
+		\end{itemize}
 		\item Ajout de séquences d'échappement nommés \lstinline|\N{...}|
 	\end{itemize}
 
@@ -424,43 +428,42 @@ cout << "\N{GREEK SMALL LETTER ETA WITH PSILI}";\end{lstlisting}
 	\frametitle{Évolutions des opérateurs d'égalité}
 	\begin{itemize}
 		\item Modification des règles de résolution de \lstinline|operator==| et \lstinline|operator!=|
-		\item Permet de corriger des ambiguïtés introduites par la réécriture de \lstinline|==| et \lstinline|!=| en C++
+		\item Corrige des ambiguïtés introduites par la réécriture de \lstinline|==| et \lstinline|!=| en C++20
 
-\note[item]{En pratique, les compilateurs, notamment GCC, sont plus laxistes que ce qu'impose la norme et accepte silencieusement des cas normalement ambigus}
+\note[item]{En pratique, les compilateurs, notamment GCC, sont plus laxistes que ce qu'impose la norme et accepte silencieusement des cas ambigus}
 
 		\item \lstinline|operator==| est utilisé pour réécrire \lstinline|operator!=| et la forme inverse de \lstinline|operator==| uniquement si \lstinline|operator!=| n'existe pas 
 	\end{itemize}
 
 \begin{lstlisting}[language=C++]
 struct Foo {
-	bool operator==(const Foo&) { return true; }
-	bool operator!=(const Foo&) { return false; } };
+  bool operator==(const Foo&) { return true; }
+  bool operator!=(const Foo&) { return false; } };
 
 // Ambigu en C++20
 bool b = Foo{} != Foo{};\end{lstlisting}
 
 \note[item]{Ambiguïté provoquée par l'absence de \lstinline|const|, l'opérateur défini ne matche pas directement et deux réécritures (via \lstinline|operator==| et via \lstinline|operator!=|) sont éligibles}
-
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|operator[]| multidimensionnel}
 	\begin{itemize}
-		\item Possibilité de définir \lstinline|operator[]| avec aucun ou plusieurs arguments
+		\item Définition de \lstinline|operator[]| avec aucun ou plusieurs arguments
 		\item Y compris des arguments \textit{variadic}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 T& operator[]();
-T& operator[](std::size_t x, std::size_t y, std::size_t z);
+T& operator[](size_t x, size_t y, size_t z);
 
 foo[3, 2, 1] = 42\end{lstlisting}
 
-\note[item]{Auparavant : utilisation de \lstinline|operator()|, de chaîne d'appel de \lstinline|[]| ou d'une surcharge de \lstinline|operator[]| prenant un agrégat tuple-like}
+\note[item]{Auparavant : utilisation de \lstinline|operator()|, de chaîne d'appel de \lstinline|[]| ou d'une surcharge de \lstinline|operator[]| prenant un agrégat \textit{tuple-like}}
 
-	\begin{block}{Discussions au-delà de C++23}
+	\begin{block}{Au-delà de C++23}
 		\begin{itemize}
-			\item Réécritures :
+			\item Réécritures
 			\begin{itemize}
 				\item De \lstinline|a[x][y][z]| en \lstinline|a[x, y, z]|
 				\item De \lstinline|a(x, y, z)| en \lstinline|a[x][y][z]| (et  \lstinline|a(x)| en \lstinline|a[x]|)
@@ -469,14 +472,40 @@ foo[3, 2, 1] = 42\end{lstlisting}
 			\item Extension aux tableaux C et aux \lstinline|operator[]| non-membres
 		\end{itemize}
 	\end{block}
+
+	\vskip 5mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:3,endLineNumber:13,positionColumn:3,positionLineNumber:13,selectionStartColumn:3,selectionStartLineNumber:13,startColumn:3,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%0Atemplate+%3Ctypename+T,+std::size_t+Z,+std::size_t+Y,+std::size_t+X%3E%0Astruct+Array3d%0A%7B%0A++T%26+operator%5B%5D(std::size_t+z,+std::size_t+y,+std::size_t+x)%0A++%7B%0A++++return+foo%5Bz+*+Y+*+X+%2B+y+*+X+%2B+x%5D%3B%0A++%7D%0A%0A++std::array%3CT,+X+*+Y+*+Z%3E+foo%3B%0A%7D%3B%0A+%0Aint+main()%0A%7B%0A++Array3d%3Cint,+4,+3,+2%3E+bar%3B%0A++bar%5B3,+2,+1%5D+%3D+42%3B%0A++std::cout+%3C%3C+bar%5B3,+2,+1%5D+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Opérateurs \lstinline|static|}
 	 \begin{itemize}
 	 	\item Possibilité de déclarer \lstinline|static| des \lstinline|operator()|
+	 \end{itemize}
+	 	
+ 	\begin{lstlisting}[language=C++]
+struct Foo {
+  static constexpr bool operator()(int i, int j) {
+    return i < j; } };
+
+static_assert(Foo::operator()(1, 2));\end{lstlisting}
+
+	 \begin{itemize}
 	 	\item Possibilité de déclarer \lstinline|static| des \lstinline|operator[]|
 	 \end{itemize}
+
+ 	\begin{lstlisting}[language=C++]
+struct Foo {
+  static int operator[](int i) {
+    return v[i]; }
+  static constexpr array<int, 4> v{5, 8, 9, 12}; };
+
+cout << Foo::operator[](2) << "\n";\end{lstlisting}
+
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A%23if+1%0A++static+constexpr+bool+operator()(int+i,+int+j)%0A%23else%0A++constexpr+bool+operator()(int+i,+int+j)%0A%23endif%0A++%7B%0A++++return+i+%3C+j%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++static_assert(Foo::operator()(1,+2))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%0Astruct+Foo%0A%7B%0A%23if+1%0A++static+int+operator%5B%5D(int+i)%0A%23else%0A++int+operator%5B%5D(int+i)%0A%23endif%0A++%7B%0A++++return+v%5Bi%5D%3B%0A++%7D%0A%0A++static+constexpr+std::array%3Cint,+4%3E+v%7B5,+8,+9,+12%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+Foo::operator%5B%5D(2)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -485,27 +514,26 @@ foo[3, 2, 1] = 42\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|()| optionnelles en l'absence de paramètres dans les lambdas mutables
 
-\note[item]{Elles étaient optionnelles dans tous les autres cas}
+\note[item]{Optionnelles dans tous les autres cas en C++20 et précédents}
 
 		\item Utilisation du \textit{name lookup} du corps de la lambda pour son retour
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 // Ne compile pas en C++20 et precedents
-auto foo = [j=0]() mutable -> decltype(j) {
-		return j++; };\end{lstlisting}
+auto foo = [j=0]() mutable -> decltype(j) { return j++; };\end{lstlisting}
 
-\note[item]{Car avant la résolution de nom ne prenait pas en compte les variables capturées}
+\note[item]{Auparavant, la résolution de nom du retour ne prenait pas en compte les variables capturées}
 
 	\begin{itemize}
 		\item Ajout du support d'attributs pour les lambdas
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-[][[ attr ]] ()->int { return 42; };\end{lstlisting}
+[] [[ attr ]] () ->int { return 42; };\end{lstlisting}
 
 	\begin{itemize}
-		\item Support des attributs \lstinline|[[nodiscard]]|, \lstinline|[[deprecated]]|, \lstinline|[[noreturn]]|
+		\item Support des attributs \lstinline|[[ nodiscard ]]|, \lstinline|[[ deprecated ]]|, \lstinline|[[ noreturn ]]|
 	\end{itemize}
 \end{frame}
 
@@ -526,7 +554,7 @@ auto foo = [j=0]() mutable -> decltype(j) {
 
 		\begin{lstlisting}[language=C++]
 // Valide en C++23, pas en C++20
-[[nodiscard, nodiscard]]
+[[ nodiscard, nodiscard ]]
 int foo();\end{lstlisting}
 	\end{itemize}
 \end{frame}
@@ -534,15 +562,23 @@ int foo();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Nouveaux attributs}
 	\begin{itemize}
-		\item \lstinline|[[ assume(expression) ]]| : le compilateur peut optimiser en supposant la véracité de l'expression
+		\item \lstinline|[[ assume(expression) ]]| permet au compilateur d'optimiser en supposant la véracité de l'expression
 	\end{itemize}
+
+	\begin{alertblock}{Contrainte}
+		\begin{itemize}
+			\item Expression doit être vraie à l'emplacement de \lstinline|assume|
+
+\note[item]{UB dans le cas contraire}
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \subsection*{Classe}
 \begin{frame}[fragile]
 	\frametitle{\textit{Layout}}
 	\begin{itemize}
-		\item Suppression de la possibilité pour les compilateurs de réordonner les données d'accessibilité différente
+		\item Suppression de la possibilité donnée aux compilateurs de réordonner les données d'accessibilité différente
 	\end{itemize}
 \end{frame}
 
@@ -555,12 +591,12 @@ int foo();\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 struct Foo {
-	void bar(this Foo const&); }\end{lstlisting}
+  void bar(this Foo const&); }\end{lstlisting}
 
 	\begin{alertblock}{Restrictions}
 		\begin{itemize}
 			\item Ne peuvent pas être \lstinline|virtual| ni \lstinline|static|
-			\item Ne peut pas avoir de \textit{cv-qualifier} ni de \textit{ref-qualifier}
+			\item Ne peuvent pas avoir de \textit{cv-qualifier} ni de \textit{ref-qualifier}
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -572,13 +608,13 @@ struct Foo {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-struct X {
-	template <typename Self>
-	void foo(this Self&&, int); };
+struct Foo {
+  template <typename Self>
+  void bar(this Self&&, int); };
 	
-void ex(X& x, D& d) {
-	x.foo(1);       // Self=X&
-	move(x).foo(2); // Self=X}\end{lstlisting}
+void ex(Foo& foo, D& d) {
+  foo.bar(1);       // Self=Foo&
+  move(foo).bar(2); // Self=Foo}\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -589,26 +625,25 @@ void ex(X& x, D& d) {
 
 	\begin{lstlisting}[language=C++]
 struct Foo {
-	void bar()(this Foo, int i); };
+  void bar()(this Foo, int i); };
 
 Foo{}(4);\end{lstlisting}
 \end{frame}
 
 \subsection*{Template}
 \begin{frame}[fragile]
-	\frametitle{Déduction de template dans les constructeurs hérités}
+	\frametitle{Déduction dans les constructeurs hérités}
 	\begin{itemize}
 		\item Déduction des paramètres templates d'un constructeur hérité
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-template <typename T> struct B { B(T); };
-template <typename T> struct C : public B<T> {
-	using  B<T>::B; };
-template <typename T> struct D : public B<T> {};
+template <typename T> struct A
+{ A(T); };
+template <typename T> struct B : public A<T>
+{ using  A<T>::A; };
 
-C c(42);	// OK C<int>
-D d(42);	// Erreur\end{lstlisting}
+B b(42);	// OK B<int>\end{lstlisting}
 \end{frame}
 
 \subsection*{Exceptions}
@@ -629,23 +664,24 @@ D d(42);	// Erreur\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 class A {};
 enum E {};
-enum struct Es { oz };
+enum struct Es {};
 enum class Ec : int {};
 
-is_scoped_enum_v<A>;	// Faux
-is_scoped_enum_v<E>;	// Faux
-is_scoped_enum_v<Es>;	// Vrai
-is_scoped_enum_v<Ec>;	// Vrai
+is_scoped_enum_v<A>;		// Faux
+is_scoped_enum_v<E>;		// Faux
+is_scoped_enum_v<Es>;		// Vrai
+is_scoped_enum_v<Ec>;		// Vrai
 is_scoped_enum_v<int>;	// Faux\end{lstlisting}
 
-	\begin{itemize}
-		\item \lstinline|std::is_implicit_lifetime| indique si un objet à un durée de vie implicite
-	\end{itemize}
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Aclass+A%0A%7B%0A%7D%3B%0A%0Aenum+E%0A%7B%0A%7D%3B%0A%0Aenum+struct+Es+%0A%7B%0A%7D%3B%0A%0Aenum+class+Ec+:+int+%0A%7B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CA%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CE%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CEs%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CEc%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3Cint%3E+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Traits}
 	\begin{itemize}
+		\item \lstinline|std::is_implicit_lifetime| indique si un objet à une durée de vie implicite
 		\item \lstinline|std::reference_constructs_from_temporary| et \lstinline|std::reference_converts_from_temporary| indiquent si la référence est construite depuis un temporaire
 	\end{itemize}
 \end{frame}
@@ -666,16 +702,20 @@ string_view bar = foo;
 bar.contains("Hello");   // true
 bar.contains("monde");   // false\end{lstlisting}
 
-\note[item]{Comparaison \textit{case-sensitive} comme toutes les fonctions de recherche dans des \lstinline|std::string|}
+\note[item]{Comparaison \textit{case-sensitive} comme toutes les fonctions de recherche dans \lstinline|std::string|}
 
 	\begin{itemize}
 		\item Interdiction de la construction de \lstinline|std::string| depuis \lstinline|nullptr|
 
 \note[item]{Erreur de compilation, avant c'était un comportement indéfini}
 
-		\item Construction de \lstinline|std::string_view| depuis un \textit{range}
-		\item Ajout de la contrainte \og{}trivialement copiable\fg{} à \lstinline|std::string_view|
+		\item Construction de \lstinline|std::string_view| depuis un range
+		\item Ajout de la contrainte trivialement copiable à \lstinline|std::string_view|
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cstring_view%3E%0A%0Aint+main()%0A%7B%0A++const+std::string+foo+%3D+%22Hello+world%22%3B%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.contains(%22Hello%22)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.contains(%22monde%22)+%3C%3C+%22%5Cn%22%3B%0A%0A++std::string_view+bar+%3D+foo%3B%0A++std::cout+%3C%3C+bar.contains(%22Hello%22)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar.contains(%22monde%22)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -697,20 +737,23 @@ bar.contains("monde");   // false\end{lstlisting}
 string foo = "Hello ", bar = "world!";
 
 foo.resize_and_overwrite(20, 
-	[sz = foo.size()] (char* buf, size_t buf_size) {
-		auto to_copy = min(buf_size - sz, bar.size())
-		memcpy(buf + sz, bar.data(), to_copy);
-		return sz + to_copy; });	// Hello world!\end{lstlisting}
+  [sz = foo.size(), bar] (char* buf, size_t buf_size) {
+    auto to_copy = min(buf_size - sz, bar.size());
+    memcpy(buf + sz, bar.data(), to_copy);
+    return sz + to_copy; });	// Hello world!\end{lstlisting}
 
 	\begin{block}{Motivation}
-		Performance : éviter des initialisations, des tests et des copies inutiles
+		Éviter des initialisations, des tests et des copies inutiles
 	\end{block}
+
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:20,positionColumn:1,positionLineNumber:20,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Ccstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+foo+%3D+%22Hello+%22%3B%0A++std::string+bar+%3D+%22world!!%22%3B%0A%0A++foo.resize_and_overwrite(20,+%0A++++++++++++++++++++++++++%5Bsz+%3D+foo.size(),+bar%5D+(char*+buf,+size_t+buf_size)+%0A++++++++++++++++++++++++++%7B%0A++++++++++++++++++++++++++++auto+to_copy+%3D+std::min(buf_size+-+sz,+bar.size())%3B%0A++++++++++++++++++++++++++++memcpy(buf+%2B+sz,+bar.data(),+to_copy)%3B%0A++++++++++++++++++++++++++++return+sz+%2B+to_copy%3B+%7D)%3B%0A%0A++std::cout+%3C%3C+foo++%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::span|}
 	\begin{itemize}
-		\item Ajout de la contrainte \og{}trivialement copiable\fg{} à \lstinline|std::span|
+		\item Ajout de la contrainte trivialement copiable
 	\end{itemize}
 \end{frame}
 
@@ -720,7 +763,6 @@ foo.resize_and_overwrite(20,
 		\item Construction depuis un \textit{braced initializers}
 
 \note[item]{Code auparavant valide mais inefficace}
-
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -731,8 +773,12 @@ pair<string, vector<string>> foo("hello", {});\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-tuple t{ 1, 3.0 };
-std::pair<int, double> p{t};\end{lstlisting}
+tuple foo{1, 3.0};
+pair bar{foo};\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+array foo{1, 3};
+pair bar{foo};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -742,34 +788,29 @@ std::pair<int, double> p{t};\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-vector<int> v(42);
-queue q(v.begin(), v.end());
-stack s(v.begin(), v.end());\end{lstlisting}
+vector<int> v{1, 3, 7, 13};
+queue q(begin(v), end(v));
+stack s(begin(v), end(v));\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cqueue%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+v%7B1,+3,+7,+13%7D%3B%0A%0A++std::queue+q(std::begin(v),+std::end(v))%3B%0A++std::stack+s(std::begin(v),+std::end(v))%3B%0A%0A++std::cout+%3C%3C+q.front()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+s.top()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Conteneurs associatifs}
 	\begin{itemize}
-		\item Ajout de surcharge hétérogène de \lstinline|erase()| et \lstinline|extract()| ne créant pas de clés temporaires
-		\item \lstinline|std::flat_map| et \lstinline|std::flat_multimap|
+		\item Surcharge de \lstinline|erase()| et \lstinline|extract()| ne créant pas de clés temporaires
+		\item Adaptateurs de conteneurs associatifs
 		\begin{itemize}
-			\item Interface similaire à \lstinline|std::map| et \lstinline|std::multimap|
-			\item Mais davantage \textit{cache-friendly}
-			\item Clés et valeurs stockées dans deux conteneurs différents
+			\item \lstinline|std::flat_map| et \lstinline|std::flat_multimap|
+			\begin{itemize}
+				\item Interface similaire à \lstinline|std::map| et \lstinline|std::multimap|
+				\item Davantage \textit{cache-friendly}
+				\item Clés et valeurs stockées dans deux conteneurs différents
+			\end{itemize}
+			\item \lstinline|std::flat_set| et \lstinline|std::flat_multiset|
 		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Adaptateurs de conteneurs associatifs}
-	\begin{itemize}
-		\item \lstinline|std::flat_map| et \lstinline|std::flat_multimap|
-		\begin{itemize}
-			\item Interface similaire à \lstinline|std::map| et \lstinline|std::multimap|
-			\item Mais davantage \textit{cache-friendly}
-			\item Clés et valeurs stockées dans deux conteneurs différents
-		\end{itemize}
-		\item \lstinline|std::flat_set| et \lstinline|std::flat_multiset|
 	\end{itemize}
 \end{frame}
 
@@ -778,13 +819,13 @@ stack s(v.begin(), v.end());\end{lstlisting}
 	\begin{itemize}
 		\item Vues multidimensionnelles
 		\item Possibilité de fournir un \textit{layout} configurable
-		\item Trois \textit{memory layouts} standard
+		\item Trois \textit{memory layouts} standards
 		\begin{itemize}
-			\item \lstinline|layout_right| : layout du C et du C++, lignes puis colonnes
-			\item \lstinline|layout_left| : layout de Fortran ou Matlab, colonnes puis lignes
+			\item \lstinline|layout_right| : \textit{layout} du C et du C++, lignes puis colonnes
+			\item \lstinline|layout_left| : \textit{layout} de Fortran ou Matlab, colonnes puis lignes
 			\item \lstinline|layout_stride| 
 		\end{itemize}
-		\item Accès à un élément via operator[] multi-paramètres (\lstinline|[x,y,z]|)
+		\item Accès à un élément via \lstinline|operator[]| multi-paramètres (\lstinline|[x,y,z]|)
 	\end{itemize}
 \end{frame}
 
@@ -792,9 +833,9 @@ stack s(v.begin(), v.end());\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Évolutions des itérateurs}
 	\begin{itemize}
-		\item Correction de \lstinline|iterator_category|, \lstinline|counted_iterator|
+		\item Correction de \lstinline|iterator_category| et \lstinline|counted_iterator|
 		\item \lstinline|std::move_iterator<T*>| doit être un \textit{random access iterator}
-		\item Modification des exigences sur les itérateurs des algorithmes \og{}non \textit{ranges}\fg{} pour permettre l'utilisation de vues
+		\item Modification des exigences sur les itérateurs des algorithmes \og{}non ranges\fg{} pour permettre l'utilisation de vues
 	\end{itemize}
 \end{frame}
 
@@ -806,35 +847,39 @@ stack s(v.begin(), v.end());\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-auto x = uint16_t(0xCAFE);
-auto xinv = byteswap(x);	// 0xFE 0xCA
+uint16_t i = 0xCAFE;
+byteswap(i);	// 0xFECA
 
-auto y = uint32_t(0xDEADBEEFu);
-auto yinv = byteswap(y);	// 0xEF 0xBE 0xAD 0xDE\end{lstlisting}
+uint32_t j = 0xDEADBEEFu;
+byteswap(j);	// 0xEFBEADDE\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccstdint%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++uint16_t+i+%3D+0xCAFE%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::byteswap(i)+%3C%3C+%22%5Cn%22%3B%0A%0A++uint32_t+j+%3D+0xDEADBEEFu%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::byteswap(j)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Flux}
 \begin{frame}[fragile]
 	\frametitle{Évolutions des flux}
 	\begin{itemize}
-		\item \lstinline|spanstream| : remplaçant de \lstinline|strstream| utilisant un \lstinline|std::span| comme buffer
+		\item \lstinline|spanstream| remplaçant de \lstinline|strstream| utilisant un \lstinline|std::span| comme buffer
 
 \note[item]{\lstinline|strstream| déprécié depuis C++98}
 
-		\item Ajout du support du mode exclusif à \lstinline|std::fstream|
+		\item Support du mode exclusif à \lstinline|std::fstream|
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Évolutions de \lstinline|std::format|}
 	\begin{itemize}
+		\item Ajout du concept formatable
 		\item Vérification des chaînes de format au \textit{compile-time}
 		\item Réduction de la taille du binaire de \lstinline|format_to|
-		\item Ajout du support des types \lstinline|std::generator|-like à \lstinline|std::format|
-		\item Le formateur de \lstinline|std::chrono| devient \textit{locale-independent} par défaut
+		\item Support des types \lstinline|std::generator|\textit{-like} par \lstinline|std::format|
+		\item Formateur de \lstinline|std::chrono| \textit{locale-independent} par défaut
 
 \note[item]{Par cohérence avec tous les autres données}
-
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -846,11 +891,10 @@ format("{:L%S}", sec(4.2));
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| de \textit{ranges}}
+	\frametitle{Évolutions de \lstinline|std::format|}
 	\begin{itemize}
-		\item Ajout du concept formatable
 		\item Ajout du type \lstinline|?| pour afficher les chaînes échappées
-		\item Formatage des \textit{ranges}
+		\item Formatage des ranges
 		\item Formatage des \lstinline|std::pair| et \lstinline|std::tuple|
 		\item Formateur pour \lstinline|std::vector<bool>::reference|
 		\item Formatage des conteneurs (si les éléments sont formatables)
@@ -871,9 +915,10 @@ format("{:L%S}", sec(4.2));
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-std::cout << std::format("Hello, {}!", name);
+cout << format("Hello, {}!", name);
+
 // Devient
-std::print("Hello, {}!", name);\end{lstlisting}
+print("Hello, {}!", name);\end{lstlisting}
 \end{frame}
 
 \subsection*{Pointeurs intelligents}
@@ -909,7 +954,7 @@ std::print("Hello, {}!", name);\end{lstlisting}
 		\begin{itemize}
 			\item \lstinline|empty()| teste la présente d'entrée
 			\item \lstinline|size()| retourne le nombre d'entrée de la \textit{stacktrace}
-			\item \lstinline|begin()|, \lstinline|end()|, \ldots retourne les itérateurs sur les entrées
+			\item \lstinline|begin()|, \lstinline|end()|, \ldots{} retourne les itérateurs sur les entrées
 			\item \lstinline|operator[]| accède à une entrée donnée
 			\item \lstinline|to_string()| retourne la description de la \textit{stacktrace}
 			\item \lstinline|operator<<| affiche la \textit{stacktrace}
@@ -929,10 +974,11 @@ std::print("Hello, {}!", name);\end{lstlisting}
 		\item \lstinline|std::unreachable()| indique que la localisation n'est pas atteignable
 		\item Permet au compilateur d'optimiser en supposant que le code ne sera pas atteint
 		\item Comportement indéfini si \lstinline|std::unreachable()| est appelé
-
-\note[item]{On peut espérer qu'en pratique on obtienne un comportement similaire à un assert non satisfait}
-
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++int+i+%3D+1%3B%0A%0A++if(i+%3E+0)%0A++%7B%0A++++std::cout+%3C%3C+%22OK%5Cn%22%3B%0A++%7D%0A++else%0A++%7B%0A++++std::unreachable()%3B%0A++++std::cout+%3C%3C+%22Unreachable%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Multi-threading}
@@ -960,10 +1006,9 @@ std::print("Hello, {}!", name);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::variant|}
 	\begin{itemize}
-		\item Héritage de \lstinline|std::variant| possible
+		\item Héritage possible de \lstinline|std::variant|
 		\item \lstinline|std::visit()| restreints aux \lstinline|std::variant|
 
-\note[item]{Et donc des dérivés en question}
 \note[item]{Auparavant, les variants de \lstinline|std::visit| pouvaient être formellement de n'importe quel type}
 	\end{itemize}
 \end{frame}
@@ -983,11 +1028,10 @@ std::print("Hello, {}!", name);\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-optional<string> foo = "Abcdef";
-optional<string> bar;
+optional<string> foo = "Abcdef", bar;
 
-foo.transform([](auto&& s) { return s.size(); } );	// 6
-bar.transform([](auto&& s) { return s.size(); } );  // Vide\end{lstlisting}
+foo.transform([](auto&& s) { return s.size(); });  // 6
+bar.transform([](auto&& s) { return s.size(); });  // Vide\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -997,12 +1041,19 @@ bar.transform([](auto&& s) { return s.size(); } );  // Vide\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-optional<string> foo = "42";
-optional<string> bar;
+auto func = [] (int i) -> optional<int> { return 2 * i; };
+optional<int> foo = 42, bar;
 
-foo.and_then(stoi);		// 42
-bar.and_then(stoi);		// Vide\end{lstlisting}
+foo.and_then(func);		// 84
+bar.and_then(func);		// Vide\end{lstlisting}
 
+	\begin{alertblock}{Retour de fonction}
+		Le retour de la fonction doit être une spécialisation de \lstinline|std::optional|
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Opérations monadiques de \lstinline|std::optional|}
 	\begin{itemize}
 		\item \lstinline|or_else()| 
 		\begin{itemize}
@@ -1012,9 +1063,20 @@ bar.and_then(stoi);		// Vide\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-optional<string> foo;
+auto func = [] -> optional<string> { return "Oups!"; };
 
-foo.or_else([]{throw runtime_error("Oups !") } );\end{lstlisting}
+optional<string> foo = "Abcdef", bar;
+
+foo.or_else(func);	// Abcdef
+bar.or_else(func);	// Oups!\end{lstlisting}
+
+	\begin{alertblock}{Retour de fonction}
+		Le retour de la fonction doit être une spécialisation de \lstinline|std::optional|
+	\end{alertblock}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:30,positionColumn:1,positionLineNumber:30,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::optional%3Cstd::string%3E+foo+%3D+%22Abcdef%22%3B%0A++++auto+bar+%3D+foo.transform(%5B%5D(auto%26%26+s)+%7B+return+s.size()%3B+%7D)%3B%0A%0A++++std::cout+%3C%3C+(bar+%3F+*bar+:+0)+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++auto+func+%3D+%5B%5D+(int+i)+-%3E+std::optional%3Cint%3E+%7B+return+2+*+i%3B+%7D%3B%0A++++std::optional%3Cint%3E+foo+%3D+42%3B%0A++++auto+bar+%3D+foo.and_then(func)%3B%0A%0A++++std::cout+%3C%3C++(bar+%3F+*bar+:+0)+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++auto+func+%3D+%5B%5D+-%3E+std::optional%3Cstd::string%3E+%7B+return+%22Oups!!%22%3B+%7D%3B%0A++++std::optional%3Cstd::string%3E+foo+%3D+%22Abcdef%22%3B%0A++++auto+bar+%3D+foo.or_else(func)%3B%0A%0A++++std::cout+%3C%3C+*bar+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Expected}
@@ -1026,21 +1088,34 @@ foo.or_else([]{throw runtime_error("Oups !") } );\end{lstlisting}
 			\item Soit une valeur de type \lstinline|T|, le type de la valeur attendu
 			\item Soit une valeur de type \lstinline|E|, le type d'erreur
 		\end{itemize}
-		\item \lstinline|operator->()| et \lstinline|operator*()| accède à la valeur 
 		\item \lstinline|operator bool()| et \lstinline|has_value()| indique si l'objet contient une valeur
+		\item \lstinline|operator->| et \lstinline|operator*| accède à la valeur 
 		\item \lstinline|value()| retourne la valeur
 		\item \lstinline|error()| retourne l'erreur
-		\item \lstinline|value_or()| retourne 
-		\begin{itemize}
-			\item La valeur si présente
-			\item La valeur reçue en paramètre sinon
-		\end{itemize}
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+expected<int, string> foo(int i) { ... }
+
+expected<int, string> e = foo(5);
+if(e)
+  cout << e.value();
+else
+  cout << e.error(); }\end{lstlisting}
+
+	\vskip 5mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:30,positionColumn:1,positionLineNumber:30,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexpected%3E%0A%23include+%3Cstring%3E%0A%0Astd::expected%3Cint,+std::string%3E+foo(int+i)%0A%7B%0A++if(i+%3E+0)%0A++%7B%0A++++return+i%3B%0A++%7D%0A++else%0A++%7B%0A++++return+std::unexpected%7B%22Nul%22%7D%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++std::expected%3Cint,+std::string%3E+e+%3D+foo(5)%3B%0A%0A++if(e)%0A++%7B%0A++++std::cout+%3C%3C+%22Val+:+%22+%3C%3C+e.value()+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A++else%0A++%7B%0A++++std::cout+%3C%3C+%22Erreur+:+%22+%3C%3C+e.error()+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::expected|}
 	\begin{itemize}
+		\item \lstinline|value_or()| retourne 
+		\begin{itemize}
+			\item La valeur si présente
+			\item La valeur reçue en paramètre sinon
+		\end{itemize}
 		\item \lstinline|transform()| modifie la valeur contenu dans un \lstinline|std::expected|
 		\item \lstinline|and_then()| dérive une fonction pour retourner un \lstinline|std::expected|
 		\item \lstinline|or_else()|
@@ -1048,33 +1123,38 @@ foo.or_else([]{throw runtime_error("Oups !") } );\end{lstlisting}
 			\item Retourne la valeur si elle est présente
 			\item Appelle une fonction avec l'erreur sinon
 		\end{itemize}
-		\item \lstinline|transform_error()|
-		\begin{itemize}
-			\item Modifie la valeur si elle est présente
-			\item Appelle une fonction avec l'erreur sinon
-		\end{itemize}
-		\item \lstinline|error_or()| la valeur à retourner s'il n'y a pas d'erreur
 	\end{itemize}
+
+	\begin{alertblock}{Retour de fonction}
+		Le retour de \lstinline|and_then()| et \lstinline|or_else()| doit être  \lstinline|std::expected|
+	\end{alertblock}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAArACcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdF6CvWNzTltQ929JWUSAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4eYqkmYDpjoF1e3ZpsM2y8ewObhOwWA3xuPyG6BAIBebw%2BX0OwQIpF2MLhYKMF12/FQEFRuzwsx%2BJgA7FYbrtiVRCU9sLsNKTqftKT8aTTTgQlgxiQcqdcaRSACIc3ZVJTiimCzm7bm8jEEWEgLwhV7vAifGXmMzhWi60UC6XksVQ01km5ElhMYIQFm3dmsnWsmmY%2BEapEg1Ho93YiHrRmPA4ivGoAmxUnrWWc91oLwEJ5uEH7MxmABqYl2IFTZiTKcwADoAG5iLyYAD6JAgAFouLN84dcyZYm4GIboyazbdnU6hbHlXCEZrtSjBL7ByB/bjg%2BtQ/iIJHja6lSrh16x2jV1iCMRwTO8yGJYXd4YFPxiCwIC2rLFQ4TBMSGzL5ZgecQ%2BXmAFT86NskVRoK4o0ngdKYGYDpym6k7xomIIprqma0NmuaNm4EpmCWZaYPaaHNq27Zpsu/Y0pKmDAQOKqwXhurYMQpxLChup4eBhbRMQ1bPocCFEQRHYxkaUK9jGNJMAmqB4mqyBPKGN4tveRIkrsNa4u665asiRzjtuU67vugb7CuUHGWyFivu%2Bn67D%2BeACv%2BxFympnoad62l%2BnpOIGbO87hougEUY5iLOZuE4qtOnmHnOx6GOgFYEAgjDUFJflCSRtIQOBkFQXGixwdxTaIVmObMfBTasaW3g4Vxyb5bxbb8RRZEUdBVE5TRaZ0QxxBMWmLGYexnFtWYLZ1URna9t2JoibsYlEJJAIyfssS3veaAMEMOnTmYABsEr0SQDYqQZAUjppPobe5AaMk1Jlyi%2B2UJoNADyXhJAoYBgKhJXof1XVffhI1DX%2B103XKCofspXC2UaY2pcdG5aVubl7h5QYLQuS4ww5k7qaOCMhTuyOXRhC1FiQFZkYlALJT2qWgelEHXfduXVehBXIUVPV/WV2G4X9hp8aNU2NUZOnUXz7X0ZgjEcxFLMYWxe3ELzeWs7VhGAwJFrmt2HDzLQnCxLwfgcFopCoJwyaWNYGKLMswZ/DwpAEJouvzAA1nEGj6JwkhGy7ZucLwCggF7zsm7rpBwLASAvO84lkBQEANMACjKIYVRCAgqAAO7G47aAsEkdBMDUachLQmc58bpsF0X9AxCnzCvVnaK13Q0ShKwqy8G39fPcIWe5/7sfINcxAp4HpAj3U%2BDG7w/CCCIYjsFIMiCIoKjqOHpC6G0BhGCg1jWPoeARMHkDzKgSQ1MHHA1jCIamFblh/MpADqYjITWb8vKeylvOgQwjhkBB1tisQYypghlwzoPPOvBs7ECYEkTgPA9YGz9tvc2HBsCqDjkQLqqgAAcW0axbUkLsYAyBpIQF3GqN2DYICWysJYdEuBCAkFTOsesvAw5aFmPMeKTAsAxHtKQD2sQvb6w4L7Ug1deBYKDiHJ2Lt%2BHew4GYDBpsFHKPDqo4s0Q0jOEkEAA%3D%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::expected|}
-	\begin{lstlisting}[language=C++]
-enum class parse_error { 
-	invalid_char,
-	overflow };
+	\begin{itemize}
+		\item \lstinline|error_or()| retourne
+		\begin{itemize}
+			\item L'erreur si la valeur n'est pas présente
+			\item Le paramètre sinon
+		\end{itemize}
 
-expected<double, parse_error>
-parse_number(const string& str)
-{ ... }
+\note[item]{\lstinline|error_or()| est le pendant de \lstinline|value_or()| sur les erreurs}
 
-string src = "12";
-auto num = parse_number(src);
+		\item \lstinline|transform_error()|
+		\begin{itemize}
+			\item Retourne la valeur si elle est présente
+			\item Appelle une fonction avec l'erreur sinon
+		\end{itemize}
+	\end{itemize}
 
-if(num.has_value()) { ... }
-else if (num.error() == parse_error::invalid_char) { ... }
-else if (num.error() == parse_error::overflow) { ... }
-else { ... }\end{lstlisting}
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAKykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XoKdQ1N2a2DXT3FpRIAlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7B5iqiZgOmOjnlzdmGwxbXl2%2Bzcx2CwC%2B11u/3ujzcyFBRghPz%2BAKBBzEwBIhAQLCRUNRD2BhGiTCIxDx10G6BAIGer3enwOwQIpB2VJpCPBa2wO34qAgzJ2eBm3xMAHYrNcdkKqALHjyNCKpXsJd9pdKTgRFgwhftJVdpeKACJqnaVJSm8X69U7TXatkEakgLwhF5vAgfK3mMzhWje416y1ik2Q4Oi66ClhMYIQJU3VXKr3K6Xs2luhlEwSs1Oc85mx5G3moflxEVra3q1NoLwEWHAs0AOmixBIAH0SBBvQB5LyJBTemZ1g57MxmExxNwMf3loMhm6JhMG9VMGuoXku5AFvZxKxxQsQNAMQYOp25swANjZg9NNtvt6te2Td%2BfKcdHIIxDBOwWBEDT5fd6ph%2BhgKPwxAsBAqZRMAMYKHMJ40q4kHwVBTDIAA1q2wRKA00QQD%2B8E3gBxEkeOu5GhALqpMAIToDsyAIPU9EihKtqYFqxA6kBCyJK8xAHmWFgqoWglESR6p2px341n%2BS7iYaYYzpCT6pnS7qekyWYISAubcvm%2ByFnyEClrJNqqemHqMocWk5h%2BYJ5pgZhbpgDbAUeYEsK2zYdlQG6icpckyhAjlxoBb4oD%2BQ5uCOZgAGpiDsIAxVFZpmA2ABuYheJgsYpf6E5TqOpnquamBidp1a1sC9betgxAnIsiXJdVw6OU29UdteBw1UVBXThWAahnOHBzLQnBxLwfgcFopCoJwbjWNYbILEshK/DwpAEJoI1zOhIBxBo%2BicJIk3bbNnC8AoICHVt00jaQcCwEgzxvKuZAUBA9TAAoyiGJUQgIKgADuU0bWgLCJHQpLpL9IS0ADwNTTN4OQ/QMTfcwfaAyyKN0NEoSsCsvC42jPbCIDINnS9yBXMQ30XaQ1O1PgU28PwggiGI7BSDIgiKCo6h3aQuitAYRgoItlj6HgERXZAcyoIk1RXRwAC0VIGaYljWL8OyqwA6mItB6/rzzAXrrzoIYjjIJdK3LAMjrBLD/0U6DvBA8QTCJJwPCjeNp1C3NHDYKor1kjsqgABznqr56SDswDIJuEAfi66GDhAC3a1LOy4IQJAjmsXAzLwt1aDMcwIKcWAxLGpB7QdR0cCdpBI7wweXddm3bZXzdmIHM2dz3d19%2Bl0SpM4khAA%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1097,9 +1177,10 @@ if (foo == unexpected(3)) { ... }\end{lstlisting}
 
 \subsection*{Ranges}
 \begin{frame}[fragile]
-	\frametitle{Évolutions des \textit{ranges} et vues}
+	\frametitle{Évolutions des ranges et vues}
 	\begin{itemize}
 		\item Ajout de \lstinline|starts_with()| et \lstinline|ends_with()| aux ranges
+		\item Ajout de \lstinline|contains()| aux ranges
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1111,33 +1192,33 @@ if(ranges::starts_with(foo, bar)) { ... }\end{lstlisting}
 		\item Relâchement des contraintes sur les \textit{range adaptors} pour accepter les types \textit{move-only}
 		\item Relâchement des contraintes sur \lstinline|join_view| permettant le support de davantage de ranges
 
-\note[item]{Avant seulement des \textit{ranges} de \textit{glvalues ranges} (vues ou non) et des \textit{ranges} de \textit{prvalues views}}
-\note[item]{Maintenant aussi des \textit{ranges} de \textit{prvalues non view ranges}}
+\note[item]{Avant seulement des ranges de \textit{glvalues ranges} (vues ou non) et des ranges de \textit{prvalues views}}
+\note[item]{Maintenant aussi des ranges de \textit{prvalues non view ranges}}
 
 		\item Suppression de la contrainte \textit{default constructible} pour les vues
-		\item \lstinline|std::ranges::to<>()| construit un conteneur depuis un \textit{range}
+		\item \lstinline|std::ranges::to<>()| construit un conteneur depuis un \lstinline|range|
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Nouveaux \textit{ranges} et \textit{range adaptors}}
+	\frametitle{Nouveaux ranges et \textit{range adaptors}}
 	\begin{itemize}
-		\item \lstinline|std::views::lazy_split()| et \lstinline|std::ranges::lazy_split_view()|
-		\item Amélioration de \lstinline|std::views::split()| et \lstinline|std::ranges::split_view()| 
+		\item Amélioration de \lstinline|std::views::split()|
+		\item \lstinline|std::views::lazy_split()|
 		\item \lstinline|std::views::zip()| et \lstinline|std::views::zip_transform()|
 	\end{itemize}
 
 \begin{lstlisting}[language=C++]
 auto x = vector{1, 2};
-auto y = list<std::string>{"Aa", "Bb", "Cc"};
+auto y = list<string>{"Aa", "Bb", "Cc"};
 auto z = array{'A', 'B', 'C', 'D'};
 
 // 1 Aa A
 // 2 Bb B
 for(tuple<int&, string&, char&> e : views::zip(x, y, z)) {
-	cout << std::get<0>(e) << ' ' 
-		<< std::get<1>(e) << ' '
-		<< std::get<2>(e) << '\n'; }\end{lstlisting}
+  cout << get<0>(e) << ' ' 
+       << get<1>(e) << ' '
+       << get<2>(e) << '\n'; }\end{lstlisting}
 
 	\begin{itemize}
 		\item \lstinline|std::views::adjacent()| et \lstinline|std::views::adjacent_transform()|
@@ -1145,13 +1226,14 @@ for(tuple<int&, string&, char&> e : views::zip(x, y, z)) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Nouveaux \textit{ranges} et \textit{range adaptors}}
+	\frametitle{Nouveaux ranges et \textit{range adaptors}}
 	\begin{itemize}
-		\item \lstinline|std::ranges::iota()|, \lstinline|std::ranges::shift_left()| et \lstinline|std::ranges::shift_right()|
+		\item \lstinline|std::ranges::iota()|
+		\item \lstinline|std::ranges::shift_left()| et \lstinline|std::ranges::shift_right()|
 
 \note[item]{Équivalents à leur contreparties \lstinline|std|}
 
-		\item \lstinline|std::views::join_with()| transforme un \textit{range} de \textit{ranges} de T en un \textit{range} de T
+		\item \lstinline|std::views::join_with()| transforme un range de ranges en un range
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1160,7 +1242,7 @@ vs | join_with('-'); // the-quick-brown-fox\end{lstlisting}
 
 	\begin{itemize}
 		\item \lstinline|std::views::chunck()| coupe un range en blocs de N éléments
-		\item \lstinline|std::views::slide()| équivalent à \lstinline|std::views::adjacent()| avec une taille  \textit{run-time}
+		\item \lstinline|std::views::slide()| : \lstinline|std::views::adjacent()| avec une taille  \textit{run-time}
 		\item \lstinline|std::views::chunck_by()| découpe un range en fonction d'un prédicat
 	\end{itemize}
 
@@ -1171,10 +1253,10 @@ v | chunk_by(less_equal{}));\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Nouveaux \textit{ranges} et \textit{range adaptors}}
+	\frametitle{Nouveaux ranges et \textit{range adaptors}}
 	\begin{itemize}
 		\item \lstinline|std::views::find_last()|
-		\item \lstinline|std::ranges::stride_view()| conserve un élément tous les n d'un range
+		\item \lstinline|std::ranges::stride_view()| conserve un élément sur $n$
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1182,24 +1264,23 @@ v | chunk_by(less_equal{}));\end{lstlisting}
 iota(1, 13) | stride(3);\end{lstlisting}
 
 	\begin{itemize}
-		\item \lstinline|std::ranges::contains()|
-		\item \lstinline|std::ranges::fold()| équivalent \textit{range} de \lstinline|std::accumulate|
+		\item \lstinline|std::ranges::fold()| équivalent range de \lstinline|std::accumulate|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-std::vector<double> v = {0.25, 0.75};
-auto r = ranges::fold(v, 1, std::plus()); // 2\end{lstlisting}
+vector<double> v = {0.25, 0.75};
+auto r = ranges::fold(v, 1, plus()); // 2\end{lstlisting}
 
 	\begin{itemize}
-		\item \lstinline|std::views::cartesian_product| construit une vue depuis le produit cartésien sur plusieurs conteneurs
+		\item \lstinline|std::views::cartesian_product| construit une vue sur le produit cartésien de plusieurs conteneurs
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Nouveaux \textit{ranges} et \textit{range adaptors}}
+	\frametitle{Nouveaux ranges et \textit{range adaptors}}
 	\begin{itemize}
 		\item \lstinline|std::views::as_rvalue()|
-		\item \lstinline|std::views::repeat()| répète n fois une valeur
+		\item \lstinline|std::views::repeat()| répète $n$ fois une valeur
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1207,10 +1288,8 @@ auto r = ranges::fold(v, 1, std::plus()); // 2\end{lstlisting}
 views::repeat(17, 4);\end{lstlisting}
 
 	\begin{itemize}
-		\item Ajout de \lstinline|std::views::lazy_split()| et \lstinline|std::ranges::lazy_split_view()|
-		\item Amélioration de \lstinline|std::views::split()| et \lstinline|std::ranges::split_view()|
 		\item Correction de \lstinline|std::ranges::istream_view()|
-		\item \lstinline|std::views::enumerate()| \textit{range} index/valeur depuis un \textit{range} de valeurs
+		\item \lstinline|std::views::enumerate()| range index/valeur depuis un range de valeurs
 		\begin{itemize}
 			\item Manipulation d'un index dans un \textit{range-based for loop} sans gestion explicite
 			\item Construction de \lstinline|std::map| depuis un \lstinline|std::vector| avec l'index pour clé
@@ -1219,24 +1298,24 @@ views::repeat(17, 4);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Borrowed ranges}}
+	\frametitle{\lstinline|borrowed_range|}
 	\begin{itemize}
-		\item Nouveau concept de \textit{ranges} : \textit{borrowed range}
-		\item \textit{Range} dont les itérateurs sur celui-ci reste valide après sa destruction
-		\item Des \textit{ranges} inconditionnellement \textit{borrowed} : \lstinline|ref_view|, \lstinline|string_view|, \lstinline|empty_view| et \lstinline|iota_view|
-		\item Des \textit{ranges} conditionnellement \textit{borrowed}, selon la vue sous-jacente : \lstinline|take_view|, \lstinline|drop_view|, \ldots
+		\item Nouveau concept de range : \lstinline|borrowed_range|
+		\item Range dont les itérateurs sur celui-ci reste valide après sa destruction
+		\item Des ranges inconditionnellement \textit{borrowed} : \lstinline|ref_view|, \lstinline|string_view|, \lstinline|empty_view| et \lstinline|iota_view|
+		\item Des ranges conditionnellement \textit{borrowed}, selon la vue sous-jacente : \lstinline|take_view|, \lstinline|drop_view|, \ldots
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\textit{Range adaptors} définis par l'utilisateur}
 	\begin{itemize}
-		\item Classe de base pour les \textit{range adaptors} \lstinline|std::ranges::range_adaptor_closure<t>|
+		\item Classe de base \lstinline|std::ranges::range_adaptor_closure<t>|
 		\item Adaptateur de fonction \lstinline|std::bind_back()|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-std::bind_back(f, ys...)(xs...);
+bind_back(f, ys...)(xs...);
 
 // Equivalent a
 

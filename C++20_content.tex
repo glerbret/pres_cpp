@@ -6,15 +6,9 @@
 \begin{frame}
 	\frametitle{Présentation}
 	\begin{itemize}
-		\item Travaux lancés en juillet 2017
-		\item Périmètre figé en juillet 2019
-		\item Version finale validée en septembre 2020
-		\item Publication finale en décembre 2020
+		\item Approuvé en décembre 2020
 		\item Dernier Working Draft : \href{https://github.com/cplusplus/draft/releases/download/n4861/n4861.pdf}{N4861}
 		\item Très bon support par GCC, Clang et Visual C++
-		
-\note[item]{Support quasi-complet du langage par GCC, seuls les modules ne sont que partiellement supportés par GCC 11}
-\note[item]{Support très faible par les autres compilateurs}
 	\end{itemize}
 \end{frame}
 
@@ -23,12 +17,11 @@
 	\frametitle{Changements d'organisation du comité}
 	\begin{itemize}
 		\item Création d'un \textit{Direction Group}
-		\item Création d'un Study Group pour l'éducation (SG20) : aide à l'apprentissage et à l'adoption des évolutions
+		\item Création d'un \textit{Study Group} pour l'éducation (SG20) : aide à l'apprentissage et à l'adoption des évolutions
 	\end{itemize}
 
 	\centering
 	\adjincludegraphics[height=0.7\textheight]{input_src/wg21-structure.png}
-
 \end{frame}
 
 \subsection*{Dépréciations et suppressions}
@@ -80,6 +73,9 @@
 
 \note[item]{Ainsi en testant la valeur, on peut savoir l'état d'implémentation de la fonctionnalité si celle-ci a évolué}
 	\end{block}
+
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:25,positionColumn:1,positionLineNumber:25,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0A%23if+0%0A%23include+%3Cnumeric%3E%0A%23endif%0A%0Aint+main()%0A%7B%0A%23if+__has_cpp_attribute(deprecated)%0A++std::cout+%3C%3C+%22__has_cpp_attribute(deprecated)+%22+%3C%3C+__has_cpp_attribute(deprecated)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A%23if+__has_cpp_attribute(toto)%0A++std::cout+%3C%3C+%22__has_cpp_attribute(toto)+%22+%3C%3C+__has_cpp_attribute(toto)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A%23if+__cpp_attributes%0A++std::cout+%3C%3C+%22__cpp_attributes+%22+%3C%3C+__cpp_attributes+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A%23if+__cpp_lib_gcd_lcm%0A++std::cout+%3C%3C+%22__cpp_lib_gcd_lcm+%22+%3C%3C+__cpp_lib_gcd_lcm+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -90,7 +86,6 @@
 			\item Contenu \textit{implementation-dependent}
 			\item Version du standard, de la bibliothèque, \textit{release date}, copyright, \ldots
 		\end{itemize}
-		
 		\item \lstinline|source_location| : position dans le code source
 		\begin{itemize}
 			\item Fichier, ligne, colonne et fonction courante
@@ -106,7 +101,7 @@
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:5,positionColumn:1,positionLineNumber:5,selectionStartColumn:1,selectionStartLineNumber:5,startColumn:1,startLineNumber:5),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring_view%3E%0A%23include+%3Csource_location%3E%0A+%0Avoid+log(const+std::string_view%26+message,+const+std::source_location%26+location+%3D+std::source_location::current())%0A%7B%0A++std::cout+%3C%3C+location.file_name()+%3C%3C+%22:%22%0A++++++++++++%3C%3C+location.line()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+location.function_name()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+message+%3C%3C+!'%5Cn!'%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++log(%22Hello+world!!%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:2,positionColumn:1,positionLineNumber:2,selectionStartColumn:1,selectionStartLineNumber:2,startColumn:1,startLineNumber:2),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring_view%3E%0A%23include+%3Csource_location%3E%0A%0Avoid+log(const+std::string_view%26+message,+const+std::source_location%26+location+%3D+std::source_location::current())%0A%7B%0A++std::cout+%3C%3C+location.file_name()+%3C%3C+%22:%22%0A++++++++++++%3C%3C+location.line()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+location.function_name()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+message+%3C%3C+!'%5Cn!'%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++log(%22Hello+world!!%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -148,7 +143,7 @@
 	\begin{itemize}
 		\item Précision de comportements sur des types entiers signés
 		\begin{itemize}
-			\item Conversion vers non signé est toujours bien défini
+			\item Conversion vers non signé est toujours bien définie
 
 \note[item]{C'est l'unique valeur de la destination congruent à la source modulo $2^N$ où N est le nombre de bits de la destination}
 
@@ -158,11 +153,10 @@
 	\end{itemize}
 \end{frame}
 
-
 \begin{frame}[fragile]
 	\frametitle{Caractères}
 	\begin{itemize}
-		\item \lstinline|char16_t| et \lstinline|char32_t| contraints : caractères UTF-16 et UTF-32
+		\item Contraintes de \lstinline|char16_t| et \lstinline|char32_t| : caractères UTF-16 et UTF-32
 
 \note[item]{Auparavant, ils pouvaient représenter ces caractères, mais ce n'était pas une obligation et pouvaient représenter d'autres codages de caractères larges}
 \note[item]{Et les \textit{Universal character name} doivent correspondre à des \textit{code points} ISO/IEC 10646}
@@ -200,7 +194,7 @@
 \note[item]{Y compris dans les classes de base}
 		\end{itemize}
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 // Agregat en C++17 pas en C++20
 class S {
@@ -211,7 +205,7 @@ class S {
 	\frametitle{Initialisation des agrégats}
 	\begin{itemize}
 		\item Initialisation nommée des membres d'un agrégat ou d'une union
-	
+
 \note[item]{Vient plus ou moins de C99}
 	\end{itemize}
 
@@ -219,12 +213,12 @@ class S {
 struct S { int a; int b; int c; }; 
 S s{.a = 1, .c = 2};
 
-union U { int a; char* b};
+union U { int a; char* b };
 U u{.b = "foo"}; \end{lstlisting}
 
 	\begin{alertblock}{Restrictions}
 		\begin{itemize}
-			\item Uniquement sur les agrégats et les unions, pas sur toutes les classes
+			\item Uniquement sur les agrégats et les unions
 			\item Initialisation des champs dans leur ordre de déclaration
 			\item Initialisation d'un unique membre d'une union
 
@@ -234,8 +228,8 @@ U u{.b = "foo"}; \end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:28,startColumn:1,startLineNumber:28),source:'%23include+%3Ciostream%3E%0A%0Astruct+S%0A%7B%0A++int+a%3B%0A++int+b%3B%0A++int+c%7B0%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++S+s%7B.a+%3D+1,+.b+%3D+2%7D%3B%0A++++std::cout+%3C%3C+s.a+%3C%3C+%22+%22+%3C%3C+s.b+%3C%3C+%22+%22+%3C%3C+s.c+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++S+s%7B.a+%3D+1,+.b+%3D+2,+.c+%3D+3%7D%3B%0A++++std::cout+%3C%3C+s.a+%3C%3C+%22+%22+%3C%3C+s.b+%3C%3C+%22+%22+%3C%3C+s.c+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++S+s%7B.b+%3D+2,+.a+%3D+1%7D%3B+++//+Erreur+sur+l!'ordre%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%0Aunion+U%0A%7B%0A++int+a%3B%0A++const+char*+b%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++U+u+%3D+%7B+.b+%3D+%22foo%22+%7D%3B%0A++++std::cout+%3C%3C+u.b+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++U+u+%3D+%7B+.a+%3D+1,+.b+%3D+%22asdf%22+%7D%3B++//+Erreur+:+un+seul+membre+sur+les+unions%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+S%0A%7B%0A++int+a%3B%0A++int+b%3B%0A++int+c%7B0%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++S+s%7B.a+%3D+1,+.b+%3D+2%7D%3B%0A++++std::cout+%3C%3C+s.a+%3C%3C+%22+%22+%3C%3C+s.b+%3C%3C+%22+%22+%3C%3C+s.c+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++S+s%7B.a+%3D+1,+.b+%3D+2,+.c+%3D+3%7D%3B%0A++++std::cout+%3C%3C+s.a+%3C%3C+%22+%22+%3C%3C+s.b+%3C%3C+%22+%22+%3C%3C+s.c+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++S+s%7B.b+%3D+2,+.a+%3D+1%7D%3B+++//+Erreur+sur+l!'ordre%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aunion+U%0A%7B%0A++int+a%3B%0A++const+char*+b%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++U+u+%3D+%7B+.b+%3D+%22foo%22+%7D%3B%0A++++std::cout+%3C%3C+u.b+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++U+u+%3D+%7B+.a+%3D+1,+.b+%3D+%22asdf%22+%7D%3B++//+Erreur+:+un+seul+membre+sur+les+unions%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -262,14 +256,13 @@ U u{.b = "foo"}; \end{lstlisting}
 	\begin{itemize}
 		\item Initialisation par défaut des champs de bits
 	\end{itemize}
-		
-		\begin{lstlisting}[language=C++]
+
+	\begin{lstlisting}[language=C++]
 struct S {
   int a : 1 {0},
-  int b : 1 = 1;}; \end{lstlisting}
+  int b : 1 = 1; }; \end{lstlisting}
 
 \note[item]{Avant C++20, il fallait définir un constructeur}
-
 \end{frame}
 
 \begin{frame}[fragile]
@@ -294,7 +287,7 @@ struct S {
 enum class color { red, green, blue };
 using enum color;
 
-if(c1 == green) {...} \end{lstlisting}
+if(c1 == green) { ... } \end{lstlisting}
 
 	\begin{itemize}
 		\item Sur une valeur de l'énumération
@@ -304,7 +297,7 @@ if(c1 == green) {...} \end{lstlisting}
 enum class color { red, green, blue };
 using enum color::green;
 
-if(c1 == green) {...}\end{lstlisting}
+if(c1 == green) { ... }\end{lstlisting}
 
 	\begin{itemize}
 		\item Sur une \textit{unscoped} \lstinline|enum|
@@ -315,7 +308,7 @@ if(c1 == green) {...}\end{lstlisting}
 	\frametitle{Conversion pointeur-booléen}
 	\begin{itemize}
 		\item Conversion pointeur vers booléen devient \textit{narrowing}
-		
+
 \note[item]{Et donc interdite dans tous les contextes où les conversion \textit{narrowing} ne sont pas autorisées}
 
 		\item \lstinline|nullptr| reste autorisé dans les initialisations directes
@@ -325,7 +318,7 @@ if(c1 == green) {...}\end{lstlisting}
 struct Foo {
   int i;
   bool b; };
-		
+
 void* p;
 Foo foo{1, p};       // erreur
 bool b1{p};          // erreur
@@ -333,7 +326,7 @@ bool b2 = p;         // OK
 bool b3{nullptr};    // OK
 bool b4 = nullptr;   // erreur
 bool b5 = {nullptr}; // erreur
-if(p){/*...*/}       // OK\end{lstlisting}
+if(p) { ... }        // OK\end{lstlisting}
 
 \note[item]{Casse du code, mais simple à corriger et plus cohérent}
 \end{frame}
@@ -344,7 +337,7 @@ if(p){/*...*/}       // OK\end{lstlisting}
 	\begin{itemize}
 		\item Définition possible de spécifications d'exception des fonctions \lstinline|=default| différentes de celles de la fonction implicite
 	\end{itemize}
-		
+
 	\begin{lstlisting}[language=C++]
 struct S {
   // Valide en C++20
@@ -358,7 +351,7 @@ struct S {
 	\begin{itemize}
 		\item Davantage de déplacements possibles
 	\end{itemize}
-		
+
 	\begin{lstlisting}[language=C++]
 unique_ptr<T> f0(unique_ptr<T> && ptr) { return ptr; }
 
@@ -381,7 +374,7 @@ Bar f3() {
 
 \subsection*{Opérateurs}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|operator<=>()|}
+	\frametitle{\lstinline|operator<=>|}
 	\begin{itemize}
 		\item Effectue une \og \textit{Three-way comparison}\fg{}
 		\begin{itemize}
@@ -393,7 +386,7 @@ Bar f3() {
 \note[item]{Un retour non numérique, p.ex. \lstinline|Nan|, indique des valeurs non ordonnées}
 
 		\end{itemize}
-		\item Trois types de retour possibles :
+		\item Trois types de retour possibles
 		\begin{itemize}
 			\item \lstinline|std::strong_ordering| : ordre et égalité
 			\item \lstinline|std::weak_ordering| : ordre et équivalence
@@ -402,41 +395,40 @@ Bar f3() {
 
 \note[item]{Égalité implique substitualité (formellement $a == b <==> f(a) == f(b)$), ce n'est pas le cas pour l'équivalence}
 \note[item]{On peut avoir équivalence et non égalité lorsqu'il y a plusieurs représentation d'une même valeur : comparaison sur certains champs seulement, codage des \lstinline|float| et \lstinline|double|}
-\note[item]{Avant C++20, ça pouvait être aussi le cas des entiers en bit+mantisse ou complément à 1. En effet, il y a alors deux représentations de 0 qui peuvent donner des résultats différents après certaines opérations binaires}
 
 		\item Peut être généré par le compilateur (\lstinline|=default|)
 		\begin{itemize}
-			\item \lstinline|operator<=>()| des bases et membres
-			\item \lstinline|operator==()| et \lstinline|operator>()|
+			\item \lstinline|operator<=>| des bases et membres
+			\item \lstinline|operator==| et \lstinline|operator>|
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|operator<=>()|}
+	\frametitle{\lstinline|operator<=>|}
 	\begin{itemize}
-		\item \lstinline|operator<=>()| déclenche la génération
+		\item \lstinline|operator<=>| déclenche la génération
 		\begin{itemize}
-			\item Opérateurs d'ordre (\lstinline|<|, \lstinline|<=|, \lstinline|>| et \lstinline|>=|) via \lstinline|operator<=>()|
-			\item \lstinline|operator==()| via \lstinline|operator==()| des bases et membres
-			\item \lstinline|operator!=()| via \lstinline|operator==()|
+			\item Opérateurs d'ordre (\lstinline|<|, \lstinline|<=|, \lstinline|>| et \lstinline|>=|) via \lstinline|operator<=>|
+			\item \lstinline|operator==| via \lstinline|operator==| des bases et membres
+			\item \lstinline|operator!=| via \lstinline|operator==|
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\lstinline|operator==()| et \lstinline|operator!=()|}
+	\begin{alertblock}{\lstinline|operator==| et \lstinline|operator!=|}
 		\begin{itemize}
 			\item Uniquement pour les retours de type \og égalité\fg{}
-			\item Pas de génération depuis \lstinline|operator<=>()|
+			\item Pas de génération depuis \lstinline|operator<=>|
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{Initialement, \lstinline|operator==()| et \lstinline|operator!=()| aussi résolu via \lstinline|operator<=>()|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le \textit{fallback} sur \lstinline|operator<=>()| (p.ex. court-circuit sur la taille de conteneurs)}
+\note[item]{Initialement, \lstinline|operator==| et \lstinline|operator!=| aussi résolu via \lstinline|operator<=>|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le \textit{fallback} sur \lstinline|operator<=>| (p.ex. court-circuit sur la taille de conteneurs)}
 
 	\begin{itemize}
 		\item Possible de marquer ces autres opérateurs \lstinline|=default|
 
-\note[item]{Mais non obligatoire pour les opérateurs d'ordre générés dès que \lstinline|operator<=>()| est présent. Mais \lstinline|=default| permet de prendre leurs adresses}
-\note[item]{\lstinline|=default| utile pour générer \lstinline|operator!=()| ou \lstinline|operator==()| en l'absence de \lstinline|operator<=>()|}
+\note[item]{Mais non obligatoire pour les opérateurs d'ordre générés dès que \lstinline|operator<=>| est présent. Mais \lstinline|=default| permet de prendre leurs adresses}
+\note[item]{\lstinline|=default| utile pour générer \lstinline|operator!=| ou \lstinline|operator==| en l'absence de \lstinline|operator<=>|}
 \note[item]{Un opérateur \lstinline|=default| qui ne peut pas être généré reste bien \textit{deleted}}
 
 		\item Utilisation de l'opérateur binaire déclaré s'il existe
@@ -448,7 +440,7 @@ Bar f3() {
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:37,positionColumn:1,positionLineNumber:37,selectionStartColumn:1,selectionStartLineNumber:37,startColumn:1,startLineNumber:37),source:'%23include+%3Ccompare%3E%0A%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+value%3B%0A%0A%23if+1%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const%0A++%7B%0A++++return+value+%3C%3D%3E+rhs.value%3B%0A++%7D%0A%23endif%0A%0A%23if+0%0A++bool+operator%3D%3D(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%0A%23if+0%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo1%7B2011%7D%3B%0A++Foo+foo2%7B2014%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(foo1+%3C+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+%3E+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+(foo1+%3D%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+!!%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:37,positionColumn:1,positionLineNumber:37,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ccompare%3E%0A%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+value%3B%0A%0A%23if+1%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const%0A++%7B%0A++++return+value+%3C%3D%3E+rhs.value%3B%0A++%7D%0A%23endif%0A%0A%23if+0%0A++bool+operator%3D%3D(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%0A%23if+0%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo1%7B2011%7D%3B%0A++Foo+foo2%7B2014%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(foo1+%3C+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+%3E+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+(foo1+%3D%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+!!%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Namespace}
@@ -467,8 +459,6 @@ namespace A {
   inline namespace B {
     namespace C {
       int i; } } }\end{lstlisting}
-
-\note[item]{Rappel, un \textit{inline namespace} permet de traiter ses membres comme s'ils appartenaient au namespace supérieur}
 \end{frame}
 
 \subsection*{Modules}
@@ -509,7 +499,6 @@ namespace A {
 
 \note[item]{La bibliothèque standard est restée aux inclusions}
 \note[item]{Mais peut être importée via \lstinline|import|}
-
 	\end{alertblock}
 \end{frame}
 
@@ -539,7 +528,7 @@ export import b;\end{lstlisting}
 export int i;
 export void bar(int j);
 export {
-  void baz() {...}
+  void baz() { ... }
   long l }\end{lstlisting}
 \end{frame}
 
@@ -551,7 +540,6 @@ export {
 			\item Nom du module implémenté
 			\item Suivi de l'import d'autres modules
 		\end{itemize}
-
 		\item Suivi du corps contenant les détails d'implémentation
 	\end{itemize}
 
@@ -561,14 +549,14 @@ void bar(int j) { return 3 * j; }\end{lstlisting}
 
 	\begin{block}{Note}
 		\begin{itemize}
-			\item L'\textit{Implementation Unit} a accès aux déclarations non exportées du module
+			\item \textit{Implementation Unit} a accès aux déclarations non exportées du module
 		\end{itemize}
 
 \note[item]{Les déclarations non exportées sont visibles de l'ensemble du module}
 	\end{block}
-	
+
 	\pause
-	
+
 	\begin{alertblock}{Mais \ldots}
 		\begin{itemize}
 			\item Mais pas les autres unités de compilation même si elles importent le module
@@ -610,7 +598,7 @@ module foo:part;\end{lstlisting}
 \note[item]{Concrètement, hors du module on importe le module dans son ensemble}
 
 		\item Une partition peut être importée dans une \textit{Implementation Unit}
-		\item \ldots{}en important uniquement le nom de la partition
+		\item \ldots{} en important uniquement le nom de la partition
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -631,26 +619,26 @@ export :part2;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Modules - Export de namespace}
 	\begin{itemize}
-		\item Un nom de namespace est exporté s'il est déclaré \lstinline|export|
-		\item \ldots{}ou implicitement si un de ses éléments est exporté
+		\item Un namespace est exporté s'il est déclaré \lstinline|export|
+		\item \ldots{} ou implicitement si un de ses éléments est exporté
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 export namespace A {  // A est exporte
   int n; }            // A::n est exporte
-	
+
 namespace B {
   export int n;       // B::n et B sont exportes
   int m; }            // B::m n'est pas exporte\end{lstlisting}
-	
+
 	\begin{itemize}
 		\item Les éléments d'une partie exportée d'un namespace sont exportés
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 // C::m est exporte mais pas C::n
 namespace C { int n; }
-	
+
 export namespace C { int m; }\end{lstlisting}
 \end{frame}
 
@@ -668,8 +656,6 @@ export using s_ptr = s*;
 
 module :private;
 struct s {};\end{lstlisting}
-
-	\pause
 
 	\begin{alertblock}{Restriction}
 		\begin{itemize}
@@ -720,8 +706,8 @@ export module foo;\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 export module foo;
-import "bar.h"
-import <version>\end{lstlisting}
+import "bar.h";
+import <version>;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -742,7 +728,7 @@ export using X = ::X;\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 export module foo;
-export import "bar.h"\end{lstlisting}
+export import "bar.h";\end{lstlisting}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -803,15 +789,13 @@ foo.ends_with("monde");     // false\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::string+foo+%3D+%22Hello+world%22%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.starts_with(%22Hello%22)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.ends_with(%22monde%22)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::string+foo+%3D+%22Hello+world%22%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.starts_with(%22Hello%22)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.ends_with(%22monde%22)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Conteneurs associatifs}
 	\begin{itemize}
 		\item \lstinline|contains()| teste la présence d'une clé
-
-\note[item]{Pour tous les conteneurs associatif, aussi bien \lstinline|map| que \lstinline|set|, \textit{ordered} qu'\textit{unordered} et single que multi}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -822,7 +806,7 @@ foo.contains(38);  // false\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo%7B%7B1,+%22foo%22%7D,+%7B42,+%22bar%22%7D%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.contains(42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.contains(38)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo%7B%7B1,+%22foo%22%7D,+%7B42,+%22bar%22%7D%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.contains(42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.contains(38)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -833,7 +817,7 @@ foo.contains(38);  // false\end{lstlisting}
 			\item Fourniture d'une classe exposant
 			\begin{itemize}
 				\item Différents foncteurs de calcul du hash
-				\item \textit{Tag} \lstinline|transparent_key_equal| sur une comparaison transparente
+				\item Tag \lstinline|transparent_key_equal| sur une comparaison transparente
 
 \note[item]{C'est à dire un foncteur exposant le tag \lstinline|is_transparent|}
 
@@ -844,13 +828,13 @@ foo.contains(38);  // false\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 struct string_hash {
-	using transparent_key_equal = equal_to<>;
-	size_t operator()(string_view txt) const   { 
-	  return hash_type{}(txt); }
-	size_t operator()(const string& txt) const {
-	  return hash_type{}(txt); }
-	size_t operator()(const char* txt) const   {
-	  return hash_type{}(txt); } };
+  using transparent_key_equal = equal_to<>;
+  size_t operator()(string_view txt) const { 
+    return hash_type{}(txt); }
+  size_t operator()(const string& txt) const {
+    return hash_type{}(txt); }
+  size_t operator()(const char* txt) const {
+    return hash_type{}(txt); } };
 
 unordered_map<string, int, string_hash> foo = ...;
 foo.find("abc");
@@ -892,7 +876,7 @@ auto foo = to_array("foo");\end{lstlisting}
 	\end{alertblock}
 
 	\hfill
-	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuDcRMAJ4H2CYaAIIbWzuY%2B4dOw8SYrBdXtzfBBLssTGCEDmXxM8SsN12%2B3BXyhUKYXiIu34qCeABFdsN0CAQEQAPrHM4QcxmFEkkGxCHXOGYgjYlBLP4HNzM5GoVAAOjSAC9MMCnizDvszGYTABWNwMEkHKk0/jECBoBjDXYIpHIXYgNmoEGQuFg2U02n0tCIgWsjXM1kk4Wiymw/XxNEOqFYnGmpmHa0i8WS6X2vVg503B0Gl2qxGolHo404/GE07E8FtXZmUi7MXpyRpjMADiDFMNrrp7sZ5qFKK5eF5/KtQulEqlPoD1Lh8sVAhVatRGq1KN1rahYb1NLdDLNdbcu0tXvrIttMvDQfDY495anDb9zcNy5DgZhI92tAEwG14qsYoxByvyfTOczu2z6disXTXFFTsXh%2B7uwiDRjY7xsQJyJv2X6DrG46eoKU5/sQVY1nM64Lo2/pFmyCpKl2kbTpqv4NAONLDhBxYmmWk64RRNpoUun6Hqu5GzhuPqoduoZ0bcHEcAstCcGKvB%2BBwWikKgnAspY1iYksKyPBsPCkAQmjcQsADWIBiho%2BicJIAlKSJnC8AoICaYpQncaQcCwEgmCqJgyCRmQFAQA0wAKMohhVEICCoAA7oJ8loCwSR0EwNTuSEtBeb5gnCYFwX0DEwBcO%2BpBxXQ0QAPKIlFfl6TZdnXMQrkGaQ%2BXIHU%2BCCbw/CCCIYjsFIMiCIoKjqGZpC6G0BhGCg1jWPoeAREZsDMGwIAROywykAAbgM3DxPxcwLKgSQ1EZHAALRYtepgSZYZjCQo0mrHoWLBOFnnebl3C8AQbxrPJPknEkSk8XxuntaJHDYLZ9lEMQuyqLmABsG3A5IuzAMgGrJRyZi7BA4lWJY6a4IQJDCrEXBzLdr0LAg7xYDEwKkGpGlaRwOmkDFvBfYZxkKXjFNmB9wl04zZlLTN0RpM4khAA%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdF6CvWNzTltQ929JWUSAJS2qF7EyOwc5rHByN5YANQmsW4NxEwAnvvYJhoAguub25h7B05DxJis55c318EEOyxMwQgs0%2BJniVmuOz2YM%2BkMhTC8RB2/FQjwAIjshugQCAiAB9I6nCDmMzI4nA2Lgq6wjEELEoRa/fZuJlI1CoAB0aQAXpggY9mQc9mYzCYAKxuBjE/aU6n8YgQNAMIY7eGI5A7ECs1DAiGw0Ey6k0uloBH8lnqpks4lCkUUmF6%2BKo%2B2QzHYk2Mg5W4ViiVSu260FO672/XOlUIlHItFG7F4gknIlgto7MykHaitOSVPpgAcgfJBpdtLdDLNguRnLwPL5lsFUvFku9/qpsLlCoEytVKPVmuROpbkNDuuprvpptrbh2Fs9deFNulYcDYdH7rLk/rvqbBqXwYD0OHO1oAmAWrFVlF6P2l6TaezGZ2WbTsViaa4IsdC4PXZ2EQa0dHcbEMcCZ9p%2BA4xmOHoCpOv7EJW1azGu84Nn6hasvKiqdhGU4aj%2BDT9tSQ7gUWxqlhOOHkdaqGLh%2BB4rmRM7rt6KFbiGtE3OxHDzLQnCirwfgcFopCoJwzKWNYGKLMsDzrDwpAEJoXHzAA1iAooaPonCSPxinCZwvAKCAGkKYJXGkHAsBIJgqiYMgEZkBQEANMACjKIYVRCAgqAAO4CXJaAsEkdBMDUbkhLQnk%2BQJQkBUF9AxMAb6prFdDRKErCrLwKXxQA8gikW%2Bbp1m2VcxAufppDFcgdT4AJvD8IIIhiOwUgyIIigqOopmkLobQGEYKDWNY%2Bh4BEhmwMwbAgBEbJDKQABuAzcPEfGzPMqBJDUhkcAAtJiV6mOJlhmBoOw7QA6mItBned1kEMcZ1JJg6CGI4yAGVJKyDLSwRhR5XmFdwvD3Zgqxyd5xxJIp3G8Tp3UiRw2A2XZRDEDsqg5gAbDtmOSDswDIOqb7smYOwQGJViWGmuCECQQqxFwszA9D8wIG8WAxECpCqepmkcNppDRbwCMGUZ8ks3zZhw0JIvi6Za0LdEaTOJIQA%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -904,7 +888,7 @@ auto foo = to_array("foo");\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 vector<int> foo {5, 12, 2, 56, 18, 33};
-erase_if(foo, [](int i) {return i > 20;});
+erase_if(foo, [](int i) { return i > 20; });
 // 5 12 2 18\end{lstlisting}
 
 	\begin{itemize}
@@ -914,19 +898,15 @@ erase_if(foo, [](int i) {return i > 20;});
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Cvector%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+12,+2,+56,+18,+33%7D%3B%0A++std::erase_if(foo,+%5B%5D(int+i)+%7Breturn+i+%3E+20%3B%7D)%3B%0A%0A++for(int+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::map%3Cint,+std::string%3E+bar%7B%7B5,+%22a%22%7D,+%7B12,+%22b%22%7D,+%7B2,+%22c%22%7D,+%7B42,+%22d%22%7D%7D%3B%0A++std::erase_if(bar,+%5B%5D(std::pair%3Cint,+std::string%3E+i)+%7Breturn+i.first+%3E+20%3B%7D)%3B%0A%0A++for(auto+i+:+bar)%0A++%7B%0A++++std::cout+%3C%3C+i.first+%3C%3C+%22+:+%22+%3C%3C+i.second+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cvector%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+12,+2,+56,+18,+33%7D%3B%0A++std::erase_if(foo,+%5B%5D(int+i)+%7Breturn+i+%3E+20%3B%7D)%3B%0A%0A++for(int+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::map%3Cint,+std::string%3E+bar%7B%7B5,+%22a%22%7D,+%7B12,+%22b%22%7D,+%7B2,+%22c%22%7D,+%7B42,+%22d%22%7D%7D%3B%0A++std::erase_if(bar,+%5B%5D(std::pair%3Cint,+std::string%3E+i)+%7Breturn+i.first+%3E+20%3B%7D)%3B%0A%0A++for(auto+i+:+bar)%0A++%7B%0A++++std::cout+%3C%3C+i.first+%3C%3C+%22+:+%22+%3C%3C+i.second+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::span|}
 	\begin{itemize}
 		\item Vue sur un conteneur contigu
-
-\note[item]{Donc entre autres sur des tableaux C, \lstinline|std::vector|, \lstinline|std::array|, et éventuellement \lstinline|std::string|}
-\note[item]{Il s'agit d'une vue, les données restent stockées par le conteneur original}
-
 		\item Similaire à \lstinline|std::string_view|
-		\item Constructible depuis un conteneur, un couple début/taille, un couple début/fin, un \textit{range} ou un autre \lstinline|std::span|
+		\item Constructible depuis un conteneur, un couple début/taille, un couple début/fin, un range ou un autre \lstinline|std::span|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -938,9 +918,9 @@ span<int> s2(foo.data(), 3);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::span|}
 	\begin{itemize}
-		\item \lstinline|begin()|, \lstinline|end()|, \ldots : itérateurs sur le \lstinline|std::span|
+		\item \lstinline|begin()|, \lstinline|end()|, \ldots{} : itérateurs sur le \lstinline|std::span|
 		\item \lstinline|size()|, \lstinline|empty()| : taille et vacuité
-		\item \lstinline|operator[]()|, \lstinline|front()|, \lstinline|back()| : accès à un élément
+		\item \lstinline|operator[]|, \lstinline|front()|, \lstinline|back()| : accès à un élément
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -961,7 +941,7 @@ span<int> baz = bar.first(2);   // 0, 1\end{lstlisting}
 	\end{itemize}
 
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Carray%3E%0A%23include+%3Cspan%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+5%3E+foo+%3D+%7B7,+12,+28,+3,+9%7D%3B%0A++std::span%3Cint%3E+bar(foo.data(),+3)%3B%0A%0A++std::cout+%3C%3C+bar.size()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar.front()+%3C%3C+%22%5Cn%22%3B+%0A++std::cout+%3C%3C+bar%5B2%5D+%3C%3C+%22%5Cn%22%3B+%0A%0A++std::span%3Cint%3E+baz+%3D+bar.first(2)%3B%0A++for(const+auto+i+:+baz)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Carray%3E%0A%23include+%3Cspan%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+5%3E+foo+%3D+%7B7,+12,+28,+3,+9%7D%3B%0A++std::span%3Cint%3E+bar(foo.data(),+3)%3B%0A%0A++std::cout+%3C%3C+bar.size()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar.front()+%3C%3C+%22%5Cn%22%3B+%0A++std::cout+%3C%3C+bar%5B2%5D+%3C%3C+%22%5Cn%22%3B+%0A%0A++std::span%3Cint%3E+baz+%3D+bar.first(2)%3B%0A++for(const+auto+i+:+baz)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Algorithmes}
@@ -970,7 +950,7 @@ span<int> baz = bar.first(2);   // 0, 1\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|std::shift_left()| décale les éléments vers le début de l'ensemble
 		\item \lstinline|std::shift_right()| décale les éléments vers la fin de l'ensemble
-		\item \ldots retournent un itérateur vers la fin (resp. début) du nouvel ensemble
+		\item \ldots{} retournent un itérateur vers la fin (resp. début) du nouvel ensemble
 	\end{itemize}
 
 	\begin{block}{Taille et décalage}
@@ -988,7 +968,7 @@ shift_right(bar.begin(), bar.end(), 1); // 5, 10, 15\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:25,positionColumn:1,positionLineNumber:25,selectionStartColumn:1,selectionStartLineNumber:25,startColumn:1,startLineNumber:25),source:'%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+10,+15,+20%7D%3B%0A++std::shift_left(foo.begin(),+foo.end(),+2)%3B%0A++//+%7B15,+20,+%3F,+,%7D%0A++for(int+i+:+foo)%0A++%7B%0A++++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::vector%3Cint%3E+bar%7B5,+10,+15,+20%7D%3B%0A++std::shift_right(bar.begin(),+bar.end(),+1)%3B%0A++//+%7B%3F,+5,+10,+15%7D%0A++for(int+i+:+bar)%0A++%7B%0A++++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:19,endLineNumber:9,positionColumn:19,positionLineNumber:9,selectionStartColumn:19,selectionStartLineNumber:9,startColumn:19,startLineNumber:9),source:'%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+10,+15,+20%7D%3B%0A++std::shift_left(foo.begin(),+foo.end(),+2)%3B%0A++//+%7B15,+20,+%3F,+%3F%7D%0A++for(int+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::vector%3Cint%3E+bar%7B5,+10,+15,+20%7D%3B%0A++std::shift_right(bar.begin(),+bar.end(),+1)%3B%0A++//+%7B%3F,+5,+10,+15%7D%0A++for(int+i+:+bar)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1015,7 +995,7 @@ bit_floor(7u);       // 4\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:11,positionColumn:1,positionLineNumber:11,selectionStartColumn:1,selectionStartLineNumber:11,startColumn:1,startLineNumber:11),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::has_single_bit(4u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::has_single_bit(7u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_ceil(7u)++%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_ceil(8u)++%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_floor(7u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:11,positionColumn:1,positionLineNumber:11,selectionStartColumn:1,selectionStartLineNumber:6,startColumn:1,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::has_single_bit(4u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::has_single_bit(7u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_ceil(7u)++%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_ceil(8u)++%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_floor(7u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1045,7 +1025,7 @@ popcount(6u);  // 2\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:3,endLineNumber:6,positionColumn:3,positionLineNumber:6,selectionStartColumn:3,selectionStartLineNumber:6,startColumn:3,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::rotl(6u,+2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::rotr(6u,+1)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::popcount(6u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:6,startColumn:1,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::rotl(6u,+2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::rotr(6u,+1)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::popcount(6u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1097,7 +1077,7 @@ midpoint(5, 2);     // 4\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::midpoint(2,+4)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::midpoint(2,+5)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::midpoint(5,+2)+%3C%3C+%22%5Cn%22%3B+%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::midpoint(2,+4)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::midpoint(2,+5)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::midpoint(5,+2)+%3C%3C+%22%5Cn%22%3B+%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1118,13 +1098,17 @@ lerp(10, 20, 0.7);  // 17
 lerp(10, 20, 0.8);  // 18
 lerp(10, 20, 0.9);  // 19
 lerp(10, 20, 1);    // 20\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxBIAHKQADqgKhE4MHt6%2BekkpjgJBIeEsUTFc8XaYDmlCBEzEBBk%2Bfly2mPZ5DDV1BAVhkdF6CrX1jVktQ929RSUSAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4fILEwECBdXtzfBBLuvwQgsy%2BJgA7FYbrtdkN0CAUIs/gc3EjoQRYSB6MQEhAuBpSLszHjdhpZk9kYd9mYzCYAKxuBjmanrCHXKEwuFoLyIw4o9kY6LY3H4wn4jQAOi4pKRKMZtPpsuZXzZaI5CLJvJV/KxOKJIuJYrMUp5FNldIZVIOLOV6M53PJblR6Mxgt1RPF6yN9sp1LNCqtjtVXPVFL5zp1wrdYsknplFt9FsVkID8KD0pDmrDQoJkZpMZNcflCf9fNtwYdoYF4ezorFADY8w7TYWmcXNaW0%2BWM5Ws3rxaCG965eaW0rk%2B3jZ2nd3XTXYgOm8PLaOS2qO8nMzP9QBOecFxeJ1lj1cT9fTiP4yVlwfxkc3MEAES%2BHHmtE4NN4fg4WlIqE4yMs1jQosyyPBsPCkAQmjPvMADWIA0nir4cJIH5QT%2BnC8AoIB4pBX7PqQcCwEgmCqJUXIkOQlB1MACjKIYbRCAgqAAO6fuBaAsAkdBvGkdEhLQjEsZ%2B34cVxmIgMAXBUqQol0NEoSsKsvCyZiADyXKCaxaEkZU1zEDRGGkDpyA1Pgn68PwggiGI7BSDIgiKCo6h4aQugtAYRgoNY1j6HgERYbAzBsCAESoMkBCkAAbgM3Cgu%2BszzKgCQdFhHAALQwgc96mABliErsaUAOpiLQBWFSRBDEEwBUJJg6CGI4yCYcBKyDGiwR8QxTFadwvCVZgqzgcxVUJFBL5vqhLm/hw2Ckcg5HELsqixLWaW1pIuzAMgyC7FJBq7BA/5WJY%2BK4IQJCUuskp9WN8wIGcWAxECpBwQh%2BicChpDCbw02YdhEG3e9HBmJN36/QDeEJVF0QpM4khAA%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Évolutions de la bibliothèque standard}
 	\begin{itemize}
 		\item Utilisation de l'attribut \lstinline|[[ nodiscard ]]|
-		\item Utilisation de \lstinline|noexcept|
+		\item Davantage de \lstinline|noexcept|
 		\item Optimisation d'algorithmes numériques via \lstinline|std::move()|
 
 \note[item]{\lstinline|noexcept| est déjà présent dans la bibliothèque standard, cette présence est étendue en C++20}
@@ -1149,20 +1133,9 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 
 \note[item]{\textit{Iterators Must Go} est l'article fondateur des \textit{ranges}}
 
-			\item Le \href{http://ericniebler.com/}{blog d'Eric Niebler}
+			\item \href{http://ericniebler.com/}{Blog d'Eric Niebler}
 		\end{itemize}
 	\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ranges - Itérateurs}
-	\begin{itemize}
-		\item \lstinline|std::common_iterator| : adaptateur d'itérateur/sentinelle représentant un range itérateur/sentinelle de types différents en un range de types similaires
-
-\note[item]{Grâce à l'opérateur de comparaison adéquate}
-
-		\item \lstinline|std::counted_iterator| : adaptateur d'itérateur avec un fonctionnement similaire à l'itérateur sous-jacent mais conservant la distance à la fin du range
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1170,25 +1143,28 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|Range|
 		\begin{itemize}
-			\item Un itérateur de début
-			\item Une sentinelle de fin
+			\item Permet la manipulation uniforme des éléments d'une structure de données
+			\item Itérateur de début
+			\item Sentinelle de fin
 			\begin{itemize}
-				\item Une valeur particulière
-				\item Un autre itérateur
+				\item Itérateur
+				\item Valeur particulière
+				\item \lstinline|std::default_sentinel_t| : itérateurs gérant la limite du range
 
-\note[item]{Ce qui revient aux paires d'itérateurs classiques}
-
-				\item \lstinline|std::default_sentinel_t| pour les itérateurs gérant la limite du range
-
-\note[item]{\lstinline|std::default_sentinel_t| est donc utilisable avec \lstinline|std::counted_iterator|}
-\note[item]{Ce qui est appelé \textit{counted range} et est un range représenté par un itérateur de début et un nombre d'éléments}
+\note[item]{\lstinline|std::default_sentinel_t| utilisable avec \lstinline|std::counted_iterator|}
+\note[item]{Appelé \textit{counted range}, range représenté par un itérateur de début et un nombre d'éléments}
 			\end{itemize}
 		\end{itemize}
 
+		\item Conteneur : \lstinline|range| possédant ses éléments
+		\item \lstinline|View| 
+		\begin{itemize}
+			\item \lstinline|range| ne possédant pas les éléments pointés par \lstinline|begin()| et \lstinline|end()|
+			\item Copie, déplacement et affectation en temps constant
+		\end{itemize}
 		\item \lstinline|SizedRange| : taille en temps constant
-		\item \lstinline|View| : copie, déplacement et affectation en temps constant
-		\item \lstinline|ViewableRange| : \textit{range} convertible en \lstinline|View|
-		\item \lstinline|CommonRange| : itérateurs et sentinelle ont le même type
+		\item \lstinline|ViewableRange| : \lstinline|range| convertible en \lstinline|View|
+		\item \lstinline|CommonRange| : itérateurs et sentinelle de même type
 	\end{itemize}
 \end{frame}
 
@@ -1211,29 +1187,37 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 			\item Vues : référence, copie superficielle
 		\end{itemize}
 	\end{block}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Ranges - Itérateurs}
+	\begin{itemize}
+		\item \lstinline|std::common_iterator| : adaptateur d'itérateur/sentinelle permettant de représenter un \textit{non-common} \lstinline|range| comme un \lstinline|CommonRange|
+
+\note[item]{Passe de itérateur/sentinelle de types différents à itérateur/sentinelle de même type}
+\note[item]{Grâce à l'opérateur de comparaison adéquate}
+
+		\item \lstinline|std::counted_iterator| : adaptateur d'itérateur reprennant le fonctionnement de l'itérateur sous-jacent mais conservant la distance à la fin du \lstinline|range|
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Ranges - Opérations}
 	\begin{itemize}
-		\item \lstinline|begin()|, \lstinline|end()|, \lstinline|cbegin()|, \lstinline|cend()|, \ldots : récupération des itérateurs
-
-\note[item]{En version simple, \textit{const}, \textit{reverse} et \textit{const reverse}}
-
-		\item \lstinline|size()| : récupération de la taille
-		\item \lstinline|empty()| : teste la vacuité
-		\item \lstinline|data()| et \lstinline|cdata()| : récupération de l'adresse de début de la plage
+		\item \lstinline|begin()|, \lstinline|end()|, \lstinline|cbegin()|, \lstinline|cend()|, \ldots{} retournent itérateurs et sentinelles
+		\item \lstinline|size()| retourne la taille du \lstinline|range|
+		\item \lstinline|empty()| teste la vacuité
+		\item \lstinline|data()| et \lstinline|cdata()| retournent l'adresse de début du \lstinline|range|
 	\end{itemize}
 
 	\begin{alertblock}{Restrictions}
 		\begin{itemize}
-			\item \lstinline|data()| et \lstinline|cdata()| sur des \textit{contiguous range} uniquement
+			\item \lstinline|data()| et \lstinline|cdata()| uniquement sur des \lstinline|ContiguousRange|
 		\end{itemize}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item Surcharges de différents algorithmes prenant un \textit{ranges} en paramètre
+		\item Surcharges de différents algorithmes prenant un \lstinline|range| en paramètre
 	\end{itemize}
 \end{frame}
 
@@ -1244,16 +1228,16 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 		\item \lstinline|std::views::single| crée une vue d'un unique élément
 		\item \lstinline|std::views::iota| crée une vue en incrémentant une valeur initiale
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 for(int i : views::iota(1, 10))
   cout << i << ' ';
   // 1 2 3 4 5 6 7 8 9\end{lstlisting}
-	
+
 	\begin{itemize}
-		\item \lstinline|std::views::counted| crée un range depuis un itérateur et un nombre d'éléments
+		\item \lstinline|std::views::counted| crée un \lstinline|range| depuis un itérateur et un nombre d'éléments
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 for(int i : views::counted(a, 3))
@@ -1264,7 +1248,7 @@ for(int i : views::counted(a, 3))
 \begin{frame}[fragile]
 	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
-		\item Appliquent filtres et transformations aux \textit{ranges}
+		\item Appliquent filtres et transformations aux \lstinline|range|
 		\item Associés, pour certains, à un \textit{range adaptor closure object}
 		\begin{itemize}
 			\item Prends un unique paramètre \lstinline|viewable_range|
@@ -1282,7 +1266,7 @@ for(int i : views::counted(a, 3))
 
 	\begin{lstlisting}[language=C++]
 D(C(R));\end{lstlisting}
-		
+
 	\begin{itemize}
 		\item Ou une syntaxe \og pipeline\fg{}
 	\end{itemize}
@@ -1312,8 +1296,8 @@ range | adaptor(args...);\end{lstlisting}
 \note[item]{Les adapteurs \lstinline|XXX_view| ont des \textit{closure object} de la forme \lstinline|views::XXX|}
 
 		\begin{itemize}
-			\item \lstinline|all_view| : tous les éléments du range
-			\item \lstinline|ref_view| : références sur les éléments du range
+			\item \lstinline|all_view| : tous les éléments du \lstinline|range|
+			\item \lstinline|ref_view| : références sur les éléments du \lstinline|range|
 			\item \lstinline|filter_view| : tous les éléments satisfaisants un prédicat
 		\end{itemize}
 	\end{itemize}
@@ -1329,7 +1313,7 @@ auto rng = ints | view::filter(even); //0, 2, 4\end{lstlisting}
 			\item \lstinline|transform_view| : les éléments transformés par l'application d'une fonction 
 		\end{itemize}
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 vector<int> ints{0, 1, 2, 3, 4, 5};
 auto double = [](int i){ return 2 * i;},
@@ -1357,7 +1341,7 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
-			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \textit{range}
+			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \lstinline|range|
 		\end{itemize}
 	\end{itemize}
 
@@ -1369,7 +1353,7 @@ for(char ch : greeting)
 
 	\begin{itemize}
 		\item  [] \begin{itemize}
-			\item \lstinline|split_view| sépare un \textit{range} en élément sur un délimiteur donné
+			\item \lstinline|split_view| sépare un \lstinline|range| en élément sur un délimiteur donné
 		\end{itemize}
 	\end{itemize}
 
@@ -1404,7 +1388,7 @@ auto years = figures | views::elements<1>;
 			\item \lstinline|keys_view| : vue des clés de chaque \lstinline|std::pair| d'une vue de \lstinline|std::pair|
 			\item \lstinline|values_view| : vue des valeurs de chaque \lstinline|std::pair| d'une vue de \lstinline|std::pair|
 		\end{itemize}
-	\item Possible d'utiliser les algorithmes opérants sur les \textit{ranges}
+	\item Possible d'utiliser les algorithmes opérants sur les \lstinline|range|
 	\end{itemize}
 \end{frame}
 
@@ -1423,32 +1407,32 @@ for(int i : ints |
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:28,startColumn:1,startLineNumber:28),source:'%23include+%3Cranges%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cvector%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++for(int+i+:+std::views::iota(1,+10))%0A++++%7B%0A++++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B0,+1,+2,+3,+4,+5%7D%3B%0A++++auto+even+%3D+%5B%5D(int+i)%7B+return+(i+%25+2)+%3D%3D+0%3B+%7D%3B%0A++++auto+square+%3D+%5B%5D(int+i)+%7B+return+i+*+i%3B+%7D%3B%0A%0A++++for(int+i+:+foo+%7C+std::views::filter(even)+%7C++std::views::transform(square))%0A++++%7B%0A++++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:24,positionColumn:1,positionLineNumber:24,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cranges%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cvector%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++for(int+i+:+std::views::iota(1,+10))%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::vector%3Cint%3E+foo%7B0,+1,+2,+3,+4,+5%7D%3B%0A++auto+even+%3D+%5B%5D(int+i)%7B+return+(i+%25+2)+%3D%3D+0%3B+%7D%3B%0A++auto+square+%3D+%5B%5D(int+i)+%7B+return+i+*+i%3B+%7D%3B%0A%0A++for(int+i+:+foo+%7C+std::views::filter(even)+%7C++std::views::transform(square))%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Ranges - Projections}
 	\begin{itemize}
-		\item Paramètres des algorithmes pré-traitant les éléments du \textit{range}
+		\item Paramètres des algorithmes pré-traitant les éléments du \lstinline|range|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-vector foo { -1, 2, -3, 4, -5, 6 };
+vector foo{-1, 2, -3, 4, -5, 6};
 sort(foo, {}, [](int i) { return abs(i); }); 
 // -1 2 -3 4 -5 6\end{lstlisting}
 
 \note[item]{La paire d'accolade vide indique d'utiliser la fonction de comparaison par défaut (\lstinline|ranges::less|)}
 
 	\begin{itemize}
-		\item Ou extrayant une données des éléments du \textit{range}
+		\item Ou extrayant une données des éléments du \lstinline|range|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 struct Task { string desc;
-              unsigned int priority { 0 };};
+              unsigned int priority { 0 }; };
 
-vector<Task> tasks { { "AAA", 10 }, {"BBB", 5 }, 
-                     { "CCC", 8 }, { "DDD", 12 }};
+vector<Task> tasks { {"AAA", 10}, {"BBB", 5}, 
+                     {"CCC", 8}, {"DDD", 12} };
 sort(tasks, greater{}, &Task::priority);
 // DDD, AAA, CCC, BBB\end{lstlisting}
 \end{frame}
@@ -1490,7 +1474,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 	\begin{itemize}
 		\item API de formatage inspiré de la bibliothèque \href{https://github.com/fmtlib/fmt}{\{fmt\}}
 	\end{itemize}
-		
+
 	\begin{block}{Motivations}
 		\begin{itemize}
 			\item Formatage \og à la C\fg{} non extensible et peu sûr
@@ -1603,7 +1587,7 @@ format("{0} et {0}", "a");      // "a et a"\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 format("{} et {}", "a", "b"); 	// "a et b"\end{lstlisting}
-	
+
 	\begin{alertblock}{Limite}
 		\begin{itemize}
 			\item Impossible d'en omettre que certains
@@ -1643,7 +1627,7 @@ format("{:6}", 'x');   	// "x     "\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-format("{:*6}", 42);    // "****42"\end{lstlisting}
+format("{:06}", 42);    // "000042"\end{lstlisting}
 
 	\begin{itemize}
 		\item Choix de l'alignement
@@ -1697,7 +1681,7 @@ format("{:.6f}", 392.65);   // "392.650000"\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-format("{:.6}", azertyuiop);   // "azerty"\end{lstlisting}
+format("{:.6}", "azertyuiop");   // "azerty"\end{lstlisting}
 
 	\begin{itemize}
 		\item Possible de fournir la taille en paramètre via un \textit{placeholder}
@@ -1770,7 +1754,7 @@ format("{:.6f}", 392.65);   // "392.650000"
 format("{:.6g}", 392.65);   // "392.65"
 format("{:.6e}", 392.65);   // "3.9265e+02"
 format("{:.6E}", 392.65);   // "3.9265E+02"
-format("{:.6a}", 42.);    	// "1.5p+5"\end{lstlisting}
+format("{:.6a}", 42.);    	// "1.500000p+5"\end{lstlisting}
 
 \note[item]{Format court : fixe sur les petites nombres, scientifique sur les grands}
 \note[item]{Par défaut court : .6g}
@@ -1780,7 +1764,7 @@ format("{:.6a}", 42.);    	// "1.5p+5"\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-format("{:s}", azerty); // "azerty"\end{lstlisting}
+format("{:s}", "azerty"); // "azerty"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1800,8 +1784,12 @@ format("{:#X}", 42);   // "0X2a"\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 format("{:.6g}", 392.65);   // "392.65"
 format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
-\end{frame}
 
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAOykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XoKdQ1N2a2DXT3FpRIAlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7B/zELEwE55c318EEO6/BEBmnxMcSs1x2O0G6BAKAWv32bgRkII0JAz1eBAg5jMIIsXBBABEdph4aCNITsaQ9mYzExKdSzBFsTNHoiDgyTABWNwMbH7MFfK4QqEwtBeeEHJEitEkDFYmlgVagkAANkJivpkjMLIRSL53N5NP5n2FKNFcNZUrNMpeb3lZg1yrVcQJGppVMVqkVOsl7P1PL5awFptRYolbLcyNR6Lt2MdFhAGmdrtW7p2Wp9EY5BsDwaj5vFlvZ0pjmLjSoTACoEcm3WYPRwvRxM3qjTmjUGTfnYYXdcXraX7fGQNW1tha6n6ztPd6i5H/YacZ3wd2w3Pu4Py7iR1zx%2BrJw2my2/W2Ax2BV3pWu%2B5GS7LY0a4oiybEKU%2B9k/cRoJDiXSDEWmXAaMe86nouxorleFo3hu95lo%2Bz4WN%2BkhvvOn4vlwv4Ev%2B9JARo%2BH4SB2ZnkueZQb2vq3gOcH2jhL64vif5MWhiHfriWGobhGhUtIOyYURC65sCkHWtelGwba8G/gmAB0KpUBSaZrAAnGYcmcgJYFCSJobQeJd6SbRypyYpU7YkwABe0QEAAnl4TiJMy66CeewlCquelZgZcp8vRLqkF%2BIDWISAUvgAtCFgUfthgGaTi7akZeomeVa0Y0b5SFBf5gXBdl4WRS%2B0X0mFXBxVyJEQYKIYFuGqUwpuj4JtYSboKZVKYcBzlaa51xJbpFFedRhkZSArV/mmGZdfFFXLu55G1f2aXDY1ICqISH4JgAGm16ZTpNMEuYlOk1eu3kPtJIBMuNe3alN5XgbN1U9gtVFLT5K2oDt%2B3iYdlVPWJg1ved27bddDZXLOB3dUdc3JQNdU2u9F2mGD04cBDzZ3Qlf0efDi31elK1jTFU4EMQXiYGV2OPbjL0SUj24KDtZMU1TM0Xsdz2nUNDPGfJO0qWpKoaVj7N9SdMFnVJ25ycAAuqepbMPWRcN01LRmySqmDy0LItQ9Nyvi1zks88DfMXKjguK6LhucwDCMNRdcl0qjWoyUr2mw/1aum9LypM6j5lWQ0NlOfr92e/9KX44jZtNWYaxra7t3h9TKve9zQN%2B/HaygyTPEpz90M4/NmcE8tTsqnLlsK8LHs9V7Ev6b7GtBQnss69bqdi71f7XM2%2BicJyvB%2BBwWikKgnAAVYliQgsSwPOsPCkAQmjNnMADWICctxtCcJII9rxPnC8AoiYr2vcxwLASCYKomDIOKJDkJQ9TAAoyiGJUQgIKgADuo9l5oBYIkOgbx0ifxCLQH%2B/9R7j2AaA%2BgMR37MESAoX%2BBBSAILoNEUIrAVi8GwUggA8uKGBACj53wflcYg78T6kCocgWo%2BBR68H4IIEQYh2BSBkIIRQKh1Bjx0HoAwRgUDBUsPoPAEQz6wGYGwS6qAUiYIAG79G4HEYeMw5ioESNUM%2BHAwpQn2ASUwlhrBmA0DsMKAB1MQtBrE2LvmTJg1jEiYHQIYRwyBT7z2WAMFEwRIHf1/hQ7gvAyaYBWMvP%2BxAmCJEvoPDgw9SBwN4JPDg2B76PyIMQHYqgAAcKowoqkkDsYAyBkA7AgCzBgG8WQQGntYKkuBCAkGpGsUqETL5zAQKcLAMRASkC3jvJJB9UlHwyafc%2Bq8hHaKSWYQ%2BQjj4cG6XMuYajiCpGcJIIAA%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+\end{frame}
+ 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Dates et heures}
 	\begin{itemize}
@@ -1815,9 +1803,6 @@ format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
 \note[item]{1 à 7 avec 1 lundi pour u, 0 à 6 avec 0 pour dimanche pour w}
 
 			\item \lstinline|%H|, \lstinline|%I| : heure (format 24h ou 12h)
-
-\note[item]{Respectivement sur 24h et 12h}
-			
 			\item \lstinline|%M| : minutes
 			\item \lstinline|%S| : secondes
 			\item \ldots
@@ -1827,6 +1812,10 @@ format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 format("{:%F %T}", chrono::system_clock::now());
 // AAAA-MM-JJ HH:mm:ss"\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::system_clock::now())%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1853,32 +1842,30 @@ format("{:%F %T}", chrono::system_clock::now());
 	\begin{itemize}
 		\item Par spécialisation de \lstinline|std::formatter<>|
 	\end{itemize}
-		
+
 	\begin{lstlisting}[language=C++]
 template<>
 struct formatter<T> {
-	template <class ParseContext>
-	auto parse(ParseContext& parse_ctx);
+  template <class ParseContext>
+  auto parse(ParseContext& parse_ctx);
 
-	template <class FormatContext>
-	auto format(const T& value, FormatContext& fmt_ctx);};\end{lstlisting}
+  template <class FormatContext>
+  auto format(const T& value, FormatContext& fmt_ctx); };\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Types utilisateur}
 	\begin{lstlisting}[language=C++]
-struct MyComplex { double real; double imag;};
+struct MyComplex { double real; double imag; };
 
 template <>
 struct formatter<MyComplex> {
-	template <class ParseContext>
-	auto parse(ParseContext& parse_ctx) { 
-		return parse_ctx.begin(); }
+  constexpr auto parse(format_parse_context& ctx) {
+    return ctx.begin(); }
 
-	template <class FormatContext>
-	auto format(const T& value, FormatContext& fmt_ctx) {
-		return format_to(fmt_ctx.out(), "{}+{}i", 
-		                 value.real, value.imag); } };
+  auto format(const MyComplex& value, format_context& ctx) {
+    return format_to(ctx.out(), "{}+{}i", 
+                     value.real, value.imag); } };
 
 format("{}", MyComplex{1, 2});	// "(1+2i)"\end{lstlisting}
 \end{frame}
@@ -1919,7 +1906,7 @@ struct Foo {
     const size_t realSize = ...;
     ptr->~Foo();
     ::operator delete(ptr, realSize); } };\end{lstlisting}
-		
+
 	\begin{alertblock}{Ne pas oublier}
 		\begin{itemize}
 			\item La destruction doit être appelée explicitement
@@ -1932,24 +1919,36 @@ struct Foo {
 	\frametitle{Horloges}
 	\begin{itemize}
 		\item Nouvelles horloges
-
-\note[item]{Différentes horloges avec des \textit{epoch} différents ainsi qu'une gestion différentes des secondes intercalaires}
-
 		\begin{itemize}
-			\item \lstinline|std::chrono::utc_clock| : temps universel coordonné
-
-\note[item]{UTC : \textit{epoch} 1 janvier 1970 00:00:00, support des secondes intercalaires}
-
+			\item \lstinline|std::chrono::utc_clock|
+			\begin{itemize}
+				\item Temps universel coordonné
+				\item Epoch : 1 janvier 1970 00:00:00
+				\item Support des secondes intercalaires
+			\end{itemize}
 			\item \lstinline|std::chrono::gps_clock|
-
-\note[item]{GPS : \textit{epoch} 6 janvier 1980 00:00:00 UTC, pas de seconde intercalaire}
-
-			\item \lstinline|std::chrono::tai_clock| : temps atomique universel
-
-\note[item]{TAI \textit{epoch} 31 décembre 1957 23:59:50 UTC, pas de seconde intercalaire}
-
+			\begin{itemize}
+				\item Epoch : 6 janvier 1980 00:00:00 UTC
+				\item Pas de seconde intercalaire
+			\end{itemize}
+			\item \lstinline|std::chrono::tai_clock|
+			\begin{itemize}
+				\item Temps atomique universel
+				\item Epoch : 31 décembre 1957 23:59:50 UTC
+				\item Pas de seconde intercalaire
+			\end{itemize}
 			\item \lstinline|std::chrono::file_clock| : alias vers le temps du système de fichier
 		\end{itemize}
+	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::utc_clock::now())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::gps_clock::now())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::tai_clock::now())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::file_clock::now())+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Horloges}
+	\begin{itemize}
 		\item Conversion des horloges vers et depuis UTC
 		\item Conversion de \lstinline|std::chrono::utc_clock| vers et depuis le temps système
 		\item Conversion des horloges entre-elles
@@ -1990,7 +1989,6 @@ struct Foo {
 \note[item]{Et bien d'autre, notamment en prenant en compte ou non la locale}
 \note[item]{Similaire à \lstinline|strftime()|}
 \note[item]{Et identique à ceux utilisés dans \lstinline|std::format|}
-
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -2021,6 +2019,14 @@ struct Foo {
 			\item [] \begin{itemize}
 				\item Et différentes combinaisons permettant de construire une date complète
 			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Calendrier}
+	\begin{itemize}
+		\item [] \begin{itemize}
 			\item Constantes représentant les jours de la semaine et les mois
 			\item Suffixes littéraux \lstinline|y| et \lstinline|d| pour les années et les jours
 			\item \lstinline|operator/| pour construire une date depuis un format \og humain\fg{}
@@ -2028,8 +2034,12 @@ struct Foo {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-auto date1 = 2016y/may/29d;
-auto date2 = Sunday[3]/may/2016y;\end{lstlisting}
+auto date1 = 2016y/May/29d;
+auto date2 = Sunday[3]/May/2016y;\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Ausing+namespace+std::literals::chrono_literals%3B%0A%0Aint+main()%0A%7B%0A++auto+date1+%3D+2016y/std::chrono::May/29d%3B%0A++auto+date2+%3D+std::chrono::Sunday%5B3%5D/std::chrono::May/2016y%3B%0A%0A++std::cout+%3C%3C+std::format(%22%7B:%25F%7D%22,+date1)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F%7D%22,+date2)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2056,10 +2066,14 @@ auto date2 = Sunday[3]/may/2016y;\end{lstlisting}
 auto tp = sys_days{2016y/may/29d} + 7h + 30min + 6s + 153ms; 
 // 2016-05-29 16:30:06.153 JST
 zoned_time zt = {"Asia/Tokyo", tp};\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Ausing+namespace+std::literals::chrono_literals%3B%0A%0Aint+main()%0A%7B%0A++auto+tp+%3D+std::chrono::sys_days%7B2016y/std::chrono::May/29d%7D+%2B+7h+%2B+30min+%2B+6s+%2B+153ms%3B+%0A++std::chrono::zoned_time+zt+%3D+%7B%22Asia/Tokyo%22,+tp%7D%3B%0A%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+tp)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+zt)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Timezone}
+	\frametitle{Date et heure}
 	\begin{block}{En attendant C++20}
 		\begin{itemize}
 			\item Utilisez Boost.DateTime
@@ -2090,7 +2104,7 @@ for(size_t i = 0; const auto& bar : foo) {
   ++i; }\end{lstlisting}
 
 	\begin{itemize}
-		\item Seuls des couples \lstinline|begin()|, \lstinline|end()| cohérents sont utilisés :
+		\item Seuls des couples \lstinline|begin()|, \lstinline|end()| cohérents sont utilisés
 		\begin{itemize}
 			\item \og Début\fg{} et \og début + taille\fg{}
 			\item fonctions membres \lstinline|begin()| et \lstinline|end()|
@@ -2108,7 +2122,7 @@ for(size_t i = 0; const auto& bar : foo) {
 \note[item]{Auparavant la fonction membre était utilisé bien qu'incohérente}
 
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+8,+5,+56,+42%7D%3B%0A++for(size_t+i+%3D+0%3B+const+auto%26+bar+:+foo)+%0A++%7B%0A++++std::cout+%3C%3C+bar+%3C%3C+%22+%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++%2B%2Bi%3B+%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+8,+5,+56,+42%7D%3B%0A++for(size_t+i+%3D+0%3B+const+auto%26+bar+:+foo)+%0A++%7B%0A++++std::cout+%3C%3C+bar+%3C%3C+%22+%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++%2B%2Bi%3B+%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Compile-time}
@@ -2135,6 +2149,10 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 			\item Pas de pointeur dans des contextes \lstinline|consteval|
 		\end{itemize}
 	\end{alertblock}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSZqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRegq19Y1ZLQOd3UUlEgCUtqhexMjsHOYAzMHI3lgA1Carbk4DxJise9gmGgCCF5doDAOYAG5i28EE2woAjsQQb9sM0xuJgA7FYrtttscCAsGP9tgAqf57MHXYEAESBVzuD1UCWIr0EH2%2BZl%2BhIBQNBNwhUJhcMRDGRFIxVxufxYTGCEEBLMp4N2vMuEIh2IImFx%2BL%2B/FQu1WaKJPy4Gg0gNWKKFHwI6BAKHm7z2bn12ylMoN%2B12ZjMJgArG4GRbGXyQczro6BeqRWK8QT3qoZXLFQ7BUKPeLvUbUNK9nKvj9VCq1UKBlqdV49ftDcb9YbzJabXbLaqqfznUCzOsqNsNEWQQmIX9fVHtoqq4W%2BXXCZnZfKIHHA%2Bqk9q0KmTRmIyOzTnrbbJ62g07S6tXHgqJjrmXl5Xq26hfW/U2lX2dx2x42YyTe7P%2B5rB7rx25w5H0xP7XmZwn5yyy0uVzznRxZrQnBWrwfgcFopCoJwBqWNYHzzIsmDmqsPCkAQmj/rMADWIBWho%2BicJIIHoRBnC8AoIB4WhYH/qQcCwEgYqYMgqYkOQlB1MACjKIYFRCAgqAAO6gShaAsAkdBMFU3EhLQfGCaB4GieJ9AxMAXAWqQSl0NEoSsMsvBaSpADyqZyUJxGMcglzEJxpGkJZNT4KBvD8IIIhiOwUgyIIigqOo1GkLoLQGEYKDWNY%2Bh4BE5GwMwbAgBEEYDKQjx9NwwLAdMsyoAkVTkRwAC0SZRqYMGWGYGjbAVADqYi0FV1VigQxBMFVCSYOghiOMgZHwUs/SasE0m8fx5ncLwzWYMsKECS1CToQBQFEQFkEcNgqhMSx%2BKqAAHAAbAVe2SNswDIMgTZmAAdGY2wQNBViWKQ2y4IQJBIVw0wTQtswICcWAxFypDYbh%2BEcIRpAKbwq1kRRqHfaDZjLeB0Nw9RWUpdEKTOJIQA%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2155,14 +2173,6 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 		\item Initialisation triviale dans des contextes \lstinline|constexpr|
 		\item \lstinline|std::is_constant_evaluated()| pour savoir si l'évaluation est \textit{compile-time}
 		\item Prise en compte accrue dans la bibliothèque standard
-		
-\note[item]{\lstinline|std::string|, \lstinline|std::vector|, algorithmes numériques, \ldots}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{\lstinline|constexpr|}
-	\begin{itemize}
 		\item Assouplissement des restrictions
 		\begin{itemize}
 			\item Fonctions virtuelles \lstinline|constexpr|
@@ -2177,7 +2187,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 			\begin{itemize}
 				\item Uniquement si le code \lstinline|asm| n'est pas évalué en \textit{compile-time}
 
-\note[item]{Par exemple, on peut avoir une branche \og C++\fg{} pour le \textit{compile-time} et une branche asm pour le \textit{run-time} avec un choix via \lstinline|std::is_constant_evaluated()|}
+\note[item]{Par exemple, on peut avoir une branche C++ pour le \textit{compile-time} et une branche asm pour le \textit{run-time} avec un choix via \lstinline|std::is_constant_evaluated()|}
 
 			\end{itemize}
 		\end{itemize}
@@ -2191,7 +2201,7 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 		\item Extension à tous les membres visibles
 
 \note[item]{\textit{structured binding} sur les membres privés depuis une fonction membre ou amis}
-	
+
 		\item Plus proche de variables classiques
 		\begin{itemize}
 			\item Capture par les lambdas (copie et référence)
@@ -2216,7 +2226,7 @@ auto f2 = [=] { return b; };\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple+foo%7B5,+42%7D%3B%0A%0A++auto%5Ba,+b%5D+%3D+foo%3B%0A++auto+f1+%3D+%5Ba%5D+%7B+return+a%3B+%7D%3B%0A++auto+f2+%3D+%5B%3D%5D+%7B+return+b%3B+%7D%3B%0A%0A++std::cout+%3C%3C+f1()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+f2()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple+foo%7B5,+42%7D%3B%0A%0A++auto%5Ba,+b%5D+%3D+foo%3B%0A++auto+f1+%3D+%5Ba%5D+%7B+return+a%3B+%7D%3B%0A++auto+f2+%3D+%5B%3D%5D+%7B+return+b%3B+%7D%3B%0A%0A++std::cout+%3C%3C+f1()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+f2()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2235,11 +2245,11 @@ auto f2 = [=] { return b; };\end{lstlisting}
 struct X : shared_ptr<int> { string foo; };
 
 template<int N> string& get(X& x) { 
-  if constexpr(N==0) return x.foo;}
+  if constexpr(N==0) return x.foo; }
 template<> class tuple_size<X> : 
   public integral_constant<int, 1> {};
 template<> class tuple_element<0, X> {
-  public: using type = string;};
+  public: using type = string; };
 
 X x;
 auto& [y] = x;\end{lstlisting}
@@ -2265,13 +2275,13 @@ auto& [y] = x;\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 template<chrono::seconds seconds>
-class fixed_timer { /* ... */ };\end{lstlisting}
+class fixed_timer { ... };\end{lstlisting}
 
 \note[item]{En C++17, il fallait utiliser un type entier, p.ex. \lstinline|size_t|}
 
 	\begin{lstlisting}[language=C++]
 template<fixed_string Id>
-class entity { /* ... */ };
+class entity { ... };
 
 entity<"hello"> e;\end{lstlisting}
 
@@ -2282,7 +2292,7 @@ entity<"hello"> e;\end{lstlisting}
 	\frametitle{Templates}
 	\begin{itemize}
 		\item \lstinline|typename| optionnel lorsque seul un nom de type est possible
-		
+	
 \note[item]{Il ne sert qu'à lever des ambigüités}
 
 		\item Spécialisation possible sur des classes internes privées ou protégées
@@ -2300,6 +2310,10 @@ template<class T>
 void g(T, type_identity_t<T>);
 
 g(4.2, 0); // OK, g<double>\end{lstlisting}
+
+	\vskip 5mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:9,endLineNumber:2,positionColumn:9,positionLineNumber:2,selectionStartColumn:9,selectionStartLineNumber:2,startColumn:9,startLineNumber:2),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate%3Cclass+T%3E%0A%23if+1%0AT+foo(T+a,+std::type_identity_t%3CT%3E+b)%0A%23else%0AT+foo(T+a,+T+b)%0A%23endif%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(4.2,+3)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2307,7 +2321,7 @@ g(4.2, 0); // OK, g<double>\end{lstlisting}
 	\begin{itemize}
 		\item Déduction de type sur les alias de template
 	\end{itemize}
-		
+
 	\begin{lstlisting}[language=C++]
 template<typename T>
 using IntPair = std::pair<int, T>;
@@ -2317,6 +2331,10 @@ IntPair<double> p0{1, 2.0};
 
 // C++ 20
 IntPair p1{1, 2.0};   // std::pair<int, double>\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cutility%3E%0A%0Atemplate%3Ctypename+T%3E%0Ausing+IntPair+%3D+std::pair%3Cint,+T%3E%3B%0A%0Aint+main()%0A%7B%0A++IntPair%3Cdouble%3E+p0%7B1,+2.0%7D%3B+%0A++IntPair+p1%7B1,+2.0%7D%3B+%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2326,11 +2344,15 @@ IntPair p1{1, 2.0};   // std::pair<int, double>\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-void foo(auto a, auto b) {...};\end{lstlisting}
+void foo(auto a, auto b) { ... };\end{lstlisting}
 
 	\begin{itemize}
 		\item Similaire	à la création de lambdas polymorphiques
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aauto+foo(auto+a,+auto+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(4,+3)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Concepts}
@@ -2340,7 +2362,7 @@ void foo(auto a, auto b) {...};\end{lstlisting}
 		\item Histoire ancienne et mouvementée
 		\begin{itemize}
 			\item Prévu initialement pour C++0x
-			\item \ldots{}et cause des décalages successifs
+			\item \ldots{} et cause des décalages successifs
 			\item Retrait à grand bruit de C++11
 			\item Finalement Concept lite TS publié en 2015
 			\item Intégration du TS acceptée en juillet 2017
@@ -2366,7 +2388,7 @@ void foo(auto a, auto b) {...};\end{lstlisting}
 \note[item]{Exemple d'\textit{axiom} : associativité ou commutativité}
 \note[item]{Intérêt des \textit{axiom} : meilleure documentation, informations au compilateur (meilleurs avertissement et diagnostics, meilleures optimisations)}
 
-			\item \textit{Concept map} : transformation d'un type non-comptable vers un concept
+			\item \textit{Concept map} : transformation d'un type non-compatible vers un concept
 
 \note[item]{Exemple de \textit{concept map} : Utilisation de type définissant l'inégalité stricte et la comparaison vers un concept attendant l'inégalité large, implémentation du concept de pile (\textit{stack}) par \lstinline|std::vector|}
 
@@ -2385,7 +2407,7 @@ template<typename T> requires Incrementable<T>
 void foo(T);\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots via une \textit{Trailing requires clause}
+		\item \ldots{} via une \textit{Trailing requires clause}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -2393,15 +2415,15 @@ template<typename T>
 void foo(T) requires Incrementable<T>;\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots via des paramètres templates contraints
+		\item \ldots{} via des paramètres templates contraints
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-template<Decrementable T>
+template<Incrementable T>
 void foo(T);\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots ou via des combinaisons de ces syntaxes
+		\item \ldots{} ou via des combinaisons de ces syntaxes
 	\end{itemize}
 \end{frame}
 
@@ -2416,17 +2438,15 @@ template<typename T> requires Addable<T>
 T add(T a, T b) { return a + b; }\end{lstlisting}
 
 	\begin{itemize}
-		\item \ldots ou depuis des expressions
+		\item \ldots{} ou depuis des expressions
 	\end{itemize}
  
 	\begin{lstlisting}[language=C++]
-template<typename T>
-requires requires (T x) { x + x; }
+template<typename T> requires requires (T x) { x + x; }
 T add(T a, T b) { return a + b; }\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
-template<typename T>
-requires (sizeof(T) > 1)
+template<typename T> requires (sizeof(T) > 1)
 void foo(T);\end{lstlisting}
 
 \note[item]{Oui, \lstinline|requires| est bien en double}
@@ -2456,12 +2476,12 @@ void foo(T);\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-template<typename... T>
-requires Concept<T> && ... && true
+template<Concept... T>
 void foo(T...);\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
-template<Concept... T>
+template<typename... T>
+requires Concept<T> && ... && true
 void foo(T...);\end{lstlisting}
 \end{frame}
 
@@ -2472,8 +2492,8 @@ void foo(T...);\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-[](Constraint auto a) {...};
-void foo(Constraint auto a) {...};\end{lstlisting}
+[](Constraint auto a) { ... };
+void foo(Constraint auto a) { ... };\end{lstlisting}
 
 	\begin{itemize}
 		\item Contraintes sur les types de retour
@@ -2505,7 +2525,7 @@ void foo();\end{lstlisting}
 	\begin{itemize}
 		\item Support des \textit{parameters pack}
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 void foo(Constraint auto... T);\end{lstlisting}
 \end{frame}
@@ -2513,10 +2533,7 @@ void foo(Constraint auto... T);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Concepts - Standard}
 	\begin{itemize}
-		\item Nombreux concepts standard
-
-\note[item]{Construit depuis les traits \lstinline|is_XXX_v| et la composition de ceux-ci généralement}
-
+		\item Nombreux concepts standards
 		\begin{itemize}
 			\item Relations entre types : \lstinline|same_as|, \lstinline|derived_from|, \lstinline|convertible_to|, \lstinline|common_with|, \ldots
 			\item Types numériques : \lstinline|integral|, \lstinline|signed_integral|, \lstinline|unsigned_integral|, \lstinline|floating_point|, \ldots
@@ -2572,8 +2589,8 @@ concept Addable = requires(
 	\begin{lstlisting}[language=C++]
 template<class T>
 concept Comparable = requires(T a, T b) {
-{ a == b } -> boolean;
-{ a != b } -> boolean; };\end{lstlisting}
+  { a == b } -> boolean;
+  { a != b } -> boolean; };\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2617,7 +2634,7 @@ template<class T> concept totally_ordered =
     { a >= b } -> boolean; };\end{lstlisting}
 
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:16,positionColumn:6,positionLineNumber:16,selectionStartColumn:6,selectionStartLineNumber:16,startColumn:6,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename+T%3E%0Aconcept+Foo+%3D+requires+(T+x)+%7B+x+%2B+x%3B+%7D%3B%0A%0Atemplate%3CFoo+T%3E%0AT+foo(T+a,+T+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(5,+2)+%3C%3C+%22%5Cn%22%3B%0A%0A%23if+1%0A++int+*bar,+*baz%3B%0A++std::cout+%3C%3C+foo(bar,+baz)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename+T%3E%0Aconcept+Foo+%3D+requires+(T+x)+%7B+x+%2B+x%3B+%7D%3B%0A%0Atemplate%3CFoo+T%3E%0AT+foo(T+a,+T+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(5,+2)+%3C%3C+%22%5Cn%22%3B%0A%0A%23if+0%0A++int+*bar,+*baz%3B%0A++std::cout+%3C%3C+foo(bar,+baz)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Attributs}
@@ -2644,11 +2661,16 @@ template<class T> concept totally_ordered =
 			\item Vérification également lors des conversions via les constructeurs
 
 \note[item]{Constructeurs non \lstinline|explicit|}
+
 		\end{itemize}
 		\item Possibilité d'associer un message à \lstinline|[[ nodiscard ]]|
 
 \note[item]{Pour indiquer la motivation du marquage \lstinline|[[ nodiscard ]]| ou l'erreur potentielle que cache la non-vérification du retour}
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0A%5B%5B+nodiscard(%22Must+be+checked%22)+%5D%5D+static+int+foo()%0A%7B%0A++return+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -2660,13 +2682,7 @@ template<class T> concept totally_ordered =
 \note[item]{Contextes non évalués : \lstinline|sizeof()|, \lstinline|typeid()| ou \lstinline|decltype()|}
 
 		\item Utilisation de paramètres templates pour les lambdas génériques
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-auto foo = []<typename T>(vector<T> bar) { ... };\end{lstlisting}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
+		\begin{itemize}
 			\item En complément de la syntaxe avec \lstinline|auto|
 
 \note[item]{Les deux syntaxes peuvent cohabiter}
@@ -2686,10 +2702,9 @@ auto foo = []<typename T>(vector<T> const& vec) {
   cout<< size(vec) << '\n';
   cout<< vec.capacity() << '\n'; };\end{lstlisting}
 
-\note[item]{Cet exemple impose l'utilisation d'un vecteur}
-
+	\vskip 10mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:17,positionColumn:6,positionLineNumber:17,selectionStartColumn:6,selectionStartLineNumber:17,startColumn:6,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++auto+foo+%3D+%5B%5D%3Ctypename+T%3E(T+first,+T+second)+%7B+return+first+%2B+second%3B+%7D%3B%0A%0A++std::cout+%3C%3C+foo(1,+5)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(1.,+5)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A++auto+bar+%3D+%5B%5D%3Ctypename+T%3E(std::vector%3CT%3E+vec)+%7B+return+std::size(vec)%3B+%7D%3B%0A%0A++std::cout+%3C%3C+bar(std::vector%3Cint%3E%7B1,+2,+3%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar(std::vector%3Cdouble%3E%7B1.,+2.%7D)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+bar(5)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++auto+foo+%3D+%5B%5D%3Ctypename+T%3E(T+first,+T+second)+%7B+return+first+%2B+second%3B+%7D%3B%0A%0A++std::cout+%3C%3C+foo(1,+5)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(1.,+5)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A++auto+bar+%3D+%5B%5D%3Ctypename+T%3E(std::vector%3CT%3E+vec)+%7B+return+std::size(vec)%3B+%7D%3B%0A%0A++std::cout+%3C%3C+bar(std::vector%3Cint%3E%7B1,+2,+3%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar(std::vector%3Cdouble%3E%7B1.,+2.%7D)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+bar(5)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2702,7 +2717,7 @@ auto foo = []<typename T>(vector<T> const& vec) {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-auto greater = [](auto x,auto y) {return x > y; };
+auto greater = [](auto x,auto y) { return x > y; };
 map<string, int, decltype(greater)> foo;\end{lstlisting}
 
 	\begin{itemize}
@@ -2728,7 +2743,7 @@ map<string, int, decltype(greater)> foo;\end{lstlisting}
 template<class F, class... Args>
 auto delay_invoke(F f, Args... args) {
 	return [f=move(f),...args=move(args)]()->decltype(auto) 
-	{return invoke(f, args...);};}\end{lstlisting}
+	{ return invoke(f, args...); }; }\end{lstlisting}
 
 	\begin{itemize}
 		\item Peuvent être \lstinline|consteval|
@@ -2742,8 +2757,8 @@ auto delay_invoke(F f, Args... args) {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-int foo(int a, int b, int c, int d) {
-	return a * b * c + d; }
+int foo(int a, int b, int c, int d)
+  { return a * b * c + d; }
 
 auto baz = bind_front(&foo, 2, 3, 4);
 baz(7);  // 31
@@ -2759,9 +2774,9 @@ bar(6);  // 30\end{lstlisting}
 \note[item]{Exemple de types incomplets : \textit{forward declaration} ou types abstraits}
 	\end{itemize}
 
-	\vskip 10mm plus 10fill
+	\vskip 5mm plus 10fill
 	\hfill
-	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Cfunctional%3E%0A%23include+%3Ciostream%3E%0A%0Aint+foo(int+a,+int+b,+int+c,+int+d)%0A%7B%0A++return+a+*+b+*+c+%2B+d%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(2,+3,+4,+5)+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+bar+%3D+std::bind(%26foo,+2,+3,+4,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+bar(6)+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+baz+%3D+std::bind_front(%26foo,+2,+3,+4)%3B%0A++std::cout+%3C%3C+baz(7)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cfunctional%3E%0A%23include+%3Ciostream%3E%0A%0Aint+foo(int+a,+int+b,+int+c,+int+d)%0A%7B%0A++return+a+*+b+*+c+%2B+d%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(2,+3,+4,+5)+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+bar+%3D+std::bind(%26foo,+2,+3,+4,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+bar(6)+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+baz+%3D+std::bind_front(%26foo,+2,+3,+4)%3B%0A++std::cout+%3C%3C+baz(7)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \subsection*{Multi-threading}
@@ -2808,6 +2823,10 @@ void foo(stop_token st) {
 jthread t(foo);
 ...
 t.request_stop();\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%0Avoid+foo()%0A%7B%0A++std::cout+%3C%3C+%22Foo%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+1%0A++std::jthread+t(foo)%3B%0A%23else%0A++std::thread+t(foo)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2831,17 +2850,17 @@ t.request_stop();\end{lstlisting}
 
 			\item \lstinline|try_acquire_for()| tente de prendre le sémaphore en attendant la durée donnée si besoin
 			\item \lstinline|try_acquire_until()| tente de prendre le sémaphore en attendant jusqu'à un temps donné si besoin
-
 		\end{itemize}
 		\item \lstinline|std::binary_semaphore|	instanciation de \lstinline|std::counting_semaphore| pour un unique possesseur
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:21,positionColumn:2,positionLineNumber:21,selectionStartColumn:2,selectionStartLineNumber:21,startColumn:2,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Csemaphore%3E%0A+%0Astd::binary_semaphore+signalMainToThread%7B0%7D%3B%0Astd::binary_semaphore+signalThreadToMain%7B0%7D%3B%0A%0Ausing+namespace+std::literals%3B%0A%0Avoid+foo()%0A%7B%0A++signalMainToThread.acquire()%3B%0A++std::cout+%3C%3C+%22%5Bthread%5D+Reception+du+signal%5Cn%22%3B%0A+%0A++std::this_thread::sleep_for(2s)%3B%0A+%0A++std::cout+%3C%3C+%22%5Bthread%5D+Envoi+a+main%5Cn%22%3B%0A++signalThreadToMain.release()%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++std::thread+worker(foo)%3B%0A++std::this_thread::sleep_for(2s)%3B%0A%0A++std::cout+%3C%3C+%22%5Bmain%5D+Envoi+au+thread%5Cn%22%3B%0A++signalMainToThread.release()%3B%0A++signalThreadToMain.acquire()%3B%0A+%0A++std::cout+%3C%3C+%22%5Bmain%5D+Got+the+signal%5Cn%22%3B+//+response+message%0A++worker.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{synchronisation - latch}
-
-\note[item]{Conservation du terme anglais car verrou est ambigu (\textit{latch} ou \textit{lock})}
-
 	\begin{itemize}
 		\item \lstinline|std::latch| compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro 
 		\begin{itemize}
@@ -2858,6 +2877,10 @@ t.request_stop();\end{lstlisting}
 			\item Impossible d'incrémenter un \lstinline|std::latch| et de revenir à sa valeur initiale
 		\end{itemize}
 	\end{alertblock}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:29,positionColumn:2,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Clatch%3E%0A%23include+%3Cthread%3E%0A%0Aint+main()%0A%7B%0A++const+size_t+nbLatch+%3D+5%3B%0A++std::latch+l1(nbLatch)%3B%0A++std::latch+l2(1)%3B%0A%0A++auto+work+%3D+%5B%26%5D+(int+i)%0A++++++++++++++%7B%0A++++++++++++++++std::cout+%3C%3C+%22Entree+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++++l1.count_down()%3B%0A++++++++++++++++l2.wait()%3B%0A++++++++++++++++std::cout+%3C%3C+%22Sortie+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++%7D%3B%0A%0A++std::cout+%3C%3C+%22Demarrage%5Cn%22%3B%0A++std::jthread+t%5BnbLatch%5D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+nbLatch%3B+%2B%2Bi)%0A++%7B%0A++++t%5Bi%5D+%3D+std::jthread(work,+i)%3B%0A++%7D%0A%0A++l1.wait()%3B%0A++std::cout+%3C%3C+%22Thread+OK%5Cn%22%3B%0A++l2.count_down()%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2873,6 +2896,10 @@ t.request_stop();\end{lstlisting}
 			\item Une fois zéro atteint, les threads en attente sont débloqués et le compteur reprends la valeur initiale décrémentée du nombre de threads \og \textit{droppés}\fg{}
 		\end{itemize}
 	\end{itemize}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAGykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XoKdQ1N2a2DXT3FpRIAlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7BxH1xHjR55c3ZhsMW167%2BzcBAQJyY6A%2B10%2BwQIOxYTGCEBmnxMAHYrNcdjs0AxBjtUgAvTAAfRhDAijwAIjsAKz7dFXTGDdAgEDPYivaI7CIQMlItb0z6YpheIg7ADuJAA1pS9tSrPETNSqRBoTs8EiMZitdrtaj6TqDTqmSy0CLHm5AXszGZsIITg9%2BKhzGZzZa8K6DlazIq3AxnXTBYagxEAHQvPAAN2JhnQRLF8IIiIDmqDBuNKAWMMBludAFk6G8vDtHc6PW41WWvT6/dbkwzUwbQ%2BGo0SY3GE0n%2BYGG9r06aswcc9ahCRHA7UE7rZX3dnPf7qb7/V2Uz3URS64G%2B5nK86KZg4eymMBMNWl/q8QRmSBtMDQegdgRFRYyYr18v6/xiBACcSYTO1lSGh0hWlovvyVryhY6qBnq3YPk%2BeCvjK6Y3iCpzoBAErEJKpBqny55rsiKLrtcHBzLQnDUrwfgcFopCoJwFqWNYeILEsDzrDwpAEJoZFzJKIDUho%2BicJI1G8fRnC8AoIDCTxtFkaQcCwEgmCqJgyAiiQ5CUPUwAKMohiVEICCoGKNFcWgLCJHQTDVIZIS0CZZk0XRVk2fQMTAFw1qkO5dDRKErArLw/meQA8iKznmRJakaVcxD6VJpBxcgtT4DRvD8IIIhiOwUgyIIigqOoCmkLorQGEYKDWNY%2Bh4BEMmwMwbCshOgykFGMTcCiVEzHMqCJNUMkcAAtEy%2BwUqYzGWGYGg7KNADqYi0Ati1qQQxBMAtiSYOghiOMgO23uh0lscsAyXsEDnGaZMXcLwm2YCsXFiltiS8eRlHiWVDEcNg6maUQxA7KoAAccSjXEkg7MAyBHT5IYuhATGQbhuCECQVprFwMyPZ9cwIOh/SIqQAlCSJHBiaQrm8H90mydxBOU2YP10fTTMKf1nXRKkziSEAA}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2906,16 +2933,15 @@ t.request_stop();\end{lstlisting}
 		\begin{itemize}
 			\item Pas de \lstinline|return|
 			\item Pas d'argument \textit{variadic}
-			
+
 \note[item]{Pas d'arguments variables à la C via \lstinline|...|}
-			
+
 			\item Pas de déduction de type sur le retour
-			
+
 \note[item]{Ni \lstinline|auto| ni concepts}
-			
+
 			\item Pas sur les constructeurs, destructeurs, fonctions \lstinline|constexpr|
 		\end{itemize}
-
 	\end{itemize}
 \end{frame}
 
@@ -2926,8 +2952,8 @@ t.request_stop();\end{lstlisting}
 		\item \textit{Coroutine state} interne contenant promesse, paramètres, variables locales et état du point de suspension
 		\item \textit{Coroutine handle} non possédant pour poursuivre ou détruire la coroutine
 		\begin{itemize}
-			\item \lstinline|operator bool()| : le \textit{handle} gère effectivement une coroutine
-			\item \lstinline|done()| : la coroutine est suspendue dans son état final
+			\item \lstinline|operator bool()| indique si le \textit{handle} gère effectivement une coroutine
+			\item \lstinline|done()| indique si la coroutine est suspendue dans son état final
 
 \note[item]{C'est à dire qu'elle est vraiment terminée}
 
@@ -2946,9 +2972,9 @@ t.request_stop();\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 struct generator {
   ...
-  bool next() { 
+  bool next() {
     return cor ? (cor.resume(), !cor.done()) : false; }
-  int value() { 
+  int value() {
     return cor.promise().current_value; }
 
   coroutine_handle<promise_type> cor; };
@@ -2959,7 +2985,6 @@ auto g = f();
 while(g.next()) cout << g.value() << endl;\end{lstlisting}
 \end{frame}
 
-
 \subsection*{Système de fichier}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::create_directory()|}
@@ -2969,10 +2994,12 @@ while(g.next()) cout << g.value() << endl;\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 create_directory("a/b/c");
-// Erreur en C++17 si a ou b existe mais ne sont pas des repertoires
-// Pas d'erreur en C++17 si c existe mais n'est pas un repertoire
+// C++17
+// Erreur si a ou b existe mais ne sont pas des repertoires
+// Pas d'erreur si c existe mais n'est pas un repertoire
 
-// Erreur en C++20 dans les deux cas\end{lstlisting}
+// C++20
+// Erreur dans les deux cas\end{lstlisting}
 \end{frame}
 
 \subsection*{Variant}
