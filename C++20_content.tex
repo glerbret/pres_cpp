@@ -17,7 +17,7 @@
 	\frametitle{Changements d'organisation du comité}
 	\begin{itemize}
 		\item Création d'un \textit{Direction Group}
-		\item Création d'un \textit{Study Group} pour l'éducation (SG20) : aide à l'apprentissage et à l'adoption des évolutions
+		\item Création d'un \textit{Study Group} pour l'éducation (SG20)
 	\end{itemize}
 
 	\centering
@@ -31,13 +31,12 @@
 		\item Dépréciation du terme POD et de \lstinline|std::is_pod()|
 		\item Dépréciation partielle de \lstinline|volatile|
 
-\note[item]{Seules certaines constructions à base de \lstinline|volatile| sont dépréciées, les constructions jugées utiles sont conservées}
 \note[item]{Les constructions dépréciées sont : incrémentation/décrémentation de \lstinline|volatile|, utilisation du résultat d'une affectation à un \lstinline|volatile|, opérateurs \lstinline|op=| sur un \lstinline|volatile|, \lstinline|volatile| sur les valeurs de retour, un \lstinline|volatile| sur les paramètres, \lstinline|volatile| sur les \textit{structured binding}}
 
 		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
 
 \note[item]{C'est à dire de ne plus pouvoir écrire \lstinline|[x,y]| comme indice d'un conteneur classique}
-\note[item]{L'expression \lstinline|[x,y]| revient à utiliser y comme indice mais en ayant évalué x}
+\note[item]{L'expression \lstinline|[x,y]| revient à utiliser \lstinline|y| comme indice mais en ayant évalué \lstinline|x|}
 
 		\item Suppression des membres dépréciés de \lstinline|std::reference_wrapper| : \lstinline|result_type|, \lstinline|argument_type|, \lstinline|first_argument_type| et \lstinline|second_argument_type|
 	\end{itemize}
@@ -63,7 +62,7 @@
 		\begin{itemize}
 			\item \lstinline|__cpp_lib_any| : support de \lstinline|std::any|
 			\item \lstinline|__cpp_lib_chrono| : support de \lstinline|std::chrono|
-			\item \lstinline|__cpp_lib_gcd_lcm| : support des fonctions \lstinline|std::gcd()| et \lstinline|std::lcm|
+			\item \lstinline|__cpp_lib_gcd_lcm| : support des fonctions \lstinline|std::gcd()| et \lstinline|std::lcm()|
 			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
@@ -145,7 +144,7 @@
 		\begin{itemize}
 			\item Conversion vers non signé est toujours bien définie
 
-\note[item]{C'est l'unique valeur de la destination congruent à la source modulo $2^N$ où N est le nombre de bits de la destination}
+\note[item]{C'est l'unique valeur de la destination congruent à la source modulo $2^N$ où $N$ est le nombre de bits de la destination}
 
 			\item Décalage à gauche : même résultat que celui du type non signé correspondant
 			\item Décalage à droite : décalage arithmétique avec extension du signe
@@ -238,7 +237,7 @@ U u{.b = "foo"}; \end{lstlisting}
 		\item Initialisation des agrégats via des données parenthésées
 	\end{itemize}
 
-	\begin{block}{\lstinline|\{\}| ou \lstinline|()| }
+	\begin{block}{\lstinline|\{\}| ou \lstinline|()| ?}
 		\begin{itemize}
 			\item \lstinline|{}| permet l'utilisation d'\textit{initializer list}
 			\item \lstinline|()| permet les conversions avec perte de précision
@@ -251,7 +250,7 @@ U u{.b = "foo"}; \end{lstlisting}
 		\end{itemize}
 	\end{block}
 
-\note[item]{Exemple de fonctions transférant les arguments à un constructeur :  (\lstinline|std::make_unique()| ou \lstinline|emplace_back()|)}
+\note[item]{Comme \lstinline|std::make_unique()| ou \lstinline|emplace_back()|}
 
 	\begin{itemize}
 		\item Initialisation par défaut des champs de bits
@@ -313,7 +312,7 @@ if(c1 == green) { ... }\end{lstlisting}
 
 		\item \lstinline|nullptr| reste autorisé dans les initialisations directes
 	\end{itemize}
-		
+
 	\begin{lstlisting}[language=C++]
 struct Foo {
   int i;
@@ -382,7 +381,7 @@ Bar f3() {
 			\item $(a <=> b) > 0$ si $a > b$
 			\item $(a <=> b) == 0$ si $a$ et $b$ sont équivalents
 
-\note[item]{Mécanisme similaire au fonctionnement de \lstinline|strcmp|, \lstinline|memcmp|, \ldots{}}
+\note[item]{Similaire au fonctionnement de \lstinline|strcmp|, \lstinline|memcmp|, \ldots{}}
 \note[item]{Un retour non numérique, p.ex. \lstinline|Nan|, indique des valeurs non ordonnées}
 
 		\end{itemize}
@@ -555,8 +554,6 @@ void bar(int j) { return 3 * j; }\end{lstlisting}
 \note[item]{Les déclarations non exportées sont visibles de l'ensemble du module}
 	\end{block}
 
-	\pause
-
 	\begin{alertblock}{Mais \ldots{}}
 		\begin{itemize}
 			\item Mais pas les autres unités de compilation même si elles importent le module
@@ -659,7 +656,8 @@ struct s {};\end{lstlisting}
 
 	\begin{alertblock}{Restriction}
 		\begin{itemize}
-			\item Uniquement dans une \textit{Primary Module Interface Unit} qui doit être la seule unité du module
+			\item Uniquement dans une \textit{Primary Module Interface Unit} 
+			\item Qui doit être la seule unité du module
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -697,7 +695,7 @@ import foo;
 module;
 #include "bar.h"
 export module foo;\end{lstlisting}
-	
+
 	\begin{itemize}
 		\item Ou import des en-têtes
 	\end{itemize}
@@ -933,7 +931,7 @@ bar.front();    // 0\end{lstlisting}
 		\item \lstinline|first()|, \lstinline|last()| : construction de \textit{sous-span}
 	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
 span<int> baz = bar.first(2);   // 0, 1\end{lstlisting}
 
 	\begin{itemize}
@@ -1049,7 +1047,7 @@ popcount(6u);  // 2\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Comparaison d'entiers}
 	\begin{itemize}
-		\item Ajout de fonctions de comparaison d'entier : \lstinline|std::cmp_equal|, \lstinline|std::cmp_not_equal|, \lstinline|std::cmp_less|, \lstinline|std::cmp_greated|, \lstinline|std::cmp_less_equal| et \lstinline|std::cmp_greater_equal|
+		\item Ajout de fonctions de comparaison d'entier : \lstinline|std::cmp_equal()|, \lstinline|std::cmp_not_equal()|, \lstinline|std::cmp_less()|, \lstinline|std::cmp_greated()|, \lstinline|std::cmp_less_equal()| et \lstinline|std::cmp_greater_equal()|
 		\item Permettent la comparaison signé / non signé sans promotion
 	\end{itemize}
 \end{frame}
@@ -1057,7 +1055,7 @@ popcount(6u);  // 2\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Mathématiques}
 	\begin{itemize}
-		\item Définition de constantes mathématiques : $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
+		\item Définition des constantes mathématiques $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
 
 \note[item]{$\gamma$ est la constante de Euler-Mascheroni et $\Phi$ le nombre d'or}
 
@@ -1110,8 +1108,6 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 		\item Utilisation de l'attribut \lstinline|[[ nodiscard ]]|
 		\item Davantage de \lstinline|noexcept|
 		\item Optimisation d'algorithmes numériques via \lstinline|std::move()|
-
-\note[item]{\lstinline|noexcept| est déjà présent dans la bibliothèque standard, cette présence est étendue en C++20}
 	\end{itemize}
 \end{frame}
 
@@ -1164,7 +1160,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 		\end{itemize}
 		\item \lstinline|SizedRange| : taille en temps constant
 		\item \lstinline|ViewableRange| : \lstinline|range| convertible en \lstinline|View|
-		\item \lstinline|CommonRange| : itérateurs et sentinelle de même type
+		\item \lstinline|CommonRange| : itérateur et sentinelle de même type
 	\end{itemize}
 \end{frame}
 
@@ -1179,8 +1175,6 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 		\item \lstinline|ContiguousRange| : fournit \lstinline|contiguous_iterator|
 	\end{itemize}
 
-	\pause
-
 	\begin{block}{En résumé}
 		\begin{itemize}
 			\item Conteneurs : possession, copie profonde
@@ -1192,12 +1186,12 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Ranges - Itérateurs}
 	\begin{itemize}
-		\item \lstinline|std::common_iterator| : adaptateur d'itérateur/sentinelle permettant de représenter un \textit{non-common} \lstinline|range| comme un \lstinline|CommonRange|
+		\item \lstinline|std::common_iterator| : adaptateur d'itérateurs/sentinelles permettant de représenter un \textit{non-common} \lstinline|range| comme un \lstinline|CommonRange|
 
 \note[item]{Passe de itérateur/sentinelle de types différents à itérateur/sentinelle de même type}
 \note[item]{Grâce à l'opérateur de comparaison adéquate}
 
-		\item \lstinline|std::counted_iterator| : adaptateur d'itérateur reprennant le fonctionnement de l'itérateur sous-jacent mais conservant la distance à la fin du \lstinline|range|
+		\item \lstinline|std::counted_iterator| : adaptateur d'itérateurs reprenant le fonctionnement de l'itérateur sous-jacent mais conservant la distance à la fin du \lstinline|range|
 	\end{itemize}
 \end{frame}
 
@@ -1326,9 +1320,9 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
-			\item \lstinline|take_view| : les N premiers éléments
+			\item \lstinline|take_view| : les $N$ premiers éléments
 			\item \lstinline|take_while_view| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
-			\item \lstinline|drop_view| : tous les éléments sauf les N premiers
+			\item \lstinline|drop_view| : tous les éléments sauf les $N$ premiers
 			\item \lstinline|drop_while_view| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
 			\item \lstinline|common_view| convertit une vue en \lstinline|common_range|
 			\item \lstinline|reverse_view| : éléments en sens inverse
@@ -1370,8 +1364,8 @@ for(auto word : sentence) {
 \begin{frame}[fragile]
 	\frametitle{Ranges - range adaptators}
 	\begin{itemize}
-		\item  [] \begin{itemize}
-			\item \lstinline|elements_view| : vue des N\textsuperscript{e} éléments de chaque \textit{tuple} d'une vue de \textit{tuple-likes}
+		\item [] \begin{itemize}
+			\item \lstinline|elements_view| : vue des $N\textsuperscript{e}$ éléments de chaque \textit{tuple} d'une vue de \textit{tuple-likes}
 		\end{itemize}
 	\end{itemize}
 
@@ -1384,7 +1378,7 @@ auto years = figures | views::elements<1>;
 // 1791 1936 1815 1912\end{lstlisting}
 
 	\begin{itemize}
-		\item  [] \begin{itemize}
+		\item [] \begin{itemize}
 			\item \lstinline|keys_view| : vue des clés de chaque \lstinline|std::pair| d'une vue de \lstinline|std::pair|
 			\item \lstinline|values_view| : vue des valeurs de chaque \lstinline|std::pair| d'une vue de \lstinline|std::pair|
 		\end{itemize}
@@ -1541,7 +1535,7 @@ format_to_n(foo.data(), foo.size(), "{}", "a");\end{lstlisting}
 	\frametitle{\lstinline|std::format| - API}
 	\begin{itemize}
 		\item \lstinline|formatted_size()| retourne la taille nécessaire au formatage
-		\item \lstinline|vformat()| et \lstinline|vformat_to()| arguments regroupés dans un \og tuple\fg{}
+		\item \lstinline|vformat()| et \lstinline|vformat_to()| arguments regroupés dans un \textit{tuple-like}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1590,7 +1584,7 @@ format("{} et {}", "a", "b"); 	// "a et b"\end{lstlisting}
 
 	\begin{alertblock}{Limite}
 		\begin{itemize}
-			\item Impossible d'en omettre que certains
+			\item Impossible d'en n'omettre que certains
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -1727,7 +1721,7 @@ format("{:b}", 42);           // "101010"
 format("{:o}", 42);           // "52"\end{lstlisting}
 
 	\begin{itemize}
-		\item Caractères : valeur numérique ou caractères
+		\item Caractères : valeur numérique ou caractère
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1789,7 +1783,7 @@ format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
 	\hfill
 	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAOykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XoKdQ1N2a2DXT3FpRIAlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7B/zELEwE55c318EEO6/BEBmnxMcSs1x2O0G6BAKAWv32bgRkII0JAz1eBAg5jMIIsXBBABEdph4aCNITsaQ9mYzExKdSzBFsTNHoiDgyTABWNwMbH7MFfK4QqEwtBeeEHJEitEkDFYmlgVagkAANkJivpkjMLIRSL53N5NP5n2FKNFcNZUrNMpeb3lZg1yrVcQJGppVMVqkVOsl7P1PL5awFptRYolbLcyNR6Lt2MdFhAGmdrtW7p2Wp9EY5BsDwaj5vFlvZ0pjmLjSoTACoEcm3WYPRwvRxM3qjTmjUGTfnYYXdcXraX7fGQNW1tha6n6ztPd6i5H/YacZ3wd2w3Pu4Py7iR1zx%2BrJw2my2/W2Ax2BV3pWu%2B5GS7LY0a4oiybEKU%2B9k/cRoJDiXSDEWmXAaMe86nouxorleFo3hu95lo%2Bz4WN%2BkhvvOn4vlwv4Ev%2B9JARo%2BH4SB2ZnkueZQb2vq3gOcH2jhL64vif5MWhiHfriWGobhGhUtIOyYURC65sCkHWtelGwba8G/gmAB0KpUBSaZrAAnGYcmcgJYFCSJobQeJd6SbRypyYpU7YkwABe0QEAAnl4TiJMy66CeewlCquelZgZcp8vRLqkF%2BIDWISAUvgAtCFgUfthgGaTi7akZeomeVa0Y0b5SFBf5gXBdl4WRS%2B0X0mFXBxVyJEQYKIYFuGqUwpuj4JtYSboKZVKYcBzlaa51xJbpFFedRhkZSArV/mmGZdfFFXLu55G1f2aXDY1ICqISH4JgAGm16ZTpNMEuYlOk1eu3kPtJIBMuNe3alN5XgbN1U9gtVFLT5K2oDt%2B3iYdlVPWJg1ved27bddDZXLOB3dUdc3JQNdU2u9F2mGD04cBDzZ3Qlf0efDi31elK1jTFU4EMQXiYGV2OPbjL0SUj24KDtZMU1TM0Xsdz2nUNDPGfJO0qWpKoaVj7N9SdMFnVJ25ycAAuqepbMPWRcN01LRmySqmDy0LItQ9Nyvi1zks88DfMXKjguK6LhucwDCMNRdcl0qjWoyUr2mw/1aum9LypM6j5lWQ0NlOfr92e/9KX44jZtNWYaxra7t3h9TKve9zQN%2B/HaygyTPEpz90M4/NmcE8tTsqnLlsK8LHs9V7Ev6b7GtBQnss69bqdi71f7XM2%2BicJyvB%2BBwWikKgnAAVYliQgsSwPOsPCkAQmjNnMADWICctxtCcJII9rxPnC8AoiYr2vcxwLASCYKomDIOKJDkJQ9TAAoyiGJUQgIKgADuo9l5oBYIkOgbx0ifxCLQH%2B/9R7j2AaA%2BgMR37MESAoX%2BBBSAILoNEUIrAVi8GwUggA8uKGBACj53wflcYg78T6kCocgWo%2BBR68H4IIEQYh2BSBkIIRQKh1Bjx0HoAwRgUDBUsPoPAEQz6wGYGwS6qAUiYIAG79G4HEYeMw5ioESNUM%2BHAwpQn2ASUwlhrBmA0DsMKAB1MQtBrE2LvmTJg1jEiYHQIYRwyBT7z2WAMFEwRIHf1/hQ7gvAyaYBWMvP%2BxAmCJEvoPDgw9SBwN4JPDg2B76PyIMQHYqgAAcKowoqkkDsYAyBkA7AgCzBgG8WQQGntYKkuBCAkGpGsUqETL5zAQKcLAMRASkC3jvJJB9UlHwyafc%2Bq8hHaKSWYQ%2BQjj4cG6XMuYajiCpGcJIIAA%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
- 
+
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format| - Dates et heures}
 	\begin{itemize}
@@ -1920,6 +1914,7 @@ struct Foo {
 	\begin{itemize}
 		\item Nouvelles horloges
 		\begin{itemize}
+			\shorthandoff{:}
 			\item \lstinline|std::chrono::utc_clock|
 			\begin{itemize}
 				\item Temps universel coordonné
@@ -1938,6 +1933,7 @@ struct Foo {
 				\item Pas de seconde intercalaire
 			\end{itemize}
 			\item \lstinline|std::chrono::file_clock| : alias vers le temps du système de fichier
+			\shorthandon{:}
 		\end{itemize}
 	\end{itemize}
 
@@ -2003,7 +1999,7 @@ struct Foo {
 				\item Année, mois
 				\item Jour dans l'année, dans le mois
 				\item Dernier jour du mois
-				\item Jour dans la semaine, n\textsuperscript{e} jour de la semaine dans le mois
+				\item Jour dans la semaine, $n\textsuperscript{e}$ jour de la semaine dans le mois
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
@@ -2131,7 +2127,7 @@ for(size_t i = 0; const auto& bar : foo) {
 	\begin{itemize}
 		\item \lstinline|consteval| impose une évaluation \textit{compile-time}
 
-\note[item]{\lstinline|constrexpr| permet une évaluation \textit{compile-time} mais ne l'impose pas}
+\note[item]{\lstinline|constexpr| permet une évaluation \textit{compile-time} mais ne l'impose pas}
 
 		\begin{itemize}
 			\item \lstinline|consteval| implique \lstinline|inline|
@@ -2185,10 +2181,9 @@ int r2 = sqr(x);             // Erreur\end{lstlisting}
 			\item Utilisation de \lstinline|dynamic_cast| et \lstinline|typeid|
 			\item Utilisation de \lstinline|asm|
 			\begin{itemize}
-				\item Uniquement si le code \lstinline|asm| n'est pas évalué en \textit{compile-time}
+				\item Si le code \lstinline|asm| n'est pas évalué en \textit{compile-time}
 
-\note[item]{Par exemple, on peut avoir une branche C++ pour le \textit{compile-time} et une branche asm pour le \textit{run-time} avec un choix via \lstinline|std::is_constant_evaluated()|}
-
+\note[item]{Par exemple, on peut avoir une branche C++ pour le \textit{compile-time} et une branche assembleur pour le \textit{run-time} avec un choix via \lstinline|std::is_constant_evaluated()|}
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
@@ -2292,7 +2287,7 @@ entity<"hello"> e;\end{lstlisting}
 	\frametitle{Templates}
 	\begin{itemize}
 		\item \lstinline|typename| optionnel lorsque seul un nom de type est possible
-	
+
 \note[item]{Il ne sert qu'à lever des ambigüités}
 
 		\item Spécialisation possible sur des classes internes privées ou protégées
@@ -2391,7 +2386,6 @@ void foo(auto a, auto b) { ... };\end{lstlisting}
 			\item \textit{Concept map} : transformation d'un type non-compatible vers un concept
 
 \note[item]{Exemple de \textit{concept map} : Utilisation de type définissant l'inégalité stricte et la comparaison vers un concept attendant l'inégalité large, implémentation du concept de pile (\textit{stack}) par \lstinline|std::vector|}
-
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -2645,7 +2639,7 @@ template<class T> concept totally_ordered =
 		\begin{itemize}
 			\item \lstinline|[[ likely ]]| et \lstinline|[[ unlikely ]]| probabilité de branches conditionnelles
 
-\note[item]{Fourni au compilateur des information lui permettant des optimisations plus pertinentes}
+\note[item]{Fourni au compilateur des informations lui permettant des optimisations plus pertinentes}
 
 			\item \lstinline|[[ no_unique_address ]]| membre statique ne nécessitant pas une adresse unique
 
@@ -2757,8 +2751,8 @@ auto delay_invoke(F f, Args... args) {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-int foo(int a, int b, int c, int d)
-  { return a * b * c + d; }
+int foo(int a, int b, int c, int d) {
+  return a * b * c + d; }
 
 auto baz = bind_front(&foo, 2, 3, 4);
 baz(7);  // 31
@@ -2794,7 +2788,7 @@ bar(6);  // 30\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Thread}
 	\begin{itemize}
-		\item Nouvelle variante de thread : \lstinline|std::jthread|
+		\item Nouvelle variante de thread \lstinline|std::jthread|
 		\begin{itemize}
 			\item Automatiquement arrêté et joint lors de la destruction
 		\end{itemize}
@@ -2805,7 +2799,7 @@ bar(6);  // 30\end{lstlisting}
 	\begin{lstlisting}[language=C++]
 int main() { thread t(foo); }  // Erreur (terminate)\end{lstlisting}
 
-\note[item]{Il faut rajouter un appel à \lstinline|join| pour corriger ce problème}
+\note[item]{Il faut rajouter un appel à \lstinline|join()| pour corriger ce problème}
 
 	\begin{lstlisting}[language=C++]
 int main() { jthread t(foo); } // OK\end{lstlisting}
@@ -2890,10 +2884,10 @@ t.request_stop();\end{lstlisting}
 		\begin{itemize}
 			\item Création avec le nombre de threads attendus
 			\item \lstinline|arrive()| décrémente le compteur
-			\item \lstinline|wait()| attends que le compteur atteigne zéro
-			\item \lstinline|arrive_and_wait()| décrémente le compteur et attends qu'il atteigne zéro
+			\item \lstinline|wait()| attend que le compteur atteigne zéro
+			\item \lstinline|arrive_and_wait()| décrémente le compteur et attend qu'il atteigne zéro
 			\item \lstinline|arrive_and_drop()| décrémente le compteur ainsi que la valeur initiale
-			\item Une fois zéro atteint, les threads en attente sont débloqués et le compteur reprends la valeur initiale décrémentée du nombre de threads \og \textit{droppés}\fg{}
+			\item Une fois zéro atteint, les threads en attente sont débloqués et le compteur reprend la valeur initiale décrémentée du nombre de threads \og \textit{droppés}\fg{}
 		\end{itemize}
 	\end{itemize}
 

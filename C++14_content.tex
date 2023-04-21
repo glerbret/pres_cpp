@@ -133,8 +133,6 @@ ni == nd;    // Erreur de compilation\end{lstlisting}
 		\begin{itemize}
 			\item \textit{Null forward iterator} non comparables avec des itérateurs \og classiques\fg{}
 		\end{itemize}
-
-\note[item]{But ? Pouvoir créer un itérateur sans l'initialiser avec un conteneur existant}
 	\end{alertblock}
 \end{frame}
 
@@ -168,8 +166,6 @@ equal(begin(foo), end(foo), begin(bar), end(bar));\end{lstlisting}
 
 	\begin{itemize}
 		\item \lstinline|std::exchange()| change la valeur d'un objet et retourne l'ancienne
-
-\note[item]{Pas un algorithme à proprement parler, comme \lstinline|std::swap|}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -232,7 +228,7 @@ int foo = 0b101010; // 42\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Séparateurs}
 	\begin{itemize}
-		\item Utilisation possible de ' dans les nombres littéraux
+		\item Utilisation possible de \lstinline|'| dans les nombres littéraux
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -253,9 +249,6 @@ int baz = 010'00;       // 512\end{lstlisting}
 
 \begin{frame}[fragile]
 	\frametitle{User-defined literals standards}
-
-\note[item]{Dans la bibliothèque et non dans le langage}
-
 	\begin{itemize}
 		\item Suffixe \lstinline|s| sur les chaînes : \lstinline|std::string|
 	\end{itemize}
@@ -265,7 +258,7 @@ auto foo = "abcd"s;   // string\end{lstlisting}
 
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Remplace \lstinline|std::string("abcd")|
+			\item Remplace \lstinline|std::string{"abcd"}|
 		\end{itemize}
 	\end{block}
 
@@ -409,7 +402,7 @@ bar();  // foo : 41
 auto baz = [ y = 10 ]() { cout << y << '\n'; };
 baz();  // 10
 
-auto qux = [ z = 2*foo ]() { cout << z << '\n'; };
+auto qux = [ z = 2 * foo ]() { cout << z << '\n'; };
 qux();  // 82\end{lstlisting}
 \end{frame}
 
@@ -418,7 +411,7 @@ qux();  // 82\end{lstlisting}
 	\begin{itemize}
 		\item Capture par déplacement
 	\end{itemize}
-	
+
 	\begin{lstlisting}[language=C++]
 auto foo = make_unique<int>(42);
 auto bar = [ foo = move(foo) ](int i) {
@@ -459,7 +452,7 @@ foo([](int x) { cout << x << endl; });\end{lstlisting}
 
 		\item Peuvent être \lstinline|noexcept|
 		\item Ajout des paramètres par défaut aux lambdas
-	
+
 		\begin{lstlisting}[language=C++]
 auto foo = [] (int bar = 12) { cout << bar << '\n'; };\end{lstlisting}
 	\end{itemize}

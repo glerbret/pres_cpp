@@ -139,7 +139,7 @@ inspect(p) {
 		\item \textit{Library fundamentals 2} : évolutions de la bibliothèque standard
 		\begin{itemize}
 			\item Partiellement intégré en C++17 et C++20
-			\item Pointeurs intelligents non possédant \lstinline|observer_ptr|
+			\item Pointeurs intelligents non possédants \lstinline|observer_ptr|
 			\item Nouveaux algorithmes
 		\end{itemize}
 		\item \textit{Library fundamentals 3}
@@ -227,7 +227,7 @@ inspect(p) {
 	\frametitle{Types}
 	\begin{itemize}
 		\item Relâchement des restrictions sur les \lstinline|typedef _t|
-		\item Mécanismes \textit{compile-time} vérifiant que deux type ont la même représentation mémoire
+		\item Mécanismes \textit{compile-time} vérifiant que deux types ont la même représentation mémoire
 
 \note[item]{P.ex. une structure de deux \lstinline|float| et un tableau de deux \lstinline|float|}
 
@@ -266,7 +266,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Représentation mémoire}
 	\begin{itemize}
-		\item Accès aux octets sous-jacent d'un objet
+		\item Accès aux octets sous-jacents d'un objet
 		\begin{itemize}
 			\item Nouvelle catégorie d'objet \textit{contiguous-layout}
 			\begin{itemize}
@@ -287,7 +287,7 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 		\item Opération \textit{relocate} (déplacement puis destruction)
 
 \note[item]{Opération généralement implémentable par un simple \lstinline|memcpy()|}
-\note[item]{L'idée est de permettre certaines optimisations sur les objets correspondant}
+\note[item]{L'idée est de permettre certaines optimisations sur les objets correspondants}
 
 		\begin{itemize}
 			\item Définition de la notion \textit{relocatable}
@@ -447,9 +447,6 @@ f(x, y);\end{lstlisting}
 		\begin{itemize}
 			\item Contrôle du \textit{layout} pour privilégier taille, ordre de déclaration, visibilité, vitesse, ordre alphabétique, lignes de cache ou règles d'une version antérieure du C++ ou d'un autre langage
 			\item Contrôle de l'alignement (remplaçant de \lstinline|#pragma pack(N)|)
-
-\note[item]{Deux propositions différentes mais compatibles, la première étant en fait un pré-requis}
-
 		\end{itemize}
 		\item Constructeurs par déplacement \lstinline|=bitcopies|
 		\item Extension de \lstinline|=delete| à d'autres construction (variables template)
@@ -729,7 +726,7 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{std::scan}
+	\frametitle{\lstinline|std::scan|}
 	\begin{itemize}
 		\item Pendant du formatage de texte introduit en C++20
 		\item Alternative sûre et robuste à \lstinline|sscanf()|
@@ -811,7 +808,7 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 
 \note[item]{Pour éviter l'usage d'un objet après libération ou suppression de ces dépendances}
 
-		\item Accès par les utilisateurs à la taille réellement allouée
+		\item Accès à la taille réellement allouée
 		\item Spécificateur de stockage des temporaires 
 		\begin{itemize}
 			\item \lstinline|constinit|

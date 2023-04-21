@@ -69,7 +69,7 @@ last: }\end{lstlisting}
 	\frametitle{Compilation conditionnelle}
 	\begin{itemize}
 		\item Ajout de \lstinline|#elifdef| et \lstinline|#elifndef|
-		\item Équivalent à \lstinline|#elif defined| et \lstinline|#elif not defined|
+		\item Équivalents à \lstinline|#elif defined| et \lstinline|#elif not defined|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -80,7 +80,7 @@ last: }\end{lstlisting}
 #endif\end{lstlisting}
 
 	\begin{itemize}
-		\item Se combine avec \lstinline|#if| et \lstinline|#elif|
+		\item Se combinent avec \lstinline|#if| et \lstinline|#elif|
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -130,7 +130,7 @@ p->b = 2;\end{lstlisting}
 			\item Type IEEE binary16
 			\item Support optionnel
 		\end{itemize}
-		\item Ajout des suffixes littéraux correspondant (\lstinline|f16|, \lstinline|f32|, \lstinline|f64|, \lstinline|f128| et \lstinline|bf16|)
+		\item Ajout des suffixes littéraux correspondants (\lstinline|f16|, \lstinline|f32|, \lstinline|f64|, \lstinline|f128| et \lstinline|bf16|)
 		\item Prise en compte par \lstinline|std::format|, \lstinline|std::ostream| et \lstinline|std::istream|
 		\item Prise en compte par \lstinline|std::numeric_limits| et \lstinline|std::is_floating_point|
 		\item Ajout de surcharges dans \lstinline|<cmath>|, \lstinline|<complex>| et \lstinline|<atomic>|
@@ -220,7 +220,7 @@ auto bar = to_underlying(FOO::A); // uint32_t\end{lstlisting}
 		\begin{itemize}
 			\item Code non évalué au \textit{compile-time}
 
-\note[item]{Soit la fonction n'est en pratique jamais appelé au \textit{compile-time} soit la branche contenant ce code n'est exécutée qu'au \textit{run-time}}
+\note[item]{Soit la fonction n'est en pratique jamais appelée au \textit{compile-time} soit la branche contenant ce code n'est exécutée qu'au \textit{run-time}}
 
 			\begin{itemize}
 				\item Variables non littérales
@@ -305,7 +305,7 @@ if ! consteval { ... }\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Durée de vie des temporaires}
 	\begin{itemize}
-		\item Extension de la durée de vie des objets temporaires créés dans l'initialisation d'un range-based for loop jusqu'à la fin de la boucle
+		\item Extension de la durée de vie des objets temporaires créés dans l'initialisation d'un \textit{range-based for loop} jusqu'à la fin de la boucle
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -483,7 +483,7 @@ foo[3, 2, 1] = 42\end{lstlisting}
 	 \begin{itemize}
 	 	\item Possibilité de déclarer \lstinline|static| des \lstinline|operator()|
 	 \end{itemize}
-	 	
+
  	\begin{lstlisting}[language=C++]
 struct Foo {
   static constexpr bool operator()(int i, int j) {
@@ -611,7 +611,7 @@ struct Foo {
 struct Foo {
   template <typename Self>
   void bar(this Self&&, int); };
-	
+
 void ex(Foo& foo, D& d) {
   foo.bar(1);       // Self=Foo&
   move(foo).bar(2); // Self=Foo}\end{lstlisting}
@@ -638,10 +638,10 @@ Foo{}(4);\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-template <typename T> struct A
-{ A(T); };
-template <typename T> struct B : public A<T>
-{ using  A<T>::A; };
+template <typename T> struct A {
+  A(T); };
+template <typename T> struct B : public A<T> {
+  using A<T>::A; };
 
 B b(42);	// OK B<int>\end{lstlisting}
 \end{frame}
@@ -940,7 +940,7 @@ print("Hello, {}!", name);\end{lstlisting}
 			\item Permet la conversion vers un type de pointeur arbitraire
 		\end{itemize}
 		\item \lstinline|out_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer sans l'utiliser
-		\item \lstinline|inout_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer mais aussi l'utiliser
+		\item \lstinline|inout_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer mais aussi de l'utiliser
 	\end{itemize}
 \end{frame}
 
@@ -954,7 +954,7 @@ print("Hello, {}!", name);\end{lstlisting}
 		\begin{itemize}
 			\item \lstinline|empty()| teste la présente d'entrée
 			\item \lstinline|size()| retourne le nombre d'entrée de la \textit{stacktrace}
-			\item \lstinline|begin()|, \lstinline|end()|, \ldots{} retourne les itérateurs sur les entrées
+			\item \lstinline|begin()|, \lstinline|end()|, \ldots{} retournent les itérateurs sur les entrées
 			\item \lstinline|operator[]| accède à une entrée donnée
 			\item \lstinline|to_string()| retourne la description de la \textit{stacktrace}
 			\item \lstinline|operator<<| affiche la \textit{stacktrace}
@@ -1088,8 +1088,8 @@ bar.or_else(func);	// Oups!\end{lstlisting}
 			\item Soit une valeur de type \lstinline|T|, le type de la valeur attendu
 			\item Soit une valeur de type \lstinline|E|, le type d'erreur
 		\end{itemize}
-		\item \lstinline|operator bool()| et \lstinline|has_value()| indique si l'objet contient une valeur
-		\item \lstinline|operator->| et \lstinline|operator*| accède à la valeur 
+		\item \lstinline|operator bool()| et \lstinline|has_value()| indiquent si l'objet contient une valeur
+		\item \lstinline|operator->| et \lstinline|operator*| accèdent à la valeur 
 		\item \lstinline|value()| retourne la valeur
 		\item \lstinline|error()| retourne l'erreur
 	\end{itemize}

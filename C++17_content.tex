@@ -169,7 +169,7 @@ template <typename T> auto foo(T t) {
 if constexpr(is_pointer_v<T>)
   return *t;
 else
-  return t;}
+  return t; }
 
 int a = 10, b = 5;
 int* ptr = &b;
@@ -376,8 +376,8 @@ for(const auto& [k,v] : myMap) {
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-if(auto [iter, succeeded] = myMap.insert(value); succeeded) {
-  ... }\end{lstlisting}
+if(auto [iter, succeeded] = myMap.insert(value); succeeded)
+{ ... }\end{lstlisting}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -593,7 +593,7 @@ Foo bar = {42}; // Erreur\end{lstlisting}
 		\item Supporte les opérations binaires (décalage, et, ou, non)
 		\item Supporte les constructions depuis un type entier
 		\item \ldots{} et les conversions vers des entiers (\lstinline|std::to_integer|)
-		\item Mais ne supporte pas les opérations arithmétiques
+		\item Mais pas les opérations arithmétiques
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -833,7 +833,7 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::variant|}
 	\begin{itemize}
-		\item Union \textit{type-safe} contenant une valeur d'un type choisi parmi n
+		\item Union \textit{type-safe} contenant une valeur d'un type choisi parmi $n$
 		\item Type contenu dépend de la valeur assignée
 	\end{itemize}
 
@@ -847,7 +847,7 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 
 		\item \lstinline|std::variant| \textit{default-constructible} seulement si le premier type l'est
 
-\note[item]{Le \lstinline|variant| contient alors le premier type initialisé par défaut}
+\note[item]{Le \lstinline|std::variant| contient alors le premier type initialisé par défaut}
 		\end{itemize}
 	\end{alertblock}
 
@@ -879,10 +879,10 @@ from_chars(begin(str), end(str), val);\end{lstlisting}
 		\item \lstinline|std::holds_alternative<>()| teste le type contenu
 		\item \lstinline|index()| retourne l'index d'un type donnée
 		\item Construction en-place
-
-		\begin{lstlisting}[language=C++]
-variant<int, float, string> v{in_place_index<0>, 10};\end{lstlisting}
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+variant<int, float, string> v{in_place_index<0>, 10};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -924,7 +924,7 @@ for(auto item : v)
 \note[item]{Et ce peut être une structure/classe présentant une surcharge de \lstinline|operator()| pour chacun des types}
 	\end{alertblock}
 
-	\begin{block}{En attendant C++17 \ldots{}}
+	\begin{block}{En attendant C++17}
 		\begin{itemize}
 			\item Utilisez Boost.Variant
 		\end{itemize}
@@ -966,9 +966,20 @@ baz("azerty"); // 6\end{lstlisting}
 	\frametitle{Fold expression}
 	\begin{itemize}
 		\item Application d'un opérateur binaire à un \textit{parameter pack}
-		\item Support du \textit{right fold} \lstinline|(pack op ...)| et du \textit{left fold} \lstinline|(... op pack)|
-		\item Éventuellement avec un valeur initiale : \lstinline|(pack op ... op init)| ou \lstinline|(init op ... op pack)|
+		\item Support du \textit{right fold} et du \textit{left fold}
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+(pack op ...);  // right fold
+(... op pack);  // left fold\end{lstlisting}
+
+	\begin{itemize}
+		\item Éventuellement avec un valeur initiale
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+(pack op ... op init);
+(init op ... op pack);\end{lstlisting}
 
 	\begin{center}
 		\includegraphics[height=0.30\textheight]{input_src/Left-fold-transformation.png} \includegraphics[height=0.30\textheight]{input_src/Right-fold-transformation.png}
@@ -1043,7 +1054,7 @@ void FoldPrint(Args&&... args) {
 FoldPrint(10, 'a', "ert"s);\end{lstlisting}
 
 	\begin{itemize}
-		\item Y compris \og ,\fg{} qui va donner une séquence d'actions
+		\item Y compris \og \lstinline|,|\fg{} qui va donner une séquence d'actions
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1062,7 +1073,7 @@ push_back_vec(foo, 10, 20, 56);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Contraintes du range-based for loop}
 	\begin{itemize}
-		\item Utilisation possible de types différents pour \lstinline|end| et \lstinline|begin|
+		\item Utilisation possible de types différents pour \lstinline|begin| et \lstinline|end|
 		\item Permet de traiter des paires d'itérateurs
 		\item \ldots{} mais aussi un itérateur et une taille
 		\item \ldots{} ou un itérateur et une sentinelle de fin
@@ -1072,7 +1083,7 @@ push_back_vec(foo, 10, 20, 56);\end{lstlisting}
 
 \subsection*{classe}
 \begin{frame}[fragile]
-	\frametitle{Héritage de constructeur}
+	\frametitle{Héritage de constructeurs}
 	\begin{itemize}
 		\item Visibilité des constructeurs hérités avec leurs paramètres par défaut
 
@@ -1152,8 +1163,6 @@ if(uncaught_exceptions()) {
 
 	\begin{lstlisting}[language=C++]
 char x = u8'x';\end{lstlisting}
-
-\note[item]{Uniformisation avec les chaînes}
 \end{frame}
 
 \subsection*{Template}
@@ -1161,11 +1170,11 @@ char x = u8'x';\end{lstlisting}
 	\frametitle{Déduction de template dans les constructeurs}
 	\begin{itemize}
 		\item Déduction des paramètres templates d'une classe à la construction
-		\item Plus de déclaration explicite des paramètres template
+		\item Plus de déclaration explicite des paramètres templates
 		\item Ni de \textit{make helpers}
 	\end{itemize}
 
-\note[item]{Généralisation de la déduction de paramètres template aux constructeurs}
+\note[item]{Généralisation de la déduction de paramètres templates aux constructeurs}
 \note[item]{Avant la déduction ne fonctionnait que pour les fonctions membres, pas pour les constructeurs}
 
 	\begin{lstlisting}[language=C++]
@@ -1310,8 +1319,8 @@ baz();     // Affiche baz\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-constexpr int AddEleven(int n)
-  { return [n] { return n+11; }(); }
+constexpr int AddEleven(int n) {
+  return [n] { return n+11; }(); }
 
 AddEleven(5);   // 16\end{lstlisting}
 \end{frame}
@@ -1490,10 +1499,10 @@ enum foo {
 	\begin{itemize}
 		\item Attributs inconnus doivent être ignorés
 
-\note[item]{Clarification de la norme, auparavant un compilateur pouvait lever une erreur car rien n'était précisé.}
-\note[item]{Maintenant, il ne le peut plus et doit seulement ignorer l'attribut (éventuellement avec un avertissement).}
+\note[item]{Clarification de la norme, auparavant un compilateur pouvait lever une erreur car rien n'était précisé}
+\note[item]{Maintenant, il ne le peut plus et doit seulement ignorer l'attribut (éventuellement avec un avertissement)}
 
-		\item \lstinline|using| des attributs non standard
+		\item \lstinline|using| des attributs non standards
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1555,8 +1564,6 @@ foo();  // Idealement : warning\end{lstlisting}
 		\end{itemize}
 		\begin{lstlisting}[language=C++]
 (void)foo();\end{lstlisting}
-
-\note[item]{Au moins avec GCC, à voir avec Visual C++ et Clang} 
 	\end{block}
 \end{frame}
 
@@ -1619,8 +1626,6 @@ int foo([[ maybe_unused ]] int a,
 	\begin{block}{Au delà du compilateur}
 		\begin{itemize}
 			\item Prise en compte par d'autres outils souhaitable
-
-\note[item]{Autres outils : générateurs de documentation, analyseurs statique de code}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -1671,7 +1676,7 @@ scoped_lock lck(first_mutex, second_mutex);\end{lstlisting}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
-void foo(int a, long b, string c) {}
+void foo(int a, long b, string c) { ... }
 
 tuple bar{42, 5L, "bar"s};
 apply(foo, bar);\end{lstlisting}
@@ -1802,7 +1807,7 @@ none == nullopt;  // true\end{lstlisting}
 
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Préférez \lstinline|optional| aux pointeurs bruts pour gérer des données optionnelles
+			\item Préférez \lstinline|std::optional| aux pointeurs bruts pour les données optionnelles
 		\end{itemize}
 
 \note[item]{Sémantique plus précise, pas de risque de tentative de libération ou de fuite mémoire, \lstinline|value()| et \lstinline|value_or()| permettent de simplifier l'usage}
@@ -1824,9 +1829,6 @@ none == nullopt;  // true\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|void*| \textit{type-safe} contenant un objet de n'importe quel type (ou vide)
 		\item Implémentation de \textit{Type-erasure}
-
-\note[item]{Pour les données, tout comme \lstinline|std::function| est un \textit{type-erasure} pour les appelables}
-
 		\item Type contenu dépend de la valeur assignée
 	\end{itemize}
 
@@ -1901,7 +1903,7 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 \note[item]{L'information de type récupérée ainsi est \textit{implementation-dependant} et non utilisable tel quel mais peut être comparé au retour de \lstinline|type_id|}
 	\end{itemize}
 
-	\begin{block}{En attendant C++17 \ldots{}}
+	\begin{block}{En attendant C++17}
 		\begin{itemize}
 			\item Utilisez Boost.Any
 		\end{itemize}
@@ -1916,7 +1918,7 @@ int* foo = any_cast<bool>(&a);     // nullptr\end{lstlisting}
 	\frametitle{\lstinline|std::string_view|}
 	\begin{itemize}
 		\item Vue sur une séquence contiguë de caractères
-		\item Quatre spécialisations standard (une par type de caractères)
+		\item Quatre spécialisations standards (une par type de caractères)
 		\item Référence non possédante sur une séquence pré-existante
 		\item Pas de modification de la séquence depuis la vue
 		\item Constructible depuis \lstinline|std::string|, une chaîne C ou un pointeur et une taille
@@ -1965,11 +1967,6 @@ cout << bar.size() << " - " << bar << '\n';
 			\item Souvent meilleures que les fonctionnalités équivalentes de \lstinline|string|
 			\item Mais pas toujours, donc mesurez
 		\end{itemize} 
-
-\note[item]{Et que boost.split}
-\note[item]{Notamment car il y a moins d'allocation mémoire}
-\note[item]{La contrepartie c'est qu'il n'y a pas de chaîne de construite ni de modification possible}
-\note[item]{Travailler à base de chaîne peut être plus rapide lorsque le compilateur peut optimiser correctement le code avec les chaîne, si on construit une chaîne au final p.ex.}
 	\end{exampleblock}
 
 	\vskip 6mm plus 10fill
@@ -2130,7 +2127,7 @@ bar.c_str();       // const char*\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Parallelism TS}
 	\begin{itemize}
-		\item Surcharges \og parallèles\fg{} de nombreux algorithmes standard
+		\item Surcharges parallèles de nombreux algorithmes standards
 		\item Politiques d'exécution (séquentielle, parallèle et parallèle+vectorisée)
 	\end{itemize}
 
