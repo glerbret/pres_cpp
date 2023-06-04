@@ -195,6 +195,33 @@ inspect(p) {
 	\end{itemize}
 \end{frame}
 
+\subsection*{Dépréciation et suppression}
+\begin{frame}[fragile]
+	\frametitle{Dépréciation}
+	\begin{itemize}
+		\item Dépréciation des modes d'arrondi (\lstinline|fesetround()|)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Suppression}
+	\begin{itemize}
+		\item Suppression d'éléments précédemment dépréciés
+		\begin{itemize}
+			\item Conversion arithmétique d'énumération
+			\item Comparaison de tableau C (se fait sur les adresses)
+			\item \lstinline|volatile|
+			\item \lstinline|std::strstream|
+			\item \lstinline|std::allocator|
+			\item API d'accès atomique à \lstinline|std::shared_ptr|
+			\item \lstinline|std::basic_string::reserve()| sans argument
+			\item \textit{Unicode Conversion Facets}
+			\item \lstinline|wstring_convert|
+			\item \textit{Locale Category Facets for Unicode}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
 \subsection*{Syntaxe}
 \begin{frame}[fragile]
 	\frametitle{Vérification statique}
@@ -203,6 +230,26 @@ inspect(p) {
 		\begin{itemize}
 			\item Annotations de types \textit{claim} / \textit{assertion}
 			\item Recouvre des points du contract TS mais plus ambitieux
+		\end{itemize}
+		\item Support de messages construits par \lstinline|static_assert|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+static_assert(sizeof(S) == 1,
+              format("Attendu 1, obtenu {}", sizeof(S)));\end{lstlisting}
+\end{frame}
+
+\subsection*{Syntaxe}
+\begin{frame}[fragile]
+	\frametitle{Mots-clés}
+	\begin{itemize}
+		\item Conversion de macros en mots-clés
+
+\note[item]{Pour être utilisable avec les modules}
+
+		\begin{itemize}
+			\item \lstinline|assert|
+			\item \lstinline|offsetof|
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -219,6 +266,8 @@ inspect(p) {
 		\item Ajout des algorithmes Unicode
 
 \note[item]{Algorithmes défini par Unicode pour travailler sur les séquences de code points}
+
+		\item Support d'Unicode (UTF-8, UTF-16 et UTF-32) dans la bibliothèque standard
 	\end{itemize}
 \end{frame}
 
@@ -315,7 +364,14 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 \note[item]{Alignement sur des évolutions C en cours}
 
 		\item Ajout d'une boucle \lstinline|do_until|
+		\item Version \textit{generator-base} de \textit{for loop}
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+struct generator { ... }
+
+for(int i: generator())
+{ ... }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -451,6 +507,7 @@ f(x, y);\end{lstlisting}
 		\item Constructeurs par déplacement \lstinline|=bitcopies|
 		\item Extension de \lstinline|=delete| à d'autres construction (variables template)
 		\item \lstinline|=delete| avec un message pour le diagnostic de compilation
+		\item Classes de base \lstinline|std::noncopyable| et \lstinline|std::nonmovable|
 	\end{itemize}
 \end{frame}
 
@@ -478,6 +535,16 @@ f(x, y);\end{lstlisting}
 
 \subsection*{Conteneurs}
 \begin{frame}[fragile]
+	\frametitle{\textit{Initializer-list}}
+	\begin{itemize}
+		\item \textit{static storage} possible pour les \textit{braced-initializer-list}
+
+\note[item]{Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'\textit{initializer list} puis vers le conteneur}
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Conteneurs}
 	\begin{itemize}
 		\item Nouveaux conteneurs
@@ -495,6 +562,7 @@ f(x, y);\end{lstlisting}
 		\end{itemize}
 		\item \lstinline|std::submdspan()| retourne une vue sur un sous-ensemble d'un \lstinline|std::mdspan|
 		\item \lstinline|span| de taille fixe
+		\item Ajout de \lstinline|at()| à \lstinline|std::span|
 		\item Relâchement des contraintes sur les tableaux C
 		\begin{itemize}
 			\item Initialisation des tableaux d'agrégats
@@ -503,6 +571,8 @@ f(x, y);\end{lstlisting}
 		\end{itemize}
 
 \note[item]{Copies des tableaux membres en particulier}
+
+		\item Correction de dysfonctionnements de \lstinline|std::flat_map| et \lstinline|std::flat_set| 
 	\end{itemize}
 \end{frame}
 
@@ -531,6 +601,7 @@ f(x, y);\end{lstlisting}
 
 \note[item]{Déjà le cas pour \lstinline|std::array|, extension aux tableaux C}
 
+		\item Utilisation d'\textit{aggregates} comme \textit{tuple-like}
 		\item Amélioration de l'ergonomie d'accès aux champs des \lstinline|std::tuple|
 	\end{itemize}
 
@@ -560,6 +631,7 @@ std::get<0>(t)\end{lstlisting}
 	\frametitle{Algorithmes}
 	\begin{itemize}
 		\item \lstinline|std::find_last()| recherche depuis la fin d'un conteneur
+		\item \lstinline|std::is_uniqued| test l'absence de deux valeurs consécutives identiques
 		\item Gestion des UUID
 		\item Fonctions statistiques (moyenne, médiane, variance, \ldots{})
 		\item Améliorations du générateur aléatoire
@@ -572,7 +644,14 @@ std::get<0>(t)\end{lstlisting}
 	\frametitle{Ranges}
 	\begin{itemize}
 		\item Ajout d'un paramètre \og pas\fg{} à \lstinline|std::iota_view|
+		\item Utilisation de \lstinline|std::get_element<>| comme point de configuration
 	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+// Tri sur le premier element du tuple
+vector<tuple<int, int>> v{{3,1},{2,4},{1,7}};
+ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
+
 \end{frame}
 
 \subsection*{Traits}
@@ -730,6 +809,29 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{\lstinline|std::format|}
+	\begin{itemize}
+		\item Davantage de vérifications \textit{compile-time} du type des arguments
+		\begin{itemize}
+			\item Déjà le cas de la majorité des erreurs
+			\item \ldots{} mais pas de toutes
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+// Erreur run-time
+format("{:>{}}", "hello", "10");\end{lstlisting}
+
+	\begin{itemize}
+		\item Amélioration du support de \lstinline|std::filesystem::path|
+		\begin{itemize}
+			\item Présence de caractères d'échappement (p.ex. \lstinline|\n|)
+			\item Support de caractère UTF-8
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{\lstinline|std::scan|}
 	\begin{itemize}
 		\item Pendant du formatage de texte introduit en C++20
@@ -789,6 +891,14 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 
 \subsection*{Gestion mémoire}
 \begin{frame}[fragile]
+	\frametitle{Références}
+	\begin{itemize}
+		\item Ajout de références possédantes, \lstinline|T~|, gérant la destruction de l'objet référencé
+		\item \textit{Reallocation constructor} transférant la responsabilité de l'objet initial à l'objet créé : \lstinline|T::T(T~)|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Pointeurs}
 	\begin{itemize}
 		\item Suppression de \lstinline|NULL| et interdiction de \lstinline|0| comme pointeur nul
@@ -812,6 +922,14 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 
 \note[item]{Pour éviter l'usage d'un objet après libération ou suppression de ces dépendances}
 
+		\begin{itemize}
+			\item \textit{Aliasing}
+			\item Suivi des dépendances
+			\item Annotation de types
+			\item Gestion de \textit{lifetime}
+			\item \ldots
+		\end{itemize}
+
 		\item Accès à la taille réellement allouée
 		\item Spécificateur de stockage des temporaires 
 		\begin{itemize}
@@ -828,6 +946,7 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 	\frametitle{Concurrence}
 	\begin{itemize}
 		\item Version \lstinline|atomic| de minimum et maximum
+		\item Obtention de l'adresse de l'objet référencé par \lstinline|std::atomic_ref| via \lstinline|data()|
 		\item Invocation concurrente
 		\item Configuration du nom et de la taille de la pile des threads
 		\item \lstinline|std::volatile_load<T>| et \lstinline|std::volatile_store<T>|
