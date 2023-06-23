@@ -185,8 +185,7 @@ inspect(p) {
 		\end{itemize}
 		\item \textit{Concurrency} 2
 		\begin{itemize}
-			\item \textit{hazard pointers} : unique écrivain, multiples lecteurs
-			\item \textit{read-copy-update data structure}
+			\item Partiellement accepté pour C++26
 		\end{itemize}
 		\item \textit{Linear Algebra}
 			\begin{itemize}
@@ -231,15 +230,9 @@ inspect(p) {
 			\item Annotations de types \textit{claim} / \textit{assertion}
 			\item Recouvre des points du contract TS mais plus ambitieux
 		\end{itemize}
-		\item Support de messages construits par \lstinline|static_assert|
 	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-static_assert(sizeof(S) == 1,
-              format("Attendu 1, obtenu {}", sizeof(S)));\end{lstlisting}
 \end{frame}
 
-\subsection*{Syntaxe}
 \begin{frame}[fragile]
 	\frametitle{Mots-clés}
 	\begin{itemize}
@@ -258,11 +251,6 @@ static_assert(sizeof(S) == 1,
 \begin{frame}[fragile]
 	\frametitle{Encodage}
 	\begin{itemize}
-		\item Ajout de \lstinline|@|, \lstinline|$| et \lstinline|`| au jeu de caractères de base
-
-\note[item]{Ajoutés en C (C23)}
-\note[item]{Supportés par tous les encodages communément utilisés}
-
 		\item Ajout des algorithmes Unicode
 
 \note[item]{Algorithmes défini par Unicode pour travailler sur les séquences de code points}
@@ -811,18 +799,6 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format|}
 	\begin{itemize}
-		\item Davantage de vérifications \textit{compile-time} du type des arguments
-		\begin{itemize}
-			\item Déjà le cas de la majorité des erreurs
-			\item \ldots{} mais pas de toutes
-		\end{itemize}
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-// Erreur run-time
-format("{:>{}}", "hello", "10");\end{lstlisting}
-
-	\begin{itemize}
 		\item Amélioration du support de \lstinline|std::filesystem::path|
 		\begin{itemize}
 			\item Présence de caractères d'échappement (p.ex. \lstinline|\n|)
@@ -979,14 +955,6 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 	\frametitle{Regex}
 	\begin{itemize}
 		\item Ajout de regex \textit{compile-time}
-	\end{itemize}
-\end{frame}
-
-\subsection*{Système de fichiers}
-\begin{frame}[fragile]
-	\frametitle{Système de fichiers}
-	\begin{itemize}
-		\item Accès bas-niveau aux IO : \lstinline|file_handle| et \lstinline|path_handle|
 	\end{itemize}
 \end{frame}
 

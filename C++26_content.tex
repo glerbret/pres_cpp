@@ -1,0 +1,170 @@
+\documentclass[C++.tex]{subfiles}
+\begin{document}
+
+\section{C++26}
+\subsection*{Présentation}
+\begin{frame}
+	\frametitle{Présentation}
+	\begin{itemize}
+		\item Début formel des travaux en juin 2023
+%		\item Dernier \textit{Working Draft} : \href{https://github.com/cplusplus/draft/releases/download/n4917/n4917.pdf}{n4917}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Syntaxe}
+\begin{frame}[fragile]
+	\frametitle{Vérification statique}
+	\begin{itemize}
+		\item Support de messages construits par \lstinline|static_assert|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+static_assert(sizeof(S) == 1,
+format("Attendu 1, obtenu {}", sizeof(S)));\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textit{Lexer}}
+	\begin{itemize}
+		\item Suppression de comportements indéfinis
+		\begin{itemize}
+			\item \textit{Universal characters} sur plusieurs lignes autorisés
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{lstlisting}[language=C++]
+int \\
+u\
+0\
+3\
+9\
+1 = 0;\end{lstlisting}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item Construction possible d'\textit{universal characters} par des macros
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+#define CONCAT(x, y) x ## y
+int CONCAT(\, u0393) = 0;\end{lstlisting}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item Une chaîne non terminée est une erreur
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Encodage}
+\begin{frame}[fragile]
+	\frametitle{Encodage}
+	\begin{itemize}
+		\item Ajout de \lstinline|@|, \lstinline|$| et \lstinline|`| au jeu de caractères de base
+	
+\note[item]{Ajoutés en C (C23)}
+\note[item]{Supportés par tous les encodages communément utilisés}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Variables}
+\begin{frame}[fragile]
+	\frametitle{\textit{Placeholders}}
+	\begin{itemize}
+		\item Joker \lstinline|_| pour des variables inutilisées
+	\end{itemize}
+	
+	\begin{lstlisting}[language=C++]
+auto _ = foo();
+// Equivalent a [[maybe_unused]] auto _ = foo();\end{lstlisting}
+
+	\begin{lstlisting}[language=C++]
+std::lock_guard _(mutex);
+auto  [x, y, _] = f();
+inspect(foo) { 
+	_ => bar; };\end{lstlisting}
+\end{frame}
+
+\subsection*{constexpr}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|constexpr|}
+	\begin{itemize}
+		\item Davantage de \lstinline|constexpr| dans la bibliothèque standard
+		\item Conversion depuis \lstinline|void*| dans des contextes \lstinline|constexpr|
+		\begin{itemize}
+			\item \lstinline|std::format()| au compile-time
+			\item \lstinline|std::function_ref|, \lstinline|std::function| et \lstinline|std::any| \lstinline|constexpr|
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Gestion mémoire}
+\begin{frame}[fragile]
+	\frametitle{\textit{lifetime}}
+	\begin{itemize}
+		\item \lstinline|std::is_within_lifetime()| indique si l'objet pointé est vivant
+		\item \ldots{} en particulier si un membre d'une union est active
+	\end{itemize}
+\end{frame}
+
+\subsection*{Multithreading}
+\begin{frame}[fragile]
+	\frametitle{Gestion mémoire}
+	\begin{itemize}
+		\item \textit{hazard pointers} : unique écrivain, multiples lecteurs
+		\item Structure de donnée \textit{read-copy update} : planification d'actions (p.ex. suppression) à réaliser plus tard
+	\end{itemize}
+\end{frame}
+
+\subsection*{Programmation fonctionnelle}
+\begin{frame}[fragile]
+	\frametitle{Type appelable}
+	\begin{itemize}
+		\item Ajout de \lstinline|std::copiable_function| pour les fonctions copiables
+
+\note[item]{Pendant de \lstinline|std::move_only_function|}
+
+		\item Ajout de \lstinline|std::function_ref|
+		\begin{itemize}
+			\item Type référence pour le passage d'appelable à une fonction
+			\item Plus générique et moins gourmand que \lstinline|std::function| et équivalents
+	
+\note[item]{Les fonctions n'ont pas besoin d'être copiables ni déplaçables}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Flux}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::format|}
+	\begin{itemize}
+		\item Davantage de vérifications \textit{compile-time} du type des arguments
+		\begin{itemize}
+			\item Déjà le cas de la majorité des erreurs
+			\item \ldots{} mais pas de toutes
+		\end{itemize}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+// Erreur run-time
+format("{:>{}}", "hello", "10");\end{lstlisting}
+
+	\begin{itemize}
+		\item Formatage des pointeurs
+	\end{itemize}
+\end{frame}
+
+\subsection*{Système de fichiers}
+\begin{frame}[fragile]
+	\frametitle{Accès bas-niveaux aux IO}
+	\begin{itemize}
+		\item Alias sur le descripteur de fichier de la plateforme : \lstinline|native_handle_type|
+		
+\note[item]{\lstinline|int| sous POSIX, \lstinline|HANDLE| (\lstinline|void*|) sous Windows}
+		 
+		\item \lstinline|native_handle()| retourne ce descripteur
+	\end{itemize}
+\end{frame}
+
+\end{document}
