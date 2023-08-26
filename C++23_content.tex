@@ -353,6 +353,9 @@ for(using T = int; T e : v) {
 	\frametitle{Suffixes littéraux}
 	\begin{itemize}
 		\item Suffixe \lstinline|uz| pour \lstinline|size_t|
+
+\note[item]{Ou toute autre combinaison de U et Z, minuscule ou majuscule}
+
 		\item Suffixe \lstinline|z| pour le type entier signé correspondant à \lstinline|size_t|
 
 \note[item]{Typiquement le retour de \lstinline|std::ssize()|}
@@ -469,11 +472,10 @@ foo[3, 2, 1] = 42\end{lstlisting}
 				\item De \lstinline|a(x, y, z)| en \lstinline|a[x][y][z]| (et  \lstinline|a(x)| en \lstinline|a[x]|)
 				\item De \lstinline|a[x, y, z]| en \lstinline|a[x][y][z]|
 			\end{itemize}
-			\item Extension aux tableaux C et aux \lstinline|operator[]| non-membres
+			\item Extension aux tableaux C, aux conteneurs standards existants et aux \lstinline|operator[]| non-membres
 		\end{itemize}
 	\end{block}
 
-	\vskip 5mm plus 10fill
 	\hfill
 	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:3,endLineNumber:13,positionColumn:3,positionLineNumber:13,selectionStartColumn:3,selectionStartLineNumber:13,startColumn:3,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%0Atemplate+%3Ctypename+T,+std::size_t+Z,+std::size_t+Y,+std::size_t+X%3E%0Astruct+Array3d%0A%7B%0A++T%26+operator%5B%5D(std::size_t+z,+std::size_t+y,+std::size_t+x)%0A++%7B%0A++++return+foo%5Bz+*+Y+*+X+%2B+y+*+X+%2B+x%5D%3B%0A++%7D%0A%0A++std::array%3CT,+X+*+Y+*+Z%3E+foo%3B%0A%7D%3B%0A+%0Aint+main()%0A%7B%0A++Array3d%3Cint,+4,+3,+2%3E+bar%3B%0A++bar%5B3,+2,+1%5D+%3D+42%3B%0A++std::cout+%3C%3C+bar%5B3,+2,+1%5D+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
@@ -531,10 +533,21 @@ auto foo = [j=0]() mutable -> decltype(j) { return j++; };\end{lstlisting}
 
 	\begin{lstlisting}[language=C++]
 [] [[ attr ]] () ->int { return 42; };\end{lstlisting}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Évolutions des lambdas}
 	\begin{itemize}
 		\item Support des attributs \lstinline|[[ nodiscard ]]|, \lstinline|[[ deprecated ]]|, \lstinline|[[ noreturn ]]|
+		\item Lambdas \lstinline|static| : \lstinline|operator()| de l'objet généré est \lstinline|static|
 	\end{itemize}
+	
+	\begin{alertblock}{Limites}
+		\begin{itemize}
+			\item \lstinline|static| et \lstinline|mutable| sont mutuellement exclusifs
+			\item Liste de capture vide
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -967,6 +980,22 @@ print("Hello, {}!", name);\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Bibliothèque de \textit{Stacktrace}}
+	\begin{lstlisting}[language=C++]
+auto trace = stacktrace::current();
+for(const auto& entry: trace) {
+  cout << "Description: " << entry.description() << "\n";
+  cout << "file: " << entry.source_file() << "\n";
+  cout << "line: " << entry.source_line() << "\n";
+  cout << "------------------------------------" << "\n";}\end{lstlisting}
+
+	\vskip 10mm plus 10fill
+	\hfill
+	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:20,positionColumn:1,positionLineNumber:20,selectionStartColumn:1,selectionStartLineNumber:20,startColumn:1,startLineNumber:20),source:'%23include+%3Cstacktrace%3E%0A%23include+%3Ciostream%3E%0A%0Avoid+foo()%0A%7B%0A++auto+trace+%3D+std::stacktrace::current()%3B%0A++for+(const+auto%26+entry:+trace)%0A++%7B%0A++++std::cout+%3C%3C+%22Description:+%22+%3C%3C+entry.description()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+%22file:+%22+%3C%3C+entry.source_file()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+%22line:+%22+%3C%3C+entry.source_line()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+%22------------------------------------%22+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic+-lstdc%2B%2B_libbacktrace',overrides:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
+\end{frame}
+
 
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::unreachable()|}
