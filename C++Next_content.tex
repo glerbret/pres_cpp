@@ -48,7 +48,7 @@
 \begin{frame}[fragile]
 	\frametitle{TS - Pattern matching}
 	\begin{itemize}
-		\item Utilisation du mot clé \lstinline|inspect| et du \textit{wildcard} \lstinline|__|
+		\item Utilisation du mot clé \lstinline|inspect| (ou \lstinline|switch|) et du \textit{wildcard} \lstinline|__|
 		\item Utilisable sur
 		\begin{itemize}
 			\item Entiers
@@ -221,6 +221,17 @@ inspect(p) {
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{\textit{Erroneous behavior}}
+	\begin{itemize}
+		\item Ajout d'un nouveau type de comportement : \textit{erroneous behavior}
+		\item Indique un code incorrect, mais bien défini (dont \textit{implementation-defined} et \textit{unspecified behavior})
+		\item Recommandation au compilateur de lever un warning
+		\item Compilateur peut rejeter le code
+		\item Applicable aux lectures de variables non initialisées
+	\end{itemize}
+\end{frame}
+
 \subsection*{Syntaxe}
 \begin{frame}[fragile]
 	\frametitle{Vérification statique}
@@ -339,6 +350,22 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 			\item Traits \lstinline|std::is_relocatable|, \lstinline|std::is_nothrow_relocatable| et \lstinline|std::is_trivially_relocatable|
 			\item Attribut \lstinline|[[ trivially_relocatable ]]|
 			\item Algorithmes gérant cette opération : \lstinline|std::relocate_at()|, \lstinline|std::uninitialized_relocate()| et \lstinline|std::uninitialized_relocate_n()|
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Variables}
+\begin{frame}[fragile]
+	\frametitle{\textit{Shadowing}}
+	\begin{itemize}
+		\item Levée plusieurs restrictions
+		\begin{itemize}
+			\item Masquage avec un type \lstinline|void|
+			
+\note[item]{Empêcher l'utilisation de la variable masqué}
+			
+			\item Initialisation de la nouvelle variable avec l'ancienne variable de même nom
+			\item Masquage sans création d'une nouvelle portée
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -477,6 +504,15 @@ f(x, y);\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
+\subsection*{Structured binding}
+\begin{frame}[fragile]
+	\frametitle{Structured binding}
+	\begin{itemize}
+		\item Support du \textit{structured binding} sur \lstinline|std::extents|
+	\end{itemize}
+\end{frame}
+
+
 \subsection*{Classes}
 \begin{frame}[fragile]
 	\frametitle{Classes}
@@ -544,6 +580,7 @@ f(x, y);\end{lstlisting}
 			\item Vecteur de capacité fixée en \textit{compile-time} \lstinline|std::static_vector|
 
 \note[item]{Contrairement à \lstinline|std::array| la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
+\note[item]{Nom non encore fixé, potentiellement \lstinline|std::inplace_vector|}
 
 			\item Queue concurrente
 			\item \textit{Bucket array} \lstinline|std::hive| : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
@@ -804,6 +841,16 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 			\item Présence de caractères d'échappement (p.ex. \lstinline|\n|)
 			\item Support de caractère UTF-8
 		\end{itemize}
+		\item Amélioration du support de \lstinline|std::chrono::time_point|
+		\item Ajout de formateurs
+		\begin{itemize}
+			\item Valeurs atomiques
+			\item Générateurs aléatoires et distributions
+			\item Pointeurs et \textit{smart pointers}
+			\item \lstinline|std::optional|, \lstinline|std::variant|, \lstinline|std::any| et \lstinline|std::expected|
+			\item \lstinline|std::mdspan|, \lstinline|std::flat_map| et \lstinline|std::flat_set|
+		\end{itemize}
+		\item Possibilité de fournir une chaîne de format au \textit{runtime}
 	\end{itemize}
 \end{frame}
 
