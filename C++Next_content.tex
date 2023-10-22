@@ -33,9 +33,16 @@
 		\item Diverses propositions de déclaration
 		\begin{itemize}
 			\item Attributs : \lstinline|[[assert:...]]|, \lstinline|[[pre:...]]| et \lstinline|[[post:...]]|
-			\item Conditions : \lstinline|pre(...)|, \lstinline|post(...)|
+			\item Syntaxe \og{}naturelle\fg{} : \lstinline|pre(...)|, \lstinline|post(...)|
 		\end{itemize}
-		\item Quatre comportements : \lstinline|assume|, \lstinline|ignore|, \lstinline|observe| et \lstinline|enforce|
+		\item Plusieurs comportements
+		\begin{itemize}
+			\item \lstinline|ignore| : contrat non vérifié
+			\item \lstinline|enforce| : appel au \textit{handler} de violation de contrat et terminaison
+			\item \lstinline|observe| : appel au \textit{handler} de violation de contrat et poursuite
+
+\note[item]{\lstinline|enforce| : c'est un arrêt systématique, \lstinline|observe| : on laisse le \textit{handler} décider}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -492,6 +499,14 @@ static_assert(sizeof(S) == 1,
 
 		\item Paramètres \lstinline|constexpr| et \og{}\textit{maybe} \lstinline|constexpr|\fg{}
 		\item Fonctions \textit{heap-free}
+		\item Retour \lstinline|std::move(x)| éligible au NRVO si \lstinline|x| l'est
+	\end{itemize}
+\end{frame}
+
+\subsection*{Fonctions}
+\begin{frame}[fragile]
+	\frametitle{Évolutions des fonctions}
+	\begin{itemize}
 		\item Possibilité de déterminer l'appelant
 		\item Arguments nommés
 	\end{itemize}
@@ -617,6 +632,26 @@ p => q;
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{itemize}
+		\item Possibilité de déclaré \lstinline|friend| un \textit{parameter pack}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+template <typename T>
+class Foo {
+  friend T;	// OK en C++23 et avant
+  ...};
+
+template <typename... Ts>
+class Bar {
+	friend Ts...;	// Invalide en C++23
+	...};\end{lstlisting}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Méta-classes}
 	\begin{itemize}
 		\item Construction de types de classes (dont les classes elles-mêmes) ayant
@@ -646,6 +681,7 @@ p => q;
 	\begin{itemize}
 		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
 		\item Objet standard pour le retour d'erreur (\lstinline|status_code| et \lstinline|error|)
+		\item Récupération des informations de l'exception contenue dans un \lstinline|std::exception_ptr|
 	\end{itemize}
 \end{frame}
 
@@ -790,6 +826,7 @@ ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
 		\item Traits et fonctions pour garantir des conversions sans perte
 		\item Trait indiquant si un type \textit{trivially default constructible} peut être initialisé en mettant tous les octets à 0
 		\item Amélioration de l'ergonomie de \lstinline|std::integral_constant<int>|
+		\item Trait \lstinline|std::is_virtual_base_of| indiquant si une classe est une classe de base virtuelle d'une autre
 	\end{itemize}
 \end{frame}
 
@@ -809,6 +846,8 @@ ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
 		\item \lstinline|std::inplace_function| : pendant de \lstinline|std::function| sans allocation
 
 \note[item]{\lstinline|std::function| peut allouer dynamiquement de la mémoire si la taille du foncteur dépasse un seuil}
+
+		\item \lstinline|std::function_ptr_t| : pointeur générique sur une fonction
 	\end{itemize}
 \end{frame}
 
@@ -838,6 +877,9 @@ ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
 			\item \lstinline|[[rvo]]| : fonctions utilisables uniquement dans un contexte RVO
 			\item \lstinline|[[side_effect_free]]| ou \lstinline|[[pure]]|
 			\item \lstinline|[[trivially_relocatable]]|
+			\item \lstinline|[[discard]]| indique qu'un retour de fonction est volontairement ignoré
+
+\note[item]{Alternative à la conversion en \lstinline|void| ou à l'affectation à \lstinline|std::ignore|}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1183,6 +1225,7 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 \note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
 
 		\item Remplaçant à \lstinline|#ifdef| ... \lstinline|#endif|
+		\item API d'interaction avec le système de build et le compilateur
 	\end{itemize}
 \end{frame}
 \end{document}
