@@ -22,12 +22,24 @@
 		\item Et la documentation via commentaires \lstinline|@pre|, \lstinline|@post| et \lstinline|@invariant|
 		\item Plusieurs propositions initiales concurrentes
 		\item \ldots{} mais un compromis à émerger
-		\item Utilisation d'attributs \lstinline|[[assert:x]]|, \lstinline|[[pre:x]]| et \lstinline|[[post:x]]|
-		\item Quatre comportements : \lstinline|assume|, \lstinline|ignore|, \lstinline|observe| et \lstinline|enforce|
 		\item Les contrats de fonctions membres publiques peuvent utiliser des membres privés ou protégés
 		\item Intégration des contrats à la bibliothèque standard
 	\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{TS - Contracts}
+	\begin{itemize}
+		\item Diverses propositions de déclaration
+		\begin{itemize}
+			\item Attributs : \lstinline|[[assert:...]]|, \lstinline|[[pre:...]]| et \lstinline|[[post:...]]|
+			\item Conditions : \lstinline|pre(...)|, \lstinline|post(...)|
+		\end{itemize}
+		\item Quatre comportements : \lstinline|assume|, \lstinline|ignore|, \lstinline|observe| et \lstinline|enforce|
+	\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}[fragile]
 	\frametitle{TS - Networking TS}
@@ -285,6 +297,9 @@ inspect(p) {
 		\item \textit{Zero-initialisation} des objets \textit{automatic storage duration}
 
 \note[item]{\textit{automatic storage duration}, c'est ce qui est sur la pile, donc globalement les variables locales}
+
+		\item Entiers non signés pour lesquels l'\textit{overflow} est un UB
+		\item Rendre les \lstinline|std::initializer_list| déplaçables
 	\end{itemize}
 \end{frame}
 
@@ -360,14 +375,37 @@ static_assert(10km / 5km == 2);\end{lstlisting}
 	\begin{itemize}
 		\item Levée plusieurs restrictions
 		\begin{itemize}
-			\item Masquage avec un type \lstinline|void|
-			
-\note[item]{Empêcher l'utilisation de la variable masqué}
-			
+			\item Masquage avec un type \lstinline|void| pour empêcher l'utilisation de la variable masquée
 			\item Initialisation de la nouvelle variable avec l'ancienne variable de même nom
 			\item Masquage sans création d'une nouvelle portée
+			\item Conversion conditionnelle
 		\end{itemize}
+
+		\begin{lstlisting}[language=C++]
+auto foo = optional<string>{"Foo"};
+if(foo as string) { /* foo: string& */ }
+else { /* foo: optional<string> */ }\end{lstlisting}
+		
+		\begin{itemize}
+			\item Constification d'un conteneur dans un \textit{range-based for loop}
+		\end{itemize}
+
+		\begin{lstlisting}[language=C++]
+vector<string> foo{"1", "2", "3"};
+cfor(auto &bar : foo) { /* foo est constant */ }\end{lstlisting}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::ignore|}
+	\begin{itemize}
+		\item \lstinline|std::ignore| pour ignorer une valeur de retour
+
+\note[item]{En pratique, fonctionne déjà mais n'est pas normalisé}
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+ignore = printf("Hello\n");\end{lstlisting}
 \end{frame}
 
 \subsection*{Contrôle de flux}
@@ -426,6 +464,14 @@ template<typenameT>int my_func(constT&) {
     static_assert(false); } }\end{lstlisting}
 
 \note[item]{L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
+
+	\begin{itemize}
+		\item Utilisation de messages construits
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+static_assert(sizeof(S) == 1, 
+              format("Expected 1, got {}", sizeof(S)));\end{lstlisting}
 \end{frame}
 
 \subsection*{Fonctions}
@@ -443,7 +489,19 @@ template<typenameT>int my_func(constT&) {
 \note[item]{NRVO : \textit{Named Return Value Optimization}}
 \note[item]{L'élision de copie des objets retournés est déjà garantie pour des \textit{prvalues} en C++17}
 \note[item]{Optimisation déjà réalisée par certains compilateurs}
+
+		\item Paramètres \lstinline|constexpr| et \og{}\textit{maybe} \lstinline|constexpr|\fg{}
+		\item Fonctions \textit{heap-free}
+		\item Possibilité de déterminer l'appelant
+		\item Arguments nommés
 	\end{itemize}
+	
+	\begin{lstlisting}[language=C++]
+void foo(int a, int b, int c, int d, bool e = false);
+
+foo(b: 10, a: 100, c: 640, d: 480);
+foo(100, 10, d: 480, e: false, c: 640);\end{lstlisting}
+	
 \end{frame}
 
 \subsection*{Opérateurs}
@@ -500,9 +558,27 @@ x|>f(y);
 // Equivalent a
 
 f(x, y);\end{lstlisting}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Opérateurs}
 	\begin{itemize}
 		\item \lstinline|operator template()| : extension du support des \textit{non-type template parameters}
+		\item Opérateur d'implication \lstinline|operator=>()|
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+p => q;
+	
+// Equivalent a
+	
+!p || q;\end{lstlisting}
+
+	\begin{itemize}
+		\item Opérateur \lstinline|nameof|
+
+\note[item]{Similaire à l'opérateur \lstinline|nameof| de C\# ou au trait \lstinline|Debug| de Rust}
+
 	\end{itemize}
 \end{frame}
 
@@ -534,6 +610,9 @@ f(x, y);\end{lstlisting}
 		\item Extension de \lstinline|=delete| à d'autres construction (variables template)
 		\item \lstinline|=delete| avec un message pour le diagnostic de compilation
 		\item Classes de base \lstinline|std::noncopyable| et \lstinline|std::nonmovable|
+		\item Mécanisme de conversion tableau de structures vers structure de tableaux
+
+\note[item]{AoS plus lisible et facile à maintenir mais SoA souvent plus efficace}
 	\end{itemize}
 \end{frame}
 
@@ -547,6 +626,17 @@ f(x, y);\end{lstlisting}
 			\item Des opérations par défaut
 		\end{itemize}
 		\item \lstinline|class|, \lstinline|struct|, \lstinline|enum class|, \textit{interface}, \textit{value type}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Énumération}
+\begin{frame}[fragile]
+	\frametitle{Énumération}
+	\begin{itemize}
+		\item Ajout d'énumérations \og{}\textit{flag-only}\fg{}
+		\item Fonctions membres sur les énumérations
+
+\note[item]{Notamment des opérations de conversion}
 	\end{itemize}
 \end{frame}
 
@@ -579,14 +669,21 @@ f(x, y);\end{lstlisting}
 
 \note[item]{\lstinline|std::mdarray| possède les éléments alors que \lstinline|std::mdspan| n'est qu'une vue et ne possède pas}
 
-			\item Vecteur de capacité fixée en \textit{compile-time} \lstinline|std::static_vector|
+				\item Queue concurrente
+				\item \textit{Bucket array} \lstinline|std::hive| : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
+				\item Vecteur utilisant un buffer externe
+				\item Conteneurs intrusifs : conteneurs non possédants
 
-\note[item]{Contrairement à \lstinline|std::array| la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
-\note[item]{Nom non encore fixé, potentiellement \lstinline|std::inplace_vector|}
+\note[item]{Intrusif car les mécanismes nécessaires au conteneur (p.ex. les pointeurs de chaînage des listes) sont dans l'objet que gère le conteneur, généralement via héritage}
 
-			\item Queue concurrente
-			\item \textit{Bucket array} \lstinline|std::hive| : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
+				\item Conteneurs \lstinline|inplace| avec un buffer de taille fixe
+			\end{itemize}
 		\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conteneurs}
+	\begin{itemize}
 		\item \lstinline|std::submdspan()| retourne une vue sur un sous-ensemble d'un \lstinline|std::mdspan|
 		\item \lstinline|span| de taille fixe
 		\item Ajout de \lstinline|at()| à \lstinline|std::span|
@@ -679,6 +776,10 @@ std::get<0>(t)\end{lstlisting}
 vector<tuple<int, int>> v{{3,1},{2,4},{1,7}};
 ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
 
+	\begin{itemize}
+		\item Plusieurs nouveaux adaptateurs : \lstinline|adjacent_filter|, \lstinline|adjacent_remove_if|, \lstinline|c_str|, \lstinline|generate|, \ldots
+		\item Ajout de \lstinline|ranges::size_hint| permettant aux ranges de réserver de la mémoire
+	\end{itemize}
 \end{frame}
 
 \subsection*{Traits}
@@ -702,6 +803,15 @@ ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::function|}
+	\begin{itemize}
+		\item \lstinline|std::inplace_function| : pendant de \lstinline|std::function| sans allocation
+
+\note[item]{\lstinline|std::function| peut allouer dynamiquement de la mémoire si la taille du foncteur dépasse un seuil}
+	\end{itemize}
+\end{frame}
+
 \subsection*{Attributs}
 \begin{frame}[fragile]
 	\frametitle{Attributs}
@@ -709,6 +819,26 @@ ranges::sort(v, less{}, get_element<0>);\end{lstlisting}
 		\item Réservation des attributs sans namespace et avec le namespace \lstinline|std|
 
 \note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
+
+		\item Possibilité d'implémenter des attributs utilisateurs
+
+\note[item]{Remplacement possible de certaines macros}
+
+		\item Nouveaux attributs
+		\begin{itemize}
+			\item \lstinline|[[invalidate_dereferencing]]| : \lstinline|*ptr| et \lstinline|ptr->| inutilisables après l'appel
+
+\note[item]{P.ex. sur \lstinline|realloc|}
+
+			\item \lstinline|[[invalidate]]| : \lstinline|ptr|, \lstinline|*ptr| et \lstinline|ptr->| inutilisables
+
+\note[item]{P.ex. sur \lstinline|free|}
+
+			\item \lstinline|[[no_copy]]| : types et fonctions ne permettant pas la copie (mais le déplacement et le RVO)
+			\item \lstinline|[[rvo]]| : fonctions utilisables uniquement dans un contexte RVO
+			\item \lstinline|[[side_effect_free]]| ou \lstinline|[[pure]]|
+			\item \lstinline|[[trivially_relocatable]]|
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -937,6 +1067,7 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 		\item \lstinline|std::retain_ptr| pointeur intrusif manipulant le comptage de référence interne
 		\item Création de pointeurs intelligents avec une valeur par défaut
 		\item Comparaison entre pointeurs intelligents et pointeurs nus
+		\item Retour covariant avec \lstinline|std::unique_ptr<T>| (comme \lstinline|T*|)
 	\end{itemize}
 \end{frame}
 
@@ -963,6 +1094,7 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 			\item \lstinline|block_scope| : durée de vie des littéraux C
 			\item \lstinline|statement_scope| : durée de vie des temporaires en C++
 		\end{itemize}
+		\item Seuils d'allocation SOO (\textit{Small Object Optimization})
 	\end{itemize}
 \end{frame}
 
@@ -977,6 +1109,8 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 		\item \lstinline|std::volatile_load<T>| et \lstinline|std::volatile_store<T>|
 		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
 		\item \lstinline|std::fiber_context| : changement de contexte \textit{stackfull} sans besoin de \textit{scheduler}
+		\item Ajout d'un nom aux threads et mutex
+		\item Contrôle de la priorité et de la taille de pile des threads
 	\end{itemize}
 \end{frame}
 
@@ -1047,6 +1181,8 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 		\item Implémentations \textit{freestanding} : plus grand sous-ensemble possible de la bibliothèque standard sans \textit{memory overhead} ni support par l'OS
 
 \note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
+
+		\item Remplaçant à \lstinline|#ifdef| ... \lstinline|#endif|
 	\end{itemize}
 \end{frame}
 \end{document}
