@@ -65,6 +65,9 @@ int CONCAT(\, u0393) = 0;\end{lstlisting}
 	
 \note[item]{Ajoutés en C (C23)}
 \note[item]{Supportés par tous les encodages communément utilisés}
+
+		\item Caractères non-encodables sont mal formés
+		\item Notion de \textit{literal encoding} et \textit{environnement encoding} et API d'interrogation
 	\end{itemize}
 \end{frame}
 
@@ -81,11 +84,10 @@ auto _ = foo();
 
 	\begin{lstlisting}[language=C++]
 std::lock_guard _(mutex);
-auto  [x, y, _] = f();
-inspect(foo) { 
-	_ => bar; };\end{lstlisting}
+auto  [x, y, _] = f();\end{lstlisting}
 \end{frame}
 
+\subsection*{Conteneurs}
 \begin{frame}[fragile]
 	\frametitle{Conteneurs}
 	\begin{itemize}
@@ -95,6 +97,41 @@ inspect(foo) {
 
 \note[item]{Contrairement à \lstinline|std::array| la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
 		\end{itemize}
+		\item Possibilité d'utiliser \lstinline|std::weak_ptr| en tant que clé de conteneur associatif
+		\item \lstinline|std::submdspan()| retourne une vue sur un sous-ensemble d'un \lstinline|std::mdspan|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Chaînes de caractères}
+	\begin{itemize}
+		\item Support de \lstinline|std::string_view| par \lstinline|std::stringstream|
+		\item Interfaçage de \lstinline|std::bitset| avec \lstinline|std::string_view|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textit{Initializer-list}}
+	\begin{itemize}
+		\item \textit{static storage} possible pour les \textit{braced-initializer-list}
+		
+\note[item]{Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'\textit{initializer list} puis vers le conteneur}
+	\end{itemize}
+\end{frame}
+
+\subsection*{Algorithme}
+\begin{frame}[fragile]
+	\frametitle{\lstinline|std::visit()|}
+	\begin{itemize}
+		\item Versions membres de \lstinline|std::visit()| et \lstinline|std::visit_format_arg()|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Ratio}
+\begin{frame}[fragile]
+	\frametitle{Ratio}
+	\begin{itemize}
+		\item Ajout des préfixes \lstinline|quecto|, \lstinline|ronto|, \lstinline|ronna| et \lstinline|quetta|
 	\end{itemize}
 \end{frame}
 
@@ -151,6 +188,7 @@ inspect(foo) {
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::format|}
 	\begin{itemize}
+		\item Redéfinition de \lstinline|std::to_string| en terme de \lstinline|std::format|
 		\item Davantage de vérifications \textit{compile-time} du type des arguments
 		\begin{itemize}
 			\item Déjà le cas de la majorité des erreurs
@@ -164,6 +202,18 @@ format("{:>{}}", "hello", "10");\end{lstlisting}
 
 	\begin{itemize}
 		\item Formatage des pointeurs
+	\end{itemize}
+
+	\begin{lstlisting}[language=C++]
+format("{:#018X}", reinterpret_cast<uintptr_t>(&i));
+// 0X00007FFE0325C4E4\end{lstlisting}
+\end{frame}
+
+\subsection*{Durées et temps}
+\begin{frame}[fragile]
+	\frametitle{Durées et temps}
+	\begin{itemize}
+		\item Spécialisation de \lstinline|std::hash| pour \lstinline|std::chrono|
 	\end{itemize}
 \end{frame}
 

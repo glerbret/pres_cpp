@@ -48,8 +48,6 @@
 	\end{itemize}
 \end{frame}
 
-
-
 \begin{frame}[fragile]
 	\frametitle{TS - Networking TS}
 	\begin{itemize}
@@ -69,7 +67,7 @@
 \begin{frame}[fragile]
 	\frametitle{TS - Pattern matching}
 	\begin{itemize}
-		\item Utilisation du mot clé \lstinline|inspect| (ou \lstinline|switch|) et du \textit{wildcard} \lstinline|__|
+		\item Utilisation du mot clé \lstinline|inspect| (ou \lstinline|switch|) et du \textit{wildcard} \lstinline|__| (ou \lstinline|_|)
 		\item Utilisable sur
 		\begin{itemize}
 			\item Entiers
@@ -473,14 +471,6 @@ template<typenameT>int my_func(constT&) {
     static_assert(false); } }\end{lstlisting}
 
 \note[item]{L'idée est de traiter le \lstinline|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
-
-	\begin{itemize}
-		\item Utilisation de messages construits
-	\end{itemize}
-
-	\begin{lstlisting}[language=C++]
-static_assert(sizeof(S) == 1, 
-              format("Expected 1, got {}", sizeof(S)));\end{lstlisting}
 \end{frame}
 
 \subsection*{Fonctions}
@@ -689,16 +679,6 @@ class Bar {
 
 \subsection*{Conteneurs}
 \begin{frame}[fragile]
-	\frametitle{\textit{Initializer-list}}
-	\begin{itemize}
-		\item \textit{static storage} possible pour les \textit{braced-initializer-list}
-
-\note[item]{Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'\textit{initializer list} puis vers le conteneur}
-
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
 	\frametitle{Conteneurs}
 	\begin{itemize}
 		\item Nouveaux conteneurs
@@ -722,7 +702,6 @@ class Bar {
 \begin{frame}[fragile]
 	\frametitle{Conteneurs}
 	\begin{itemize}
-		\item \lstinline|std::submdspan()| retourne une vue sur un sous-ensemble d'un \lstinline|std::mdspan|
 		\item \lstinline|span| de taille fixe
 		\item Ajout de \lstinline|at()| à \lstinline|std::span|
 		\item Relâchement des contraintes sur les tableaux C
@@ -743,14 +722,12 @@ class Bar {
 	\begin{itemize}
 		\item Construction de \lstinline|std::string_view| depuis des chaînes implicites
 		\item Prise en charge de \lstinline|std::string_view| par \lstinline|std::from_chars|
-		\item Support de \lstinline|std::string_view| par \lstinline|std::stringstream|
 		\item Concaténation de \lstinline|std::string| et \lstinline|std::string_view|
 		\item Modification du constructeur de \lstinline|std::string| depuis un caractère pour interdire les autres numériques (entiers ou flottants)
 
 \note[item]{Il s'agit d'empêcher les initialisations depuis des numériques via la conversion en char}
 
 		\item Voire dépréciation de la construction d'un \lstinline|std::string| depuis un caractère
-		\item Interfaçage de \lstinline|std::bitset| avec \lstinline|std::string_view|
 	\end{itemize}
 \end{frame}
 
@@ -1003,13 +980,6 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 
 \subsection*{Flux}
 \begin{frame}[fragile]
-	\frametitle{Flux}
-	\begin{itemize}
-		\item Redéfinition de \lstinline|std::to_string| en terme de \lstinline|std::format|
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
 	\frametitle{\lstinline|std::format|}
 	\begin{itemize}
 		\item Amélioration du support de \lstinline|std::filesystem::path|
@@ -1022,7 +992,7 @@ auto [...a, ...b] = f();  // ill-formed\end{lstlisting}
 		\begin{itemize}
 			\item Valeurs atomiques
 			\item Générateurs aléatoires et distributions
-			\item Pointeurs et \textit{smart pointers}
+			\item \textit{Smart pointers}
 			\item \lstinline|std::optional|, \lstinline|std::variant|, \lstinline|std::any| et \lstinline|std::expected|
 			\item \lstinline|std::mdspan|, \lstinline|std::flat_map| et \lstinline|std::flat_set|
 		\end{itemize}
@@ -1169,14 +1139,6 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 	\end{itemize}
 \end{frame}
 
-\subsection*{Durées et temps}
-\begin{frame}[fragile]
-	\frametitle{Durées et temps}
-	\begin{itemize}
-		\item Spécialisation de \lstinline|std::hash| pour \lstinline|std::chrono|
-	\end{itemize}
-\end{frame}
-
 \subsection*{Regex}
 \begin{frame}[fragile]
 	\frametitle{Regex}
@@ -1221,10 +1183,6 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);\end{lstlisting}
 
 \note[item]{P.ex. pour embarquer une image dans l'application sans aller lire au \textit{runtime} le fichier contenant la ressource}
 \note[item]{Et sans passer par des conversions externes vers des tableaux de \textit{bytes} injectés dans un fichier d'en-tête}
-
-		\item Implémentations \textit{freestanding} : plus grand sous-ensemble possible de la bibliothèque standard sans \textit{memory overhead} ni support par l'OS
-
-\note[item]{Actuellement le sous-ensemble de la bibliothèque standard proposé est \textit{implementation-defined}}
 
 		\item Remplaçant à \lstinline|#ifdef| ... \lstinline|#endif|
 		\item API d'interaction avec le système de build et le compilateur
