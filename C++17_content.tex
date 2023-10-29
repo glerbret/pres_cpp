@@ -148,10 +148,12 @@ else if constexpr(cond) {
 else {
   ... }\end{lstlisting}
 
-	\begin{itemize}
-		\item Conditions d'arrêt plus simple avec les \textit{variadic template}
-		\item Moins de spécialisations explicites
-	\end{itemize}
+	\begin{block}{Motivation}
+		\begin{itemize}
+			\item Conditions d'arrêt plus simple avec les \textit{variadic template}
+			\item Moins de spécialisations explicites
+		\end{itemize}
+	\end{block}
 
 	\begin{block}{Note}
 		\begin{itemize}
@@ -180,7 +182,8 @@ cout << foo(a) << ' ' << foo(ptr);  // 10 5\end{lstlisting}
 	\frametitle{\lstinline|if constexpr|}
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Les branches doivent être syntaxiquement correctes mais pas nécessairement sémantiquement valides
+			\item Les branches doivent être syntaxiquement correctes 
+			\item \ldots{} mais pas nécessairement sémantiquement valides
 		\end{itemize}
 	\end{block}
 
@@ -402,7 +405,7 @@ if(auto [iter, succeeded] = myMap.insert(value); succeeded)
 
 	\begin{block}{Et ensuite ?}
 		\begin{itemize}
-			\item Un premier pas vers les types algébriques de données et le \textit{pattern matching}
+			\item Premier pas vers les types algébriques de données et le \textit{pattern matching}
 		\end{itemize}
 	\end{block}
 

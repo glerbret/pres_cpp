@@ -462,7 +462,7 @@ namespace A {
 
 \subsection*{Modules}
 \begin{frame}[fragile]
-	\frametitle{Modules - Présentation}
+	\frametitle{Modules -- Présentation}
 	\begin{itemize}
 \note[item]{Fusion du TS de mai 2018 et de la proposition concurrente de Clang (ATOM)}
 
@@ -502,7 +502,7 @@ namespace A {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Interface Unit}
+	\frametitle{Modules -- Interface Unit}
 	\begin{itemize}
 		\item L'\textit{Interface Unit} commence par un préambule
 		\begin{itemize}
@@ -532,7 +532,7 @@ export {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Implementation Unit}
+	\frametitle{Modules -- Implementation Unit}
 	\begin{itemize}
 		\item L'\textit{Implementation Unit} commence par un préambule
 		\begin{itemize}
@@ -562,7 +562,7 @@ void bar(int j) { return 3 * j; }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Partitions}
+	\frametitle{Modules -- Partitions}
 	\begin{itemize}
 		\item Les modules peuvent être partitionnés sur plusieurs unités
 		\item Les partitions fournissent alors un nom de partition
@@ -588,7 +588,7 @@ module foo:part;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Partitions}
+	\frametitle{Modules -- Partitions}
 	\begin{itemize}
 		\item Les partitions sont un détail d'implémentation non visibles hors du module
 
@@ -614,7 +614,7 @@ export :part2;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Export de namespace}
+	\frametitle{Modules -- Export de namespace}
 	\begin{itemize}
 		\item Un namespace est exporté s'il est déclaré \lstinline|export|
 		\item \ldots{} ou implicitement si un de ses éléments est exporté
@@ -640,7 +640,7 @@ export namespace C { int m; }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Implémentation inline}
+	\frametitle{Modules -- Implémentation inline}
 	\begin{itemize}
 		\item Interface et implémentation dans un unique fichier
 		\item Implémentation dans un fragment \lstinline|private|
@@ -663,7 +663,7 @@ struct s {};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Utilisation}
+	\frametitle{Modules -- Utilisation}
 	\begin{itemize}
 		\item Import des modules via la directive \lstinline|import|
 	\end{itemize}
@@ -684,7 +684,7 @@ import foo;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Code non-modulaire}
+	\frametitle{Modules -- Code non-modulaire}
 	\begin{itemize}
 		\item Inclusion d'en-têtes avant le préambule du module
 	\end{itemize}
@@ -709,7 +709,7 @@ import <version>;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Modules - Code non-modulaire}
+	\frametitle{Modules -- Code non-modulaire}
 	\begin{itemize}
 		\item Export possible des symboles inclus
 	\end{itemize}
@@ -735,7 +735,7 @@ export import "bar.h";\end{lstlisting}
 	\begin{itemize}
 		\item \lstinline|std::basic_string::reserve()| ne peut plus réduire la capacité
 		\begin{itemize}
-			\item L'appel avec une capacité inférieure n'a pas d'effet
+			\item Appel avec une capacité inférieure sans effet
 
 \note[item]{Auparavant, la norme permettait de réduire effectivement la capacité mais ne l'imposait pas (idem \lstinline|shrink_to_fit()|)}
 \note[item]{Si la capacité demandée était inférieur à la taille effective, cet appel était équivalent à un appel à \lstinline|shrink_to_fit()|}
@@ -904,7 +904,14 @@ erase_if(foo, [](int i) { return i > 20; });
 	\begin{itemize}
 		\item Vue sur un conteneur contigu
 		\item Similaire à \lstinline|std::string_view|
-		\item Constructible depuis un conteneur, un couple début/taille, un couple début/fin, un range ou un autre \lstinline|std::span|
+		\item Constructible depuis 
+		\begin{itemize}
+			\item Conteneur
+			\item Couple début / taille
+			\item Couple début / fin
+			\item Range
+			\item Autre \lstinline|std::span|
+		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1113,7 +1120,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 
 \subsection*{Ranges}
 \begin{frame}
-	\frametitle{Ranges - Présentation}
+	\frametitle{Ranges -- Présentation}
 	\begin{itemize}
 		\item Abstraction de plus haut niveau que les itérateurs
 		\item Manipulation d'ensemble au travers d'algorithmes et de \textit{range adaptators}
@@ -1135,7 +1142,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Concepts}
+	\frametitle{Ranges -- Concepts}
 	\begin{itemize}
 		\item \lstinline|Range|
 		\begin{itemize}
@@ -1165,7 +1172,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Concepts}
+	\frametitle{Ranges -- Concepts}
 	\begin{itemize}
 		\item \lstinline|InputRange| : fournit des \lstinline|input_iterator|
 		\item \lstinline|OutputRange| : fournit des \lstinline|output_iterator|
@@ -1184,7 +1191,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Itérateurs}
+	\frametitle{Ranges -- Itérateurs}
 	\begin{itemize}
 		\item \lstinline|std::common_iterator| : adaptateur d'itérateurs/sentinelles permettant de représenter un \textit{non-common} \lstinline|range| comme un \lstinline|CommonRange|
 
@@ -1196,7 +1203,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ranges - Opérations}
+	\frametitle{Ranges -- Opérations}
 	\begin{itemize}
 		\item \lstinline|begin()|, \lstinline|end()|, \lstinline|cbegin()|, \lstinline|cend()|, \ldots{} retournent itérateurs et sentinelles
 		\item \lstinline|size()| retourne la taille du \lstinline|range|
@@ -1216,7 +1223,7 @@ lerp(10, 20, 1);    // 20\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Factory}
+	\frametitle{Ranges -- Factory}
 	\begin{itemize}
 		\item \lstinline|std::views::empty| crée une vue vide
 		\item \lstinline|std::views::single| crée une vue d'un unique élément
@@ -1240,7 +1247,7 @@ for(int i : views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators}
+	\frametitle{Ranges -- range adaptators}
 	\begin{itemize}
 		\item Appliquent filtres et transformations aux \lstinline|range|
 		\item Associés, pour certains, à un \textit{range adaptor closure object}
@@ -1253,7 +1260,7 @@ for(int i : views::counted(a, 3))
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators}
+	\frametitle{Ranges -- range adaptators}
 	\begin{itemize}
 		\item Peuvent être chaînés avec une syntaxe \og appel de fonction\fg{}
 	\end{itemize}
@@ -1283,7 +1290,7 @@ range | adaptor(args...);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators}
+	\frametitle{Ranges -- range adaptators}
 	\begin{itemize}
 		\item Plusieurs adapteurs fournis par la bibliothèque standard
 
@@ -1317,7 +1324,7 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators}
+	\frametitle{Ranges -- range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
 			\item \lstinline|take_view| : les $N$ premiers éléments
@@ -1332,7 +1339,7 @@ auto rng = ints | view::transform(double);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators}
+	\frametitle{Ranges -- range adaptators}
 	\begin{itemize}
 		\item  [] \begin{itemize}
 			\item \lstinline|join_view| \og aplati\fg{} les éléments d'un \lstinline|range|
@@ -1362,7 +1369,7 @@ for(auto word : sentence) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - range adaptators}
+	\frametitle{Ranges -- range adaptators}
 	\begin{itemize}
 		\item [] \begin{itemize}
 			\item \lstinline|elements_view| : vue des $N\textsuperscript{e}$ éléments de chaque \textit{tuple} d'une vue de \textit{tuple-likes}
@@ -1387,7 +1394,7 @@ auto years = figures | views::elements<1>;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Exemples}
+	\frametitle{Ranges -- Exemples}
 	\begin{lstlisting}[language=C++]
 vector<int> ints{0, 1, 2, 3, 4, 5};
 
@@ -1405,7 +1412,7 @@ for(int i : ints |
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges - Projections}
+	\frametitle{Ranges -- Projections}
 	\begin{itemize}
 		\item Paramètres des algorithmes pré-traitant les éléments du \lstinline|range|
 	\end{itemize}
@@ -1464,7 +1471,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Présentation}
+	\frametitle{\lstinline|std::format| -- Présentation}
 	\begin{itemize}
 		\item API de formatage inspiré de la bibliothèque \href{https://github.com/fmtlib/fmt}{\{fmt\}}
 	\end{itemize}
@@ -1502,7 +1509,7 @@ cin >> setw(24) >> a;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - API}
+	\frametitle{\lstinline|std::format| -- API}
 	\begin{itemize}
 		\item \lstinline|format()| retourne une chaîne
 	\end{itemize}
@@ -1532,7 +1539,7 @@ format_to_n(foo.data(), foo.size(), "{}", "a");\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - API}
+	\frametitle{\lstinline|std::format| -- API}
 	\begin{itemize}
 		\item \lstinline|formatted_size()| retourne la taille nécessaire au formatage
 		\item \lstinline|vformat()| et \lstinline|vformat_to()| arguments regroupés dans un \textit{tuple-like}
@@ -1547,7 +1554,7 @@ vformat("{}", make_format_args("a"));\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - \textit{Placeholder}}
+	\frametitle{\lstinline|std::format| -- \textit{Placeholder}}
 	\begin{itemize}
 		\item Format général : \lstinline|{[arg-id][:format-spec]}|
 		\begin{itemize}
@@ -1565,7 +1572,7 @@ vformat("{}", make_format_args("a"));\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Identifiant d'arguments}
+	\frametitle{\lstinline|std::format| -- Identifiant d'arguments}
 	\begin{itemize}
 		\item Valeur optionnelle indiquant l'index du paramètre à afficher
 		\item Débute à 0
@@ -1590,7 +1597,7 @@ format("{} et {}", "a", "b"); 	// "a et b"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Spécification de format}
+	\frametitle{\lstinline|std::format| -- Spécification de format}
 	\begin{itemize}
 		\item Format général : \lstinline|[[fill]align][sign][#][0][width][prec][L][type]|
 		\begin{itemize}
@@ -1607,7 +1614,7 @@ format("{} et {}", "a", "b"); 	// "a et b"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Alignement}
+	\frametitle{\lstinline|std::format| -- Alignement}
 	\begin{itemize}
 		\item Alignement par défaut dépendant du type
 	\end{itemize}
@@ -1634,7 +1641,7 @@ format("{:*^6}", 'x'); 	// "**x***"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Taille minimale}
+	\frametitle{\lstinline|std::format| -- Taille minimale}
 	\begin{itemize}
 		\item Fournit la taille minimal du champ
 		\item Si le champ est plus long, il n'est pas tronqué
@@ -1656,7 +1663,7 @@ format("|{0:{1}}| |{0:{2}}|", 10, 4, 12);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Précision}
+	\frametitle{\lstinline|std::format| -- Précision}
 	\begin{itemize}
 		\item Introduit par un \lstinline|.|
 		\item Uniquement sur
@@ -1683,7 +1690,7 @@ format("{:.6}", "azertyuiop");   // "azerty"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Signe}
+	\frametitle{\lstinline|std::format| -- Signe}
 	\begin{itemize}
 		\item Uniquement sur les négatifs : '\lstinline|-|'
 
@@ -1699,7 +1706,7 @@ format("{0:},{0:+},{0:-},{0: }", -1);	// "-1,-1,-1,-1"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Zéros non significatifs}
+	\frametitle{\lstinline|std::format| -- Zéros non significatifs}
 	\begin{itemize}
 		\item Affichage des zéros non significatifs
 	\end{itemize}
@@ -1709,7 +1716,7 @@ format("{:+06d}", 120);	// "+00120"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Format}
+	\frametitle{\lstinline|std::format| -- Format}
 	\begin{itemize}
 		\item Entiers : décimal, octal, binaire ou hexadécimal
 	\end{itemize}
@@ -1738,7 +1745,7 @@ format("{:s}", true);         // "true"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Format}
+	\frametitle{\lstinline|std::format| -- Format}
 	\begin{itemize}
 		\item Flottants : fixe, court, scientifique ou hexadécimal
 	\end{itemize}
@@ -1762,7 +1769,7 @@ format("{:s}", "azerty"); // "azerty"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Forme alternative}
+	\frametitle{\lstinline|std::format| -- Forme alternative}
 	\begin{itemize}
 		\item Affichage de la base des entiers
 	\end{itemize}
@@ -1785,7 +1792,7 @@ format("{:#.6g}", 392.65);  // "392.650"\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Dates et heures}
+	\frametitle{\lstinline|std::format| -- Dates et heures}
 	\begin{itemize}
 		\item Format basé sur \lstinline|strftime|
 		\begin{itemize}
@@ -1813,7 +1820,7 @@ format("{:%F %T}", chrono::system_clock::now());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Gestion des erreurs}
+	\frametitle{\lstinline|std::format| -- Gestion des erreurs}
 	\begin{itemize}
 		\item Exception \lstinline|std::format_error|
 		\begin{itemize}
@@ -1832,7 +1839,7 @@ format("{:%F %T}", chrono::system_clock::now());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Types utilisateur}
+	\frametitle{\lstinline|std::format| -- Types utilisateur}
 	\begin{itemize}
 		\item Par spécialisation de \lstinline|std::formatter<>|
 	\end{itemize}
@@ -1848,7 +1855,7 @@ struct formatter<T> {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format| - Types utilisateur}
+	\frametitle{\lstinline|std::format| -- Types utilisateur}
 	\begin{lstlisting}[language=C++]
 struct MyComplex { double real; double imag; };
 
@@ -2352,7 +2359,7 @@ void foo(auto a, auto b) { ... };\end{lstlisting}
 
 \subsection*{Concepts}
 \begin{frame}[fragile]
-	\frametitle{Concepts - Présentation}
+	\frametitle{Concepts -- Présentation}
 	\begin{itemize}
 		\item Histoire ancienne et mouvementée
 		\begin{itemize}
@@ -2391,7 +2398,7 @@ void foo(auto a, auto b) { ... };\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template}
+	\frametitle{Concepts -- Utilisation template}
 	\begin{itemize}
 		\item Utilisable via une \textit{Requires clause}
 	\end{itemize}
@@ -2422,7 +2429,7 @@ void foo(T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template}
+	\frametitle{Concepts -- Utilisation template}
 	\begin{itemize}
 		\item Utilisable depuis un concept nommé
 	\end{itemize}
@@ -2447,7 +2454,7 @@ void foo(T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template}
+	\frametitle{Concepts -- Utilisation template}
 	\begin{itemize}
 		\item Peuvent être composés
 	\end{itemize}
@@ -2464,7 +2471,7 @@ void foo(T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation template}
+	\frametitle{Concepts -- Utilisation template}
 	\begin{itemize}
 		\item Support des \textit{parameters pack}
 	\end{itemize}
@@ -2480,7 +2487,7 @@ void foo(T...);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation inférence de type}
+	\frametitle{Concepts -- Utilisation inférence de type}
 	\begin{itemize}
 		\item Contraintes sur les paramètres (lambdas et fonctions templates)
 	\end{itemize}
@@ -2499,7 +2506,7 @@ auto bar() -> Constraint decltype(auto);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Utilisation inférence de type}
+	\frametitle{Concepts -- Utilisation inférence de type}
 	\begin{itemize}
 		\item Contraintes sur les variables
 	\end{itemize}
@@ -2525,7 +2532,7 @@ void foo(Constraint auto... T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Standard}
+	\frametitle{Concepts -- Standard}
 	\begin{itemize}
 		\item Nombreux concepts standards
 		\begin{itemize}
@@ -2548,7 +2555,7 @@ void foo(Constraint auto... T);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition}
+	\frametitle{Concepts -- Définition}
 	\begin{itemize}
 		\item Peuvent être définis depuis des expressions
 	\end{itemize}
@@ -2565,7 +2572,7 @@ concept Swappable = requires(T&& t, U&& u) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition}
+	\frametitle{Concepts -- Définition}
 	\begin{itemize}
 		\item Y compris en retirant des qualifieurs
 	\end{itemize}
@@ -2588,7 +2595,7 @@ concept Comparable = requires(T a, T b) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition}
+	\frametitle{Concepts -- Définition}
 	\begin{itemize}
 		\item Depuis des \textit{traits}
 	\end{itemize}
@@ -2604,7 +2611,7 @@ concept constructible_from =
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Concepts - Définition}
+	\frametitle{Concepts -- Définition}
 	\begin{itemize}
 		\item Depuis d'autres concepts
 	\end{itemize}
@@ -2824,7 +2831,7 @@ t.request_stop();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{synchronisation - sémaphores}
+	\frametitle{synchronisation -- sémaphores}
 	\begin{itemize}
 		\item \lstinline|std::counting_semaphore|
 		\begin{itemize}
@@ -2854,7 +2861,7 @@ t.request_stop();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{synchronisation - latch}
+	\frametitle{synchronisation -- latch}
 	\begin{itemize}
 		\item \lstinline|std::latch| compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro 
 		\begin{itemize}
@@ -2878,7 +2885,7 @@ t.request_stop();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{synchronisation - barrière}
+	\frametitle{synchronisation -- barrière}
 	\begin{itemize}
 		\item \lstinline|std::barrier| attend qu'un certain nombre de threads n'atteigne la barrière
 		\begin{itemize}
@@ -2905,7 +2912,7 @@ t.request_stop();\end{lstlisting}
 
 \subsection*{Coroutines}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::coroutine| - Présentation}
+	\frametitle{\lstinline|std::coroutine| -- Présentation}
 	\begin{itemize}
 		\item Fonction dont l'exécution peut être suspendue et reprise
 		\item Simplification du développement de code asynchrone
@@ -2914,7 +2921,7 @@ t.request_stop();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::coroutine| - Définition}
+	\frametitle{\lstinline|std::coroutine| -- Définition}
 	\begin{itemize}
 		\item Fonctions contenant
 		\begin{itemize}
@@ -2940,7 +2947,7 @@ t.request_stop();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::coroutine| - Mécanismes}
+	\frametitle{\lstinline|std::coroutine| -- Mécanismes}
 	\begin{itemize}
 		\item \textit{Promise} utilisée pour renvoyer valeurs et exceptions
 		\item \textit{Coroutine state} interne contenant promesse, paramètres, variables locales et état du point de suspension
@@ -2962,7 +2969,7 @@ t.request_stop();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::coroutine| - Exemple}
+	\frametitle{\lstinline|std::coroutine| -- Exemple}
 	\begin{lstlisting}[language=C++]
 struct generator {
   ...

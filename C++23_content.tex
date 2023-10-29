@@ -886,7 +886,7 @@ byteswap(j);	// 0xEFBEADDE\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Évolutions de \lstinline|std::format|}
 	\begin{itemize}
-		\item Ajout du concept formatable
+		\item Ajout du concept \lstinline|formatable|
 		\item Vérification des chaînes de format au \textit{compile-time}
 		\item Réduction de la taille du binaire de \lstinline|format_to|
 		\item Support des types \lstinline|std::generator|\textit{-like} par \lstinline|std::format|
@@ -1114,8 +1114,8 @@ bar.or_else(func);	// Oups!\end{lstlisting}
 	\begin{itemize}
 		\item Classe template \lstinline|std::expected<T, E>| contenant
 		\begin{itemize}
-			\item Soit une valeur de type \lstinline|T|, le type de la valeur attendu
-			\item Soit une valeur de type \lstinline|E|, le type d'erreur
+			\item Soit une valeur de type \lstinline|T|
+			\item Soit une erreur de type \lstinline|E|
 		\end{itemize}
 		\item \lstinline|operator bool()| et \lstinline|has_value()| indiquent si l'objet contient une valeur
 		\item \lstinline|operator->| et \lstinline|operator*| accèdent à la valeur 

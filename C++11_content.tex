@@ -16,7 +16,7 @@
 		\item Changement de fonctionnement du comité
 		\begin{itemize}
 			\item Utilisation de \textit{Technical Specification} et de groupes de travail dédiés
-			\item Pilotage par les dates et plus les fonctionnalités
+			\item Pilotage par les dates et pas les fonctionnalités
 			\item Des versions fréquentes (3 ans : 2011, 2014, 2017, 2020, \ldots{})
 			\item Voir \href{https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/}{Trip report: Winter ISO C++ standards meeting}
 		\end{itemize}
@@ -24,7 +24,7 @@
 
 \note[item]{La seule fonctionnalité non supportée par GCC, Clang et Visual C++ est le \og support minimal pour les GC\fg{} qui n'est supporté par personne et disparait en C++23}
 
-		\item Objectifs : plus sûr, plus simple, aussi rapide que possible, meilleure détection d'erreur en \textit{compile-time}
+		\item Objectifs : sureté, simplicité, rapidité et meilleure détection d'erreur en \textit{compile-time}
 
 \note[item]{Pas complet, je laisse de côté \lstinline|system_error|, \lstinline|codecvt|, \lstinline|typeindex| et deux-trois nouvelles fonctions dans la bibliothèque standard}
 	\end{itemize}
@@ -41,13 +41,13 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Suppression des export templates}
+	\frametitle{\textit{Export templates}}
 	\begin{itemize}
 		\item Suppression des \textit{export templates}
 		\item \lstinline|export| reste un mot-clé réservé
 	\end{itemize}
 
-	\begin{block}{\lstinline|export| et compatibilité}
+	\begin{block}{Compatibilité}
 		\begin{itemize}
 			\item Rupture de comptabilité ascendante
 			\item Implémenté sur un unique compilateur et inutilisé en pratique
@@ -86,16 +86,16 @@
 			\item Plages garanties : [$-(2^{63}-1)$, $2^{63}-1$] et [$0$, $2^{64}$]
 			\item Extension de nombreux compilateurs bien avant C++11
 		\end{itemize}
-		\item \lstinline|intmax_t| et \lstinline|uintmax_t| : types entiers le plus grand disponibles
+		\item Types entiers le plus grand disponibles \lstinline|intmax_t| et \lstinline|uintmax_t|
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Nouveaux types entiers}
 	\begin{itemize}
-		\item \lstinline|int<N>_t|, \lstinline|uint<N>_t| : entiers de N bits
+		\item Entiers de \lstinline|N| bits \lstinline|int<N>_t| et \lstinline|uint<N>_t|
 		\begin{itemize}
-			\item N = 8, 16, 32 ou 64
+			\item \lstinline|N| = 8, 16, 32 ou 64
 			\item \lstinline|int<N>_t| obligatoirement en complément à 2
 
 \note[item]{En C++, pas de contrainte sur les autres types entiers signés avant C++20}
@@ -103,14 +103,14 @@
 \note[item]{Complément à 2 : inversion de chaque bit (complément à 1) puis ajout de 1}
 
 			\item Pas de bit de \textit{padding}
-			\item Optionnels
+			\item Support optionnel
 		\end{itemize}
-		\item \lstinline|int_least<N>_t|, \lstinline|uint_least<N>_t| : plus petits entiers d'au moins N bits
-		\item \lstinline|int_fast<N>_t|, \lstinline|uint_fast<N>_t| : plus rapides entiers d'au moins N bits
-		\item \lstinline|intptr_t| et \lstinline|uintptr_t| : entier capable de contenir une adresse
+		\item Plus petits entiers d'au moins \lstinline|N| bits \lstinline|int_least<N>_t| et \lstinline|uint_least<N>_t|
+		\item Plus rapides entiers d'au moins \lstinline|N| bits \lstinline|int_fast<N>_t| et \lstinline|uint_fast<N>_t|
+		\item Entiers capables de contenir une adresse \lstinline|intptr_t| et \lstinline|uintptr_t|
 		\begin{itemize}
-			\item Doivent pouvoir être reconvertit en \lstinline|void*| avec une valeur égale au pointeur original
-			\item Optionnels
+			\item Convertibles en \lstinline|void*| avec une valeur égale au pointeur original
+			\item Support optionnel
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -127,10 +127,10 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Rappels}
+	\frametitle{POD Généralisé -- Rappels}
 	\begin{itemize}
 		\item Types POD (\textit{Plain Old Data}) : classes et structures POD, unions POD, types scalaires et tableaux de ces types
-		\item Certaines constructions ne sont permises que pour les types POD
+		\item Certaines constructions permises uniquement sur les types POD
 
 \note[item]{Permises \textbf{uniquement} sur les POD vue de la norme tout du moins. En pratique, certaines opérations peuvent fonctionner sur des types non-POD sur une implémentation particulière}
 
@@ -149,7 +149,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe agrégat}
+	\frametitle{POD Généralisé -- Classe agrégat}
 	\begin{itemize}
 		\item C++98
 		\begin{itemize}
@@ -162,7 +162,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe agrégat}
+	\frametitle{POD Généralisé -- Classe agrégat}
 	\begin{itemize}
 		\item C++11
 		\begin{itemize}
@@ -179,7 +179,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe POD C++98}
+	\frametitle{POD Généralisé -- Classe POD C++98}
 	\begin{itemize}
 		\item Classe agrégat
 		\item Sans donnée membre non-statique de type non-POD
@@ -190,7 +190,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe POD C++11}
+	\frametitle{POD Généralisé -- Classe POD C++11}
 	\begin{itemize}
 		\item Contraintes réparties en trois sous-notions
 		\item \textit{trivially copyable}
@@ -219,7 +219,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe POD C++11}
+	\frametitle{POD Généralisé -- Classe POD C++11}
 	\begin{itemize}
 		\item \textit{trivial}
 		\begin{itemize}
@@ -236,7 +236,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe POD C++11}
+	\frametitle{POD Généralisé -- Classe POD C++11}
 	\begin{itemize}
 		\item \textit{Standard-layout}
 		\begin{itemize}
@@ -259,7 +259,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Classe POD C++11}
+	\frametitle{POD Généralisé -- Classe POD C++11}
 	\begin{itemize}
 		\item POD
 		\begin{itemize}
@@ -267,17 +267,22 @@
 			\item \textit{standard layout}
 			\item Pas de donnée membre non-statique non-POD
 		\end{itemize}
-		\item Ajout des traits correspondants : \lstinline|std::is_trivial|, \lstinline|std::is_trivially_copyable| et \lstinline|std::is_standard_layout|
+		\item Traits correspondants 
+		\begin{itemize}
+			\item \lstinline|std::is_trivial|
+			\item \lstinline|std::is_trivially_copyable|
+			\item \lstinline|std::is_standard_layout|
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Objectifs}
+	\frametitle{POD Généralisé -- Objectifs}
 	\begin{itemize}
-		\item Opérations POD deviennent accessibles à la sous-notion correspondante
+		\item Opérations POD accessibles à la sous-notion correspondante
 		\item Relâchement et adaptation de certaines contraintes
 		\begin{itemize}
-			\item Constructeurs ou destructeurs déclarés \lstinline|=default| autorisés
+			\item Constructeurs ou destructeurs \lstinline|=default| autorisés
 			\item Données membres non-statiques plus nécessairement publiques
 
 \note[item]{Mais doivent toutes avoir la même portée, car en C++, le compilateur peut réordonner les données de portées différentes}
@@ -290,7 +295,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{POD Généralisé - Conséquences}
+	\frametitle{POD Généralisé -- Conséquences}
 	\begin{itemize}
 		\item \textit{standard layout}
 		\begin{itemize}
@@ -371,8 +376,6 @@ void foo(int) { cout << "entier\n"; }
 foo(0);
 foo(NULL);\end{lstlisting}
 	\end{block}
-
-\note[item]{GCC 8.1 en C++2a - avec \lstinline|0| :  entier, avec \lstinline|NULL| : erreur de compilation (ambiguïté)}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -520,7 +523,7 @@ struct Foo { int bar; };
 // Valide en C++11, mal-forme en C++98/03
 cout << sizeof(Foo::bar); \end{lstlisting}
 
-\note[item]{Mal-formé (\textit{ill-formed}) n'implique pas une erreur de compilation ni même un avertissement. Seulement que ce n'est pas correct vu de la norme}
+\note[item]{Mal-formé (\textit{ill-formed}) n'implique pas une erreur de compilation ni même un avertissement, seulement que ce n'est pas correct vu de la norme}
 
 	\begin{block}{Note}
 		\begin{itemize}
@@ -557,7 +560,7 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 		\item Déplacement seulement si
 		\begin{itemize}
 			\item Type déplaçable
-			\item Instance sur le point d'être détruite ou explicitement déplaçable
+			\item Instance sur le point d'être détruite ou explicitement déplacée
 		\end{itemize}
 	\end{itemize}
 
@@ -844,14 +847,13 @@ cout << sizeof(Foo::bar); \end{lstlisting}
 
 \subsection*{Initialisation}
 \begin{frame}[fragile]
-	\frametitle{Initializer list}
+	\frametitle{\textit{Initializer list}}
 	\begin{itemize}
 		\item Initialisation des conteneurs
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
 vector<int> foo;
-
 foo.push_back(1);
 foo.push_back(56);
 foo.push_back(18);
@@ -863,7 +865,7 @@ vector<int> foo{1, 56, 18, 3};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Initializer list}
+	\frametitle{\textit{Initializer list}}
 	\begin{itemize}
 		\item Classe \lstinline|std::initializer_list| pour accéder aux valeurs de la liste
 	\end{itemize}
@@ -883,7 +885,7 @@ vector<int> foo{1, 56, 18, 3};\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Initializer list}
+	\frametitle{\textit{Initializer list}}
 	\begin{itemize}
 		\item Constructeurs peuvent prendre un \lstinline|std::initializer_list| en paramètre
 	\end{itemize}
@@ -902,7 +904,7 @@ MaClasse(initializer_list<value_type> itemList);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Initializer list}
+\frametitle{\textit{Initializer list}}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Préférez \lstinline|std::initializer_list| aux insertions successives
@@ -920,7 +922,7 @@ MaClasse(initializer_list<value_type> itemList);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Uniform Initialization}
+	\frametitle{\textit{Uniform Initialization}}
 	\begin{itemize}
 		\item Plusieurs types d'initialisation en C++98/03
 	\end{itemize}
@@ -933,7 +935,7 @@ int d;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Uniform Initialization}
+	\frametitle{\textit{Uniform Initialization}}
 	\begin{itemize}
 		\item Mais aucune de générique
 	\end{itemize}
@@ -960,7 +962,7 @@ int c{8}                    // KO\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Uniform Initialization}
+	\frametitle{\textit{Uniform Initialization}}
 	\begin{itemize}
 		\item En C++ 11, l'initialisation via \lstinline|{}| est générique
 	\end{itemize}
@@ -985,7 +987,7 @@ int e{};                     // OK\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Uniform Initialization}
+	\frametitle{\textit{Uniform Initialization}}
 	\begin{itemize}
 		\item Dans différents contextes
 	\end{itemize}
@@ -999,7 +1001,7 @@ f({2});\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Uniform Initialization}
+	\frametitle{\textit{Uniform Initialization}}
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item Pas de troncature avec \lstinline|{}|
@@ -1021,7 +1023,7 @@ vector<int> foo(2);  // 0 0\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Uniform Initialization}
+	\frametitle{\textit{Uniform Initialization}}
 	\begin{alertblock}{Contraintes sur l'initialisation d'agrégats}
 		\begin{itemize}
 			\item Pas d'héritage
@@ -1597,6 +1599,9 @@ find_if_not(begin(foo), end(foo), is_odd); // 4\end{lstlisting}
 	\frametitle{Algorithmes - Comparaison}
 	\begin{itemize}
 		\item \lstinline|std::all_of()| teste si tous les éléments de l'ensemble vérifient un prédicat
+		\begin{itemize}
+			\item Retourne vrai si l'ensemble est vide
+		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1607,16 +1612,15 @@ vector<int> baz{4, 12};
 all_of(begin(foo), end(foo), is_odd); // False
 all_of(begin(bar), end(bar), is_odd); // True
 all_of(begin(baz), end(baz), is_odd); // False\end{lstlisting}
-
-	\begin{itemize}
-		\item Retourne vrai si l'ensemble est vide
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Comparaison}
 	\begin{itemize}
 		\item \lstinline|std::any_of()| teste si au moins un élément vérifie un prédicat
+		\begin{itemize}
+			\item Retourne faux si l'ensemble est vide
+		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1627,16 +1631,15 @@ vector<int> baz{4, 12};
 any_of(begin(foo), end(foo), is_odd); // True
 any_of(begin(bar), end(bar), is_odd); // True
 any_of(begin(baz), end(baz), is_odd); // False\end{lstlisting}
-
-	\begin{itemize}
-		\item Retourne faux si l'ensemble est vide
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Comparaison}
 	\begin{itemize}
 		\item \lstinline|std::none_of()| teste si aucun élément ne vérifie le prédicat
+		\begin{itemize}
+			\item Retourne vrai si l'ensemble est vide
+		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1647,10 +1650,6 @@ vector<int> baz{4, 12};
 none_of(begin(foo), end(foo), is_odd); // False
 none_of(begin(bar), end(bar), is_odd); // False
 none_of(begin(baz), end(baz), is_odd); // True\end{lstlisting}
-
-	\begin{itemize}
-		\item Retourne vrai si l'ensemble est vide
-	\end{itemize}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1670,10 +1669,6 @@ vector<int> baz{5, 4, 3, 9, 1};
 
 is_permutation(begin(foo), end(foo), begin(bar)); // true
 is_permutation(begin(foo), end(foo), begin(baz)); // false\end{lstlisting}
-
-	\begin{itemize}
-		\item Égalité des éléments mais pas de leur ordre
-	\end{itemize}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1727,7 +1722,9 @@ move(begin(foo), end(foo), back_inserter(bar));\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Partitionnement}
 	\begin{itemize}
-		\item \lstinline|std::is_partitioned()| indique si un ensemble est partitionné, c'est à dire si les éléments vérifiant un prédicat sont avant ceux ne le vérifiant pas
+		\item \lstinline|std::is_partitioned()| indique si un ensemble est partitionné
+
+\note[item]{C'est à dire si les éléments vérifiant un prédicat sont avant ceux ne le vérifiant pas}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1742,7 +1739,10 @@ is_partitioned(begin(bar), end(bar), is_odd); // true\end{lstlisting}
 	\frametitle{Algorithmes - Partitionnement}
 	\begin{itemize}
 		\item \lstinline|std::partition_copy()| copie l'ensemble en le partitionnant
-		\item \lstinline|std::partition_point()| retourne le point de partition d'un ensemble partitionné, c'est à dire le premier élément ne vérifiant pas le prédicat
+		\item \lstinline|std::partition_point()| retourne le point de partition d'un ensemble partitionné
+		\begin{itemize}
+			\item C'est à dire le premier élément ne vérifiant pas le prédicat
+		\end{itemize}
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -1758,7 +1758,7 @@ partition_point(begin(foo), end(foo), is_odd); // 4\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Algorithmes - Tri}
 	\begin{itemize}
-		\item \lstinline|std::is_sorted()| indique si l'ensemble est ordonnée (ascendant)
+		\item \lstinline|std::is_sorted()| indique si l'ensemble est ordonnée (ordre ascendant)
 	\end{itemize}
 
 \note[item]{Possibilité de fournir un foncteur de comparaison (\lstinline|<| par défaut)}
@@ -1881,7 +1881,7 @@ iota(begin(foo), end(foo), 50); // 50 51 52 53 54\end{lstlisting}
 
 \subsection*{Range-based for loop}
 \begin{frame}[fragile]
-	\frametitle{Range-based for loop}
+	\frametitle{\textit{Range-based for loop}}
 	\begin{itemize}
 		\item Itération sur un conteneur complet
 
@@ -1906,18 +1906,18 @@ for(auto var : foo)
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Range-based for loop}
+	\frametitle{\textit{Range-based for loop}}
 	\begin{alertblock}{Modification des éléments}
 		\begin{itemize}
 			\item La variable d'itération doit être une référence
 		\end{itemize}
-	\end{alertblock}
 
-	\begin{lstlisting}
+		\begin{lstlisting}
 vector<int> foo(4);
 
 for(auto& var : foo)
   var = 5;    // foo : 5 5 5 5\end{lstlisting}
+	\end{alertblock}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1925,7 +1925,7 @@ for(auto& var : foo)
 \end{frame}
 
 \begin{frame}
-	\frametitle{Range-based for loop}
+	\frametitle{\textit{Range-based for loop}}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Préférez \textit{range-based for loop} aux boucles classiques et à \lstinline|std::for_each()|
@@ -2076,7 +2076,7 @@ u8R"(Message\n en une seule \n ligne)";\end{lstlisting}
 
 \subsection*{User-defined literals}
 \begin{frame}[fragile]
-	\frametitle{User-defined literals}
+	\frametitle{\textit{User-defined literals}}
 	\begin{itemize}
 		\item Possibilité de définir des littéraux \og utilisateur\fg{}
 		\item Nombre (entier ou réel), caractère ou chaîne suffixé par un identifiant
@@ -2102,7 +2102,7 @@ Foo bar = 12_f; // OK\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{User-defined literals}
+	\frametitle{\textit{User-defined literals}}
 	\begin{itemize}
 		\item Littéraux brutes : chaîne C entièrement analysée par l'opérateur
 	\end{itemize}
@@ -2124,7 +2124,7 @@ Foo foo = 0110_b;  // 6\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{User-defined literals}
+	\frametitle{\textit{User-defined literals}}
 	\begin{itemize}
 		\item Littéraux \og préparés\fg{} par le compilateur
 		\begin{itemize}
@@ -2548,7 +2548,7 @@ struct Baz : Bar {
 	\frametitle{Opérateurs de conversion explicite}
 	\begin{itemize}
 		\item Extension de \lstinline|explicit| aux opérateurs de conversion
-		\item Qui ne définissent alors plus de conversion implicite
+		\item \ldots{} qui ne définissent alors plus de conversion implicite
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -2738,14 +2738,6 @@ function<int(int, int)> bar = foo;\end{lstlisting}
 		\item Copiable
 		\item Peut être passer en paramètre ou retourner par une fonction
 	\end{itemize}
-
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Les foncteurs ne sont pas transmis aux algorithmes par ce mécanisme mais par des paramètres templates identifiés aux types internes du compilateur
-		\end{itemize}
-
-\note[item]{Types internes moins génériques et non accessibles mais plus efficaces}
-	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2873,8 +2865,6 @@ int baz = foo(5);
 \note[item]{Même avec \lstinline|mutable|}
 
 		\item Pas de capture des variables globales et statiques
-
-\note[item]{Dans l'exemple ci-dessus, \lstinline|bar| ne peut donc pas être une variable globale}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
@@ -2956,7 +2946,7 @@ auto foo = [] { return 5; };\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{\lstinline|std::reference_wrapper|}
 	\begin{itemize}
-		\item Encapsule un objet en émulant un référence
+		\item Encapsule un objet en émulant une référence
 		\item Construction par \lstinline|std::ref()| et \lstinline|std::cref()|
 		\item Copiable
 	\end{itemize}
@@ -3142,7 +3132,7 @@ sum(1,2,3,5);  // 11\end{lstlisting}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item Candidat naturel : \lstinline|std::initializer_list|
+		\item Candidat naturel \lstinline|std::initializer_list|
 		\item \ldots{} constructible depuis un \textit{variadic template}
 	\end{itemize}
 
@@ -3248,11 +3238,11 @@ sort(foo.begin(), foo.end(),
 
 \subsection*{Type traits}
 \begin{frame}[fragile]
-	\frametitle{Type traits - Helper}
+	\frametitle{Type traits -- Helper}
 	\begin{itemize}
-		\item \lstinline|std::integral_constant| : constante \textit{compile-time}
-		\item \lstinline|true_type| : \lstinline|std::integral_constant| booléen vrai
-		\item \lstinline|false_type| : \lstinline|std::integral_constant| booléen faux
+		\item Constante \textit{compile-time} \lstinline|std::integral_constant|
+		\item \lstinline|std::integral_constant| booléen vrai \lstinline|true_type|
+		\item \lstinline|std::integral_constant| booléen faux \lstinline|false_type|
 	\end{itemize}
 
 	\begin{lstlisting}[language=C++]
@@ -3268,7 +3258,7 @@ factorial<5>::value;  // 120 en compile-time\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Type traits - Trait}
+	\frametitle{Type traits -- Trait}
 	\begin{itemize}
 		\item Détermine, à la compilation, les caractéristiques des types
 		\item \lstinline|std::is_array| : tableau C
@@ -3292,7 +3282,7 @@ is_integral<string>::value;  // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Type traits - Trait}
+	\frametitle{Type traits -- Trait}
 	\begin{itemize}
 		\item \lstinline|std::is_fundamental| : type fondamental (entier, réel, \lstinline|void| ou \lstinline|nullptr_t|)
 	\end{itemize}
@@ -3312,7 +3302,7 @@ is_const<string>::value;       // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Type traits - Trait}
+	\frametitle{Type traits -- Trait}
 	\begin{itemize}
 		\item \lstinline|std::is_base_of| : base d'un autre type
 	\end{itemize}
@@ -3332,7 +3322,7 @@ is_base_of<Bar, Foo>::value;        // false\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Type traits - Transformations}
+	\frametitle{Type traits -- Transformations}
 	\begin{itemize}
 		\item Construction d'un type par transformation d'un type existant
 		\item \lstinline|std::add_const| : type \lstinline|const|
@@ -3348,7 +3338,7 @@ typedef add_const<const int*>::type C;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Type traits - Transformations}
+	\frametitle{Type traits -- Transformations}
 	\begin{itemize}
 		\item \lstinline|std::make_unsigned| : type non signé correspondant
 	\end{itemize}
@@ -3387,7 +3377,7 @@ typedef make_unsigned<Foo>::type D;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - \lstinline|std::unique_ptr|}
+	\frametitle{Pointeurs intelligents -- \lstinline|std::unique_ptr|}
 	\begin{itemize}
 		\item Responsabilité exclusive
 		\item Non copiable, mais déplaçable
@@ -3421,7 +3411,7 @@ unique_ptr<int> p(new int);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - \lstinline|std::unique_ptr|}
+	\frametitle{Pointeurs intelligents -- \lstinline|std::unique_ptr|}
 	\begin{itemize}
 		\item Fourniture possible de la fonction de libération
 	\end{itemize}
@@ -3450,7 +3440,7 @@ for(int i=0; i<5; ++i) foo[i] = i;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - \lstinline|std::shared_ptr|}
+	\frametitle{Pointeurs intelligents -- \lstinline|std::shared_ptr|}
 	\begin{itemize}
 		\item Responsabilité partagée de la ressource
 		\item Comptage de références
@@ -3474,7 +3464,7 @@ shared_ptr<int> p(new int());
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - \lstinline|std::make_shared()|}
+	\frametitle{Pointeurs intelligents -- \lstinline|std::make_shared()|}
 	\begin{itemize}
 		\item Allocation et construction de l'objet dans le \lstinline|std::shared_ptr|
 	\end{itemize}
@@ -3504,7 +3494,7 @@ foo(shared_ptr<int>(new int(42)), bar());\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - \lstinline|std::weak_ptr|}
+	\frametitle{Pointeurs intelligents -- \lstinline|std::weak_ptr|}
 	\begin{itemize}
 		\item Aucune responsabilité sur la ressource
 		\item Collabore avec \lstinline|std::shared_ptr|
@@ -3524,7 +3514,7 @@ weak_ptr<int> wp(sp);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - \lstinline|std::weak_ptr|}
+	\frametitle{Pointeurs intelligents -- \lstinline|std::weak_ptr|}
 	\begin{itemize}
 		\item Pas d'accès à la ressource
 		\item Convertible en \lstinline|std::shared_ptr| via \lstinline|lock()|
@@ -3549,7 +3539,7 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - Conclusion}
+	\frametitle{Pointeurs intelligents -- Conclusion}
 	\begin{alertblock}{Don't}
 		\begin{itemize}
 			\item N'utilisez pas de pointeurs bruts possédants
@@ -3573,7 +3563,7 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - Conclusion}
+	\frametitle{Pointeurs intelligents -- Conclusion}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Brisez les cycles à l'aide de \lstinline|std::weak_ptr|
@@ -3597,7 +3587,7 @@ shared_ptr<int> sp = wp.lock();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Pointeurs intelligents - Conclusion}
+	\frametitle{Pointeurs intelligents -- Conclusion}
 	\begin{block}{Pour aller plus loin}
 		\begin{itemize}
 			\item Voir \href{http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/}{Pointeurs intelligents (Loïc Joly)}
@@ -3729,7 +3719,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 
 	\begin{itemize}
 		\item \lstinline|std::ratio| représente un rapport entre deux nombres
-		\item Numérateur et dénominateurs sont des paramètres templates
+		\item Numérateur et dénominateur sont des paramètres templates
 		\item \lstinline|num| accède au numérateur
 		\item \lstinline|den| accède au dénominateur
 	\end{itemize}
@@ -3935,7 +3925,7 @@ thread_local int foo = 0;\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables atomiques - \lstinline|std::atomic|}
+	\frametitle{Variables atomiques -- \lstinline|std::atomic|}
 	\begin{itemize}
 		\item Encapsulation de types de base fournissant des opérations atomiques
 		\item Atomicité de l'affectation, de l'incrémentation et de la décrémentation
@@ -3953,7 +3943,7 @@ atomic<int> foo{5};
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables atomiques - \lstinline|std::atomic|}
+	\frametitle{Variables atomiques -- \lstinline|std::atomic|}
 	\begin{itemize}
 		\item \lstinline|compare_exchange_weak| et \lstinline|compare_exchange_strong| 
 
@@ -3977,7 +3967,7 @@ foo.compare_exchange_strong(bar, 8);
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables atomiques - \lstinline|std::atomic|}
+	\frametitle{Variables atomiques -- \lstinline|std::atomic|}
 	\begin{itemize}
 		\item \lstinline|fetch_add()| addition et retour de la valeur avant modification
 	\end{itemize}
@@ -3997,7 +3987,7 @@ cout << foo;        // Affiche 5 15\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables atomiques - \lstinline|std::atomic|}
+	\frametitle{Variables atomiques -- \lstinline|std::atomic|}
 	\begin{itemize}
 		\item Plusieurs instanciations standards (\lstinline|std::atomic_bool|, \lstinline|std::atomic_int|, \ldots{})
 	\end{itemize}
@@ -4010,7 +4000,7 @@ cout << foo;        // Affiche 5 15\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables atomiques - \lstinline|std::atomic_flag|}
+	\frametitle{Variables atomiques -- \lstinline|std::atomic_flag|}
 	\begin{itemize}
 		\item Gestion atomique de \textit{flags}
 		\item Non copiable, non déplaçable, \textit{lock free}
@@ -4239,7 +4229,7 @@ call_once(flag, foo, 42, 'r');\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables conditionnelles - Principe}
+	\frametitle{Variables conditionnelles -- Principe}
 	\begin{itemize}
 		\item Mise en attente du thread sur la variable conditionnelle
 		\item Réveil du thread lors de la notification de la variable
@@ -4253,7 +4243,7 @@ call_once(flag, foo, 42, 'r');\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables conditionnelles - \lstinline|std::condition_variable|}
+	\frametitle{Variables conditionnelles -- \lstinline|std::condition_variable|}
 	\begin{itemize}
 		\item Uniquement avec \lstinline|std::unique_lock|
 		\item \lstinline|wait()| met en attente le thread
@@ -4278,7 +4268,7 @@ cv.wait(lck);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables conditionnelles - \lstinline|std::condition_variable|}
+	\frametitle{Variables conditionnelles -- \lstinline|std::condition_variable|}
 	\begin{itemize}
 		\item \lstinline|wait_for()| met en attente le thread, au maximum la durée donnée
 		\item \lstinline|wait_until()| met en attente le thread, au maximum jusqu'au temps donné
@@ -4292,7 +4282,7 @@ cv.wait(lck);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables conditionnelles - \lstinline|std::condition_variable|}
+	\frametitle{Variables conditionnelles -- \lstinline|std::condition_variable|}
 	\begin{itemize}
 		\item \lstinline|notify_one()| notifie un des threads en attente sur la variable conditionnelle
 	\end{itemize}
@@ -4316,7 +4306,7 @@ cv.wait(lck);\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Variables conditionnelles - \lstinline|std::condition_variable|}
+	\frametitle{Variables conditionnelles -- \lstinline|std::condition_variable|}
 	\begin{lstlisting}[language=C++]
 mutex mtx;
 condition_variable cv;
@@ -4335,7 +4325,7 @@ for(auto& th : threads) th.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - Principe}
+	\frametitle{Futures \& promise -- Principe}
 	\begin{itemize}
 		\item \lstinline|std::promise| contient une valeur
 		\begin{itemize}
@@ -4359,7 +4349,7 @@ for(auto& th : threads) th.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::future|}
+	\frametitle{Futures \& promise -- \lstinline|std::future|}
 	\begin{itemize}
 		\item Utilisable uniquement s'il est valide (associé à un état partagé)
 		\item Construit valide que par certaines fonctions fournisseuses
@@ -4374,7 +4364,7 @@ for(auto& th : threads) th.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::future|}
+	\frametitle{Futures \& promise -- \lstinline|std::future|}
 	\begin{itemize}
 		\item \lstinline|share()| construit un \lstinline|std::shared_future| depuis le \lstinline|std::future|
 	\end{itemize}
@@ -4396,7 +4386,7 @@ for(auto& th : threads) th.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::async()|}
+	\frametitle{Futures \& promise -- \lstinline|std::async()|}
 	\begin{itemize}
 		\item Appelle la fonction fournie
 		\item Et retourne, sans attendre la fin de l'exécution, un \lstinline|std::future|
@@ -4416,7 +4406,7 @@ for(auto& th : threads) th.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::async()|}
+	\frametitle{Futures \& promise -- \lstinline|std::async()|}
 	\begin{lstlisting}[language=C++]
 int foo() {
   this_thread::sleep_for(chrono::seconds(5));
@@ -4428,7 +4418,7 @@ cout << bar.get() << "\n";\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::promise|}
+	\frametitle{Futures \& promise -- \lstinline|std::promise|}
 	\begin{itemize}
 		\item Objet que l'on promet de valoriser ultérieurement
 		\item Déplaçable mais non copiable
@@ -4444,7 +4434,7 @@ cout << bar.get() << "\n";\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::promise|}
+	\frametitle{Futures \& promise -- \lstinline|std::promise|}
 	\begin{itemize}
 		\item \lstinline|set_value()| affecte une valeur et passe l'état partagé à prêt
 		\item \lstinline|set_exception()| affecte une exception et passe l'état partagé à prêt
@@ -4469,7 +4459,7 @@ th1.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::packaged_task|}
+	\frametitle{Futures \& promise -- \lstinline|std::packaged_task|}
 	\begin{itemize}
 		\item Encapsulation d'un appelable similaire à \lstinline|std::function|
 		\item \ldots{} dont la valeur de retour est récupérable par un \lstinline|std::future|
@@ -4486,7 +4476,7 @@ th1.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::packaged_task|}
+	\frametitle{Futures \& promise -- \lstinline|std::packaged_task|}
 	\begin{itemize}
 		\item \lstinline|operator()| appelle l'appelable, affecte sa valeur de retour (ou l'exception levée) au \lstinline|std::future| et passe l'état partagé à prêt
 		\item \lstinline|reset()| réinitialise l'état partagé en conservant l'appelable
@@ -4504,7 +4494,7 @@ th1.join();\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Futures \& promise - \lstinline|std::packaged_task|}
+	\frametitle{Futures \& promise -- \lstinline|std::packaged_task|}
 	\begin{lstlisting}[language=C++]
 void foo(future<int>& fut) {
   int x = fut.get();
