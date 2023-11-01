@@ -15,12 +15,13 @@
 \begin{frame}[fragile]
 	\frametitle{Vérification statique}
 	\begin{itemize}
-		\item Support de messages construits par \lstinline|static_assert|
+		\item Support de messages construits par \mintinline{cpp}|static_assert|
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-static_assert(sizeof(S) == 1,
-format("Attendu 1, obtenu {}", sizeof(S)));\end{lstlisting}
+	\begin{minted}{cpp}
+		static_assert(sizeof(S) == 1,
+		format("Attendu 1, obtenu {}", sizeof(S)));
+	\end{minted}
 
 	\begin{alertblock}{\textit{Compile-time}}
 		\begin{itemize}
@@ -31,7 +32,7 @@ format("Attendu 1, obtenu {}", sizeof(S)));\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Lexer}}
+	\frametitle{Lexer}
 	\begin{itemize}
 		\item Suppression de comportements indéfinis
 		\begin{itemize}
@@ -39,13 +40,14 @@ format("Attendu 1, obtenu {}", sizeof(S)));\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
 	
-	\begin{lstlisting}[language=C++]
-int \\
-u\
-0\
-3\
-9\
-1 = 0;\end{lstlisting}
+	\begin{minted}[escapeinside=||]{cpp}
+		int |\textbackslash|\
+		u\
+		0\
+		3\
+		9\
+		1 = 0;
+	\end{minted}
 
 	\begin{itemize}
 		\item [] \begin{itemize}
@@ -53,9 +55,10 @@ u\
 		\end{itemize}
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-#define CONCAT(x, y) x ## y
-int CONCAT(\, u0393) = 0;\end{lstlisting}
+	\begin{minted}[escapeinside=||]{cpp}
+		#define CONCAT(x, y) x ## y
+		int CONCAT(|\textbackslash|, u0393) = 0;
+	\end{minted}
 
 	\begin{itemize}
 		\item [] \begin{itemize}
@@ -68,7 +71,7 @@ int CONCAT(\, u0393) = 0;\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Encodage}
 	\begin{itemize}
-		\item Ajout de \lstinline|@|, \lstinline|$| et \lstinline|`| au jeu de caractères de base
+		\item Ajout de \mintinline[escapeinside=||]{cpp}{|@|}, \mintinline{cpp}|$| et \mintinline[escapeinside=||]{cpp}{|`|} au jeu de caractères de base
 	
 \note[item]{Ajoutés en C (C23)}
 \note[item]{Supportés par tous les encodages communément utilisés}
@@ -80,18 +83,20 @@ int CONCAT(\, u0393) = 0;\end{lstlisting}
 
 \subsection*{Variables}
 \begin{frame}[fragile]
-	\frametitle{\textit{Placeholders}}
+	\frametitle{Placeholders}
 	\begin{itemize}
-		\item Joker \lstinline|_| pour des variables inutilisées
+		\item Joker \mintinline{cpp}|_| pour des variables inutilisées
 	\end{itemize}
 	
-	\begin{lstlisting}[language=C++]
-auto _ = foo();
-// Equivalent a [[maybe_unused]] auto _ = foo();\end{lstlisting}
+	\begin{minted}{cpp}
+		auto _ = foo();
+		// Equivalent a [[maybe_unused]] auto _ = foo();
+	\end{minted}
 
-	\begin{lstlisting}[language=C++]
-std::lock_guard _(mutex);
-auto  [x, y, _] = f();\end{lstlisting}
+	\begin{minted}{cpp}
+		std::lock_guard _(mutex);
+		auto  [x, y, _] = f();
+	\end{minted}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -100,25 +105,25 @@ auto  [x, y, _] = f();\end{lstlisting}
 	\begin{itemize}
 		\item Nouveaux conteneurs
 		\begin{itemize}
-			\item Vecteur de capacité fixée en \textit{compile-time} \lstinline|std::inplace_vector|
+			\item Vecteur de capacité fixée en \textit{compile-time} \mintinline{cpp}|std::inplace_vector|
 
-\note[item]{Contrairement à \lstinline|std::array| la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
+\note[item]{Contrairement à \mintinline{cpp}|std::array| la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments \og sans valeur par défaut\fg{}}
 		\end{itemize}
-		\item Possibilité d'utiliser \lstinline|std::weak_ptr| en tant que clé de conteneur associatif
-		\item \lstinline|std::submdspan()| retourne une vue sur un sous-ensemble d'un \lstinline|std::mdspan|
+		\item Possibilité d'utiliser \mintinline{cpp}|std::weak_ptr| en tant que clé de conteneur associatif
+		\item \mintinline{cpp}|std::submdspan()| retourne une vue sur un sous-ensemble d'un \mintinline{cpp}|std::mdspan|
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Chaînes de caractères}
 	\begin{itemize}
-		\item Support de \lstinline|std::string_view| par \lstinline|std::stringstream|
-		\item Interfaçage de \lstinline|std::bitset| avec \lstinline|std::string_view|
+		\item Support de \mintinline{cpp}|std::string_view| par \mintinline{cpp}|std::stringstream|
+		\item Interfaçage de \mintinline{cpp}|std::bitset| avec \mintinline{cpp}|std::string_view|
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{\textit{Initializer-list}}
+	\frametitle{Initializer-list}
 	\begin{itemize}
 		\item \textit{static storage} possible pour les \textit{braced-initializer-list}
 		
@@ -128,9 +133,9 @@ auto  [x, y, _] = f();\end{lstlisting}
 
 \subsection*{Algorithme}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::visit()|}
+	\frametitle{{\NoAutoSpacing std::visit()}}
 	\begin{itemize}
-		\item Versions membres de \lstinline|std::visit()| et \lstinline|std::visit_format_arg()|
+		\item Versions membres de \mintinline{cpp}|std::visit()| et \mintinline{cpp}|std::visit_format_arg()|
 	\end{itemize}
 \end{frame}
 
@@ -138,28 +143,28 @@ auto  [x, y, _] = f();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Ratio}
 	\begin{itemize}
-		\item Ajout des préfixes \lstinline|quecto|, \lstinline|ronto|, \lstinline|ronna| et \lstinline|quetta|
+		\item Ajout des préfixes \mintinline{cpp}|quecto|, \mintinline{cpp}|ronto|, \mintinline{cpp}|ronna| et \mintinline{cpp}|quetta|
 	\end{itemize}
 \end{frame}
 
 \subsection*{constexpr}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|constexpr|}
+	\frametitle{constexpr}
 	\begin{itemize}
-		\item Davantage de \lstinline|constexpr| dans la bibliothèque standard
-		\item Conversion depuis \lstinline|void*| dans des contextes \lstinline|constexpr|
+		\item Davantage de \mintinline{cpp}|constexpr| dans la bibliothèque standard
+		\item Conversion depuis \mintinline{cpp}|void*| dans des contextes \mintinline{cpp}|constexpr|
 		\begin{itemize}
-			\item \lstinline|std::format()| au compile-time
-			\item \lstinline|std::function_ref|, \lstinline|std::function| et \lstinline|std::any| \lstinline|constexpr|
+			\item \mintinline{cpp}|std::format()| au compile-time
+			\item \mintinline{cpp}|std::function_ref|, \mintinline{cpp}|std::function| et \mintinline{cpp}|std::any| \mintinline{cpp}|constexpr|
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \subsection*{Gestion mémoire}
 \begin{frame}[fragile]
-	\frametitle{\textit{lifetime}}
+	\frametitle{lifetime}
 	\begin{itemize}
-		\item \lstinline|std::is_within_lifetime()| indique si l'objet pointé est vivant
+		\item \mintinline{cpp}|std::is_within_lifetime()| indique si l'objet pointé est vivant
 		\item \ldots{} en particulier si un membre d'une union est active
 	\end{itemize}
 \end{frame}
@@ -177,14 +182,14 @@ auto  [x, y, _] = f();\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Type appelable}
 	\begin{itemize}
-		\item Ajout de \lstinline|std::copiable_function| pour les fonctions copiables
+		\item Ajout de \mintinline{cpp}|std::copiable_function| pour les fonctions copiables
 
-\note[item]{Pendant de \lstinline|std::move_only_function|}
+\note[item]{Pendant de \mintinline{cpp}|std::move_only_function|}
 
-		\item Ajout de \lstinline|std::function_ref|
+		\item Ajout de \mintinline{cpp}|std::function_ref|
 		\begin{itemize}
 			\item Type référence pour le passage d'appelable à une fonction
-			\item Plus générique et moins gourmand que \lstinline|std::function| et équivalents
+			\item Plus générique et moins gourmand que \mintinline{cpp}|std::function| et équivalents
 	
 \note[item]{Les fonctions n'ont pas besoin d'être copiables ni déplaçables}
 		\end{itemize}
@@ -193,9 +198,9 @@ auto  [x, y, _] = f();\end{lstlisting}
 
 \subsection*{Flux}
 \begin{frame}[fragile]
-	\frametitle{\lstinline|std::format|}
+	\frametitle{{\NoAutoSpacing std::format}}
 	\begin{itemize}
-		\item Redéfinition de \lstinline|std::to_string| en terme de \lstinline|std::format|
+		\item Redéfinition de \mintinline{cpp}|std::to_string| en terme de \mintinline{cpp}|std::format|
 		\item Davantage de vérifications \textit{compile-time} du type des arguments
 		\begin{itemize}
 			\item Déjà le cas de la majorité des erreurs
@@ -203,24 +208,26 @@ auto  [x, y, _] = f();\end{lstlisting}
 		\end{itemize}
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-// Erreur run-time
-format("{:>{}}", "hello", "10");\end{lstlisting}
+	\begin{minted}{cpp}
+		format("{:>{}}", "hello", "10");
+		// Erreur run-time
+	\end{minted}
 
 	\begin{itemize}
 		\item Formatage des pointeurs
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-format("{:#018X}", reinterpret_cast<uintptr_t>(&i));
-// 0X00007FFE0325C4E4\end{lstlisting}
+	\begin{minted}{cpp}
+		format("{:#018X}", reinterpret_cast<uintptr_t>(&i));
+		// 0X00007FFE0325C4E4
+	\end{minted}
 \end{frame}
 
 \subsection*{Durées et temps}
 \begin{frame}[fragile]
 	\frametitle{Durées et temps}
 	\begin{itemize}
-		\item Spécialisation de \lstinline|std::hash| pour \lstinline|std::chrono|
+		\item Spécialisation de \mintinline{cpp}|std::hash| pour \mintinline{cpp}|std::chrono|
 	\end{itemize}
 \end{frame}
 
@@ -228,11 +235,11 @@ format("{:#018X}", reinterpret_cast<uintptr_t>(&i));
 \begin{frame}[fragile]
 	\frametitle{Accès bas-niveaux aux IO}
 	\begin{itemize}
-		\item Alias sur le descripteur de fichier de la plateforme : \lstinline|native_handle_type|
+		\item Alias sur le descripteur de fichier de la plateforme : \mintinline{cpp}|native_handle_type|
 		
-\note[item]{\lstinline|int| sous POSIX, \lstinline|HANDLE| (\lstinline|void*|) sous Windows}
+\note[item]{\mintinline{cpp}|int| sous POSIX, \mintinline{cpp}|HANDLE| (\mintinline{cpp}|void*|) sous Windows}
 		 
-		\item \lstinline|native_handle()| retourne ce descripteur
+		\item \mintinline{cpp}|native_handle()| retourne ce descripteur
 	\end{itemize}
 \end{frame}
 

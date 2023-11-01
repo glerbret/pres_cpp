@@ -46,7 +46,7 @@
 
 		\item Vaste sous-ensemble commun (proche du C) entre C et C++
 
-\note[item]{Meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type \lstinline|char|, pas de conversion implicite depuis \lstinline|void|)}
+\note[item]{Meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type \mintinline{cpp}|char|, pas de conversion implicite depuis \mintinline{cpp}|void|)}
 
 		\item \textit{Zero-overhead abstraction}
 		\item Compatibilité ascendante forte mais pas absolue
@@ -118,8 +118,8 @@
 		\item Plusieurs variantes
 		\begin{itemize}
 			\item Type de retour dédié
-			\item Valeur particulière notant un échec (\lstinline|NULL|, \lstinline|-1|)
-			\item Récupération de la dernière erreur (\lstinline|errno|, \lstinline|GetLastError()|)
+			\item Valeur particulière notant un échec (\mintinline{cpp}|NULL|, \mintinline{cpp}|-1|)
+			\item Récupération de la dernière erreur (\mintinline{cpp}|errno|, \mintinline{cpp}|GetLastError()|)
 		\end{itemize}
 		\item Nécessite \og un test toutes les deux lignes\fg{}
 		\item Gestion manuelle de la remontée de la pile d'appel
@@ -138,38 +138,39 @@
 \begin{frame}[fragile]
 	\frametitle{Erreurs -- Exceptions}
 	\begin{itemize}
-		\item Lancées par \lstinline|throw|
-		\item Attrapées par \lstinline|catch()| depuis un bloc \lstinline|try|
+		\item Lancées par \mintinline{cpp}|throw|
+		\item Attrapées par \mintinline{cpp}|catch()| depuis un bloc \mintinline{cpp}|try|
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-try {
-  ...
-  // Lancement d'une exception
-  throw logic_error("Oups !");
-  ... }
-catch(logic_error& e) {
-  // Traitement de l'exception 
-  ... }\end{lstlisting}
+	\begin{minted}{cpp}
+		try {
+		  ...
+		  // Lancement d'une exception
+		  throw logic_error("Oups !");
+		  ... }
+		catch(logic_error& e) {
+		  // Traitement de l'exception 
+		  ... }
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Erreurs -- Exceptions}
 	\begin{itemize}
 		\item Type quelconque
-		\item Idéalement héritant de \lstinline|std::exception| (via \lstinline|std::logic_error|, \lstinline|std::runtime_error| ou autres)
-		\item \lstinline|catch(...)| pour attraper les exceptions de tout type
+		\item Idéalement héritant de \mintinline{cpp}|std::exception| (via \mintinline{cpp}|std::logic_error|, \mintinline{cpp}|std::runtime_error| ou autres)
+		\item \mintinline{cpp}|catch(...)| pour attraper les exceptions de tout type
 		\item Compatibles avec le \textit{stack unwinding}
 
 \note[item]{Objets sur la pile détruits lors de la sortie d'une fonction même sur exception}
 \note[item]{Destruction dans l'ordre inverse de la création des objets}
 
-		\item Pas de \lstinline[keywordstyle=\color{black}]|finally|
-		\item Appel de \lstinline|std::terminate()| si une exception n'est pas attrapée
+		\item Pas de \mintinline{cpp}|finally|
+		\item Appel de \mintinline{cpp}|std::terminate()| si une exception n'est pas attrapée
 
 \note[item]{Sortie du programme sans \textit{stack unwinding}}
 
-		\item Utilisées par la bibliothèque standard (p.ex. \lstinline|std::bad_alloc|)
+		\item Utilisées par la bibliothèque standard (p.ex. \mintinline{cpp}|std::bad_alloc|)
 	\end{itemize}
 \end{frame}
 
@@ -233,7 +234,7 @@ catch(logic_error& e) {
 
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Destructeurs et \lstinline|swap()| ne doivent pas lever d'exception
+			\item Destructeurs et \mintinline{cpp}|swap()| ne doivent pas lever d'exception
 
 \note[item]{Aussi le cas pour le déplacement en C++11}
 		\end{itemize}
@@ -270,16 +271,17 @@ catch(logic_error& e) {
 		\end{itemize}
 	\end{exampleblock}
 
-	\begin{lstlisting}[language=C++]
-class A {
-public:
-  A(const A&);
-  A& operator=(A);
-  friend void swap(A& lhs, A& rhs); };  // Nothrow
+	\begin{minted}{cpp}
+	class A {
+	public:
+	  A(const A&);
+	  A& operator=(A);
+	  friend void swap(A& lhs, A& rhs); };  // Nothrow
 
-A& A::operator=(A other) {              // Copy
-  swap(*this, other);                   // Swap
-  return *this; }\end{lstlisting}
+	A& A::operator=(A other) {              // Copy
+	  swap(*this, other);                   // Swap
+	  return *this; }
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -292,9 +294,9 @@ A& A::operator=(A other) {              // Copy
 
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Utilisez des types dédiés héritant de \lstinline|std::exception|
+			\item Utilisez des types dédiés héritant de \mintinline{cpp}|std::exception|
 
-\note[item]{Idéalement via \lstinline|std::runtime_error|}
+\note[item]{Idéalement via \mintinline{cpp}|std::runtime_error|}
 
 			\item Définissez des hiérarchies d'exceptions
 		\end{itemize}
@@ -322,17 +324,18 @@ A& A::operator=(A other) {              // Copy
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Erreurs -- \lstinline|assert|}
+	\frametitle{Erreurs -- assert}
 	\begin{itemize}
 		\item Arrête le programme si l'expression est évalué à 0
 		\item Affiche au moins l'expression, le fichier et la ligne
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-assert(expression);\end{lstlisting}
+	\begin{minted}{cpp}
+		assert(expression);
+	\end{minted}
 
 	\begin{itemize}
-		\item Sans effet lorsque \lstinline|NDEBUG| est défini
+		\item Sans effet lorsque \mintinline{cpp}|NDEBUG| est défini
 		\begin{itemize}
 			\item Coût nul en \textit{Release}
 			\item Inutilisable pour les erreurs d'exécution et le contrôle des entrées
@@ -351,7 +354,7 @@ assert(expression);\end{lstlisting}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
-			\item Réservez \lstinline|assert| aux erreurs de programmation et à la vérification des contrats internes
+			\item Réservez \mintinline{cpp}|assert| aux erreurs de programmation et à la vérification des contrats internes
 		\end{itemize}
 	\end{exampleblock}
 
@@ -363,7 +366,7 @@ assert(expression);\end{lstlisting}
 
 	\begin{alertblock}{Don't}
 		\begin{itemize}
-			\item Jamais d'\lstinline|assert| pour les erreurs d'exécution et le contrôle des entrées
+			\item Jamais d'\mintinline{cpp}|assert| pour les erreurs d'exécution et le contrôle des entrées
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -377,14 +380,18 @@ assert(expression);\end{lstlisting}
 
 	\begin{itemize}
 		\item Solution C : \textit{Single Entry Single Exit}, bloc unique de libération
+	\end{itemize}
 
-		\begin{lstlisting}[language=C++]
-char* memory = malloc(50);
-if(!memory) goto err;
-...
-err:
-free(memory);\end{lstlisting}
+	\begin{minted}{cpp}
+		char* memory = malloc(50);
+		if(!memory) goto err;
+		...
+		err:
+		free(memory);
+	\end{minted}
 
+	\begin{itemize}
+	\item []
 		\begin{itemize}
 			\item Laborieux
 			\item Difficile à mettre en place en présence d'exceptions
@@ -395,16 +402,17 @@ free(memory);\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{Ressources -- Gestion manuelle}
 	\begin{block}{Quiz : Comment éviter les fuites mémoires ?}
-		\begin{lstlisting}[language=C++]
-char* memory1 = NULL;
-char* memory2 = NULL;
-...
-memory1 = new char[50];
-...
-memory2 = new char[200];
-...
-delete[] memory1;
-delete[] memory2;\end{lstlisting}
+		\begin{minted}{cpp}
+			char* memory1 = NULL;
+			char* memory2 = NULL;
+			...
+			memory1 = new char[50];
+			...
+			memory2 = new char[200];
+			...
+			delete[] memory1;
+			delete[] memory2;
+		\end{minted}
 	\end{block}
 \end{frame}
 
@@ -419,14 +427,15 @@ delete[] memory2;\end{lstlisting}
 		\item Une double libération est une erreur
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-struct Foo {
-public:
-  Foo() : bar(new char[50]) {}
-  ~Foo() { delete[] bar; }
-
-private:
-  char* bar; };\end{lstlisting}
+	\begin{minted}{cpp}
+		struct Foo {
+		public:
+		  Foo() : bar(new char[50]) {}
+		  ~Foo() { delete[] bar; }
+		
+		private:
+		  char* bar; };
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -512,41 +521,42 @@ private:
 	\begin{alertblock}{Gestion des erreurs}
 		\begin{itemize}
 			\item Pas d'erreur ni d'exception dans les destructeurs
-			\item La libération peut échouer (p.ex. \lstinline|flush| lors de la fermeture de fichier)
+			\item La libération peut échouer (p.ex. \mintinline{cpp}|flush()| lors de la fermeture de fichier)
 		\end{itemize}
 	\end{alertblock}
 
-	\begin{lstlisting}[language=C++]
-{
-  ifstream src("input.txt");
-  ofstream dst("output.txt");
-  copy_files(src, dst);
-}
+	\begin{minted}{cpp}
+		{
+		  ifstream src("input.txt");
+		  ofstream dst("output.txt");
+		  copy_files(src, dst);
+		}
 
-remove_file(src);
-// Potentielle perte de donnees\end{lstlisting}
+		remove_file(src);
+		// Potentielle perte de donnees
+	\end{minted}
 
-\note[item]{Problème résolu en forçant l'écriture (\lstinline|flush|) en fin de la fonction \lstinline|copy_files()| et en remontant une exception en cas d'erreur}
+\note[item]{Problème résolu en forçant l'écriture (\mintinline{cpp}|flush|) en fin de la fonction \mintinline{cpp}|copy_files()| et en remontant une exception en cas d'erreur}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Ressources -- Limites du RAII}
-	\begin{alertblock}{\lstinline|std::auto_ptr|}
+	\begin{alertblock}{\mintinline{cpp}|std::auto_ptr|}
 		\begin{itemize}
 			\item Copiable
 			\item La copie transfère la responsabilité de la ressource
 		\end{itemize}
 	\end{alertblock}
 
-	\begin{lstlisting}[language=C++]
-void foo(auto_ptr<int> bar) {}
+	\begin{minted}{cpp}
+		void foo(auto_ptr<int> bar) {}
 
-auto_ptr<int> bar(new int(5));
-foo(bar);
-// Erreur : bar n'est plus utilisable
-cout << *bar << "\n";\end{lstlisting}
+		auto_ptr<int> bar(new int(5));
+		foo(bar);
+		cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
+	\end{minted}
 
-\note[item]{\lstinline|std::auto_ptr| déprécié en C++11 et remplacé par \lstinline|std::unique_ptr| qui fonctionne mieux (sémantique de déplacement)}
+\note[item]{\mintinline{cpp}|std::auto_ptr| déprécié en C++11 et remplacé par \mintinline{cpp}|std::unique_ptr| qui fonctionne mieux (sémantique de déplacement)}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -556,8 +566,8 @@ cout << *bar << "\n";\end{lstlisting}
 
 	\begin{itemize}
 		\item Principe de connaissance minimale
-		\item Un objet \lstinline|A| peut utiliser les services d'un deuxième objet \lstinline|B|
-		\item \ldots{} mais ne doit pas utiliser \lstinline|B| pour accéder à un troisième objet
+		\item Un objet \mintinline{cpp}|A| peut utiliser les services d'un deuxième objet \mintinline{cpp}|B|
+		\item \ldots{} mais ne doit pas utiliser \mintinline{cpp}|B| pour accéder à un troisième objet
 		\item En particulier, une classe n'expose pas ses données
 	\end{itemize}
 
@@ -623,17 +633,18 @@ cout << *bar << "\n";\end{lstlisting}
 		\begin{itemize}
 			\item N'hésitez pas à étendre l'interface de classe avec des fonctions libres
 			\item Pensez à l'amitié pour cette interface étendue
-			\item Implémentez-la en terme de fonctions membres (p.ex. \lstinline|+| à partir de \lstinline|+=|)
+			\item Implémentez-la en terme de fonctions membres (p.ex. \mintinline{cpp}|+| à partir de \mintinline{cpp}|+=|)
 		\end{itemize}
 	\end{block}
 
-	\begin{lstlisting}[language=C++]
-class Foo {
-public:
-  Foo& operator+=(const Foo& other); };
+	\begin{minted}{cpp}
+		class Foo {
+		public:
+		  Foo& operator+=(const Foo& other); };
 
-Foo operator+(Foo lhs, const Foo& rhs) {
-  return lhs += rhs; }\end{lstlisting}
+		Foo operator+(Foo lhs, const Foo& rhs) {
+		  return lhs += rhs; }
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -680,19 +691,19 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\frametitle{Ressources -- Conclusion}
 	\begin{alertblock}{Don't}
 		\begin{itemize}
-			\item Pas de \lstinline|delete| dans le code applicatif
+			\item Pas de \mintinline{cpp}|delete| dans le code applicatif
 		\end{itemize}
 
-\note[item]{\lstinline|delete| dans les classes bas niveau qui définissent des capsules RAII}
+\note[item]{\mintinline{cpp}|delete| dans les classes bas niveau qui définissent des capsules RAII}
 	\end{alertblock}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item Sous Linux, méfiez-vous de l'\textit{Optimistic Memory Allocator}
 
-\note[item]{Retourne une adresse lors d'un \lstinline|new| ou d'un \lstinline|malloc()| sans allocation et avec peu de contrôle}
+\note[item]{Retourne une adresse lors d'un \mintinline{cpp}|new| ou d'un \mintinline{cpp}|malloc()| sans allocation et avec peu de contrôle}
 \note[item]{Allocation uniquement lors de l'usage de la mémoire}
-\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais \lstinline|init|}
+\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais \mintinline{cpp}|init|}
 \note[item]{Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement}
 
 			\item Pensez à paramétrer correctement l'OS
@@ -709,9 +720,9 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \note[item]{Formellement, la STL n'existe plus dans la norme C++ actuelle}
 
 		\begin{itemize}
-			\item Conteneurs et \lstinline|std::basic_string|
+			\item Conteneurs et \mintinline{cpp}|std::basic_string|
 
-\note[item]{\lstinline|std::basic_string| contient, est template et a une interface \og conteneurs\fg{}. Mais a une sémantique particulière et n'est pas remplaçable de ce fait et possède des algorithmes spécifiques}
+\note[item]{\mintinline{cpp}|std::basic_string| contient, est template et a une interface \og conteneurs\fg{}. Mais a une sémantique particulière et n'est pas remplaçable de ce fait et possède des algorithmes spécifiques}
 
 			\item Itérateurs
 			\item Algorithmes manipulation les données des conteneurs via les itérateurs
@@ -720,7 +731,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Quelques algorithmes manipulant directement des données (p.ex. \lstinline|std::min()|)
+			\item Quelques algorithmes manipulant directement des données (p.ex. \mintinline{cpp}|std::min()|)
 		\end{itemize}
 	\end{block}
 
@@ -729,7 +740,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\begin{itemize}
 			\item Promoteur de la programmation générique
 
-\note[item]{Programmation générique : template en C++, \lstinline|generic| en Java}
+\note[item]{Programmation générique : template en C++, \mintinline{java}|generic| en Java}
 \note[item]{Programmation générique = polymorphisme paramétrique}
 
 			\item Sceptique vis à vis de la POO
@@ -768,9 +779,9 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\begin{block}{À nuancer}
 		Algorithmes membres sur certains conteneurs
 		\begin{itemize}
-			\item Accès par itérateurs insuffisant (p.ex. \lstinline|std::list|)
-			\item Habitudes et historiques (p.ex. \lstinline|std::string|)
-			\item Performances (p.ex. \lstinline|map.find()|)
+			\item Accès par itérateurs insuffisant (p.ex. \mintinline{cpp}|std::list|)
+			\item Habitudes et historiques (p.ex. \mintinline{cpp}|std::string|)
+			\item Performances (p.ex. \mintinline{cpp}|map.find()|)
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -782,7 +793,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 		\item Contiennent des objets copiables et non constants
 
 \note[item]{En C++11 et suivantes : copiables ou déplaçables}
-\note[item]{On peut avoir des conteneurs \lstinline|const| et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de \lstinline|const|}
+\note[item]{On peut avoir des conteneurs \mintinline{cpp}|const| et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de \mintinline{cpp}|const|}
 
 		\item \ldots{} qui peuvent être les adresses d'autres objets
 	\end{itemize}
@@ -803,7 +814,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \begin{frame}[fragile]
 	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
 	\begin{itemize}
-		\item \lstinline|std::vector|
+		\item \mintinline{cpp}|std::vector|
 		\begin{itemize}
 			\item Tableau de taille variable d'éléments contigus
 			\item Accès indexé
@@ -815,17 +826,17 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 			\item Compatible avec l'organisation mémoire des tableaux C
 
-\note[item]{Passage à un tableau C en prenant l'adresse du premier élément : \lstinline|T* ptr = &vec[0];|}
+\note[item]{Passage à un tableau C en prenant l'adresse du premier élément : \mintinline{cpp}|T* ptr = &vec[0];|}
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\lstinline|std::vector<bool>| n'est pas un vecteur de booléen}
+	\begin{alertblock}{\mintinline{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
 		\begin{itemize}
 			\item Ne remplit pas tous les pré-requis des conteneurs
-			\item \lstinline|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
+			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
 			\item Voir \cite{effStl} item 18
 
-\note[item]{Impossible de prendre l'adresse de \lstinline|v[0]| d'un \lstinline|vector<bool>|}
+\note[item]{Impossible de prendre l'adresse de \mintinline{cpp}|v[0]| d'un \mintinline{cpp}|vector<bool>|}
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -833,7 +844,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \begin{frame}[fragile]
 	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
 	\begin{itemize}
-		\item \lstinline|std::list|
+		\item \mintinline{cpp}|std::list|
 		\begin{itemize}
 			\item Liste doublement chaînée
 			\item Accès bidirectionnel non indexé
@@ -843,10 +854,10 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \note[item]{Algorithmes membres pour la liste car accès non indexé}
 		\end{itemize}
 
-		\item \lstinline|std::deque|
+		\item \mintinline{cpp}|std::deque|
 		\begin{itemize}
 			\item \textit{Double-ended queue}
-			\item Proche de \lstinline|std::vector| mais extensible aux deux extrémités
+			\item Proche de \mintinline{cpp}|std::vector| mais extensible aux deux extrémités
 			\item Accès indexé
 			\item Éléments non nécessairement contigus
 			\item Non compatible avec l'organisation mémoire des tableaux C
@@ -857,17 +868,17 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \begin{frame}[fragile]
 	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
 	\begin{itemize}
-		\item \lstinline|std::string|
+		\item \mintinline{cpp}|std::string|
 		\begin{itemize}
-			\item Alias de \lstinline|std::basic_string<char>|
+			\item Alias de \mintinline{cpp}|std::basic_string<char>|
 			\item Stockage de chaînes de caractères
 			\item Manipulation de \textit{bytes} et non de caractères encodés
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\lstinline|std::string| et UTF-8}
+	\begin{alertblock}{\mintinline{cpp}|std::string| et UTF-8}
 		\begin{itemize}
-			\item \lstinline|length()| et \lstinline|size()| retournent le nombre de \textit{bytes}, pas de caractères
+			\item \mintinline{cpp}|length()| et \mintinline{cpp}|size()| retournent le nombre de \textit{bytes}, pas de caractères
 		\end{itemize}
 	\end{alertblock}
 
@@ -878,7 +889,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 \note[item]{Contiguïté garantie en C++11 et suivant}
 \note[item]{Pas d'implémentation non contigüe connue}
 
-			\item Variante \lstinline|std::wstring| pour les caractères larges
+			\item Variante \mintinline{cpp}|std::wstring| pour les caractères larges
 		\end{itemize}
 	\end{itemize}
 
@@ -895,10 +906,10 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\begin{itemize}
 		\item Quatre saveurs
 		\begin{itemize}
-			\item \lstinline|std::map| -- clés-valeurs, ordonné par la clé, unicité des clés
-			\item \lstinline|std::multimap| -- clés-valeurs, ordonné par la clé, multiplicité des clés
-			\item \lstinline|std::set| -- valeurs ordonnées et uniques
-			\item \lstinline|std::multiset| -- valeurs ordonnées et non-uniques
+			\item \mintinline{cpp}|std::map| -- clés-valeurs, ordonné par la clé, unicité des clés
+			\item \mintinline{cpp}|std::multimap| -- clés-valeurs, ordonné par la clé, multiplicité des clés
+			\item \mintinline{cpp}|std::set| -- valeurs ordonnées et uniques
+			\item \mintinline{cpp}|std::multiset| -- valeurs ordonnées et non-uniques
 		\end{itemize}
 	\end{itemize}
 
@@ -931,20 +942,20 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 	\begin{itemize}
 		\item Basés sur un autre conteneur pour proposer une API simplifiée
 		\item Avantages et inconvénients du conteneur sous-jacent
-		\item \lstinline|std::stack|
+		\item \mintinline{cpp}|std::stack|
 		\begin{itemize}
 			\item Pile LIFO
-			\item Basée sur \lstinline|std::vector|, \lstinline|std::list| ou \lstinline|std::deque|
+			\item Basée sur \mintinline{cpp}|std::vector|, \mintinline{cpp}|std::list| ou \mintinline{cpp}|std::deque|
 		\end{itemize} 
-		\item \lstinline|std::queue|
+		\item \mintinline{cpp}|std::queue|
 		\begin{itemize}
 			\item File FIFO
-			\item Basée sur \lstinline|std::deque| ou \lstinline|std::list|
+			\item Basée sur \mintinline{cpp}|std::deque| ou \mintinline{cpp}|std::list|
 		\end{itemize} 
-		\item \lstinline|std::priority_queue|
+		\item \mintinline{cpp}|std::priority_queue|
 		\begin{itemize}
 			\item File dont l'élément de tête est le plus grand
-			\item Basée sur \lstinline|std::vector| ou \lstinline|std::deque|
+			\item Basée sur \mintinline{cpp}|std::vector| ou \mintinline{cpp}|std::deque|
 			\item Critère d'ordre configurable (strictement inférieur par défaut)
 		\end{itemize} 
 	\end{itemize}
@@ -952,14 +963,15 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 
 \begin{frame}[fragile]
 	\frametitle{STL Conteneurs -- Adaptateurs}
-	\begin{lstlisting}[language=C++]
-stack<int, vector<int> > foo;
-for(int i=0; i<5; ++i) foo.push(i);
+	\begin{minted}{cpp}
+		stack<int, vector<int> > foo;
+		for(int i=0; i<5; ++i) foo.push(i);
 
-// Affiche 4 3 2 1 0
-while(!foo.empty()) {
-  cout << ' ' << foo.top();
-  foo.pop(); }\end{lstlisting}
+		// Affiche 4 3 2 1 0
+		while(!foo.empty()) {
+		  cout << ' ' << foo.top();
+		  foo.pop(); }
+	\end{minted}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -969,10 +981,10 @@ while(!foo.empty()) {
 \begin{frame}[fragile]
 	\frametitle{STL Conteneurs -- conteneurs non-STL}
 
-\note[item]{\lstinline|std::valarray| laissé de côté, pas vraiment un conteneur}
+\note[item]{\mintinline{cpp}|std::valarray| laissé de côté, pas vraiment un conteneur}
 
 	\begin{itemize}
-		\item \lstinline|std::bitset|
+		\item \mintinline{cpp}|std::bitset|
 		\begin{itemize}
 			\item Tableau de bits de taille fixe
 			\item Conçu pour réduite l'empreinte mémoire
@@ -980,8 +992,8 @@ while(!foo.empty()) {
 		\end{itemize}
 	\end{itemize}
 
-	\begin{block}{\lstinline|std::bitset| vs. \lstinline|std::vector<bool>|}
-		Objectif de gain mémoire adressé par \lstinline|std::bitset|, pourquoi \lstinline|std::vector<bool>| n'est-il pas un vrai conteneur de booléen ?
+	\begin{block}{\mintinline[style=vim]{cpp}|std::bitset| vs. \mintinline[style=vim]{cpp}|std::vector<bool>|}
+		Objectif de gain mémoire adressé par \mintinline{cpp}|std::bitset|, pourquoi \mintinline{cpp}|std::vector<bool>| n'est-il pas un vrai conteneur de booléen ?
 	\end{block}
 
 	\begin{itemize}
@@ -1000,15 +1012,15 @@ while(!foo.empty()) {
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- \lstinline|std::pair|}
+	\frametitle{STL Conteneurs -- std::pair}
 	\begin{itemize}
 		\item Couple de deux valeurs
 		\item Pas un conteneur
 		\begin{itemize}
-			\item Type de retour de la recherche sur les \lstinline|std::map| (couple clé-valeur)
+			\item Type de retour de la recherche sur les \mintinline{cpp}|std::map| (couple clé-valeur)
 			\item Candidat pour construire des vecteurs indexés par un non-numérique
 		\end{itemize}
-		\item \lstinline|std::make_pair| construit une paire
+		\item \mintinline{cpp}|std::make_pair| construit une paire
 	\end{itemize}
 \end{frame}
 
@@ -1016,8 +1028,8 @@ while(!foo.empty()) {
 	\frametitle{STL Conteneurs -- Choix du conteneur}
 	\begin{exampleblock}{Do, par défaut}
 		\begin{itemize}
-			\item \lstinline|std::string| pour les chaînes de caractères
-			\item \lstinline|std::vector|
+			\item \mintinline{cpp}|std::string| pour les chaînes de caractères
+			\item \mintinline{cpp}|std::vector|
 		\end{itemize}
 	\end{exampleblock}		
 
@@ -1029,8 +1041,8 @@ while(!foo.empty()) {
 
 	\begin{alertblock}{Flux d'octets}
 		\begin{itemize}
-			\item Utilisez \lstinline|std::vector<unsigned char>|
-			\item Pas \lstinline|std::vector<char>| encore moins \lstinline|std::string|
+			\item Utilisez \mintinline{cpp}|std::vector<unsigned char>|
+			\item Pas \mintinline{cpp}|std::vector<char>| encore moins \mintinline{cpp}|std::string|
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -1041,10 +1053,10 @@ while(!foo.empty()) {
 		\begin{itemize}
 			\item Voir \cite{effStl} item 1
 			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?}
-			\item Pensez à \lstinline|reserve()|
+			\item Pensez à \mintinline{cpp}|reserve()|
 			\item Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
 
-\note[item]{Voir overload 134 (août 2016) sur big O et les performances \lstinline|std::vector|/\lstinline|std::string|, et l'importance de la localité des données}
+\note[item]{Voir overload 134 (août 2016) sur big O et les performances \mintinline{cpp}|std::vector|/\mintinline{cpp}|std::string|, et l'importance de la localité des données}
 
 			\item Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
 		\end{itemize}
@@ -1060,14 +1072,14 @@ while(!foo.empty()) {
 		\item Interface similaire à celle d'un pointeur
 		\item Quatre types
 		\begin{itemize}
-			\item \lstinline|iterator| et \lstinline|const_iterator|
-			\item \lstinline|reverse_iterator| et \lstinline|const_reverse_iterator|
+			\item \mintinline{cpp}|iterator| et \mintinline{cpp}|const_iterator|
+			\item \mintinline{cpp}|reverse_iterator| et \mintinline{cpp}|const_reverse_iterator|
 
-\note[item]{\lstinline|const_iterator| itèrent sur des valeurs constantes, utilisables pour lire des données mais pas pour les écrire}
+\note[item]{\mintinline{cpp}|const_iterator| itèrent sur des valeurs constantes, utilisables pour lire des données mais pas pour les écrire}
 
 		\end{itemize}
-		\item Itérateurs sur un conteneur : \lstinline|begin()| et \lstinline|end()|
-		\item Itérateurs inverses sur un conteneur : \lstinline|rbegin()| et \lstinline|rend()|
+		\item Itérateurs sur un conteneur : \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
+		\item Itérateurs inverses sur un conteneur : \mintinline{cpp}|rbegin()| et \mintinline{cpp}|rend()|
 		\item Les itérateurs d'une paire doivent appartenir au même conteneur
 	\end{itemize}
 
@@ -1078,7 +1090,7 @@ while(!foo.empty()) {
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{Un élément après la fin permet de représenter des ensemble vide (si \lstinline|begin| et \lstinline|end| référence le même élément)}
+\note[item]{Un élément après la fin permet de représenter des ensemble vide (si \mintinline{cpp}|begin| et \mintinline{cpp}|end| référence le même élément)}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1089,7 +1101,7 @@ while(!foo.empty()) {
 				\item Opérations communes : copie, affectation et incrémentation
 				\item Hiérarchie de cinq catégories
 				\begin{itemize}
-					\item \textit{Input} : égalité (\lstinline|==| et \lstinline|\!=|) et lecture
+					\item \textit{Input} : égalité (\mintinline{cpp}|==| et \mintinline{cpp}|!=|) et lecture
 					\item \textit{Output} : écriture
 					\item \textit{Forward} : Parcours multiples
 
@@ -1098,8 +1110,8 @@ while(!foo.empty()) {
 					\item \textit{Bidirectional} : décrémentation
 					\item \textit{Random access} 
 					\begin{itemize}
-						\item Déplacement d'un nombre arbitraire (\lstinline|+|, \lstinline|-|, \lstinline|+=|, \lstinline|-=| et \lstinline|[]|)
-						\item Comparaison (\lstinline|<|, \lstinline|<=|, \lstinline|>|, \lstinline|>=|)
+						\item Déplacement d'un nombre arbitraire (\mintinline{cpp}|+|, \mintinline{cpp}|-|, \mintinline{cpp}|+=|, \mintinline{cpp}|-=| et \mintinline{cpp}|[]|)
+						\item Comparaison (\mintinline{cpp}|<|, \mintinline{cpp}|<=|, \mintinline{cpp}|>|, \mintinline{cpp}|>=|)
 					\end{itemize} 
 				\end{itemize}
 			\end{itemize}
@@ -1136,15 +1148,15 @@ while(!foo.empty()) {
 		\hline
 		Conteneur & Catégorie \\ 
 		\hline
-		\lstinline|std::vector| & \textit{Random access} \\ 
+		\mintinline{cpp}|std::vector| & \textit{Random access} \\ 
 		\hline
-		\lstinline|std::deque| & \textit{Random access} \\ 
+		\mintinline{cpp}|std::deque| & \textit{Random access} \\ 
 		\hline
-		\lstinline|std::list| & \textit{Bidirectionnal} \\ 
+		\mintinline{cpp}|std::list| & \textit{Bidirectionnal} \\ 
 		\hline
-		\lstinline|std::map| et \lstinline|std::multimap| & \textit{Bidirectionnal} \\ 
+		\mintinline{cpp}|std::map| et \mintinline{cpp}|std::multimap| & \textit{Bidirectionnal} \\ 
 		\hline
-		\lstinline|std::set| et \lstinline|std::multiset| & \textit{Bidirectionnal} \\ 
+		\mintinline{cpp}|std::set| et \mintinline{cpp}|std::multiset| & \textit{Bidirectionnal} \\ 
 		\hline
 	\end{tabular} 
 \end{frame}
@@ -1159,9 +1171,9 @@ while(!foo.empty()) {
 \note[item]{Les itérateurs classiques pointent sur des éléments existants du conteneur}
 
 		\begin{itemize}
-			\item En queue : \lstinline|back_inserter|
-			\item En tête : \lstinline|front_inserter|
-			\item À la position courante : \lstinline|inserter|
+			\item En queue : \mintinline{cpp}|back_inserter|
+			\item En tête : \mintinline{cpp}|front_inserter|
+			\item À la position courante : \mintinline{cpp}|inserter|
 
 \note[item]{La disponibilité de tel ou tel itérateur d'insertion dépend du conteneur}
 		\end{itemize}
@@ -1172,22 +1184,23 @@ while(!foo.empty()) {
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Foncteurs}
 	\begin{itemize}
-		\item Instances de classe définissant \lstinline|operator()|
+		\item Instances de classe définissant \mintinline{cpp}|operator()|
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-class LessThan {
-public:
-  explicit LessThan(int threshold)
-    : m_threshold(threshold) {}
-  bool operator() (int value) { 
-    return value <= m_threshold; }
+	\begin{minted}{cpp}
+		class LessThan {
+		public:
+		  explicit LessThan(int threshold)
+		    : m_threshold(threshold) {}
+		  bool operator() (int value) { 
+		    return value <= m_threshold; }
 
-private:
-  int const m_threshold; };
+		private:
+		  int const m_threshold; };
 
-LessThan func(10);
-cout << func(5) << "\n";   // 1\end{lstlisting}
+		LessThan func(10);
+		cout << func(5) << "\n";   // 1
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1197,13 +1210,13 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 
 \note[item]{Ce qui représente un avantage sur les fonctions libres}
 
-		\item Foncteurs standards : \lstinline|std::plus|, \lstinline|std::minus|, \lstinline|std::equal|, \lstinline|std::less|, \ldots{}
+		\item Foncteurs standards : \mintinline{cpp}|std::plus|, \mintinline{cpp}|std::minus|, \mintinline{cpp}|std::equal|, \mintinline{cpp}|std::less|, \ldots{}
 		\item Constructibles
 		\begin{itemize}
-			\item Depuis des pointeurs de fonctions : \lstinline|std::prt_fun|
-			\item Depuis des fonctions membres : \lstinline|std::mem_fun|, \lstinline|std::mem_fun1|, \ldots{}
-			\item En niant d'autres foncteurs : \lstinline|std::not1|, \lstinline|std::not2|
-			\item En fixant des paramètres : \lstinline|std::bind1st|, \lstinline|std::bind2nd|
+			\item Depuis des pointeurs de fonctions : \mintinline{cpp}|std::prt_fun|
+			\item Depuis des fonctions membres : \mintinline{cpp}|std::mem_fun|, \mintinline{cpp}|std::mem_fun1|, \ldots{}
+			\item En niant d'autres foncteurs : \mintinline{cpp}|std::not1|, \mintinline{cpp}|std::not2|
+			\item En fixant des paramètres : \mintinline{cpp}|std::bind1st|, \mintinline{cpp}|std::bind2nd|
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1213,22 +1226,23 @@ cout << func(5) << "\n";   // 1\end{lstlisting}
 	\begin{itemize}
 		\item Appelables retournant un booléen (ou un type convertible en booléen)
 		\item Utilisés par de nombreux algorithmes
-		\item De nombreux algorithmes utilisent un prédicat par défaut (p.ex. \lstinline|<| ou \lstinline|==|)
+		\item De nombreux algorithmes utilisent un prédicat par défaut (p.ex. \mintinline{cpp}|<| ou \mintinline{cpp}|==|)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Parcours}
 	\begin{itemize}
-		\item \lstinline|std::for_each()| parcourt un ensemble d'éléments
+		\item \mintinline{cpp}|std::for_each()| parcourt un ensemble d'éléments
 		\item \ldots{} et applique un traitement à chaque élément
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-void print(int i) { cout << i << ' '; }
+	\begin{minted}{cpp}
+		void print(int i) { cout << i << ' '; }
 
-vector<int> foo{4, 5, 9 ,12};
-for_each(foo.begin(), foo.end(), print);\end{lstlisting}
+		vector<int> foo{4, 5, 9 ,12};
+		for_each(foo.begin(), foo.end(), print);
+	\end{minted}
 
 	\begin{itemize}
 		\item Version du \textit{map}/\textit{apply} fonctionnel
@@ -1241,14 +1255,15 @@ for_each(foo.begin(), foo.end(), print);\end{lstlisting}
 		\item Retourne le foncteur passé en paramètre
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-struct Aggregate {
-  Aggregate() : m_sum(0) {}
-  void operator() (int i) { m_sum += i; }
-  int m_sum; };
+	\begin{minted}{cpp}
+		struct Aggregate {
+		  Aggregate() : m_sum(0) {}
+		  void operator() (int i) { m_sum += i; }
+		  int m_sum; };
 
-vector<int> foo{4, 5, 9 ,12};
-for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30\end{lstlisting}
+		vector<int> foo{4, 5, 9 ,12};
+		for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
+	\end{minted}
 
 	\begin{itemize}
 		\item Candidat pour le \textit{fold}/\textit{reduce} fonctionnel
@@ -1259,40 +1274,39 @@ for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Recherche linéaire}
 	\begin{itemize}
-		\item \lstinline|std::find()| recherche une valeur
+		\item \mintinline{cpp}|std::find()| recherche une valeur
 		\item \ldots{} et retourne un itérateur sur celle-ci
 		\item \ldots{} ou l'itérateur de fin si la valeur n'est pas présente
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 9 ,12};
-vector<int>::iterator it1;
-vector<int>::iterator it2
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9 ,12};
+		vector<int>::iterator it1;
+		vector<int>::iterator it2
 
-// it1 pointe sur foo[1]
-it1 = find(foo.begin(), foo.end(), 5);
-// Et it2 sur foo.end()
-it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
+		it1 = find(foo.begin(), foo.end(), 5);   // it1 pointe sur foo[1]
+		it2 = find(foo.begin(), foo.end(), 19);  // Et it2 sur foo.end()
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Recherche linéaire}
 	\begin{itemize}
-		\item \lstinline|std::find_if()| recherche depuis un prédicat
+		\item \mintinline{cpp}|std::find_if()| recherche depuis un prédicat
 	\end{itemize}
 
-	\begin{block}{Variantes \og \lstinline|_if|\fg{}}
+	\begin{block}{Variantes \og \mintinline{cpp}|_if|\fg{}}
 		\begin{itemize}
-			\item Les algorithmes suffixés par \lstinline|_if| utilisent un prédicat
+			\item Les algorithmes suffixés par \mintinline{cpp}|_if| utilisent un prédicat
 		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
-		\item \lstinline|std::find_first_of()| recherche la première occurrence d'un élément
-		\item \lstinline|std::search()| recherche la première occurrence d'un sous-ensemble
-		\item \lstinline|std::find_end()| recherche la dernière occurrence d'un sous-ensemble
-		\item \lstinline|std::adjacent_find()| recherche deux éléments consécutifs égaux
-		\item \lstinline|std::search_n()| recherche la première suite de $n$ éléments consécutifs égaux à une valeur
+		\item \mintinline{cpp}|std::find_first_of()| recherche la première occurrence d'un élément
+		\item \mintinline{cpp}|std::search()| recherche la première occurrence d'un sous-ensemble
+		\item \mintinline{cpp}|std::find_end()| recherche la dernière occurrence d'un sous-ensemble
+		\item \mintinline{cpp}|std::adjacent_find()| recherche deux éléments consécutifs égaux
+		\item \mintinline{cpp}|std::search_n()| recherche la première suite de $n$ éléments consécutifs égaux à une valeur
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1304,25 +1318,26 @@ it2 = find(foo.begin(), foo.end(), 19);\end{lstlisting}
 	\frametitle{STL Algorithmes -- Recherche dichotomique}
 	\begin{itemize}
 		\item Pré-requis : ensemble trié
-		\item \lstinline|std::lower_bound()| retourne un itérateur sur le premier élément non strictement inférieur à la valeur recherchée
+		\item \mintinline{cpp}|std::lower_bound()| retourne un itérateur sur le premier élément non strictement inférieur à la valeur recherchée
 
 \note[item]{Formulation \og n'est pas strictement inférieur\fg{} semble être une tournure compliquée pour supérieur ou égal, mais c'est précisément ce que fait la fonction et c'est important si on fourni un prédicat de comparaison}
 
 		\item \ldots{} et l'itérateur de fin si un tel élément n'existe pas
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 7, 9, 12};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9, 12};
 
-*lower_bound(foo.begin(), foo.end(), 6);  // 7
-*lower_bound(foo.begin(), foo.end(), 9);  // 9\end{lstlisting}
+		*lower_bound(foo.begin(), foo.end(), 6);  // 7
+		*lower_bound(foo.begin(), foo.end(), 9);  // 9
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Recherche dichotomique}
 	\begin{itemize}
-		\item \lstinline|std::upper_bound()| retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée 
-		\item \lstinline|std::equal_range()| retourne la paire (\lstinline|std::lower_bound|, \lstinline|std::upper_bound|)
+		\item \mintinline{cpp}|std::upper_bound()| retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée 
+		\item \mintinline{cpp}|std::equal_range()| retourne la paire (\mintinline{cpp}|std::lower_bound|, \mintinline{cpp}|std::upper_bound|)
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
@@ -1332,7 +1347,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 	\end{alertblock}
 
 	\begin{itemize}
-		\item \lstinline|std::binary_search()| indique si l'élément cherché est présent
+		\item \mintinline{cpp}|std::binary_search()| indique si l'élément cherché est présent
 	\end{itemize}
 \end{frame}
 
@@ -1344,16 +1359,17 @@ vector<int> foo{4, 5, 7, 9, 12};
 		\end{itemize}
 	\end{alertblock}
 
-	\begin{lstlisting}[language=C++]
-vector<int>::iterator foo(vector<int> vec, int val) {
-  vector<int>::iterator it = 
-    lower_bound(vec.begin(), vec.end(), val);
-  if(it != vec.end() && *it == val) return it;
-  else return vec.end(); }
+	\begin{minted}{cpp}
+		vector<int>::iterator foo(vector<int> vec, int val) {
+		  vector<int>::iterator it = 
+		    lower_bound(vec.begin(), vec.end(), val);
+		  if(it != vec.end() && *it == val) return it;
+		  else return vec.end(); }
 
-vector<int> bar{1, 5, 8, 13, 25, 42};
-foo(bar, 12);  // vec.end
-foo(bar, 13);  // iterateur sur 13\end{lstlisting}
+		vector<int> bar{1, 5, 8, 13, 25, 42};
+		foo(bar, 12);  // vec.end
+		foo(bar, 13);  // iterateur sur 13
+	\end{minted}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1363,17 +1379,18 @@ foo(bar, 13);  // iterateur sur 13\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Comptage}
 	\begin{itemize}
-		\item \lstinline|std::count()| compte le nombre d'éléments égaux à la valeur fournie
+		\item \mintinline{cpp}|std::count()| compte le nombre d'éléments égaux à la valeur fournie
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 3, 9, 5, 5 ,12};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 3, 9, 5, 5 ,12};
 
-count(foo.begin(), foo.end(), 5);  // 3
-count(foo.begin(), foo.end(), 2);  // 0\end{lstlisting}
+		count(foo.begin(), foo.end(), 5);  // 3
+		count(foo.begin(), foo.end(), 2);  // 0
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::count_if()| compte le nombre d'éléments satisfaisant le prédicat
+		\item \mintinline{cpp}|std::count_if()| compte le nombre d'éléments satisfaisant le prédicat
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1384,37 +1401,38 @@ count(foo.begin(), foo.end(), 2);  // 0\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Comparaison}
 	\begin{itemize}
-		\item \lstinline|std::equal()| teste l'égalité de deux ensembles (valeur et position)
+		\item \mintinline{cpp}|std::equal()| teste l'égalité de deux ensembles (valeur et position)
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 9, 12};
-vector<int> bar{4, 5, 12, 9};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9, 12};
+		vector<int> bar{4, 5, 12, 9};
 
-equal(foo.begin(), foo.end(), foo.begin());  // true
-equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
+		equal(foo.begin(), foo.end(), foo.begin());  // true
+		equal(foo.begin(), foo.end(), var.begin());  // false
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Comparaison}
 	\begin{alertblock}{Attention}
 		\begin{itemize}
-			\item \lstinline|std::equal()| ne vérifie pas les tailles des deux ensembles
+			\item \mintinline{cpp}|std::equal()| ne vérifie pas les tailles des deux ensembles
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{Comparaison sur la taille du premier ensemble (couple \lstinline|begin()| - \lstinline|end()|)}
-\note[item]{C++14 ajoute des surcharges de \lstinline|std::equal()| testant la taille}
+\note[item]{Comparaison sur la taille du premier ensemble (couple \mintinline{cpp}|begin()| - \mintinline{cpp}|end()|)}
+\note[item]{C++14 ajoute des surcharges de \mintinline{cpp}|std::equal()| testant la taille}
 
-	\begin{block}{Et \lstinline|operator==| ?}
+	\begin{block}{Et \mintinline[style=vim]{cpp}|operator==| ?}
 		\begin{itemize}
-			\item \lstinline|operator==| sur des conteneurs teste la taille et le contenu
+			\item \mintinline{cpp}|operator==| sur des conteneurs teste la taille et le contenu
 		\end{itemize}
 	\end{block}
 
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Préférez \lstinline|operator==| à \lstinline|std::equal()| pour comparer un conteneur complet
+			\item Préférez \mintinline{cpp}|operator==| à \mintinline{cpp}|std::equal()| pour comparer un conteneur complet
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -1422,14 +1440,15 @@ equal(foo.begin(), foo.end(), var.begin());  // false\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Comparaison}
 	\begin{itemize}
-		\item \lstinline|std::mistmatch()| retourne une paire d'itérateurs sur les premiers éléments différents
+		\item \mintinline{cpp}|std::mistmatch()| retourne une paire d'itérateurs sur les premiers éléments différents
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 9, 13};
-vector<int> var{4, 5, 12, 8};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9, 13};
+		vector<int> var{4, 5, 12, 8};
 
-mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12\end{lstlisting}
+		mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12
+	\end{minted}
 
 	\begin{itemize}
 		\item \ldots{} ou l'itérateur de fin en cas d'égalité
@@ -1443,16 +1462,17 @@ mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Remplissage}
 	\begin{itemize}
-		\item \lstinline|std::fill()| remplit l'ensemble avec la valeur fournie
+		\item \mintinline{cpp}|std::fill()| remplit l'ensemble avec la valeur fournie
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo(4);
+	\begin{minted}{cpp}
+		vector<int> foo(4);
 
-fill(foo.begin(), foo.end(), 12);  // 12 12 12 12\end{lstlisting}
+		fill(foo.begin(), foo.end(), 12);  // 12 12 12 12
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::fill_n()| idem avec un ensemble défini par sa taille
+		\item \mintinline{cpp}|std::fill_n()| idem avec un ensemble défini par sa taille
 	\end{itemize}
 
 	\begin{block}{Constructeur}
@@ -1460,28 +1480,30 @@ fill(foo.begin(), foo.end(), 12);  // 12 12 12 12\end{lstlisting}
 			\item Remplissage des conteneurs séquentiels à la construction
 		\end{itemize}
 
-		\begin{lstlisting}[language=C++]
-vector<int> foo(4, 12);\end{lstlisting}
+		\begin{minted}{cpp}
+			vector<int> foo(4, 12);
+		\end{minted}
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Remplissage}
 	\begin{itemize}
-		\item \lstinline|std::generate()| valorise les éléments à partir d'un générateur
+		\item \mintinline{cpp}|std::generate()| valorise les éléments à partir d'un générateur
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-int gen() {
-  static int i = 0;
-  i += 5;
-  return i; }
+	\begin{minted}{cpp}
+		int gen() {
+		  static int i = 0;
+		  i += 5;
+		  return i; }
 
-vector<int> foo(4);
-generate(foo.begin(), foo.end(), gen);  // 5 10 15 20\end{lstlisting}
+		vector<int> foo(4);
+		generate(foo.begin(), foo.end(), gen);  // 5 10 15 20
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::generate_n()| idem avec un ensemble défini par sa taille
+		\item \mintinline{cpp}|std::generate_n()| idem avec un ensemble défini par sa taille
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1492,17 +1514,18 @@ generate(foo.begin(), foo.end(), gen);  // 5 10 15 20\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Copie}
 	\begin{itemize}
-		\item \lstinline|std::copy()| copie les éléments du début vers la fin
+		\item \mintinline{cpp}|std::copy()| copie les éléments du début vers la fin
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 9, 12};
-vector<int> bar;
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9, 12};
+		vector<int> bar;
 
-copy(foo.begin(), foo.end(), back_inserter(bar));\end{lstlisting}
+		copy(foo.begin(), foo.end(), back_inserter(bar));
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::copy_backward()| copie les éléments de la fin vers le début
+		\item \mintinline{cpp}|std::copy_backward()| copie les éléments de la fin vers le début
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
@@ -1525,27 +1548,29 @@ copy(foo.begin(), foo.end(), back_inserter(bar));\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Échange}
 	\begin{itemize}
-		\item \lstinline|std::swap()| échange deux objets
+		\item \mintinline{cpp}|std::swap()| échange deux objets
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-int x=10, y=20;   // x:10 y:20
-swap(x,y);        // x:20 y:10\end{lstlisting}
+	\begin{minted}{cpp}
+		int x=10, y=20;   // x:10 y:20
+		swap(x,y);        // x:20 y:10
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::swap_ranges()| échange des éléments de deux ensembles
+		\item \mintinline{cpp}|std::swap_ranges()| échange des éléments de deux ensembles
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo (5,10); // foo: 10 10 10 10 10
-vector<int> bar (5,33); // bar: 33 33 33 33 33
+	\begin{minted}{cpp}
+		vector<int> foo (5,10); // foo: 10 10 10 10 10
+		vector<int> bar (5,33); // bar: 33 33 33 33 33
 
-swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
-// foo : 10 33 33 33 10
-// bar : 10 10 10 33 33\end{lstlisting}
+		swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
+		// foo : 10 33 33 33 10
+		// bar : 10 10 10 33 33
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::iter_swap()| échange deux objets pointés par des itérateurs
+		\item \mintinline{cpp}|std::iter_swap()| échange deux objets pointés par des itérateurs
 	\end{itemize}
 
 	\hfill
@@ -1555,33 +1580,34 @@ swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Remplacement}
 	\begin{itemize}
-		\item \lstinline|std::replace()| remplace toutes les occurrences d'une valeur par une autre
+		\item \mintinline{cpp}|std::replace()| remplace toutes les occurrences d'une valeur par une autre
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 7, 9 ,12, 5};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9 ,12, 5};
 
-replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8\end{lstlisting}
+		replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::replace_if()| remplace toutes les éléments vérifiant le prédicat par une valeur donnée
+		\item \mintinline{cpp}|std::replace_if()| remplace toutes les éléments vérifiant le prédicat par une valeur donnée
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Remplacement}
 	\begin{itemize}
-		\item \lstinline|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
+		\item \mintinline{cpp}|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
 	\end{itemize}
 
-	\begin{block}{Variantes \og \lstinline|_copy|\fg{}}
+	\begin{block}{Variantes \og \mintinline{cpp}|_copy|\fg{}}
 		\begin{itemize}
-			\item Les algorithmes suffixés par \lstinline|_copy| fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
+			\item Les algorithmes suffixés par \mintinline{cpp}|_copy| fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
 		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
-		\item \lstinline|std::replace_copy_if()| copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
+		\item \mintinline{cpp}|std::replace_copy_if()| copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1592,12 +1618,14 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Suppression}
 	\begin{itemize}
-		\item \lstinline|std::remove()| élimine les éléments égaux à une valeur donnée
+		\item \mintinline{cpp}|std::remove()| élimine les éléments égaux à une valeur donnée
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
-remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...\end{lstlisting}
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+
+		remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
+	\end{minted}
 
 	\begin{alertblock}{Pas de suppression}
 		\begin{itemize}
@@ -1606,22 +1634,23 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...\end{lstlisting}
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{\lstinline|std::remove()| ne supprime pas car les algorithmes ne peuvent pas modifier le conteneur, en particulier sa taille, mais seulement son contenu}
+\note[item]{\mintinline{cpp}|std::remove()| ne supprime pas car les algorithmes ne peuvent pas modifier le conteneur, en particulier sa taille, mais seulement son contenu}
 
 	\begin{block}{Idiome \textit{Erase-Remove}}
-		Suppression via un appel à \lstinline|erase()| sur les éléments après le nouvel itérateur de fin
+		Suppression via un appel à \mintinline{cpp}|erase()| sur les éléments après le nouvel itérateur de fin
 
-		\begin{lstlisting}[language=C++]
-foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());\end{lstlisting}
+		\begin{minted}{cpp}
+			foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
+		\end{minted}
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Suppression}
 	\begin{itemize}
-		\item \lstinline|std::remove_if()| élimine les éléments vérifiant le prédicat
-		\item \lstinline|std::remove_copy()| copie les éléments différents d'une valeur donnée
-		\item \lstinline|std::remove_copy_if()| copie les éléments ne vérifiant pas le prédicat
+		\item \mintinline{cpp}|std::remove_if()| élimine les éléments vérifiant le prédicat
+		\item \mintinline{cpp}|std::remove_copy()| copie les éléments différents d'une valeur donnée
+		\item \mintinline{cpp}|std::remove_copy_if()| copie les éléments ne vérifiant pas le prédicat
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1633,19 +1662,20 @@ foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());\end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Suppression des doublons}
 	\begin{itemize}
-		\item \lstinline|std::unique()| élimine les éléments consécutifs égaux sauf le premier
+		\item \mintinline{cpp}|std::unique()| élimine les éléments consécutifs égaux sauf le premier
 	\end{itemize}
 
-\note[item]{Tout comme \lstinline|remove|, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé}
+\note[item]{Tout comme \mintinline{cpp}|remove|, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé}
 \note[item]{L'ordre relatif est préservé, important si la comparaison ne se fait que sur une partie d'un élément composite}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
 
-unique(foo.begin(), foo.end());  // 4 5 7 9 5 ... \end{lstlisting}
+		unique(foo.begin(), foo.end());  // 4 5 7 9 5 ...
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::unique_copy()| copie l'ensemble en ne conservant que le premier des éléments consécutifs égaux
+		\item \mintinline{cpp}|std::unique_copy()| copie l'ensemble en ne conservant que le premier des éléments consécutifs égaux
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1656,16 +1686,17 @@ unique(foo.begin(), foo.end());  // 4 5 7 9 5 ... \end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Transformation}
 	\begin{itemize}
-		\item \lstinline|std::transform()| applique une transformation aux éléments d'un ensemble
+		\item \mintinline{cpp}|std::transform()| applique une transformation aux éléments d'un ensemble
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-int double_val(int i) { return 2 * i;}
+	\begin{minted}{cpp}
+		int double_val(int i) { return 2 * i;}
 
-vector<int> foo{4, 5, 7, 9};
-vector<int> bar(4);
-transform(foo.begin(), foo.end(), bar.begin(), double_val);
-// 8 10 14 18\end{lstlisting}
+		vector<int> foo{4, 5, 7, 9};
+		vector<int> bar(4);
+		transform(foo.begin(), foo.end(), bar.begin(), double_val);
+		// 8 10 14 18
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1674,14 +1705,15 @@ transform(foo.begin(), foo.end(), bar.begin(), double_val);
 		\item Ou de deux ensembles en stockant le résultat dans un troisième
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 7, 9};
-vector<int> bar{2, 3, 6, 1};
-vector<int> baz(4);
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9};
+		vector<int> bar{2, 3, 6, 1};
+		vector<int> baz(4);
 
-transform(foo.begin(), foo.end(), bar.begin(), 
-          baz.begin(), plus<int>());
-// 6 8 13 10\end{lstlisting}
+		transform(foo.begin(), foo.end(), bar.begin(), 
+		          baz.begin(), plus<int>());
+		// 6 8 13 10
+	\end{minted}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1691,17 +1723,17 @@ transform(foo.begin(), foo.end(), bar.begin(),
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Rotation}
 	\begin{itemize}
-		\item \lstinline|std::rotate()| effectue une rotation de l'ensemble, le nouveau début étant fourni par un itérateur
+		\item \mintinline{cpp}|std::rotate()| effectue une rotation de l'ensemble, le nouveau début étant fourni par un itérateur
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 5, 7, 9, 12};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9, 12};
 
-rotate(foo.begin(), foo.begin() + 2, foo.end());
-// 7 9 12 4 5\end{lstlisting}
+		rotate(foo.begin(), foo.begin() + 2, foo.end());  // 7 9 12 4 5
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::rotate_copy()| effectue une rotation et copie le résultat
+		\item \mintinline{cpp}|std::rotate_copy()| effectue une rotation et copie le résultat
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1712,15 +1744,16 @@ rotate(foo.begin(), foo.begin() + 2, foo.end());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Partitionnement}
 	\begin{itemize}
-		\item \lstinline|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots{}
+		\item \mintinline{cpp}|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots{}
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-bool is_odd(int i) { return (i % 2) == 1; }
+	\begin{minted}{cpp}
+		bool is_odd(int i) { return (i % 2) == 1; }
+		vector<int> foo{4, 13, 28, 9 , 54};
 
-vector<int> foo{4, 13, 28, 9 , 54};
-partition(foo.begin(), foo.end(), is_odd);
-// 9 13 28 4 54 ou 9 13 4 28 54 ou ...)\end{lstlisting}
+		partition(foo.begin(), foo.end(), is_odd);
+		// 9 13 28 4 54 ou 9 13 4 28 54 ou ...)
+	\end{minted}
 
 	\begin{itemize}
 		\item \ldots{} et retourne un itérateur sur le début de la seconde partie
@@ -1736,14 +1769,14 @@ partition(foo.begin(), foo.end(), is_odd);
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Partitionnement}
 	\begin{itemize}
-		\item \lstinline|std::stable_partition()| partitionne en conservant l'ordre relatif
+		\item \mintinline{cpp}|std::stable_partition()| partitionne en conservant l'ordre relatif
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 13, 28, 9 , 54};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 13, 28, 9 , 54};
 
-stable_partition(foo.begin(), foo.end(), is_odd);
-// 13 9 4 28 54\end{lstlisting}
+		stable_partition(foo.begin(), foo.end(), is_odd);  // 13 9 4 28 54
+	\end{minted}
 
 	\begin{block}{Deux fonctions ?}
 		\begin{itemize}
@@ -1755,7 +1788,7 @@ stable_partition(foo.begin(), foo.end(), is_odd);
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Partitionnement}
 	\begin{itemize}
-		\item \lstinline|std::nth_element()| réordonne les éléments
+		\item \mintinline{cpp}|std::nth_element()| réordonne les éléments
 		\begin{itemize}
 			\item Élément sur l'itérateur pivot est celui qui serait à cette place si l'ensemble était trié
 			\item Éléments avant ne sont pas supérieurs
@@ -1766,11 +1799,12 @@ stable_partition(foo.begin(), foo.end(), is_odd);
 
 \note[item]{Formulation \og pas supérieur\fg{} étrange mais gère le cas des égalités avec le pivot et la sémantique de l'opérateur fourni}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+	\begin{minted}{cpp}
+		vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-nth_element(foo.begin(), foo.begin() + 3, foo.end());
-// 2 1 3 4 5 9 6 7 8\end{lstlisting}
+		nth_element(foo.begin(), foo.begin() + 3, foo.end());
+		// 2 1 3 4 5 9 6 7 8
+	\end{minted}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1780,13 +1814,14 @@ nth_element(foo.begin(), foo.begin() + 3, foo.end());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Tri}
 	\begin{itemize}
-		\item \lstinline|std::sort()| trie un ensemble
+		\item \mintinline{cpp}|std::sort()| trie un ensemble
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{4, 13, 28, 9 , 54};
+	\begin{minted}{cpp}
+		vector<int> foo{4, 13, 28, 9 , 54};
 
-sort(foo.begin(), foo.end());  // 4 9 13 28 54\end{lstlisting}
+		sort(foo.begin(), foo.end());  // 4 9 13 28 54
+	\end{minted}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
@@ -1795,25 +1830,26 @@ sort(foo.begin(), foo.end());  // 4 9 13 28 54\end{lstlisting}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item \lstinline|std::stable_sort()| trie l'ensemble en conservant l'ordre relatif
+		\item \mintinline{cpp}|std::stable_sort()| trie l'ensemble en conservant l'ordre relatif
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Tri}
 	\begin{itemize}
-		\item \lstinline|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant \ldots{}
+		\item \mintinline{cpp}|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant \ldots{}
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
+	\begin{minted}{cpp}
 vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
 partial_sort(foo.begin(), foo.begin() + 3, foo.end());
-// 1 2 3 9 8 7 6 5 4\end{lstlisting}
+// 1 2 3 9 8 7 6 5 4
+	\end{minted}
 
 	\begin{itemize}
 		\item \ldots{} les autres éléments n'ont pas d'ordre particulier
-		\item \lstinline|std::partial_sort_copy()| copie l'ensemble ordonné à l'image de \lstinline|std::partial_sort()|
+		\item \mintinline{cpp}|std::partial_sort_copy()| copie l'ensemble ordonné à l'image de \mintinline{cpp}|std::partial_sort()|
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1824,15 +1860,16 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Mélange}
 	\begin{itemize}
-		\item \lstinline|std::random_shuffle()| réordonne aléatoirement l'ensemble
+		\item \mintinline{cpp}|std::random_shuffle()| réordonne aléatoirement l'ensemble
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+	\begin{minted}{cpp}
+		vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-random_shuffle(foo.begin(), foo.end());
-// 1 8 3 7 9 4 2 6 5
-// ou ...\end{lstlisting}
+		random_shuffle(foo.begin(), foo.end());
+		// 1 8 3 7 9 4 2 6 5
+		// ou ...
+	\end{minted}
 
 	\vskip 10mm plus 10fill
 	\hfill
@@ -1842,23 +1879,24 @@ random_shuffle(foo.begin(), foo.end());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Fusion}
 	\begin{itemize}
-		\item \lstinline|std::merge()| fusionne deux ensembles triés dans un troisième
+		\item \mintinline{cpp}|std::merge()| fusionne deux ensembles triés dans un troisième
 	\end{itemize}
 
 \note[item]{Ce troisième ensemble est bien entendu trié lui aussi}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{1, 5, 6, 8};
-vector<int> bar{2, 5};
-vector<int> baz;
+	\begin{minted}{cpp}
+		vector<int> foo{1, 5, 6, 8};
+		vector<int> bar{2, 5};
+		vector<int> baz;
 
-merge(foo.begin(), foo.end(), 
-      bar.begin(), bar.end(), 
-      back_inserter(baz));
-// 1 2 5 5 6 8\end{lstlisting}
+		merge(foo.begin(), foo.end(), 
+		      bar.begin(), bar.end(), 
+		      back_inserter(baz));
+		// 1 2 5 5 6 8
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::inplace_merge()| fusionne deux sous-ensembles sur place
+		\item \mintinline{cpp}|std::inplace_merge()| fusionne deux sous-ensembles sur place
 	\end{itemize}
 
 \note[item]{En fait il fusionne le début trié d'un ensemble avec le reste trié de ce même ensemble dans l'ensemble en question}
@@ -1878,41 +1916,43 @@ merge(foo.begin(), foo.end(),
 	\end{alertblock}
 
 	\begin{itemize}
-		\item \lstinline|std::includes()| vérifie si tous les éléments sont présents dans un autre ensemble
+		\item \mintinline{cpp}|std::includes()| vérifie si tous les éléments sont présents dans un autre ensemble
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{1, 5, 6, 8};
-vector<int> bar{2, 5};
-vector<int> baz{1, 6};
+	\begin{minted}{cpp}
+		vector<int> foo{1, 5, 6, 8};
+		vector<int> bar{2, 5};
+		vector<int> baz{1, 6};
 
-includes(foo.begin(), foo.end(), 
-         bar.begin(), bar.end());   // faux
-includes(foo.begin(), foo.end(), 
-         baz.begin(), baz.end());   // vrai\end{lstlisting}
+		includes(foo.begin(), foo.end(), 
+		         bar.begin(), bar.end());   // faux
+		includes(foo.begin(), foo.end(), 
+		         baz.begin(), baz.end());   // vrai
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Opérations ensemblistes}
 	\begin{itemize}
-		\item \lstinline|std::set_union()| : union de deux ensembles
+		\item \mintinline{cpp}|std::set_union()| : union de deux ensembles
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{1, 5, 6, 8};
-vector<int> bar{2, 5};
-vector<int> baz;
+	\begin{minted}{cpp}
+		vector<int> foo{1, 5, 6, 8};
+		vector<int> bar{2, 5};
+		vector<int> baz;
 
-set_union(foo.begin(), foo.end(), bar.begin(),
-          bar.end(), back_inserter(baz));
-// 1 2 5 6 8\end{lstlisting}
+		set_union(foo.begin(), foo.end(), bar.begin(),
+		          bar.end(), back_inserter(baz));
+		// 1 2 5 6 8
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::set_intersection()| : intersection de deux ensembles
-		\item \lstinline|std::set_difference()| : différence de deux ensembles
-		\item \lstinline|std::set_symmetric_difference()| : différence symétrique de deux ensembles
+		\item \mintinline{cpp}|std::set_intersection()| : intersection de deux ensembles
+		\item \mintinline{cpp}|std::set_difference()| : différence de deux ensembles
+		\item \mintinline{cpp}|std::set_symmetric_difference()| : différence symétrique de deux ensembles
 
-\note[item]{\lstinline|set_difference()| conserve les éléments présents dans le premier ensemble mais pas dans le second alors que \lstinline|set_symmetric_difference()| conserve les éléments présents dans un des ensembles mais pas dans l'autre}
+\note[item]{\mintinline{cpp}|set_difference()| conserve les éléments présents dans le premier ensemble mais pas dans le second alors que \mintinline{cpp}|set_symmetric_difference()| conserve les éléments présents dans un des ensembles mais pas dans l'autre}
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1929,19 +1969,19 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 	\end{block}
 
 	\begin{itemize}
-		\item \lstinline|std::make_heap()| forme un tas depuis un ensemble
-		\item \lstinline|std::pop_heap()| déplace l'élément de plus haute valeur en fin d'ensemble
-		\item \lstinline|std::push_heap()| ajoute l'élément en fin d'ensemble au tas
+		\item \mintinline{cpp}|std::make_heap()| forme un tas depuis un ensemble
+		\item \mintinline{cpp}|std::pop_heap()| déplace l'élément de plus haute valeur en fin d'ensemble
+		\item \mintinline{cpp}|std::push_heap()| ajoute l'élément en fin d'ensemble au tas
 	\end{itemize}
 
 	\begin{block}{Structure}
 		\begin{itemize}
-			\item \lstinline|std::pop_heap()| et \lstinline|std::push_heap()| maintiennent la structure de tas
+			\item \mintinline{cpp}|std::pop_heap()| et \mintinline{cpp}|std::push_heap()| maintiennent la structure de tas
 		\end{itemize}
 	\end{block}
 
 	\begin{itemize}
-		\item \lstinline|std::sort_heap()| tri le tas
+		\item \mintinline{cpp}|std::sort_heap()| tri le tas
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1952,27 +1992,30 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Min-max}
 
-\note[item]{Possibilité de fournir la fonction de comparaison (\lstinline|operator<| par défaut)}
+\note[item]{Possibilité de fournir la fonction de comparaison (\mintinline{cpp}|operator<| par défaut)}
 
 	\begin{itemize}
-		\item \lstinline|std::min()| détermine le minimum de deux éléments
-		\item \lstinline|std::max()| détermine le maximum de deux éléments
+		\item \mintinline{cpp}|std::min()| détermine le minimum de deux éléments
+		\item \mintinline{cpp}|std::max()| détermine le maximum de deux éléments
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-min(52, 6);  // 6
-max(52, 6);  // 52\end{lstlisting}
+	\begin{minted}{cpp}
+		min(52, 6);  // 6
+		max(52, 6);  // 52
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::min_element()| détermine le plus petit élément d'un ensemble
+		\item \mintinline{cpp}|std::min_element()| détermine le plus petit élément d'un ensemble
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{18, 5, 6, 8};
-min_element(foo.begin(), foo.end()); // Sur 5 \end{lstlisting}
+	\begin{minted}{cpp}
+		vector<int> foo{18, 5, 6, 8};
+
+		min_element(foo.begin(), foo.end()); // Sur 5
+	\end{minted}
 
 	\begin{itemize}
-		\item \lstinline|std::max_element()| détermine le plus grand élément d'un ensemble
+		\item \mintinline{cpp}|std::max_element()| détermine le plus grand élément d'un ensemble
 	\end{itemize}
 
 	\vskip 10mm plus 10fill
@@ -1983,14 +2026,14 @@ min_element(foo.begin(), foo.end()); // Sur 5 \end{lstlisting}
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Numérique}
 	\begin{itemize}
-		\item \lstinline|std::accumulate()| \og ajoute\fg{} tous les éléments de l'ensemble
+		\item \mintinline{cpp}|std::accumulate()| \og ajoute\fg{} tous les éléments de l'ensemble
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{18, 5, 6, 8};
+	\begin{minted}{cpp}
+		vector<int> foo{18, 5, 6, 8};
 
-accumulate(foo.begin(), foo.end(), 1, multiplies<int>());
-// 4320 \end{lstlisting}
+		accumulate(foo.begin(), foo.end(), 1, multiplies<int>()); // 4320
+	\end{minted}
 
 	\begin{itemize}
 		\item Opérateur et valeur initiale configurables
@@ -2001,16 +2044,17 @@ accumulate(foo.begin(), foo.end(), 1, multiplies<int>());
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Numérique}
 	\begin{itemize}
-		\item \lstinline|std::adjacent_difference()| \og différence\fg{} entre chaque élément et son prédécesseur
+		\item \mintinline{cpp}|std::adjacent_difference()| \og différence\fg{} entre chaque élément et son prédécesseur
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{18, 5, 6, 8};
-vector<int> bar;
+	\begin{minted}{cpp}
+		vector<int> foo{18, 5, 6, 8};
+		vector<int> bar;
 
-adjacent_difference(foo.begin(), foo.end(), 
-                    back_inserter(bar), minus<int>());
-// 18 -13 1 2\end{lstlisting}
+		adjacent_difference(foo.begin(), foo.end(), 
+		                    back_inserter(bar), minus<int>());
+		// 18 -13 1 2
+	\end{minted}
 
 	\begin{itemize}
 		\item Opérateur configurable
@@ -2020,15 +2064,15 @@ adjacent_difference(foo.begin(), foo.end(),
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Numérique}
 	\begin{itemize}
-		\item \lstinline|std::inner_product()| : \og produit scalaire\fg{} de deux ensembles
+		\item \mintinline{cpp}|std::inner_product()| : \og produit scalaire\fg{} de deux ensembles
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{1, 2, 3, 4};
-vector<int> bar{2, 3, 4, 5};
+	\begin{minted}{cpp}
+		vector<int> foo{1, 2, 3, 4};
+		vector<int> bar{2, 3, 4, 5};
 
-inner_product(foo.begin(), foo.end(), bar.begin(), 0);
-// 40\end{lstlisting}
+		inner_product(foo.begin(), foo.end(), bar.begin(), 0); // 40
+	\end{minted}
 
 	\begin{itemize}
 		\item Opérateurs et valeur configurables
@@ -2038,16 +2082,16 @@ inner_product(foo.begin(), foo.end(), bar.begin(), 0);
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Numérique}
 	\begin{itemize}
-		\item \lstinline|std::partial_sum()| : \og somme\fg{} partielle d'un ensemble
+		\item \mintinline{cpp}|std::partial_sum()| : \og somme\fg{} partielle d'un ensemble
 		\item Chaque élément résultant est la somme des éléments d'indice inférieur ou égal de l'ensemble de départ
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{1, 2, 3, 4};
-vector<int> bar;
+	\begin{minted}{cpp}
+		vector<int> foo{1, 2, 3, 4};
+		vector<int> bar;
 
-partial_sum(foo.begin(), foo.end(), back_inserter(bar));
-// 1 3 6 10\end{lstlisting}
+		partial_sum(foo.begin(), foo.end(), back_inserter(bar)); // 1 3 6 10
+	\end{minted}
 
 	\begin{itemize}
 		\item Opérateur configurable
@@ -2092,10 +2136,11 @@ partial_sum(foo.begin(), foo.end(), back_inserter(bar));
 		\end{itemize}
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-int foo[4];
+	\begin{minted}{cpp}
+		int foo[4];
 
-fill(foo, foo + 4, 5);  // 5 5 5 5\end{lstlisting}
+		fill(foo, foo + 4, 5);  // 5 5 5 5
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2103,23 +2148,24 @@ fill(foo, foo + 4, 5);  // 5 5 5 5\end{lstlisting}
 	\begin{itemize}
 		\item Flux
 		\begin{itemize}
-			\item \lstinline|istream_iterator| : \textit{input} itérateur
+			\item \mintinline{cpp}|istream_iterator| : \textit{input} itérateur
 			\begin{itemize}
 				\item Début : depuis un flux entrant
 				\item Fin : constructeur par défaut
 			\end{itemize}
-			\item \lstinline|ostream_iterator| : \textit{output} itérateur
+			\item \mintinline{cpp}|ostream_iterator| : \textit{output} itérateur
 			\begin{itemize}
 				\item Depuis un flux sortant, séparateur configurable
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
 
-	\begin{lstlisting}[language=C++]
-vector<int> foo{5, 6, 12, 89};
-ostream_iterator<int> out_it (cout, ", ");
+	\begin{minted}{cpp}
+		vector<int> foo{5, 6, 12, 89};
+		ostream_iterator<int> out_it (cout, ", ");
 
-copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
+		copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
+	\end{minted}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
@@ -2128,7 +2174,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 	\end{alertblock}
 
 	\begin{itemize}
-		\item Buffers de flux : \lstinline|istreambuf_iterator| et \lstinline|ostreambuf_iterator|
+		\item Buffers de flux : \mintinline{cpp}|istreambuf_iterator| et \mintinline{cpp}|ostreambuf_iterator|
 	\end{itemize}
 
 	\hfill \href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
@@ -2145,7 +2191,7 @@ copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,\end{lstlisting}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
-			\item \lstinline|operator[]| ne vérifie pas les bornes
+			\item \mintinline{cpp}|operator[]| ne vérifie pas les bornes
 		\end{itemize}
 
 \note[item]{Une implémentation peut mettre une assertion dessus et produire une erreur à l'exécution en debug, p.ex. sur les TU, et une implémentation de qualité devrait le faire}
