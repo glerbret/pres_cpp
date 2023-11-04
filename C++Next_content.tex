@@ -80,7 +80,8 @@
 		inspect(x) {
 		  0  => { cout << "Aucun"; }
 		  1  => { cout << "Un"; }
-		  __ => { cout << "Plusieurs"; } }
+		  __ => { cout << "Plusieurs"; }
+		}
 	\end{minted}
 
 	\begin{itemize}
@@ -94,7 +95,8 @@
 		inspect(x) {
 		  "zero" => { cout << "Aucun"; }
 		  "un"   => { cout << "Un"; }
-		  __     => { cout << "Plusieurs"; } }
+		  __     => { cout << "Plusieurs"; }
+		}
 	\end{minted}
 \end{frame}
 
@@ -112,7 +114,8 @@
 		  [0, 0] => { cout << "on origin"; }
 		  [0, y] => { cout << "on y-axis"; }
 		  [x, 0] => { cout << "on x-axis"; }
-		  [x, y] => { cout << x << ',' << y; } }
+		  [x, y] => { cout << x << ',' << y; }
+		}
 	\end{minted}
 
 	\begin{itemize}
@@ -125,7 +128,8 @@
 	\begin{minted}{cpp}
 		inspect(v) {
 		  <int> i   => { cout << "Entier " << i; }
-		  <float> f => { cout << "Reel " << f; } }
+		  <float> f => { cout << "Reel " << f; }
+		}
 	\end{minted}
 \end{frame}
 
@@ -141,7 +145,8 @@
 	\begin{minted}{cpp}
 		inspect(shape) {
 		  <Circle> [r]       => { cout << 3.14 * r * r; }
-		  <Rectangle> [w, h] => { cout << w * h; } }
+		  <Rectangle> [w, h] => { cout << w * h; }
+		}
 	\end{minted}
 
 	\begin{itemize}
@@ -150,7 +155,8 @@
 
 	\begin{minted}{cpp}
 		inspect(p) {
-		  [x, y] if(x > y) => { cout << x << "superieur a" << y; } }
+		  [x, y] if(x > y) => { cout << x << "superieur a" << y; }
+		}
 	\end{minted}
 
 	\begin{alertblock}{Attention}
@@ -513,14 +519,12 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
+		// C++20 : echec de compilation systematique
 		template<typenameT>int my_func(constT&) {
-		  if constexpr(is_integral_v<T>) {
-		    return 1; } 
-		  else if constexpr(is_convertible_v<string, T>) {
-		    return 2 ;}
-		  else {
-		    // C++20 : echec de compilation systematique
-		    static_assert(false); } }
+		  if constexpr(is_integral_v<T>) { return 1; } 
+		  else if constexpr(is_convertible_v<string, T>) { return 2 ; }
+		  else { static_assert(false); }
+		}
 	\end{minted}
 
 \note[item]{L'idée est de traiter le \mintinline{cpp}|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
@@ -693,12 +697,14 @@
 		template <typename T>
 		class Foo {
 		  friend T;      // OK en C++23 et avant
-		  ...};
+		  ...
+		};
 
 		template <typename... Ts>
 		class Bar {
 		  friend Ts...;  // Invalide en C++23
-		  ...};
+		  ...
+		};
 	\end{minted}
 \end{frame}
 
@@ -962,8 +968,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		struct tuple_element<I, tuple<Ts...>>
-		  { using type = Ts...[I]; };
+		struct tuple_element<I, tuple<Ts...>> { using type = Ts...[I]; };
 	\end{minted}
 
 	\begin{itemize}
@@ -990,7 +995,8 @@
 
 	\begin{minted}{cpp}
 		template<unsigned int N> struct my_vector {
-		  my_vector(int...[N] v) : values{v...} {}};
+		  my_vector(int...[N] v) : values{v...} {}
+		};
 	\end{minted}
 
 	\begin{itemize}

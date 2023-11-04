@@ -196,8 +196,9 @@
 
 	\begin{minted}{cpp}
 		// Agregat en C++17 pas en C++20
-		class S {
-		  S() = default; };
+		struct S {
+		  S() = default;
+		};
 	\end{minted}
 \end{frame}
 
@@ -261,7 +262,8 @@
 	\begin{minted}{cpp}
 		struct S {
 		  int a : 1 {0},
-		  int b : 1 = 1; };
+		  int b : 1 = 1;
+		};
 	\end{minted}
 
 \note[item]{Avant C++20, il fallait définir un constructeur}
@@ -321,7 +323,8 @@
 	\begin{minted}{cpp}
 		struct Foo {
 		  int i;
-		  bool b; };
+		  bool b;
+		};
 
 		void* p;
 		Foo foo{1, p};       // erreur
@@ -347,7 +350,8 @@
 		struct S {
 		  // Valide en C++20
 		  // Invalide en C++17 (constructeur implicite noexcept)
-		  S() noexcept(false) = default; };
+		  S() noexcept(false) = default;
+		};
 	\end{minted}
 \end{frame}
 
@@ -367,12 +371,12 @@
 
 		void f2(Foo w) { throw w; }
 
-		struct Bar {
-		  B(Foo); };
+		struct Bar { B(Foo); };
 
 		Bar f3() {
 		  Foo w;
-		  return w; }
+		  return w;
+		}
 	\end{minted}
 
 \note[item]{Tous ces exemples sont des cas où il y a une copie en C++17 et un déplacement possible en C++20}
@@ -459,14 +463,16 @@
 
 	\begin{minted}{cpp}
 		namespace A::inline B::C { 
-		  int i; }
+		  int i;
+		}
 
 		// Equivalent a
 
 		namespace A {
 		  inline namespace B {
 		    namespace C {
-		      int i; } } }
+		      int i;
+		} } }
 	\end{minted}
 \end{frame}
 
@@ -539,7 +545,8 @@
 		export void bar(int j);
 		export {
 		  void baz() { ... }
-		  long l }
+		  long l;
+		}
 	\end{minted}
 \end{frame}
 
@@ -639,22 +646,26 @@
 
 	\begin{minted}{cpp}
 		export namespace A {  // A est exporte
-		  int n; }            // A::n est exporte
+		  int n;              // A::n est exporte
+		}
 
 		namespace B {
 		  export int n;       // B::n et B sont exportes
-		  int m; }            // B::m n'est pas exporte
+		  int m;              // B::m n'est pas exporte
+		}
 	\end{minted}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Modules -- Export de namespace}
 	\begin{itemize}
 		\item Les éléments d'une partie exportée d'un namespace sont exportés
 	\end{itemize}
-
+	
 	\begin{minted}{cpp}
-		// C::m est exporte mais pas C::n
-		namespace C { int n; }
-
-		export namespace C { int m; }
+		namespace C { int n; }         // C::m est exporte
+		
+		export namespace C { int m; }  // mais pas C::n
 	\end{minted}
 \end{frame}
 
@@ -1100,9 +1111,9 @@
 \begin{frame}[fragile]
 	\frametitle{Mathématiques}
 	\begin{itemize}
-		\item Définition des constantes mathématiques $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\Phi$
+		\item Définition des constantes mathématiques $e$, $\log_2 e$, $\log_{10} e$, $\pi$, $\dfrac{1}{\pi}$, $\dfrac{1}{\sqrt{\pi}}$, $\ln{2}$, $\ln{10}$, $\sqrt{2}$, $\sqrt{3}$, $\dfrac{1}{\sqrt{3}}$, $\gamma$, $\varphi$
 
-\note[item]{$\gamma$ est la constante de Euler-Mascheroni et $\Phi$ le nombre d'or}
+\note[item]{$\gamma$ est la constante de Euler-Mascheroni et $\varphi$ le nombre d'or}
 
 		\item \mintinline{cpp}|std::midpoint()| : demi-somme de deux valeurs (entières ou flottantes)
 	\end{itemize}
@@ -1113,9 +1124,9 @@
 		\end{itemize}
 
 		\begin{minted}{cpp}
-			midpoint(2, 4);     // 3
-			midpoint(2, 5);     // 3
-			midpoint(5, 2);     // 4
+			midpoint(2, 4);  // 3
+			midpoint(2, 5);  // 3
+			midpoint(5, 2);  // 4
 		\end{minted}
 	\end{block}
 
@@ -1350,7 +1361,7 @@
 		vector<int> ints{0, 1, 2, 3, 4, 5};
 		auto even = [](int i){ return (i % 2) == 0;},
 
-		auto rng = ints | view::filter(even);  // 0, 2, 4
+		auto rng = ints | view::filter(even);       // 0, 2, 4
 	\end{minted}
  
 	\begin{itemize}
@@ -1425,7 +1436,8 @@
 	\begin{minted}{cpp}
 		auto figures = map {
 		  {"Lovelace"s, 1815}, {"Turing"s,   1912},
-		  {"Babbage"s,  1791}, {"Hamilton"s, 1936} };
+		  {"Babbage"s,  1791}, {"Hamilton"s, 1936}
+		};
 
 		auto years = figures | views::elements<1>;  // 1791 1936 1815 1912
 	\end{minted}
@@ -1658,11 +1670,11 @@
 \begin{frame}[fragile]
 	\frametitle{{\NoAutoSpacing std::format} -- Spécification de format}
 	\begin{itemize}
-		\item Format général : \mintinline{cpp}|[[fill]align][sign][#][0][width][prec][L][type]|
+		\item Format général : \mintinline[escapeinside=||]{cpp}{[[fill]align][sign][|#|][0][width][prec][L][type]}
 		\begin{itemize}
 			\item \mintinline{cpp}|fill| et \mintinline{cpp}|align| : gestion de l'alignement
 			\item \mintinline{cpp}|sign| : gestion du signe
-			\item \mintinline{cpp}|#| : forme alternative
+			\item \mintinline[escapeinside=||]{cpp}{|#|} : forme alternative
 			\item \mintinline{cpp}|0| : gestion des zéros non significatifs
 			\item \mintinline{cpp}|width| : taille minimal du champ
 			\item \mintinline{cpp}|prec| : précision du champ
@@ -1927,7 +1939,8 @@
 		  auto parse(ParseContext& parse_ctx);
 
 		  template <class FormatContext>
-		  auto format(const T& value, FormatContext& fmt_ctx); };
+		  auto format(const T& value, FormatContext& fmt_ctx);
+		};
 	\end{minted}
 \end{frame}
 
@@ -1939,11 +1952,13 @@
 		template <>
 		struct formatter<MyComplex> {
 		  constexpr auto parse(format_parse_context& ctx) {
-		    return ctx.begin(); }
+		    return ctx.begin();
+		  }
 		
 		  auto format(const MyComplex& value, format_context& ctx) {
-		    return format_to(ctx.out(), "{}+{}i", 
-		                     value.real, value.imag); } };
+		    return format_to(ctx.out(), "{}+{}i", value.real, value.imag);
+		  }
+		};
 
 		format("{}", MyComplex{1, 2});  // "(1+2i)"
 	\end{minted}
@@ -1986,7 +2001,9 @@
 		  void operator delete(Foo* ptr, destroying_delete_t) {
 		    const size_t realSize = ...;
 		    ptr->~Foo();
-		    ::operator delete(ptr, realSize); } };
+		    ::operator delete(ptr, realSize);
+		  }
+		};
 	\end{minted}
 
 	\begin{alertblock}{Ne pas oublier}
@@ -2052,7 +2069,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolution de \mintinline{cpp}|std::chrono::duration|}
+	\frametitle{Évolution de {\NoAutoSpacing std::chrono::duration}}
 	\begin{itemize}
 		\item \textit{Helper} pour le jour, la semaine, le mois ou l'année
 		\item \mintinline{cpp}|to_stream()| affiche une \mintinline{cpp}|std::chrono::duration|
@@ -2187,7 +2204,8 @@ auto date2 = Sunday[3]/May/2016y;
 		vector<int> foo{1, 8, 5, 56, 42};
 		for(size_t i = 0; const auto& bar : foo) {
 		  cout << bar << " " << i << "\n";
-		  ++i; }
+		  ++i;
+		}
 	\end{minted}
 
 	\begin{itemize}
@@ -2747,9 +2765,11 @@ auto date2 = Sunday[3]/May/2016y;
 		    { a < b } -> boolean;
 		    { a > b } -> boolean;
 		    { a <= b } -> boolean;
-		    { a >= b } -> boolean; };
+		    { a >= b } -> boolean;
+		  };
 	\end{minted}
 
+	\vskip 10mm plus 10fill
 	\hfill
 	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename+T%3E%0Aconcept+Foo+%3D+requires+(T+x)+%7B+x+%2B+x%3B+%7D%3B%0A%0Atemplate%3CFoo+T%3E%0AT+foo(T+a,+T+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(5,+2)+%3C%3C+%22%5Cn%22%3B%0A%0A%23if+0%0A++int+*bar,+*baz%3B%0A++std::cout+%3C%3C+foo(bar,+baz)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
@@ -2817,7 +2837,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{minted}{cpp}
 		auto foo = []<typename T>(vector<T> const& vec) { 
 		  cout<< size(vec) << '\n';
-		  cout<< vec.capacity() << '\n'; };
+		  cout<< vec.capacity() << '\n';
+		};
 	\end{minted}
 
 	\vskip 10mm plus 10fill
@@ -2862,8 +2883,10 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{minted}{cpp}
 		template<class F, class... Args>
 		auto delay_invoke(F f, Args... args) {
-		  return [f=move(f),...args=move(args)]()->decltype(auto) 
-		  { return invoke(f, args...); }; }
+		  return [f=move(f),...args=move(args)]()->decltype(auto) {
+		    return invoke(f, args...); 
+		  }
+		}
 	\end{minted}
 
 	\begin{itemize}
@@ -2878,8 +2901,7 @@ auto date2 = Sunday[3]/May/2016y;
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		int foo(int a, int b, int c, int d) {
-		  return a * b * c + d; }
+		int foo(int a, int b, int c, int d) { return a * b * c + d; }
 
 		auto baz = bind_front(&foo, 2, 3, 4);
 		baz(7);  // 31
@@ -2942,7 +2964,8 @@ auto date2 = Sunday[3]/May/2016y;
 
 	\begin{minted}{cpp}
 		void foo(stop_token st) {
-		  while(!st.stop_requested()) { ... }}
+		  while(!st.stop_requested()) { ... }
+		}
 
 		jthread t(foo);
 		...
@@ -3097,12 +3120,11 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{minted}{cpp}
 		struct generator {
 		  ...
-		  bool next() {
-		    return cor ? (cor.resume(), !cor.done()) : false; }
-		  int value() {
-		    return cor.promise().current_value; }
+		  bool next() { return cor ? (cor.resume(), !cor.done()) : false; }
+		  int value() { return cor.promise().current_value; }
 
-		  coroutine_handle<promise_type> cor; };
+		  coroutine_handle<promise_type> cor;
+		};
 
 		generator f() { co_yield 1; co_yield 2; }
 
@@ -3140,8 +3162,7 @@ auto date2 = Sunday[3]/May/2016y;
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		variant<string, bool> x = "abc";
-		// C++17 : bool, C++20 : string
+		variant<string, bool> x = "abc";  // C++17 : bool, C++20 : string
 	\end{minted}
 
 	\begin{itemize}
@@ -3152,8 +3173,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 	\begin{minted}{cpp}
 		variant<float, long> v;
-		v = 0;
-		// C++17 : erreur, C++20 : long
+		v = 0;                            // C++17 : erreur, C++20 : long
 	\end{minted}
 \end{frame}
 

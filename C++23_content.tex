@@ -62,7 +62,8 @@
 		void foo(void) {
 		  int x;
 		  x = 1;
-		last: }
+		last:
+		}
 	\end{minted}
 \end{frame}
 
@@ -457,7 +458,8 @@
 	\begin{minted}{cpp}
 		struct Foo {
 		  bool operator==(const Foo&) { return true; }
-		  bool operator!=(const Foo&) { return false; } };
+		  bool operator!=(const Foo&) { return false; }
+		};
 
 		// Ambigu en C++20
 		bool b = Foo{} != Foo{};
@@ -506,8 +508,8 @@
 
  	\begin{minted}{cpp}
 		struct Foo {
-		  static constexpr bool operator()(int i, int j) {
-		    return i < j; } };
+		  static constexpr bool operator()(int i, int j) { return i < j; }
+		};
 
 		static_assert(Foo::operator()(1, 2));
 	\end{minted}
@@ -518,9 +520,9 @@
 
  	\begin{minted}{cpp}
 		struct Foo {
-		  static int operator[](int i) {
-		    return v[i]; }
-		  static constexpr array<int, 4> v{5, 8, 9, 12}; };
+		  static int operator[](int i) { return v[i]; }
+		  static constexpr array<int, 4> v{5, 8, 9, 12};
+		};
 
 		cout << Foo::operator[](2) << "\n";
 	\end{minted}
@@ -587,13 +589,13 @@
 	\frametitle{Évolutions des attributs}
 	\begin{itemize}
 		\item Duplication possible d'un attribut dans une liste d'attributs
-
-		\begin{minted}{cpp}
-			// Valide en C++23, pas en C++20
-			[[ nodiscard, nodiscard ]]
-			int foo();
-		\end{minted}
 	\end{itemize}
+
+	\begin{minted}{cpp}
+		// Valide en C++23, pas en C++20
+		[[ nodiscard, nodiscard ]]
+		int foo();
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -628,7 +630,8 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  void bar(this Foo const&); }
+		  void bar(this Foo const&);
+		}
 	\end{minted}
 
 	\begin{alertblock}{Restrictions}
@@ -648,11 +651,13 @@
 	\begin{minted}{cpp}
 		struct Foo {
 		  template <typename Self>
-		  void bar(this Self&&, int); };
+		  void bar(this Self&&, int);
+		};
 
 		void ex(Foo& foo, D& d) {
 		  foo.bar(1);       // Self=Foo&
-		  move(foo).bar(2); // Self=Foo}
+		  move(foo).bar(2); // Self=Foo
+		}
 	\end{minted}
 \end{frame}
 
@@ -664,7 +669,8 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  void bar()(this Foo, int i); };
+		  void bar()(this Foo, int i);
+		};
 
 		Foo{}(4);
 	\end{minted}
@@ -679,9 +685,11 @@
 
 	\begin{minted}{cpp}
 		template <typename T> struct A {
-		  A(T); };
+		  A(T);
+		};
 		template <typename T> struct B : public A<T> {
-		  using A<T>::A; };
+		  using A<T>::A;
+		};
 
 		B b(42);	// OK B<int>
 	\end{minted}
@@ -1025,7 +1033,8 @@
 		  cout << "Description: " << entry.description() << "\n";
 		  cout << "file: " << entry.source_file() << "\n";
 		  cout << "line: " << entry.source_line() << "\n";
-		  cout << "------------------------------------" << "\n";}
+		  cout << "------------------------------------" << "\n";
+		}
 	\end{minted}
 
 	\vskip 10mm plus 10fill
@@ -1169,7 +1178,7 @@
 		if(e)
 		  cout << e.value();
 		else
-		  cout << e.error(); }
+		  cout << e.error();
 	\end{minted}
 
 	\vskip 5mm plus 10fill
@@ -1256,6 +1265,7 @@
 	\begin{minted}{cpp}
 		auto foo = view::iota(0, 50);
 		auto bar = view::iota(0, 30);
+
 		if(ranges::starts_with(foo, bar)) { ... }
 	\end{minted}
 
@@ -1287,9 +1297,8 @@
 		// 1 Aa A
 		// 2 Bb B
 		for(tuple<int&, string&, char&> e : views::zip(x, y, z)) {
-		  cout << get<0>(e) << ' ' 
-		       << get<1>(e) << ' '
-		       << get<2>(e) << '\n'; }
+		  cout << get<0>(e) << ' ' << get<1>(e) << ' ' << get<2>(e) << '\n';
+		}
    	\end{minted}
 
 	\begin{itemize}

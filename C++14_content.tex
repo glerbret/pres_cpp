@@ -40,7 +40,8 @@
 	\begin{minted}{cpp}
 		[](int x) { 
 		  if(x >= 0) return 2 * x; 
-		  else return -2 * x; };
+		  else return -2 * x;
+		};
 	\end{minted}
 
 	\begin{itemize}
@@ -50,7 +51,8 @@
 	\begin{minted}{cpp}
 		auto bar(int x) {
 		  if(x >= 0) return 2 * x; 
-		  else return -2 * x; }
+		  else return -2 * x;
+		}
 	\end{minted}
 \end{frame}
 
@@ -63,7 +65,8 @@
 	\begin{minted}{cpp}
 		auto fact(unsigned int x) {
 		  if(x == 0) return 1U;
-		  else return x * fact(x-1); }
+		  else return x * fact(x-1);
+		}
 	\end{minted}
 
 	\begin{alertblock}{Contraintes}
@@ -396,7 +399,8 @@
 
 	\begin{minted}{cpp}
 		auto foo = [] (auto... args) { 
-		  std::cout << sizeof...(args) << '\n'; };
+		  std::cout << sizeof...(args) << '\n';
+		};
 
 		foo(2);           // 1
 		foo(2, 3, 4);     // 3
@@ -437,7 +441,8 @@
 	\begin{minted}{cpp}
 		auto foo = make_unique<int>(42);
 		auto bar = [ foo = move(foo) ](int i) {
-		  cout << *foo * i << '\n'; };
+		  cout << *foo * i << '\n';
+		};
 
 		bar(5);  // Affiche 210
 	\end{minted}
@@ -448,12 +453,13 @@
 
 	\begin{minted}{cpp}
 		struct Bar {
-		  auto foo() {
-		    return [s=s] { cout << s << '\n'; }; }
+		  auto foo() { return [s=s] { cout << s << '\n'; }; }
 
-		  string s; };
+		  string s;
+		};
 	\end{minted}
 
+	\vskip 10mm plus 10fill
 	\hfill
 	\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:8,startColumn:1,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+42%3B%0A%0A++auto+bar+%3D+%5B+%26x+%3D+foo+%5D()+%7B+--x%3B+%7D%3B%0A++bar()%3B%0A++std::cout+%3C%3C+foo+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+%5B+y+%3D+2*foo+%5D()+%7B+std::cout+%3C%3C+y+%3C%3C+!'%5Cn!'%3B+%7D%3B%0A++baz()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g122,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:boost,ver:'175')),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+12.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}

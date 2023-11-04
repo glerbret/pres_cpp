@@ -177,7 +177,8 @@
 		if constexpr(is_pointer_v<T>)
 		  return *t;
 		else
-		  return t; }
+		  return t;
+		}
 		
 		int a = 10, b = 5;
 		int* ptr = &b;
@@ -223,7 +224,8 @@
 			template<int N>
 			constexpr int fibo() {
 			  if constexpr (N>=2) return fibo<N-1>()+fibo<N-2>();
-			  else return N; }
+			  else return N;
+			}
 		\end{minted}
 	\end{block}
 
@@ -300,7 +302,8 @@
 
 	\begin{minted}{cpp}
 		switch(int foo = 42; bar) {
-		  ... }
+		  ... 
+		}
 	\end{minted}
 
 	\vskip 10mm plus 10fill
@@ -345,8 +348,10 @@
 		  public: template <int N> auto& get() const {
 		    if constexpr(N == 0) { return i; }
 		    else { return s; } } };
+
 		template<> struct tuple_size<Foo>
 		  : integral_constant<size_t, 2> {};
+
 		template<size_t N> struct tuple_element<N, Foo> {
 		  using type = decltype(declval<Foo>().get<N>()); };
 
@@ -491,13 +496,15 @@
 
 	\begin{minted}{cpp}
 		T f() {
-		  return T{}; } // Pas de copie
+		  return T{};  // Pas de copie
+		}
 	\end{minted}
 
 	\begin{minted}{cpp}
 		T g() {
 		  T t;
-		  return t; }   // Copie potentielle eludee
+		  return t;    // Copie potentielle eludee
+		}
 	\end{minted}
 \end{frame}
 
@@ -989,13 +996,16 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  int operator()(int i) { return 10 + i; } };
+		  int operator()(int i) { return 10 + i; }
+		};
 
 		struct Bar {
-		  int operator()(const string& s) { return s.size(); } };
+		  int operator()(const string& s) { return s.size(); }
+		};
 
 		template <typename... Ts> struct Baz : Ts... {
-		  using Ts::operator()...; };
+		  using Ts::operator()...;
+		};
 
 		Baz<Foo, Bar> baz;
 		baz(5);        // 15
@@ -1119,6 +1129,7 @@
 		push_back_vec(foo, 10, 20, 56);
 	\end{minted}
 
+	\vskip 10mm plus 10fill
 	\hfill
 	\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbFykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn4JdpgO6bX1BIVhkdF6CnUNTdmtwz3BfSUDXACUtqhexMjsHOYAzMHI3lgA1CYbbk5DxJish9gmGgCCm9u7mAdHp8HAl9d3ZlsMO177hzcADd2kRiB9bp8vKkjHtmGwFIkmKs9kN0CAQLRCNExApDlZIbcCJgWIkDMTAQQAJ6JRisTAAOiZexuxGAeI2V1uEVQnj2YloEFZ7KZDP5bIUc0%2BJgA7ASbns9mcCMsGHsIKKDmZYuZYuL2VKNvLZQARaVEklkpgUo7U2nwxnM4Ucrk3WgCYB7d2whQ%2BIUSzX1A3SuWfRXK1XqoMKLUWPaiw3GmVmwk3Ymk8mYSk0ulsTXOiE3dBLCL0L34IH%2BkXM6NSyGh27hzAq4hqjXMgD0%2Bsl%2BJDKbuFoz1qztpzDvzEsLxa8paexArVYUgYldbuDYVSubkYg0b2XYTvfr/c%2B6atNrcdtzT1FBc5nyBqDw6D2ADFPOhlMRggRF7rdcvg3reVFQgNEMTQLwCGeNxAXjZlAVgsCQH4YgAHd6nQQFb2wHcVzmaDYLAdYAFY3AYIjDzXY9BzPEcLzHek9gAFVIPZL3HJ1JzvW4HyfPZEmhBAAH0ImRABrISQWQUCCHREApLBQEmI%2BbU9iBViC21f8axXENgPVIEGQEhRhNE5AxNwg1WIPI0%2B3NG5vz2FgmGCCBV1lfSkIgqCEKOVFZIxHlPDERIECYAi/IFCACGILxMFYmK4oS2L4r2KhcUwfDfLcPYKNI8j1ls1NFS8pYfKORC/QSPYzFYjZWMkLKKr8vKyIooqBw3UrIIinLaAXLgGQ0VizCGuqhqamCWo4XKZuypUBrGmqlo2Cbetmkx8va41G1fd9P2/CAuGG2amCI1jzDMaICEunsOrDfy5IUkhAW/S40t5SjFWM0zxMk9pqF5VjjpGk7iNiRMHpQndINQPY8D2EAPtQVdFQ8h6SoClAyvWhH5qIjaOrR5MHu68qppy1qCso01Pg4BZaE4YjeD8DgtFIVBOBgyxrFRJYVieTYeFIAhNHphYxJAYjhsZjhJBZsWOc4XgFBAYbRbZ%2BnSDgWAkEwVR2lhsgKEshRlEMSohAQVBUNZ4W0FJOhrXSc2QloK2bdZ9mHcSOgBmALgzFqn2/eIUJ6WV0gQ/oYgAHlII923Ff19pnUjlPkFqfBWd4fhBBEMR2CkGRBEUFR1E10hdASAwjBQaxrH0PAIlV2AHRAIKhlIEEYm4GVmbmBZUESapVY4ABaNFDhNUwecsLgZT2ceAHUBSX5f9Zi8Lx9pdBDEcZAVf51ZBlk4JXct62k%2B4XgYswNZhdQ4gmESMWGaZhXK85jhsAN5Ajb2KoAAHLEcesRJB7GAMgZAexA4MjMOqbmVhLCsVwIQEgWoNjzFvm/BYCBzhYBiG5Ugktpb6E4PLUgXteDfxVmrEWuDyEcDMJ/dmtCGGa0Ht3aIqRnCSCAA%3D%3D}{\includegraphics[height=0.5cm]{input_src/play-button.png}}
 \end{frame}
@@ -1156,10 +1167,8 @@
 
 	\begin{minted}{cpp}
 		struct Foo { Foo(int a, int b = 0); };
-		struct Bar : Foo {
-		  Bar(int a); using Foo::Foo; };
-		struct Baz : Foo {
-		  Baz(int a, int b = 0); using Foo::Foo; };
+		struct Bar : Foo { Bar(int a); using Foo::Foo; };
+		struct Baz : Foo { Baz(int a, int b = 0); using Foo::Foo; };
 
 		Bar bar(0); // Ambigu (OK en C++11)
 		Baz baz(0); // OK (Ambigu en C++11)
@@ -1259,7 +1268,8 @@
 	\begin{minted}{cpp}
 		template<class Func> struct Foo { 
 		  Foo(Func f) : func(f) {} 
-		  Func func; };
+		  Func func;
+		};
 
 		Foo([&](int i) { ... });
 	\end{minted}
@@ -1343,9 +1353,10 @@
 
 	\begin{minted}{cpp}
 		template<int* P> struct Foo { 
-		  int operator()() { return *P; } };
-		int N = 5;
+		  int operator()() { return *P; }
+		};
 
+		int N = 5;
 		Foo<&N> foo;     // OK
 		foo();           // 5
 
@@ -1371,9 +1382,9 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  auto bar() {
-		    return [*this] { cout << s << endl; }; }
-		  std::string s; };
+		  auto bar() { return [*this] { cout << s << endl; }; }
+		  std::string s;
+		};
 
 		auto baz = Foo{"baz"}.bar();
 		baz();     // Affiche baz
@@ -1389,7 +1400,8 @@
 
 	\begin{minted}{cpp}
 		constexpr int AddEleven(int n) {
-		  return [n] { return n+11; }(); }
+		  return [n] { return n+11; }();
+		}
 
 		AddEleven(5);   // 16
 	\end{minted}
@@ -1429,7 +1441,8 @@
 		constexpr auto add = [] (int n, int m) {
 		  auto L = [=] { return n; };
 		  auto R = [=] { return m; };
-		  return [=] { return L() + R(); }; };
+		  return [=] { return L() + R(); };
+		};
 
 		add(3, 4)()   // 7
 	\end{minted}
@@ -1449,7 +1462,8 @@
 
 	\begin{minted}{cpp}
 		int foo(int i) {
-		  return i + 42; }
+		  return i + 42;
+		}
 
 		invoke(&foo, 8);  // 50
 	\end{minted}
@@ -1464,8 +1478,8 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  int bar(int i) {
-		    return i + 42; } };
+		  int bar(int i) { return i + 42; }
+		};
 
 		Foo foo;
 		invoke(&Foo::bar, foo, 8);  // 50
@@ -1489,8 +1503,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		bool LessThan10(int a) {
-		  return a < 10; }
+		bool LessThan10(int a) { return a < 10; }
 
 		vector foo = { 1, 6, 3, 8, 14, 42, 2 };
 		count_if(begin(foo), end(foo), not_fn(LessThan10)); // 2
@@ -1570,7 +1583,8 @@
 	\begin{minted}{cpp}
 		enum foo {
 		  FOO_1 [[ Attribut ]],
-		  FOO_2 };
+		  FOO_2
+		};
 	\end{minted}
 \end{frame}
 
@@ -1614,7 +1628,8 @@
 		    ...
 		  case 4:   // Idealement : warning
 		    ...
-		    break; }
+		    break;
+		}
 	\end{minted}
 
 \note[item]{Les compilateurs offraient déjà des mécanismes similaires (\mintinline{cpp}|__attribute__ ((fallthrough));| ou \mintinline{cpp}|[[gnu::fallthrough]]| sur GCC, voire des commentaires à un format précis)}

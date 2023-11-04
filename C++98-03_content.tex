@@ -147,10 +147,12 @@
 		  ...
 		  // Lancement d'une exception
 		  throw logic_error("Oups !");
-		  ... }
+		  ...
+		}
 		catch(logic_error& e) {
 		  // Traitement de l'exception 
-		  ... }
+		  ...
+		}
 	\end{minted}
 \end{frame}
 
@@ -276,11 +278,13 @@
 	public:
 	  A(const A&);
 	  A& operator=(A);
-	  friend void swap(A& lhs, A& rhs); };  // Nothrow
+	  friend void swap(A& lhs, A& rhs);  // Nothrow
+	};
 
-	A& A::operator=(A other) {              // Copy
-	  swap(*this, other);                   // Swap
-	  return *this; }
+	A& A::operator=(A other) {           // Copy
+	  swap(*this, other);                // Swap
+	  return *this;
+	}
 	\end{minted}
 \end{frame}
 
@@ -434,7 +438,8 @@
 		  ~Foo() { delete[] bar; }
 		
 		private:
-		  char* bar; };
+		  char* bar;
+		};
 	\end{minted}
 \end{frame}
 
@@ -467,7 +472,7 @@
 
 \note[item]{Proche du \textit{try with resources} de Java ou du \textit{with} de Python}
 
-		\item Propriété intrinsèque des objets \og par design\fg{}
+		\item Propriété intrinsèque des objets par design
 
 \note[item]{Contrairement à Java ou Python où c'est une propriété de l'usage}
 
@@ -506,11 +511,6 @@
 	\begin{alertblock}{Don't}
 		\begin{itemize}
 			\item Évitez les couples constructeur vide et fonction d'initialisation
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{alertblock}{Don't}
-		\begin{itemize}
 			\item Évitez les couples constructeur vide et ensemble de mutateurs
 		\end{itemize}
 	\end{alertblock}
@@ -532,8 +532,7 @@
 		  copy_files(src, dst);
 		}
 
-		remove_file(src);
-		// Potentielle perte de donnees
+		remove_file(src);  // Potentielle perte de donnees
 	\end{minted}
 
 \note[item]{Problème résolu en forçant l'écriture (\mintinline{cpp}|flush|) en fin de la fonction \mintinline{cpp}|copy_files()| et en remontant une exception en cas d'erreur}
@@ -640,10 +639,12 @@
 	\begin{minted}{cpp}
 		class Foo {
 		public:
-		  Foo& operator+=(const Foo& other); };
+		  Foo& operator+=(const Foo& other);
+		};
 
 		Foo operator+(Foo lhs, const Foo& rhs) {
-		  return lhs += rhs; }
+		  return lhs += rhs;
+		}
 	\end{minted}
 \end{frame}
 
@@ -830,7 +831,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\mintinline{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
+	\begin{alertblock}{\mintinline[style=vim]{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
 		\begin{itemize}
 			\item Ne remplit pas tous les pré-requis des conteneurs
 			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
@@ -970,7 +971,8 @@
 		// Affiche 4 3 2 1 0
 		while(!foo.empty()) {
 		  cout << ' ' << foo.top();
-		  foo.pop(); }
+		  foo.pop();
+		}
 	\end{minted}
 
 	\vskip 10mm plus 10fill
@@ -1190,13 +1192,12 @@
 	\begin{minted}{cpp}
 		class LessThan {
 		public:
-		  explicit LessThan(int threshold)
-		    : m_threshold(threshold) {}
-		  bool operator() (int value) { 
-		    return value <= m_threshold; }
+		  explicit LessThan(int threshold) : m_threshold(threshold) {}
+		  bool operator() (int value) { return value <= m_threshold; }
 
 		private:
-		  int const m_threshold; };
+		  int const m_threshold;
+		};
 
 		LessThan func(10);
 		cout << func(5) << "\n";   // 1
@@ -1259,7 +1260,8 @@
 		struct Aggregate {
 		  Aggregate() : m_sum(0) {}
 		  void operator() (int i) { m_sum += i; }
-		  int m_sum; };
+		  int m_sum;
+		};
 
 		vector<int> foo{4, 5, 9 ,12};
 		for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
@@ -1295,7 +1297,7 @@
 		\item \mintinline{cpp}|std::find_if()| recherche depuis un prédicat
 	\end{itemize}
 
-	\begin{block}{Variantes \og \mintinline{cpp}|_if|\fg{}}
+	\begin{block}{Variantes \mintinline{cpp}|_if|}
 		\begin{itemize}
 			\item Les algorithmes suffixés par \mintinline{cpp}|_if| utilisent un prédicat
 		\end{itemize}
@@ -1361,10 +1363,10 @@
 
 	\begin{minted}{cpp}
 		vector<int>::iterator foo(vector<int> vec, int val) {
-		  vector<int>::iterator it = 
-		    lower_bound(vec.begin(), vec.end(), val);
+		  vector<int>::iterator it = lower_bound(vec.begin(), vec.end(), val);
 		  if(it != vec.end() && *it == val) return it;
-		  else return vec.end(); }
+		  else return vec.end();
+		}
 
 		vector<int> bar{1, 5, 8, 13, 25, 42};
 		foo(bar, 12);  // vec.end
@@ -1496,7 +1498,8 @@
 		int gen() {
 		  static int i = 0;
 		  i += 5;
-		  return i; }
+		  return i;
+		}
 
 		vector<int> foo(4);
 		generate(foo.begin(), foo.end(), gen);  // 5 10 15 20
@@ -1600,7 +1603,7 @@
 		\item \mintinline{cpp}|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
 	\end{itemize}
 
-	\begin{block}{Variantes \og \mintinline{cpp}|_copy|\fg{}}
+	\begin{block}{Variantes \mintinline{cpp}|_copy|}
 		\begin{itemize}
 			\item Les algorithmes suffixés par \mintinline{cpp}|_copy| fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
 		\end{itemize}
@@ -1889,10 +1892,8 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		vector<int> bar{2, 5};
 		vector<int> baz;
 
-		merge(foo.begin(), foo.end(), 
-		      bar.begin(), bar.end(), 
-		      back_inserter(baz));
-		// 1 2 5 5 6 8
+		merge(foo.begin(), foo.end(), bar.begin(), bar.end(), 
+		      back_inserter(baz));      // 1 2 5 5 6 8
 	\end{minted}
 
 	\begin{itemize}
@@ -1924,10 +1925,8 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		vector<int> bar{2, 5};
 		vector<int> baz{1, 6};
 
-		includes(foo.begin(), foo.end(), 
-		         bar.begin(), bar.end());   // faux
-		includes(foo.begin(), foo.end(), 
-		         baz.begin(), baz.end());   // vrai
+		includes(foo.begin(), foo.end(), bar.begin(), bar.end());  // faux
+		includes(foo.begin(), foo.end(), baz.begin(), baz.end());  // vrai
 	\end{minted}
 \end{frame}
 
@@ -1943,8 +1942,7 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		vector<int> baz;
 
 		set_union(foo.begin(), foo.end(), bar.begin(),
-		          bar.end(), back_inserter(baz));
-		// 1 2 5 6 8
+		          bar.end(), back_inserter(baz));   // 1 2 5 6 8
 	\end{minted}
 
 	\begin{itemize}
@@ -2052,8 +2050,7 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		vector<int> bar;
 
 		adjacent_difference(foo.begin(), foo.end(), 
-		                    back_inserter(bar), minus<int>());
-		// 18 -13 1 2
+		                    back_inserter(bar), minus<int>());  // 18 -13 1 2
 	\end{minted}
 
 	\begin{itemize}
