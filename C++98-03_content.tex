@@ -87,7 +87,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Norme \& support}
+	\frametitle{Norme et support}
 	\begin{itemize}
 		\item Compilateurs
 		\begin{itemize}
@@ -328,7 +328,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Erreurs -- assert}
+	\frametitle{Erreurs -- \mintinline[style=white]{cpp}|assert|}
 	\begin{itemize}
 		\item Arrête le programme si l'expression est évalué à 0
 		\item Affiche au moins l'expression, le fichier et la ligne
@@ -540,7 +540,7 @@
 
 \begin{frame}[fragile]
 	\frametitle{Ressources -- Limites du RAII}
-	\begin{alertblock}{\mintinline{cpp}|std::auto_ptr|}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::auto_ptr|}
 		\begin{itemize}
 			\item Copiable
 			\item La copie transfère la responsabilité de la ressource
@@ -831,7 +831,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\mintinline[style=vim]{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
 		\begin{itemize}
 			\item Ne remplit pas tous les pré-requis des conteneurs
 			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
@@ -877,7 +877,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\mintinline{cpp}|std::string| et UTF-8}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::string| et UTF-8}
 		\begin{itemize}
 			\item \mintinline{cpp}|length()| et \mintinline{cpp}|size()| retournent le nombre de \textit{bytes}, pas de caractères
 		\end{itemize}
@@ -1015,7 +1015,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- std::pair}
+	\frametitle{STL Conteneurs -- \mintinline[style=white]{cpp}|std::pair|}
 	\begin{itemize}
 		\item Couple de deux valeurs
 		\item Pas un conteneur
@@ -1298,7 +1298,7 @@
 		\item \mintinline{cpp}|std::find_if()| recherche depuis un prédicat
 	\end{itemize}
 
-	\begin{block}{Variantes \mintinline{cpp}|_if|}
+	\begin{block}{Variantes \mintinline[style=white]{cpp}|_if|}
 		\begin{itemize}
 			\item Les algorithmes suffixés par \mintinline{cpp}|_if| utilisent un prédicat
 		\end{itemize}
@@ -1430,7 +1430,7 @@
 \note[item]{Comparaison sur la taille du premier ensemble (couple \mintinline{cpp}|begin()| - \mintinline{cpp}|end()|)}
 \note[item]{C++14 ajoute des surcharges de \mintinline{cpp}|std::equal()| testant la taille}
 
-	\begin{block}{Et \mintinline[style=vim]{cpp}|operator==| ?}
+	\begin{block}{Et \mintinline[style=white]{cpp}|operator==| ?}
 		\begin{itemize}
 			\item \mintinline{cpp}|operator==| sur des conteneurs teste la taille et le contenu
 		\end{itemize}

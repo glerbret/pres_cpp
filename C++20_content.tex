@@ -244,7 +244,7 @@
 		\item Initialisation des agrégats via des données parenthésées
 	\end{itemize}
 
-	\begin{block}{\mintinline{cpp}|{}| ou \mintinline{cpp}|()| ?}
+	\begin{block}{\mintinline[style=white,escapeinside=||]{cpp}{|\{\}|} ou \mintinline[style=white]{cpp}|()| ?}
 		\begin{itemize}
 			\item \mintinline{cpp}|{}| permet l'utilisation d'\textit{initializer list}
 			\item \mintinline{cpp}|()| permet les conversions avec perte de précision
@@ -286,7 +286,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{using enum}
+	\frametitle{\mintinline[style=white]{cpp}|using enum|}
 	\begin{itemize}
 		\item Utilisation d'\mintinline{cpp}|using| sur une \mintinline{cpp}|enum class|
 	\end{itemize}
@@ -345,7 +345,7 @@
 
 \subsection*{Classe}
 \begin{frame}[fragile]
-	\frametitle{Spécifications d'exception et =default}
+	\frametitle{Spécifications d'exception et \mintinline[style=white]{cpp}|=default|}
 	\begin{itemize}
 		\item Définition possible de spécifications d'exception des fonctions \mintinline{cpp}|=default| différentes de celles de la fonction implicite
 	\end{itemize}
@@ -389,7 +389,7 @@
 
 \subsection*{Opérateurs}
 \begin{frame}[fragile]
-	\frametitle{operator<=>}
+	\frametitle{\mintinline[style=white]{cpp}|operator<=>|}
 	\begin{itemize}
 		\item Effectue une \og \textit{Three-way comparison}\fg{}
 		\begin{itemize}
@@ -420,7 +420,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{operator<=>}
+	\frametitle{\mintinline[style=white]{cpp}|operator<=>|}
 	\begin{itemize}
 		\item \mintinline{cpp}|operator<=>| déclenche la génération
 		\begin{itemize}
@@ -430,7 +430,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\mintinline[style=vim]{cpp}|operator==| et \mintinline[style=vim]{cpp}|operator!=|}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|operator==| et \mintinline[style=white]{cpp}|operator!=|}
 		\begin{itemize}
 			\item Uniquement pour les retours de type \og égalité\fg{}
 			\item Pas de génération depuis \mintinline{cpp}|operator<=>|
@@ -490,7 +490,7 @@
 		\item Alternative au mécanisme d'inclusion
 	\end{itemize}
 
-	\begin{alertblock}{Modules et \mintinline[style=vim]{cpp}|namespace|}
+	\begin{alertblock}{Modules et \mintinline[style=white]{cpp}|namespace|}
 		\begin{itemize}
 			\item Ne replace pas les \mintinline{cpp}|namespace|
 		\end{itemize}
@@ -887,14 +887,14 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::list et forward\_list}}
+	\frametitle{\mintinline[style=white]{cpp}|std::list| et \mintinline[style=white]{cpp}|forward_list|}
 	\begin{itemize}
 		\item \mintinline{cpp}|remove()|, \mintinline{cpp}|remove_if()| et \mintinline{cpp}|unique()| retourne le nombre d'éléments supprimés
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::array}}
+	\frametitle{\mintinline[style=white]{cpp}|std::array|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::to_array()| construit un \mintinline{cpp}|std::array| depuis un tableau C
 	\end{itemize}
@@ -916,7 +916,7 @@
 		auto foo = to_array("foo");
 	\end{minted}
 
-	\begin{alertblock}{\mintinline{cpp}|0| terminal}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|0| terminal}
 		\begin{itemize}
 			\item Le \mintinline{cpp}|0| terminal est un élément du tableau
 		\end{itemize}
@@ -953,7 +953,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::span}}
+	\frametitle{\mintinline[style=white]{cpp}|std::span|}
 	\begin{itemize}
 		\item Vue sur un conteneur contigu
 		\item Similaire à \mintinline{cpp}|std::string_view|
@@ -975,7 +975,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::span}}
+	\frametitle{\mintinline[style=white]{cpp}|std::span|}
 	\begin{itemize}
 		\item \mintinline{cpp}|begin()|, \mintinline{cpp}|end()|, \ldots{} : itérateurs sur le \mintinline{cpp}|std::span|
 		\item \mintinline{cpp}|size()|, \mintinline{cpp}|empty()| : taille et vacuité
@@ -1550,7 +1550,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Présentation}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Présentation}
 	\begin{itemize}
 		\item API de formatage inspiré de la bibliothèque \href{https://github.com/fmtlib/fmt}{\{fmt\}}
 	\end{itemize}
@@ -1590,7 +1590,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- API}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- API}
 	\begin{itemize}
 		\item \mintinline{cpp}|format()| retourne une chaîne
 	\end{itemize}
@@ -1625,7 +1625,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- API}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- API}
 	\begin{itemize}
 		\item \mintinline{cpp}|formatted_size()| retourne la taille nécessaire au formatage
 		\item \mintinline{cpp}|vformat()| et \mintinline{cpp}|vformat_to()| arguments regroupés dans un \textit{tuple-like}
@@ -1641,7 +1641,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Placeholder}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Placeholder}
 	\begin{itemize}
 		\item Format général : \mintinline{cpp}|{[arg-id][:format-spec]}|
 		\begin{itemize}
@@ -1659,7 +1659,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Identifiant d'arguments}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Identifiant d'arguments}
 	\begin{itemize}
 		\item Valeur optionnelle indiquant l'index du paramètre à afficher
 		\item Débute à 0
@@ -1686,7 +1686,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Spécification de format}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Spécification de format}
 	\begin{itemize}
 		\item Format général : \mintinline[escapeinside=||]{cpp}{[[fill]align][sign][|#|][0][width][prec][L][type]}
 		\begin{itemize}
@@ -1703,7 +1703,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Alignement}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Alignement}
 	\begin{itemize}
 		\item Alignement par défaut dépendant du type
 	\end{itemize}
@@ -1733,7 +1733,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Taille minimale}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Taille minimale}
 	\begin{itemize}
 		\item Fournit la taille minimal du champ
 		\item Si le champ est plus long, il n'est pas tronqué
@@ -1757,7 +1757,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Précision}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Précision}
 	\begin{itemize}
 		\item Introduit par un \mintinline{cpp}|.|
 		\item Uniquement sur
@@ -1786,7 +1786,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Signe}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Signe}
 	\begin{itemize}
 		\item Uniquement sur les négatifs : '\mintinline{cpp}|-|'
 
@@ -1803,7 +1803,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Zéros non significatifs}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Zéros non significatifs}
 	\begin{itemize}
 		\item Affichage des zéros non significatifs
 	\end{itemize}
@@ -1814,7 +1814,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Format}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Format}
 	\begin{itemize}
 		\item Entiers : décimal, octal, binaire ou hexadécimal
 	\end{itemize}
@@ -1846,7 +1846,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Format}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Format}
 	\begin{itemize}
 		\item Flottants : fixe, court, scientifique ou hexadécimal
 	\end{itemize}
@@ -1872,7 +1872,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Forme alternative}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Forme alternative}
 	\begin{itemize}
 		\item Affichage de la base des entiers
 	\end{itemize}
@@ -1898,7 +1898,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Dates et heures}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Dates et heures}
 	\begin{itemize}
 		\item Format basé sur \mintinline{cpp}|strftime|
 		\begin{itemize}
@@ -1928,7 +1928,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Gestion des erreurs}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Gestion des erreurs}
 	\begin{itemize}
 		\item Exception \mintinline{cpp}|std::format_error|
 		\begin{itemize}
@@ -1947,7 +1947,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Types utilisateur}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Types utilisateur}
 	\begin{itemize}
 		\item Par spécialisation de \mintinline{cpp}|std::formatter<>|
 	\end{itemize}
@@ -1965,7 +1965,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format} -- Types utilisateur}
+	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Types utilisateur}
 	\begin{minted}{cpp}
 		struct MyComplex { double real; double imag; };
 
@@ -2090,7 +2090,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolution de {\NoAutoSpacing std::chrono::duration}}
+	\frametitle{Évolution de \mintinline[style=white]{cpp}|std::chrono::duration|}
 	\begin{itemize}
 		\item \textit{Helper} pour le jour, la semaine, le mois ou l'année
 		\item \mintinline{cpp}|to_stream()| affiche une \mintinline{cpp}|std::chrono::duration|
@@ -2257,7 +2257,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 \subsection*{Compile-time}
 \begin{frame}[fragile]
-	\frametitle{consteval}
+	\frametitle{\mintinline[style=white]{cpp}|consteval|}
 	\begin{itemize}
 		\item \mintinline{cpp}|consteval| impose une évaluation \textit{compile-time}
 
@@ -2288,7 +2288,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{constinit}
+	\frametitle{\mintinline[style=white]{cpp}|constinit|}
 	\begin{itemize}
 		\item \mintinline{cpp}|constinit| impose une initialisation durant la phase \textit{static initialization}
 		\begin{itemize}
@@ -2300,7 +2300,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|constexpr|}
 	\begin{itemize}
 		\item Initialisation triviale dans des contextes \mintinline{cpp}|constexpr|
 		\item \mintinline{cpp}|std::is_constant_evaluated()| pour savoir si l'évaluation est \textit{compile-time}
@@ -2479,7 +2479,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Paramètres auto}
+	\frametitle{Paramètres \mintinline[style=white]{cpp}|auto|}
 	\begin{itemize}
 		\item Création de fonctions templates via \mintinline{cpp}|auto|
 	\end{itemize}
@@ -2844,7 +2844,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{Lambdas}
+	\frametitle{Lambda}
 	\begin{itemize}
 		\item Utilisables dans des contextes non évalués
 
@@ -2880,7 +2880,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Lambdas}
+	\frametitle{Lambda}
 	\begin{itemize}
 		\item Lambda \textit{stateless} assignables et constructibles par défaut
 
@@ -2908,7 +2908,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Lambdas}
+	\frametitle{Lambda}
 	\begin{itemize}
 		\item Expansion des \textit{parameter packs} lors de la capture
 	\end{itemize}
@@ -2959,7 +2959,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 \subsection*{Multi-threading}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::atomic}}
+	\frametitle{\mintinline[style=white]{cpp}|std::atomic|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::atomic<std::shared_ptr<T>>|
 		\item \mintinline{cpp}|std::atomic<>| sur les types flottant
@@ -3097,7 +3097,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 \subsection*{Coroutines}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::coroutine} -- Présentation}
+	\frametitle{\mintinline[style=white]{cpp}|std::coroutine| -- Présentation}
 	\begin{itemize}
 		\item Fonction dont l'exécution peut être suspendue et reprise
 		\item Simplification du développement de code asynchrone
@@ -3106,7 +3106,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::coroutine} -- Définition}
+	\frametitle{\mintinline[style=white]{cpp}|std::coroutine| -- Définition}
 	\begin{itemize}
 		\item Fonctions contenant
 		\begin{itemize}
@@ -3132,7 +3132,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::coroutine} -- Mécanismes}
+	\frametitle{\mintinline[style=white]{cpp}|std::coroutine| -- Mécanismes}
 	\begin{itemize}
 		\item \textit{Promise} utilisée pour renvoyer valeurs et exceptions
 		\item \textit{Coroutine state} interne contenant promesse, paramètres, variables locales et état du point de suspension
@@ -3154,7 +3154,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::coroutine} -- Exemple}
+	\frametitle{\mintinline[style=white]{cpp}|std::coroutine| -- Exemple}
 	\begin{minted}{cpp}
 		struct generator {
 		  ...
@@ -3173,7 +3173,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 \subsection*{Système de fichier}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::create\_directory()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::create_directory()|}
 	\begin{itemize}
 		\item Échec de \mintinline{cpp}|std::create_directory()| si l'élément terminal existe et n'est pas un répertoire
 	\end{itemize}
@@ -3191,7 +3191,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 \subsection*{Variant}
 \begin{frame}[fragile]
-	\frametitle{Constructeur de {\NoAutoSpacing std::variant}}
+	\frametitle{Constructeur de \mintinline[style=white]{cpp}|std::variant|}
 	\begin{itemize}
 		\item Contraintes sur le constructeur et l'opérateur d'affectation de \mintinline{cpp}|std::variant|
 		\begin{itemize}
@@ -3216,7 +3216,7 @@ auto date2 = Sunday[3]/May/2016y;
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::visit()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::visit()|}
 	\begin{itemize}
 		\item Possibilité d'expliciter le type de retour de \mintinline{cpp}|std::visit()|
 		\begin{itemize}

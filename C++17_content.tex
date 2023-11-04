@@ -48,7 +48,7 @@
 
 \subsection*{include}
 \begin{frame}[fragile]
-	\frametitle{\_\_has\_include}
+	\frametitle{\mintinline[style=white]{cpp}|__has_include|}
 	\begin{itemize}
 		\item Teste la présence d'un fichier d'en-tête
 		\item Et donc la disponibilité d'une fonctionnalité
@@ -69,7 +69,7 @@
 
 \subsection*{inline variable}
 \begin{frame}[fragile]
-	\frametitle{inline variable}
+	\frametitle{\mintinline[style=white]{cpp}|inline| variable}
 	\begin{itemize}
 		\item Sémantique \mintinline{cpp}|inline| identique sur fonctions et variables
 		\item Peut être définie, à l'identique, dans plusieurs unité de compilation
@@ -125,7 +125,7 @@
 
 \subsection*{static\_assert}
 \begin{frame}[fragile]
-	\frametitle{static\_assert sans message}
+	\frametitle{\mintinline[style=white]{cpp}|static_assert| sans message}
 	\begin{itemize}
 		\item \mintinline{cpp}|static_assert| sans message utilisateur
 	\end{itemize}
@@ -143,7 +143,7 @@
 
 \subsection*{if constexpr}
 \begin{frame}[fragile]
-	\frametitle{if constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|if constexpr|}
 	\begin{itemize}
 		\item Branchement évalué à la compilation
 	\end{itemize}
@@ -174,7 +174,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{if constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|if constexpr|}
 	\begin{minted}{cpp}
 		template <typename T> auto foo(T t) {
 		if constexpr(is_pointer_v<T>)
@@ -190,7 +190,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{if constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|if constexpr|}
 	\begin{block}{Note}
 		\begin{itemize}
 			\item Les branches doivent être syntaxiquement correctes 
@@ -212,7 +212,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{if constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|if constexpr|}
 	\begin{block}{\textit{hello world} de la récursion}
 		\begin{minted}{cpp}
 			template<int  N>
@@ -240,7 +240,7 @@
 
 \subsection*{init statement}
 \begin{frame}[fragile]
-	\frametitle{if init statement}
+	\frametitle{\mintinline[style=white]{cpp}|if| init statement}
 	\begin{itemize}
 		\item Initialisation dans le branchement
 		\item Portée identique aux déclarations dans la condition
@@ -265,7 +265,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{if init statement}
+	\frametitle{\mintinline[style=white]{cpp}|if| init statement}
 	\begin{itemize}
 		\item Alternative à certaines constructions peu lisibles
 	\end{itemize}
@@ -301,7 +301,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{switch init statement}
+	\frametitle{\mintinline[style=white]{cpp}|switch| init statement}
 	\begin{itemize}
 		\item Initialisation dans le \mintinline{cpp}|switch()|
 		\item Utilisable dans le corps du \mintinline{cpp}|switch()|
@@ -638,7 +638,7 @@
 
 \subsection*{Types}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::byte}}
+	\frametitle{\mintinline[style=white]{cpp}|std::byte|}
 	\begin{itemize}
 		\item Stockage de bits
 		\item Pas un type caractère ni arithmétique
@@ -741,7 +741,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::map \& std::unordered\_map}}
+	\frametitle{\mintinline[style=white]{cpp}|std::map| et \mintinline[style=white]{cpp}|std::unordered_map|}
 	\begin{itemize}
 		\item \mintinline{cpp}|try_emplace()| tente de construire en place
 		\item \ldots{} sans effet, même pas un \og vol\fg{} de la valeur, si la clé existe déjà
@@ -764,7 +764,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing emplace\_back(), emplace\_front()}}
+	\frametitle{\mintinline[style=white]{cpp}|emplace_back()|, \mintinline[style=white]{cpp}|emplace_front()|}
 	\begin{itemize}
 		\item Retournent une référence sur l'élément ajouté
 	\end{itemize}
@@ -817,7 +817,7 @@
 
 \subsection*{Itérateurs}
 \begin{frame}
-	\frametitle{ContiguousIterator}
+	\frametitle{\mintinline[style=white]{cpp}|ContiguousIterator|}
 	\begin{itemize}
 		\item Basé sur \mintinline{cpp}|RandomAccessIterator|
 		\item Mais sur des conteneurs à stockage contigu
@@ -864,7 +864,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::to\_chars() et std::from\_chars}}
+	\frametitle{\mintinline[style=white]{cpp}|std::to_chars()| et \mintinline[style=white]{cpp}|std::from_chars()|}
 	\begin{itemize}
 		\item Conversions entre chaînes C pré-allouées et nombre
 	\end{itemize}
@@ -899,7 +899,7 @@
 
 \subsection*{Variant}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::variant}}
+	\frametitle{\mintinline[style=white]{cpp}|std::variant|}
 	\begin{itemize}
 		\item Union \textit{type-safe} contenant une valeur d'un type choisi parmi $n$
 		\item Type contenu dépend de la valeur assignée
@@ -939,7 +939,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::variant}}
+	\frametitle{\mintinline[style=white]{cpp}|std::variant|}
 	\begin{itemize}
 		\item \mintinline{cpp}|get<>()| récupère la valeur depuis l'index ou le nom du type
 		\item Et lève une exception si le type demandé n'est pas correct
@@ -955,7 +955,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::variant}}
+	\frametitle{\mintinline[style=white]{cpp}|std::variant|}
 	\begin{minted}{cpp}
 		variant<int, float, string> v, w;
 		v = "xyzzy";         // string
@@ -975,7 +975,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::variant}}
+	\frametitle{\mintinline[style=white]{cpp}|std::variant|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::visit()| permet l'appel sur le type réellement contenu
 	\end{itemize}
@@ -1009,7 +1009,7 @@
 
 \subsection*{Pack exansion}
 \begin{frame}[fragile]
-	\frametitle{Pack expansion sur using}
+	\frametitle{Pack expansion sur \mintinline[style=white]{cpp}|using|}
 	\begin{itemize}
 		\item Expansion du \textit{parameter pack} dans les \textit{using declaration}
 	\end{itemize}
@@ -1204,7 +1204,7 @@
 
 \subsection*{Exception}
 \begin{frame}[fragile]
-	\frametitle{noexcept}
+	\frametitle{\mintinline[style=white]{cpp}|noexcept|}
 	\begin{itemize}
 		\item \mintinline{cpp}|noexcept| fait partie du type des fonctions
 	\end{itemize}
@@ -1224,7 +1224,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::uncaught\_exceptions()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::uncaught_exceptions()|}
 	\begin{itemize}
 		\item Retourne le nombre d'exceptions lancées (ou relancées) et non encore attrapées du thread courant
 	\end{itemize}
@@ -1324,7 +1324,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{template <auto>}
+	\frametitle{\mintinline[style=white]{cpp}|template <auto>|}
 	\begin{itemize}
 		\item Déduction du type des paramètres templates numériques
 	\end{itemize}
@@ -1352,7 +1352,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Template \& contraintes d'utilisation}
+	\frametitle{Template et contraintes d'utilisation}
 	\begin{itemize}
 		\item \mintinline{cpp}|typename| autorisé dans les déclarations de \textit{template template parameters}
 	\end{itemize}
@@ -1369,7 +1369,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Template \& contraintes d'utilisation}
+	\frametitle{Template et contraintes d'utilisation}
 	\begin{itemize}
 		\item Évaluation constante de tous les arguments templates \og non-types\fg{}
 		\item Y compris pointeurs, références, pointeurs sur membres, \ldots{}
@@ -1392,7 +1392,7 @@
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{Capture de *this}
+	\frametitle{Capture de \mintinline[style=white]{cpp}|*this|}
 	\begin{itemize}
 		\item Capture \mintinline{cpp}|*this| par valeur
 
@@ -1478,7 +1478,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::invoke()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::invoke()|}
 	\begin{itemize}
 		\item Appelle l'appelable fourni en paramètre
 		\item \ldots{} en fournissant la liste de paramètres
@@ -1495,7 +1495,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::invoke()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::invoke()|}
 	\begin{itemize}
 		\item Fonctionne également avec des fonctions membres
 		\item \ldots{} le premier paramètre fourni est l'objet à utiliser
@@ -1523,7 +1523,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::not\_fn()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::not_fn()|}
 	\begin{itemize}
 		\item Construction de \textit{function object} en niant un appelable
 	\end{itemize}
@@ -1637,7 +1637,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Attribut [[ fallthrough ]]}
+	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ fallthrough ]]|}
 	\begin{itemize}
 		\item Dans un \mintinline{cpp}|switch| avant un \mintinline{cpp}|case| ou \mintinline{cpp}|default|
 		\item Indique qu'un cas se poursuit intentionnellement dans le cas suivant
@@ -1668,7 +1668,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Attribut [[ nodiscard ]]}
+	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ nodiscard ]]|}
 	\begin{itemize}
 		\item Indique que le retour d'une fonction ne devrait pas être ignorée
 	\end{itemize}
@@ -1695,7 +1695,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Attribut [[ nodiscard ]]}
+	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ nodiscard ]]|}
 	\begin{itemize}
 		\item Possible sur la déclaration d'un type (classe, structure ou énumération)
 		\item Indique qu'un retour de ce type ne devrait jamais être ignoré
@@ -1715,7 +1715,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Attribut [[ maybe\_unused ]]}
+	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ maybe_unused ]]|}
 	\begin{itemize}
 		\item Sur une classe, structure, fonction, variable, paramètre, \ldots{}
 		\item Indique qu'un élément peut ne pas être utilisé
@@ -1763,7 +1763,7 @@
 
 \subsection*{Multi-threading}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::shared\_mutex}}
+	\frametitle{\mintinline[style=white]{cpp}|std::shared_mutex|}
 	\begin{itemize}
 		\item Similaire à \mintinline{cpp}|std::mutex| avec deux niveaux d'accès
 		\begin{itemize}
@@ -1787,7 +1787,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::scoped\_lock}}
+	\frametitle{\mintinline[style=white]{cpp}|std::scoped_lock|}
 	\begin{itemize}
 		\item Acquisition de plusieurs mutex
 	\end{itemize}
@@ -1802,7 +1802,7 @@
 
 \subsection*{Library fundamentals TS}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::apply()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::apply()|}
 	\begin{itemize}
 		\item Appel de fonction depuis un \textit{tuple-like} d'argument
 	\end{itemize}
@@ -1835,7 +1835,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::optional}}
+	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item Gestion d'objet dont la présence est optionnelle
 	\end{itemize}
@@ -1871,7 +1871,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::optional}}
+	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item Supporte la déduction de type
 	\end{itemize}
@@ -1907,7 +1907,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::optional}}
+	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item Changement de la valeur via \mintinline{cpp}|reset()|, \mintinline{cpp}|swap()|, \mintinline{cpp}|emplace()| ou \mintinline{cpp}|operator=|
 		\item Comparaison naturelle des valeurs contenues 
@@ -1938,8 +1938,8 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::optional}}
-	\begin{alertblock}{\mintinline[style=vim]{cpp}|std::optional<bool>| ? \mintinline[style=vim]{cpp}|std::optional<T*>| ?}
+	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::optional<bool>| ? \mintinline[style=white]{cpp}|std::optional<T*>| ?}
 		\begin{itemize}
 			\item Utilisez des booléens \og trois états\fg{} (Boost.tribool)
 			\item Utilisez des pointeurs bruts
@@ -1967,7 +1967,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::any}}
+	\frametitle{\mintinline[style=white]{cpp}|std::any|}
 	\begin{itemize}
 		\item \mintinline{cpp}|void*| \textit{type-safe} contenant un objet de n'importe quel type (ou vide)
 		\item Implémentation de \textit{Type-erasure}
@@ -1982,7 +1982,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::any}}
+	\frametitle{\mintinline[style=white]{cpp}|std::any|}
 	\begin{itemize}
 		\item Supporte la construction en-place
 	\end{itemize}
@@ -2018,7 +2018,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::any}}
+	\frametitle{\mintinline[style=white]{cpp}|std::any|}
 	\begin{itemize}
 		\item \mintinline{cpp}|any_cast<Type>()| récupère la valeur
 		\item \ldots{} et lève une exception si le type demandé n'est pas correct
@@ -2043,7 +2043,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::any}}
+	\frametitle{\mintinline[style=white]{cpp}|std::any|}
 	\begin{itemize}
 		\item \mintinline{cpp}|reset()| vide le contenu
 		\item \mintinline{cpp}|has_value()| teste la vacuité
@@ -2065,7 +2065,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::string\_view}}
+	\frametitle{\mintinline[style=white]{cpp}|std::string_view|}
 	\begin{itemize}
 		\item Vue sur une séquence contiguë de caractères
 		\item Quatre spécialisations standards (une par type de caractères)
@@ -2083,7 +2083,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::string\_view}}
+	\frametitle{\mintinline[style=white]{cpp}|std::string_view|}
 	\begin{itemize}
 		\item Accès aux caractères : \mintinline{cpp}|operator[]|, \mintinline{cpp}|at()|, \mintinline{cpp}|front()|, \mintinline{cpp}|back()|, \mintinline{cpp}|data()|
 		\item Modification des bornes : \mintinline{cpp}|remove_prefix()| et \mintinline{cpp}|remove_suffix()|
@@ -2100,7 +2100,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::string\_view}}
+	\frametitle{\mintinline[style=white]{cpp}|std::string_view|}
 	\begin{minted}{cpp}
 		string foo = "Lorem ipsum dolor sit amet";
 
@@ -2134,7 +2134,7 @@
 		std::shared_ptr<int[]> foo(new int[10]);
 	\end{minted}
 
-	\begin{alertblock}{Pas de \mintinline[style=vim]{cpp}|std::make_shared()|}
+	\begin{alertblock}{Pas de \mintinline[style=white]{cpp}|std::make_shared()|}
 		\begin{itemize}
 			\item \mintinline{cpp}|std::make_shared()| ne supporte pas les tableaux en C++17
 		\end{itemize}
@@ -2311,7 +2311,7 @@
 		\item \mintinline{cpp}|std::reduce()| \og ajoute\fg{} tous les éléments de l'ensemble
 	\end{itemize}
 
-	\begin{block}{\mintinline[style=vim]{cpp}|std::reduce()| ou \mintinline[style=vim]{cpp}|std::accumulate()| ?}
+	\begin{block}{\mintinline[style=white]{cpp}|std::reduce()| ou \mintinline[style=white]{cpp}|std::accumulate()| ?}
 		\begin{itemize}
 			\item Ordre des \og additions\fg{} non spécifié dans le cas de \mintinline{cpp}|std::reduce()|
 		\end{itemize}

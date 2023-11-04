@@ -17,7 +17,7 @@
 
 \subsection*{constexpr}
 \begin{frame}[fragile]
-	\frametitle{constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|constexpr|}
 	\begin{itemize}
 		\item Fonctions membres \mintinline{cpp}|constexpr| plus implicitement \mintinline{cpp}|const|
 		\item Relâchement des contraintes sur les fonctions \mintinline{cpp}|constexpr|
@@ -83,7 +83,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{decltype(auto)}
+	\frametitle{\mintinline[style=white]{cpp}|decltype(auto)|}
 	\begin{itemize}
 		\item Déduction du type retour en conservant la référence
 	\end{itemize}
@@ -326,7 +326,7 @@
 
 \subsection*{tuple}
 \begin{frame}[fragile]
-	\frametitle{Adressage des {\NoAutoSpacing std::tuple} par le type}
+	\frametitle{Adressage des \mintinline[style=white]{cpp}|std::tuple| par le type}
 	\begin{itemize}
 		\item Utilisation du type plutôt que de l'indice
 	\end{itemize}
@@ -506,7 +506,7 @@
 
 \subsection*{Type traits}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::is\_final}}
+	\frametitle{\mintinline[style=white]{cpp}|std::is_final|}
 	\begin{itemize}
 		\item Indique si la classe est finale ou non
 	\end{itemize}
@@ -543,7 +543,7 @@
 
 \subsection*{Pointeurs intelligents}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::make\_unique}}
+	\frametitle{\mintinline[style=white]{cpp}|std::make_unique|}
 	\begin{itemize}
 		\item Allocation et construction de l'objet dans le \mintinline{cpp}|std::unique_ptr|
 	\end{itemize}
@@ -567,7 +567,7 @@
 
 \subsection*{Attributs}
 \begin{frame}[fragile]
-	\frametitle{Attribut [[ deprecated ]]}
+	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ deprecated ]]|}
 	\begin{itemize}
 		\item Indique qu'une entité (variable, fonction, classe, \ldots{}) est dépréciée
 		\item Émission possible d'avertissement sur l'utilisation d'une entité \mintinline{cpp}|deprecated|
@@ -587,7 +587,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Attribut [[ deprecated ]]}
+	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ deprecated ]]|}
 	\begin{itemize}
 		\item Possibilité de fournir un message explicatif
 	\end{itemize}
@@ -609,7 +609,7 @@
 
 \subsection*{Multi-threading}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::shared\_timed\_mutex}}
+	\frametitle{\mintinline[style=white]{cpp}|std::shared_timed_mutex|}
 	\begin{itemize}
 		\item Similaire à \mintinline{cpp}|std::timed_mutex| avec deux niveaux d'accès
 		\begin{itemize}
@@ -636,7 +636,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::shared\_lock}}
+	\frametitle{\mintinline[style=white]{cpp}|std::shared_lock|}
 	\begin{itemize}
 		\item Capsule RAII sur les mutex partagés
 		\item Support des mutex verrouillés ou non

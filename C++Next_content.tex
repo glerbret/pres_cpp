@@ -459,7 +459,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::ignore}}
+	\frametitle{\mintinline[style=white]{cpp}|std::ignore|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::ignore| pour ignorer une valeur de retour
 
@@ -513,7 +513,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{static\_assert}
+	\frametitle{\mintinline[style=white]{cpp}|static_assert|}
 	\begin{itemize}
 		\item Retarder à l'instanciation l'échec de \mintinline{cpp}|static_assert(false)| dans des templates
 	\end{itemize}
@@ -869,7 +869,7 @@
 
 \subsection*{Programmation fonctionnelle}
 \begin{frame}[fragile]
-	\frametitle{Lambdas}
+	\frametitle{Lambda}
 	\begin{itemize}
 		\item Capture mutable partielle par les lambdas
 
@@ -878,7 +878,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::function}}
+	\frametitle{\mintinline[style=white]{cpp}|std::function|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::inplace_function| : pendant de \mintinline{cpp}|std::function| sans allocation
 
@@ -1047,11 +1047,11 @@
 
 \subsection*{Flux}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::format}}
+	\frametitle{\mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
 		\item Amélioration du support de \mintinline{cpp}|std::filesystem::path|
 		\begin{itemize}
-			\item Présence de caractères d'échappement (p.ex. \mintinline{cpp}|\n|)
+			\item Présence de caractères d'échappement (p.ex. \mintinline[escapeinside=||]{cpp}{|\textbackslash|n})
 			\item Support de caractère UTF-8
 		\end{itemize}
 		\item Amélioration du support de \mintinline{cpp}|std::chrono::time_point|
@@ -1068,7 +1068,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::scan}}
+	\frametitle{\mintinline[style=white]{cpp}|std::scan|}
 	\begin{itemize}
 		\item Pendant du formatage de texte introduit en C++20
 		\item Alternative sûre et robuste à \mintinline{cpp}|sscanf()|
@@ -1233,7 +1233,7 @@
 	\end{itemize}
 \end{frame}
 
-\subsection*{Compilation \& implémentation}
+\subsection*{Compilation et implémentation}
 \begin{frame}[fragile]
 	\frametitle{Module}
 	\begin{itemize}
@@ -1245,7 +1245,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Compilation \& implémentation}
+	\frametitle{Compilation et implémentation}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::embed()| ressources externes disponibles au \textit{runtime} 
 

@@ -149,14 +149,14 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolutions de char8\_t}
+	\frametitle{Évolutions de \mintinline[style=white]{cpp}|char8_t|}
 	\begin{itemize}
 		\item Initialisation d'un tableau de \mintinline{cpp}|char| ou d'\mintinline{cpp}|unsigned char| depuis une chaîne littérale UTF-8
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Relâchement des contraintes de wchar\_t}
+	\frametitle{Relâchement des contraintes de \mintinline[style=white]{cpp}|wchar_t|}
 	\begin{itemize}
 		\item Suppression de la contrainte
 	\end{itemize}
@@ -225,7 +225,7 @@
 
 \subsection*{constexpr}
 \begin{frame}[fragile]
-	\frametitle{constexpr}
+	\frametitle{\mintinline[style=white]{cpp}|constexpr|}
 	\begin{itemize}
 		\item Relâchement de contrainte sur les fonctions \mintinline{cpp}|constexpr|
 		\begin{itemize}
@@ -263,7 +263,7 @@
 
 \subsection*{if consteval}
 \begin{frame}[fragile]
-	\frametitle{if consteval}
+	\frametitle{\mintinline[style=white]{cpp}|if consteval|}
 	\begin{itemize}
 		\item Branche prise en compte si le code est évalué au \textit{compile-time}
 		\item Peut appeler des fonctions immédiate
@@ -288,7 +288,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{if consteval}
+	\frametitle{\mintinline[style=white]{cpp}|if consteval|}
 	\begin{itemize}
 		\item Négation possible
 	\end{itemize}
@@ -335,7 +335,7 @@
 
 \subsection*{init-statement}
 \begin{frame}[fragile]
-	\frametitle{\textit{init-statement}}
+	\frametitle{init-statement}
 	\begin{itemize}
 		\item \mintinline{cpp}|using| possible dans l'\textit{init-statement} de \mintinline{cpp}|if|, \mintinline{cpp}|switch| et \mintinline{cpp}|for|
 	\end{itemize}
@@ -475,7 +475,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{operator[] multidimensionnel}
+	\frametitle{\mintinline[style=white]{cpp}|operator[]| multidimensionnel}
 	\begin{itemize}
 		\item Définition de \mintinline{cpp}|operator[]| avec aucun ou plusieurs arguments
 		\item Y compris des arguments \textit{variadic}
@@ -509,7 +509,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Opérateurs static}
+	\frametitle{Opérateurs \mintinline[style=white]{cpp}|static|}
 	 \begin{itemize}
 	 	\item Possibilité de déclarer \mintinline{cpp}|static| des \mintinline{cpp}|operator()|
 	 \end{itemize}
@@ -585,7 +585,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::invoke\_r()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::invoke_r()|}
 	\begin{itemize}
 		\item Similaire à \mintinline{cpp}|std::invoke()|
 		\item Retour convertit vers le premier paramètre template
@@ -631,7 +631,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Paramètre this explicite / deducing this}
+	\frametitle{Paramètre \mintinline[style=white]{cpp}|this| explicite / deducing \mintinline[style=white]{cpp}|this|}
 	\begin{itemize}
 		\item Objectif : limiter les surcharges \mintinline{cpp}|const| / non \mintinline{cpp}|const| de fonctions membres
 		\item Utilisation d'un premier paramètre, préfixé \mintinline{cpp}|this|, notant l'instance de classe
@@ -652,7 +652,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Paramètre this explicite / deducing this}
+	\frametitle{Paramètre \mintinline[style=white]{cpp}|this| explicite / deducing \mintinline[style=white]{cpp}|this|}
 	\begin{itemize}
 		\item Utilisation des règles classiques de déduction de types 
 	\end{itemize}
@@ -671,7 +671,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Paramètre this explicite / deducing this}
+	\frametitle{Paramètre \mintinline[style=white]{cpp}|this| explicite / deducing \mintinline[style=white]{cpp}|this|}
 	\begin{itemize}
 		\item Permet le passage de \mintinline{cpp}|this| par valeur
 	\end{itemize}
@@ -706,7 +706,7 @@
 
 \subsection*{Exceptions}
 \begin{frame}[fragile]
-	\frametitle{noexcept}
+	\frametitle{\mintinline[style=white]{cpp}|noexcept|}
 	\begin{itemize}
 		\item Ajout de \mintinline{cpp}|noexcept| à plusieurs fonctions de la bibliothèque standard
 	\end{itemize}
@@ -816,14 +816,14 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::span}}
+	\frametitle{\mintinline[style=white]{cpp}|std::span|}
 	\begin{itemize}
 		\item Ajout de la contrainte trivialement copiable
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::pair}}
+	\frametitle{\mintinline[style=white]{cpp}|std::pair|}
 	\begin{itemize}
 		\item Construction depuis un \textit{braced initializers}
 
@@ -850,7 +850,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::stack \& std::queue}}
+	\frametitle{\mintinline[style=white]{cpp}|std::stack| et \mintinline[style=white]{cpp}|std::queue|}
 	\begin{itemize}
 		\item Création de \mintinline{cpp}|std::stack| et \mintinline{cpp}|std::queue| depuis une paire d'itérateurs
 	\end{itemize}
@@ -885,7 +885,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::mdspan}}
+	\frametitle{\mintinline[style=white]{cpp}|std::mdspan|}
 	\begin{itemize}
 		\item Vues multidimensionnelles
 		\item Possibilité de fournir un \textit{layout} configurable
@@ -911,7 +911,7 @@
 
 \subsection*{Algorithmes}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::byteswap()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::byteswap()|}
 	\begin{itemize}
 		\item Inverse les octets d'un entier
 	\end{itemize}
@@ -943,7 +943,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolutions de {\NoAutoSpacing std::format}}
+	\frametitle{Évolutions de \mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
 		\item Ajout du concept \mintinline{cpp}|formatable|
 		\item Vérification des chaînes de format au \textit{compile-time}
@@ -961,7 +961,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Évolutions de {\NoAutoSpacing std::format}}
+	\frametitle{Évolutions de \mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
 		\item Ajout du type \mintinline{cpp}|?| pour afficher les chaînes échappées
 		\item Formatage des ranges
@@ -979,7 +979,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::print}}
+	\frametitle{\mintinline[style=white]{cpp}|std::print|}
 	\begin{itemize}
 		\item Écriture dans \mintinline{cpp}|std::cout| depuis une chaîne de format \mintinline{cpp}|std::format|
 	\end{itemize}
@@ -995,7 +995,7 @@
 
 \subsection*{Pointeurs intelligents}
 \begin{frame}[fragile]
-	\frametitle{out\_ptr et inout\_ptr}
+	\frametitle{\mintinline[style=white]{cpp}|std::out_ptr| et \mintinline[style=white]{cpp}|std::inout_ptr|}
 	\begin{itemize}
 		\item Abstractions entre \textit{smart pointers} et API C modifiant un pointeur
 
@@ -1011,8 +1011,8 @@
 			\item Permet le passage comme pointeur C \mintinline{cpp}|void*| ou \mintinline{cpp}|void**|
 			\item Permet la conversion vers un type de pointeur arbitraire
 		\end{itemize}
-		\item \mintinline{cpp}|out_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer sans l'utiliser
-		\item \mintinline{cpp}|inout_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer mais aussi de l'utiliser
+		\item \mintinline{cpp}|std::out_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer sans l'utiliser
+		\item \mintinline{cpp}|std::inout_ptr| permet à l'API C de modifier l'adresse contenu dans le smart pointer mais aussi de l'utiliser
 	\end{itemize}
 \end{frame}
 
@@ -1059,7 +1059,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::unreachable()}}
+	\frametitle{\mintinline[style=white]{cpp}|std::unreachable()|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::unreachable()| indique que la localisation n'est pas atteignable
 		\item Permet au compilateur d'optimiser en supposant que le code ne sera pas atteint
@@ -1082,7 +1082,7 @@
 
 \subsection*{Durées et temps}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing time\_point::clock}}
+	\frametitle{\mintinline[style=white]{cpp}|time_point::clock|}
 	\begin{itemize}
 		\item Relâchement des contraintes sur \mintinline{cpp}|time_point::clock|
 		\begin{itemize}
@@ -1095,7 +1095,7 @@
 
 \subsection*{Variant}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::variant}}
+	\frametitle{\mintinline[style=white]{cpp}|std::variant|}
 	\begin{itemize}
 		\item Héritage possible de \mintinline{cpp}|std::variant|
 		\item \mintinline{cpp}|std::visit()| restreints aux \mintinline{cpp}|std::variant|
@@ -1106,7 +1106,7 @@
 
 \subsection*{Optional}
 \begin{frame}[fragile]
-	\frametitle{Opérations monadiques de {\NoAutoSpacing std::optional}}
+	\frametitle{Opérations monadiques de \mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item \mintinline{cpp}|transform()| modifie la valeur contenu dans un \mintinline{cpp}|std::optional|
 
@@ -1127,7 +1127,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Opérations monadiques de {\NoAutoSpacing std::optional}}
+	\frametitle{Opérations monadiques de \mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item \mintinline{cpp}|and_then()| dérive une fonction pour retourner un \mintinline{cpp}|std::optional|
 	\end{itemize}
@@ -1146,7 +1146,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Opérations monadiques de {\NoAutoSpacing std::optional}}
+	\frametitle{Opérations monadiques de \mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item \mintinline{cpp}|or_else()| 
 		\begin{itemize}
@@ -1176,7 +1176,7 @@
 
 \subsection*{Expected}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::expected}}
+	\frametitle{\mintinline[style=white]{cpp}|std::expected|}
 	\begin{itemize}
 		\item Classe template \mintinline{cpp}|std::expected<T, E>| contenant
 		\begin{itemize}
@@ -1206,7 +1206,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::expected}}
+	\frametitle{\mintinline[style=white]{cpp}|std::expected|}
 	\begin{itemize}
 		\item \mintinline{cpp}|value_or()| retourne 
 		\begin{itemize}
@@ -1233,7 +1233,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::expected}}
+	\frametitle{\mintinline[style=white]{cpp}|std::expected|}
 	\begin{itemize}
 		\item \mintinline{cpp}|error_or()| retourne
 		\begin{itemize}
@@ -1257,7 +1257,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::unexpected}}
+	\frametitle{\mintinline[style=white]{cpp}|std::unexpected|}
 	\begin{itemize}
 		\item Classe template \mintinline{cpp}|std::unexpected<E>| contenant une erreur
 		\item \mintinline{cpp}|error()| retourne l'erreur
@@ -1405,7 +1405,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{borrowed\_range}
+	\frametitle{\mintinline[style=white]{cpp}|borrowed_range|}
 	\begin{itemize}
 		\item Nouveau concept de range : \mintinline{cpp}|borrowed_range|
 		\item Range dont les itérateurs sur celui-ci reste valide après sa destruction
@@ -1441,7 +1441,7 @@
 
 \subsection*{Coroutines}
 \begin{frame}[fragile]
-	\frametitle{{\NoAutoSpacing std::generator}}
+	\frametitle{\mintinline[style=white]{cpp}|std::generator|}
 	\begin{itemize}
 		\item Générateur de coroutines synchrones
 	\end{itemize}
