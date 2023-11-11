@@ -19,8 +19,8 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		static_assert(sizeof(S) == 1,
-		format("Attendu 1, obtenu {}", sizeof(S)));
+		static_assert(sizeof(Foo) == 1,
+		              format("Attendu 1, obtenu {}", sizeof(Foo)));
 	\end{minted}
 
 	\begin{alertblock}{\textit{Compile-time}}
@@ -29,6 +29,11 @@
 		\end{itemize}
 	\end{alertblock}
 
+	\begin{alertblock}{Dépendance}
+		\begin{itemize}
+			\item Nécessite que \mintinline{cpp}|std::format| devienne \mintinline{cpp}|constexpr|
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -94,6 +99,9 @@
 
 	\begin{minted}{cpp}
 		std::lock_guard _(mutex);
+	\end{minted}
+
+	\begin{minted}{cpp}
 		auto  [x, y, _] = f();
 	\end{minted}
 \end{frame}
@@ -234,7 +242,7 @@
 \begin{frame}[fragile]
 	\frametitle{Accès bas-niveaux aux IO}
 	\begin{itemize}
-		\item Alias sur le descripteur de fichier de la plateforme : \mintinline{cpp}|native_handle_type|
+		\item Alias \mintinline{cpp}|native_handle_type| sur le descripteur de fichier de la plateforme
 		
 \note[item]{\mintinline{cpp}|int| sous POSIX, \mintinline{cpp}|HANDLE| (\mintinline{cpp}|void*|) sous Windows}
 		 

@@ -344,7 +344,7 @@
 
 \note[item]{P.ex. une structure de deux \mintinline{cpp}|float| et un tableau de deux \mintinline{cpp}|float|}
 
-		\item Ajout d'un type \og{}\textit{fixed point decimal}\fg{}
+		\item Type \og{}\textit{fixed point decimal}\fg{}
 		\item Entiers larges \mintinline{cpp}|wide_integer<128, unsigned>|
 		\item Nombres rationnels
 		\item Possibilité de définir des objets \mintinline{cpp}|constexpr|
@@ -395,7 +395,7 @@
 				\item Contiguïté garantie
 			\end{itemize}
 			\item Représentation sous forme de tableau
-			\item Obtention d'un pointeur sur la représentation via \mintinline{cpp}|reinterpret_cast| vers \mintinline{cpp}|char|, \mintinline{cpp}|unsigned char| ou \mintinline{cpp}|std::byte|
+			\item Obtention d'un pointeur sur la représentation via \mintinline{cpp}|reinterpret_cast| vers \mintinline{cpp}|char*|, \mintinline{cpp}|unsigned char*| ou \mintinline{cpp}|std::byte*|
 			\item Conversion pointeur sur représentation vers pointeur sur objet via \mintinline{cpp}|reinterpret_cast|
 		\end{itemize}
 	\end{itemize}
@@ -430,7 +430,7 @@
 \begin{frame}[fragile]
 	\frametitle{Shadowing}
 	\begin{itemize}
-		\item Levée plusieurs restrictions
+		\item Levée de plusieurs restrictions
 		\begin{itemize}
 			\item Masquage avec un type \mintinline{cpp}|void| pour empêcher l'utilisation de la variable masquée
 			\item Initialisation de la nouvelle variable avec l'ancienne variable de même nom
@@ -838,7 +838,7 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges}
 	\begin{itemize}
-		\item Ajout d'un paramètre \og pas\fg{} à \mintinline{cpp}|std::iota_view|
+		\item Ajout d'un paramètre \mintinline{cpp}|pas| à \mintinline{cpp}|std::iota_view|
 		\item Utilisation de \mintinline{cpp}|std::get_element<>| comme point de configuration
 	\end{itemize}
 
@@ -906,7 +906,7 @@
 
 \note[item]{P.ex. sur \mintinline{cpp}|realloc|}
 
-			\item \mintinline{cpp}|[[invalidate]]| : \mintinline{cpp}|ptr|, \mintinline{cpp}|*ptr| et \mintinline{cpp}|ptr->| inutilisables
+			\item \mintinline{cpp}|[[invalidate]]| : \mintinline{cpp}|ptr|, \mintinline{cpp}|*ptr| et \mintinline{cpp}|ptr->| inutilisables après l'appel
 
 \note[item]{P.ex. sur \mintinline{cpp}|free|}
 
@@ -1157,7 +1157,7 @@
 \begin{frame}[fragile]
 	\frametitle{Contrôle mémoire}
 	\begin{itemize}
-		\item Ajout de mécanismes de sécurité de l'usage mémoire
+		\item Mécanismes de sécurité de l'usage mémoire
 
 \note[item]{Pour éviter l'usage d'un objet après libération ou suppression de ces dépendances}
 
@@ -1200,7 +1200,7 @@
 	\frametitle{Coroutines}
 	\begin{itemize}
 		\item Bibliothèques de support des coroutines
-		\item \mintinline{cpp}|std::lazy<T>| : coroutines permettant l'évaluation différée
+		\item \mintinline{cpp}|std::lazy<T>| permettant l'évaluation différée
 		\item Unification et amélioration des API asynchrones
 
 \note[item]{Qu'il s'agisse de coroutines, d'algorithmes parallèles, d'\textit{executor} ou autre}
