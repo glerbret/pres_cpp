@@ -33,10 +33,23 @@
 		\item Diverses propositions de déclaration
 		\begin{itemize}
 			\item Attributs : \mintinline{cpp}|[[pre:...]]|, \mintinline{cpp}|[[post:...]]| et  \mintinline{cpp}|[[assert:...]]|
-			\item Conditions : \mintinline{cpp}|precond(...)|, \mintinline{cpp}|postcond(...)| et \mintinline{cpp}|incond(...)|
+			\item Conditions : \mintinline{cpp}|pre(...)|, \mintinline{cpp}|post(...)| et \mintinline{cpp}|contract_assert(...)|
 			\item Fermetures : \mintinline{cpp}|pre {...}|, \mintinline{cpp}|post(...) {...}|
 			\item Alternatives : \mintinline{cpp}|[{pre:...}]|, \mintinline[escapeinside=||]{cpp}{|@|(pre: ...)}
 		\end{itemize}
+		\item Émergence d'un consensus sur la déclaration sous forme de conditions
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int f(int i)
+		  pre (i >= 0)
+		  post (r: r > 0) {
+		  contract_assert (i >= 0);
+		  return i + 1;
+		}
+	\end{minted}
+
+	\begin{itemize}
 		\item Plusieurs comportements
 		\begin{itemize}
 			\item \mintinline{cpp}|ignore| : contrat non vérifié
@@ -256,7 +269,28 @@
 			\end{itemize}
 			\item \mintinline{cpp}|class|, \mintinline{cpp}|struct|, \mintinline{cpp}|enum class|, \textit{interface}, \textit{value type}
 		\end{itemize}
+		\item Bindings vers d'autres langages (JS, Python) via ces mécanismes
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{TS -- Reflection}
+	\begin{minted}{cpp}
+		template <typename E> requires is_enum_v<E>
+		constexpr string enum_to_string(E value) {
+		  template for(constexpr auto e : meta::members_of(^E)) {
+		    if(value == [:e:]) {
+		      return string(meta::name_of(e));
+		    }
+		  }
+		  return "<unnamed>";
+		}
+		
+		enum Color { red, green, blue };
+		enum_to_string(Color::red);  // red
+		enum_to_string(Color(42));   // <unnamed>
+	\end{minted}
+
 \end{frame}
 
 \subsection*{Dépréciation et suppression}
@@ -827,10 +861,6 @@
 		\item Gestion des UUID
 		\item Fonctions statistiques (moyenne, médiane, variance, \ldots{})
 		\item Améliorations du générateur aléatoire
-		\item Algèbre linéaire
-		\begin{itemize}
-			\item Basé sur un sous-ensemble de \href{https://www.netlib.org/blas/}{BLAS} (vecteur, matrice, \ldots{})
-		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -963,17 +993,6 @@
 	\begin{itemize}
 		\item [] 
 		\begin{itemize}
-			\item Indexation des \textit{packs}
-		\end{itemize}
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		struct tuple_element<I, tuple<Ts...>> { using type = Ts...[I]; };
-	\end{minted}
-
-	\begin{itemize}
-		\item [] 
-		\begin{itemize}
 			\item \textit{Slicing} de \textit{packs}
 		\end{itemize}
 	\end{itemize}
@@ -1063,7 +1082,6 @@
 			\item \mintinline{cpp}|std::optional|, \mintinline{cpp}|std::variant|, \mintinline{cpp}|std::any| et \mintinline{cpp}|std::expected|
 			\item \mintinline{cpp}|std::mdspan|, \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 		\end{itemize}
-		\item Possibilité de fournir une chaîne de format au \textit{runtime}
 	\end{itemize}
 \end{frame}
 
@@ -1221,15 +1239,6 @@
 	\begin{itemize}
 		\item Support des entrées/sorties audio
 		\item \mintinline{cpp}|std::web_view| API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via \textit{callback})
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Debug}
-	\begin{itemize}
-		\item \mintinline{cpp}|std::breakpoint()| : point d'arrêt dans le programme
-		\item \mintinline{cpp}|std::breakpoint_if_debugging| : point d'arrêt si l'exécution se fait dans un debugger
-		\item \mintinline{cpp}|std::is_debugger_present()| permet de savoir si l'exécution se fait dans un debugger
 	\end{itemize}
 \end{frame}
 

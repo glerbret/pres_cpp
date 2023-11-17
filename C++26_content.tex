@@ -140,6 +140,30 @@
 
 \subsection*{Algorithme}
 \begin{frame}[fragile]
+	\frametitle{Algèbre linéaire}
+	\begin{itemize}
+		\item Basé sur un sous-ensemble de \href{https://www.netlib.org/blas/}{BLAS}
+		\item Multiples opérations
+		\begin{itemize}
+			\item Somme de vecteurs
+			\item Multiplication de vecteurs ou de matrices par un scalaire
+			\item Produit de vecteurs et de matrices
+			\item Triangularisation de matrices
+			\item Rotation de plans
+		\end{itemize}
+		\item Plusieurs formats de stockage des matrices
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<double> x_vec{1., 2., 3., 4., 5.};
+		mdspan x(x_vec.data(), 5);
+
+		linalg::scale(2.0, x); // x = 2.0 * x
+	\end{minted}
+
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::visit()|}
 	\begin{itemize}
 		\item Versions membres de \mintinline{cpp}|std::visit()| et \mintinline{cpp}|std::visit_format_arg()|
@@ -165,6 +189,23 @@
 			\item \mintinline{cpp}|std::function_ref|, \mintinline{cpp}|std::function| et \mintinline{cpp}|std::any| \mintinline{cpp}|constexpr|
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\subsection*{Parameters pack}
+\begin{frame}[fragile]
+	\frametitle{Parameters pack}
+	\begin{itemize}
+		\item Indexation des \textit{packs}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		template <typename... T>
+		constexpr auto first_plus_last(T... values) -> T...[0] {
+		  return T...[0](values...[0] + values...[sizeof...(values)-1]);
+		}
+
+		first_plus_last(1, 2, 10);  // 11
+	\end{minted}
 \end{frame}
 
 \subsection*{Gestion mémoire}
@@ -206,6 +247,15 @@
 \subsection*{Flux}
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::format|}
+	\begin{itemize}
+		\item Possibilité de fournir une chaîne de format au \textit{runtime}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		string str = "{}";
+		format(runtime_format(str), 42);
+	\end{minted}
+
 	\begin{itemize}
 		\item Redéfinition de \mintinline{cpp}|std::to_string| en terme de \mintinline{cpp}|std::format|
 		\item Davantage de vérifications \textit{compile-time} du type des arguments
@@ -250,4 +300,13 @@
 	\end{itemize}
 \end{frame}
 
+\subsection*{Compilation et implémentation}
+\begin{frame}[fragile]
+	\frametitle{Debug}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::breakpoint()| : point d'arrêt dans le programme
+		\item \mintinline{cpp}|std::breakpoint_if_debugging| : point d'arrêt si l'exécution se fait dans un debugger
+		\item \mintinline{cpp}|std::is_debugger_present()| permet de savoir si l'exécution se fait dans un debugger
+	\end{itemize}
+\end{frame}
 \end{document}

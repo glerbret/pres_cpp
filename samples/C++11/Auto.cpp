@@ -1,5 +1,6 @@
-#include <iostream>
-#include <vector>
+#include <utility>
+#include <typeinfo>
+#include <cassert>
 
 auto add(int a, int b) -> decltype(a + b) 
 {
@@ -8,18 +9,6 @@ auto add(int a, int b) -> decltype(a + b)
 
 int main()
 {
-  {
-    auto i = 2;
-    std::cout << i << " " << typeid(i).name() << " " << typeid(int).name() << "\n";
-  }
-
-  {
-    auto i = static_cast<unsigned long>(2);
-    std::cout << i << " " << typeid(i).name() << " " << typeid(unsigned long).name() << "\n";
-  }
-
-  {
-    auto i = add(1, 3);
-    std::cout << i << " " << typeid(i).name() << " " << typeid(int).name() << "\n";
-  }
+  auto i = add(1, 3);
+  assert(typeid(i) == typeid(int));
 }

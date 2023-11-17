@@ -1,3 +1,10 @@
+\RequirePackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{shadows}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{color}
+\usepackage{textcomp}
+
 % Insertion du sommaire de chaque section beamer
 \AtBeginSection[]
 {
@@ -18,7 +25,6 @@
 \setbeamercolor{structure}{fg=teal, bg=teal!40}
 
 % Format de la page de titres
-\usepackage{graphicx}
 \defbeamertemplate*{title page}{customized}[1][colsep=-4bp,rounded=true,shadow=true]
 {
 	\vbox{}
@@ -49,10 +55,33 @@
 	\hfill\includegraphics[height=12pt]{license.png}
 }
 
-% Coloration des blocs
+% Format des blocs (block, alertblock et exampleblock)
+%% Coloration
 \definecolor{example_green}{RGB}{0,0.6,0}
 \setbeamercolor{block title}{bg=teal,fg=white}
 \setbeamercolor{block title example}{bg=green!60!black,fg=white}
+
+%% Pas de degrade sur la coloration des blocs (block, alertblock et exampleblock)
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+	color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
+
+%% Taille et ombrage identique au block de code
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\mdfdefinestyle{blockframe}{
+	backgroundcolor=white,
+	linewidth=0pt,
+	linecolor=white,
+	roundcorner=5pt,
+	shadow=true,
+	shadowsize=5pt,
+	innerleftmargin=4pt,
+	innerrightmargin=4pt,
+	innertopmargin=-7pt,
+	innerbottommargin=1pt
+}
+\surroundwithmdframed[style=blockframe]{block}
+\surroundwithmdframed[style=blockframe]{alertblock}
+\surroundwithmdframed[style=blockframe]{exampleblock}
 
 % Format de la bibliographie
 \setbeamertemplate{frametitle continuation}[from second]
@@ -74,13 +103,6 @@
 <all>
 
 % Format de code
-\usepackage{minted}
-\usepackage{color}
-\usepackage{textcomp}
-
-\RequirePackage[framemethod=TikZ]{mdframed}
-\usetikzlibrary{shadows}
-
 %% Gestion des listing
 \mdfdefinestyle{codeframe}{
 	backgroundcolor=white,
