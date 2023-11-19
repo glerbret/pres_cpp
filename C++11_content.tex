@@ -20,10 +20,6 @@
 			\item Des versions fréquentes (3 ans : 2011, 2014, 2017, 2020, \ldots{})
 			\item Voir \href{https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/}{Trip report: Winter ISO C++ standards meeting}
 		\end{itemize}
-		\item Support quasi-complet par GCC, Clang et Visual C++
-
-\note[item]{La seule fonctionnalité non supportée par GCC, Clang et Visual C++ est le \og support minimal pour les GC\fg{} qui n'est supporté par personne et disparait en C++23}
-
 		\item Objectifs : sureté, simplicité, rapidité et meilleure détection d'erreur en \textit{compile-time}
 
 \note[item]{Pas complet, je laisse de côté \mintinline{cpp}|system_error|, \mintinline{cpp}|codecvt|, \mintinline{cpp}|typeindex| et deux-trois nouvelles fonctions dans la bibliothèque standard}
@@ -774,19 +770,19 @@
 
 			\item \mintinline{cpp}|std::forward()| convertit le paramètre en \textit{rvalue} s'il n'est pas une \textit{lvalue reference}
 		\end{itemize}
-
-		\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots{} ?}
-			\begin{itemize}
-				\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337} §3.10
-			\end{itemize}
-		\end{block}
-
-		\begin{block}{\mintinline[style=white]{cpp}|std::forward()| ?}
-			\begin{itemize}
-				\item \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385})
-			\end{itemize}
-		\end{block}
 	\end{itemize}
+
+	\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots{} ?}
+		\begin{itemize}
+			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337} §3.10
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{\mintinline[style=white]{cpp}|std::forward()| ?}
+		\begin{itemize}
+			\item \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385})
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}
@@ -807,8 +803,8 @@
 
 	\begin{alertblock}{\textit{user-declared} ? \textit{user-provided} ?}
 		\begin{itemize}
-			\item \textit{user-declared} : la fonction est déclarée par l'utilisateur, y compris en \mintinline{cpp}|=default|
-			\item \textit{user-provided} : le corps de la fonction est fourni par l'utilisateur
+			\item \textit{user-declared} : fonction déclarée par l'utilisateur, y compris \mintinline{cpp}|=default|
+			\item \textit{user-provided} : corps de la fonction fourni par l'utilisateur
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -816,15 +812,19 @@
 \begin{frame}
 	\frametitle{Sémantique de déplacement}
 	\begin{block}{\textit{Rule of five}}
-		Si une classe déclare destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
+		\begin{itemize}
+			\item Si une classe déclare destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
 
 \note[item]{Contrairement à \textit{Rule of three}, l'absence des constructeur et opérateur d'affectation par déplacement n'est pas une erreur grave, mais une optimisation manquée}
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{\textit{Rule of zero}}
-		Lorsque c'est possible, n'en définissez aucune
+		\begin{itemize}
+			\item Lorsque c'est possible, n'en définissez aucune
 
 \note[item]{\textit{Rule of zero} s'applique typiquement aux classes sans gestion explicite d'\textit{ownership}, c'est à dire sans membres qu'il faut explicitement libérés, fermés, \ldots{}. Ce qui devrait être le cas par défaut}
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Pour aller plus loin}
@@ -1387,14 +1387,14 @@
 			\item \mintinline{cpp}|std::unordered_multiset|
 		\end{itemize}
 		\item Versions non ordonnées de \mintinline{cpp}|std::map|, \mintinline{cpp}|std::set|, \ldots{}
-
-		\begin{block}{\mintinline[style=white]{cpp}|unordered_| ?}
-			\begin{itemize}
-				\item Nombreuses implémentations \mintinline{cpp}|hash_XXX| existantes
-				\item Structures fondamentalement non ordonnées
-			\end{itemize}
-		\end{block}
 	\end{itemize}
+
+	\begin{block}{\mintinline[style=white]{cpp}|unordered_| ?}
+		\begin{itemize}
+			\item Nombreuses implémentations \mintinline{cpp}|hash_XXX| existantes
+			\item Structures fondamentalement non ordonnées
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2282,7 +2282,9 @@
 	\end{minted}
 
 	\begin{block}{\mintinline[style=white]{cpp}|std::make_tuple| ou constructeur ?}
-		\mintinline{cpp}|std::make_tuple()| permet la déduction de types, pas le constructeur
+		\begin{itemize}
+			\item \mintinline{cpp}|std::make_tuple()| permet la déduction de types, pas le constructeur
+		\end{itemize}
 
 		\begin{minted}{cpp}
 			auto foo{5, 'e', 98L};              // KO

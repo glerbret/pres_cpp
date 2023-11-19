@@ -10,15 +10,14 @@ struct Foo
   {
     return value <=> rhs.value;
   }
+#else
+  auto operator<=>(const Foo& rhs) const = default;
 #endif
 
 #if 0
   bool operator==(const Foo& rhs) const = default;
 #endif
 
-#if 0
-  auto operator<=>(const Foo& rhs) const = default;
-#endif
 };
 
 int main()

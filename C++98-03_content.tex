@@ -185,15 +185,15 @@
 			\item \og Je ne comprends pas\fg{}, \og Ça ne sert à rien\fg{}, \ldots{}
 			\item Impact négatif sur les performances
 		\end{itemize}
-
-		\begin{block}{À nuancer}
-			\begin{itemize}
-				\item Initialement vrai
-				\item Actuellement, une exception non levée ne coute quasiment rien
-				\item Souvent comparée à une non gestion d'erreur, est-ce pertinent ? 
-			\end{itemize}
-		\end{block}
 	\end{itemize}
+
+	\begin{block}{À nuancer}
+		\begin{itemize}
+			\item Initialement vrai
+			\item Actuellement, une exception non levée ne coute quasiment rien
+			\item Souvent comparée à une non gestion d'erreur, est-ce pertinent ? 
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -446,18 +446,22 @@
 \begin{frame}[fragile]
 	\frametitle{Ressources -- Gestion manuelle et bonnes pratiques}
 	\begin{exampleblock}{Do}
-		Si une classe manipule une ressource brute, elle doit
 		\begin{itemize}
-			\item Soit définir constructeur de copie et opérateur d'affectation
-			\item Soit les déclarer privés sans les définir (classe non copiable)
+			\item Si une classe manipule une ressource brute, elle doit
+			\begin{itemize}
+				\item Soit définir constructeur de copie et opérateur d'affectation
+				\item Soit les déclarer privés sans les définir (classe non copiable)
+			\end{itemize}
 		\end{itemize}
 	\end{exampleblock}
 
 	\begin{exampleblock}{\textit{Big Rule of three}}
-		Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
+		\begin{itemize}
+			\item Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
 
 \note[item]{Forme canonique orthodoxe de Coplien}
 \note[item]{Thèse de Coplien : \textit{Multi-paradigm Design}}
+		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
@@ -778,11 +782,13 @@
 \begin{frame}[fragile]
 	\frametitle{STL -- Standard Template Library}
 	\begin{block}{À nuancer}
-		Algorithmes membres sur certains conteneurs
 		\begin{itemize}
-			\item Accès par itérateurs insuffisant (p.ex. \mintinline{cpp}|std::list|)
-			\item Habitudes et historiques (p.ex. \mintinline{cpp}|std::string|)
-			\item Performances (p.ex. \mintinline{cpp}|map.find()|)
+			\item Algorithmes membres sur certains conteneurs
+			\begin{itemize}
+				\item Accès par itérateurs insuffisant (p.ex. \mintinline{cpp}|std::list|)
+				\item Habitudes et historiques (p.ex. \mintinline{cpp}|std::string|)
+				\item Performances (p.ex. \mintinline{cpp}|map.find()|)
+			\end{itemize}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -1650,7 +1656,9 @@
 \note[item]{\mintinline{cpp}|std::remove()| ne supprime pas car les algorithmes ne peuvent pas modifier le conteneur, en particulier sa taille, mais seulement son contenu}
 
 	\begin{block}{Idiome \textit{Erase-Remove}}
-		Suppression via un appel à \mintinline{cpp}|erase()| sur les éléments après le nouvel itérateur de fin
+		\begin{itemize}
+			\item Suppression via un appel à \mintinline{cpp}|erase()| après le nouvel itérateur de fin
+		\end{itemize}
 
 		\begin{minted}{cpp}
 			foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());

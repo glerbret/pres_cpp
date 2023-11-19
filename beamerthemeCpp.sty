@@ -55,6 +55,10 @@
 	\hfill\includegraphics[height=12pt]{license.png}
 }
 
+% Decalage des sous-listes
+\setlength{\leftmarginii}{0.4cm}
+\setlength{\leftmarginiii}{0.4cm}
+
 % Format des blocs (block, alertblock et exampleblock)
 %% Coloration
 \definecolor{example_green}{RGB}{0,0.6,0}
@@ -63,25 +67,30 @@
 
 %% Pas de degrade sur la coloration des blocs (block, alertblock et exampleblock)
 \pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
-	color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
+	color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(3pt)=(lower.bg)}
 
 %% Taille et ombrage identique au block de code
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \mdfdefinestyle{blockframe}{
 	backgroundcolor=white,
 	linewidth=0pt,
-	linecolor=white,
+	linecolor=black,
 	roundcorner=5pt,
 	shadow=true,
 	shadowsize=5pt,
+	skipabove=5pt,
+	skipbelow=7pt,
 	innerleftmargin=4pt,
 	innerrightmargin=4pt,
-	innertopmargin=-7pt,
+	innertopmargin=5pt,
 	innerbottommargin=1pt
 }
 \surroundwithmdframed[style=blockframe]{block}
 \surroundwithmdframed[style=blockframe]{alertblock}
 \surroundwithmdframed[style=blockframe]{exampleblock}
+\addtobeamertemplate{block begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
+\addtobeamertemplate{block alerted begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
+\addtobeamertemplate{block example begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
 
 % Format de la bibliographie
 \setbeamertemplate{frametitle continuation}[from second]
@@ -106,10 +115,17 @@
 %% Gestion des listing
 \mdfdefinestyle{codeframe}{
 	backgroundcolor=white,
+	linewidth=0.4pt,
 	linecolor=black,
 	roundcorner=5pt,
 	shadow=true,
-	shadowsize=5pt
+	shadowsize=5pt,
+	skipabove=5pt,
+	skipbelow=7pt,
+	innerleftmargin=10pt,
+	innerrightmargin=10pt,
+	innertopmargin=5pt,
+	innerbottommargin=5pt
 }
 
 \surroundwithmdframed[style=codeframe]{minted}

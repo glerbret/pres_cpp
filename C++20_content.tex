@@ -8,7 +8,6 @@
 	\begin{itemize}
 		\item Approuvé en décembre 2020
 		\item Dernier Working Draft : \href{https://github.com/cplusplus/draft/releases/download/n4861/n4861.pdf}{N4861}
-		\item Très bon support par GCC, Clang et Visual C++
 	\end{itemize}
 \end{frame}
 
@@ -38,6 +37,7 @@
 \note[item]{C'est à dire de ne plus pouvoir écrire \mintinline{cpp}|[x,y]| comme indice d'un conteneur classique}
 \note[item]{L'expression \mintinline{cpp}|[x,y]| revient à utiliser \mintinline{cpp}|y| comme indice mais en ayant évalué \mintinline{cpp}|x|}
 
+		\item Dépréciation de \mintinline{cpp}|std::rel_ops|
 		\item Suppression des membres dépréciés de \mintinline{cpp}|std::reference_wrapper| : \mintinline{cpp}|result_type|, \mintinline{cpp}|argument_type|, \mintinline{cpp}|first_argument_type| et \mintinline{cpp}|second_argument_type|
 	\end{itemize}
 \end{frame}
@@ -68,9 +68,11 @@
 	\end{itemize}
 
 	\begin{block}{Valorisation}
-		Année et mois de l'acceptation dans le standard ou de l'évolution
+		\begin{itemize}
+			\item Année et mois de l'acceptation dans le standard ou de l'évolution
 
 \note[item]{Ainsi en testant la valeur, on peut savoir l'état d'implémentation de la fonctionnalité si celle-ci a évolué}
+		\end{itemize}
 	\end{block}
 
 	\begin{tikzpicture}[remember picture,overlay]
@@ -403,74 +405,106 @@
 
 \subsection*{Opérateurs}
 \begin{frame}[fragile]
-	\frametitle{\mintinline[style=white]{cpp}|operator<=>|}
+	\frametitle{spaceship operator -- \mintinline[style=white]{cpp}|operator<=>|}
 	\begin{itemize}
 		\item Effectue une \og \textit{Three-way comparison}\fg{}
+		\item Génère les opérateurs d'ordre (\mintinline{cpp}|<|, \mintinline{cpp}|<=|, \mintinline{cpp}|>| et \mintinline{cpp}|>=|)
+		\item Réécrit \mintinline[escapeinside=||]{cpp}{a|@|b} en \mintinline[escapeinside=||]{cpp}{a<=>b|@|0} ou \mintinline[escapeinside=||]{cpp}{0|@|b<=>a}
+	\end{itemize}
+
+	\begin{exampleblock}{Comparaison hétérogène}
 		\begin{itemize}
-			\item $(a <=> b) < 0$ si $a < b$
-			\item $(a <=> b) > 0$ si $a > b$
-			\item $(a <=> b) == 0$ si $a$ et $b$ sont équivalents
-
-\note[item]{Similaire au fonctionnement de \mintinline{cpp}|strcmp|, \mintinline{cpp}|memcmp|, \ldots{}}
-\note[item]{Un retour non numérique, p.ex. \mintinline{cpp}|Nan|, indique des valeurs non ordonnées}
-
+			\item Une unique version à écrire (\mintinline{cpp}|A<=>B| ou \mintinline{cpp}|B<=>A|)
 		\end{itemize}
-		\item Trois types de retour possibles
-		\begin{itemize}
-			\item \mintinline{cpp}|std::strong_ordering| : ordre et égalité
-			\item \mintinline{cpp}|std::weak_ordering| : ordre et équivalence
-			\item \mintinline{cpp}|std::partial_ordering| : ordre partiel
-		\end{itemize}
-
-\note[item]{Égalité implique substitualité (formellement $a == b <==> f(a) == f(b)$), ce n'est pas le cas pour l'équivalence}
-\note[item]{On peut avoir équivalence et non égalité lorsqu'il y a plusieurs représentation d'une même valeur : comparaison sur certains champs seulement, codage des \mintinline{cpp}|float| et \mintinline{cpp}|double|}
-
-		\item Peut être généré par le compilateur (\mintinline{cpp}|=default|)
+	\end{exampleblock}
+		
+	\begin{itemize}
+		\item Peut être déclaré \mintinline{cpp}|=default| et généré par
 		\begin{itemize}
 			\item \mintinline{cpp}|operator<=>| des bases et membres
-			\item \mintinline{cpp}|operator==| et \mintinline{cpp}|operator>|
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{\mintinline[style=white]{cpp}|operator<=>|}
-	\begin{itemize}
-		\item \mintinline{cpp}|operator<=>| déclenche la génération
-		\begin{itemize}
-			\item Opérateurs d'ordre (\mintinline{cpp}|<|, \mintinline{cpp}|<=|, \mintinline{cpp}|>| et \mintinline{cpp}|>=|) via \mintinline{cpp}|operator<=>|
-			\item \mintinline{cpp}|operator==| via \mintinline{cpp}|operator==| des bases et membres
-			\item \mintinline{cpp}|operator!=| via \mintinline{cpp}|operator==|
+			\item \mintinline{cpp}|operator==| et \mintinline{cpp}|operator<|
 		\end{itemize}
 	\end{itemize}
 
-	\begin{alertblock}{\mintinline[style=white]{cpp}|operator==| et \mintinline[style=white]{cpp}|operator!=|}
+	\begin{alertblock}{Attention}
 		\begin{itemize}
-			\item Uniquement pour les retours de type égalité
-			\item Pas de génération depuis \mintinline{cpp}|operator<=>|
+			\item Uniquement pour des comparaisons homogènes
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{Initialement, \mintinline{cpp}|operator==| et \mintinline{cpp}|operator!=| aussi résolu via \mintinline{cpp}|operator<=>|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le \textit{fallback} sur \mintinline{cpp}|operator<=>| (p.ex. court-circuit sur la taille de conteneurs)}
-
 	\begin{itemize}
-		\item Possible de marquer ces autres opérateurs \mintinline{cpp}|=default|
-
-\note[item]{Mais non obligatoire pour les opérateurs d'ordre générés dès que \mintinline{cpp}|operator<=>| est présent. Mais \mintinline{cpp}|=default| permet de prendre leurs adresses}
-\note[item]{\mintinline{cpp}|=default| utile pour générer \mintinline{cpp}|operator!=| ou \mintinline{cpp}|operator==| en l'absence de \mintinline{cpp}|operator<=>|}
-\note[item]{Un opérateur \mintinline{cpp}|=default| qui ne peut pas être généré reste bien \textit{deleted}}
-
 		\item Utilisation de l'opérateur binaire déclaré s'il existe
 
 \note[item]{La génération implicite n'a donc lieu que s'il n'y a pas de version explicite}
 
 		\item Supporté par la bibliothèque standard
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{spaceship operator -- \mintinline[style=white]{cpp}|operator<=>|}
+	\begin{itemize}
+		\item Trois types de retour possibles
+		\begin{itemize}
+			\item \mintinline{cpp}|std::strong_ordering| : ordre total et égalité
+			\begin{itemize}
+				\item \mintinline{cpp}|less|, \mintinline{cpp}|equivalent|/\mintinline{cpp}|equal| et \mintinline{cpp}|greater|
+			\end{itemize}
+			\item \mintinline{cpp}|std::weak_ordering| : ordre total et équivalence
+			\begin{itemize}
+				\item \mintinline{cpp}|less|, \mintinline{cpp}|equivalent| et \mintinline{cpp}|greater|
+			\end{itemize}
+			\item \mintinline{cpp}|std::partial_ordering| : ordre partiel
+			\begin{itemize}
+				\item \mintinline{cpp}|less|, \mintinline{cpp}|equivalent|, \mintinline{cpp}|greater| et \mintinline{cpp}|unordered|
+			\end{itemize}
+		\end{itemize}
+		\item Conversion \mintinline{cpp}|strong_ordering| $\rightarrow$ \mintinline{cpp}|weak_ordering| $\rightarrow$ \mintinline{cpp}|partial_ordering|
+		\item Comparable uniquement avec \mintinline{cpp}|0|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{spaceship operator -- \mintinline[style=white]{cpp}|operator==|}
+	\begin{itemize}
+		\item Génère l'opérateur \mintinline{cpp}|!=|
+		\item Peut être déclaré \mintinline{cpp}|=default| et généré par \mintinline{cpp}|operator==| des bases et membres
+	\end{itemize}
+
+	\begin{alertblock}{Génération de \mintinline[style=white]{cpp}|operator==|}
+		\begin{itemize}
+			\item Pas de génération depuis \mintinline{cpp}|operator<=>|
+
+\note[item]{Initialement, \mintinline{cpp}|operator==| et \mintinline{cpp}|operator!=| aussi résolu via \mintinline{cpp}|operator<=>|. Modifié pour ne pas avoir des tests d'égalité non optimaux \og par erreur\fg{} via le \textit{fallback} sur \mintinline{cpp}|operator<=>| (p.ex. court-circuit sur la taille de conteneurs)}
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{exampleblock}{\mintinline[style=white]{cpp}|=default| implicite}
+		\begin{itemize}
+			\item Implicitement \mintinline{cpp}|=default| lorsque \mintinline{cpp}|operator<=>| est \mintinline{cpp}|=default|
+		\end{itemize}
+	\end{exampleblock}
 
 	\begin{tikzpicture}[remember picture,overlay]
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
-		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:37,positionColumn:1,positionLineNumber:37,selectionStartColumn:1,selectionStartLineNumber:37,startColumn:1,startLineNumber:37),source:'%23include+%3Ccompare%3E%0A%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+value%3B%0A%0A%23if+1%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const%0A++%7B%0A++++return+value+%3C%3D%3E+rhs.value%3B%0A++%7D%0A%23endif%0A%0A%23if+0%0A++bool+operator%3D%3D(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%0A%23if+0%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo1%7B2011%7D%3B%0A++Foo+foo2%7B2014%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(foo1+%3C+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+%3E+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+(foo1+%3D%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+!!%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}};
+		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:36,positionColumn:1,positionLineNumber:36,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ccompare%3E%0A%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+value%3B%0A%0A%23if+1%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const%0A++%7B%0A++++return+value+%3C%3D%3E+rhs.value%3B%0A++%7D%0A%23else%0A++auto+operator%3C%3D%3E(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%0A%23if+0%0A++bool+operator%3D%3D(const+Foo%26+rhs)+const+%3D+default%3B%0A%23endif%0A%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo1%7B2011%7D%3B%0A++Foo+foo2%7B2014%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(foo1+%3C+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+%3E+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+(foo1+%3D%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+(foo1+!!%3D+foo2)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}};
 	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{spaceship operator -- Conclusion}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Privilégiez \mintinline{cpp}|operator<=>| aux opérateurs \mintinline{cpp}|<|, \mintinline{cpp}|<=|, \mintinline{cpp}|>| et \mintinline{cpp}|>=|
+			\item Déclarez \mintinline{cpp}|operator<=>| et \mintinline{cpp}|operator==| \mintinline{cpp}|=default| si possible
+		\end{itemize}
+	\end{exampleblock}
+	
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item Ne mélangez pas \mintinline{cpp}|operator<=>| et opérateurs d'ordre dans une même classe
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
 
 \subsection*{Namespace}
