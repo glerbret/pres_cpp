@@ -1058,9 +1058,84 @@
 		(pack op ... op init);
 		(init op ... op pack);
 	\end{minted}
+\end{frame}
 
+\subsection*{Fold expression}
+\begin{frame}[fragile]
+	\frametitle{Fold expression}
 	\begin{center}
-		\includegraphics[height=0.30\textheight]{input_src/Left-fold-transformation.png} \includegraphics[height=0.30\textheight]{input_src/Right-fold-transformation.png}
+		\begin{tikzpicture}[framed,background rectangle/.style={draw=black,fill=white,rounded corners,general shadow={fill=lightgray,shadow xshift= 4pt,shadow yshift=-4pt}}]
+			\coordinate (i) at (0,0);
+			\coordinate (o) at (4.5cm,0);
+			\coordinate (l) at (2.5cm,0);
+
+			\begin{scope}[sibling distance=12mm,level distance=6mm]
+				\node at (i) {:}
+					child {node {1}}
+					child {node {:}
+						child {node {2}}
+						child {node {:}
+							child {node {3}}
+							child {node {:}
+								child {node {4}}
+								child {node {[ ]}}
+							}
+						}
+					};
+
+				\node at (o)  {$f$}
+					child {node {1}}
+					child {node {$f$}
+						child {node {2}}
+						child {node {$f$}
+							child {node {3}}
+							child {node {$f$}
+								child {node {4}}
+								child {node {$z$}}
+							}
+						}
+					};
+			\end{scope}
+
+			\node at (l) {\textit{Right fold}};
+		\end{tikzpicture}
+		\\
+		\phantom{text}\\
+		\begin{tikzpicture}[framed,background rectangle/.style={draw=black,fill=white,rounded corners,general shadow={fill=lightgray,shadow xshift= 4pt,shadow yshift=-4pt}}]
+			\coordinate (i) at (0,0);
+			\coordinate (o) at (6.35cm,0);
+			\coordinate (l) at (2.5cm,0);
+
+			\begin{scope}[sibling distance=12mm,level distance=6mm]
+				\node at (i) {:}
+					child {node {1}}
+					child {node {:}
+						child {node {2}}
+						child {node {:}
+							child {node {3}}
+							child {node {:}
+								child {node {4}}
+								child {node {[ ]}}
+							}
+						}
+					};
+
+				\node at (o) {$f$}
+					child {node {$f$}
+						child {node {$f$}
+							child {node {$f$}
+								child {node {$z$}}
+								child {node {1}}
+							}
+							child {node {2}}
+						}
+						child {node {3}}
+					}
+					child {node {4}};
+			\end{scope}
+
+			\node at (l) {\textit{Left fold}};
+		\end{tikzpicture}
 	\end{center}
 \end{frame}
 
