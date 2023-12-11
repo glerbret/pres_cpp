@@ -1,11 +1,98 @@
-\RequirePackage[framemethod=TikZ]{mdframed}
+\RequirePackage[framemethod=TikZ]{mdframed}	% Cadre autour des blocs et des exemples de code
 \usetikzlibrary{shadows}
-\usepackage{graphicx}
-\usepackage{minted}
-\usepackage{color}
-\usepackage{textcomp}
+\RequirePackage{color}			% Gestions des couleurs
+\RequirePackage{graphicx}		% Inclusion des images
+\RequirePackage{minted}			% Mise en forme du code
+\RequirePackage{textcomp}		% Caractères complémentaires
+\RequirePackage{fontawesome}	% Fonte awesome (symboles)
 
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{infolines}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+\beamertemplatenavigationsymbolsempty
+\setbeamercolor{structure}{fg=teal, bg=teal!40}
+
+% Decalage des sous-listes
+\setlength{\leftmarginii}{0.4cm}
+\setlength{\leftmarginiii}{0.4cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format des blocs (block, alertblock et exampleblock)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Coloration
+\definecolor{example_green}{RGB}{0,0.6,0}
+\setbeamercolor{block title}{bg=teal,fg=white}
+\setbeamercolor{block title example}{bg=green!60!black,fg=white}
+
+% Pas de degrade sur la coloration des blocs (block, alertblock et exampleblock)
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+	color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(3pt)=(lower.bg)}
+
+% Taille et ombrage identique au block de code
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\mdfdefinestyle{blockframe}{
+	backgroundcolor=white,
+	linewidth=0pt,
+	linecolor=black,
+	roundcorner=5pt,
+	shadow=true,
+	shadowsize=5pt,
+	skipabove=5pt,
+	skipbelow=7pt,
+	innerleftmargin=4pt,
+	innerrightmargin=4pt,
+	innertopmargin=5pt,
+	innerbottommargin=1pt
+}
+\surroundwithmdframed[style=blockframe]{block}
+\surroundwithmdframed[style=blockframe]{alertblock}
+\surroundwithmdframed[style=blockframe]{exampleblock}
+\addtobeamertemplate{block begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
+\addtobeamertemplate{block alerted begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
+\addtobeamertemplate{block example begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format de code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format du listing
+\mdfdefinestyle{codeframe}{
+	backgroundcolor=white,
+	linewidth=0.4pt,
+	linecolor=black,
+	roundcorner=5pt,
+	shadow=true,
+	shadowsize=5pt,
+	skipabove=5pt,
+	skipbelow=7pt,
+	innerleftmargin=10pt,
+	innerrightmargin=10pt,
+	innertopmargin=5pt,
+	innerbottommargin=5pt
+}
+
+% Format du cadre
+\surroundwithmdframed[style=codeframe]{minted}
+\setminted{fontsize=\small,baselinestretch=1,autogobble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format de la bibliographie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{frametitle continuation}[from second]
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=teal}
+\setbeamercolor*{bibliography entry location}{fg=teal}
+\setbeamercolor*{bibliography entry note}{fg=teal}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Insertion du sommaire de chaque section beamer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \AtBeginSection[]
 {
 	\begin{frame}<beamer>{Sommaire}
@@ -13,18 +100,9 @@
 	\end{frame}
 }
 
-\mode<presentation>
-
-% Style
-\useinnertheme[shadow=true]{rounded}
-\useoutertheme{infolines}
-\usecolortheme{orchid}
-\usecolortheme{whale}
-
-\beamertemplatenavigationsymbolsempty
-\setbeamercolor{structure}{fg=teal, bg=teal!40}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format de la page de titres
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \defbeamertemplate*{title page}{customized}[1][colsep=-4bp,rounded=true,shadow=true]
 {
 	\vbox{}
@@ -55,52 +133,9 @@
 	\hfill\includegraphics[height=12pt]{license.png}
 }
 
-% Decalage des sous-listes
-\setlength{\leftmarginii}{0.4cm}
-\setlength{\leftmarginiii}{0.4cm}
-
-% Format des blocs (block, alertblock et exampleblock)
-%% Coloration
-\definecolor{example_green}{RGB}{0,0.6,0}
-\setbeamercolor{block title}{bg=teal,fg=white}
-\setbeamercolor{block title example}{bg=green!60!black,fg=white}
-
-%% Pas de degrade sur la coloration des blocs (block, alertblock et exampleblock)
-\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
-	color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(3pt)=(lower.bg)}
-
-%% Taille et ombrage identique au block de code
-\setbeamertemplate{blocks}[rounded][shadow=false]
-\mdfdefinestyle{blockframe}{
-	backgroundcolor=white,
-	linewidth=0pt,
-	linecolor=black,
-	roundcorner=5pt,
-	shadow=true,
-	shadowsize=5pt,
-	skipabove=5pt,
-	skipbelow=7pt,
-	innerleftmargin=4pt,
-	innerrightmargin=4pt,
-	innertopmargin=5pt,
-	innerbottommargin=1pt
-}
-\surroundwithmdframed[style=blockframe]{block}
-\surroundwithmdframed[style=blockframe]{alertblock}
-\surroundwithmdframed[style=blockframe]{exampleblock}
-\addtobeamertemplate{block begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
-\addtobeamertemplate{block alerted begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
-\addtobeamertemplate{block example begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
-
-% Format de la bibliographie
-\setbeamertemplate{frametitle continuation}[from second]
-\setbeamercolor*{bibliography entry title}{fg=black}
-\setbeamercolor*{bibliography entry author}{fg=teal}
-\setbeamercolor*{bibliography entry location}{fg=teal}
-\setbeamercolor*{bibliography entry note}{fg=teal}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ajoute une page note même vide
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeatletter 
 \def\beamer@framenotesbegin{%   
 	\gdef\beamer@noteitems{}%   
@@ -108,25 +143,4 @@
 }
 \makeatother
 
-\mode
-<all>
-
-% Format de code
-%% Gestion des listing
-\mdfdefinestyle{codeframe}{
-	backgroundcolor=white,
-	linewidth=0.4pt,
-	linecolor=black,
-	roundcorner=5pt,
-	shadow=true,
-	shadowsize=5pt,
-	skipabove=5pt,
-	skipbelow=7pt,
-	innerleftmargin=10pt,
-	innerrightmargin=10pt,
-	innertopmargin=5pt,
-	innerbottommargin=5pt
-}
-
-\surroundwithmdframed[style=codeframe]{minted}
-\setminted{fontsize=\small,baselinestretch=1,autogobble}
+\mode<all>
