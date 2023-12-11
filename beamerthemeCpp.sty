@@ -4,7 +4,7 @@
 \RequirePackage{graphicx}		% Inclusion des images
 \RequirePackage{minted}			% Mise en forme du code
 \RequirePackage{textcomp}		% Caractères complémentaires
-\RequirePackage{fontawesome}	% Fonte awesome (symboles)
+\RequirePackage{fontawesome5}	% Fonte awesome (symboles)
 
 \mode<presentation>
 
@@ -21,6 +21,9 @@
 % Decalage des sous-listes
 \setlength{\leftmarginii}{0.4cm}
 \setlength{\leftmarginiii}{0.4cm}
+
+% Commande pour ajouter un logo sur les liens
+\newcommand{\linklogo}{\textsuperscript{\tiny\textcolor{teal}{\thickspace\faExternalLink*}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format des blocs (block, alertblock et exampleblock)

@@ -58,7 +58,7 @@
 \begin{frame}[fragile]
 	\frametitle{Normalisation}
 	\begin{itemize}
-		\item Normalisé par \href{http://www.open-std.org/JTC1/SC22/WG21/}{l'ISO (JTC1/SC22/WG21)}
+		\item Normalisé par \href{http://www.open-std.org/JTC1/SC22/WG21/}{l'ISO (JTC1/SC22/WG21\linklogo)}
 		\item Comité distinct de celui du C
 
 \note[item]{C : Working group 14}
@@ -68,8 +68,8 @@
 
 \note[item]{Donc libre de droit, mais la norme ISO définitive est payante}
 
-		\item Actualité de normalisation, et du C++ en général : \href{https://isocpp.org/}{isocpp.org}
-		\item \ldots{} ainsi que les \href{https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines}{C++ Core Guidelines}
+		\item Actualité de normalisation, et du C++ en général : \href{https://isocpp.org/}{isocpp.org\linklogo}
+		\item \ldots{} ainsi que les \href{https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines}{C++ Core Guidelines\linklogo}
 	\end{itemize}
 
 	\begin{alertblock}{isocpp.org n'est pas le site du comité}
@@ -80,8 +80,8 @@
 	\end{alertblock}
 
 	\begin{itemize}
-		\item \href{https://github.com/cplusplus}{Dépôt GIT (brouillons et propositions)}
-		\item Conférence annuelle \href{http://cppcon.org/}{cppcon}
+		\item \href{https://github.com/cplusplus}{Dépôt GIT\linklogo (brouillons et propositions)}
+		\item Conférence annuelle \href{http://cppcon.org/}{cppcon\linklogo}
 	\end{itemize}
 \end{frame}
 
@@ -90,22 +90,22 @@
 	\begin{itemize}
 		\item Compilateurs
 		\begin{itemize}
-			\item GCC -- \href{https://gcc.gnu.org/projects/cxx-status.html}{C++ Standards Support in GCC}
-			\item Clang -- \href{http://clang.llvm.org/cxx_status.html}{C++ Support in Clang}
-			\item Visual studio -- \href{https://docs.microsoft.com/fr-fr/cpp/overview/visual-cpp-language-conformance?view=msvc-160}{Conformité du langage Microsoft C++}
+			\item GCC -- \href{https://gcc.gnu.org/projects/cxx-status.html}{C++ Standards Support in GCC\linklogo}
+			\item Clang -- \href{http://clang.llvm.org/cxx_status.html}{C++ Support in Clang\linklogo}
+			\item Visual studio -- \href{https://docs.microsoft.com/fr-fr/cpp/overview/visual-cpp-language-conformance?view=msvc-160}{Conformité du langage Microsoft C++\linklogo}
 		\end{itemize}
 		\item Bibliothèques standards
 		\begin{itemize}
-			\item GCC -- \href{https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html}{status.html}
-			\item Clang -- \href{https://libcxx.llvm.org/}{C++ Standard Library}
+			\item GCC -- \href{https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html}{status.html\linklogo}
+			\item Clang -- \href{https://libcxx.llvm.org/}{C++ Standard Library\linklogo}
 		\end{itemize}
-		\item Vision globale -- \href{http://en.cppreference.com/w/cpp/compiler_support}{C++ compiler support}
+		\item Vision globale -- \href{http://en.cppreference.com/w/cpp/compiler_support}{C++ compiler support\linklogo}
 	\end{itemize}
 
 	\begin{block}{Sites de référence C++}
 		\begin{itemize}
-			\item \href{https://en.cppreference.com/w/}{cppreference.com}
-			\item \href{https://hackingcpp.com/}{hacking C++}
+			\item \href{https://en.cppreference.com/w/}{cppreference.com\linklogo}
+			\item \href{https://hackingcpp.com/}{hacking C++\linklogo}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -178,7 +178,7 @@
 \begin{frame}[fragile]
 	\frametitle{Erreurs -- Critiques des exceptions}
 	\begin{itemize}
-		\item Critiquées, voire interdites, par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide)}
+		\item Critiquées, voire interdites, par certaines normes de codage (p.ex. : \href{https://google.github.io/styleguide/cppguide.html}{Google C++ Style Guide\linklogo})
 		\item Arguments très variés
 		\begin{itemize}
 			\item \og Je ne comprends pas\fg{}, \og Ça ne sert à rien\fg{}, \ldots{}
@@ -655,7 +655,7 @@
 	\frametitle{Ressources -- Et le Garbage Collector ?}
 	\begin{itemize}
 		\item Pas de GC dans le langage ni dans la bibliothèque standard
-		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm})
+		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm\linklogo})
 		\item \ldots{} mais limité par manque de support par le langage
 		\item Non déterministe : adapté à la mémoire pas aux autres ressources
 		\item Particulièrement adapté à la gestion des structures cycliques
@@ -902,7 +902,7 @@
 	\begin{alertblock}{API trop riche}
 		\begin{itemize}
 			\item De nombreuses fonctions membres qui gagneraient à être libres et génériques
-			\item Voir \href{http://www.gotw.ca/gotw/084.htm}{GotW \#84 : Monoliths "Unstrung"}
+			\item Voir \href{http://www.gotw.ca/gotw/084.htm}{GotW \#84 : Monoliths "Unstrung"\linklogo}
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -1060,7 +1060,7 @@
 	\begin{block}{Conseils}
 		\begin{itemize}
 			\item Voir \cite{effStl} item 1
-			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?}
+			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?\linklogo}
 			\item Pensez à \mintinline{cpp}|reserve()|
 			\item Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
 
@@ -2319,7 +2319,7 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 
 	\begin{block}{Aller plus loin}
 		\begin{itemize}
-			\item Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms (Marshall Clow)}
+			\item Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms\linklogo (Marshall Clow)}
 		\end{itemize}
 
 \note[item]{Conf cppcon 2016 sur les algorithmes en général et sur comment faire ces propres algorithmes}

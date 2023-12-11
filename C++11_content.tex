@@ -7,7 +7,7 @@
 	\frametitle{Présentation}
 	\begin{itemize}
 		\item Approuvé le 12 août 2011
-		\item Dernier \textit{Working Draft} : \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337}
+		\item Dernier \textit{Working Draft} : \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337\linklogo}
 		\item Standardisation laborieuse
 		\begin{itemize}
 			\item Sortie tardive (C++0x)
@@ -18,7 +18,7 @@
 			\item Utilisation de \textit{Technical Specification} et de groupes de travail dédiés
 			\item Pilotage par les dates et pas les fonctionnalités
 			\item Des versions fréquentes (3 ans : 2011, 2014, 2017, 2020, \ldots{})
-			\item Voir \href{https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/}{Trip report: Winter ISO C++ standards meeting}
+			\item Voir \href{https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/}{Trip report: Winter ISO C++ standards meeting\linklogo}
 		\end{itemize}
 		\item Objectifs : sureté, simplicité, rapidité et meilleure détection d'erreur en \textit{compile-time}
 
@@ -55,7 +55,7 @@
 
 	\begin{block}{Motivations}
 		\begin{itemize}
-			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1426.pdf}{N1426}
+			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1426.pdf}{N1426\linklogo}
 		\end{itemize}
 
 \note[item]{En gros les motivations sont : peu utile, peu demandé, compliqué à implémenter et compliqué à utiliser}
@@ -774,13 +774,13 @@
 
 	\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots{} ?}
 		\begin{itemize}
-			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337} §3.10
+			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337\linklogo} §3.10
 		\end{itemize}
 	\end{block}
 
 	\begin{block}{\mintinline[style=white]{cpp}|std::forward()| ?}
 		\begin{itemize}
-			\item \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385})
+			\item \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385\linklogo})
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -829,7 +829,7 @@
 
 	\begin{block}{Pour aller plus loin}
 		\begin{itemize}
-			\item Voir \href{https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf}{Élégance, style épuré et classe (Loïc Joly)}
+			\item Voir \href{https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf}{Élégance, style épuré et classe\linklogo (Loïc Joly)}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -1147,7 +1147,7 @@
 
 	\begin{block}{Pour aller plus loin}
 		\begin{itemize}
-			\item Voir \href{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}{GotW 94 : AAA Style}
+			\item Voir \href{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}{GotW 94 : AAA Style\linklogo}
 		\end{itemize}
 	\end{block}
 
@@ -2468,8 +2468,8 @@
 	\end{exampleblock}
 
 	\begin{tikzpicture}[remember picture,overlay]
-		\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
-			\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A%0A++std::cout+%3C%3C+foo.m_a+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}};
+	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
+		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A%0A++std::cout+%3C%3C+foo.m_a+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\includegraphics[height=0.5cm]{input_src/play-button.png}}};
 	\end{tikzpicture}
 \end{frame}
 
@@ -2754,7 +2754,7 @@
 	\begin{block}{Dépréciation}
 		\begin{itemize}
 			\item Les spécifications d'exception sont dépréciées
-			\item Voir \href{http://www.gotw.ca/publications/mill22.htm}{A Pragmatic Look at Exception Specifications} (Herb Sutter)
+			\item Voir \href{http://www.gotw.ca/publications/mill22.htm}{A Pragmatic Look at Exception Specifications\linklogo} (Herb Sutter)
 		\end{itemize}
 
 \note[item]{En pratique, seule \mintinline{cpp}|throw()| était utilisée et utilisable et a été remplacée par \mintinline{cpp}|noexcept|}
@@ -3107,7 +3107,7 @@
 	\begin{block}{Motivations}
 		\begin{itemize}
 			\item Lisibilité, expressivité et performances
-			\item Voir \href{https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf}{Practical Performance Practices}
+			\item Voir \href{https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf}{Practical Performance Practices\linklogo}
 		\end{itemize}
 
 \note[item]{Entre autres, il y a aussi des remarques intéressantes sur le choix des conteneurs, des pointeurs intelligents, sur \mintinline{cpp}|std::endl|, etc.}
@@ -3796,7 +3796,7 @@
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item Passez par un \mintinline{cpp}|std::unique_ptr| temporaire intermédiaire pour insérer des éléments dans un conteneur de \mintinline{cpp}|std::unique_ptr|
-			\item Voir \href{https://accu.org/index.php/journals/2271}{Overload 134 - C++ Antipatterns}
+			\item Voir \href{https://accu.org/index.php/journals/2271}{Overload 134 - C++ Antipatterns\linklogo}
 		\end{itemize}
 
 \note[item]{\mintinline{cpp}|push_back| d'un pointeur brute n'est pas possible et \mintinline{cpp}|emplace_back| peut échouer en laissant fuir le pointeur}
@@ -3813,7 +3813,7 @@
 	\frametitle{Pointeurs intelligents -- Conclusion}
 	\begin{block}{Pour aller plus loin}
 		\begin{itemize}
-			\item Voir \href{http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/}{Pointeurs intelligents (Loïc Joly)}
+			\item Voir \href{http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/}{Pointeurs intelligents\linklogo (Loïc Joly)}
 		\end{itemize}
 	\end{block}
 
