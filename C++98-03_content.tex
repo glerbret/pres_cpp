@@ -291,7 +291,7 @@
 	\frametitle{Erreurs -- Exceptions et bonnes pratiques}
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item \textit{Throw by value, catch by const reference} (\cite{coding} chap. 73)
+			\item \textit{Throw by value, catch by const reference} (voir \textit{C++ Coding Standards} chap. 73)
 		\end{itemize}
 	\end{exampleblock}
 
@@ -363,7 +363,7 @@
 
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Préférez les exceptions aux codes retour (\cite{coding} chap. 72)
+			\item Préférez les exceptions aux codes retour (voir \textit{C++ Coding Standards} chap. 72)
 		\end{itemize}
 	\end{exampleblock}
 
@@ -773,7 +773,7 @@
 
 	\begin{block}{Pour aller plus loin}
 		\begin{itemize}
-			\item \cite{effStl} de Scott Meyers
+			\item Voir \textit{Effective STL} de Scott Meyers
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -840,7 +840,7 @@
 		\begin{itemize}
 			\item Ne remplit pas tous les pré-requis des conteneurs
 			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
-			\item Voir \cite{effStl} item 18
+			\item Voir \textit{Effective STL} item 18
 
 \note[item]{Impossible de prendre l'adresse de \mintinline{cpp}|v[0]| d'un \mintinline{cpp}|vector<bool>|}
 		\end{itemize}
@@ -1059,7 +1059,7 @@
 	\frametitle{STL Conteneurs -- Choix du conteneur}
 	\begin{block}{Conseils}
 		\begin{itemize}
-			\item Voir \cite{effStl} item 1
+			\item Voir \textit{Effective STL} item 1
 			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?\linklogo}
 			\item Pensez à \mintinline{cpp}|reserve()|
 			\item Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place

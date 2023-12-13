@@ -88,12 +88,47 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format de la bibliographie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{frametitle continuation}[from second]
-\setbeamercolor*{bibliography entry title}{fg=black}
-\setbeamercolor*{bibliography entry author}{fg=teal}
-\setbeamercolor*{bibliography entry location}{fg=teal}
-\setbeamercolor*{bibliography entry note}{fg=teal}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
+% Livre
+\newcommand{\addbook}[2]{%
+	\textcolor{teal}{\NoAutoSpacing #1}\\%
+	\hspace*{5mm}#2\\%
+	\\}
+
+% Article
+\newcommand{\addarticle}[3]{%
+	\href{#2}{\textcolor{teal}{\NoAutoSpacing #1}}\\%
+	\hspace*{5mm}#3\\%
+	\\}
+
+% Site web
+\newcommand{\addweb}[2]{%
+	\href{#2}{\textcolor{teal}{#1}}\\%
+	\hspace*{5mm}{\footnotesize \url{#2}}\\%
+	\\}
+\newcommand{\addwebauth}[3]{%
+	\href{#2}{\textcolor{teal}{#1}}\\%
+	\hspace*{5mm}{#3}\\%
+	\hspace*{5mm}{\footnotesize \url{#2}}\\%
+	\\}
+
+% Blog
+\newcommand{\addblog}[3]{%
+	\href{#2}{\textcolor{teal}{#1}}\\%
+	\hspace*{5mm}{#3}\\%
+	\hspace*{5mm}{\footnotesize \url{#2}}\\%
+	\\}
+
+% Conférences
+\newcommand{\addconf}[4]{%
+	\href{#2}{\textcolor{teal}{#1}}
+	\href{#3}{\textcolor{red}{\faYoutube}}
+	\href{#4}{\faGithub}\\%
+	\\}
+
+% Vidéo
+\newcommand{\addvideo}[2]{%
+	\href{#2}{\textcolor{teal}{#1} \textsuperscript{\footnotesize \textcolor{red}{\faYoutube}}}\\
+	\\}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Insertion du sommaire de chaque section beamer
