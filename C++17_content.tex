@@ -62,6 +62,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:11,positionColumn:1,positionLineNumber:11,selectionStartColumn:1,selectionStartLineNumber:11,startColumn:1,startLineNumber:11),source:'%23include+%3Ciostream%3E%0A%23if+__has_include(%3Coptional%3E)%0A%23++include+%3Coptional%3E%0A%23++define+OPT_ENABLE+1%0A%23endif%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+OPT_ENABLE+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0061}{https://wg21.link/P0061R1}
 \end{frame}
 
 \subsection*{inline variable}
@@ -91,6 +93,8 @@
 			\item Ne justifie pas l'usage de variables globales
 		\end{itemize}
 	\end{alertblock}
+
+	\prop{P0386}{https://wg21.link/P0386R2}
 \end{frame}
 
 \subsection*{Namespace}
@@ -118,6 +122,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%0Anamespace+A::B::C%0A%7B%0A++int+foo+%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+A::B::C::foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{N4230}{https://wg21.link/N4230}
 \end{frame}
 
 \subsection*{static\_assert}
@@ -136,6 +142,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:7,positionColumn:1,positionLineNumber:7,selectionStartColumn:1,selectionStartLineNumber:7,startColumn:1,startLineNumber:7),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++static_assert(sizeof(int)+%3D%3D+3)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{N3928}{https://wg21.link/N3928}
 \end{frame}
 
 \subsection*{if constexpr}
@@ -168,6 +176,8 @@
 
 \note[item]{C'est à dire qu'en cas de condition composée (\mintinline{cpp}|or|, \mintinline{cpp}|and|), même si la première partie permet de résoudre la condition, il faut que le reste soit évaluable en \textit{compile-time}}
 	\end{block}
+
+	\prop{P0292}{https://wg21.link/P0292R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -259,6 +269,8 @@
 		  else     cout << -foo;
 		}
 	\end{minted}
+
+	\prop{P0305}{https://wg21.link/P0305R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -314,6 +326,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+5%3B%0A%0A+switch(int+foo+%3D+42%3B+bar)%0A+%7B%0A++++case+5:%0A++++++std::cout+%3C%3C+-foo+%3C%3C+%22%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++++++break%3B%0A+%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0305}{https://wg21.link/P0305R1}
 \end{frame}
 
 \subsection*{Structured binding}
@@ -337,6 +351,8 @@
 		\item Et sur les classes implémentant \mintinline{cpp}|get<>()|, \mintinline{cpp}|tuple_size| et \mintinline{cpp}|tuple_element|	
 		\item Notamment \mintinline{cpp}|std::tuple|, \mintinline{cpp}|std::pair|, \mintinline{cpp}|std::array|
 	\end{itemize}
+
+	\prop{P0217}{https://wg21.link/P0217R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -475,6 +491,8 @@
 		a << b;
 		a >> b;
 	\end{minted}
+
+	\prop{P0145}{https://wg21.link/P0145R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -514,6 +532,8 @@
 		  return t;    // Copie potentielle eludee
 		}
 	\end{minted}
+
+	\prop{P0135}{https://wg21.link/P0135R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -593,6 +613,8 @@
 		auto x4 = { 3 };      // std::initializer_list<int>
 		auto x5{ 3 };         // int
 	\end{minted}
+
+	\prop{N3922}{https://wg21.link/N3922}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -606,6 +628,8 @@
 		Foo foo{42};
 		Foo bar = Foo{42};
 	\end{minted}
+
+	\prop{P0138}{https://wg21.link/P0138R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -659,6 +683,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:23,positionColumn:1,positionLineNumber:23,selectionStartColumn:1,selectionStartLineNumber:23,startColumn:1,startLineNumber:23),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccstddef%3E%0A%23include+%3Ciomanip%3E%0A%0Aint+main()%0A%7B%0A++std::byte+b%7B5%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%7C%3D+std::byte%7B2%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%3C%3C%3D+2%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++b+%2B%3D+std::byte%7B2%7D%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0298}{https://wg21.link/P0298R3}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -690,6 +716,8 @@
 			\item Modifier une clé dans une \mintinline{cpp}|std::map|
 		\end{itemize}
 	\end{block}
+
+	\prop{P0083}{https://wg21.link/P0083R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -783,10 +811,12 @@
 	\end{minted}
 
 	\begin{block}{Note}
-	\begin{itemize}
-		\item \mintinline{cpp}|emplace()| renvoie toujours un itérateur
-	\end{itemize}
+		\begin{itemize}
+			\item \mintinline{cpp}|emplace()| renvoie toujours un itérateur
+		\end{itemize}
 	\end{block}
+
+	\prop{P0084}{https://wg21.link/P0084R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -860,6 +890,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::clamp(1,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::clamp(54,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::clamp(25,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0025}{https://wg21.link/P0025R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -894,6 +926,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccharconv%3E%0A%0Aint+main()%0A%7B%0A++char+str%5B25%5D+%3D+%22%22%3B%0A++std::to_chars(std::begin(str),+std::end(str),+12.5)%3B%0A++std::cout+%3C%3C+str+%3C%3C+%22%5Cn%22%3B%0A%0A++double+val+%3D+0%3B%0A++std::from_chars(std::begin(str),+std::end(str),+val)%3B%0A++std::cout+%3C%3C+val+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0067}{https://wg21.link/P0067R5}
 \end{frame}
 
 \subsection*{Variant}
@@ -935,6 +969,8 @@
 			\item Préférez \mintinline{cpp}|std::variant| aux unions brutes
 		\end{itemize}
 	\end{exampleblock}
+
+	\prop{P0088}{https://wg21.link/P0088R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1035,6 +1071,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:32,positionColumn:1,positionLineNumber:32,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++int+operator()(int+i)%0A++%7B%0A++++return+10+%2B+i%3B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar%0A%7B%0A++int+operator()(const+std::string%26+s)%0A++%7B%0A++++return+s.size()%3B%0A++%7D%0A%7D%3B%0A%0Atemplate+%3Ctypename...+Ts%3E%0Astruct+Baz+:+Ts...%0A%7B%0A++using+Ts::operator()...%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Baz%3CFoo,+Bar%3E+baz%3B%0A++std::cout+%3C%3C+baz(5)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz(%22azerty%22)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0195}{https://wg21.link/P0195R2}
 \end{frame}
 
 \subsection*{Fold expression}
@@ -1058,6 +1096,8 @@
 		(pack op ... op init);
 		(init op ... op pack);
 	\end{minted}
+
+	\prop{P0036}{https://wg21.link/P0036R0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1239,6 +1279,8 @@
 		\item \ldots{} ou un itérateur et une sentinelle de fin
 		\item Compatible avec les travaux sur Range TS
 	\end{itemize}
+
+	\prop{P0184}{https://wg21.link/P0184R0}
 \end{frame}
 
 \subsection*{classe}
@@ -1273,6 +1315,8 @@
 \note[item]{En C++11, \mintinline{cpp}|Baz| hérite de deux constructeurs - l'un avec deux paramètres \mintinline{cpp}|int| sans valeur par défaut et l'autre avec un paramètre \mintinline{cpp}|int| - et défini un constructeur avec deux \mintinline{cpp}|int| dont un avec une valeur par défaut}
 \note[item]{En C++17, \mintinline{cpp}|Bar| hérite d'un constructeur avec deux paramètres \mintinline{cpp}|int| dont une valeur par défaut et défini un constructeur avec un paramètre \mintinline{cpp}|int|}
 \note[item]{En C++17, \mintinline{cpp}|Baz|  hérite d'un constructeur avec deux paramètres \mintinline{cpp}|int| dont un avec une valeur par défaut qu'il redéfini}
+
+	\prop{P0136}{https://wg21.link/P0136R1}
 \end{frame}
 
 \subsection*{Exception}
@@ -1294,6 +1338,8 @@
 	\begin{itemize}
 		\item Les fonctions \mintinline{cpp}|noexcept| peuvent être convertie en fonctions non \mintinline{cpp}|noexcept|
 	\end{itemize}
+
+	\prop{P0012}{https://wg21.link/P0012R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1314,6 +1360,8 @@
 \note[item]{P.ex. rollback}
 		\end{itemize}
 	\end{block}
+
+	\prop{N4259}{https://wg21.link/N4259}
 \end{frame}
 
 \subsection*{Littéraux}
@@ -1327,6 +1375,8 @@
 	\begin{minted}{cpp}
 		char x = u8'x';
 	\end{minted}
+
+	\prop{N4267}{https://wg21.link/N4267}
 \end{frame}
 
 \subsection*{Template}
@@ -1352,6 +1402,8 @@
 	\end{minted}
 
 \note[item]{Fonctionne avec \mintinline{cpp}|pair p()|, \mintinline{cpp}|pair p\{\}| et \mintinline{cpp}|pair()| mais pas, pour l'instant, avec \mintinline{cpp}|pair\{\}|}
+
+	\prop{P0091}{https://wg21.link/P0091R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1422,6 +1474,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Cauto+value%3E+constexpr+auto+FOO+%3D+value%3B%0A%0Aint+main()%0A%7B%0A++constexpr+auto+const+foo+%3D+FOO%3C100%3E%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0127}{https://wg21.link/P0127R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1486,6 +1540,8 @@
 		auto baz = Foo{"baz"}.bar();
 		baz();     // Affiche baz
 	\end{minted}
+
+	\prop{P0018}{https://wg21.link/P0018R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1502,6 +1558,8 @@
 
 		AddEleven(5);   // 16
 	\end{minted}
+
+	\prop{P0170}{https://wg21.link/P0170R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1634,6 +1692,8 @@
 		enable_if_t<is_integral_v<T>, T>
 		sqrt(T t);
 	\end{minted}
+
+	\prop{P0006}{https://wg21.link/P0006R0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1662,6 +1722,9 @@
 		enable_if_t<conjunction_v<is_same<T, Ts>...>>
 		foo(T, Ts...) {}
 	\end{minted}
+
+	\proptwo{P0185}{https://wg21.link/P0185R1}
+		{P0013}{https://wg21.link/P0013R1}
 \end{frame}
 
 \subsection*{Attributs}
@@ -1685,6 +1748,8 @@
 		  FOO_2
 		};
 	\end{minted}
+
+	\prop{N4266}{https://wg21.link/N4266}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1707,6 +1772,9 @@
 		[[ using nsp: kernel, target(cpu,gpu) ]]
 		foo();
 	\end{minted}
+
+	\proptwo{P0283}{https://wg21.link/P0283R2}
+		{P0028}{https://wg21.link/P0028R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1738,6 +1806,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:28,startColumn:1,startLineNumber:28),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+1%3B%0A%0A++switch(foo)%0A++%7B%0A++++case+1:%0A++++case+2:%0A++++++std::cout+%3C%3C+%22Cas+1-2%5Cn%22%3B%0A%23if+1%0A++++++%5B%5B+fallthrough+%5D%5D%3B%0A%23endif%0A%0A++++case+3:%0A++++++std::cout+%3C%3C+%22Cas+3%5Cn%22%3B%0A%0A++++case+4:%0A++++++std::cout+%3C%3C+%22Cas+4%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22Cas+default%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0188}{https://wg21.link/P0188R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1765,6 +1835,8 @@
 			(void)foo();
 		\end{minted}
 	\end{block}
+
+	\prop{P0189}{https://wg21.link/P0189R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1811,6 +1883,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%0A%23if+0%0A%5B%5B+maybe_unused+%5D%5D+static+int+foo(%5B%5B+maybe_unused+%5D%5Dint+a,%0A++++++++++++++++++++++++++++++++++%5B%5B+maybe_unused+%5D%5D+int+b)%0A%23else%0Astatic+int+foo(int+a,%0A+++++++++++++++int+b)%0A%23endif%0A%7B%0A++return+0%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0212}{https://wg21.link/P0212R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1853,6 +1927,8 @@
 			\item Équivalent \textit{non-timed} de \mintinline{cpp}|std::shared_timed_mutex|
 		\end{itemize}
 	\end{block}
+
+	\prop{N4508}{https://wg21.link/N4508}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1867,6 +1943,8 @@
 
 		scoped_lock lck(first_mutex, second_mutex);
 	\end{minted}
+
+	\prop{P0156}{https://wg21.link/P0156R2}
 \end{frame}
 
 \subsection*{Library fundamentals TS}
@@ -1939,6 +2017,8 @@
 		\item \mintinline{cpp}|value()| retourne la valeur ou lève l'exception \mintinline{cpp}|std::bad_optional_access|
 		\item \mintinline{cpp}|value_or()| retourne la valeur ou une valeur par défaut
 	\end{itemize}
+
+	\prop{P0220}{https://wg21.link/P0220R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2050,6 +2130,8 @@
 		a = 3.14;   // double
 		a = true;   // bool
 	\end{minted}
+
+	\prop{P0220}{https://wg21.link/P0220R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2151,6 +2233,9 @@
 			\item La chaîne référencée doit vivre au moins aussi longtemps que la vue
 		\end{itemize}
 	\end{alertblock}
+
+	\proptwo{N3921}{https://wg21.link/N3921}
+		{P0220}{https://wg21.link/P0220R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2227,6 +2312,9 @@
 			\item Mais pas dans le périmètre accepté pour C++17
 		\end{itemize}
 	\end{block}
+
+	\proptwo{P0414}{https://wg21.link/P0414R2}
+		{P0035}{https://wg21.link/P0035R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2272,6 +2360,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::gcd(12,+18)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::lcm(12,+18)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0295}{https://wg21.link/P0295R0}
 \end{frame}
 
 \subsection*{Filesystem TS}
@@ -2291,6 +2381,8 @@
 		bar.native();      // std::string
 		bar.c_str();       // const char*
 	\end{minted}
+
+	\prop{P0218}{https://wg21.link/P0218R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2371,6 +2463,8 @@
 			\item Pas de gestion intrinsèque des accès concurrents
 		\end{itemize}
 	\end{alertblock}
+
+	\prop{P0024}{https://wg21.link/P0024R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2459,5 +2553,7 @@
 			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P0226}{https://wg21.link/P0226R1}
 \end{frame}
 \end{document}

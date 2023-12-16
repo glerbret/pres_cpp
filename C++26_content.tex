@@ -34,6 +34,8 @@
 			\item Nécessite que \mintinline{cpp}|std::format| devienne \mintinline{cpp}|constexpr|
 		\end{itemize}
 	\end{alertblock}
+
+	\prop{P2741}{https://wg21.link/P2741R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -70,6 +72,8 @@
 			\item Une chaîne non terminée est une erreur
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P2621}{https://wg21.link/P2621R2}
 \end{frame}
 
 \subsection*{Encodage}
@@ -84,6 +88,9 @@
 		\item Caractères non-encodables sont mal formés
 		\item Notion de \textit{literal encoding} et \textit{environnement encoding} et API d'interrogation
 	\end{itemize}
+
+	\proptwo{P2558}{https://wg21.link/P2558R2}
+		{P1854}{https://wg21.link/P1854R4}
 \end{frame}
 
 \subsection*{Types}
@@ -99,6 +106,8 @@
 		sub_sat(INT_MIN, 1);            // INT_MIN
 		add_sat<unsigned char>(255, 4); // 255
 	\end{minted}
+
+	\prop{P0543}{https://wg21.link/P0543R3}
 \end{frame}
 
 \subsection*{Variables}
@@ -119,6 +128,8 @@
 	\begin{minted}{cpp}
 		auto  [x, y, _] = f();
 	\end{minted}
+
+	\prop{P2169}{https://wg21.link/P2169R4}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -134,6 +145,10 @@
 		\item Possibilité d'utiliser \mintinline{cpp}|std::weak_ptr| en tant que clé de conteneur associatif
 		\item \mintinline{cpp}|std::submdspan()| retourne une vue sur un sous-ensemble d'un \mintinline{cpp}|std::mdspan|
 	\end{itemize}
+
+	\propthree{p0843}{https://wg21.link/p0843r9}
+		{P1901}{https://wg21.link/P1901R2}
+		{P2630}{https://wg21.link/P2630R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -142,6 +157,9 @@
 		\item Support de \mintinline{cpp}|std::string_view| par \mintinline{cpp}|std::stringstream|
 		\item Interfaçage de \mintinline{cpp}|std::bitset| avec \mintinline{cpp}|std::string_view|
 	\end{itemize}
+
+	\proptwo{P2495}{https://wg21.link/P2495R3}
+		{P2697}{https://wg21.link/P2697R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -151,6 +169,8 @@
 		
 \note[item]{Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'\textit{initializer list} puis vers le conteneur}
 	\end{itemize}
+
+	\prop{P2752}{https://wg21.link/P2752R2}
 \end{frame}
 
 \subsection*{Algorithme}
@@ -176,6 +196,7 @@
 		linalg::scale(2.0, x); // x = 2.0 * x
 	\end{minted}
 
+	\prop{P1673}{https://wg21.link/P1673R12}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -183,6 +204,8 @@
 	\begin{itemize}
 		\item Versions membres de \mintinline{cpp}|std::visit()| et \mintinline{cpp}|std::visit_format_arg()|
 	\end{itemize}
+
+	\prop{P2637}{https://wg21.link/P2637R3}
 \end{frame}
 
 \subsection*{Ratio}
@@ -191,6 +214,8 @@
 	\begin{itemize}
 		\item Ajout des préfixes \mintinline{cpp}|quecto|, \mintinline{cpp}|ronto|, \mintinline{cpp}|ronna| et \mintinline{cpp}|quetta|
 	\end{itemize}
+
+	\prop{P2734}{https://wg21.link/P2734R0}
 \end{frame}
 
 \subsection*{constexpr}
@@ -204,6 +229,8 @@
 			\item \mintinline{cpp}|std::function_ref|, \mintinline{cpp}|std::function| et \mintinline{cpp}|std::any| \mintinline{cpp}|constexpr|
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P2738}{https://wg21.link/P2738R1}
 \end{frame}
 
 \subsection*{Parameters pack}
@@ -221,6 +248,8 @@
 
 		first_plus_last(1, 2, 10);  // 11
 	\end{minted}
+
+	\prop{P2662}{https://wg21.link/P2662R3}
 \end{frame}
 
 \subsection*{Gestion mémoire}
@@ -230,6 +259,8 @@
 		\item \mintinline{cpp}|std::is_within_lifetime()| indique si l'objet pointé est vivant
 		\item \ldots{} en particulier si un membre d'une union est active
 	\end{itemize}
+
+	\prop{P2641}{https://wg21.link/P2641R4}
 \end{frame}
 
 \subsection*{Multithreading}
@@ -239,6 +270,9 @@
 		\item \textit{hazard pointers} : unique écrivain, multiples lecteurs
 		\item Structure de donnée \textit{read-copy update} : planification d'actions (p.ex. suppression) à réaliser plus tard
 	\end{itemize}
+
+	\proptwo{P2530}{https://wg21.link/P2530R3}
+		{P2545}{https://wg21.link/P2545R4}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -257,6 +291,9 @@
 \note[item]{Les fonctions n'ont pas besoin d'être copiables ni déplaçables}
 		\end{itemize}
 	\end{itemize}
+
+	\proptwo{P2548}{https://wg21.link/P2548R6}
+		{P0792}{https://wg21.link/P0792R14}
 \end{frame}
 
 \subsection*{Flux}
@@ -293,6 +330,11 @@
 		format("{:#018X}", reinterpret_cast<uintptr_t>(&i));
 		// 0X00007FFE0325C4E4
 	\end{minted}
+
+	\propfour{P2918}{https://wg21.link/P2918R2}
+		{P2587}{https://wg21.link/P2587R3}
+		{P2757}{https://wg21.link/P2757R3}
+		{P2510}{https://wg21.link/P2510R3}
 \end{frame}
 
 \subsection*{Durées et temps}
@@ -301,6 +343,8 @@
 	\begin{itemize}
 		\item Spécialisation de \mintinline{cpp}|std::hash| pour \mintinline{cpp}|std::chrono|
 	\end{itemize}
+
+	\prop{P2592}{https://wg21.link/P2592R3}
 \end{frame}
 
 \subsection*{Système de fichiers}
@@ -313,6 +357,8 @@
 		 
 		\item \mintinline{cpp}|native_handle()| retourne ce descripteur
 	\end{itemize}
+
+	\prop{P1759}{https://wg21.link/P1759R6}
 \end{frame}
 
 \subsection*{Compilation et implémentation}
@@ -323,5 +369,7 @@
 		\item \mintinline{cpp}|std::breakpoint_if_debugging| : point d'arrêt si l'exécution se fait dans un debugger
 		\item \mintinline{cpp}|std::is_debugger_present()| permet de savoir si l'exécution se fait dans un debugger
 	\end{itemize}
+
+	\prop{P2546}{https://wg21.link/P2546R5}
 \end{frame}
 \end{document}

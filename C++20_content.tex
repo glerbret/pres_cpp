@@ -79,6 +79,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:25,positionColumn:1,positionLineNumber:25,selectionStartColumn:1,selectionStartLineNumber:25,startColumn:1,startLineNumber:25),source:'%23include+%3Ciostream%3E%0A%0A%23if+0%0A%23include+%3Cnumeric%3E%0A%23endif%0A%0Aint+main()%0A%7B%0A%23if+__has_cpp_attribute(deprecated)%0A++std::cout+%3C%3C+%22__has_cpp_attribute(deprecated)+%22+%3C%3C+__has_cpp_attribute(deprecated)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A%23if+__has_cpp_attribute(toto)%0A++std::cout+%3C%3C+%22__has_cpp_attribute(toto)+%22+%3C%3C+__has_cpp_attribute(toto)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A%23if+__cpp_attributes%0A++std::cout+%3C%3C+%22__cpp_attributes+%22+%3C%3C+__cpp_attributes+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A%23if+__cpp_lib_gcd_lcm%0A++std::cout+%3C%3C+%22__cpp_lib_gcd_lcm+%22+%3C%3C+__cpp_lib_gcd_lcm+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0941}{https://wg21.link/P0941R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -106,6 +108,9 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring_view%3E%0A%23include+%3Csource_location%3E%0A%0Avoid+log(const+std::string_view%26+message,+const+std::source_location%26+location+%3D+std::source_location::current())%0A%7B%0A++std::cout+%3C%3C+location.file_name()+%3C%3C+%22:%22%0A++++++++++++%3C%3C+location.line()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+location.function_name()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+message+%3C%3C+!'%5Cn!'%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++log(%22Hello+world!!%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0754}{https://wg21.link/P0754R2}
+		{P1208}{https://wg21.link/P1208R6}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -118,6 +123,8 @@
 			\item Alternative à des constructions à base de macros de compilation ou de SFINAE
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P0892}{https://wg21.link/P0892R2}
 \end{frame}
 
 \subsection*{Types}
@@ -155,6 +162,8 @@
 			\item Décalage à droite : décalage arithmétique avec extension du signe
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P1236}{https://wg21.link/P1236R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -184,6 +193,9 @@
 			\item Suppression d'ambigüité sur les surcharges et spécialisation de template
 		\end{itemize}
 	\end{block}
+
+	\proptwo{P0482}{https://wg21.link/P0482R6}
+		{P1041}{https://wg21.link/P1041R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -205,6 +217,8 @@
 		  S() = default;
 		};
 	\end{minted}
+
+	\prop{P1008}{https://wg21.link/P1008R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -238,6 +252,8 @@
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+S%0A%7B%0A++int+a%3B%0A++int+b%3B%0A++int+c%7B0%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++S+s%7B.a+%3D+1,+.b+%3D+2%7D%3B%0A++++std::cout+%3C%3C+s.a+%3C%3C+%22+%22+%3C%3C+s.b+%3C%3C+%22+%22+%3C%3C+s.c+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++S+s%7B.a+%3D+1,+.b+%3D+2,+.c+%3D+3%7D%3B%0A++++std::cout+%3C%3C+s.a+%3C%3C+%22+%22+%3C%3C+s.b+%3C%3C+%22+%22+%3C%3C+s.c+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++S+s%7B.b+%3D+2,+.a+%3D+1%7D%3B+++//+Erreur+sur+l!'ordre%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%0Aunion+U%0A%7B%0A++int+a%3B%0A++const+char*+b%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++U+u+%3D+%7B+.b+%3D+%22foo%22+%7D%3B%0A++++std::cout+%3C%3C+u.b+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++U+u+%3D+%7B+.a+%3D+1,+.b+%3D+%22asdf%22+%7D%3B++//+Erreur+:+un+seul+membre+sur+les+unions%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0329}{https://wg21.link/P0329R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -273,6 +289,8 @@
 	\end{minted}
 
 \note[item]{Avant C++20, il fallait définir un constructeur}
+
+	\prop{P0960}{https://wg21.link/P0960R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -299,6 +317,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:10,endLineNumber:8,positionColumn:10,positionLineNumber:8,selectionStartColumn:10,selectionStartLineNumber:8,startColumn:10,startLineNumber:8),source:'%23include+%3Cbit%3E%0A%23include+%3Ciostream%3E%0A+%0Aint+main()%0A%7B%0A++if(std::endian::native+%3D%3D+std::endian::big)%0A++++std::cout+%3C%3C+%22big-endian%5Cn%22%3B%0A++else+if(std::endian::native+%3D%3D+std::endian::little)%0A++++std::cout+%3C%3C+%22little-endian%5Cn%22%3B%0A++else%0A++++std::cout+%3C%3C+%22mixed-endian%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0463}{https://wg21.link/P0463R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -328,6 +348,8 @@
 	\begin{itemize}
 		\item Sur une \textit{unscoped} \mintinline{cpp}|enum|
 	\end{itemize}
+
+	\prop{P1099}{https://wg21.link/P1099R5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -357,6 +379,8 @@
 	\end{minted}
 
 \note[item]{Casse du code, mais simple à corriger et plus cohérent}
+
+	\prop{P1957}{https://wg21.link/P1957R2}
 \end{frame}
 
 \subsection*{Classe}
@@ -373,6 +397,8 @@
 		  S() noexcept(false) = default;
 		};
 	\end{minted}
+
+	\prop{P1286}{https://wg21.link/P1286R2}
 \end{frame}
 
 \subsection*{Sémantique de déplacement}
@@ -401,6 +427,8 @@
 
 \note[item]{Tous ces exemples sont des cas où il y a une copie en C++17 et un déplacement possible en C++20}
 \note[item]{Il y a plusieurs autres cas}
+
+	\prop{P1825}{https://wg21.link/P1825R0}
 \end{frame}
 
 \subsection*{Opérateurs}
@@ -439,6 +467,10 @@
 
 		\item Supporté par la bibliothèque standard
 	\end{itemize}
+
+	\propthree{P1185}{https://wg21.link/P1185R2}
+		{P1186}{https://wg21.link/P1186R3}
+		{P0768}{https://wg21.link/P0768R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -527,6 +559,8 @@
 		      int i;
 		} } }
 	\end{minted}
+
+	\prop{P1094}{https://wg21.link/P1094R2}
 \end{frame}
 
 \subsection*{Modules}
@@ -568,6 +602,8 @@
 \note[item]{La bibliothèque standard est restée aux inclusions}
 \note[item]{Mais peut être importée via \mintinline{cpp}|import|}
 	\end{alertblock}
+
+	\prop{P1103}{https://wg21.link/P1103R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -853,6 +889,8 @@
 
 \note[item]{La capacité est alors supérieure ou égale à la taille}
 	\end{exampleblock}
+
+	\prop{P0966}{https://wg21.link/P0966R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -880,6 +918,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::string+foo+%3D+%22Hello+world%22%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.starts_with(%22Hello%22)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.ends_with(%22monde%22)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0457}{https://wg21.link/P0457R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -899,6 +939,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo%7B%7B1,+%22foo%22%7D,+%7B42,+%22bar%22%7D%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+foo.contains(42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+foo.contains(38)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0458}{https://wg21.link/P0458R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -932,6 +974,9 @@
 		foo.find("abc");
 		foo.find("def"sv);
 	\end{minted}
+
+	\proptwo{P0919}{https://wg21.link/P0919R3}
+		{P1690}{https://wg21.link/P1690R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -939,6 +984,8 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|remove()|, \mintinline{cpp}|remove_if()| et \mintinline{cpp}|unique()| retournent le nombre d'éléments supprimés
 	\end{itemize}
+
+	\prop{P0646}{https://wg21.link/P0646R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -974,6 +1021,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdF6CvWNzTltQ929JWUSAJS2qF7EyOwc5rHByN5YANQmsW4NxEwAnvvYJhoAguub25h7B05DxJis55c318EEOyxMwQgs0%2BJniVmuOz2YM%2BkMhTC8RB2/FQjwAIjshugQCAiAB9I6nCDmMzI4nA2Lgq6wjEELEoRa/fZuJlI1CoAB0aQAXpggY9mQc9mYzCYAKxuBjE/aU6n8YgQNAMIY7eGI5A7ECs1DAiGw0Ey6k0uloBH8lnqpks4lCkUUmF6%2BKo%2B2QzHYk2Mg5W4ViiVSu260FO672/XOlUIlHItFG7F4gknIlgto7MykHaitOSVPpgAcgfJBpdtLdDLNguRnLwPL5lsFUvFku9/qpsLlCoEytVKPVmuROpbkNDuuprvpptrbh2Fs9deFNulYcDYdH7rLk/rvqbBqXwYD0OHO1oAmAWrFVlF6P2l6TaezGZ2WbTsViaa4IsdC4PXZ2EQa0dHcbEMcCZ9p%2BA4xmOHoCpOv7EJW1azGu84Nn6hasvKiqdhGU4aj%2BDT9tSQ7gUWxqlhOOHkdaqGLh%2BB4rmRM7rt6KFbiGtE3OxHDzLQnCirwfgcFopCoJwzKWNYGKLMsDzrDwpAEJoXHzAA1iAooaPonCSPxinCZwvAKCAGkKYJXGkHAsBIJgqiYMgEZkBQEANMACjKIYVRCAgqAAO4CXJaAsEkdBMDUbkhLQnk%2BQJQkBUF9AxC5zBJAoXkEKQsV0NEoSsKsvAZfFADyCKRb5unWbZVzEC5%2BmkOVyB1PgAm8PwggiGI7BSDIgiKCo6imaQuhtAYRgoNY1j6HgESGZA8yoEkNSGRwAC0mJXqY4mWGYGg7EtADqYi0Dtu3WQQxw7UkmDoIYjjILwqAAG7RMQeBYNNQKkMQXiCHgbAACpsrQb3zAoUkrIMtLBGFHleaV3C8KdmCrHJ3nHEkincbxOn9SJHDYDZdlEMQOyqDmABsS2k5IOzAMg6oQKdX3KYhEBiVYlhprghAkEKsRcLM8Po/MCBvFgMTvap6maRw2mkNFd01YZxmC1LZhY0JOMC6ZszzI9xBpM4khAA%3D%3D}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0325}{https://wg21.link/P0325R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -998,6 +1047,9 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cvector%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+12,+2,+56,+18,+33%7D%3B%0A++std::erase_if(foo,+%5B%5D(int+i)+%7Breturn+i+%3E+20%3B%7D)%3B%0A%0A++for(int+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::map%3Cint,+std::string%3E+bar%7B%7B5,+%22a%22%7D,+%7B12,+%22b%22%7D,+%7B2,+%22c%22%7D,+%7B42,+%22d%22%7D%7D%3B%0A++std::erase_if(bar,+%5B%5D(std::pair%3Cint,+std::string%3E+i)+%7Breturn+i.first+%3E+20%3B%7D)%3B%0A%0A++for(auto+i+:+bar)%0A++%7B%0A++++std::cout+%3C%3C+i.first+%3C%3C+%22+:+%22+%3C%3C+i.second+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P1209}{https://wg21.link/P1209R0}
+		{P1115}{https://wg21.link/P1115R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1020,6 +1072,10 @@
 		span<int> s1{foo};
 		span<int> s2(foo.data(), 3);
 	\end{minted}
+
+	\propthree{P0122}{https://wg21.link/P0122R7}
+		{P1024}{https://wg21.link/P1024R3}
+		{P1227}{https://wg21.link/P1227R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1082,6 +1138,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:25,positionColumn:1,positionLineNumber:25,selectionStartColumn:1,selectionStartLineNumber:25,startColumn:1,startLineNumber:25),source:'%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+10,+15,+20%7D%3B%0A++std::shift_left(foo.begin(),+foo.end(),+2)%3B%0A++//+%7B15,+20,+%3F,+%3F%7D%0A++for(int+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%0A++std::vector%3Cint%3E+bar%7B5,+10,+15,+20%7D%3B%0A++std::shift_right(bar.begin(),+bar.end(),+1)%3B%0A++//+%7B%3F,+5,+10,+15%7D%0A++for(int+i+:+bar)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0769}{https://wg21.link/P0769R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1112,6 +1170,9 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::has_single_bit(4u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::has_single_bit(7u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_ceil(7u)++%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_ceil(8u)++%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_floor(7u)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::bit_width(7u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0556}{https://wg21.link/P0556R3}
+		{P1956}{https://wg21.link/P1956R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1144,6 +1205,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:6,startColumn:1,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::rotl(6u,+2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::rotr(6u,+1)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::popcount(6u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0553}{https://wg21.link/P0553R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1162,6 +1225,8 @@
 			\item Uniquement sur des types \textit{trivially copyable}
 		\end{itemize}
 	\end{alertblock}
+
+	\prop{P0476}{https://wg21.link/P0476R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1170,6 +1235,8 @@
 		\item Ajout de fonctions de comparaison d'entier : \mintinline{cpp}|std::cmp_equal()|, \mintinline{cpp}|std::cmp_not_equal()|, \mintinline{cpp}|std::cmp_less()|, \mintinline{cpp}|std::cmp_greated()|, \mintinline{cpp}|std::cmp_less_equal()| et \mintinline{cpp}|std::cmp_greater_equal()|
 		\item Permettent la comparaison signé / non signé sans promotion
 	\end{itemize}
+
+	\prop{P0586}{https://wg21.link/P0586R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1198,6 +1265,9 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::midpoint(2,+4)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::midpoint(2,+5)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::midpoint(5,+2)+%3C%3C+%22%5Cn%22%3B+%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0631}{https://wg21.link/P0631R8}
+		{P0811}{https://wg21.link/P0811R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1224,6 +1294,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxBIAHKQADqgKhE4MHt6%2BekkpjgJBIeEsUTFc8XaYDmlCBEzEBBk%2Bfly2mPZ5DDV1BAVhkdF6CrX1jVktQ929RSUSAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4fILEwECBdXtzfBBLuvwQgsy%2BJgA7FYbrtdkN0CAUIs/gc3EjoQRYSB6MQEhAuBpSLszHjdhpZk9kYd9mYzCYAKxuBjmanrCHXKEwuFoLyIw4o9kY6LY3H4wn4jQAOi4pKRKMZtPpsuZXzZaI5CLJvJV/KxOKJIuJYrMUp5FNldIZVIOLOV6M53PJblR6Mxgt1RPF6yN9sp1LNCqtjtVXPVFL5zp1wrdYsknplFt9FsVkID8KD0pDmrDQoJkZpMZNcflCf9fNtwYdoYF4ezorFADY8w7TYWmcXNaW0%2BWM5Ws3rxaCG965eaW0rk%2B3jZ2nd3XTXYgOm8PLaOS2qO8nMzP9QBOecFxeJ1lj1cT9fTiP4yVlwfxkc3MEAES%2BHHmtE4NN4fg4WlIqE4yMs1jQosyyPBsPCkAQmjPvMADWIA0nir4cJIH5QT%2BnC8AoIB4pBX7PqQcCwEgmCqJUXIkOQlB1MACjKIYbRCAgqAAO6fuBaAsAkdBvGkdEhLQjEsZ%2B34cVxmIgDRzAJAoTEEKQol0NEoSsKsvAKZiADyXKCaxaEkZU1zEDRGGkPpyA1Pgn68PwggiGI7BSDIgiKCo6h4aQugtAYRgoNY1j6HgERYZA8yoAkHRYRwAC0MIHPepgAZYhK7FFADqYi0ClqUkQQxBMClCSYOghiOMgvCoAAbtExB4FgwVAqQxBeIIeBsAAKqgnj1fMCjASsgxosEfEMUxuncLwuWYKs4HMXlCRQS%2Bb6oe5v4cNgpHIORxC7KosS1lFtaSLswDIMguwQLlzUwaSED/lYlj4rghAkJS6yShNC3zAgZxYDEDVwQh%2BicChpDCeVJlYThn1AxwZjLd%2Bq0fXhszzFVxApM4khAA}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0811}{https://wg21.link/P0811R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1256,6 +1328,9 @@
 			\item \href{http://ericniebler.com/}{Blog d'Eric Niebler\linklogo}
 		\end{itemize}
 	\end{block}
+
+	\proptwo{P0896}{https://wg21.link/P0896R4}
+		{P1035}{https://wg21.link/P1035R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1596,6 +1671,8 @@
 		// Seuls 24 caracteres sont lus
 		cin >> setw(24) >> a;
 	\end{minted}
+
+	\prop{P0053}{https://wg21.link/P0053R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1636,6 +1713,8 @@
 			\item Overload 166
 		\end{itemize}
 	\end{block}
+
+	\prop{P0645}{https://wg21.link/P0645R10}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2058,6 +2137,9 @@
 	\begin{minted}{cpp}
 		double* a = new double[]{1, 2, 3};
 	\end{minted}
+
+	\proptwo{P0674}{https://wg21.link/P0674R1}
+		{P1009}{https://wg21.link/P1009R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2087,6 +2169,8 @@
 			\item La destruction doit être appelée explicitement
 		\end{itemize}
 	\end{alertblock}
+
+	\prop{P0722}{https://wg21.link/P0722R3}
 \end{frame}
 
 \subsection*{Date et heure}
@@ -2122,6 +2206,8 @@
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::utc_clock::now())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::gps_clock::now())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::tai_clock::now())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T%7D%22,+std::chrono::file_clock::now())+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0355}{https://wg21.link/P0355R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2169,6 +2255,8 @@
 \note[item]{Et identique à ceux utilisés dans \mintinline{cpp}|std::format|}
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P0355}{https://wg21.link/P0355R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2199,6 +2287,8 @@
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P0355}{https://wg21.link/P0355R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2252,6 +2342,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:39,endLineNumber:13,positionColumn:39,positionLineNumber:13,selectionStartColumn:39,selectionStartLineNumber:13,startColumn:39,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Ausing+namespace+std::literals::chrono_literals%3B%0A%0Aint+main()%0A%7B%0A++auto+tp+%3D+std::chrono::sys_days%7B2016y/std::chrono::May/29d%7D+%2B+7h+%2B+30min+%2B+6s+%2B+153ms%3B+%0A++std::chrono::zoned_time+zt+%3D+%7B%22Asia/Tokyo%22,+tp%7D%3B%0A%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T+%25Z%7D%22,+tp)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T+%25Z%7D%22,+zt)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0355}{https://wg21.link/P0355R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2270,6 +2362,8 @@ auto date2 = Sunday[3]/May/2016y;
 \note[item]{ICU : \textit{International Components for Unicode}}
 \note[item]{ICU peut être une alternative à \mintinline{cpp}|Boost.DateTime|}
 	\end{block}
+
+	\prop{P0355}{https://wg21.link/P0355R7}
 \end{frame}
 
 \subsection*{Range-based for loop}
@@ -2309,6 +2403,9 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+8,+5,+56,+42%7D%3B%0A++for(size_t+i+%3D+0%3B+const+auto%26+bar+:+foo)+%0A++%7B%0A++++std::cout+%3C%3C+bar+%3C%3C+%22+%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++%2B%2Bi%3B+%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0614}{https://wg21.link/P0614R1}
+		{P0962}{https://wg21.link/P0962R1}
 \end{frame}
 
 \subsection*{Compile-time}
@@ -2341,6 +2438,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:42,positionColumn:1,positionLineNumber:42,selectionStartColumn:1,selectionStartLineNumber:42,startColumn:1,startLineNumber:42),source:'%23include+%3Ciostream%3E%0A%0Aconsteval+int+sqr(int+n)%0A%7B%0A++return+n+*+n%3B%0A%7D%0A%0Aconstexpr+int+sqr2(int+n)%0A%7B%0A++return+n+*+n%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++constexpr+int+foo+%3D+sqr(100)%3B%0A++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++constexpr+int+x+%3D+10%3B%0A++++constexpr+int+foo+%3D+sqr(x)%3B%0A++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++int+x+%3D+100%3B%0A++++int+foo+%3D+sqr(x)%3B%0A++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%23endif%0A%0A%23if+0%0A++%7B%0A++++int+x+%3D+100%3B%0A++++int+foo+%3D+sqr2(x)%3B%0A++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P1073}{https://wg21.link/P1073R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2353,6 +2452,8 @@ auto date2 = Sunday[3]/May/2016y;
 			\item Adresse le \textit{static initialization order fiasco}
 		\end{itemize}
 	\end{itemize}
+
+	\prop{P1143}{https://wg21.link/P1143R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2379,6 +2480,11 @@ auto date2 = Sunday[3]/May/2016y;
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
+
+	\propfour{P1064}{https://wg21.link/P1064R0}
+		{P1002}{https://wg21.link/P1002R1}
+		{P1330}{https://wg21.link/P1330R0}
+		{P1331}{https://wg21.link/P1331R2}
 \end{frame}
 
 \subsection*{structured binding}
@@ -2416,6 +2522,10 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple+foo%7B5,+42%7D%3B%0A%0A++auto%5Ba,+b%5D+%3D+foo%3B%0A++auto+f1+%3D+%5Ba%5D+%7B+return+a%3B+%7D%3B%0A++auto+f2+%3D+%5B%3D%5D+%7B+return+b%3B+%7D%3B%0A%0A++std::cout+%3C%3C+f1()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+f2()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\propthree{P0961}{https://wg21.link/P0961R1}
+		{P1091}{https://wg21.link/P1091R3}
+		{P1381}{https://wg21.link/P1381R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2445,6 +2555,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\end{minted}
 
 \note[item]{Exemple invalide en C++17 à cause du \mintinline{cpp}|get()| de \mintinline{cpp}|shared_ptr| qui n'était pas utilisable mais empêchait de rechercher dans le \mintinline{cpp}|namespace| englobant. En C++20 cette fonction n'est pas retenue et on recherche dans le \mintinline{cpp}|namespace|}
+
+	\prop{P0969}{https://wg21.link/P0969R0}
 \end{frame}
 
 \subsection*{Template}
@@ -2478,6 +2590,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\end{minted}
 
 \note[item]{En C++17, il faut utiliser un ensemble de \mintinline{cpp}|char| : \mintinline{cpp}|template<char... Id>|}
+
+	\prop{P0732}{https://wg21.link/P0732R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2509,6 +2623,9 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate%3Cclass+T%3E%0A%23if+1%0AT+foo(T+a,+std::type_identity_t%3CT%3E+b)%0A%23else%0AT+foo(T+a,+T+b)%0A%23endif%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(4.2,+3)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0846}{https://wg21.link/P0846R0}
+		{P0887}{https://wg21.link/P0887R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2532,6 +2649,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cutility%3E%0A%0Atemplate%3Ctypename+T%3E%0Ausing+IntPair+%3D+std::pair%3Cint,+T%3E%3B%0A%0Aint+main()%0A%7B%0A++IntPair%3Cdouble%3E+p0%7B1,+2.0%7D%3B+%0A++IntPair+p1%7B1,+2.0%7D%3B+%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P1814}{https://wg21.link/P1814R0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2592,6 +2711,9 @@ auto date2 = Sunday[3]/May/2016y;
 \note[item]{Exemple de \textit{concept map} : Utilisation de type définissant l'inégalité stricte et la comparaison vers un concept attendant l'inégalité large, implémentation du concept de pile (\textit{stack}) par \mintinline{cpp}|std::vector|}
 		\end{itemize}
 	\end{itemize}
+
+	\proptwo{P0734}{https://wg21.link/P0734R0}
+		{P0898}{https://wg21.link/P0898R3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2896,6 +3018,11 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0A%5B%5B+nodiscard(%22Must+be+checked%22)+%5D%5D+static+int+foo()%0A%7B%0A++return+5%3B%0A%7D%0A%0Astruct+Bar+%7B%0A++%5B%5B+nodiscard+%5D%5DBar()+%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Bar+b%7B%7D%3B%0A%23else%0A++Bar%7B%7D%3B%0A%23endif%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\propfour{P0479}{https://wg21.link/P0479R5}
+		{P0840}{https://wg21.link/P0840R2}
+		{P1771}{https://wg21.link/P1771R1}
+		{P1301}{https://wg21.link/P1301R4}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -2933,6 +3060,9 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++auto+foo+%3D+%5B%5D%3Ctypename+T%3E(T+first,+T+second)+%7B+return+first+%2B+second%3B+%7D%3B%0A%0A++std::cout+%3C%3C+foo(1,+5)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(1.,+5)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%0A++auto+bar+%3D+%5B%5D%3Ctypename+T%3E(std::vector%3CT%3E+vec)+%7B+return+std::size(vec)%3B+%7D%3B%0A%0A++std::cout+%3C%3C+bar(std::vector%3Cint%3E%7B1,+2,+3%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar(std::vector%3Cdouble%3E%7B1.,+2.%7D)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+bar(5)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0315}{https://wg21.link/P0315R4}
+		{P0428}{https://wg21.link/P0428R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2961,6 +3091,9 @@ auto date2 = Sunday[3]/May/2016y;
 		\end{itemize}
 		\item Capture de \textit{structured binding}
 	\end{itemize}
+
+	\proptwo{P0624}{https://wg21.link/P0624R2}
+		{P0409}{https://wg21.link/P0409R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2981,6 +3114,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{itemize}
 		\item Peuvent être \mintinline{cpp}|consteval|
 	\end{itemize}
+
+	\prop{P0780}{https://wg21.link/P0780R2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3011,6 +3146,9 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cfunctional%3E%0A%23include+%3Ciostream%3E%0A%0Aint+foo(int+a,+int+b,+int+c,+int+d)%0A%7B%0A++return+a+*+b+*+c+%2B+d%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(2,+3,+4,+5)+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+bar+%3D+std::bind(%26foo,+2,+3,+4,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+bar(6)+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+baz+%3D+std::bind_front(%26foo,+2,+3,+4)%3B%0A++std::cout+%3C%3C+baz(7)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\proptwo{P0356}{https://wg21.link/P0356R5}
+		{P0357}{https://wg21.link/P0357R3}
 \end{frame}
 
 \subsection*{Multi-threading}
@@ -3023,6 +3161,11 @@ auto date2 = Sunday[3]/May/2016y;
 		\item \mintinline{cpp}|std::atomic_ref| applique des modifications atomiques sur des données non-atomiques qu'il référence
 		\item \mintinline{cpp}|wait()|, \mintinline{cpp}|notify_one()| et \mintinline{cpp}|notify_all()| pour attendre le changement d'état d'un \mintinline{cpp}|std::atomic|
 	\end{itemize}
+
+	\propfour{P0718}{https://wg21.link/P0718R2}
+		{P0020}{https://wg21.link/P0020R6}
+		{P0883}{https://wg21.link/P0883R2}
+		{P0019}{https://wg21.link/P0019R8}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3066,6 +3209,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%0Avoid+foo()%0A%7B%0A++std::cout+%3C%3C+%22Foo%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+1%0A++std::jthread+t(foo)%3B%0A%23else%0A++std::thread+t(foo)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P0660}{https://wg21.link/P0660R10}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3097,6 +3242,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:21,positionColumn:2,positionLineNumber:21,selectionStartColumn:2,selectionStartLineNumber:21,startColumn:2,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Csemaphore%3E%0A+%0Astd::binary_semaphore+signalMainToThread%7B0%7D%3B%0Astd::binary_semaphore+signalThreadToMain%7B0%7D%3B%0A%0Ausing+namespace+std::literals%3B%0A%0Avoid+foo()%0A%7B%0A++signalMainToThread.acquire()%3B%0A++std::cout+%3C%3C+%22%5Bthread%5D+Reception+du+signal%5Cn%22%3B%0A+%0A++std::this_thread::sleep_for(2s)%3B%0A+%0A++std::cout+%3C%3C+%22%5Bthread%5D+Envoi+a+main%5Cn%22%3B%0A++signalThreadToMain.release()%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++std::thread+worker(foo)%3B%0A++std::this_thread::sleep_for(2s)%3B%0A%0A++std::cout+%3C%3C+%22%5Bmain%5D+Envoi+au+thread%5Cn%22%3B%0A++signalMainToThread.release()%3B%0A++signalThreadToMain.acquire()%3B%0A+%0A++std::cout+%3C%3C+%22%5Bmain%5D+Got+the+signal%5Cn%22%3B+//+response+message%0A++worker.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P1135}{https://wg21.link/P1135R6}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3122,6 +3269,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:29,positionColumn:2,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Clatch%3E%0A%23include+%3Cthread%3E%0A%0Aint+main()%0A%7B%0A++const+size_t+nbLatch+%3D+5%3B%0A++std::latch+l1(nbLatch)%3B%0A++std::latch+l2(1)%3B%0A%0A++auto+work+%3D+%5B%26%5D+(int+i)%0A++++++++++++++%7B%0A++++++++++++++++std::cout+%3C%3C+%22Entree+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++++l1.count_down()%3B%0A++++++++++++++++l2.wait()%3B%0A++++++++++++++++std::cout+%3C%3C+%22Sortie+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++%7D%3B%0A%0A++std::cout+%3C%3C+%22Demarrage%5Cn%22%3B%0A++std::jthread+t%5BnbLatch%5D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+nbLatch%3B+%2B%2Bi)%0A++%7B%0A++++t%5Bi%5D+%3D+std::jthread(work,+i)%3B%0A++%7D%0A%0A++l1.wait()%3B%0A++std::cout+%3C%3C+%22Thread+OK%5Cn%22%3B%0A++l2.count_down()%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P1135}{https://wg21.link/P1135R6}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3142,6 +3291,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\node[xshift=-5mm,yshift=6mm] at (current page.south east){%
 		\href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbarrier%3E%0A%23include+%3Cthread%3E%0A%0Aint+main()%0A%7B%0A++const+size_t+nb+%3D+5%3B%0A++std::barrier+b(nb)%3B%0A%0A++auto+work+%3D+%5B%26%5D+(int+i)%0A++++++++++++++%7B%0A++++++++++++++++std::cout+%3C%3C+%22Entree+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++++b.arrive_and_wait()%3B%0A++++++++++++++++std::cout+%3C%3C+%22Milieu+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++++b.arrive_and_wait()%3B%0A++++++++++++++++std::cout+%3C%3C+%22Sortie+foo%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++++++++++++%7D%3B%0A%0A++std::cout+%3C%3C+%22Demarrage%5Cn%22%3B%0A++std::jthread+t%5Bnb%5D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+nb%3B+%2B%2Bi)%0A++%7B%0A++++t%5Bi%5D+%3D+std::jthread(work,+i)%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{\codelogo}};
 	\end{tikzpicture}
+
+	\prop{P1135}{https://wg21.link/P1135R6}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3149,6 +3300,8 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{itemize}
 		\item Nouvelle politique d'exécution vectorisé \mintinline{cpp}|std::unsequenced_policy|
 	\end{itemize}
+
+	\prop{P1001}{https://wg21.link/P1001R2}
 \end{frame}
 
 \subsection*{Coroutines}
@@ -3159,6 +3312,8 @@ auto date2 = Sunday[3]/May/2016y;
 		\item Simplification du développement de code asynchrone
 		\item TS publié en juillet 2017
 	\end{itemize}
+
+	\prop{P0912}{https://wg21.link/P0912R5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3243,6 +3398,8 @@ auto date2 = Sunday[3]/May/2016y;
 		// C++20
 		// Erreur dans les deux cas
 	\end{minted}
+
+	\prop{P1164}{https://wg21.link/P1164R1}
 \end{frame}
 
 \subsection*{Variant}
@@ -3269,6 +3426,8 @@ auto date2 = Sunday[3]/May/2016y;
 		variant<float, long> v;
 		v = 0;                            // C++17 : erreur, C++20 : long
 	\end{minted}
+
+	\prop{P0608}{https://wg21.link/P0608R3}
 \end{frame}
 
 \begin{frame}[fragile]
