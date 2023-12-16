@@ -86,6 +86,21 @@
 	\end{itemize}
 \end{frame}
 
+\subsection*{Types}
+\begin{frame}[fragile]
+	\frametitle{\textit{Saturation arithmétic}}
+	\begin{itemize}
+		\item Fonctions \mintinline{cpp}|std::add_sat()|, \mintinline{cpp}|std::sub_sat()|, \mintinline{cpp}|std::mul_sat()|, \mintinline{cpp}|std::div_sat()| et \mintinline{cpp}|std::saturate_cast()|
+		\item Les calculs dont le résultat est hors borne retournent les plus grandes ou plus petites valeurs représentables
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		add_sat(3, 4);                  // 7
+		sub_sat(INT_MIN, 1);            // INT_MIN
+		add_sat<unsigned char>(255, 4); // 255
+	\end{minted}
+\end{frame}
+
 \subsection*{Variables}
 \begin{frame}[fragile]
 	\frametitle{Placeholders}

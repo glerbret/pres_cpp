@@ -290,7 +290,6 @@
 		enum_to_string(Color::red);  // red
 		enum_to_string(Color(42));   // <unnamed>
 	\end{minted}
-
 \end{frame}
 
 \subsection*{Dépréciation et suppression}
@@ -327,7 +326,11 @@
 		\item Indique un code incorrect, mais bien défini (dont \textit{implementation-defined} et \textit{unspecified behavior})
 		\item Recommandation au compilateur de lever un warning
 		\item Compilateur peut rejeter le code
-		\item Applicable aux lectures de variables non initialisées
+		\item Applicable
+		\begin{itemize}
+		 	\item Aux lectures de variables non initialisées
+		 	\item À l'absence de retour des affectations
+	\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -694,7 +697,6 @@
 		\item Support du \textit{structured binding} sur \mintinline{cpp}|std::extents|
 	\end{itemize}
 \end{frame}
-
 
 \subsection*{Classes}
 \begin{frame}[fragile]
