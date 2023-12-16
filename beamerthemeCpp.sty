@@ -6,6 +6,7 @@
 \RequirePackage{textcomp}		% Caractères complémentaires
 \RequirePackage{fontawesome5}	% Fonte awesome (symboles)
 \RequirePackage[absolute,overlay]{textpos} % Position des mdframed
+\RequirePackage{atbegshi}		% Action en début de page
 
 \mode<presentation>
 
@@ -31,8 +32,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Indicateur de référence de la proposition
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Format du contour
-\mdfdefinestyle{propframe}{
+% Position de la prochaine proposition
+\newcounter{proposalpos}
+
+% Remise à 0 (7pt) de la position en début de la page
+\AtBeginShipout{\setcounter{proposalpos}{7}}
+
+% Format du contour d'une proposition
+\mdfdefinestyle{proposalframe}{
 	backgroundcolor=white,
 	linewidth=1pt,
 	linecolor=teal,
@@ -46,52 +53,20 @@
 	userdefinedwidth=1.2cm,
 }
 
-% Affichage de la référence
-\newcommand{\propblock}[2]{%
-	\begin{mdframed}[style=propframe]%
+% Affichage de la proposition
+\newcommand{\proposalblock}[2]{%
+	\begin{mdframed}[style=proposalframe]%
 		\raggedleft\href{#2}{\textcolor{teal}{{\scriptsize \raisebox{1.1pt}{#1}}{\thinspace\small\faPlayCircle}}}%
 	\end{mdframed}%
-	}
+}
 
-% Affichage de la référence à la position souhaité (en bas à gauche)
-\newcommand{\prop}[2]{%
-	\begin{textblock*}{1cm}(7pt,245pt)%
-		\propblock{\MakeUppercase{#1}}{#2}%
+% Ajout d'une proposition
+\newcommand{\addproposal}[2]{%
+	\begin{textblock*}{1cm}(\value{proposalpos}pt ,245pt)%
+		\proposalblock{\MakeUppercase{#1}}{#2}%
 	\end{textblock*}%
-	}
-\newcommand{\proptwo}[4]{%
-	\begin{textblock*}{1cm}(7pt,245pt)%
-		\propblock{\MakeUppercase{#1}}{#2}%
-	\end{textblock*}%
-	\begin{textblock*}{1cm}(47pt,245pt)%
-		\propblock{\MakeUppercase{#3}}{#4}%
-	\end{textblock*}%
-	}
-\newcommand{\propthree}[6]{%
-	\begin{textblock*}{1cm}(7pt,245pt)%
-		\propblock{\MakeUppercase{#1}}{#2}%
-	\end{textblock*}%
-	\begin{textblock*}{1cm}(47pt,245pt)%
-		\propblock{\MakeUppercase{#3}}{#4}%
-	\end{textblock*}%
-	\begin{textblock*}{1cm}(87pt,245pt)%
-		\propblock{\MakeUppercase{#5}}{#6}%
-	\end{textblock*}%
-	}
-\newcommand{\propfour}[8]{%
-	\begin{textblock*}{1cm}(7pt,245pt)%
-		\propblock{\MakeUppercase{#1}}{#2}%
-	\end{textblock*}%
-	\begin{textblock*}{1cm}(47pt,245pt)%
-		\propblock{{#3}}{#4}%
-	\end{textblock*}%
-	\begin{textblock*}{1cm}(87pt,245pt)%
-		\propblock{{#5}}{#6}%
-	\end{textblock*}%
-	\begin{textblock*}{1cm}(127pt,245pt)%
-		\propblock{\MakeUppercase{#7}}{#8}%
-	\end{textblock*}%
-	}
+	\setcounter{proposalpos}{40 + \value{proposalpos}}%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format des blocs (block, alertblock et exampleblock)
