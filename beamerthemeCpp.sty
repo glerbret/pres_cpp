@@ -26,8 +26,31 @@
 
 % Commande pour ajouter un logo sur les liens
 \newcommand{\linklogo}{\textsuperscript{\tiny\textcolor{teal}{\thickspace\faExternalLink*}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exemple de code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Position du prochaine exemple
+\newcounter{codepos}
+
+% Remise à 0 (345pt) de la position en début de la page
+\AtBeginShipout{\setcounter{codepos}{345}}
+
 % Commande pour le logo du lien sur les exemples de code
-\newcommand{\codelogo}{\textcolor{teal}{\Large \faPlayCircle}}
+\newcommand{\codelogo}{\textcolor{teal}{\small\faPlayCircle}}
+
+% Ajout d'un exemple de code
+\newcommand{\sample}[1]{%
+	\begin{textblock*}{1cm}(\value{codepos}pt, 254pt)%
+		\href{#1}{\textcolor{teal}{\small\faPlayCircle}}%
+	\end{textblock*}%
+	\setcounter{codepos}{\value{codepos} - 15}%
+}
+
+% Environnement permettant de supporter les % et # dans l'URL
+\newenvironment{codesample}
+{\catcode`\%=12 \catcode`\#=12}
+{\catcode`\%=14 \catcode`\#=6}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Indicateur de référence de la proposition
@@ -62,7 +85,7 @@
 
 % Ajout d'une proposition
 \newcommand{\addproposal}[2]{%
-	\begin{textblock*}{1cm}(\value{proposalpos}pt ,245pt)%
+	\begin{textblock*}{1cm}(\value{proposalpos}pt, 245pt)%
 		\proposalblock{\MakeUppercase{#1}}{#2}%
 	\end{textblock*}%
 	\setcounter{proposalpos}{40 + \value{proposalpos}}%
