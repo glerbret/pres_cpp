@@ -95,9 +95,9 @@
 % Format des blocs (block, alertblock et exampleblock)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Coloration
-\definecolor{example_green}{RGB}{0,0.6,0}
 \setbeamercolor{block title}{bg=teal,fg=white}
-\setbeamercolor{block title example}{bg=green!60!black,fg=white}
+\colorlet{example_green}{green!60!black}
+\setbeamercolor{block title example}{bg=example_green,fg=white}
 
 % Pas de degrade sur la coloration des blocs (block, alertblock et exampleblock)
 \pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
@@ -107,21 +107,21 @@
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \mdfdefinestyle{blockframe}{
 	backgroundcolor=white,
-	linewidth=0pt,
+	linewidth=1pt,
 	linecolor=black,
-	roundcorner=5pt,
+	roundcorner=4.5pt,
 	shadow=true,
 	shadowsize=5pt,
 	skipabove=5pt,
 	skipbelow=7pt,
-	innerleftmargin=4pt,
-	innerrightmargin=4pt,
-	innertopmargin=5pt,
+	innerleftmargin=3.9pt,
+	innerrightmargin=3.9pt,
+	innertopmargin=4.8pt,
 	innerbottommargin=1pt
 }
-\surroundwithmdframed[style=blockframe]{block}
-\surroundwithmdframed[style=blockframe]{alertblock}
-\surroundwithmdframed[style=blockframe]{exampleblock}
+\surroundwithmdframed[style=blockframe, linecolor=teal]{block}
+\surroundwithmdframed[style=blockframe, linecolor=red!75!black]{alertblock}
+\surroundwithmdframed[style=blockframe, linecolor=example_green]{exampleblock}
 \addtobeamertemplate{block begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
 \addtobeamertemplate{block alerted begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
 \addtobeamertemplate{block example begin}{\vskip -\bigskipamount \setlength{\leftmargini}{0.55cm}}{}
@@ -134,7 +134,7 @@
 	backgroundcolor=white,
 	linewidth=0.4pt,
 	linecolor=black,
-	roundcorner=5pt,
+	roundcorner=4.5pt,
 	shadow=true,
 	shadowsize=5pt,
 	skipabove=5pt,
