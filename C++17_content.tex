@@ -33,9 +33,6 @@
 	\begin{itemize}
 		\item Suppression de \mintinline{cpp}|register| (qui reste un mot réservé)
 		\item Suppression des opérateurs d'incrément sur les booléens
-
-\note[item]{\mintinline{cpp}|operator++| déjà déprécié en C++98}
-
 		\item Suppression de \mintinline{cpp}|std::auto_ptr|
 		\item Suppression de \mintinline{cpp}|std::random_shuffle()|
 		\item Suppression des anciens mécanismes fonctionnels : \mintinline{cpp}|std::bind1st()|, \mintinline{cpp}|std::bind2nd()|, \ldots{}
@@ -575,7 +572,7 @@
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{Bref les autres restrictions continuent de s'appliquer}
+\note[item]{Bref, les autres restrictions continuent de s'appliquer}
 \note[item]{Pour résumer, C++14 a levé l'interdiction de membres initialisés par défaut, et C++17 assoupli celle sur \og pas d'héritage\fg{}}
 
 	\begin{codesample}
@@ -600,7 +597,7 @@
 
 	\begin{minted}{cpp}
 		auto x1 = { 1, 2 };   // std::initializer_list<int>
-		auto x2 = { 1, 2.0 }; // Erreur
+		auto x2 = { 1, 2.0 }; // Erreur : types différents
 		auto x3{ 1, 2 };      // Erreur : multiples elements
 		auto x4 = { 3 };      // std::initializer_list<int>
 		auto x5{ 3 };         // int
@@ -1293,11 +1290,6 @@
 		Baz baz(0); // OK (Ambigu en C++11)
 	\end{minted}
 
-\note[item]{En C++11, \mintinline{cpp}|Bar| hérite de deux constructeurs - l'un avec deux paramètres \mintinline{cpp}|int| sans valeur par défaut et l'autre avec un paramètre \mintinline{cpp}|int| qui est surchargé par le constructeur de \mintinline{cpp}|Bar|}
-\note[item]{En C++11, \mintinline{cpp}|Baz| hérite de deux constructeurs - l'un avec deux paramètres \mintinline{cpp}|int| sans valeur par défaut et l'autre avec un paramètre \mintinline{cpp}|int| - et défini un constructeur avec deux \mintinline{cpp}|int| dont un avec une valeur par défaut}
-\note[item]{En C++17, \mintinline{cpp}|Bar| hérite d'un constructeur avec deux paramètres \mintinline{cpp}|int| dont une valeur par défaut et défini un constructeur avec un paramètre \mintinline{cpp}|int|}
-\note[item]{En C++17, \mintinline{cpp}|Baz|  hérite d'un constructeur avec deux paramètres \mintinline{cpp}|int| dont un avec une valeur par défaut qu'il redéfini}
-
 	\addproposal{P0136}{https://wg21.link/P0136R1}
 \end{frame}
 
@@ -1338,8 +1330,6 @@
 	\begin{block}{Motivation}
 		\begin{itemize}
 			\item Comportement différent d'un destructeur en présence d'exception
-
-\note[item]{P.ex. rollback}
 		\end{itemize}
 	\end{block}
 
@@ -1370,7 +1360,6 @@
 		\item Ni de \textit{make helpers}
 	\end{itemize}
 
-\note[item]{Généralisation de la déduction de paramètres templates aux constructeurs}
 \note[item]{Avant la déduction ne fonctionnait que pour les fonctions membres, pas pour les constructeurs}
 
 	\begin{minted}{cpp}
@@ -1382,8 +1371,6 @@
 		pair p(2, 4.5);
 		tuple t(4, 3, 2.5);
 	\end{minted}
-
-\note[item]{Fonctionne avec \mintinline{cpp}|pair p()|, \mintinline{cpp}|pair p\{\}| et \mintinline{cpp}|pair()| mais pas, pour l'instant, avec \mintinline{cpp}|pair\{\}|}
 
 	\addproposal{P0091}{https://wg21.link/P0091R3}
 \end{frame}
@@ -1425,8 +1412,6 @@
 			tuple<int> t(1, 2, 3);  // Erreur
 		\end{minted}
 	\end{alertblock}
-
-\note[item]{Il faut donc fournir tous les paramètres templates ou aucun}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1502,8 +1487,6 @@
 	\frametitle{Capture de \mintinline[style=white]{cpp}|*this|}
 	\begin{itemize}
 		\item Capture \mintinline{cpp}|*this| par valeur
-
-\note[item]{Jusqu'à présent, on ne pouvait pas capturer la classe courante, seulement des attributs de celle-ci}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1557,8 +1540,6 @@
 	\begin{itemize}
 		\item Implicitement \mintinline{cpp}|constexpr| lorsque les exigences sont satisfaites
 	\end{itemize}
-
-\note[item]{Les lambdas sont donc \mintinline{cpp}|constexpr| par défaut}
 
 	\begin{minted}{cpp}
 		auto ID = [] (int n) { return n; };
@@ -1682,9 +1663,6 @@
 			\item \mintinline{cpp}|is_swappable_with|, \mintinline{cpp}|is_swappable|, \mintinline{cpp}|is_nothrow_swappable_with| et \mintinline{cpp}|is_nothrow_swappable| : objets échangeables
 			\item \mintinline{cpp}|is_callable| et \mintinline{cpp}|is_nothrow_callable| : objet appelable
 			\item \mintinline{cpp}|void_t| conversion en \mintinline{cpp}|void|
-
-\note[item]{Surtout utile en méta-programmation via \mintinline{cpp}|enable_if| et le SFINAE}
-
 		\end{itemize}
 		\item Méta-fonctions sur les traits
 		\begin{itemize}
@@ -1736,7 +1714,6 @@
 		\item Attributs inconnus doivent être ignorés
 
 \note[item]{Clarification de la norme, auparavant un compilateur pouvait lever une erreur car rien n'était précisé}
-\note[item]{Maintenant, il ne le peut plus et doit seulement ignorer l'attribut (éventuellement avec un avertissement)}
 
 		\item \mintinline{cpp}|using| des attributs non standards
 	\end{itemize}
@@ -1776,9 +1753,6 @@
 		    break;
 		}
 	\end{minted}
-
-\note[item]{Les compilateurs offraient déjà des mécanismes similaires (\mintinline{cpp}|__attribute__ ((fallthrough));| ou \mintinline{cpp}|[[gnu::fallthrough]]| sur GCC, voire des commentaires à un format précis)}
-\note[item]{Généralement pas d'avertissement sur des case vides (cas 1-2 ici)}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:28,startColumn:1,startLineNumber:28),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+1%3B%0A%0A++switch(foo)%0A++%7B%0A++++case+1:%0A++++case+2:%0A++++++std::cout+%3C%3C+%22Cas+1-2%5Cn%22%3B%0A%23if+1%0A++++++%5B%5B+fallthrough+%5D%5D%3B%0A%23endif%0A%0A++++case+3:%0A++++++std::cout+%3C%3C+%22Cas+3%5Cn%22%3B%0A%0A++++case+4:%0A++++++std::cout+%3C%3C+%22Cas+4%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22Cas+default%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -2075,8 +2049,6 @@
 		\begin{itemize}
 			\item Préférez \mintinline{cpp}|std::optional| aux pointeurs bruts pour les données optionnelles
 		\end{itemize}
-
-\note[item]{Sémantique plus précise, pas de risque de tentative de libération ou de fuite mémoire, \mintinline{cpp}|value()| et \mintinline{cpp}|value_or()| permettent de simplifier l'usage}
 	\end{exampleblock}
 
 	\begin{block}{En attendant C++17}

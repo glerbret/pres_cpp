@@ -21,8 +21,6 @@
 			\item Voir \href{https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/}{Trip report: Winter ISO C++ standards meeting\linklogo}
 		\end{itemize}
 		\item Objectifs : sureté, simplicité, rapidité et meilleure détection d'erreur en \textit{compile-time}
-
-\note[item]{Pas complet, je laisse de côté \mintinline{cpp}|system_error|, \mintinline{cpp}|codecvt|, \mintinline{cpp}|typeindex| et deux-trois nouvelles fonctions dans la bibliothèque standard}
 	\end{itemize}
 \end{frame}
 
@@ -31,8 +29,6 @@
 	\frametitle{Dépréciations et suppressions}
 	\begin{itemize}
 		\item Dépréciation de \mintinline{cpp}|register|
-
-\note[item]{\mintinline{cpp}|register| est supprimé en C++17}
 	\end{itemize}
 \end{frame}
 
@@ -430,9 +426,6 @@
 		\begin{itemize}
 			\item Préférez les vérifications \textit{compile-time} ou \textit{link-time} aux vérifications \textit{run-time}
 		\end{itemize}
-
-\note[item]{Typez correctement, définissez \mintinline{cpp}|const| ce qui l'est par construction, pas de conversion implicite (et donc des constructeurs explicites), garantissez les invariants par construction si possible}
-\note[item]{Et plusieurs autres points dans ce qui suit : opérateurs de conversion explicite, \mintinline{cpp}|enum class|, \mintinline{cpp}|override|, etc.}
 	\end{exampleblock}
 
 	\begin{codesample}
@@ -539,9 +532,6 @@
 		\begin{itemize}
 			\item En pratique, cet exemple compile en mode C++98 sous GCC
 		\end{itemize}
-
-\note[item]{Au moins GCC 5.3 et suivants}
-\note[item]{Compile et semble fonctionner, mais ce n'est pas pour autant correct}
 	\end{block}
 \end{frame}
 
@@ -552,9 +542,6 @@
 		\item Deux constats
 		\begin{itemize}
 			\item Copie potentiellement couteuse ou impossible
-
-\note[item]{Copie désactivée : techniquement compliquée ou dangereux (flux, thread), pas de sens (sémantique d'entité)}
-
 			\item Copie inutile lorsque l'objet source est immédiatement détruit
 		\end{itemize}
 	\end{itemize}
@@ -938,8 +925,6 @@
 			\item N'utilisez pas \mintinline{cpp}|std::initializer_list| pour copier ou transformer
 			\item Utilisez les algorithmes et constructeurs idoines
 		\end{itemize}
-
-\note[item]{Meilleure sémantique, plus évolutif et probablement plus performant}
 	\end{alertblock}
 \end{frame}
 
@@ -969,9 +954,6 @@
 		int c(foo);      // ???
 		int d[] (1, 2);  // KO
 	\end{minted}
-
-\note[item]{\mintinline{cpp}|int b();| est un piège classique}
-\note[item]{La signification de \mintinline{cpp}|int c(foo);| va dépendre de ce qu'est \mintinline{cpp}|foo|}
 
 	\begin{minted}{cpp}
 		int a[] = {1, 2, 3};        // OK
@@ -1079,8 +1061,6 @@
 	\frametitle{\mintinline[style=white]{cpp}|auto|}
 	\begin{itemize}
 		\item Déduction (ou inférence) de type depuis l'initialisation
-
-\note[item]{Les deux termes se trouvent. Forme simple (par rapport à des langages fonctionnels comme Caml ou Haskell) de l'inférence}
 	\end{itemize}
 
 	\begin{alertblock}{Attention}
@@ -1193,7 +1173,6 @@
 			\item Initialisation impossible - \mintinline{cpp}|decltype|
 			\item Interfaces, rôles, contexte - concepts ?
 
-\note[item]{Pas utile de connaitre le type exact d'une variables de type \mintinline{cpp}|std::map<std::string, std::vector<unsigned long long> >::const_iterator| mais il peut être important de savoir que c'est un itérateur. Ce qu'auto n'indique pas}
 \note[item]{Mais il faut attendre C++20 pour avoir les concepts}
 		\end{itemize}
 	\end{itemize}
@@ -1233,8 +1212,6 @@
 	\begin{minted}{cpp}
 		decltype( (a) ) e;     // int&
 	\end{minted}
-
-\note[item]{Au passage, cette ligne ne compile pas car la référence n'est pas initialisée}
 
 	\begin{codesample}
 			\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++int+a%3B%0A++long+b%3B%0A%0A++decltype+(a)+c%3B%0A++decltype+(a+%2B+b)+d%3B%0A%0A++assert(typeid(c)+%3D%3D+typeid(int))%3B%0A++assert(typeid(d)+%3D%3D+typeid(long))%3B%0A%0A%23if+0%0A++decltype(+(a)+)+e%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -1463,9 +1440,6 @@
 		\begin{itemize}
 			\item Éliminer des copies inutiles et gagner en performance
 		\end{itemize}
-
-\note[item]{Copies présentes malgré l'élision de copie, (N)RVO et la sémantique de déplacement}
-\note[item]{On gagne aussi en lisibilité (moins de ligne, pas de construction juste pour pousser, pas d'introduction d'un nom sans utilité)}
 	\end{block}
 
 	\begin{codesample}
@@ -1600,8 +1574,6 @@
 		\begin{itemize}
 			\item Préférez \mintinline{cpp}|std::begin()| et \mintinline{cpp}|std::end()| aux fonctions membres
 		\end{itemize}
-
-\note[item]{Plus génériques (à commencer par tableau C), coût à priori nul}
 	\end{exampleblock}
 \end{frame}
 
@@ -1875,8 +1847,6 @@
 		shuffle(begin(foo), end(foo), default_random_engine(seed));
 	\end{minted}
 
-\note[item]{Générateurs de nombre aléatoire correspondant vus plus tard}
-
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Crandom%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++unsigned+seed+%3D+std::chrono::system_clock::now().time_since_epoch().count()%3B%0A%0A++std::shuffle(begin(foo),+end(foo),+std::default_random_engine(seed))%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
@@ -1920,10 +1890,6 @@
 
 		minmax_element(foo.begin(), foo.end()); // 5 - 18
 	\end{minted}
-
-\note[item]{La fonction de comparaison est configurable (< par défaut)}
-\note[item]{Combinaison des fonctions min et max en un seul parcours}
-\note[item]{Optimisation classique de recherche de min et max en un seul parcours}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cutility%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A++auto+p+%3D+std::minmax_element(begin(foo),+end(foo))%3B%0A%0A++std::cout+%3C%3C+*(p.first)+%3C%3C+%22+%22+%3C%3C+*(p.second)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -2154,7 +2120,7 @@
 	\begin{itemize}
 		\item Chaînes littérales brutes (sans interprétation des échappements)
 
-\note[item]{Utilité pour écrire des expressions rationnelles, des commandes shell ou autres qui ont aussi leurs échappements}
+\note[item]{Utile pour écrire des expressions rationnelles, des commandes shell ou autres qui ont aussi leurs échappements}
 
 		\begin{itemize}
 			\item Préfixées par \mintinline{cpp}|R|
@@ -2191,9 +2157,6 @@
 		\item Possibilité de définir des littéraux \og utilisateur\fg{}
 		\item Nombre (entier ou réel), caractère ou chaîne suffixé par un identifiant
 		\item Identifiants non standards préfixés par \mintinline{cpp}|_|
-
-\note[item]{Les identifiants non préfixés sont réservé pour le standard}
-
 		\item Définit via \mintinline{cpp}|operator""suffixe|
 	\end{itemize}
 
@@ -2469,8 +2432,6 @@
 		\begin{itemize}
 			\item Préférez l'initialisation des membres à l'initialisation par constructeurs pour les initialisations avec une valeur connue à la compilation
 		\end{itemize}
-
-\note[item]{Y compris pour les valeurs \og par défaut\fg{} modifiées dans seulement une petite partie des constructeurs}
 	\end{exampleblock}
 
 	\begin{codesample}
@@ -2527,8 +2488,6 @@
 			\item Paramètres du constructeur de base
 			\item Appelle le constructeur de base correspondant
 			\item Initialise les membres sans fournir de paramètres
-
-\note[item]{Donc initialisation d'attribut si présente, sinon constructeur par défaut (ou non initialisation pour \mintinline{cpp}|int|, pointeur, \ldots{}) et erreur si un membre ne peut pas être construit}
 		\end{itemize}
 	\end{itemize}
 
@@ -2855,9 +2814,6 @@
 	\begin{itemize}
 		\item Énumérations mieux typées
 		\item Sans conversions implicites
-
-\note[item]{Pas de conversion avec des entiers ou d'autres énumérations}
-
 		\item Énumérés locaux à l'énumération
 	\end{itemize}
 
@@ -2950,7 +2906,8 @@
 			\item Dépréciation de \mintinline{cpp}|std::mem_fun|, \mintinline{cpp}|std::ptr_fun| et consorts
 		\end{itemize}
 
-\note[item]{Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes. Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)}
+\note[item]{Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes}
+\note[item]{Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)}
 	\end{block}
 \end{frame}
 
@@ -3035,15 +2992,11 @@
 		\begin{itemize}
 			\item Capture du pointeur, non de l'objet
 		\end{itemize}
-
-\note[item]{C++14 permet la capture d'une copie de l'objet}
 	\end{alertblock}
 
 	\begin{itemize}
 		\item [] \begin{itemize}
 			\item Soit via \mintinline{cpp}|[=]| ou \mintinline{cpp}|[&]|
-
-\note[item]{Plusieurs changements autour de la capture explicite ou implicite de \mintinline{cpp}|this| dans les versions suivantes}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -3088,8 +3041,6 @@
 			\item Unique instruction
 			\item Un \mintinline{cpp}|return|
 		\end{itemize}
-
-\note[item]{Restrictions levées dans les versions récentes}
 
 		\item Omission possible d'une liste de paramètres vide
 	\end{itemize}
@@ -3222,8 +3173,6 @@
 		\begin{minted}{cpp}
 			using Error = int;
 		\end{minted}
-
-\note[item]{Ainsi \mintinline{cpp}|using| devient le mot clé générique pour injecter des symboles : tout ou partie d'un namespace dans un autre, membres d'une classe de base dans une classe dérivée, alias sur un type, fut-il template partiellement paramétré}
 	\end{block}
 \end{frame}
 
@@ -3308,8 +3257,6 @@
 		sum(1, 5, 56, 9);                   // 71
 		sum(string("Un"), string("Deux"));  // "UnDeux"
 	\end{minted}
-
-\note[item]{Très proche de la façon de parcourir des listes (ou d'autres structures de données) dans les langages fonctionnels (p.ex. Lisp) où une liste est décomposée entre un élément de tête et le reste de la liste}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0A//+Condition+d!'arret%0Atemplate%3Ctypename+T%3E%0AT+sum(T+val)%0A%7B%0A++return+val%3B%0A%7D%0A%0Atemplate%3Ctypename+T,+typename...+Args%3E%0AT+sum(T+val,+Args...+values)%0A%7B%0A++return+val+%2B+sum(values...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+5,+56,+9)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -3763,7 +3710,6 @@
 		\item Pas d'accès à la ressource
 		\item Convertible en \mintinline{cpp}|std::shared_ptr| via \mintinline{cpp}|lock()|
 
-\note[item]{Pourquoi ? Pour verrouiller la ressource le temps de son utilisation}
 \note[item]{Retourne un \mintinline{cpp}|std::shared_ptr| vide si la ressource n'existe plus}
 	\end{itemize}
 
@@ -3801,8 +3747,6 @@
 		\begin{itemize}
 			\item Préférez \mintinline{cpp}|std::unique_ptr| à \mintinline{cpp}|std::shared_ptr|
 			\item Préférez une responsabilité unique à une responsabilité partagée
-
-\note[item]{Code globalement plus simple (parfois au prix d'une petite complexité locale) et souvent plus performant (le comptage de référence à un coup, particulièrement en environnement multithreadé)}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -4152,16 +4096,12 @@
 		\begin{itemize}
 			\item Préférez \mintinline{cpp}|std::clock::duration| aux entiers pour manipuler les durées
 		\end{itemize}
-
-\note[item]{Meilleur sémantique et meilleur typage}
 	\end{exampleblock}
 
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item N'espérez pas une précision arbitrairement grande des horloges
 		\end{itemize}
-
-\note[item]{En particulier ne soyez pas certains de récupérer des durées précis à la nanoseconde sous prétexte qu'il y a une instanciation en nanosecondes}
 	\end{alertblock}
 \end{frame}
 
@@ -4830,7 +4770,6 @@
 		\end{itemize}
 
 \note[item]{En gros plusieurs threads peuvent lire un même conteneur et plusieurs threads peuvent lire ou écrire simultanément des conteneurs différents sans problème et c'est à peu prés tout}
-\note[item]{Mais telle ou telle implémentation peuvent proposer mieux}
 	\end{alertblock}
 
 	\begin{exampleblock}{Do}
@@ -4961,8 +4900,6 @@
 			\item N'utilisez pas les expressions rationnelles pour les traitements triviaux
 			\item Préférez les algorithmes
 		\end{itemize}
-
-\note[item]{Traitements triviaux : recherche d'un caractère particulier, passage en majuscule, récupération des n premiers caractères}
  	\end{alertblock}
 
 	\begin{block}{Conseil}

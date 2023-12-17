@@ -29,9 +29,6 @@
 	\begin{itemize}
 		\item Dépréciation du terme POD et de \mintinline{cpp}|std::is_pod()|
 		\item Dépréciation partielle de \mintinline{cpp}|volatile|
-
-\note[item]{Les constructions dépréciées sont : incrémentation/décrémentation de \mintinline{cpp}|volatile|, utilisation du résultat d'une affectation à un \mintinline{cpp}|volatile|, opérateurs \mintinline{cpp}|op=| sur un \mintinline{cpp}|volatile|, \mintinline{cpp}|volatile| sur les valeurs de retour, un \mintinline{cpp}|volatile| sur les paramètres, \mintinline{cpp}|volatile| sur les \textit{structured binding}}
-
 		\item Dépréciation de l'usage de l'opérateur virgule dans les expressions d'indiçage
 
 \note[item]{C'est à dire de ne plus pouvoir écrire \mintinline{cpp}|[x,y]| comme indice d'un conteneur classique}
@@ -97,7 +94,6 @@
 
 \note[item]{En particulier, la numérotation des lignes et colonnes peut commencer à 0 ou à 1}
 \note[item]{Il est toutefois encouragé de numéroter à partir de 1 et de retourner 0 lorsque le numéro n'est pas connu}
-\note[item]{De même le format de la chaîne contenant la fonction n'est pas définie}
 
 			\item Remplaçant de \mintinline{cpp}|__LINE__|, \mintinline{cpp}|__FILE__|, \mintinline{cpp}|__func__| et autres macros propriétaires
 		\end{itemize}
@@ -185,9 +181,6 @@
 	\begin{block}{Motivation}
 		\begin{itemize}
 			\item Suppression de l'ambigüité caractère UTF-8 / littéral
-
-\note[item]{Pour rappel, le type \mintinline{cpp}|char| est signé ou non en fonction de l'implémentation}
-
 			\item Suppression d'ambigüité sur les surcharges et spécialisation de template
 		\end{itemize}
 	\end{block}
@@ -223,8 +216,6 @@
 	\frametitle{Initialisation des agrégats}
 	\begin{itemize}
 		\item Initialisation nommée des membres d'un agrégat ou d'une union
-
-\note[item]{Vient plus ou moins de C99}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -259,7 +250,7 @@
 		\item Initialisation des agrégats via des données parenthésées
 	\end{itemize}
 
-	\begin{block}{\mintinline[style=white,escapeinside=||]{cpp}{|\{\}|} ou \mintinline[style=white]{cpp}|()| ?}
+	\begin{block}{\mintinline[style=white,escapeinside=||]{cpp}{|\{\}|} ou \mintinline[style=white]{cpp}|()|}
 		\begin{itemize}
 			\item \mintinline{cpp}|{}| permet l'utilisation d'\textit{initializer list}
 			\item \mintinline{cpp}|()| permet les conversions avec perte de précision
@@ -374,8 +365,6 @@
 		if(p) { ... }        // OK
 	\end{minted}
 
-\note[item]{Casse du code, mais simple à corriger et plus cohérent}
-
 	\addproposal{P1957}{https://wg21.link/P1957R2}
 \end{frame}
 
@@ -422,7 +411,6 @@
 	\end{minted}
 
 \note[item]{Tous ces exemples sont des cas où il y a une copie en C++17 et un déplacement possible en C++20}
-\note[item]{Il y a plusieurs autres cas}
 
 	\addproposal{P1825}{https://wg21.link/P1825R0}
 \end{frame}
@@ -458,9 +446,6 @@
 
 	\begin{itemize}
 		\item Utilisation de l'opérateur binaire déclaré s'il existe
-
-\note[item]{La génération implicite n'a donc lieu que s'il n'y a pas de version explicite}
-
 		\item Supporté par la bibliothèque standard
 	\end{itemize}
 
@@ -576,16 +561,11 @@
 	\begin{itemize}
 		\item [] \begin{itemize}
 			\item Réduction des temps de compilation
-
-\note[item]{Pas plusieurs traitements complets d'un même fichier inclus plusieurs fois}
-
 			\item Nouveau niveau d'encapsulation
 			\item Plus grande robustesse (isolation des effets des macros)
 			\item Meilleurs prises en charge des bibliothèques par l'analyse statique, les optimiseurs, \ldots{}
 			\item Gestion des inclusions multiples sans garde
 			\item Compatible avec le système actuel d'inclusion
-
-\note[item]{Le mécanisme actuel d'inclusion est conservé et n'est pas, pour l'instant, déprécié}
 		\end{itemize}
 	\end{itemize}
 
@@ -593,9 +573,6 @@
 		\begin{itemize}
 			\item En C++20, la bibliothèque standard n'utilise pas les modules
 		\end{itemize}
-
-\note[item]{La bibliothèque standard est restée aux inclusions}
-\note[item]{Mais peut être importée via \mintinline{cpp}|import|}
 	\end{alertblock}
 
 	\addproposal{P1103}{https://wg21.link/P1103R3}
@@ -818,8 +795,6 @@
 		\item Ou import des en-têtes
 	\end{itemize}
 
-\note[item]{C'est une des évolutions apportées par ATOM}
-
 	\begin{minted}{cpp}
 		export module foo;
 		import "bar.h";
@@ -875,14 +850,10 @@
 		\item Dépréciation de \mintinline{cpp}|reserve()| sans paramètre
 	\end{itemize}
 
-\note[item]{Oui car avant, \mintinline{cpp}|std::basic_string::reserve()| sans paramètre permettait de réduire la capacité en fonction de la taille effective}
-
 	\begin{exampleblock}{Réduction à la capacité utile}
 		\begin{itemize}
 			\item Utilisez \mintinline{cpp}|shrink_to_fit()| et non \mintinline{cpp}|reserve()|
 		\end{itemize}
-
-\note[item]{La capacité est alors supérieure ou égale à la taille}
 	\end{exampleblock}
 
 	\addproposal{P0966}{https://wg21.link/P0966R1}
@@ -945,9 +916,6 @@
 			\begin{itemize}
 				\item Différents foncteurs de calcul du hash
 				\item Tag \mintinline{cpp}|transparent_key_equal| sur une comparaison transparente
-
-\note[item]{C'est à dire un foncteur exposant le tag \mintinline{cpp}|is_transparent|}
-
 			\end{itemize}
 			\item Suppression de conversions inutiles
 		\end{itemize}
@@ -1167,9 +1135,6 @@
 	\frametitle{Manipulation binaire}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::rotl()| et \mintinline{cpp}|std::rotr()| rotations binaires
-
-\note[item ]{Respectivement vers la gauche et la droite}
-
 		\item \mintinline{cpp}|std::countl_zero| nombre consécutif de bits à zéro depuis le plus significatif
 		\item \mintinline{cpp}|std::countl_one| nombre consécutif de bits à un depuis le plus significatif
 		\item \mintinline{cpp}|std::countr_zero| nombre consécutif de bits à zéro depuis le moins significatif
@@ -1300,16 +1265,12 @@
 		\item Manipulation d'ensemble au travers d'algorithmes et de \textit{range adaptators}
 		\item Vivent dans le \mintinline{cpp}|namespace std::ranges|
 
-\note[item]{TS publié en juillet 2017}
 \note[item]{Pour être précis, les \textit{range adaptors} manipulent seulement les \textit{viewable ranges}}
 	\end{itemize}
 
 	\begin{block}{Pour aller plus loin}
 		\begin{itemize}
 			\item \href{https://accu.org/content/conf2009/AndreiAlexandrescu_iterators-must-go.pdf}{Iterators Must Go\linklogo (Andrei Alexandrescu)}
-
-\note[item]{\textit{Iterators Must Go} est l'article fondateur des \textit{ranges}}
-
 			\item \href{http://ericniebler.com/}{Blog d'Eric Niebler\linklogo}
 		\end{itemize}
 	\end{block}
@@ -1456,8 +1417,6 @@
 
 	\begin{itemize}
 		\item Peuvent prendre plusieurs arguments
-
-\note[item]{Plusieurs syntaxes pour prendre les arguments}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1635,8 +1594,6 @@
 		\end{itemize}
 	\end{itemize}
 
-\note[item]{Exemple issue de la norme}
-
 	\begin{minted}{cpp}
 		{ osyncstream s(cout);
 		  s << "Hello," << '\n'; // no flush
@@ -1668,9 +1625,6 @@
 	\begin{block}{Motivations}
 		\begin{itemize}
 			\item Formatage \og à la C\fg{} non extensible et peu sûr
-
-\note[item]{Non extensible : ne supporte pas le types utilisateurs}
-
 			\item Flux complexes, peu performants, peu propices à l'internationalisation et la localisation, formateurs globaux
 
 \note[item]{Peu propices à la localisation car le format et l'ordre des éléments est dans le code lui-même et ne peut pas être sortie facilement}
@@ -1908,9 +1862,6 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::format| -- Signe}
 	\begin{itemize}
 		\item Uniquement sur les négatifs : '\mintinline{cpp}|-|'
-
-\note[item]{Uniquement sur les négatifs est le comportement par défaut}
-
 		\item Sur toutes les valeurs : '\mintinline{cpp}|+|'
 		\item Uniquement sur les négatifs en réservant l'espace : '\mintinline[escapeinside=||]{cpp}{| |}'
 	\end{itemize}
@@ -2197,8 +2148,6 @@
 		\item Conversion des horloges vers et depuis UTC
 		\item Conversion de \mintinline{cpp}|std::chrono::utc_clock| vers et depuis le temps système
 		\item Conversion des horloges entre-elles
-
-\note[item]{Conversion via UTC ou temps système si nécessaire}
 	\end{itemize}
 
 	\begin{alertblock}{Conversion de \mintinline{cpp}|std::chrono::file_clock|}
@@ -2231,7 +2180,6 @@
 			\item \mintinline{cpp}|%Z| : abréviation de la \textit{timezone}
 			\item \ldots{}
 
-\note[item]{Et bien d'autre, notamment en prenant en compte ou non la locale}
 \note[item]{Similaire à \mintinline{cpp}|strftime()|}
 \note[item]{Et identique à ceux utilisés dans \mintinline{cpp}|std::format|}
 		\end{itemize}
@@ -2339,7 +2287,6 @@ auto date2 = Sunday[3]/May/2016y;
 		\end{itemize}
 
 \note[item]{ICU : \textit{International Components for Unicode}}
-\note[item]{ICU peut être une alternative à \mintinline{cpp}|Boost.DateTime|}
 	\end{block}
 
 	\addproposal{P0355}{https://wg21.link/P0355R7}
@@ -2452,8 +2399,6 @@ auto date2 = Sunday[3]/May/2016y;
 			\item Utilisation de \mintinline{cpp}|asm|
 			\begin{itemize}
 				\item Si le code \mintinline{cpp}|asm| n'est pas évalué en \textit{compile-time}
-
-\note[item]{Par exemple, on peut avoir une branche C++ pour le \textit{compile-time} et une branche assembleur pour le \textit{run-time} avec un choix via \mintinline{cpp}|std::is_constant_evaluated()|}
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
@@ -2853,9 +2798,6 @@ auto date2 = Sunday[3]/May/2016y;
 
 			\item Comparaisons : \mintinline{cpp}|boolean|, \mintinline{cpp}|equality_comparable|, \mintinline{cpp}|totally_ordered|, \ldots{}
 			\item \textit{Callable concepts} : \mintinline{cpp}|invocable|, \mintinline{cpp}|predicate|, \mintinline{cpp}|strict_weak_order|, \ldots{}
-
-\note[item]{\mintinline{cpp}|predicate| : appelable et retourne un bool}
-
 			\item \ldots{}
 		\end{itemize}
 	\end{itemize}
@@ -2973,17 +2915,9 @@ auto date2 = Sunday[3]/May/2016y;
 		\item Extension de \mintinline{cpp}|[[ nodiscard ]]| aux constructeurs
 		\begin{itemize}
 			\item Marquage \mintinline{cpp}|[[ nodiscard ]]| des constructeurs autorisé
-
-\note[item]{Auparavant, GCC levait un avertissement}
-
 			\item Vérification également lors des conversions via les constructeurs
-
-\note[item]{Constructeurs non \mintinline{cpp}|explicit|}
-
 		\end{itemize}
 		\item Possibilité d'associer un message à \mintinline{cpp}|[[ nodiscard ]]|
-
-\note[item]{Pour indiquer la motivation du marquage \mintinline{cpp}|[[ nodiscard ]]| ou l'erreur potentielle que cache la non-vérification du retour}
 	\end{itemize}
 
 	\begin{codesample}
@@ -3007,9 +2941,6 @@ auto date2 = Sunday[3]/May/2016y;
 		\item Utilisation de paramètres templates pour les lambdas génériques
 		\begin{itemize}
 			\item En complément de la syntaxe avec \mintinline{cpp}|auto|
-
-\note[item]{Les deux syntaxes peuvent cohabiter}
-
 			\item Permet de récupérer le type
 		\end{itemize}
 	\end{itemize}
@@ -3041,7 +2972,6 @@ auto date2 = Sunday[3]/May/2016y;
 		\item Lambda \textit{stateless} assignables et constructibles par défaut
 
 \note[item]{\textit{stateless}, c'est à dire qui ne capture rien}
-\note[item]{Le but est de pouvoir écrire des choses comme ci-dessous et de rendre les lambdas \textit{stateless} encore plus interchangeable avec les foncteurs}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -3145,8 +3075,6 @@ auto date2 = Sunday[3]/May/2016y;
 			\item Automatiquement arrêté et joint lors de la destruction
 		\end{itemize}
 	\end{itemize}
-
-\note[item]{Qui est finalement un motif classique de l'usage des threads}
 
 	\begin{minted}{cpp}
 		int main() { thread t(foo); }  // Erreur (terminate)
@@ -3295,13 +3223,7 @@ auto date2 = Sunday[3]/May/2016y;
 		\begin{itemize}
 			\item Pas de \mintinline{cpp}|return|
 			\item Pas d'argument \textit{variadic}
-
-\note[item]{Pas d'arguments variables à la C via \mintinline{cpp}|...|}
-
 			\item Pas de déduction de type sur le retour
-
-\note[item]{Ni \mintinline{cpp}|auto| ni concepts}
-
 			\item Pas sur les constructeurs, destructeurs, fonctions \mintinline{cpp}|constexpr|
 		\end{itemize}
 	\end{itemize}
@@ -3316,9 +3238,6 @@ auto date2 = Sunday[3]/May/2016y;
 		\begin{itemize}
 			\item \mintinline{cpp}|operator bool()| indique si le \textit{handle} gère effectivement une coroutine
 			\item \mintinline{cpp}|done()| indique si la coroutine est suspendue dans son état final
-
-\note[item]{C'est à dire qu'elle est vraiment terminée}
-
 			\item \mintinline{cpp}|operator()| et \mintinline{cpp}|resume()| poursuit la coroutine
 			\item \mintinline{cpp}|destroy()| détruit la coroutine
 		\end{itemize}

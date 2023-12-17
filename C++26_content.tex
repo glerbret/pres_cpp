@@ -282,9 +282,6 @@
 	\frametitle{Type appelable}
 	\begin{itemize}
 		\item Ajout de \mintinline{cpp}|std::copiable_function| pour les fonctions copiables
-
-\note[item]{Pendant de \mintinline{cpp}|std::move_only_function|}
-
 		\item Ajout de \mintinline{cpp}|std::function_ref|
 		\begin{itemize}
 			\item Type référence pour le passage d'appelable à une fonction
@@ -354,9 +351,6 @@
 	\frametitle{Accès bas-niveaux aux IO}
 	\begin{itemize}
 		\item Alias \mintinline{cpp}|native_handle_type| sur le descripteur de fichier de la plateforme
-		
-\note[item]{\mintinline{cpp}|int| sous POSIX, \mintinline{cpp}|HANDLE| (\mintinline{cpp}|void*|) sous Windows}
-		 
 		\item \mintinline{cpp}|native_handle()| retourne ce descripteur
 	\end{itemize}
 

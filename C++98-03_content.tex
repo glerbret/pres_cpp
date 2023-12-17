@@ -26,8 +26,6 @@
 
 		\end{itemize}
 		\item Projet de TR2 finalement transposé en \textit{Technical Specification}
-
-\note[item]{TR2 non publié car changement des procédures au sein du comité ISO C++}
 	\end{itemize}
 \end{frame}
 
@@ -41,13 +39,7 @@
 		\item Typage statique déclaratif
 		\item Généraliste
 		\item Initialement, ajout des classes au C
-
-\note[item]{Classes issues de Simula}
-
 		\item Vaste sous-ensemble commun (proche du C) entre C et C++
-
-\note[item]{Meilleur typage que C (à l'origine d'incompatibilités : caractères littéraux de type \mintinline{cpp}|char|, pas de conversion implicite depuis \mintinline{cpp}|void|)}
-
 		\item \textit{Zero-overhead abstraction}
 		\item Compatibilité ascendante forte mais pas absolue
 		\item Évolutions par les bibliothèques plutôt que par le langage
@@ -162,15 +154,8 @@
 		\item Idéalement héritant de \mintinline{cpp}|std::exception| (via \mintinline{cpp}|std::logic_error|, \mintinline{cpp}|std::runtime_error| ou autres)
 		\item \mintinline{cpp}|catch(...)| pour attraper les exceptions de tout type
 		\item Compatibles avec le \textit{stack unwinding}
-
-\note[item]{Objets sur la pile détruits lors de la sortie d'une fonction même sur exception}
-\note[item]{Destruction dans l'ordre inverse de la création des objets}
-
 		\item Pas de \mintinline{cpp}|finally|
 		\item Appel de \mintinline{cpp}|std::terminate()| si une exception n'est pas attrapée
-
-\note[item]{Sortie du programme sans \textit{stack unwinding}}
-
 		\item Utilisées par la bibliothèque standard (p.ex. \mintinline{cpp}|std::bad_alloc|)
 	\end{itemize}
 \end{frame}
@@ -236,8 +221,6 @@
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Destructeurs et \mintinline{cpp}|swap()| ne doivent pas lever d'exception
-
-\note[item]{Aussi le cas pour le déplacement en C++11}
 		\end{itemize}
 	\end{exampleblock}
 
@@ -298,9 +281,6 @@
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Utilisez des types dédiés héritant de \mintinline{cpp}|std::exception|
-
-\note[item]{Idéalement via \mintinline{cpp}|std::runtime_error|}
-
 			\item Définissez des hiérarchies d'exceptions
 		\end{itemize}
 	\end{exampleblock}
@@ -318,9 +298,6 @@
 		\begin{itemize}
 			\item N'utilisez jamais les exceptions pour contrôler le flux d'exécution
 			\item Ni pour gérer les \og échecs attendus\fg{}
-
-\note[item]{P. ex. l'absence d'un élément dans une collection lors de la recherche}
-
 			\item Réservez les exceptions au signalement d'erreurs
 		\end{itemize}
 	\end{alertblock}
@@ -557,8 +534,6 @@
 		foo(bar);
 		cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
 	\end{minted}
-
-\note[item]{\mintinline{cpp}|std::auto_ptr| déprécié en C++11 et remplacé par \mintinline{cpp}|std::unique_ptr| qui fonctionne mieux (sémantique de déplacement)}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -610,8 +585,6 @@
 			\item Laissez les membres publics
 			\item Fournissez, éventuellement, des constructeurs initialisant les données
 		\end{itemize}
-
-\note[item]{Pas de fonction de services dans les agrégats, éventuellement des fonctions techniques}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Do, conteneurs}
@@ -669,8 +642,6 @@
 			\item Un complément à RAII, pas un concurrent ni un remplaçant
 			\item Indisponible à ce jour
 		\end{itemize}
-
-\note[item]{Pas près d'arriver, le support minimal de C++11 n'a été implémenté par aucun compilateur et a été supprimé en C++23, et pas de travaux sur le sujet}
 	\end{block}
 \end{frame}
 
@@ -697,8 +668,6 @@
 		\begin{itemize}
 			\item Pas de \mintinline{cpp}|delete| dans le code applicatif
 		\end{itemize}
-
-\note[item]{\mintinline{cpp}|delete| dans les classes bas niveau qui définissent des capsules RAII}
 	\end{alertblock}
 
 	\begin{alertblock}{Attention}
@@ -720,14 +689,8 @@
 	\frametitle{STL -- Standard Template Library}
 	\begin{itemize}
 		\item Partie de la bibliothèque standard comprenant
-
-\note[item]{Formellement, la STL n'existe plus dans la norme C++ actuelle}
-
 		\begin{itemize}
 			\item Conteneurs et \mintinline{cpp}|std::basic_string|
-
-\note[item]{\mintinline{cpp}|std::basic_string| contient, est template et a une interface \og conteneurs\fg{}. Mais a une sémantique particulière et n'est pas remplaçable de ce fait et possède des algorithmes spécifiques}
-
 			\item Itérateurs
 			\item Algorithmes manipulation les données des conteneurs via les itérateurs
 		\end{itemize}
@@ -750,13 +713,10 @@
 			\item Sceptique vis à vis de la POO
 
 \note[item]{Pour Stepanov : POO = hoax (canular)}
-\note[item]{Stepanov a de vrais arguments et cible davantage le marketing survendeur (\textit{silver bullet}) et les promesses non tenues que la POO elle-même}
 \note[item]{Stepanov ne s'oppose pas à l'abstraction et à encapsulation mais à la façon dont la POO prétend y répondre}
 
 		\end{itemize}
 		\item Basée sur les templates, pas sur la POO
-
-\note[item]{Pas de POO dans la STL : utilisation de classes (abstraction, modularité) mais ni polymorphisme de sous-typage ni \textit{dynamic dispatch}}
 	\end{itemize}
 \end{frame}
 
@@ -797,10 +757,6 @@
 	\frametitle{STL Conteneurs -- Généralités}
 	\begin{itemize}
 		\item Contiennent des objets copiables et non constants
-
-\note[item]{En C++11 et suivantes : copiables ou déplaçables}
-\note[item]{On peut avoir des conteneurs \mintinline{cpp}|const| et donc ne pas pouvoir modifier les éléments, mais on ne peut pas avoir de conteneur de \mintinline{cpp}|const|}
-
 		\item \ldots{} qui peuvent être les adresses d'autres objets
 	\end{itemize}
 
@@ -826,13 +782,7 @@
 			\item Accès indexé
 			\item Croissance en temps amorti
 			\item Modifications en fin de vecteur (couteux ailleurs)
-
-\note[item]{Couteux d'insérer/retirer ailleurs qu'en fin car il faut déplacer les données}
-\note[item]{Possible d'échanger puis de retirer à la fin (si l'ordre n'est pas important)}
-
 			\item Compatible avec l'organisation mémoire des tableaux C
-
-\note[item]{Passage à un tableau C en prenant l'adresse du premier élément : \mintinline{cpp}|T* ptr = &vec[0];|}
 		\end{itemize}
 	\end{itemize}
 
@@ -841,8 +791,6 @@
 			\item Ne remplit pas tous les pré-requis des conteneurs
 			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
 			\item Voir \textit{Effective STL} item 18
-
-\note[item]{Impossible de prendre l'adresse de \mintinline{cpp}|v[0]| d'un \mintinline{cpp}|vector<bool>|}
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -856,8 +804,6 @@
 			\item Accès bidirectionnel non indexé
 			\item Modification n'importe où à faible coût
 			\item Plusieurs algorithmes membres (tri, fusion, suppression, \ldots{})
-
-\note[item]{Algorithmes membres pour la liste car accès non indexé}
 		\end{itemize}
 
 		\item \mintinline{cpp}|std::deque|
@@ -987,9 +933,6 @@
 
 \begin{frame}[fragile]
 	\frametitle{STL Conteneurs -- conteneurs non-STL}
-
-\note[item]{\mintinline{cpp}|std::valarray| laissé de côté, pas vraiment un conteneur}
-
 	\begin{itemize}
 		\item \mintinline{cpp}|std::bitset|
 		\begin{itemize}
@@ -1062,9 +1005,6 @@
 			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?\linklogo}
 			\item Pensez à \mintinline{cpp}|reserve()|
 			\item Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
-
-\note[item]{Voir overload 134 (août 2016) sur big O et les performances \mintinline{cpp}|std::vector|/\mintinline{cpp}|std::string|, et l'importance de la localité des données}
-
 			\item Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
 		\end{itemize}
 	\end{block}
@@ -1081,9 +1021,6 @@
 		\begin{itemize}
 			\item \mintinline{cpp}|iterator| et \mintinline{cpp}|const_iterator|
 			\item \mintinline{cpp}|reverse_iterator| et \mintinline{cpp}|const_reverse_iterator|
-
-\note[item]{\mintinline{cpp}|const_iterator| itèrent sur des valeurs constantes, utilisables pour lire des données mais pas pour les écrire}
-
 		\end{itemize}
 		\item Itérateurs sur un conteneur : \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
 		\item Itérateurs inverses sur un conteneur : \mintinline{cpp}|rbegin()| et \mintinline{cpp}|rend()|
@@ -1111,9 +1048,6 @@
 					\item \textit{Input} : égalité (\mintinline{cpp}|==| et \mintinline{cpp}|!=|) et lecture
 					\item \textit{Output} : écriture
 					\item \textit{Forward} : Parcours multiples
-
-\note[item]{I.e. l'incrément ne consomme pas de donnée}
-
 					\item \textit{Bidirectional} : décrémentation
 					\item \textit{Random access} 
 					\begin{itemize}
@@ -1174,15 +1108,10 @@
 		\item Adaptateur d'itérateurs
 		\item De type \textit{Output}
 		\item Insertion de nouveaux éléments
-
-\note[item]{Les itérateurs classiques pointent sur des éléments existants du conteneur}
-
 		\begin{itemize}
 			\item En queue : \mintinline{cpp}|back_inserter|
 			\item En tête : \mintinline{cpp}|front_inserter|
 			\item À la position courante : \mintinline{cpp}|inserter|
-
-\note[item]{La disponibilité de tel ou tel itérateur d'insertion dépend du conteneur}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1213,9 +1142,6 @@
 	\frametitle{STL Algorithmes -- Foncteurs}
 	\begin{itemize}
 		\item Possèdent des données membres
-
-\note[item]{Ce qui représente un avantage sur les fonctions libres}
-
 		\item Foncteurs standards : \mintinline{cpp}|std::plus|, \mintinline{cpp}|std::minus|, \mintinline{cpp}|std::equal|, \mintinline{cpp}|std::less|, \ldots{}
 		\item Constructibles
 		\begin{itemize}
@@ -1428,9 +1354,6 @@
 		\end{itemize}
 	\end{alertblock}
 
-\note[item]{Comparaison sur la taille du premier ensemble (couple \mintinline{cpp}|begin()| - \mintinline{cpp}|end()|)}
-\note[item]{C++14 ajoute des surcharges de \mintinline{cpp}|std::equal()| testant la taille}
-
 	\begin{block}{Et \mintinline[style=white]{cpp}|operator==| ?}
 		\begin{itemize}
 			\item \mintinline{cpp}|operator==| sur des conteneurs teste la taille et le contenu
@@ -1539,12 +1462,7 @@
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item À la taille du second ensemble
-
-\note[item]{Il faut un second ensemble assez grand ou utiliser un itérateur d'insertion}
-
 			\item Aux ensembles non-disjoints
-
-\note[item]{L'itérateur du second ensemble ne doit pas pointé un élément du premier ensemble.}
 		\end{itemize}
 	\end{alertblock}
 
@@ -1893,8 +1811,6 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		\item \mintinline{cpp}|std::merge()| fusionne deux ensembles triés dans un troisième
 	\end{itemize}
 
-\note[item]{Ce troisième ensemble est bien entendu trié lui aussi}
-
 	\begin{minted}{cpp}
 		vector<int> foo{1, 5, 6, 8};
 		vector<int> bar{2, 5};
@@ -1907,8 +1823,6 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 	\begin{itemize}
 		\item \mintinline{cpp}|std::inplace_merge()| fusionne deux sous-ensembles sur place
 	\end{itemize}
-
-\note[item]{En fait il fusionne le début trié d'un ensemble avec le reste trié de ce même ensemble dans l'ensemble en question}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8%7D%3B%0A++++std::vector%3Cint%3E+bar%7B2,+5%7D%3B%0A++++std::vector%3Cint%3E+baz%3B%0A%0A++++std::merge(foo.begin(),+foo.end(),+bar.begin(),+bar.end(),+std::back_inserter(baz))%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+baz%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8,+2,+5%7D%3B%0A%0A++++std::inplace_merge(foo.begin(),+foo.begin()+%2B+4,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -1997,8 +1911,6 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Min-max}
-
-\note[item]{Possibilité de fournir la fonction de comparaison (\mintinline{cpp}|operator<| par défaut)}
 
 	\begin{itemize}
 		\item \mintinline{cpp}|std::min()| détermine le minimum de deux éléments
@@ -2208,8 +2120,6 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		\begin{itemize}
 			\item N'utilisez pas d'itérateur invalidé
 		\end{itemize}
-
-\note[item]{Certaines opérations, par exemple l'ajout dans un vecteur, peuvent invalider les itérateurs sur le conteneur}
 	\end{alertblock}
 
 	\begin{alertblock}{Attention}
@@ -2233,7 +2143,6 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 			\item Réfléchissez à votre utilisation des données
 
 \note[item]{Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, \ldots{}}
-\note[item]{La première interrogation étant : ce traitement est-il nécessaire ?}
 
 			\item Méfiez-vous des complexités brutes
 
@@ -2299,8 +2208,6 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		\begin{itemize}
 			\item Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms\linklogo (Marshall Clow)}
 		\end{itemize}
-
-\note[item]{Conf cppcon 2016 sur les algorithmes en général et sur comment faire ces propres algorithmes}
 	\end{block}
 \end{frame}
 \end{document}

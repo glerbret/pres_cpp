@@ -60,7 +60,8 @@
 			\item \mintinline{cpp}|enforce| : appel au \textit{handler} de violation de contrat et terminaison
 			\item \mintinline{cpp}|observe| : appel au \textit{handler} de violation de contrat et poursuite
 
-\note[item]{\mintinline{cpp}|enforce| : c'est un arrêt systématique, \mintinline{cpp}|observe| : on laisse le \textit{handler} décider}
+\note[item]{\mintinline{cpp}|enforce| : arrêt systématique}
+\note[item]{\mintinline{cpp}|observe| : on laisse le \textit{handler} décider}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -91,8 +92,6 @@
 		\item Utilisable sur
 		\begin{itemize}
 			\item Entiers
-
-\note[item]{Proche dans l'esprit de \mintinline{cpp}|switch/case| avec une syntaxe plus légère et sans \textit{fallthrough}}
 		\end{itemize}
 	\end{itemize}
 
@@ -377,9 +376,6 @@
 	\frametitle{Mots-clés}
 	\begin{itemize}
 		\item Conversion de macros en mots-clés
-
-\note[item]{Pour être utilisable avec les modules}
-
 		\begin{itemize}
 			\item \mintinline{cpp}|assert|
 			\item \mintinline{cpp}|offsetof|
@@ -405,17 +401,11 @@
 	\begin{itemize}
 		\item Relâchement des restrictions sur les \mintinline{cpp}|typedef _t|
 		\item Mécanismes \textit{compile-time} vérifiant que deux types ont la même représentation mémoire
-
-\note[item]{P.ex. une structure de deux \mintinline{cpp}|float| et un tableau de deux \mintinline{cpp}|float|}
-
 		\item Type \og{}\textit{fixed point decimal}\fg{}
 		\item Entiers larges \mintinline{cpp}|wide_integer<128, unsigned>|
 		\item Nombres rationnels
 		\item Possibilité de définir des objets \mintinline{cpp}|constexpr|
 		\item \textit{Zero-initialisation} des objets \textit{automatic storage duration}
-
-\note[item]{\textit{automatic storage duration}, c'est ce qui est sur la pile, donc globalement les variables locales}
-
 		\item Entiers non signés pour lesquels l'\textit{overflow} est un UB
 		\item Rendre les \mintinline{cpp}|std::initializer_list| déplaçables
 		\item Détection et gestion des débordements
@@ -540,8 +530,6 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::ignore|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::ignore| pour ignorer une valeur de retour
-
-\note[item]{En pratique, fonctionne déjà mais n'est pas normalisé}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -611,8 +599,6 @@
 		}
 	\end{minted}
 
-\note[item]{L'idée est de traiter le \mintinline{cpp}|static_assert| à l'instanciation et donc de n'échouer que si le paramètre template n'est convertible ni en entier ni en chaîne}
-
 	\addproposal{P2593}{https://wg21.link/p2593r1}
 \end{frame}
 
@@ -635,7 +621,7 @@
 		\item Élision de copie des objets de retour nommés (NRVO) garantie
 
 \note[item]{NRVO : \textit{Named Return Value Optimization}}
-\note[item]{L'élision de copie des objets retournés est déjà garantie pour des \textit{prvalues} en C++17}
+\note[item]{RVO déjà garantie en C++17 pour des \textit{prvalues}}
 \note[item]{Optimisation déjà réalisée par certains compilateurs}
 
 		\item Paramètres \mintinline{cpp}|constexpr| et \og{}\textit{maybe} \mintinline{cpp}|constexpr|\fg{}
@@ -683,9 +669,6 @@
 			\item Dépréciation des conversions entre énumérations
 			\item Dépréciation de la comparaison \og \textit{two-way}\fg{} entre types tableaux
 			\item Comparaison \textit{three-way} entre \textit{unscoped} énumération et type entier
-
-\note[item]{\textit{unscoped} énumération, c'est à dire les \mintinline{cpp}|enum| par opposition aux \mintinline{cpp}|enum class|}
-
 		\end{itemize}
 		\item Interdiction de l'appel de \mintinline{cpp}|operator=| sur des temporaires
 
@@ -707,8 +690,7 @@
 			\item incrément et décrément postfixés à partir des versions préfixés
 			\item \mintinline{cpp}|operator->| et \mintinline{cpp}|operator->*| à partir de \mintinline{cpp}|operator*| et \mintinline{cpp}|operator.|
 
-\note[item]{A priori \mintinline{cpp}|operator->| et \mintinline{cpp}|operator->*| seront générés par défaut, mais cette génération sera désactivable avec \mintinline{cpp}|=delete|}
-\note[item]{Dans la continuité des opérateurs de comparaisons}
+\note[item]{A priori, \mintinline{cpp}|operator->| et \mintinline{cpp}|operator->*| générés par défaut, génération désactivable avec \mintinline{cpp}|=delete|}
 
 		\end{itemize}
 		\item Ajout de \mintinline{cpp}|operator[]| à \mintinline{cpp}|std::initializer_list|
@@ -743,9 +725,6 @@
 
 	\begin{itemize}
 		\item Opérateur \mintinline{cpp}|nameof|
-
-\note[item]{Similaire à l'opérateur \mintinline{cpp}|nameof| de C\# ou au trait \mintinline{cpp}|Debug| de Rust}
-
 	\end{itemize}
 
 	\addproposal{P2971}{https://wg21.link/p2971r1}
@@ -818,8 +797,6 @@
 	\begin{itemize}
 		\item Ajout d'énumérations \og{}\textit{flag-only}\fg{}
 		\item Fonctions membres sur les énumérations
-
-\note[item]{Notamment des opérations de conversion}
 	\end{itemize}
 
 	\addproposal{p2966}{https://wg21.link/p2966r1}
@@ -845,9 +822,6 @@
 		\item Nouveaux conteneurs
 		\begin{itemize}
 			\item Tableaux multidimensionnels \mintinline{cpp}|std::mdarray|
-
-\note[item]{\mintinline{cpp}|std::mdarray| possède les éléments alors que \mintinline{cpp}|std::mdspan| n'est qu'une vue et ne possède pas}
-
 			\item Queue concurrente
 			\item \textit{Bucket array} \mintinline{cpp}|std::hive| : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
 			\item Vecteur utilisant un buffer externe
@@ -877,9 +851,6 @@
 			\item Copies de tableaux
 			\item Tableau comme type de retour
 		\end{itemize}
-
-\note[item]{Copies des tableaux membres en particulier}
-
 		\item Correction de dysfonctionnements de \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set| 
 	\end{itemize}
 
@@ -894,9 +865,6 @@
 		\item Prise en charge de \mintinline{cpp}|std::string_view| par \mintinline{cpp}|std::from_chars|
 		\item Concaténation de \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view|
 		\item Modification du constructeur de \mintinline{cpp}|std::string| depuis un caractère pour interdire les autres numériques (entiers ou flottants)
-
-\note[item]{Il s'agit d'empêcher les initialisations depuis des numériques via la conversion en char}
-
 		\item Voire dépréciation de la construction d'un \mintinline{cpp}|std::string| depuis un caractère
 	\end{itemize}
 
@@ -909,9 +877,6 @@
 	\begin{itemize}
 		\item Récupération d'un index depuis un type pour \mintinline{cpp}|std::variant| et \mintinline{cpp}|std::tuple|
 		\item Utilisation de tableaux C comme \textit{tuple-like}
-
-\note[item]{Déjà le cas pour \mintinline{cpp}|std::array|, extension aux tableaux C}
-
 		\item Utilisation d'\textit{aggregates} comme \textit{tuple-like}
 		\item Amélioration de l'ergonomie d'accès aux champs des \mintinline{cpp}|std::tuple|
 	\end{itemize}
@@ -1005,8 +970,6 @@
 	\frametitle{Lambda}
 	\begin{itemize}
 		\item Capture mutable partielle par les lambdas
-
-\note[item]{Par défaut, capture \mintinline{cpp}|const|, possible de la rendre modifiable via \mintinline{cpp}|mutable|, mais tous les données capturées sont alors mutable}
 	\end{itemize}
 \end{frame}
 
@@ -1014,9 +977,6 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::function|}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::inplace_function| : pendant de \mintinline{cpp}|std::function| sans allocation
-
-\note[item]{\mintinline{cpp}|std::function| peut allouer dynamiquement de la mémoire si la taille du foncteur dépasse un seuil}
-
 		\item \mintinline{cpp}|std::function_ptr_t| : pointeur générique sur une fonction
 	\end{itemize}
 
@@ -1030,13 +990,7 @@
 	\frametitle{Attributs}
 	\begin{itemize}
 		\item Réservation des attributs sans namespace et avec le namespace \mintinline{cpp}|std|
-
-\note[item]{Attributs sans namespace, c'est à dire dans le namespace global}
-
 		\item Possibilité d'implémenter des attributs utilisateurs
-
-\note[item]{Remplacement possible de certaines macros}
-
 		\item Nouveaux attributs
 		\begin{itemize}
 			\item \mintinline{cpp}|[[invalidate_dereferencing]]| : \mintinline{cpp}|*ptr| et \mintinline{cpp}|ptr->| inutilisables après l'appel
@@ -1052,8 +1006,6 @@
 			\item \mintinline{cpp}|[[side_effect_free]]| ou \mintinline{cpp}|[[pure]]|
 			\item \mintinline{cpp}|[[trivially_relocatable]]|
 			\item \mintinline{cpp}|[[discard]]| indique qu'un retour de fonction est volontairement ignoré
-
-\note[item]{Alternative à la conversion en \mintinline{cpp}|void| ou à l'affectation à \mintinline{cpp}|std::ignore|}
 		\end{itemize}
 	\end{itemize}
 
@@ -1306,9 +1258,6 @@
 	\frametitle{Contrôle mémoire}
 	\begin{itemize}
 		\item Mécanismes de sécurité de l'usage mémoire
-
-\note[item]{Pour éviter l'usage d'un objet après libération ou suppression de ces dépendances}
-
 		\begin{itemize}
 			\item \textit{Aliasing}
 			\item Suivi des dépendances
@@ -1361,8 +1310,6 @@
 		\item Bibliothèques de support des coroutines
 		\item \mintinline{cpp}|std::lazy<T>| permettant l'évaluation différée
 		\item Unification et amélioration des API asynchrones
-
-\note[item]{Qu'il s'agisse de coroutines, d'algorithmes parallèles, d'\textit{executor} ou autre}
 	\end{itemize}
 \end{frame}
 
@@ -1389,8 +1336,6 @@
 	\begin{itemize}
 		\item Communication d'informations aux outils de \textit{build} par les modules
 		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
-
-\note[item]{P.ex. si le standard C++2z supprime les conversions implicites, il serait possible d'appliquer ce changement uniquement sur les modules déclarant \mintinline{cpp}|epoch 202z|}
 	\end{itemize}
 
 	\addproposal{p2978}{https://wg21.link/p2978r0}
@@ -1400,10 +1345,6 @@
 	\frametitle{Compilation et implémentation}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::embed()| ressources externes disponibles au \textit{runtime} 
-
-\note[item]{P.ex. pour embarquer une image dans l'application sans aller lire au \textit{runtime} le fichier contenant la ressource}
-\note[item]{Et sans passer par des conversions externes vers des tableaux de \textit{bytes} injectés dans un fichier d'en-tête}
-
 		\item Remplaçant à \mintinline{cpp}|#ifdef| ... \mintinline{cpp}|#endif|
 		\item API d'interaction avec le système de build et le compilateur
 	\end{itemize}

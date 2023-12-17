@@ -27,9 +27,6 @@
 	\frametitle{Dépréciations et suppressions}
 	\begin{itemize}
 		\item Suppression des fonctionnalités liées au support d'un GC
-
-\note[item]{Suppression directe, sans dépréciation. Pas utilisées en pratique}
-
 		\item Dépréciation de \mintinline{cpp}|std::aligned_storage| et \mintinline{cpp}|std::aligned_union|
 		\item Dépréciation de \mintinline{cpp}|std::std::numeric_limits::has_denorm|
 	\end{itemize}
@@ -102,8 +99,6 @@
 	\frametitle{Avertissement}
 	\begin{itemize}
 		\item \mintinline{cpp}|#warning| génère un avertissement à la compilation
-
-\note[item]{Déjà présent dans la plupart des compilateurs}
 	\end{itemize}
 
 	\begin{codesample}
@@ -182,7 +177,6 @@
 		\item Permet l'utilisation de \mintinline{cpp}|wchar_t| pour représenter des caractères UTF-16 ou UCS-2 sur des systèmes supportant UTF-8
 
 \note[item]{Tous les codes points Unicode (21 bits) ne sont pas représentables sur un \mintinline{cpp}|wchar_t| 16 bits}
-\note[item]{Déjà le cas sur Visual C++}
 	\end{itemize}
 
 	\addproposal{P2460}{https://wg21.link/P2460R2}
@@ -209,8 +203,6 @@
 		template <std::size_t N>
 		class Foo { static_assert(N, "Message"); };
 	\end{minted}
-
-\note[item]{En pratique, ces codes étaient déjà acceptées, au moins sous GCC et clang}
 
 	\begin{itemize}
 		\item \mintinline{cpp}|auto(x)| et \mintinline{cpp}|auto{x}| convertissent \mintinline{cpp}|x| en \textit{prvalue}
@@ -373,8 +365,6 @@
 		{ ... }
 	\end{minted}
 
-\note[item]{En C++20, il est possible d'utiliser \mintinline{cpp}|typedef| dans l'\textit{init-statement}}
-
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+v%7B1,+2,+5%7D%3B%0A+%0A++for(using+T+%3D+int%3B+T+e+:+v)%0A++%7B%0A++++std::cout+%3C%3C+e+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
@@ -387,13 +377,7 @@
 	\frametitle{Encodage}
 	\begin{itemize}
 		\item Support des fichiers sources en UTF-8
-
-\note[item]{Auparavant supporté par plusieurs compilateurs, pas imposé par la norme}
-
 		\item Encodage identique entre le préprocesseur et le code C++
-
-\note[item]{Auparavant les deux encodages pouvaient être différents}
-\note[item]{Et ainsi \mintinline{cpp}|\#if 'A' == '\\x41'| et \mintinline{cpp}|if('A' == 0x41)| donner des résultats différents}
 	\end{itemize}
 
 	\addproposal{P2295}{https://wg21.link/P2295R6}
@@ -404,9 +388,6 @@
 	\frametitle{Suffixes littéraux}
 	\begin{itemize}
 		\item Suffixe \mintinline{cpp}|uz| pour \mintinline{cpp}|size_t|
-
-\note[item]{Ou toute autre combinaison de U et Z, minuscule ou majuscule}
-
 		\item Suffixe \mintinline{cpp}|z| pour le type entier signé correspondant à \mintinline{cpp}|size_t|
 
 \note[item]{Typiquement le retour de \mintinline{cpp}|std::ssize()|}
@@ -463,14 +444,9 @@
 		const char * s2 = S(K\u00f6ppe);
 	\end{minted}
 
-\note[item]{En pratique, avant C++23, le traitement dépend du compilateur}
-
 	\begin{itemize}
 		\item Suppression des caractères littéraux larges non codables ou multi-caractères
 		\item Ajout de séquences d'échappement délimitées
-
-\note[item]{Délimitées et pas de taille fixe}
-
 		\begin{itemize}
 			\item \mintinline[escapeinside=||]{cpp}{|\textbackslash|u{}} prenant un nombre arbitraire de chiffres hexadécimaux
 			\item \mintinline[escapeinside=||]{cpp}{|\textbackslash|x{}} prenant un nombre arbitraire de chiffres hexadécimaux
@@ -529,8 +505,6 @@
 
 		foo[3, 2, 1] = 42
 	\end{minted}
-
-\note[item]{Auparavant : utilisation de \mintinline{cpp}|operator()|, de chaîne d'appel de \mintinline{cpp}|[]| ou d'une surcharge de \mintinline{cpp}|operator[]| prenant un agrégat \textit{tuple-like}}
 
 	\begin{block}{Au-delà de C++23}
 		\begin{itemize}
@@ -828,8 +802,6 @@
 		bar.contains("monde");   // false
 	\end{minted}
 
-\note[item]{Comparaison \textit{case-sensitive} comme toutes les fonctions de recherche dans \mintinline{cpp}|std::string|}
-
 	\begin{itemize}
 		\item Interdiction de la construction de \mintinline{cpp}|std::string| depuis \mintinline{cpp}|nullptr|
 
@@ -856,9 +828,6 @@
 		\begin{itemize}
 			\item Allocation d'un tableau de \mintinline{cpp}|count + 1| caractères
 			\item Copie du contenu de la chaîne dans ce tableau
-
-\note[item]{En se limitant à la taille allouée bien sûr}
-
 			\item Appel à la fonction pour valoriser les caractères et déterminer la taille finale
 			\item Mise à jour du contenu de la chaîne avec celui du tableau
 		\end{itemize}
@@ -1026,9 +995,6 @@
 	\frametitle{Évolutions des flux}
 	\begin{itemize}
 		\item \mintinline{cpp}|spanstream| remplaçant de \mintinline{cpp}|strstream| utilisant un \mintinline{cpp}|std::span| comme buffer
-
-\note[item]{\mintinline{cpp}|strstream| déprécié depuis C++98}
-
 		\item Support du mode exclusif à \mintinline{cpp}|std::fstream|
 	\end{itemize}
 
@@ -1043,8 +1009,6 @@
 		\item Vérification des chaînes de format au \textit{compile-time}
 		\item Ajout du type \mintinline{cpp}|?| pour afficher les chaînes échappées
 		\item Formateur de \mintinline{cpp}|std::chrono| \textit{locale-independent} par défaut
-
-\note[item]{Par cohérence avec tous les autres données}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1102,9 +1066,6 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::out_ptr| et \mintinline[style=white]{cpp}|std::inout_ptr|}
 	\begin{itemize}
 		\item Abstractions entre \textit{smart pointers} et API C modifiant un pointeur
-
-\note[item]{Et pas uniquement le contenu pointé par le \textit{smart pointer}}
-
 		\begin{itemize}
 			\item Création d'un pointeur de pointeur temporaire depuis le \textit{smart pointer}
 			\item Automatisation des appels à \mintinline{cpp}|reset()| et \mintinline{cpp}|release()|
@@ -1212,8 +1173,6 @@
 	\begin{itemize}
 		\item Héritage possible de \mintinline{cpp}|std::variant|
 		\item \mintinline{cpp}|std::visit()| restreints aux \mintinline{cpp}|std::variant|
-
-\note[item]{Auparavant, les variants de \mintinline{cpp}|std::visit| pouvaient être formellement de n'importe quel type}
 	\end{itemize}
 
 	\addproposal{P2162}{https://wg21.link/P2162R2}
@@ -1359,9 +1318,6 @@
 			\item L'erreur si la valeur n'est pas présente
 			\item Le paramètre sinon
 		\end{itemize}
-
-\note[item]{\mintinline{cpp}|error_or()| est le pendant de \mintinline{cpp}|value_or()| sur les erreurs}
-
 		\item \mintinline{cpp}|transform_error()|
 		\begin{itemize}
 			\item Retourne la valeur si elle est présente
@@ -1458,9 +1414,6 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|std::ranges::iota()|
 		\item \mintinline{cpp}|std::ranges::shift_left()| et \mintinline{cpp}|std::ranges::shift_right()|
-
-\note[item]{Équivalents à leur contreparties \mintinline{cpp}|std|}
-
 		\item \mintinline{cpp}|std::views::join_with()| transforme un range de ranges en un range
 	\end{itemize}
 
