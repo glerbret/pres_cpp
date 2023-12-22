@@ -219,7 +219,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		struct S { int a; int b; int c; }; 
+		struct S { int a; int b; int c; };
 		S s{.a = 1, .c = 2};
 
 		union U { int a; char* b };
@@ -291,7 +291,7 @@
 			\item \mintinline{cpp}|native| : \textit{endianess} du système
 		\end{itemize}
 	\end{itemize}
-	
+
 	\begin{minted}{cpp}
 		if(endian::native == endian::big)
 		  cout << "big-endian\n";
@@ -429,7 +429,7 @@
 			\item Une unique version à écrire (\mintinline{cpp}|A<=>B| ou \mintinline{cpp}|B<=>A|)
 		\end{itemize}
 	\end{exampleblock}
-		
+
 	\begin{itemize}
 		\item Peut être déclaré \mintinline{cpp}|=default| et généré par
 		\begin{itemize}
@@ -511,7 +511,7 @@
 			\item Déclarez \mintinline{cpp}|operator<=>| et \mintinline{cpp}|operator==| \mintinline{cpp}|=default| si possible
 		\end{itemize}
 	\end{exampleblock}
-	
+
 	\begin{alertblock}{Don't}
 		\begin{itemize}
 			\item Ne mélangez pas \mintinline{cpp}|operator<=>| et opérateurs d'ordre dans une même classe
@@ -527,7 +527,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		namespace A::inline B::C { 
+		namespace A::inline B::C {
 		  int i;
 		}
 
@@ -722,10 +722,10 @@
 	\begin{itemize}
 		\item Les éléments d'une partie exportée d'un namespace sont exportés
 	\end{itemize}
-	
+
 	\begin{minted}{cpp}
 		namespace C { int n; }         // C::m est exporte
-		
+
 		export namespace C { int m; }  // mais pas C::n
 	\end{minted}
 \end{frame}
@@ -748,7 +748,7 @@
 
 	\begin{alertblock}{Restriction}
 		\begin{itemize}
-			\item Uniquement dans une \textit{Primary Module Interface Unit} 
+			\item Uniquement dans une \textit{Primary Module Interface Unit}
 			\item Qui doit être la seule unité du module
 		\end{itemize}
 	\end{alertblock}
@@ -924,7 +924,7 @@
 	\begin{minted}{cpp}
 		struct string_hash {
 		  using transparent_key_equal = equal_to<>;
-		  size_t operator()(string_view txt) const { 
+		  size_t operator()(string_view txt) const {
 		    return hash_type{}(txt); }
 		  size_t operator()(const string& txt) const {
 		    return hash_type{}(txt); }
@@ -999,7 +999,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item Remplacement de l'idiome \og \textit{Erase-remove}\fg{} 
+		\item Remplacement de l'idiome \og \textit{Erase-remove}\fg{}
 		\item Remplacement de la fonction membre \mintinline{cpp}|erase()|
 	\end{itemize}
 
@@ -1016,7 +1016,7 @@
 	\begin{itemize}
 		\item Vue sur un conteneur contigu
 		\item Similaire à \mintinline{cpp}|std::string_view|
-		\item Constructible depuis 
+		\item Constructible depuis
 		\begin{itemize}
 			\item Conteneur
 			\item Couple début / taille
@@ -1298,7 +1298,7 @@
 		\end{itemize}
 
 		\item Conteneur : \mintinline{cpp}|range| possédant ses éléments
-		\item \mintinline{cpp}|View| 
+		\item \mintinline{cpp}|View|
 		\begin{itemize}
 			\item \mintinline{cpp}|range| ne possédant pas les éléments pointés par \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
 			\item Copie, déplacement et affectation en temps constant
@@ -1448,10 +1448,10 @@
 
 		auto rng = ints | view::filter(even);       // 0, 2, 4
 	\end{minted}
- 
+
 	\begin{itemize}
 		\item [] \begin{itemize}
-			\item \mintinline{cpp}|transform_view| : les éléments transformés par l'application d'une fonction 
+			\item \mintinline{cpp}|transform_view| : les éléments transformés par l'application d'une fonction
 		\end{itemize}
 	\end{itemize}
 
@@ -1575,7 +1575,7 @@
 		struct Task { string desc;
 		              unsigned int priority { 0 }; };
 
-		vector<Task> tasks { {"AAA", 10}, {"BBB", 5}, 
+		vector<Task> tasks { {"AAA", 10}, {"BBB", 5},
 		                     {"CCC", 8}, {"DDD", 12} };
 
 		sort(tasks, greater{}, &Task::priority);  // DDD, AAA, CCC, BBB
@@ -2042,7 +2042,7 @@
 		  constexpr auto parse(format_parse_context& ctx) {
 		    return ctx.begin();
 		  }
-		
+
 		  auto format(const MyComplex& value, format_context& ctx) {
 		    return format_to(ctx.out(), "{}+{}i", value.real, value.imag);
 		  }
@@ -2261,7 +2261,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 	\begin{minted}{cpp}
 		// 2016-05-29 07:30:06.153 UTC
-		auto tp = sys_days{2016y/may/29d} + 7h + 30min + 6s + 153ms; 
+		auto tp = sys_days{2016y/may/29d} + 7h + 30min + 6s + 153ms;
 		// 2016-05-29 16:30:06.153 JST
 		zoned_time zt = {"Asia/Tokyo", tp};
 	\end{minted}
@@ -2464,9 +2464,9 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{minted}{cpp}
 		struct X : shared_ptr<int> { string foo; };
 
-		template<int N> string& get(X& x) { 
+		template<int N> string& get(X& x) {
 		  if constexpr(N==0) return x.foo; }
-		template<> class tuple_size<X> : 
+		template<> class tuple_size<X> :
 		  public integral_constant<int, 1> {};
 		template<> class tuple_element<0, X> {
 		  public: using type = string; };
@@ -2559,7 +2559,7 @@ auto date2 = Sunday[3]/May/2016y;
 		using IntPair = std::pair<int, T>;
 
 		// C++ 17
-		IntPair<double> p0{1, 2.0}; 
+		IntPair<double> p0{1, 2.0};
 
 		// C++ 20
 		IntPair p1{1, 2.0};   // std::pair<int, double>
@@ -2682,7 +2682,7 @@ auto date2 = Sunday[3]/May/2016y;
 	\begin{itemize}
 		\item \ldots{} ou depuis des expressions
 	\end{itemize}
- 
+
 	\begin{minted}{cpp}
 		template<typename T> requires requires (T x) { x + x; }
 		T add(T a, T b) { return a + b; }
@@ -2860,7 +2860,7 @@ auto date2 = Sunday[3]/May/2016y;
 
 	\begin{minted}{cpp}
 		template<class T, class... Args>
-		concept constructible_from = 
+		concept constructible_from =
 		  destructible<T> && is_constructible_v<T, Args...>;
   	\end{minted}
 \end{frame}
@@ -2872,7 +2872,7 @@ auto date2 = Sunday[3]/May/2016y;
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		template<class T> concept semiregular = 
+		template<class T> concept semiregular =
 		  copyable<T> && default_constructible<T>;
   	\end{minted}
 
@@ -2952,7 +2952,7 @@ auto date2 = Sunday[3]/May/2016y;
 	\end{block}
 
 	\begin{minted}{cpp}
-		auto foo = []<typename T>(vector<T> const& vec) { 
+		auto foo = []<typename T>(vector<T> const& vec) {
 		  cout<< size(vec) << '\n';
 		  cout<< vec.capacity() << '\n';
 		};
@@ -3006,7 +3006,7 @@ auto date2 = Sunday[3]/May/2016y;
 		template<class F, class... Args>
 		auto delay_invoke(F f, Args... args) {
 		  return [f=move(f),...args=move(args)]()->decltype(auto) {
-		    return invoke(f, args...); 
+		    return invoke(f, args...);
 		  }
 		}
 	\end{minted}
@@ -3144,7 +3144,7 @@ auto date2 = Sunday[3]/May/2016y;
 \begin{frame}[fragile]
 	\frametitle{synchronisation -- latch}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::latch| compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro 
+		\item \mintinline{cpp}|std::latch| compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro
 		\begin{itemize}
 			\item Création avec la valeur initiale du compteur
 			\item \mintinline{cpp}|count_down()| décrémente le compteur

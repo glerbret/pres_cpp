@@ -117,7 +117,7 @@
 
 	\begin{minted}{cpp}
 		struct X { int a, b; };
-		
+
 		X* p = start_lifetime_as<X>(malloc(sizeof(struct X));
 		p->a = 1;
 		p->b = 2;
@@ -173,7 +173,7 @@
 		The values of type \mintinline{cpp}|wchar_t| can represent distinct codes for all members of the largest extended character set specified among the supported locale
 	\end{block}
 
-	\begin{itemize}		
+	\begin{itemize}
 		\item Permet l'utilisation de \mintinline{cpp}|wchar_t| pour représenter des caractères UTF-16 ou UCS-2 sur des systèmes supportant UTF-8
 
 \note[item]{Tous les codes points Unicode (21 bits) ne sont pas représentables sur un \mintinline{cpp}|wchar_t| 16 bits}
@@ -263,7 +263,7 @@
 \note[item]{P.ex. \mintinline{cpp}|sizeof *ptr|}
 			\end{itemize}
 		\end{itemize}
-		\item Conversion implicite de fonctions \mintinline{cpp}|constexpr| en \mintinline{cpp}|consteval| 
+		\item Conversion implicite de fonctions \mintinline{cpp}|constexpr| en \mintinline{cpp}|consteval|
 
 \note[item]{Lorsque la fonction ne peut qu'être invoquée au \textit{compile-time}}
 
@@ -291,7 +291,7 @@
 		consteval int foo(int i) { return i; }
 
 		constexpr int bar(int i) {
-		  if consteval { return foo(i) + 1; } 
+		  if consteval { return foo(i) + 1; }
 		  else { return 42; } }
 	\end{minted}
 
@@ -474,7 +474,7 @@
 
 \note[item]{En pratique, les compilateurs, notamment GCC, sont plus laxistes que ce qu'impose la norme et accepte silencieusement des cas ambigus}
 
-		\item \mintinline{cpp}|operator==| est utilisé pour réécrire \mintinline{cpp}|operator!=| et la forme inverse de \mintinline{cpp}|operator==| uniquement si \mintinline{cpp}|operator!=| n'existe pas 
+		\item \mintinline{cpp}|operator==| est utilisé pour réécrire \mintinline{cpp}|operator!=| et la forme inverse de \mintinline{cpp}|operator==| uniquement si \mintinline{cpp}|operator!=| n'existe pas
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -598,7 +598,7 @@
 		\item Support des attributs \mintinline{cpp}|[[ nodiscard ]]|, \mintinline{cpp}|[[ deprecated ]]|, \mintinline{cpp}|[[ noreturn ]]|
 		\item Lambdas \mintinline{cpp}|static| : \mintinline{cpp}|operator()| de l'objet généré est \mintinline{cpp}|static|
 	\end{itemize}
-	
+
 	\begin{alertblock}{Limites}
 		\begin{itemize}
 			\item \mintinline{cpp}|static| et \mintinline{cpp}|mutable| sont mutuellement exclusifs
@@ -687,7 +687,7 @@
 \begin{frame}[fragile]
 	\frametitle{Paramètre \mintinline[style=white]{cpp}|this| explicite / deducing \mintinline[style=white]{cpp}|this|}
 	\begin{itemize}
-		\item Utilisation des règles classiques de déduction de types 
+		\item Utilisation des règles classiques de déduction de types
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -836,7 +836,7 @@
 	\begin{minted}{cpp}
 		string foo = "Hello ", bar = "world!";
 
-		foo.resize_and_overwrite(20, 
+		foo.resize_and_overwrite(20,
 		  [sz = foo.size(), bar] (char* buf, size_t buf_size) {
 		    auto to_copy = min(buf_size - sz, bar.size());
 		    memcpy(buf + sz, bar.data(), to_copy);
@@ -941,7 +941,7 @@
 		\begin{itemize}
 			\item \mintinline{cpp}|layout_right| : \textit{layout} du C et du C++, lignes puis colonnes
 			\item \mintinline{cpp}|layout_left| : \textit{layout} de Fortran ou Matlab, colonnes puis lignes
-			\item \mintinline{cpp}|layout_stride| 
+			\item \mintinline{cpp}|layout_stride|
 		\end{itemize}
 		\item Accès à un élément via \mintinline{cpp}|operator[]| multi-paramètres (\mintinline{cpp}|[x,y,z]|)
 	\end{itemize}
@@ -1069,7 +1069,7 @@
 		\begin{itemize}
 			\item Création d'un pointeur de pointeur temporaire depuis le \textit{smart pointer}
 			\item Automatisation des appels à \mintinline{cpp}|reset()| et \mintinline{cpp}|release()|
-			\item \textit{Exception-safe} : \textit{smart pointer} rétabli au retour de l'API C	
+			\item \textit{Exception-safe} : \textit{smart pointer} rétabli au retour de l'API C
 
 \note[item]{Pas d'exception dans le code C++ avant le rétablissement du \textit{smart pointer}}
 
@@ -1224,7 +1224,7 @@
 \begin{frame}[fragile]
 	\frametitle{Opérations monadiques de \mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
-		\item \mintinline{cpp}|or_else()| 
+		\item \mintinline{cpp}|or_else()|
 		\begin{itemize}
 			\item Retourne le \mintinline{cpp}|std::optional| s'il a une valeur
 			\item Appelle une fonction sinon
@@ -1259,7 +1259,7 @@
 			\item Soit une erreur de type \mintinline{cpp}|E|
 		\end{itemize}
 		\item \mintinline{cpp}|operator bool()| et \mintinline{cpp}|has_value()| indiquent si l'objet contient une valeur
-		\item \mintinline{cpp}|operator->| et \mintinline{cpp}|operator*| accèdent à la valeur 
+		\item \mintinline{cpp}|operator->| et \mintinline{cpp}|operator*| accèdent à la valeur
 		\item \mintinline{cpp}|value()| retourne la valeur
 		\item \mintinline{cpp}|error()| retourne l'erreur
 	\end{itemize}
@@ -1285,7 +1285,7 @@
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::expected|}
 	\begin{itemize}
-		\item \mintinline{cpp}|value_or()| retourne 
+		\item \mintinline{cpp}|value_or()| retourne
 		\begin{itemize}
 			\item La valeur si présente
 			\item La valeur reçue en paramètre sinon

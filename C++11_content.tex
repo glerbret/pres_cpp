@@ -228,10 +228,10 @@
 	\begin{itemize}
 		\item \textit{Standard-layout}
 		\begin{itemize}
-			\item Pas de donnée membre non-statique non-\textit{Standard-layout} 
+			\item Pas de donnée membre non-statique non-\textit{Standard-layout}
 			\item Pas de référence
 			\item Pas de classe de base non-\textit{Standard-layout}
-			\item Pas de fonction virtuelle 
+			\item Pas de fonction virtuelle
 			\item Pas de classe de base virtuelle
 			\item Même accessibilité de toutes les données membres non-statique
 			\item Données membres non-statiques dans une unique classe de l'arbre d'héritage
@@ -255,7 +255,7 @@
 			\item \textit{standard layout}
 			\item Pas de donnée membre non-statique non-POD
 		\end{itemize}
-		\item Traits correspondants 
+		\item Traits correspondants
 		\begin{itemize}
 			\item \mintinline{cpp}|std::is_trivial|
 			\item \mintinline{cpp}|std::is_trivially_copyable|
@@ -472,7 +472,7 @@
 		switch(a) {
 		  case foo():
 		    break;
-		
+
 		  default:
 		    break;
 		}
@@ -884,7 +884,7 @@
 			\item Valeurs contenues dans un tableau temporaire de même durée de vie
 			\item Copier un \mintinline{cpp}|std::initializer_list| ne copie pas les données
 		\end{itemize}
-	\end{alertblock}		
+	\end{alertblock}
 
 	\begin{itemize}
 		\item Fonctions membres \mintinline{cpp}|size()|, \mintinline{cpp}|begin()|, \mintinline{cpp}|end()|
@@ -1378,9 +1378,9 @@
 		\item Versions non ordonnées de \mintinline{cpp}|std::map|, \mintinline{cpp}|std::set|, \ldots{}
 	\end{itemize}
 
-	\begin{block}{\mintinline[style=white]{cpp}|unordered_| ?}
+	\begin{block}{\mintinline[style=white]{cpp}|unordered_<XXX>| ?}
 		\begin{itemize}
-			\item Nombreuses implémentations \mintinline{cpp}|hash_XXX| existantes
+			\item Nombreuses implémentations \mintinline{cpp}|hash_<XXX>| existantes
 			\item Structures fondamentalement non ordonnées
 		\end{itemize}
 	\end{block}
@@ -1497,7 +1497,7 @@
 	\begin{exampleblock}{Do}
 		\begin{itemize}
 			\item Préférez \mintinline{cpp}|std::array| lorsque la taille est fixe et connue
-			\item Sinon préférez \mintinline{cpp}|std::vector| 
+			\item Sinon préférez \mintinline{cpp}|std::vector|
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -1867,7 +1867,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::is_heap_until()| indique le premier élément qui n'est pas dans la position correspondant à un tas 
+		\item \mintinline{cpp}|std::is_heap_until()| indique le premier élément qui n'est pas dans la position correspondant à un tas
 	\end{itemize}
 \end{frame}
 
@@ -2184,7 +2184,7 @@
 	\begin{itemize}
 		\item Littéraux brutes : chaîne C entièrement analysée par l'opérateur
 	\end{itemize}
-	
+
 	\begin{minted}{cpp}
 		Foo operator""_b(const char* str) {
 		  unsigned long long a = 0;
@@ -2334,7 +2334,7 @@
 
 	\begin{exampleblock}{Do}
 		\begin{itemize}
-			\item Préférez un \mintinline{cpp}|std::tuple| de retour aux paramètres OUT
+			\item Préférez un \mintinline{cpp}|std::tuple| de retour aux paramètres \og{}\textit{OUT}\fg{}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -2573,13 +2573,13 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  virtual void f(int); 
+		  virtual void f(int);
 		  virtual void g(int) const;
 		  void h(int);
 		};
 
 		struct Bar : Foo {
-		  void f(float) override;   // Erreur 
+		  void f(float) override;   // Erreur
 		  void g(int) override;     // Erreur
 		  void h(int) override;     // Erreur
 		};
@@ -2757,7 +2757,7 @@
 	\begin{itemize}
 		\item Quasi-pointeur \mintinline{cpp}|std::exception_ptr| à responsabilité partagée sur une exception
 		\item \mintinline{cpp}|std::current_exception()| récupère un pointeur sur l'exception courante
-		\item \mintinline{cpp}|std::rethrow_exception()| relance l'exception contenue dans \mintinline{cpp}|std::exception_ptr| 
+		\item \mintinline{cpp}|std::rethrow_exception()| relance l'exception contenue dans \mintinline{cpp}|std::exception_ptr|
 		\item \mintinline{cpp}|std::make_exception_ptr()| construit \mintinline{cpp}|std::exception_ptr| depuis une exception
 	\end{itemize}
 \end{frame}
@@ -3274,7 +3274,7 @@
 
 		int total = 0;
 		foo(int i) {
-		  total += i; 
+		  total += i;
 		  return i;
 		}
 
@@ -3378,7 +3378,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		template<class T, 
+		template<class T,
 		typename enable_if<is_integral<T>::value, T>::type* = nullptr>
 		void foo(T data) { }
 
@@ -3430,11 +3430,11 @@
 
 	\begin{minted}{cpp}
 		template <unsigned n>
-		struct factorial 
+		struct factorial
 		  : integral_constant<int, n*factorial<n-1>::value> {};
 
 		template <>
-		struct factorial<0> 
+		struct factorial<0>
 		  : integral_constant<int, 1> {};
 
 		factorial<5>::value;  // 120 en compile-time
@@ -3694,7 +3694,7 @@
 
 	\begin{block}{Objectif}
 		\begin{itemize}
-			\item Rompre les cycles 
+			\item Rompre les cycles
 		\end{itemize}
 	\end{block}
 
@@ -3786,7 +3786,7 @@
 	\begin{block}{Sous silence}
 		\begin{itemize}
 			\item Allocateurs, mémoire non-initialisée, alignement, \ldots{}
-		\end{itemize} 
+		\end{itemize}
 	\end{block}
 
 	\begin{block}{Mais aussi}
@@ -3989,7 +3989,7 @@
 
 	\begin{minted}{cpp}
 		milliseconds foo(10000);
-		foo.count() * milliseconds::period::num / 
+		foo.count() * milliseconds::period::num /
 		              milliseconds::period::den;  // 10
 	\end{minted}
 \end{frame}
@@ -4080,7 +4080,7 @@
 		steady_clock::time_point t1 = steady_clock::now();
 		...
 		steady_clock::time_point t2 = steady_clock::now();
-		duration<double> time_span = 
+		duration<double> time_span =
 		duration_cast<duration<double>>(t2 - t1);
 	\end{minted}
 \end{frame}
@@ -4088,7 +4088,7 @@
 \begin{frame}[fragile]
 	\frametitle{Horloges}
 	\begin{itemize}
-		\item Horloge avec le plus petit intervalle entre deux \textit{ticks} \mintinline{cpp}|std::chrono::high_resolution_clock| 
+		\item Horloge avec le plus petit intervalle entre deux \textit{ticks} \mintinline{cpp}|std::chrono::high_resolution_clock|
 		\item Possible synonyme de \mintinline{cpp}|std::chrono::system_clock| ou \mintinline{cpp}|std::chrono::steady_clock|
 	\end{itemize}
 
@@ -4137,7 +4137,7 @@
 
 	\begin{minted}{cpp}
 		atomic<int> foo{5};
-		++foo; 
+		++foo;
 	\end{minted}
 
 	\begin{itemize}
@@ -4152,7 +4152,7 @@
 \begin{frame}[fragile]
 	\frametitle{Variables atomiques -- \mintinline[style=white]{cpp}|std::atomic|}
 	\begin{itemize}
-		\item \mintinline{cpp}|compare_exchange_weak| et \mintinline{cpp}|compare_exchange_strong| 
+		\item \mintinline{cpp}|compare_exchange_weak| et \mintinline{cpp}|compare_exchange_strong|
 
 \note[item]{Différence \textit{weak} / \textit{strong} : \textit{weak} peu échouer dans certains cas. Lorsque cela se produit, aucune valeur n'est modifiée}
 
@@ -4309,7 +4309,7 @@
 	\frametitle{Mutex -- \mintinline[style=white]{cpp}|std::mutex|}
 	\begin{itemize}
 		\item Verrou pour l'accès exclusif à une section de code
-		\item \mintinline{cpp}|lock()| verrouille le mutex 
+		\item \mintinline{cpp}|lock()| verrouille le mutex
 		\item \ldots{} en attendant sa libération s'il est déjà verrouillé
 		\item \mintinline{cpp}|try_lock()| verrouille le mutex s'il est libre, retourne \mintinline{cpp}|false| sinon
 		\item \mintinline{cpp}|unlock()| relâche le mutex
@@ -4514,7 +4514,7 @@
 		\item \mintinline{cpp}|notify_all()| notifie tous les threads en attente
 		\item \mintinline{cpp}|std::condition_variable_any| similaire à \mintinline{cpp}|std::condition_variable|
 		\item \ldots{} sans être limité à \mintinline{cpp}|std::unique_lock|
-		\item \mintinline{cpp}|std::notify_all_at_thread_exit()| 
+		\item \mintinline{cpp}|std::notify_all_at_thread_exit()|
 		\begin{itemize}
 			\item Indique de notifier tous les threads à la fin du thread courant
 			\item Prend un verrou qui sera libéré à la fin du thread

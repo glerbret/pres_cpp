@@ -47,7 +47,7 @@
 			\item \textit{Universal characters} sur plusieurs lignes autorisés
 		\end{itemize}
 	\end{itemize}
-	
+
 	\begin{minted}[escapeinside=||]{cpp}
 		int |\textbackslash|\
 		u\
@@ -118,7 +118,7 @@
 	\begin{itemize}
 		\item Joker \mintinline{cpp}|_| pour des variables inutilisées
 	\end{itemize}
-	
+
 	\begin{minted}{cpp}
 		auto _ = foo();  // Equivalent a [[maybe_unused]] auto _ = foo();
 	\end{minted}
@@ -168,7 +168,7 @@
 	\frametitle{Initializer-list}
 	\begin{itemize}
 		\item \textit{static storage} possible pour les \textit{braced-initializer-list}
-		
+
 \note[item]{Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'\textit{initializer list} puis vers le conteneur}
 	\end{itemize}
 
@@ -286,7 +286,7 @@
 		\begin{itemize}
 			\item Type référence pour le passage d'appelable à une fonction
 			\item Plus générique et moins gourmand que \mintinline{cpp}|std::function| et équivalents
-	
+
 \note[item]{Les fonctions n'ont pas besoin d'être copiables ni déplaçables}
 		\end{itemize}
 	\end{itemize}

@@ -18,7 +18,7 @@
 	\begin{itemize}
 		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
 		\item Support de la programmation par contrat
-		\item Remplace la vérification via \mintinline{cpp}|assert| 
+		\item Remplace la vérification via \mintinline{cpp}|assert|
 		\item Et la documentation via commentaires \mintinline[escapeinside=||]{cpp}{|@|pre}, \mintinline[escapeinside=||]{cpp}{|@|post} et \mintinline[escapeinside=||]{cpp}{|@|invariant}
 		\item Plusieurs propositions initiales concurrentes
 		\item \ldots{} mais un compromis à émerger
@@ -104,7 +104,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item[] 
+		\item[]
 		\begin{itemize}
 			\item Chaînes de caractères
 		\end{itemize}
@@ -124,7 +124,7 @@
 \begin{frame}[fragile]
 	\frametitle{TS -- Pattern matching}
 	\begin{itemize}
-		\item[] 
+		\item[]
 		\begin{itemize}
 			\item \mintinline{cpp}|std::tuple|, \mintinline{cpp}|std::pair|, \mintinline{cpp}|std::array| et tuple-like
 		\end{itemize}
@@ -140,7 +140,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] 
+		\item []
 		\begin{itemize}
 			\item \mintinline{cpp}|std::variant| et \mintinline{cpp}|std::any|
 		\end{itemize}
@@ -157,7 +157,7 @@
 \begin{frame}[fragile]
 	\frametitle{TS -- Pattern matching}
 	\begin{itemize}
-		\item[] 
+		\item[]
 		\begin{itemize}
 			\item Types polymorphiques
 		\end{itemize}
@@ -197,7 +197,7 @@
 
 	\begin{minted}{cpp}
 		int foo[] = {1, 2, 3, 4, 5};
-		copy(begin(i), end(i), make_ostream_joiner(cout, ", ")); 
+		copy(begin(i), end(i), make_ostream_joiner(cout, ", "));
 		// "1, 2, 3, 4, 5"
 	\end{minted}
 
@@ -308,7 +308,7 @@
 		  }
 		  return "<unnamed>";
 		}
-		
+
 		enum Color { red, green, blue };
 		enum_to_string(Color::red);  // red
 		enum_to_string(Color(42));   // <unnamed>
@@ -364,7 +364,7 @@
 \begin{frame}[fragile]
 	\frametitle{Vérification statique}
 	\begin{itemize}
-		\item \textit{Procedural function interfaces} 
+		\item \textit{Procedural function interfaces}
 		\begin{itemize}
 			\item Annotations de types \textit{claim} / \textit{assertion}
 			\item Recouvre des points du contract TS mais plus ambitieux
@@ -510,7 +510,7 @@
 		if(foo as string) { /* foo: string& */ }
 		else { /* foo: optional<string> */ }
 	\end{minted}
-		
+
 	\begin{itemize}
 		\item []
 		\begin{itemize}
@@ -593,7 +593,7 @@
 	\begin{minted}{cpp}
 		// C++20 : echec de compilation systematique
 		template<typenameT>int my_func(constT&) {
-		  if constexpr(is_integral_v<T>) { return 1; } 
+		  if constexpr(is_integral_v<T>) { return 1; }
 		  else if constexpr(is_convertible_v<string, T>) { return 2 ; }
 		  else { static_assert(false); }
 		}
@@ -640,7 +640,7 @@
 		\item Possibilité de déterminer l'appelant
 		\item Arguments nommés
 	\end{itemize}
-	
+
 	\begin{minted}{cpp}
 		void foo(int a, int b, int c, int d, bool e = false);
 
@@ -717,7 +717,7 @@
 
 	\begin{minted}{cpp}
 		p => q;
-	
+
 		// Equivalent a
 
 		!p || q;
@@ -851,7 +851,7 @@
 			\item Copies de tableaux
 			\item Tableau comme type de retour
 		\end{itemize}
-		\item Correction de dysfonctionnements de \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set| 
+		\item Correction de dysfonctionnements de \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 	\end{itemize}
 
 	\addproposal{P2821}{https://wg21.link/p2821r4}
@@ -1023,12 +1023,12 @@
 	\begin{minted}{cpp}
 		auto foo = make_tuple(0, 'a', 3.14);
 
-		for... (auto elem : tup)  
+		for... (auto elem : tup)
 		  cout << elem << "\n";
 	\end{minted}
 
 	\begin{itemize}
-		\item [] 
+		\item []
 		\begin{itemize}
 			\item Duplication de l'expression pour chaque élément (pas de boucle)
 			\item Éléments de type différent
@@ -1053,7 +1053,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] 
+		\item []
 		\begin{itemize}
 			\item \textit{Slicing} de \textit{packs}
 		\end{itemize}
@@ -1084,7 +1084,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] 
+		\item []
 		\begin{itemize}
 			\item \textit{Variadic function} homogène
 		\end{itemize}
@@ -1098,7 +1098,7 @@
 \note[item]{La fonction prend un nombre quelconque de paramètres, mais tous du type T}
 
 	\begin{itemize}
-		\item [] 
+		\item []
 		\begin{itemize}
 			\item \textit{Unpack} de \mintinline{cpp}|std::tuple| à la volée
 		\end{itemize}
@@ -1267,7 +1267,7 @@
 		\end{itemize}
 
 		\item Accès à la taille réellement allouée
-		\item Spécificateur de stockage des temporaires 
+		\item Spécificateur de stockage des temporaires
 		\begin{itemize}
 			\item \mintinline{cpp}|constinit|
 			\item \mintinline{cpp}|variable_scope|
@@ -1344,7 +1344,7 @@
 \begin{frame}[fragile]
 	\frametitle{Compilation et implémentation}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::embed()| ressources externes disponibles au \textit{runtime} 
+		\item \mintinline{cpp}|std::embed()| ressources externes disponibles au \textit{runtime}
 		\item Remplaçant à \mintinline{cpp}|#ifdef| ... \mintinline{cpp}|#endif|
 		\item API d'interaction avec le système de build et le compilateur
 	\end{itemize}

@@ -39,8 +39,8 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		[](int x) { 
-		  if(x >= 0) return 2 * x; 
+		[](int x) {
+		  if(x >= 0) return 2 * x;
 		  else return -2 * x;
 		};
 	\end{minted}
@@ -51,7 +51,7 @@
 
 	\begin{minted}{cpp}
 		auto bar(int x) {
-		  if(x >= 0) return 2 * x; 
+		  if(x >= 0) return 2 * x;
 		  else return -2 * x;
 		}
 	\end{minted}
@@ -425,7 +425,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		auto foo = [] (auto... args) { 
+		auto foo = [] (auto... args) {
 		  std::cout << sizeof...(args) << '\n';
 		};
 

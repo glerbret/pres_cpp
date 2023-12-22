@@ -97,7 +97,7 @@
 \begin{frame}[fragile]
 	\frametitle{Nested namespace}
 	\begin{itemize}
-		\item Simplification des imbrications de namespaces via l'opérateur \mintinline{cpp}|::| 
+		\item Simplification des imbrications de namespaces via l'opérateur \mintinline{cpp}|::|
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -106,9 +106,9 @@
 		namespace C {
 		...
 		}}}
-		
+
 		// Devient
-		
+
 		namespace A::B::C {
 		...
 		}
@@ -183,7 +183,7 @@
 		else
 		  return t;
 		}
-		
+
 		int a = 10, b = 5;
 		int* ptr = &b;
 		cout << foo(a) << ' ' << foo(ptr);  // 10 5
@@ -194,7 +194,7 @@
 	\frametitle{\mintinline[style=white]{cpp}|if constexpr|}
 	\begin{block}{Note}
 		\begin{itemize}
-			\item Les branches doivent être syntaxiquement correctes 
+			\item Les branches doivent être syntaxiquement correctes
 			\item \ldots{} mais pas nécessairement sémantiquement valides
 		\end{itemize}
 	\end{block}
@@ -310,7 +310,7 @@
 
 	\begin{minted}{cpp}
 		switch(int foo = 42; bar) {
-		  ... 
+		  ...
 		}
 	\end{minted}
 
@@ -339,7 +339,7 @@
 			\item Sont toutes des membres de l'objet ou de la même classe de base publique
 			\item Ne sont pas des unions anonymes
 		\end{itemize}
-		\item Et sur les classes implémentant \mintinline{cpp}|get<>()|, \mintinline{cpp}|tuple_size| et \mintinline{cpp}|tuple_element|	
+		\item Et sur les classes implémentant \mintinline{cpp}|get<>()|, \mintinline{cpp}|tuple_size| et \mintinline{cpp}|tuple_element|
 		\item Notamment \mintinline{cpp}|std::tuple|, \mintinline{cpp}|std::pair|, \mintinline{cpp}|std::array|
 	\end{itemize}
 
@@ -356,7 +356,7 @@
 	\begin{minted}{cpp}
 		class Foo {
 		  const int i = 42;
-		  const string s{"Hello"}; 
+		  const string s{"Hello"};
 		  public: template <int N> auto& get() const {
 		    if constexpr(N == 0) { return i; }
 		    else { return s; } } };
@@ -406,7 +406,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		map<int, string> myMap;    
+		map<int, string> myMap;
 		for(const auto& [k,v] : myMap)
 		{ ... }
 	\end{minted}
@@ -810,7 +810,7 @@
 		\begin{itemize}
 			\item Conteneurs et \mintinline{cpp}|initializer_list| : résultat de la fonction membre \mintinline{cpp}|size()|
 			\item Tableau C : taille du tableau
-		\end{itemize} 
+		\end{itemize}
 
 		\item \mintinline{cpp}|std::empty()|
 		\begin{itemize}
@@ -825,7 +825,7 @@
 			\item Tableau C : pointeur sur le premier élément
 			\item \mintinline{cpp}|initializer_list| : itérateur sur le premier élément
 		\end{itemize}
-	\end{itemize}	
+	\end{itemize}
 \end{frame}
 
 \subsection*{Itérateurs}
@@ -834,7 +834,7 @@
 	\begin{itemize}
 		\item Basé sur \mintinline{cpp}|RandomAccessIterator|
 		\item Mais sur des conteneurs à stockage contigu
-		\item Itérateur associé à 
+		\item Itérateur associé à
 		\begin{itemize}
 			\item \mintinline{cpp}|std::vector|
 			\item \mintinline{cpp}|std::array|
@@ -1007,7 +1007,7 @@
 	\begin{alertblock}{Attention}
 		\begin{itemize}
 			\item Appelable valide pour tous les types du \mintinline{cpp}|std::variant|
-		\end{itemize} 
+		\end{itemize}
 
 \note[item]{Et ce peut être une structure/classe présentant une surcharge de \mintinline{cpp}|operator()| pour chacun des types}
 	\end{alertblock}
@@ -1382,8 +1382,8 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		template<class Func> struct Foo { 
-		  Foo(Func f) : func(f) {} 
+		template<class Func> struct Foo {
+		  Foo(Func f) : func(f) {}
 		  Func func;
 		};
 
@@ -1426,7 +1426,7 @@
 	\end{minted}
 
 	\begin{minted}{cpp}
-		template <typename Type, Type value> 
+		template <typename Type, Type value>
 		  constexpr Type FOO = value;
 		constexpr auto const foo = FOO<int, 100>;
 
@@ -1468,7 +1468,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		template<int* P> struct Foo { 
+		template<int* P> struct Foo {
 		  int operator()() { return *P; }
 		};
 
@@ -1528,7 +1528,7 @@
 \begin{frame}[fragile]
 	\frametitle{Lambdas et expressions constantes}
 	\begin{itemize}
-		\item Déclaration \mintinline{cpp}|constexpr| de lambda possible 
+		\item Déclaration \mintinline{cpp}|constexpr| de lambda possible
 		\item Explicitement via \mintinline{cpp}|constexpr|
 	\end{itemize}
 
@@ -1645,7 +1645,7 @@
 		enable_if_t<is_integral<T>::value, T>
 		sqrt(T t);
 
-		// Devient 
+		// Devient
 
 		template <typename T>
 		enable_if_t<is_integral_v<T>, T>
@@ -2009,13 +2009,13 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item Changement de la valeur via \mintinline{cpp}|reset()|, \mintinline{cpp}|swap()|, \mintinline{cpp}|emplace()| ou \mintinline{cpp}|operator=|
-		\item Comparaison naturelle des valeurs contenues 
+		\item Comparaison naturelle des valeurs contenues
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		optional<int> deux(2), dix(10);
 
-		dix > deux;       // true	
+		dix > deux;       // true
 		dix < deux;       // false
 		dix == 10;        // true
 	\end{minted}
@@ -2027,7 +2027,7 @@
 	\begin{minted}{cpp}
 		optional<int> none, dix(10);
 
-		dix > none;       // true	
+		dix > none;       // true
 		dix < none;       // false
 		none == 10;       // false
 		none == nullopt;  // true
@@ -2216,7 +2216,7 @@
 		\begin{itemize}
 			\item Souvent meilleures que les fonctionnalités équivalentes de \mintinline{cpp}|string|
 			\item Mais pas toujours, donc mesurez
-		\end{itemize} 
+		\end{itemize}
 	\end{exampleblock}
 
 	\begin{codesample}
@@ -2276,7 +2276,7 @@
 
 	\begin{minted}{cpp}
 		string in = "abcdefgh", out;
-		sample(begin(in), end(in), back_inserter(out), 
+		sample(begin(in), end(in), back_inserter(out),
 		       5, mt19937{random_device{}()});
 	\end{minted}
 
@@ -2290,7 +2290,7 @@
 	\begin{itemize}
 		\item Ajout des fonctions \mintinline{cpp}|std::gcd()| et \mintinline{cpp}|std::lcm()|
 		\item Initialement prévu pour des versions ultérieures
-		\item \ldots{} mais suffisamment simples et élémentaires pour C++17 
+		\item \ldots{} mais suffisamment simples et élémentaires pour C++17
 	\end{itemize}
 
 	\begin{minted}{cpp}

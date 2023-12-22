@@ -8,8 +8,8 @@
 	\begin{itemize}
 		\item Années 80 -- \og C with classes\fg{} par Bjarne Stroustrup aux Bell Labs
 		\item 1983 -- renommé C++
-		\item 1985 -- première version publique de CFront 
-		\item 1985 -- première version de \textit{The C++ Programming Language} 
+		\item 1985 -- première version publique de CFront
+		\item 1985 -- première version de \textit{The C++ Programming Language}
 		\item 1998 -- première normalisation
 		\item 2003 -- amendement
 		\item 2007 -- publication du premier \textit{Technical Report} (TR1)
@@ -141,7 +141,7 @@
 		  ...
 		}
 		catch(logic_error& e) {
-		  // Traitement de l'exception 
+		  // Traitement de l'exception
 		  ...
 		}
 	\end{minted}
@@ -175,7 +175,7 @@
 		\begin{itemize}
 			\item Initialement vrai
 			\item Actuellement, une exception non levée ne coute quasiment rien
-			\item Souvent comparée à une non gestion d'erreur, est-ce pertinent ? 
+			\item Souvent comparée à une non gestion d'erreur, est-ce pertinent ?
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -412,7 +412,7 @@
 		public:
 		  Foo() : bar(new char[50]) {}
 		  ~Foo() { delete[] bar; }
-		
+
 		private:
 		  char* bar;
 		};
@@ -463,7 +463,7 @@
 			\item Ressources automatiquement libérées à la destruction de l'objet
 
 \note[item]{Et de façon déterministe}
-			
+
 			\item Capsules RAII copiables sans effort
 		\end{itemize}
 	\end{itemize}
@@ -898,18 +898,18 @@
 		\begin{itemize}
 			\item Pile LIFO
 			\item Basée sur \mintinline{cpp}|std::vector|, \mintinline{cpp}|std::list| ou \mintinline{cpp}|std::deque|
-		\end{itemize} 
+		\end{itemize}
 		\item \mintinline{cpp}|std::queue|
 		\begin{itemize}
 			\item File FIFO
 			\item Basée sur \mintinline{cpp}|std::deque| ou \mintinline{cpp}|std::list|
-		\end{itemize} 
+		\end{itemize}
 		\item \mintinline{cpp}|std::priority_queue|
 		\begin{itemize}
 			\item File dont l'élément de tête est le plus grand
 			\item Basée sur \mintinline{cpp}|std::vector| ou \mintinline{cpp}|std::deque|
 			\item Critère d'ordre configurable (strictement inférieur par défaut)
-		\end{itemize} 
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -981,7 +981,7 @@
 			\item \mintinline{cpp}|std::string| pour les chaînes de caractères
 			\item \mintinline{cpp}|std::vector|
 		\end{itemize}
-	\end{exampleblock}		
+	\end{exampleblock}
 
 	\begin{exampleblock}{Do, performances}
 		\begin{itemize}
@@ -1049,11 +1049,11 @@
 					\item \textit{Output} : écriture
 					\item \textit{Forward} : Parcours multiples
 					\item \textit{Bidirectional} : décrémentation
-					\item \textit{Random access} 
+					\item \textit{Random access}
 					\begin{itemize}
 						\item Déplacement d'un nombre arbitraire (\mintinline{cpp}|+|, \mintinline{cpp}|-|, \mintinline{cpp}|+=|, \mintinline{cpp}|-=| et \mintinline{cpp}|[]|)
 						\item Comparaison (\mintinline{cpp}|<|, \mintinline{cpp}|<=|, \mintinline{cpp}|>|, \mintinline{cpp}|>=|)
-					\end{itemize} 
+					\end{itemize}
 				\end{itemize}
 			\end{itemize}
 		\end{column}
@@ -1087,19 +1087,19 @@
 	\frametitle{STL Itérateurs -- Catégories et conteneurs}
 	\begin{tabular}{ | p{5cm} | p{5cm} |}
 		\hline
-		Conteneur & Catégorie \\ 
+		Conteneur & Catégorie \\
 		\hline
-		\mintinline{cpp}|std::vector| & \textit{Random access} \\ 
+		\mintinline{cpp}|std::vector| & \textit{Random access} \\
 		\hline
-		\mintinline{cpp}|std::deque| & \textit{Random access} \\ 
+		\mintinline{cpp}|std::deque| & \textit{Random access} \\
 		\hline
-		\mintinline{cpp}|std::list| & \textit{Bidirectionnal} \\ 
+		\mintinline{cpp}|std::list| & \textit{Bidirectionnal} \\
 		\hline
-		\mintinline{cpp}|std::map| et \mintinline{cpp}|std::multimap| & \textit{Bidirectionnal} \\ 
+		\mintinline{cpp}|std::map| et \mintinline{cpp}|std::multimap| & \textit{Bidirectionnal} \\
 		\hline
-		\mintinline{cpp}|std::set| et \mintinline{cpp}|std::multiset| & \textit{Bidirectionnal} \\ 
+		\mintinline{cpp}|std::set| et \mintinline{cpp}|std::multiset| & \textit{Bidirectionnal} \\
 		\hline
-	\end{tabular} 
+	\end{tabular}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1269,7 +1269,7 @@
 \begin{frame}[fragile]
 	\frametitle{STL Algorithmes -- Recherche dichotomique}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::upper_bound()| retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée 
+		\item \mintinline{cpp}|std::upper_bound()| retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée
 		\item \mintinline{cpp}|std::equal_range()| retourne la paire (\mintinline{cpp}|std::lower_bound|, \mintinline{cpp}|std::upper_bound|)
 	\end{itemize}
 
@@ -1639,7 +1639,7 @@
 		vector<int> bar{2, 3, 6, 1};
 		vector<int> baz(4);
 
-		transform(foo.begin(), foo.end(), bar.begin(), 
+		transform(foo.begin(), foo.end(), bar.begin(),
 		          baz.begin(), plus<int>());
 		// 6 8 13 10
 	\end{minted}
@@ -1816,7 +1816,7 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		vector<int> bar{2, 5};
 		vector<int> baz;
 
-		merge(foo.begin(), foo.end(), bar.begin(), bar.end(), 
+		merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
 		      back_inserter(baz));      // 1 2 5 5 6 8
 	\end{minted}
 
@@ -1969,7 +1969,7 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 		vector<int> foo{18, 5, 6, 8};
 		vector<int> bar;
 
-		adjacent_difference(foo.begin(), foo.end(), 
+		adjacent_difference(foo.begin(), foo.end(),
 		                    back_inserter(bar), minus<int>());  // 18 -13 1 2
 	\end{minted}
 
