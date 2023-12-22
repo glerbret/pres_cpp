@@ -30,6 +30,8 @@
 	\begin{itemize}
 		\item Dépréciation de \mintinline{cpp}|register|
 	\end{itemize}
+
+	\addproposal{N4193}{https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4193.html\#809}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -56,6 +58,8 @@
 
 \note[item]{En gros les motivations sont : peu utile, peu demandé, compliqué à implémenter et compliqué à utiliser}
 	\end{block}
+
+	\addproposal{N1426}{https://wg21.link/N1426}
 \end{frame}
 
 \subsection*{Nouveaux types}
@@ -82,6 +86,8 @@
 	\end{itemize}
 
 	\addproposal{N1811}{https://wg21.link/N1811}
+	\addproposal{N1835}{https://wg21.link/n1835}
+	\addproposal{n1988}{https://wg21.link/n1988}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -107,6 +113,9 @@
 			\item Support optionnel
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{N1835}{https://wg21.link/n1835}
+	\addproposal{n1988}{https://wg21.link/n1988}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -118,6 +127,9 @@
 		\item Fonctions de manipulation de \mintinline{cpp}|intmax_t| et \mintinline{cpp}|uintmax_t|
 		\item Surcharges de \mintinline{cpp}|abs()| et \mintinline{cpp}|div()| pour \mintinline{cpp}|intmax_t| si nécessaire
 	\end{itemize}
+
+	\addproposal{N1835}{https://wg21.link/n1835}
+	\addproposal{n1988}{https://wg21.link/n1988}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -164,6 +176,8 @@
 		\item Pas de classe de base
 		\item Pas de fonction virtuelle
 	\end{itemize}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -204,6 +218,8 @@
 			\item Classes de base et membres non-statiques \textit{trivially copyable}
 		\end{itemize}
 	\end{block}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -221,6 +237,8 @@
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -244,6 +262,8 @@
 			\item Organisation mémoire similaire aux structures C
 		\end{itemize}
 	\end{block}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -262,6 +282,8 @@
 			\item \mintinline{cpp}|std::is_standard_layout|
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -280,6 +302,8 @@
 \note[item]{A condition de respecter les contraintes de type et de localité des données membre}
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -303,6 +327,8 @@
 			\item Utilisation de \mintinline{cpp}|qsort()| ou \mintinline{cpp}|bsearch()|
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{n2342}{https://wg21.link/n2342}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -481,6 +507,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:23,positionColumn:1,positionLineNumber:23,selectionStartColumn:1,selectionStartLineNumber:23,startColumn:1,startLineNumber:23),source:'%23include+%3Ciostream%3E%0A%0Astatic+constexpr+int+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++char+bar%5Bfoo()%5D+%3D+%22azerty%22%3B%0A%0A++int+a+%3D+42%3B%0A++switch(a)%0A++%7B%0A++++case+foo():%0A++++++std::cout+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++++++break%3B%0A%0A++++default:%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2235}{https://wg21.link/N2235}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -533,6 +561,8 @@
 			\item En pratique, cet exemple compile en mode C++98 sous GCC
 		\end{itemize}
 	\end{block}
+
+	\addproposal{n2253}{https://wg21.link/n2253}
 \end{frame}
 
 \subsection*{Sémantique de déplacement}
@@ -992,6 +1022,11 @@
 		\put(40,-39){\line(0,-1){8}}
 		\put(40,-47){\vector(1,0){10}}
 	\end{picture}
+
+	\addproposal{N2118}{https://wg21.link/N2118}
+	\addproposal{n2439}{https://wg21.link/n2439}
+	\addproposal{N2844}{https://wg21.link/N2844}
+	\addproposal{N3053}{https://wg21.link/N3053}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1023,6 +1058,11 @@
 			\item \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385\linklogo})
 		\end{itemize}
 	\end{block}
+
+	\addproposal{N2118}{https://wg21.link/N2118}
+	\addproposal{n2439}{https://wg21.link/n2439}
+	\addproposal{N2844}{https://wg21.link/N2844}
+	\addproposal{N3053}{https://wg21.link/N3053}
 \end{frame}
 
 \begin{frame}
@@ -1047,6 +1087,11 @@
 			\item \textit{user-provided} : corps de la fonction fourni par l'utilisateur
 		\end{itemize}
 	\end{alertblock}
+
+	\addproposal{N2118}{https://wg21.link/N2118}
+	\addproposal{n2439}{https://wg21.link/n2439}
+	\addproposal{N2844}{https://wg21.link/N2844}
+	\addproposal{N3053}{https://wg21.link/N3053}
 \end{frame}
 
 \begin{frame}
@@ -1072,6 +1117,11 @@
 			\item Voir \href{https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf}{Élégance, style épuré et classe\linklogo (Loïc Joly)}
 		\end{itemize}
 	\end{block}
+
+	\addproposal{N2118}{https://wg21.link/N2118}
+	\addproposal{n2439}{https://wg21.link/n2439}
+	\addproposal{N2844}{https://wg21.link/N2844}
+	\addproposal{N3053}{https://wg21.link/N3053}
 \end{frame}
 
 \begin{frame}
@@ -1089,6 +1139,11 @@
 			\item Implémentations utilisant le déplacement si possible
 		\end{itemize}
 	\end{block}
+
+	\addproposal{N2118}{https://wg21.link/N2118}
+	\addproposal{n2439}{https://wg21.link/n2439}
+	\addproposal{N2844}{https://wg21.link/N2844}
+	\addproposal{N3053}{https://wg21.link/N3053}
 \end{frame}
 
 \subsection*{Initialisation}
@@ -1131,6 +1186,8 @@
 		\item Fonctions membres \mintinline{cpp}|size()|, \mintinline{cpp}|begin()|, \mintinline{cpp}|end()|
 		\item Construction automatique depuis une liste de valeurs entre accolades
 	\end{itemize}
+
+	\addproposal{N2672}{https://wg21.link/N2672}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1151,6 +1208,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:39,positionColumn:1,positionLineNumber:39,selectionStartColumn:1,selectionStartLineNumber:39,startColumn:1,startLineNumber:39),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cinitializer_list%3E%0A%0Astruct+Foo%0A%7B%0A++Foo(std::initializer_list%3Cint%3E+l)+:+m_vec(l)%0A++%7B%0A++++std::cout+%3C%3C+l.size()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++void+append(std::initializer_list%3Cint%3E+l)%0A++%7B%0A++++for(std::initializer_list%3Cint%3E::iterator+it+%3D+l.begin()%3B+it+!!%3D+l.end()%3B+%2B%2Bit)%0A++++%7B%0A++++++m_vec.push_back(*it)%3B%0A++++%7D%0A++%7D%0A%0A++std::vector%3Cint%3E+m_vec%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo+%3D+%7B1,+2,+3,+4,+5%7D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.append(%7B6,+7,+8%7D)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2672}{https://wg21.link/N2672}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1321,6 +1380,8 @@
 	\end{block}
 
 	\addproposal{N1984}{https://wg21.link/N1984}
+	\addproposal{n1737}{https://wg21.link/n1737}
+	\addproposal{n2546}{https://wg21.link/n2546}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1348,6 +1409,10 @@
 			auto j = i;  // int
 		\end{minted}
 	\end{alertblock}
+
+	\addproposal{N1984}{https://wg21.link/N1984}
+	\addproposal{n1737}{https://wg21.link/n1737}
+	\addproposal{n2546}{https://wg21.link/n2546}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1372,6 +1437,10 @@
 		auto i = static_cast<unsigned long>(2);
 		auto j = 2UL
 	\end{minted}
+
+	\addproposal{N1984}{https://wg21.link/N1984}
+	\addproposal{n1737}{https://wg21.link/n1737}
+	\addproposal{n2546}{https://wg21.link/n2546}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1517,6 +1586,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aauto+add(int+a,+int+b)+-%3E+decltype(a+%2B+b)+%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+add(1,+3)%3B%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n2541}{https://wg21.link/n2541}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1543,6 +1614,8 @@
 			\item Utilisez la déduction du type retour dans vos fonctions templates
 		\end{itemize}
 	\end{exampleblock}
+
+	\addproposal{n2541}{https://wg21.link/n2541}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -1567,6 +1640,8 @@
 		array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 		// Erreur de compilation
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1587,6 +1662,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9%7D%3B%0A++++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+0)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9,+17%7D%3B%0A++%7D%0A%23endif%0A%0A++%7B%0A++++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9%7D%3B%0A++++std::cout+%3C%3C+std::get%3C2%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%23if+0%0A++++std::cout+%3C%3C+std::get%3C8%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1625,6 +1702,8 @@
 			\item Structures fondamentalement non ordonnées
 		\end{itemize}
 	\end{block}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2224,6 +2303,9 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXtzfBBLssTGCEDmXxM8SsN12%2B3BXyhUOG6BAIFe72IByOgguu34qDBFmkuwAHKRdlwzCSEmCACIHCHXOHYkgQX67Z4NXYgRmoEGQuF42EM3YIpFoLx/dHo1nsiWHXZgDhy9axOkM6kC%2BEEREoJbiw6S%2BUmACsbgYBuVArVNwtMN5Gq1KKIaMOvyxOLxBOJpPJu0p8Rp5ttjOIECYYtQUuIHK5PPpfJtsYZwu1YqebklbMjMrcisVtPV0JpgaTot1adlBuNpqVKoLoN5/KLmqRDo%2BzsxsWwXIgkhBAYTQZDYfMADYI1GcTHVfHBWODlTdoa84HLf3%2BMHQ0Qx5yJ/mG/27SKdan09K9eWFWaa1CV4mm8nS/r1pXL9bC7c/V8OAtaJxDbw/BwWikKgnBppY1hCksKyPBsPCkAQmhfgsADWICGho%2BicJI/6IcBnC8AoIAYQhgFfqQcCwEgmCqG8YZkBQIbEMACjKIYVRCAgqAAO4AXBaAsEkdBMDUrEhLQHHcQBQH8YJ9AxMxzBJAonEEKQMl0NEoSsGsvDqXJADyYoSTxuHUW81xMYRHC8GZyB1PgAG8PwggiGI7BSDIgiKCo6ikaQuhtAYRgoNY1j6HgESEZACyoEkNRWQAtAic6mOBlhcFwuwJQA6mItBZdl1EEMQTC8KgrzEMQeBYFFwKkMQXiCHgbAACqoJ4tULAoUGrHoCLBKJ7GcSZ3C8MVmBrHBXElUkiHfr%2BOF%2BSBHDYDRyB0bsqiEsOCXDpIuzAMgyC7BAxWNchcwnWBViWCSuCECQ%2BxmLEXBzGNc0LAgZxYDEdWoehmEcNhpBSWV%2BG2ER8EfYDZiLUBy3vaRcwLBVaTOJIQA%3D%3D%3D}
 	\end{codesample}
+
+	\addproposal{N2930}{https://wg21.link/N2930}
+	\addproposal{N3271}{https://wg21.link/N3271}
 \end{frame}
 
 \begin{frame}
@@ -2442,6 +2524,8 @@
 			\item Uniquement pour les littéraux numériques
 		\end{itemize}
 	\end{alertblock}
+
+	\addproposal{N2765}{https://wg21.link/N2765}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2468,6 +2552,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:63,positionColumn:1,positionLineNumber:63,selectionStartColumn:1,selectionStartLineNumber:63,startColumn:1,startLineNumber:63),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++explicit+Foo(int+a)%0A++++:+m_a%7Ba%7D%0A++%7B%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate+:%0A++int+m_a%3B%0A%7D%3B%0A%0Astatic+Foo+operator+%22%22+_f(unsigned+long+long+int+a)%0A%7B%0A++return+Foo(a)%3B%0A%7D%0A%0Astatic+Foo+operator%22%22_f(const+char*+str,+size_t+/*+length+*/)%0A%7B%0A++return+Foo(std::stoull(str))%3B%0A%7D%0A%0Astatic+Foo+operator%22%22_b(const+char*+str)%0A%7B%0A++unsigned+long+long+a+%3D+0%3B%0A++for(size_t+i+%3D+0%3B+str%5Bi%5D%3B+%2B%2Bi)%0A++%7B%0A++++a+%3D+(a+*+2)+%2B+(str%5Bi%5D+-+!'0!')%3B%0A++%7D%0A++return+Foo(a)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A%23if+0%0A++++Foo+foo1+%3D+12%3B%0A%23endif%0A++%7D%0A%0A++%7B%0A++++Foo+foo+%3D+42_f%3B%0A++++foo.print()%3B%0A++%7D%0A%0A++%7B%0A++++Foo+foo+%3D+%2212%22_f%3B%0A++++foo.print()%3B%0A++%7D%0A%0A++%7B%0A++++Foo+foo+%3D+0110_b%3B%0A++++foo.print()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2765}{https://wg21.link/N2765}
 \end{frame}
 
 \subsection*{tuple}
@@ -2500,6 +2586,8 @@
 			auto bar = make_tuple(5, 'e', 98L); // OK
 		\end{minted}
 	\end{block}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2529,6 +2617,8 @@
 			\item Les indices commencent à 0
 		\end{itemize}
 	\end{alertblock}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2562,6 +2652,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:23,positionColumn:1,positionLineNumber:23,selectionStartColumn:1,selectionStartLineNumber:23,startColumn:1,startLineNumber:23),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A%0A++int+a%3B%0A++double+b%3B%0A%0A++std::tie(a,+std::ignore,+b)+%3D+foo%3B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A%0A++std::string+c+%3D+std::get%3C1%3E(foo)%3B%0A++std::cout+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+bar+%3D+std::make_tuple(12,+5UL)%3B%0A++auto+baz+%3D+std::tuple_cat(foo,+bar)%3B%0A%0A++std::cout+%3C%3C+std::tuple_size%3Cdecltype(baz)%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2777,6 +2869,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbGakAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cnwcAXV7c3J14OuwBiqFQHxMAHYrDddv9ARBggRdkxZh9IZCQLsWAB9JgQBFI/Zg3GggAiwIhUNQEDQDCGuyG6BAIBeRnMsRpBGIiNJKLRmIgtPpQ1QeF5bNmHOukNB4PFeOJN1xsO5TAOUqJypJ12%2Bvws9V2qIBQLl%2BNJXlSRjJ9P1arlhuJ6xVXzZPzh2oAXrqycCjdKTa9zSBLXb1ZDXRSBNS%2BQy2a9maz2biufqIBoxcjdqRuSdhXHSZKCSDZZ9C5CI4zgBm2VbbvnKx8FSwmMEIGLczmvan9bt%2BOTJIjA5yybsIvUIOYzJIzKPe/bpcWCHSUIs4Qc3MvO4CAHQYphPFeHXZgDj7w/L1dD4ibzE71cHkwAVjcDBvfelqutL7byO1xDX3an8d2X6DsOo7jpONb9hGaBeEuhyrl2F7biee4HkeV57meCFoW4R53g%2BT5ShK1ZvoRBGfkwbpdhAPaVqmrpAcQI5mGOE5MX%2BxHIpBi5YT%2BmFIdhKEoXx9G8bByGHk%2Bu7YRhGInFhN73o%2BazPoRBavtcHDzLQnC3rwfgcFopCoJwK6WNYNKLMsjwbDwpAEJoGnzAA1iAt4aPonCSLp9mGZwvAKCAbl2fpGmkHAsBIJgqiYMg0EkOQlD1MACjKIYlRCAgqAAO56TZaAsIkdBMNUKUhLQ6VZXpBl5QV9AxElzCJAoGUEKQ1V0NEoSsKsvBtbVADy0Hldl3mRdF1zEElvmkKNyC1Pgem8PwggiGI7BSDIgiKCo6jBaQuitAYRgoNY1j6HgET%2BZA8yoIk1T%2BRwAC0tIHISpimZYXBcLsD0AOpiLQ30/ZFbJMLwqAAG7RMQeBYJdTakMQXiCHgbAACqArQcPzAoFkrHotLBCVaUZcN3C8GymCrDZmXEEwiT2Zp2lebtRkcNgUUxUQ36qAAHLED2xJIuzAMgyC7BAjoMI5sziyZViWOmuCECQ%2BxmOsXCzOTDPzAgZxYDE8POa57kcJ5pCVWDU3%2BYF2sm2YzMGazWvBaKpCQ8QqTOJIQA%3D%3D%3D}
 	\end{codesample}
+
+	\addproposal{N2540}{https://wg21.link/N2540}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2829,6 +2923,10 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:49,positionColumn:1,positionLineNumber:49,selectionStartColumn:1,selectionStartLineNumber:49,startColumn:1,startLineNumber:49),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%0A++%7D%0A%0A++virtual+void+f(int)%0A++%7B%0A++%7D%0A%0A++virtual+void+g(int)+const%0A++%7B%0A++%7D%0A%0A++void+h(int)%0A++%7B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%0A++%7D%0A%0A++void+f(float)+override%0A++%7B%0A++%7D%0A%0A++void+g(int)+override%0A++%7B%0A++%7D%0A%0A++void+h(int)+override%0A++%7B%0A++%7D%0A%0A++void+i(int)+override%0A++%7B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2928}{https://wg21.link/N2928}
+	\addproposal{N3206}{https://wg21.link/N3206}
+	\addproposal{N3272}{https://wg21.link/N3272}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2876,6 +2974,9 @@
 	\begin{itemize}
 		\item Aussi bien via l'héritage public que privé
 	\end{itemize}
+
+	\addproposal{N3206}{https://wg21.link/N3206}
+	\addproposal{N3272}{https://wg21.link/N3272}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2908,6 +3009,9 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo+final%0A%7B%0A++Foo()%0A++%7B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:40,positionColumn:1,positionLineNumber:40,selectionStartColumn:1,selectionStartLineNumber:40,startColumn:1,startLineNumber:40),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%0A++%7D%0A%0A++virtual+void+f(int)%0A++%7B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%0A++%7D%0A%0A++virtual+void+f(int)+final%0A++%7B%0A++%7D%0A%7D%3B%0A%0Astruct+Baz+:+Bar%0A%7B%0A++Baz()%0A++%7B%0A++%7D%0A%0A++virtual+void+f(int)%0A++%7B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N3206}{https://wg21.link/N3206}
+	\addproposal{N3272}{https://wg21.link/N3272}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2991,6 +3095,8 @@
 			\item Marquez \mintinline{cpp}|noexcept| les fonctions qui sémantiquement ne jette pas d'exception
 		\end{itemize}
 	\end{exampleblock}
+
+	\addproposal{N3050}{https://wg21.link/N3050}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3001,6 +3107,8 @@
 		\item \mintinline{cpp}|std::rethrow_exception()| relance l'exception contenue dans \mintinline{cpp}|std::exception_ptr|
 		\item \mintinline{cpp}|std::make_exception_ptr()| construit \mintinline{cpp}|std::exception_ptr| depuis une exception
 	\end{itemize}
+
+	\addproposal{n2179}{https://wg21.link/n2179}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3022,6 +3130,8 @@
 			\item Faire passer la barrière des threads aux exceptions
 		\end{itemize}
 	\end{block}
+
+	\addproposal{n2179}{https://wg21.link/n2179}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3120,6 +3230,8 @@
 		\item Copiable
 		\item Peut être passer en paramètre ou retourner par une fonction
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3150,6 +3262,8 @@
 \note[item]{Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes}
 \note[item]{Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)}
 	\end{block}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3182,6 +3296,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+a,+int+b)%0A%7B%0A++return+(a+-+1)+*+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int)%3E+bar+%3D+std::bind(%26foo,+std::placeholders::_1,+2)%3B%0A++std::cout+%3C%3C+bar(3)+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+std::bind(%26foo,+std::placeholders::_2,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+baz(3,+2,+1,+2,+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3240,6 +3356,10 @@
 			\item Soit via \mintinline{cpp}|[=]| ou \mintinline{cpp}|[&]|
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{N2550}{https://wg21.link/N2550}
+	\addproposal{N2658}{https://wg21.link/N2658}
+	\addproposal{N2927}{https://wg21.link/N2927}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3266,6 +3386,10 @@
 
 \note[item]{Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale}
 	\end{alertblock}
+
+	\addproposal{N2550}{https://wg21.link/N2550}
+	\addproposal{N2658}{https://wg21.link/N2658}
+	\addproposal{N2927}{https://wg21.link/N2927}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3299,6 +3423,10 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++int+bar+%3D+4%3B%0A++++auto+foo+%3D+%5B%26bar%5D+(int+a)+-%3E+int+%7B+bar+*%3D+a%3B+return+3+*+a%3B%7D%3B%0A%0A++++std::cout+%3C%3C+foo(5)+%3C%3C+!'+!'+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+8,+5,+6,+3,+7%7D%3B%0A++++std::vector%3Cint%3E+bar%3B%0A%0A++++std::copy_if(begin(foo),+end(foo),+std::back_inserter(bar),+%5B%5D+(int+i)+%7Breturn+(i%252)+%3D%3D+1%3B%7D)%3B%0A++++for(auto+i+:+bar)%0A++++%7B%0A++++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2550}{https://wg21.link/N2550}
+	\addproposal{N2658}{https://wg21.link/N2658}
+	\addproposal{N2927}{https://wg21.link/N2927}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3346,6 +3474,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Aint+main()%0A%7B%0A++int+a%7B10%7D%3B%0A%0A++std::reference_wrapper%3Cint%3E+aref+%3D+std::ref(a)%3B%0A++aref%2B%2B%3B+++//+a+:+11%0A++std::cout+%3C%3C+a+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \subsection*{Template}
@@ -3415,6 +3545,8 @@
 			using Error = int;
 		\end{minted}
 	\end{block}
+
+	\addproposal{N2258}{https://wg21.link/N2258}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3475,6 +3607,9 @@
 		  static const unsigned int size = sizeof...(Args);
 		};
 	\end{minted}
+
+	\addproposal{N2242}{https://wg21.link/N2242}
+	\addproposal{N2555}{https://wg21.link/N2555}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3502,6 +3637,9 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0A//+Condition+d!'arret%0Atemplate%3Ctypename+T%3E%0AT+sum(T+val)%0A%7B%0A++return+val%3B%0A%7D%0A%0Atemplate%3Ctypename+T,+typename...+Args%3E%0AT+sum(T+val,+Args...+values)%0A%7B%0A++return+val+%2B+sum(values...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+5,+56,+9)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2242}{https://wg21.link/N2242}
+	\addproposal{N2555}{https://wg21.link/N2555}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3526,6 +3664,9 @@
 
 		sum(1, 2, 3, 5);  // 11
 	\end{minted}
+
+	\addproposal{N2242}{https://wg21.link/N2242}
+	\addproposal{N2555}{https://wg21.link/N2555}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3551,6 +3692,9 @@
 
 		foo(1, 2, 3, 5);
 	\end{minted}
+
+	\addproposal{N2242}{https://wg21.link/N2242}
+	\addproposal{N2555}{https://wg21.link/N2555}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3575,6 +3719,9 @@
 	\end{minted}
 
 \note[item]{,0 permet de régler le souci du retour void}
+
+	\addproposal{N2242}{https://wg21.link/N2242}
+	\addproposal{N2555}{https://wg21.link/N2555}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3608,6 +3755,9 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:25,positionColumn:1,positionLineNumber:25,selectionStartColumn:1,selectionStartLineNumber:25,startColumn:1,startLineNumber:25),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename+...+T%3E%0Atypename+std::common_type%3CT...%3E::type+sum(T+...+t)%0A%7B%0A++typename+std::common_type%3CT...%3E::type+result%7B%7D%3B%0A++std::initializer_list%3Cint%3E%7B+(result+%2B%3D+t,+0)...+%7D%3B%0A++return+result%3B%0A%7D%0A%0Atemplate%3Ctypename+...+T%3E%0Avoid+print(T+...+t)%0A%7B%0A++std::initializer_list%3Cint%3E%7B+(std::cout+%3C%3C+t+%3C%3C+%22+%22,+0)...+%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+5,+42,+9)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%0A++print(1,+2,+3,+5)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N2242}{https://wg21.link/N2242}
+	\addproposal{N2555}{https://wg21.link/N2555}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3680,6 +3830,8 @@
 
 		factorial<5>::value;  // 120 en compile-time
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3706,6 +3858,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate+%3Cunsigned+n%3E%0Astruct+factorial+:+std::integral_constant%3Cint,+n+*+factorial%3Cn-1%3E::value%3E%0A%7B%7D%3B%0A%0Atemplate+%3C%3E%0Astruct+factorial%3C0%3E+:+std::integral_constant%3Cint,+1%3E%0A%7B%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+factorial%3C5%3E::value+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_array%3Cint%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_array%3Cint%5B3%5D%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3728,6 +3882,8 @@
 		is_const<const short>::value;  // true
 		is_const<string>::value;       // false
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3749,6 +3905,8 @@
 	\begin{itemize}
 		\item Et bien d'autres \ldots{}
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3763,6 +3921,8 @@
 		typedef add_const<const int>::type B;   // const int
 		typedef add_const<const int*>::type C;  // const int* const
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3783,6 +3943,8 @@
 	\begin{itemize}
 		\item Et bien d'autres \ldots{}
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \subsection*{Pointeurs intelligents}
@@ -3890,6 +4052,8 @@
 		\item \mintinline{cpp}|unique()| indique si la possession est unique
 		\item Fourniture possible de la fonction de libération
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3943,6 +4107,8 @@
 		shared_ptr<int> sp(new int(20));
 		weak_ptr<int> wp(sp);
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -3968,6 +4134,8 @@
 
 \note[item]{Soit il pointe sur rien, soit la ressource a été libérée car n'avait plus de \mintinline{cpp}|std::shared_ptr| sur elle}
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -4091,6 +4259,8 @@
 			[[ gsl::suppress(26400) ]]
 		\end{minted}
 	\end{block}
+
+	\addproposal{N2761}{https://wg21.link/N2761}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -4119,6 +4289,8 @@
 			\item Aussi une information à destination des développeurs
 		\end{itemize}
 	\end{exampleblock}
+
+	\addproposal{N2761}{https://wg21.link/N2761}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -5048,6 +5220,7 @@
 		regex foo("[0-9A-Z]+", icase);
 	\end{minted}
 
+	\addproposal{n1836}{https://wg21.link/n1836}
 	\addproposal{N1429}{https://wg21.link/N1429}
 \end{frame}
 
@@ -5074,6 +5247,9 @@
 		regex_match(string("abcd123efg"), r);   // false
 		regex_match(string("abcdefg"), r);      // false
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
+	\addproposal{N1429}{https://wg21.link/N1429}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -5093,6 +5269,9 @@
 			\item \mintinline{cpp}|prefix()| : la séquence de caractères précédant la capture
 		\end{itemize}
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
+	\addproposal{N1429}{https://wg21.link/N1429}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -5109,6 +5288,9 @@
 		m.prefix();     // abcd
 		m.suffix();     // efg
 	\end{minted}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
+	\addproposal{N1429}{https://wg21.link/N1429}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -5126,6 +5308,9 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::string+s(%22abcd123efg%22)%3B%0A++++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++++std::smatch+m%3B%0A%0A++++std::regex_search(s,+m,+r)%3B%0A++++std::cout+%3C%3C+m.size()+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+m.str(0)+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+m.position(0)+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+m.prefix()+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+m.suffix()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::string+s(%22abcd123efg%22)%3B%0A++++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A%0A++++std::cout+%3C%3C+std::regex_replace(s,+r,+%22-%22)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
+	\addproposal{N1429}{https://wg21.link/N1429}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -5175,6 +5360,8 @@
 		\item Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, \ldots{})
 		\item Fonction de normalisation ramenant la séquence générée dans [0,1)
 	\end{itemize}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -5201,5 +5388,7 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::default_random_engine+generator%3B%0A++std::uniform_int_distribution%3Cint%3E+distribution(0,9)%3B%0A%0A++generator.seed(std::chrono::system_clock::now().time_since_epoch().count())%3B%0A++std::cout+%3C%3C+distribution(generator)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{n1836}{https://wg21.link/n1836}
 \end{frame}
 \end{document}
