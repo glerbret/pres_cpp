@@ -10,3 +10,5 @@
 *.vrb
 c\+\+*.pdf
 _minted-*
+*.pyg
+*.synctex(busy)
