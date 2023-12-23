@@ -82,6 +82,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%0Astatic+auto+bar(int+x)%0A%7B%0A++if(x+%3E%3D+0)+return+2+*+x%3B%0A++else+return+-2+*+x%3B%0A%7D%0A%0Astatic+auto+fact(unsigned+int+x)%0A%7B%0A++if(x+%3D%3D+0)+return+1U%3B%0A++else+return+x+*+fact(x-1)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::cout+%3C%3C+bar(5)+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+bar(-2)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::cout+%3C%3C+fact(4)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N3638}{https://wg21.link/N3638}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -437,6 +439,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++auto+foo+%3D+%5B%5D+(auto...+args)+%7B+std::cout+%3C%3C+sizeof...(args)+%3C%3C+!'%5Cn!'%3B+%7D%3B%0A%0A++foo(2)%3B%0A++foo(2,+3,+4)%3B%0A++foo(%22azerty%22s)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N3649}{https://wg21.link/N3649}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -491,6 +495,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+42%3B%0A%0A++auto+bar+%3D+%5B+%26x+%3D+foo+%5D()+%7B+--x%3B+%7D%3B%0A++bar()%3B%0A++std::cout+%3C%3C+foo+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+%5B+y+%3D+2*foo+%5D()+%7B+std::cout+%3C%3C+y+%3C%3C+!'%5Cn!'%3B+%7D%3B%0A++baz()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N3648}{https://wg21.link/N3648}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -625,6 +631,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:8,endLineNumber:14,positionColumn:8,positionLineNumber:14,selectionStartColumn:8,selectionStartLineNumber:14,startColumn:8,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%0A%5B%5B+deprecated(%22Utilisez+Foo%22)+%5D%5D%0Astatic+void+bar()%0A%7B%0A%7D%0A%0Aclass+%5B%5B+deprecated+%5D%5D+Baz%0A%7B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++bar()%3B%0A%0A++Baz+baz%3B%0A%0A++%5B%5B+deprecated+%5D%5D%0A++int+foo%7B42%7D%3B%0A++std::cout+%3C%3C+foo+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{N3760}{https://wg21.link/N3760}
 \end{frame}
 
 \subsection*{Multi-threading}
@@ -675,5 +683,7 @@
 		  ...
 		}  // Liberation du mutex
 	\end{minted}
+
+	\addproposal{N3659}{https://wg21.link/N3659}
 \end{frame}
 \end{document}

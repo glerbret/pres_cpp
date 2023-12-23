@@ -321,6 +321,8 @@
 			\item Accolades obligatoires, même avec une unique instruction
 		\end{itemize}
 	\end{alertblock}
+
+	\addproposal{P1938}{https://wg21.link/P1938R3}
 \end{frame}
 
 \subsection*{Sémantique de déplacement}
@@ -605,6 +607,10 @@
 			\item Liste de capture vide
 		\end{itemize}
 	\end{alertblock}
+
+	\addproposal{P1102}{https://wg21.link/P1102R2}
+	\addproposal{P2036}{https://wg21.link/P2036R3}
+	\addproposal{P2173}{https://wg21.link/P2173R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -701,6 +707,8 @@
 		  move(foo).bar(2); // Self=Foo
 		}
 	\end{minted}
+
+	\addproposal{P0847}{https://wg21.link/P0847R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -716,6 +724,8 @@
 
 		Foo{}(4);
 	\end{minted}
+
+	\addproposal{P0847}{https://wg21.link/P0847R7}
 \end{frame}
 
 \subsection*{Template}
@@ -1125,6 +1135,9 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:20,positionColumn:1,positionLineNumber:20,selectionStartColumn:1,selectionStartLineNumber:20,startColumn:1,startLineNumber:20),source:'%23include+%3Cstacktrace%3E%0A%23include+%3Ciostream%3E%0A%0Avoid+foo()%0A%7B%0A++auto+trace+%3D+std::stacktrace::current()%3B%0A++for+(const+auto%26+entry:+trace)%0A++%7B%0A++++std::cout+%3C%3C+%22Description:+%22+%3C%3C+entry.description()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+%22file:+%22+%3C%3C+entry.source_file()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+%22line:+%22+%3C%3C+entry.source_line()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+%22------------------------------------%22+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic+-lstdc%2B%2Bexp',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{P0881}{https://wg21.link/P0881R7}
+	\addproposal{P2301}{https://wg21.link/P2301R1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1219,6 +1232,8 @@
 	\begin{alertblock}{Retour de fonction}
 		Le retour de la fonction doit être une spécialisation de \mintinline{cpp}|std::optional|
 	\end{alertblock}
+
+	\addproposal{P0798}{https://wg21.link/P0798R8}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1247,6 +1262,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:30,positionColumn:1,positionLineNumber:30,selectionStartColumn:1,selectionStartLineNumber:30,startColumn:1,startLineNumber:30),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::optional%3Cstd::string%3E+foo+%3D+%22Abcdef%22%3B%0A++++auto+bar+%3D+foo.transform(%5B%5D(auto%26%26+s)+%7B+return+s.size()%3B+%7D)%3B%0A%0A++++std::cout+%3C%3C+(bar+%3F+*bar+:+0)+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++auto+func+%3D+%5B%5D+(int+i)+-%3E+std::optional%3Cint%3E+%7B+return+2+*+i%3B+%7D%3B%0A++++std::optional%3Cint%3E+foo+%3D+42%3B%0A++++auto+bar+%3D+foo.and_then(func)%3B%0A%0A++++std::cout+%3C%3C++(bar+%3F+*bar+:+0)+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%0A++%7B%0A++++auto+func+%3D+%5B%5D+-%3E+std::optional%3Cstd::string%3E+%7B+return+%22Oups!!%22%3B+%7D%3B%0A++++std::optional%3Cstd::string%3E+foo+%3D+%22Abcdef%22%3B%0A++++auto+bar+%3D+foo.or_else(func)%3B%0A%0A++++std::cout+%3C%3C+*bar+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
+
+	\addproposal{P0798}{https://wg21.link/P0798R8}
 \end{frame}
 
 \subsection*{Expected}
@@ -1328,6 +1345,8 @@
 	\begin{codesample}
 		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAKykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XoKdQ1N2a2DXT3FpRIAlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7B5iqiZgOmOjnlzdmGwxbXl2%2Bzcx2CwC%2B11u/3ujzcyFBRghPz%2BAKBBzEwBIhAQLCRUNRD2BhGiTCIxDx10G6BAIGer3enwOwQIpB2VJpCPBa2wO34qAgzJ2eBm3xMAHYrNcdkKqALHjyNCKpXsJd9pdKTgRFgwhftJVdpeKACJqnaVJSm8X69U7TXatkEakgLwhF5vAgfK3mMzhWje416y1ik2Q4Oi66ClhMYIQJU3VXKr3K6Xs2luhlEwSs1Oc85mx5G3moflxEVra3q1NoLwEWHAs0AOmixBIAH0SBBvQB5LyJBTemZ1g57MxmExxNwMf3loMhm6JhMG9VMGuoXku5AFvZxKxxQsQNAMQYOp25swANjZg9NNtvt6te2Td%2BfKcdHIIxDBOwWBEDT5fd6ph%2BhgKPwxAsBAqZRMAMYKHMJ40q4kHwVBTDIAA1q2wRKA00QQD%2B8E3gBxEkeOu5GhALqpMAIToDsyAIPU9EihKtqYFqxA6kBCyJK8xAHmWFgqoWglESR6p2px341n%2BS7iYaYYzpCT6pnS7qekyWYISAubcvm%2ByFnyEClrJNqqemHqMocWk5h%2BYJ5pgZhbpgDbAUeYEsK2zYdlQG6icpckyhAjlxoBb4oD%2BQ5uCOZgAGpiDsIAxVFZpmA2ABuYheJgsYpf6E5TqOpnquamBidp1a1sC9betgxAnIsiXJdVw6OU29UdteBw1UVBXThWAahnOHBzLQnBxLwfgcFopCoJwbjWNYbILEshK/DwpAEJoI1zOhIBxBo%2BicJIk3bbNnC8AoICHVt00jaQcCwEgzxvKuZAUBA9TAAoyiGJUQgIKgADuU0bWgLCJHQpLpL9IS0ADwNTTN4OQ/QMTfcwfaAyyKN0NEoSsCsvC42jPbCIDINnS9yBXMQ30XaQ1O1PgU28PwggiGI7BSDIgiKCo6h3aQuitAYRgoItlj6HgERXZAcyoIk1RXRwAC0VIGaYljWL8OyqwA6mItB6/rzzAXrrzoIYjjIJdK3LAMjrBLD/0U6DvBA8QTCJJwPCjeNp1C3NHDYKor1kjsqgABznqr56SDswDIJuEAfi66GDhAC3a1LOy4IQJAjmsXAzLwt1aDMcwIKcWAxLGpB7QdR0cCdpBI7wweXddm3bZXzdmIHM2dz3d19%2Bl0SpM4khAA%3D}
 	\end{codesample}
+
+	\addproposal{P2505}{https://wg21.link/P2505R5}
 \end{frame}
 
 \begin{frame}[fragile]
