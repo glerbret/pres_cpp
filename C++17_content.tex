@@ -56,7 +56,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:11,positionColumn:1,positionLineNumber:11,selectionStartColumn:1,selectionStartLineNumber:11,startColumn:1,startLineNumber:11),source:'%23include+%3Ciostream%3E%0A%23if+__has_include(%3Coptional%3E)%0A%23++include+%3Coptional%3E%0A%23++define+OPT_ENABLE+1%0A%23endif%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+OPT_ENABLE+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23if+__has_include(%3Coptional%3E)%0A%23++include+%3Coptional%3E%0A%23++define+OPT_ENABLE%0A%23endif%0A%0Aint+main()%0A%7B%0A%23ifdef+OPT_ENABLE%0A++std::cout+%3C%3C+%22Optional+enabled%5Cn%22%3B%0A%23else%0A++std::cout+%3C%3C+%22Optional+disabled%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0061}{https://wg21.link/P0061R1}
@@ -115,7 +115,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%0Anamespace+A::B::C%0A%7B%0A++int+foo+%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+A::B::C::foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Anamespace+A::B::C%0A%7B%0A++int+foo+%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+A::B::C::foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{N4230}{https://wg21.link/N4230}
@@ -134,7 +134,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:7,positionColumn:1,positionLineNumber:7,selectionStartColumn:1,selectionStartLineNumber:7,startColumn:1,startLineNumber:7),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++static_assert(sizeof(int)+%3D%3D+3)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++static_assert(sizeof(int)+%3D%3D+3)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{N3928}{https://wg21.link/N3928}
@@ -189,6 +189,10 @@
 		cout << foo(a) << ' ' << foo(ptr);  // 10 5
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T%3E+auto+foo(T+t)%0A%7B%0A++if+constexpr+(std::is_pointer_v%3CT%3E)%0A++++return+*t%3B%0A++else%0A++++return+t%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++int+a+%3D+10,+b+%3D+5%3B%0A++int*+ptr+%3D+%26b%3B%0A++std::cout+%3C%3C+foo(a)+%3C%3C+!'+!'+%3C%3C+foo(ptr)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0292}{https://wg21.link/P0292R2}
 \end{frame}
 
@@ -236,7 +240,7 @@
 	\end{block}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T%3E+auto+foo(T+t)%0A%7B%0A++if+constexpr+(std::is_pointer_v%3CT%3E)%0A++++return+*t%3B%0A++else%0A++++return+t%3B%0A%7D%0A%0Atemplate%3Cint+N%3E%0Aconstexpr+int+fibo()%0A%7B%0A++if+constexpr+(N%3E%3D2)%0A++++return+fibo%3CN-1%3E()%2Bfibo%3CN-2%3E()%3B%0A++else+return+N%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++int+a+%3D+10,+b+%3D+5%3B%0A++++int*+ptr+%3D+%26b%3B%0A++++std::cout+%3C%3C+foo(a)+%3C%3C+!'+!'+%3C%3C+foo(ptr)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::cout+%3C%3C+fibo%3C8%3E()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Cint+N%3E%0Aconstexpr+int+fibo()%0A%7B%0A++if+constexpr+(N%3E%3D2)%0A++++return+fibo%3CN-1%3E()%2Bfibo%3CN-2%3E()%3B%0A++else+return+N%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+fibo%3C8%3E()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 \end{frame}
 
@@ -264,6 +268,10 @@
 		  else     cout << -foo;
 		}
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+5%3B%0A%0A++if(int+foo+%3D+42%3B+bar)%0A++%7B%0A++++std::cout+%3C%3C+foo+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A++else%0A++%7B%0A++++std::cout+%3C%3C+-foo+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0305}{https://wg21.link/P0305R1}
 \end{frame}
@@ -298,10 +306,6 @@
 		}
 	\end{minted}
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+5%3B%0A%0A++if(int+foo+%3D+42%3B+bar)%0A++%7B%0A++++std::cout+%3C%3C+foo+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A++else%0A++%7B%0A++++std::cout+%3C%3C+-foo+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
 	\addproposal{P0305}{https://wg21.link/P0305R1}
 \end{frame}
 
@@ -319,7 +323,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+5%3B%0A%0A+switch(int+foo+%3D+42%3B+bar)%0A+%7B%0A++++case+5:%0A++++++std::cout+%3C%3C+-foo+%3C%3C+%22%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++++++break%3B%0A+%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+5%3B%0A%0A++switch(int+foo+%3D+42%3B+bar)%0A++%7B%0A++++case+5:%0A++++++std::cout+%3C%3C+-foo+%3C%3C+%22%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0305}{https://wg21.link/P0305R1}
@@ -376,6 +380,14 @@
 
 \note[item]{Les définitions de \mintinline{cpp}|tuple_size| et \mintinline{cpp}|tuple_element| sont dans \mintinline{cpp}|std|}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++template+%3Cint+N%3E+auto%26+get()+const%0A++%7B%0A++++if+constexpr(N+%3D%3D+0)%0A++++%7B%0A++++++return+i%3B%0A++++%7D%0A++++else%0A++++%7B%0A++++++return+s%3B%0A++++%7D%0A++%7D%0A%0Aprivate:%0A++const+int+i+%3D+42%3B%0A++const+std::string+s%7B%22Hello%22%7D%3B%0A%7D%3B%0A%0Anamespace+std%0A%7B%0A++template%3C%3E%0A++struct+tuple_size%3CFoo%3E%0A++++:+std::integral_constant%3Cstd::size_t,+2%3E+%7B%7D%3B%0A%0A++template%3Cstd::size_t+N%3E%0A++struct+tuple_element%3CN,+Foo%3E%0A++%7B%0A++++using+type+%3D+decltype(std::declval%3CFoo%3E().get%3CN%3E())%3B%0A++%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++const+auto+%5B+i,+s+%5D+%3D+Foo%7B%7D%3B%0A++std::cout+%3C%3C+i+%3C%3C+!'+!'+%3C%3C+s+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Carray%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cutility%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Astatic+std::tuple%3Cint,+std::string%3E+foo()%0A%7B%0A++return+std::make_tuple(42,+%22Hello%22s)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+%5Bx,y%5D+%3D+foo()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'+!'+%3C%3C+y+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0217}{https://wg21.link/P0217R3}
 \end{frame}
 
@@ -429,8 +441,8 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbACcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHp8HAl9d3ZlsMO177hzcBC8SXoH1u91%2Bj2ebgaxCYAE9wV8fn8AUcWEwksjIWinoCvI5aIQkRsrhDbl40kY9sw2AokkxVnthugQCBiQRomIFIcrBSbqcvA49gAxVCoT4mADs/Juez2wQIeyYfM%2BCtoAmAewiatuCtZ7NeNNMGzlMoAInq7rdJo5kGKJXt%2BKgIHMpbL1XszsDiAxHZLZZIzKQ9gBWAKh8xmAASVU10d50qtZo9VoFdrwDsNIGBoMwgKVoZzxveZJ1DTdHrlCp9y39OcxAGtMAB9PP0CDBqNmWPxyW9hTu1MQ5NS231e0sghskBwxGFwShsyXCsALyro5r09n89JxyXexX5bhMos3fDluttcwvv9p5HdzHAqVe0xwU3T%2B3Z69CqYhNQA4wwsVRSARUg1xMMMLWeGCXSrR8FQNGd2TQQkYUBPZVAwo49jADg8IIwFMIRHC3EIijiNwtcyMIqC3AYfDrwOZ8bXlFjtz/ACgJAsCoJgw4YIiSth04ndUKWZUqPI7DpIo/DaNIuSmLDBimMQlj0zYhUf31JD/yIHjQKRaDYPXBCxJzNCpKOTDZNs3CFIUuSlIc8iVLU9YNKvAUdM9PTkNnTFsSOItxJAUtVxYBEAFksR/WU2gOXs5AYRNLSjWUQ2SswLUwLxVHSscx0fX9nRICA0AYYYVQA8xYh4ptSAAN34vYQDfWKsXdAKOLKwKJPQuSm1o6N2py2jmtojzGK8sSfO0pC8CoCADMAqCLEIaJi2FVZMCwdA2sEzq4qSAA6YIlEaCAc0ZPBiEXAhixQiKCGIN5LggDYezMAAVYhUDwXlBzmUSWV2zB9v2nr2L8sSBpQSTaK24gAFpLiUKr0Gm9ZVNm5i/K0sr%2BGISqBBqtb6salq2o66LTphpC%2Bt6hHrNoka5LGjqxrkqblNxzyCc0r0FoWjgFloTgw14PwOC0UhUE4NxrGsFklhWfFvh4UgCE0cWFibEAww0fROEkGW9YVzheAUEATd1uXxdIOBYCQTBVEwZAALIChVuIYAFGUQwqiEBBUAAd1l7W0BYJI6CYGog5CWhQ4j2X5ZjuP6BiAPmCSBQw6ezO6GiUJWDWXhi%2BzgB5QlU8jy33c9m5/dtjheCb5A6nwWXeH4QQRDEdgpBkQRFBUdRHdIXQ2gMIwUBVyx9DwCJbcgBZUCSGo29R1lBNMSxrC4aU9lRgB1MRaFPs/3bephT6SfbDHtXhUGa6J3qwNe3VIYgvEEPAbBfoSloN/BYCh1arD0KyYIScQ5hwbtwXgb1IacG1uHeESQ9YSylhbKeisODYA9l7IgxAsIAA5Yio1iJIPYwBkAOggG9f%2BTY5h7AgMrQ%2BS89i4EICQZKGwuBzGQdghYCBzhYBiD/Q2xtTYcHNqQdOr9ra2DtjrURcizB4PlgQkRjtQYtWiGkZwkggA%3D}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:43,positionColumn:1,positionLineNumber:43,selectionStartColumn:1,selectionStartLineNumber:43,startColumn:1,startLineNumber:43),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++template+%3Cint+N%3E+auto%26+get()+const%0A++%7B%0A++++if+constexpr(N+%3D%3D+0)%0A++++%7B%0A++++++return+i%3B%0A++++%7D%0A++++else%0A++++%7B%0A++++++return+s%3B%0A++++%7D%0A++%7D%0A%0Aprivate:%0A++const+int+i+%3D+42%3B%0A++const+std::string+s%7B%22Hello%22%7D%3B%0A%7D%3B%0A%0Anamespace+std%0A%7B%0A++template%3C%3E%0A++struct+tuple_size%3CFoo%3E%0A++++:+std::integral_constant%3Cstd::size_t,+2%3E+%7B%7D%3B%0A%0A++template%3Cstd::size_t+N%3E%0A++struct+tuple_element%3CN,+Foo%3E%0A++%7B%0A++++using+type+%3D+decltype(std::declval%3CFoo%3E().get%3CN%3E())%3B%0A++%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++const+auto+%5B+i,+s+%5D+%3D+Foo%7B%7D%3B%0A++std::cout+%3C%3C+i+%3C%3C+!'+!'+%3C%3C+s+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Carray%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cutility%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+myMap%7B%7B1,+%22Un%22s%7D,+%7B2,+%22Deux%22s%7D%7D%3B%0A%0A++if(auto+%5Biter,+succeeded%5D+%3D+myMap.insert(std::pair%3Cint,+std::string%3E(3,+%22Trois%22s))%3B+succeeded)%0A++%7B%0A++++std::cout+%3C%3C+iter-%3Esecond+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Carray%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cutility%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+myMap%7B%7B1,+%22Un%22s%7D,+%7B2,+%22Deux%22s%7D%7D%3B%0A%0A++for(const+auto%26+%5Bk,v%5D+:+myMap)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+%22+:+%22+%3C%3C+v+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0217}{https://wg21.link/P0217R3}
@@ -570,8 +582,8 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		struct Foo {int i;};
-		struct Bar : Foo {double l;};
+		struct Foo { int i; };
+		struct Bar : Foo { double l; };
 
 		Bar bar{{42}, 1.25};
 		Bar baz{{}, 1.25};   // Foo non intialise
@@ -590,7 +602,7 @@
 \note[item]{Pour résumer, C++14 a levé l'interdiction de membres initialisés par défaut, et C++17 assoupli celle sur \og pas d'héritage\fg{}}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+i%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++double+l%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Bar+bar%7B%7B42%7D,+1.25%7D%3B%0A++Bar+baz%7B%7B%7D,+1.25%7D%3B%0A%0A++std::cout+%3C%3C+bar.i+%3C%3C+!'+!'+%3C%3C+bar.l+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz.i+%3C%3C+!'+!'+%3C%3C+baz.l+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+i%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++double+l%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Bar+bar%7B%7B42%7D,+1.25%7D%3B%0A++Bar+baz%7B%7B%7D,+1.25%7D%3B%0A%0A++std::cout+%3C%3C+bar.i+%3C%3C+!'+!'+%3C%3C+bar.l+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz.i+%3C%3C+!'+!'+%3C%3C+baz.l+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{p0017}{https://wg21.link/p0017r1}
@@ -612,12 +624,17 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		auto x1 = { 1, 2 };   // std::initializer_list<int>
-		auto x2 = { 1, 2.0 }; // Erreur : types différents
-		auto x3{ 1, 2 };      // Erreur : multiples elements
-		auto x4 = { 3 };      // std::initializer_list<int>
-		auto x5{ 3 };         // int
+		auto x1 = {1, 2};   // std::initializer_list<int>
+		auto x2 = {1, 2.0}; // Erreur : types différents
+		auto x3{1, 2};      // Erreur : multiples elements
+		auto x4 = {3};      // std::initializer_list<int>
+		int x = {3};        // int
+		auto x5{3};         // int
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++auto+x+%3D+%7B1,+2%7D%3B%0A++++assert(typeid(x)+%3D%3D+typeid(std::initializer_list%3Cint%3E))%3B%0A++%7D%0A%0A%23if+0%0A++%7B%0A++++auto+x+%3D+%7B1,+2.0%7D%3B%0A++%7D%0A%23endif%0A%0A%23if+0%0A++%7B%0A++auto+x%7B1,+2%7D%3B%0A++%7D%0A%23endif%0A%0A++%7B%0A++++auto+x+%3D+%7B3%7D%3B%0A++++assert(typeid(x)+%3D%3D+typeid(std::initializer_list%3Cint%3E))%3B%0A++%7D%0A%0A++%7B%0A++++int+x+%3D+%7B3%7D%3B%0A++++assert(typeid(x)+%3D%3D+typeid(int))%3B%0A++%7D%0A%0A++%7B%0A++++auto+x%7B3%7D%3B%0A++++assert(typeid(x)+%3D%3D+typeid(int))%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{N3922}{https://wg21.link/N3922}
 \end{frame}
@@ -633,6 +650,10 @@
 		Foo foo{42};
 		Foo bar = Foo{42};
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aenum+class+Foo+:+unsigned+int%0A%7B%0A++Invalid+%3D+0,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%7B42%7D%3B%0A++Foo+bar+%3D+Foo%7B42%7D%3B%0A%0A++std::cout+%3C%3C+static_cast%3Cunsigned+int%3E(foo)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+static_cast%3Cunsigned+int%3E(bar)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0138}{https://wg21.link/P0138R2}
 \end{frame}
@@ -659,7 +680,11 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:29,startColumn:1,startLineNumber:29),source:'%23include+%3Ciostream%3E%0A%0Aenum+class+Foo+:+unsigned+int%0A%7B%0A++Invalid+%3D+0,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%7B42%7D%3B%0A++Foo+bar+%3D+Foo%7B42%7D%3B%0A%0A++std::cout+%3C%3C+static_cast%3Cunsigned+int%3E(foo)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+static_cast%3Cunsigned+int%3E(bar)+%3C%3C+%22%5Cn%22%3B%0A%0A%23if+0%0A++Foo+baz%3B%0A++baz+%3D+42%3B%0A%23endif%0A%0A%23if+0%0A++Foo+baz+%3D+42%3B%0A%23endif%0A%0A%23if+0%0A++Foo+baz+%3D+%7B42%7D%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aenum+class+Foo+:+unsigned+int%0A%7B%0A++Invalid+%3D+0,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo+%3D+42%3B%0A++Foo+bar+%3D+%7B42%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aenum+class+Foo+:+unsigned+int%0A%7B%0A++Invalid+%3D+0,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A++foo+%3D+42%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0138}{https://wg21.link/P0138R2}
@@ -686,7 +711,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:23,positionColumn:1,positionLineNumber:23,selectionStartColumn:1,selectionStartLineNumber:23,startColumn:1,startLineNumber:23),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccstddef%3E%0A%23include+%3Ciomanip%3E%0A%0Aint+main()%0A%7B%0A++std::byte+b%7B5%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%7C%3D+std::byte%7B2%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%3C%3C%3D+2%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++b+%2B%3D+std::byte%7B2%7D%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccstddef%3E%0A%23include+%3Ciomanip%3E%0A%0Aint+main()%0A%7B%0A++std::byte+b%7B5%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%7C%3D+std::byte%7B2%7D%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A++b+%3C%3C%3D+2%3B%0A++std::cout+%3C%3C+std::hex+%3C%3C+std::setw(2)+%3C%3C+std::setfill(!'0!')%3B%0A++std::cout+%3C%3C+std::to_integer%3Cunsigned+int%3E(b)+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++b+%2B%3D+std::byte%7B2%7D%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0298}{https://wg21.link/P0298R3}
@@ -747,7 +772,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbFykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn4JdpgO6bX1BIVhkdFxrXUNTdlD3b3FpYMAlLaoXsTI7BzmAMzByN5YANQma25OCgTEmKz72CYaAILrm9uYewcsTIkXV7dmGwxbXrv7bmOxGCwHeNw%2BwQIOxewQgMw%2BJgA7FYbjsdsd0CAQC83gdIaR0QRMSAgSCLjt%2BKg9sikRYEuYzJSuAykQARAm0sykBmUswsxGstn7FHXNEYrE4gH4wnE0lGckRerUqzIrkMxXEPlmPkCoVrEVo/jECBoBjHHZMLxEcyxPYAVgsAGtSAA3Ex21k7EAU1CoeGo5UfNFiolYtBWp5uAE7R2R6NgDgAWgTcYOOxdqbcOxTCeFQepgoD4pQCyhAPjqztbgYuf1%2BaNJoE5st1rMtvdTtd7s93o1/tFgYDIeJ4bLB2jsfLaYTyY4mfT85zqzrAaFRdDJYjU6zuarNeXBplYdLi8r1drIvzGoAdMElA1qL7r5hVCcmA4IFwZvCVwOG6bmytVAbXtTs3Q9L0fT9fNaXzYdjy3cc00nJCdyTFNtwXTClzzVddXXEcT2ws991wv8SEbM0oRbYC21A51wJ7HY%2BxgmkhyPTcxyjZDT1necM2I7MD1YwsB2LUdT3dc9hIIhCuIrKTSN/fMaJ2Ygnk9G872iAhH1QZ9X2Id9dLMb8yMNCiAOooCQI7Bju0gyl%2BzRWD2PEojUJjXiMM8gTPJw38XPwsSNwk4jFIvetLKbazW3bB17Ig3t6mcwcB3gzj5xQ7i0L4zC/JyoShPMgt83cxDCt3aSSvK%2BS02LCJfQMWhEgQJh52IW8zR0zB0FPIrMM6hgMEwa9HUwABPOF%2Bp8wqhpG68cUSXrpvCvdItkzK1uq5SA3mrAxsm1a1k9NYSq07qH063I0gEAlixYVAXUwCB9swMzAp9Y0rItGy6Lsrskqg1LXPSjiws87KKzy3yZpkgc1xCwiKoU9b4Ys76Yt%2BuL6MBpiWLww8MohwqoendC53yuGSsR4mPMqkiNtuYKODmWhODtXg/A4LRSFQTgo0sax0QWJZHnWHhSAITRWbmR0QDtDR9E4SQuZlvnOF4BQQCV6WedZ0g4FgJAX3aICyAoCB6mABRlEMSohAQVAAHducltAWESOgmGqO2QloR2Xe53mPa9%2BgYht5hEgUJ2CFIUO6GiUJWBWXgE/DgB5K1A9d9XTeQa5iBtzXSHz2p8G53h%2BEEEQxHYKQZEERQVHUfXSF0BIDCMFBrGsfQ8AibXIDmVBEmqbWkwxfZWVMIXLC4REdkTAB1MRaCX5eXzfJflvQQxHGQXgnuiYEsCHuFSGILxBDwNgABUmvPuYFFF5Y9AxYI/Ydp3c%2B4XgTkwCsSWzsjKJBlmzDmas278w4NgVQZsiDqVUAADliImWIkgdjAGQMgHYEATjX0dDMPBgsrCWAJLgQgJA9hfC/P/cBcwEBnCwDEC%2B8tFbKw4KrUgwcj4l21rrBhnCzBQN5jA%2Bh%2BtvyumiKkZwkggA}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuyxMsSdnl2arDOteWztuB8HAzwuL2CBE2D2CEEmLxMAHYrBdNpteugQCAHk9diDSEiCCiQH8jCdNvxUNs4bCLEVzGYSVxqbCACLYilmUjUklmekwhmMnbw86I5Go9E/LE4vEEgHLbCbCJVMlWOGs6ly4icsyc7m85b8l6I1UAOmCSmq1FQqANmFUBGITAcECmUJ1euJJAgaAYvU2TC8RHMADZtgBWCwAa1IADcTEGGZsQK7UFCEQqXYLcai0L67m4fptQ9nc2AOABaIsF3abCPltybMtFvku3nJoUoWagn6FpZBtwMevO5P8YjugRen1%2BsyB6NhyPR2Px1VJgUp5NpvGZ9u7XP5jsVouljjVyuHutLftLptLlvrw/07sMYsP6M9%2Blnl1j0nEO6xw3G6IEM0WlaNp2v%2BZiTE6/KIoOw6eqC74BsG05RjGcYJouiIUqm4oZm2h7bpuu4lmWO41lWJG1gefaQWSPLNumrZZuR9Z3lRLrQR6o6%2BqgCFTuGyFzrKVTocuS6rjhjEETW%2BE5oR%2B6HmRkkURRDbJheYkMRuMk1sxPasXRa64eRLYROaBi0LECBMIexBGp6f6YOgx6UQe5E2QwGCYAaoaYAAnpCTlKa5BruVgBrorEDn%2BUxXa6ae1FXoZinUg%2BxZPgwL66smbkeV5vlRcssbLCpS4/nZpo2fEiRlAw2ItiwqARpgEDZVg4HFVBbocXBXE8SGfGzqhJLCZhK7YRpeFOXJ5EKVpSl6eeWr6eJmmdml80dUOXXej1E6If1KHzkJjbkqNCUSbN0mdlNikzZ2ylnhhi2XvR17RWtcXQk9HDTLQnBBrwfgcFopCoJwOaWNYSKzPMtwrDwpAEJo33TKGIBBho%2BicJIANIyDnC8AoIAY4jQPfaQcCwEgVpNFxZAUBAVTAAoyiGCUQgIKgADugPw2gLCxHQTDVSzIS0OzXOA8DfMC/QMRM8wsQKBzBCkNLdDRKErCLLwauywA8r64vc7j1PIOcxBM/jpCmxU%2BCA7w/CCCIYjsFIMiCIoKjqKTpC6EUBhGCg1jWPoeARITkDTKgsTVYTJbIjsDKmBDlhcDCmzFgA6mItAZ5nQG2hnEXoIYjjILwDXRMQeBYBHkKkMQXiCHgbAACqmXX0wKNDCw9LiwQi2zHPG9wvA2pgizw5ztqxEjP1/TjPugxw2CqDTRCfqoAAc/rFv6kibMAyDIJsEA2k3oaTKf4NWJY2K4IQJDbG8Uxj3P0wIEcWAxPXqPo5jHBsakElhXK2hNibvwAWYRewNl5v1JuBSM0REjOEkEAA}
 	\end{codesample}
 
 	\addproposal{P0083}{https://wg21.link/P0083R3}
@@ -768,7 +793,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo+%7B%7B1,%22foo1%22%7D,+%7B2,%22foo2%22%7D%7D%3B%0A++std::map%3Cint,+std::string%3E+bar+%7B%7B3,%22bar2%22%7D%7D%3B%0A%0A++foo.merge(bar)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo+%7B%7B1,%22foo1%22%7D,+%7B2,%22foo2%22%7D%7D%3B%0A++std::map%3Cint,+std::string%3E+bar+%7B%7B3,%22bar2%22%7D%7D%3B%0A%0A++foo.merge(bar)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0083}{https://wg21.link/P0083R3}
@@ -792,7 +817,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:23,positionColumn:1,positionLineNumber:23,selectionStartColumn:1,selectionStartLineNumber:23,startColumn:1,startLineNumber:23),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo+%7B%7B1,%22foo1%22%7D,+%7B2,%22foo2%22%7D%7D%3B%0A%0A++foo.insert_or_assign(3,+%22foo3%22)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.insert_or_assign(2,+%22foo2bis%22)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::map%3Cint,+std::string%3E+foo+%7B%7B1,%22foo1%22%7D,+%7B2,%22foo2%22%7D%7D%3B%0A%0A++foo.insert_or_assign(3,+%22foo3%22)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.insert_or_assign(2,+%22foo2bis%22)%3B%0A++for(const+auto%26+%5Bk,v%5D+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+k+%3C%3C+!'-!'+%3C%3C+v+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{n4279}{https://wg21.link/n4279}
@@ -823,6 +848,10 @@
 			\item \mintinline{cpp}|emplace()| renvoie toujours un itérateur
 		\end{itemize}
 	\end{block}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::vector%3Cint%3E%3E+foo%3B%0A++foo.emplace_back(3,+1).push_back(42)%3B%0A%0A++for(const+auto%26+vec:+foo)%0A++%7B%0A++++for(const+auto+it:+vec)%0A++++%7B%0A++++++std::cout+%3C%3C+it+%3C%3C+%22+%22%3B%0A++++%7D%0A++++std::cout+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0084}{https://wg21.link/P0084R2}
 \end{frame}
@@ -899,7 +928,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::clamp(1,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::clamp(54,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::clamp(25,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::clamp(1,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::clamp(54,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::clamp(25,+18,+42)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0025}{https://wg21.link/P0025R1}
@@ -934,7 +963,7 @@
 	\end{alertblock}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccharconv%3E%0A%0Aint+main()%0A%7B%0A++char+str%5B25%5D+%3D+%22%22%3B%0A++std::to_chars(std::begin(str),+std::end(str),+12.5)%3B%0A++std::cout+%3C%3C+str+%3C%3C+%22%5Cn%22%3B%0A%0A++double+val+%3D+0%3B%0A++std::from_chars(std::begin(str),+std::end(str),+val)%3B%0A++std::cout+%3C%3C+val+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccharconv%3E%0A%0Aint+main()%0A%7B%0A++char+str%5B25%5D+%3D+%22%22%3B%0A++std::to_chars(std::begin(str),+std::end(str),+12.5)%3B%0A++std::cout+%3C%3C+str+%3C%3C+%22%5Cn%22%3B%0A%0A++double+val+%3D+0%3B%0A++std::from_chars(std::begin(str),+std::end(str),+val)%3B%0A++std::cout+%3C%3C+val+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0067}{https://wg21.link/P0067R5}
@@ -1020,6 +1049,10 @@
 		get<float>(w);       // exception : w contient un int
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuwfBwCdnl2arDOteWztuAG5NRGIzwuVw%2BNzufyqeEMBGBlwuwQImxYTGCEEmLxMAHYrBdNpteugQCBflCYT9EaRNlRaKgmAQqYTiQ8jCdNr8qQB3Ha4874353AAi2zMZlUAE8AF6S8XmMw8l74wmbYloLxIn4/AkEIkgYCYWH3HXMgjER4nCC/SYQrVgJYAVjcDDtCpBePZQs2XHly15Sp1KpQsw1uy1TL1BopggtVptu02LsdzqWvsx7s5nvD%2BsNe2jy2wloxqfdytVwbjbm1uuzUcNBc51s18cTTpdxfhfM2GZ2wqzkd2GhjRb9VcDapDbjDxojOcRFobFYTDtbKd5iq7nt%2Brs7paD6sXfdnefrjdDzeXye3mLeeCom0HJenNd26FmEXoQ%2B3/ur/bcy0/7YrK4t5pq8qx3g%2BO5Pr%2BNJ0nWEANlebzAVQmJYoKLwcNMtCcPavB%2BBwWikKgnCTpY1gErM8y3CsPCkAQmhYdMADWID2ho%2BicJI%2BGMcRnC8AoIAcQxhFYaQcCwEgmCqE06okOQlBVMACjKIYJRCAgqCcgRdFoCwsR0PSySqSEtAaVpBFEXpBn0DEynMLECiaQy1l0NEoSsIsvCubZADy6rmdpvHSU05zEMp/GkCFyAVPgBG8PwggiGI7BSDIgiKCo6iiaQuhFAYRgoNY1j6HgESCZA0yoLEZQMIJHAALSEj2pjkZYXBYpsDUAOpiLQXXddJppMF1sSYOgMJ4MgvCoP8xBmlgFXoqQxBeIIeBsAAKqgnhLdMChUQsPQ6sEJnqZpQXcLwpqYIsdGcsQTCxIx2G4TxOUkRw2AycgcnEJsqgABwAGwNcDkibMAyDIJsECmmtzHWhAZFWJYVK4IQJAissUzXS90wIEcWAxMtrHsZxHDcaQlkzZFgnCfjFNmO9RGfXjomTNMc2JM4khAA}
+	\end{codesample}
+
 	\addproposal{P0088}{https://wg21.link/P0088R3}
 \end{frame}
 
@@ -1051,7 +1084,7 @@
 	\end{block}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cnwcAXV7dmmwzbXnsHbgAbpgHCR3jc7j8Hk8gQ08IYCODbjdggRdiwmMEIHMPiZ4lYbrt9viPkSicN0CAQIC4QiAajSLsqLRUEwCIyKVSXkYLrtAYyAO4HAnXMl8p4AEX2ZjMqgAngAvBVy8xmYWkskU3ZUtBeNEAgG7TkgYCYRHPAiUkDct6xbAQQFzGGGsDrACsbgYrvVEMJZMBkt2XDVsRFYq1OqW%2BsOhuNpvNR0EFwdToNh123o9XvWodxfqJAsDgJ9os1lu1KCjzvTcbN9KTdogAtTMfTmc93tzvs%2Bmyouw0GvJlqp8YB6CWEXoycdJfDw5NdcOsWnOK7PdceCoeZ7m/7g6N89Hh2ZrPN9ubJY2G63frxEu3RLxYbLVuBoOIAONNOI8IbifZB5Wja7x2nyT5uoyXAaIyqoIFULKqnel75kyJAQEweqoLshCYCw2p8jiKFDq%2BeD5BAJhulYboSuhmHmAAbAxuwNMAOL4saurRm4hosdWbgZhwAnqvEEqMjhLCrs%2BxGRnqfFCVmnbPkhEIiR8HALLQnBurwfgcFopCoJw3GWNYRpLCsjwbDwpAEJo6kLAA1iAbrQZpHCSDpdkGZwvAKCA0G2Xp6mkHAsBIJgqggphZAUOhxDAAoyiGFUQgIKgAq6dZaAsEkdBshkSUhLQqXpbp%2BnZbl9AxAlzBJAoaXshVdDRKErBrLwTVVQA8nqJUZV5EUgtc8V%2BRwvCDcgdT4LpvD8IIIhiOwUgyIIigqOoQWkLobQGEYKDWNY%2Bh4BEfmQAsqBJDUo0ALQUgcEqmCZlhcPEuzXQA6mItBve9EUEMQTBvUkmDoAieDILwqDAsQP5YKd2KkMQXiCHgbAACqoJ48MLAo5mrHoFLBIVKVpf13C8P9mBrNZAoA0kdkaVpnmbYZHDYJFyDRbsqgABz0dd9GSLswDIMguwQP9yMOU6EDGVYliMrghAkNKsRcHMFMMwscFMFgMQI05Ln6JwHmkGVkM%2BbY/k2VrxscGYzP6azmtBXMCzQ2kziSEAA%3D%3D}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cvariant%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::variant%3Cint,+std::string%3E%3E+v%7B5,+10,+%22hello%22%7D%3B%0A%0A++for(auto+item+:+v)%0A++%7B%0A++++std::visit(%5B%5D(auto%26%26+arg)%7Bstd::cout+%3C%3C+arg+%3C%3C+!'+!'%3B%7D,+item)%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0088}{https://wg21.link/P0088R3}
@@ -1083,7 +1116,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:32,positionColumn:1,positionLineNumber:32,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++int+operator()(int+i)%0A++%7B%0A++++return+10+%2B+i%3B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar%0A%7B%0A++int+operator()(const+std::string%26+s)%0A++%7B%0A++++return+s.size()%3B%0A++%7D%0A%7D%3B%0A%0Atemplate+%3Ctypename...+Ts%3E%0Astruct+Baz+:+Ts...%0A%7B%0A++using+Ts::operator()...%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Baz%3CFoo,+Bar%3E+baz%3B%0A++std::cout+%3C%3C+baz(5)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz(%22azerty%22)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++int+operator()(int+i)%0A++%7B%0A++++return+10+%2B+i%3B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar%0A%7B%0A++int+operator()(const+std::string%26+s)%0A++%7B%0A++++return+s.size()%3B%0A++%7D%0A%7D%3B%0A%0Atemplate+%3Ctypename...+Ts%3E%0Astruct+Baz+:+Ts...%0A%7B%0A++using+Ts::operator()...%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Baz%3CFoo,+Bar%3E+baz%3B%0A++std::cout+%3C%3C+baz(5)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+baz(%22azerty%22)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0195}{https://wg21.link/P0195R2}
@@ -1212,6 +1245,14 @@
 		// 1 + (2 + (3 + 4))
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Along+long+sum(Args...+args)%0A%7B%0A++return+(args+%2B+...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+4)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Abool+all(Args...+args)%0A%7B%0A++return+(...+%26%26+args)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+all(true,+true,+true,+false)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0036}{https://wg21.link/P0036R0}
 \end{frame}
 
@@ -1234,6 +1275,10 @@
 			// 1.0 / (2.0 / 3.0)
 		\end{minted}
 	\end{alertblock}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Adouble+ldiv(Args...+args)%0A%7B%0A++return+(...+/+args)%3B%0A%7D%0A%0Atemplate%3Ctypename...+Args%3E%0Adouble+rdiv(Args...+args)%0A%7B%0A++return+(args+/+...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+ldiv(1.0,+2.0,+3.0)+%3C%3C+!'+!'+%3C%3C+rdiv(1.0,+2.0,+3.0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0036}{https://wg21.link/P0036R0}
 \end{frame}
@@ -1286,7 +1331,11 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbFykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn4JdpgO6bX1BIVhkdFxrXUNTdlD3b3FpYMAlLaoXsTI7BzmAMzByN5YANQma25OCgTEmKz72CYaAILrm9uYewfHxMHAF1e3ZhsMW167%2BzcADd2kRiB8bp8vKkjDtmGwFIkmMsdsd0CAQLRCNExAp9lZITcCJgWIkDMTAQQAJ6JRisTAAOiZO2uxGAeLWlxuEVQnh2YloEFZ7KZDP5bIUM0%2BJgA7ATrjsdqcCIsGDsIKK9mZYuZYuL2VK1vLZQARaVEklkpgUg7U2nwxnM4UcrnXWgCYA7d2whQ%2BIUSzX1A3SuWfRXK1XqoMKLUWHaiw3GmVmwnXYmk8mYSk0ulsTXOiHXdALCL0L34IH%2BkXM6NSyGhm7hzAq4hqjXMgD0%2Bsl%2BJDKduFoz1qztpzDvzEsLxa8pcexArVYUgYldduDYVSubkYg0Z2XYTvfr/c%2B6atNrcdtzj1FBc5nyBqDw6B2ADFPOhlK9BIvdbrl8H63lRUIDRDE0C8AgnjcQF42ZQEYNAkB%2BGIAB3ep0EBW9sB3FcZigmCwFWABWNwGEIw812PQczxHC8x3pHYABVSB2S9xydSc7xuB8nx2RJoQQAB9CJkQAa0EkFkBAgh0RASSwUBRiPm1HYgRYgttT/GsVxDID1SBBl%2BIUISROQUScINFiDyNPtzWuYJIJYJhgggVdZT0xDwMg%2BCDlRGSMR5TwxESBAmHw3yBQgE4vEwFjoti1jiBiliqFxTA8J8twdnIkiyNWGzU0VTyFm8g4EL9BIdjMFi1hYyQMrK3yctI8iCoHDdiog8KstoBcuAZDQWLMAaaoGhroKajhsqmzKlT6kaqoWtYxu66aTFy1rjUbV930/ByIC4QbpqYQiWPMMxogIc6ezasM/Nk%2BSSEBByLh2fhUAoxUjJMsSJPaaheRYw6hqOojYkTO7kJ3CDUB2PAdhAN7eVXRV3Luor/JQErVvh2bCLWtrUeTO7OtKiasuavKKNNT4ODmWhOCI3g/A4LRSFQThoMsaxUQWJZHnWHhSAITQ6bmUSQCIwaGY4SRmdF9nOF4BQQEGkXWbp0g4FgJBMFUdoYbICgLIUZRDEqIQEFQFCWaFtBSToa10jNkJaEt62WbZ%2B3EjoAZ2WYRJjNQAhSG933iFCekldD1AHfoYgAHkIPdm2Fb19pnWj9PkFqfAWd4fhBBEMR2CkGRBEUFR1A10hdASAwjBQaxrH0PAIhVyA5lQRJqhVjgAFo0X2E1TG5ywuBlHZ%2B4AdQFKfp71k4wv72l0EMRxkF4VAQWIV4sA71zSCSwQ8DYRjeVoA%2B5gUPnlj0NFghdi2rdT7heBOTAViFlDiCYRJRfpozeWNcOYcGwPrZAhsdiqAAByxH7rESQOxgDIGQOqaKDBRJ4QgFzKwlgWK4EICQLUawuAzHfgAuYCAzhYBiIfCWUt9CcDlqQT2W9o4qzVpQphHAzDALZqAihGsZhzB3qkZwkggA}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Atemplate%3Ctypename+T,+typename...+Args%3E%0Avoid+push_back_vec(std::vector%3CT%3E%26+v,+Args%26%26...+args)%0A%7B%0A++(v.push_back(args),+...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%3B%0A++push_back_vec(foo,+10,+20,+56)%3B%0A++for(auto+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Atemplate%3Ctypename+...Args%3E%0Avoid+FoldPrint(Args%26%26...+args)%0A%7B%0A++(std::cout+%3C%3C+...+%3C%3C+std::forward%3CArgs%3E(args))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++FoldPrint(10,+!'a!',+%22ert%22s)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0036}{https://wg21.link/P0036R0}
@@ -1357,6 +1406,10 @@
 		\item Les fonctions \mintinline{cpp}|noexcept| peuvent être convertie en fonctions non \mintinline{cpp}|noexcept|
 	\end{itemize}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23if+1%0Avoid+use_func(void+(*func)()+noexcept)%0A%23else%0Avoid+use_func(void+(*func)())%0A%23endif%0A%7B%7D%0A%0Avoid+my_func()%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++use_func(%26my_func)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0012}{https://wg21.link/P0012R1}
 \end{frame}
 
@@ -1376,6 +1429,10 @@
 			\item Comportement différent d'un destructeur en présence d'exception
 		\end{itemize}
 	\end{block}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()+%3D+default%3B%0A++~Foo()%0A++%7B%0A++++std::cout+%3C%3C+std::uncaught_exceptions()%3B%0A++%7D%0A%7D%3B%0A%0Avoid+bar()%0A%7B%0A++Foo+foo%3B%0A%23if+0%0A++throw+std::exception()%3B%0A%23endif%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++bar()%3B%0A++%7D%0A++catch(...)%0A++%7B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{N4259}{https://wg21.link/N4259}
 \end{frame}
@@ -1416,6 +1473,20 @@
 		tuple t(4, 3, 2.5);
 	\end{minted}
 
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Ne permet pas la déduction partielle
+		\end{itemize}
+
+		\begin{minted}{cpp}
+			tuple<int> t(1, 2, 3);  // Erreur
+		\end{minted}
+	\end{alertblock}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++std::pair+p(2,+4.5)%3B%0A++std::tuple+t(4,+3,+2.5)%3B%0A++std::cout+%3C%3C+p.second+%3C%3C+%22+%22+%3C%3C+std::get%3C0%3E(t)+%3C%3C+%22%5Cn%22%3B%0A%0A%23if+0%0A++std::tuple%3Cint%3E+t(1,+2,+3)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0091}{https://wg21.link/P0091R3}
 \end{frame}
 
@@ -1435,29 +1506,10 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:29,startColumn:1,startLineNumber:29),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cutility%3E%0A%0Atemplate%3Cclass+Func%3E+struct+Foo%0A%7B%0A++Foo(Func+f)+:+func(f)%0A++%7B%0A++%7D%0A%0A++void+operator()+(int+i)%0A++%7B%0A++++func(i)%3B%0A++%7D%0A%0A++Func+func%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::pair+p(2,+4.5)%3B%0A++std::tuple+t(4,+3,+2.5)%3B%0A++std::cout+%3C%3C+p.second+%3C%3C+%22+%22+%3C%3C+std::get%3C0%3E(t)+%3C%3C+%22%5Cn%22%3B%0A%0A++int+a+%3D+2%3B%0A++Foo+foo(%5B%26%5D(int+i)+%7Bstd::cout+%3C%3C+a+*+i+%3C%3C+!'%5Cn!'%3B%7D)%3B%0A++foo(5)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cutility%3E%0A%0Atemplate%3Cclass+Func%3E+struct+Foo%0A%7B%0A++Foo(Func+f)+:+func(f)%0A++%7B%0A++%7D%0A%0A++void+operator()+(int+i)%0A++%7B%0A++++func(i)%3B%0A++%7D%0A%0A++Func+func%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++int+a+%3D+2%3B%0A++Foo+foo(%5B%26%5D(int+i)+%7Bstd::cout+%3C%3C+a+*+i+%3C%3C+!'%5Cn!'%3B%7D)%3B%0A++foo(5)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0091}{https://wg21.link/P0091R3}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Déduction de template dans les constructeurs}
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Rend obsolète plusieurs \textit{make helper}
-		\end{itemize}
-	\end{block}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Ne permet pas la déduction partielle
-		\end{itemize}
-
-		\begin{minted}{cpp}
-			tuple<int> t(1, 2, 3);  // Erreur
-		\end{minted}
-	\end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1483,7 +1535,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Cauto+value%3E+constexpr+auto+FOO+%3D+value%3B%0A%0Aint+main()%0A%7B%0A++constexpr+auto+const+foo+%3D+FOO%3C100%3E%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Cauto+value%3E+constexpr+auto+FOO+%3D+value%3B%0A%0Aint+main()%0A%7B%0A++constexpr+auto+const+foo+%3D+FOO%3C100%3E%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0127}{https://wg21.link/P0127R2}
@@ -1500,32 +1552,14 @@
 		//                            ^^^^^^^^
 		struct Foo { C<T> data; };
 
-		foo<std::vector, int> bar;
+		Foo<vector, int> bar;
 	\end{minted}
 
 \note[item]{Auparavant, il fallait obligatoirement utiliser \mintinline{cpp}|class|, alors que \mintinline{cpp}|typename| était valide partout ailleurs}
-\end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Template et contraintes d'utilisation}
-	\begin{itemize}
-		\item Évaluation constante de tous les arguments templates \og non-types\fg{}
-		\item Y compris pointeurs, références, pointeurs sur membres, \ldots{}
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		template<int* P> struct Foo {
-		  int operator()() { return *P; }
-		};
-
-		int N = 5;
-		Foo<&N> foo;     // OK
-		foo();           // 5
-
-		constexpr int* bar() { return &N; }
-		Foo<bar()> foo2; // OK
-		foo2();          // 5
-	\end{minted}
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Atemplate+%3Ctemplate+%3Ctypename%3E+typename+C,+typename+T%3E%0Astruct+Foo%0A%7B%0A++C%3CT%3E+data%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo%3Cstd::vector,+int%3E+bar%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -1542,13 +1576,17 @@
 
 	\begin{minted}{cpp}
 		struct Foo {
-		  auto bar() { return [*this] { cout << s << endl; }; }
-		  std::string s;
+		  auto bar() { return [*this] { cout << s << '\n'; }; }
+		  string s;
 		};
 
 		auto baz = Foo{"baz"}.bar();
 		baz();     // Affiche baz
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++auto+bar()%0A++%7B%0A++++return+%5B*this%5D+%7B+std::cout+%3C%3C+s+%3C%3C+!'%5Cn!'%3B+%7D%3B%0A++%7D%0A%0A++std::string+s%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++auto+baz+%3D+Foo%7B%22baz%22%7D.bar()%3B%0A++baz()%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0018}{https://wg21.link/P0018R3}
 \end{frame}
@@ -1567,6 +1605,10 @@
 
 		AddEleven(5);   // 16
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aconstexpr+int+AddEleven(int+n)%0A%7B%0A++return+%5Bn%5D+%7B+return+n+%2B+11%3B+%7D()%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+AddEleven(5)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0170}{https://wg21.link/P0170R1}
 \end{frame}
@@ -1592,6 +1634,14 @@
 		constexpr int I = ID(3);
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++auto+ID+%3D+%5B%5D+(int+n)+%7B+return+n%3B+%7D%3B%0A++constexpr+int+I+%3D+ID(3)%3B%0A++std::cout+%3C%3C+I+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++auto+ID+%3D+%5B%5D+(int+n)+constexpr+%7B+return+n%3B+%7D%3B%0A++constexpr+int+I+%3D+ID(3)%3B%0A++std::cout+%3C%3C+I+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0170}{https://wg21.link/P0170R1}
 \end{frame}
 
@@ -1612,7 +1662,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzABspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdF6CvWNzTltQ929JWUSAJS2qF7EyOwc5rHByN5YANQmsW5OQ8SYrPvYJhoAgpdXaAxDmKpJxDvBBDtX6OjY9ABujAg7x2DFmtxMAHYrNcdjsTgQlgw9gBWCwMEzIgAieyhcMwCOISKR1h2XC4%2BwsOMxEDBsWhNwhmPB12BLCYwRp4Kht1hkPpsNhQ3QIBQiw%2B%2BzcEs%2B31%2BmABDAgyNmewOUrAa2RbgY6opPKpzKuvO5MIFTC8RB2AElsfsbaiMdigYIQcr7o9nq8%2BXiCUSKfq6XrYW6CE8Xm9nZaVdjrRBYrT%2BQKhSK0OaVZKDla02qNVqdQGTZCmdc9XzAzszRbrVGUVYsTsnR9QTjKfDESC/YXdSagwJ3WHgZHbVbqXGu4bEwRhaLUxKpYPVRmdZrtWt8%2BPO8WC8bxz2HiGPeXzahy99qxja47gQxSOGPiwwd2BU/ny/X6XH6/P1/YRXjwEz/asRMnWXqtoS7Z0v6CbfjBr6/jsABKAFWEBDrNt6bYsB2jJjrBeHPmBxKAcBNq4oROwBDSeyWIhnKQZ2a74fhDHQTsSbTuKC5uCe6CxjekizFRs6LjmK64fqxY4dcHDzLQnDIrwfgcFopCoJwkqWCSCiLMsmDUbEPCkAQmgyfMADWIDIho%2BicJIikmapnC8AoIDWcZykyaQcCwEgTyYMgR5kBQEANMACjKIYVRCAgqAAO5KYZaAsEkdBMDUEUhLQ0VxUpKlJSl9AxGFzBJAoMUEKQ%2BV0NEoSsKsvBVYVADy5rZfFDl%2BcgVzEGFTmkJ1dT4EpvD8IIIhiOwUgyIIigqOoHmkLobQGEYKDWNY%2Bh4BELmQPMqBJDULkcAAtEKtqmJplhcBCOzHQA6mItC3XdTwEMQTC3UkmDoIYjjILwqAAsQxB4FgO00qQxBeIIeBsAAKqgnjg/M2lLCsgyTsEGVRTF7XcLwb2YKshmxe9SQmbJ8n2QtakcNgqj%2BYFOyqAAHPEx3xJIOzAMgyD1m90NmcqEAaVYlg3rghAkPpXCzATFPzAgpxYDEEMWVZNkcHZpC5QDfUuW5Cua2Y1MqbT8sebM8xA2kziSEAA%3D%3D}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++constexpr+auto+add+%3D+%5B%5D+(int+n,+int+m)%0A++%7B%0A++++auto+L+%3D+%5B%3D%5D+%7B+return+n%3B+%7D%3B%0A++++auto+R+%3D+%5B%3D%5D+%7B+return+m%3B+%7D%3B%0A++++return+%5B%3D%5D+%7B+return+L()+%2B+R()%3B+%7D%3B%0A++%7D%3B%0A%0A++std::cout+%3C%3C+add(3,+4)()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0170}{https://wg21.link/P0170R1}
@@ -1634,6 +1684,10 @@
 		invoke(&foo, 8);  // 50
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Aint+foo(int+i)%0A%7B%0A++return+i+%2B+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::invoke(%26foo,+8)+%3C%3C+%22%5Cn%22%3B++//+50%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{n4169}{https://wg21.link/n4169}
 \end{frame}
 
@@ -1653,14 +1707,8 @@
 		invoke(&Foo::bar, foo, 8);  // 50
 	\end{minted}
 
-	\begin{block}{Motivation}
-		\begin{itemize}
-			\item Syntaxe unique d'appel d'appelable
-		\end{itemize}
-	\end{block}
-
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:24,positionColumn:1,positionLineNumber:24,selectionStartColumn:1,selectionStartLineNumber:24,startColumn:1,startLineNumber:24),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+i)%0A%7B%0A++return+i+%2B+42%3B%0A%7D%0A%0Astruct+Bar%0A%7B%0A++int+baz(int+i)%0A++%7B%0A++++return+i+%2B+42%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::invoke(%26foo,+8)+%3C%3C+!'%5Cn!'%3B%0A%0A++Bar+bar%3B%0A++std::cout+%3C%3C+std::invoke(%26Bar::baz,+bar,+8)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astruct+Bar%0A%7B%0A++int+baz(int+i)%0A++%7B%0A++++return+i+%2B+42%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Bar+bar%3B%0A++std::cout+%3C%3C+std::invoke(%26Bar::baz,+bar,+8)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{n4169}{https://wg21.link/n4169}
@@ -1675,7 +1723,7 @@
 	\begin{minted}{cpp}
 		bool LessThan10(int a) { return a < 10; }
 
-		vector foo = { 1, 6, 3, 8, 14, 42, 2 };
+		vector<int> foo = { 1, 6, 3, 8, 14, 42, 2 };
 		count_if(begin(foo), end(foo), not_fn(LessThan10)); // 2
 	\end{minted}
 
@@ -1684,6 +1732,10 @@
 			\item Dépréciation de \mintinline{cpp}|std::not1| et \mintinline{cpp}|std::not2|
 		\end{itemize}
 	\end{block}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cfunctional%3E%0A%0Abool+LessThan10(int+a)%0A%7B%0A++return+a+%3C+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%3D+%7B+1,+6,+3,+8,+14,+42,+2+%7D%3B%0A++std::cout+%3C%3C+std::count_if(begin(foo),+end(foo),+std::not_fn(LessThan10))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{p0005}{https://wg21.link/p0005r4}
 	\addproposal{p0358}{https://wg21.link/p0358r1}
@@ -1708,6 +1760,10 @@
 		enable_if_t<is_integral_v<T>, T>
 		sqrt(T t);
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccmath%3E%0A%0Atemplate+%3Ctypename+T%3E%0Astd::enable_if_t%3Cstd::is_integral_v%3CT%3E,+T%3E%0Asqrt(T+t)%0A%7B%0A++return+std::sqrt(t)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sqrt(25)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0006}{https://wg21.link/P0006R0}
 \end{frame}
@@ -1735,6 +1791,10 @@
 		enable_if_t<conjunction_v<is_same<T, Ts>...>>
 		foo(T, Ts...) {}
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate%3Ctypename+T,+typename...+Ts%3E%0Astd::enable_if_t%3Cstd::conjunction_v%3Cstd::is_same%3CT,+Ts%3E...%3E%3E%0Afoo(T,+Ts...)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5,+12,+8,+65)%3B%0A%23if+0%0A++foo(5,+12,+8.,+65)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0185}{https://wg21.link/P0185R1}
 	\addproposal{P0013}{https://wg21.link/P0013R1}
@@ -1812,7 +1872,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:28,positionColumn:1,positionLineNumber:28,selectionStartColumn:1,selectionStartLineNumber:28,startColumn:1,startLineNumber:28),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+1%3B%0A%0A++switch(foo)%0A++%7B%0A++++case+1:%0A++++case+2:%0A++++++std::cout+%3C%3C+%22Cas+1-2%5Cn%22%3B%0A%23if+1%0A++++++%5B%5B+fallthrough+%5D%5D%3B%0A%23endif%0A%0A++++case+3:%0A++++++std::cout+%3C%3C+%22Cas+3%5Cn%22%3B%0A%0A++++case+4:%0A++++++std::cout+%3C%3C+%22Cas+4%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22Cas+default%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+1%3B%0A%0A++switch(foo)%0A++%7B%0A++++case+1:%0A++++case+2:%0A++++++std::cout+%3C%3C+%22Cas+1-2%5Cn%22%3B%0A%23if+1%0A++++++%5B%5B+fallthrough+%5D%5D%3B%0A%23endif%0A%0A++++case+3:%0A++++++std::cout+%3C%3C+%22Cas+3%5Cn%22%3B%0A%0A++++case+4:%0A++++++std::cout+%3C%3C+%22Cas+4%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22Cas+default%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0188}{https://wg21.link/P0188R1}
@@ -1821,7 +1881,9 @@
 \begin{frame}[fragile]
 	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ nodiscard ]]|}
 	\begin{itemize}
-		\item Indique que le retour d'une fonction ne devrait pas être ignorée
+		\item Indique qu'un retour de fonction ne devrait pas être ignorée
+		\item Incitation à lever un avertissement dans le cas contraire
+		\item Sur la déclaration de fonction
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1829,10 +1891,6 @@
 
 		foo();  // Idealement : warning
 	\end{minted}
-
-	\begin{itemize}
-		\item Incitation à lever un avertissement dans le cas contraire
-	\end{itemize}
 
 	\begin{block}{Note}
 		\begin{itemize}
@@ -1844,14 +1902,17 @@
 		\end{minted}
 	\end{block}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0A%5B%5B+nodiscard+%5D%5D+static+int+foo()%0A%7B%0A++return+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0189}{https://wg21.link/P0189R1}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Attribut \mintinline[style=white]{cpp}|[[ nodiscard ]]|}
 	\begin{itemize}
-		\item Possible sur la déclaration d'un type (classe, structure ou énumération)
-		\item Indique qu'un retour de ce type ne devrait jamais être ignoré
+		\item \ldots{} ou sur un type (classe, structure ou énumération)
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1862,7 +1923,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%0A%5B%5B+nodiscard+%5D%5D+static+int+foo()%0A%7B%0A++return+5%3B%0A%7D%0A%0Astruct+%5B%5B+nodiscard+%5D%5D+Bar%0A%7B%0A%7D%3B%0A%0Astatic+Bar+baz()%0A%7B%0A++return+Bar%7B%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A++baz()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+%5B%5B+nodiscard+%5D%5D+Bar%0A%7B%0A%7D%3B%0A%0Astatic+Bar+baz()%0A%7B%0A++return+Bar%7B%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++baz()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0189}{https://wg21.link/P0189R1}
@@ -1889,7 +1950,7 @@
 	\end{block}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:17,positionColumn:1,positionLineNumber:17,selectionStartColumn:1,selectionStartLineNumber:17,startColumn:1,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%0A%23if+0%0A%5B%5B+maybe_unused+%5D%5D+static+int+foo(%5B%5B+maybe_unused+%5D%5Dint+a,%0A++++++++++++++++++++++++++++++++++%5B%5B+maybe_unused+%5D%5D+int+b)%0A%23else%0Astatic+int+foo(int+a,%0A+++++++++++++++int+b)%0A%23endif%0A%7B%0A++return+0%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0A%23if+0%0A%5B%5B+maybe_unused+%5D%5D+static+int+foo(%5B%5B+maybe_unused+%5D%5Dint+a,%0A++++++++++++++++++++++++++++++++++%5B%5B+maybe_unused+%5D%5D+int+b)%0A%23else%0Astatic+int+foo(int+a,%0A+++++++++++++++int+b)%0A%23endif%0A%7B%0A++return+0%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0212}{https://wg21.link/P0212R1}
@@ -1977,8 +2038,8 @@
 	\begin{minted}{cpp}
 		void foo(int a, int b, int c) { ... }
 
-		array<int, 3> baz{1, 54, 3};
-		apply(foo, baz);
+		array<int, 3> bar{1, 54, 3};
+		apply(foo, bar);
 	\end{minted}
 
 	\begin{itemize}
@@ -1986,7 +2047,11 @@
 	\end{itemize}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:30,positionColumn:1,positionLineNumber:30,selectionStartColumn:1,selectionStartLineNumber:30,startColumn:1,startLineNumber:30),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Carray%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Astatic+void+foo(int+a,+long+b,+std::string+c)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'+!'+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Astatic+void+bar(int+a,+int+b,+int+c)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'+!'+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::tuple+baz%7B42,+5L,+%22bar%22s%7D%3B%0A++++std::apply(foo,+baz)%3B%0A++%7D%0A%0A++%7B%0A++++std::array%3Cint,+3%3E+baz%7B42,+5,+12%7D%3B%0A++++std::apply(bar,+baz)%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%0Astatic+void+foo(int+a,+int+b,+int+c)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'+!'+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+3%3E+bar%7B42,+5,+12%7D%3B%0A++std::apply(foo,+bar)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Astatic+void+foo(int+a,+long+b,+std::string+c)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'+!'+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::tuple+baz%7B42,+5L,+%22bar%22s%7D%3B%0A++std::apply(foo,+baz)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0220}{https://wg21.link/P0220R1}
@@ -2027,6 +2092,10 @@
 		\item \mintinline{cpp}|value_or()| retourne la valeur ou une valeur par défaut
 	\end{itemize}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbu6ixZcy0J2eXF71MjsibveggIAeTzEOz2ghOm34qAgwQImyYkzeJgA7FYLptNngqBAmHdsJsNIj0RjNocCHMGPCdmjzhiSko3iTSZhycRKX8AQwvLRaEDqUjkQARJEXWGbFhMYIQImXVGM7Zy4kYjmAx7JMSbCJVO6CyGoaGSMyI5Y0plYiBa4gypnKgj/FCzOGg0GbABUlrubhdYCWAFY3AwffylZt6Zh5UyVWgvE7di7zGYAG54LAmf0MBPB960kkqoHq2iapgALx1euhAFojVmzditcXrTao47PS73SXW7tNkH00GTRHQ7QGSHbfbo7GvV2E8nU%2BnM/3iSjhRd5SjTbm7QD8wINR6drqoRAq8b1xiCMQAJ4DtcD0cA8edtxF4gAOkTYi8mGlj%2B7foDfdPBVlxzDFRAIZAEAgNAGF6X5NxALV0AAfW3Z4kKYZAFgUBRzAANlDRsMRvEc4LHFtnS7TAXwAdwQL5vwop8e3/JYFxAoDVyFEUc2I9i8zVHdCz3ZYD31I9qzYyN4IfRjnzfD9MBQ4gIENSYf2YwNWPXJduJ0i4OGmWhOF9Xg/A4LRSFQTgvUsaxflmeZbhWHhSAITQDOmABrEBfQ0fROEkUz3MszheAUEA/Lc8yDNIOBYCQTBVCaGMSHISgqmABRlEMEohAQVBqLMly0BYWI6C%2BZJspCWg8oKsyLJKsr6BiTLmFiBR8oIUhGroaJQlYRZeB65qAHkY1qwrgsSppzmITLQtIabkAqfAzN4fhBBEMR2CkGRBEUFR1Gi0hdCKAwjBQaxrH0PAInCyBplQ8KOArP591MWzLC4ZFNgrAB1MRC3%2BxLz1xCtYkwdBDG%2BXhUETaJiBTTB7ulUhiC8QQ8DYAAVfUh3gaYFAchYejtYIqty/LJu4Xhz0wRYXOo4gmFidzDOMoLjqsjhsCS5AUuITZVAADlwitcMkTZgEwzYIHPDHPLUiAbKsSxSE2XBCBIbYzGWKZabZ6YECOLAYlR7zfP8jhAtIerYYW8LIsNq2zE5izuYN6LJmmeHiESZxJCAA%3D}
+	\end{codesample}
+
 	\addproposal{P0220}{https://wg21.link/P0220R1}
 \end{frame}
 
@@ -2065,6 +2134,18 @@
 		auto bar = make_optional<complex<double>>(3.0, 4.0);
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cutility%3E%0A%23include+%3Ccomplex%3E%0A%0Aint+main()%0A%7B%0A++auto+foo+%3D+std::make_optional%3Cstd::complex%3Cdouble%3E%3E(5.0,+6.0)%3B%0A++std::cout+%3C%3C+*foo+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cutility%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::optional%3Cstd::vector%3Cint%3E%3E+bar(std::in_place,+%7B1,+2,+3%7D)%3B%0A++for(const+auto+it+:+*bar)%0A++++std::cout+%3C%3C+it+%3C%3C+!'+!'%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cutility%3E%0A%23include+%3Ccomplex%3E%0A%0Aint+main()%0A%7B%0A++std::optional%3Cstd::complex%3Cdouble%3E%3E+foo%7Bstd::in_place,+3.0,+4.0%7D%3B%0A++std::cout+%3C%3C+*foo+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0220}{https://wg21.link/P0220R1}
 \end{frame}
 
@@ -2098,6 +2179,14 @@
 
 \note[item]{\mintinline{cpp}|std::nullopt| est inférieur à toutes valeurs}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++std::optional%3Cint%3E+none%3B%0A++std::optional%3Cint%3E+dix(10)%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(dix+%3E+none)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+(dix+%3C+none)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+(none+%3D%3D+10)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+(none+%3D%3D+std::nullopt)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++std::optional%3Cint%3E+deux(2)%3B%0A++std::optional%3Cint%3E+dix(10)%3B%0A%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+(dix+%3E+deux)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+(dix+%3C+deux)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+(dix+%3D%3D+10)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0220}{https://wg21.link/P0220R1}
 \end{frame}
 
@@ -2121,10 +2210,6 @@
 			\item Utilisez \mintinline{cpp}|Boost.Optional|
 		\end{itemize}
 	\end{block}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAHNIADqgKhE4MHt6%2BekkpjgJBIeEsUTHxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRcdIKtfWNWS2Dnd1FJf0AlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7B6gJVWLnlzdmGwxbXrv7bi8jlohAAnu9rrcfvdHm40CwEvRVBDPt9fv8DgA3TAOEgoj7jRzIHaDdAgEDPV60AHBAjnHb8VAQWk7JgzD4mADsVmuOx2eCoECYj2wOw07N5fJ2JwIiwYrP2PKufIqSg%2BUulmFlxHlpPJDC8tFolMVHM5ABEOdcWSwmMEIBKbtz1XtnZK%2BXqKS80m8Dp74YjMMiDugFhF6O81qKInUuRZPcEAPqIpjLUg7NYAOg06ck2a5lrWSo1/oWBFhAJ2ACoY8QKwcdmBVgBWNwMJumyHu1lA1A7GMAL0e5pJBDJIFtAGtMInKT7qX6x%2BSA0iAaGvOHMJHsBBm9n0wA2bPsosuj1LlBl%2BtuauD6%2BNlttjunyUFq3K13FqWeucCX1uT1sVxYgaUEbd%2BzqCAEwYZMDDTT8Wh2Mx0zWAsTy/Pl%2BGICA0AYQYeyIflyxAW86kdDVz3HNAgXvQh7ybB9Ow/SjlyvAFKw7Vt21WF8PzfLs%2BLdZjR3HX9mFoCC632EdGQgSQzHQs9%2BUFWtyIo0saPYhsazqejH24piNVVLduxYy9NIOStzDMTE8CwEwuOspilJ/b0/wku9pIZVAmQAWgUwypQFCBBzUksL2o8stJvHSh2ixiuOfDCdmMpSzMi%2B9rNs%2BzHLMMxAv4m5XyE8LRLc8TJOHby/IC3iNQIYhwW7OM0pE1iLLcSta0zTExC8TAHT0hynx45LCo1UQCGQBAcIEfDPRjdBZ3KsRE1TZYFAUcwDxSsLP1ajSosshtMEzAB3BAmAIQb4s4kbAr5cbXUtATHpK78LzEsRKq82T/MU7tDvvbreu8GcSDkhShsS0aXUKuH3rMr6F0OMCox2LAvFUCBauS1yqVAul0fwbGuHFZzAYitjjpvBafIMWgEkuh62vMo7OobCASZFDHMCxmZoful8AE4AHpRZ2Br%2BpcqmOsrLm8FUWFef5wWDJF8WGTENVKao6mOZvBWlekryyYF279KSy5hb5TWpZMwSXqKwS8c%2BlaUdpekGAELc6o%2BsqCYOT3icViAzYp4SgfiunPDEJmmBZqOaZ2I2ee9kJzeTu71Z5G2KI1O3iGl3X2vZ%2BXucrdPMEzg2EqF3P84LiWqG1h3StL%2B8ICr4dTfFNWrY0PPG52TWW9oHXI9lsvOe7k21hHT0DSNSka44y3YcHwvi8ds0nY4OZaE4ZteD8DgtFIVBOE6yxrBJBYlgedYeFIAhNH3uZJxAZsc0PjhJBPt%2BF9OC8AUCAHMr8z771IHAWASAgw4l7GQCgQpiDAAUMoQwFQhAIFQGdU%2Bz8Ax0CumkDBIRaDYNwafc%2BhD6AxDQcwBICgcEEFIDQ6IoRWArF4Gw4gAB5IEFC8GAPgcgK4qDQEcF4CImo%2BBT68H4IIEQYh2BSBkIIRQKh1CQNILoFoBgjAoGsNYfQeAIigMgHMMSEjfKkmkqYG%2BlguCch2L5AA6mICSbigwNWFL5BImB0CGCJLwVA2JiDEDspgcxDpSBF0EHgNgAAVem0S5gKHvssPQpJgikKwTgoR3BeANUwCsZ%2BZ1iBMASG/A%2BR8AHaMvhwbAqgEFEDrKoWIB5fIHkkDsYAyBiQQClgwScAsIDXysJYdMuBCAkD2F8LgMwinVLmAgU4WAYgxM/t/fQnB/6kCoSE4BtgwEv2WTsjgZg6nnwaUsyBMw5hhJSM4SQQA%3D%3D%3D}
-	\end{codesample}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -2140,6 +2225,41 @@
 		a = 3.14;   // double
 		a = true;   // bool
 	\end{minted}
+
+	\addproposal{P0220}{https://wg21.link/P0220R1}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::any|}
+	\begin{itemize}
+		\item \mintinline{cpp}|any_cast<Type>()| récupère la valeur
+		\item \ldots{} et lève une exception si le type demandé n'est pas correct
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		any a = 1;
+		any_cast<int>(a);               // 1
+		any_cast<bool>(a);              // std::bad_any_cast
+	\end{minted}
+
+	\begin{itemize}
+		\item ou récupère l'adresse
+		\item \ldots{} et retourne \mintinline{cpp}|nullptr| si le type demandé n'est pas correct
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		any a = 1;
+		int* foo = any_cast<int>(&a);
+		int* foo = any_cast<bool>(&a);  // nullptr
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%0Aint+main()%0A%7B%0A++std::any+a+%3D+1%3B%0A++std::cout+%3C%3C+std::any_cast%3Cint%3E(%26a)+%3C%3C+%22+-+%22+%3C%3C+*std::any_cast%3Cint%3E(%26a)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::any_cast%3Cdouble%3E(%26a)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%0Aint+main()%0A%7B%0A++std::any+a+%3D+1%3B%0A++std::cout+%3C%3C+std::any_cast%3Cint%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++std::cout+%3C%3C+std::any_cast%3Cbool%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0220}{https://wg21.link/P0220R1}
 \end{frame}
@@ -2179,32 +2299,21 @@
 		a.emplace<std::complex<double>>(3.0, 4.0);
 	\end{minted}
 
-	\addproposal{P0220}{https://wg21.link/P0220R1}
-\end{frame}
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%23include+%3Ccomplex%3E%0A%0Aint+main()%0A%7B%0A++std::any+a+%3D+1%3B%0A++std::cout+%3C%3C+std::any_cast%3Cint%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%0A++a.emplace%3Cstd::complex%3Cdouble%3E%3E(3.0,+4.0)%3B%0A++std::cout+%3C%3C+std::any_cast%3Cstd::complex%3Cdouble%3E%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
-\begin{frame}[fragile]
-	\frametitle{\mintinline[style=white]{cpp}|std::any|}
-	\begin{itemize}
-		\item \mintinline{cpp}|any_cast<Type>()| récupère la valeur
-		\item \ldots{} et lève une exception si le type demandé n'est pas correct
-	\end{itemize}
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%0Aint+main()%0A%7B%0A++std::any+a+%3D+1%3B%0A++std::cout+%3C%3C+std::any_cast%3Cint%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%0A++a+%3D+3.14%3B%0A++std::cout+%3C%3C+std::any_cast%3Cdouble%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
-	\begin{minted}{cpp}
-		any a = 1;
-		any_cast<int>(a);               // 1
-		any_cast<bool>(a);              // std::bad_any_cast
-	\end{minted}
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%23include+%3Ccomplex%3E%0A%0Aint+main()%0A%7B%0A++std::any+a+%3D+std::make_any%3Cstd::complex%3Cdouble%3E%3E(3.0,+4.0)%3B%0A++std::cout+%3C%3C+std::any_cast%3Cstd::complex%3Cdouble%3E%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
-	\begin{itemize}
-		\item ou récupère l'adresse
-		\item \ldots{} et retourne \mintinline{cpp}|nullptr| si le type demandé n'est pas correct
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		any a = 1;
-		int* foo = any_cast<int>(&a);
-		int* foo = any_cast<bool>(&a);  // nullptr
-	\end{minted}
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%23include+%3Ccomplex%3E%0A%0Aint+main()%0A%7B%0A++std::any+a(std::in_place_type%3Cstd::complex%3Cdouble%3E%3E,+3.0,+4.0)%3B%0A++std::cout+%3C%3C+std::any_cast%3Cstd::complex%3Cdouble%3E%3E(a)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0220}{https://wg21.link/P0220R1}
 \end{frame}
@@ -2226,7 +2335,7 @@
 	\end{block}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4eGAJ4XV7dmmwzbXnsHbi8jlohDe60uNzuPweTzcaBYiXoqnekJuwQIuxYTGCEFmHxMAHYrDddvsiR9SaShugQCBXrsmE8ACK7LgHYnXSm7am0tBA2EA7kEGl0hgvAD6oiGAPRFwgTFmAsOuzAawArG4GKr2fiSZTGQcWesAHRSHV6qnC3mLDEAwU80USqUEAHoRYRehyhVKtwq9Wa7XrDkU/XM3YEYheTDmzmUh1822He1WkARVCeMSJBAGpPKh2vSVMaWHNOeL2Ku3K7UarVrIO6z6bKi7DQhy0ihM%2BoUigvOmWCctd6sBuvBr6uPBUBtcpjGzAIgwrAHx1ALzDIw5urwe6PguUmjSkXaSY0aPH1i3d638yu%2B/NiwvFtwrtcbtxbnfvcHyiu533D2sY1JQkmWnMkOS5e8XgZMM2QvWN22vRM3GTHsHz7Q5ZW/cwADZvVvfYzDMXYAFpCOIgiACooMfF1MIHbCzDw38UKrf1APgyCU07AiaIw993U9RjmKHdjAwgslQNRWNCQkxDHQZCAHWCcVESYFZxQIF5El3Z9uNXRF11dQTd0ucEjwPI8TzPIC430m8/yvR1aOXfTX2M7chLM7Af1Ekwa3EkMQLA2S2yc%2BkcxZB0sQAa0wcVXlcjsDKRDzPz3b9LOPU9zzkpyeMcviizovTkvczcTK/Hz8McgDAr1YLpOA8lLyghlbPkgrWLvFNSwMWgsxzbqGWNbMFHFAA3MQo1xPyAtHMLIt2NUOvym0uwdPrM2zLtZzGybpswWbb1VP1duNLSdNxY1mDYY7arEhaGoJKTbhej4OHmWhODVXg/A4LRSFQTgUMsaxuUWZZHg2HhSAITRPvmGKQDVQ9vo4SQ/oRoHOF4BQQEPeGAc%2B0g4FgJB10wZAgRIchKHqYAFGUQxKiEBBUAAd3%2B2H4USOgmGqZmQloNnOf%2BwHebofpGeYRIFHZghSEl%2BhiFCVhVl4ZXogAeSBUWuexynkGuYhGdx0gjdqfB/t4fhBBEMR2CkGRBEUFR1GJ0hdFaAwjBQaxrH0PAInxyB5lQRJqnxjgSOpQ1TDBywuAJUiAHUxFoNP1wjRkSJ09BDEcZBeFQCbomIPAsFD3FSEjQQ8DYAAVdNaGr%2BYFEhlY9GpYIhdZ9mDe4XgI0wVZYY54gmESBGvp%2BrHPeBjhsFUKmaeIXZVAADhwkicMkXZgGQZBdggCMvAYGLFQgUGrEsI9cEIEhCPWLhZmHmf5gQM4sBiGvkdR/QnBMakHFiXc2%2BNCYf0ARwMw89AaL3fsTWY8wy7EFSM4SQQA}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%0Aint+main()%0A%7B%0A++std::any+a%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+a.has_value()+%3C%3C+!'%5Cn!'%3B%0A%0A++a+%3D+5%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+a.has_value()+%3C%3C!'+!'+%3C%3C+a.type().name()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0220}{https://wg21.link/P0220R1}
@@ -2294,7 +2403,7 @@
 	\end{exampleblock}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cstring_view%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::string+foo+%3D+%22Lorem+ipsum+dolor+sit+amet,+consectetur+adipiscing+elit.+Sed+non+risus.%22%3B%0A%0A++++std::string_view+bar(%26foo%5B0%5D,+11)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A%0A++++foo%5B0%5D+%3D+!'l!'%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+!'%5Cn!'%3B%0A%0A++++bar.remove_suffix(6)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++char+foo%5B3%5D+%3D+%7B!'B!',+!'a!',+!'r!'%7D%3B%0A++++std::string_view+bar(foo,+sizeof+foo)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cstring_view%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::string+foo+%3D+%22Lorem+ipsum+dolor+sit+amet,+consectetur+adipiscing+elit.+Sed+non+risus.%22%3B%0A%0A++++std::string_view+bar(%26foo%5B0%5D,+11)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A%0A++++foo%5B0%5D+%3D+!'l!'%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+!'%5Cn!'%3B%0A%0A++++bar.remove_suffix(6)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++char+foo%5B3%5D+%3D+%7B!'B!',+!'a!',+!'r!'%7D%3B%0A++++std::string_view+bar(foo,+sizeof+foo)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{N3921}{https://wg21.link/N3921}
@@ -2358,7 +2467,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:20,positionColumn:1,positionLineNumber:20,selectionStartColumn:1,selectionStartLineNumber:20,startColumn:1,startLineNumber:20),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cctime%3E%0A%0Aint+main()%0A%7B%0A++std::string+in+%3D+%22abcdefgh%22%3B%0A++std::string+out%3B%0A++std::mt19937+gen%7Bstatic_cast%3Cunsigned+long%3E(time(nullptr))%7D%3B%0A++std::sample(std::begin(in),+std::end(in),+std::back_inserter(out),+5,+gen)%3B%0A%0A++for(auto+it+:+out)%0A++%7B%0A++++std::cout+%3C%3C+it+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cctime%3E%0A%0Aint+main()%0A%7B%0A++std::string+in+%3D+%22abcdefgh%22%3B%0A++std::string+out%3B%0A++std::mt19937+gen%7Bstatic_cast%3Cunsigned+long%3E(time(nullptr))%7D%3B%0A++std::sample(std::begin(in),+std::end(in),+std::back_inserter(out),+5,+gen)%3B%0A%0A++for(auto+it+:+out)%0A++%7B%0A++++std::cout+%3C%3C+it+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0220}{https://wg21.link/P0220R1}
@@ -2378,7 +2487,7 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::gcd(12,+18)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::lcm(12,+18)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::gcd(12,+18)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::lcm(12,+18)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0295}{https://wg21.link/P0295R0}
@@ -2401,6 +2510,10 @@
 		bar.native();      // std::string
 		bar.c_str();       // const char*
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cfilesystem%3E%0A%0Aint+main()%0A%7B%0A++std::filesystem::path+foo(%22/home/foo%22)%3B%0A++std::filesystem::path+bar(foo+/+%22bar.txt%22)%3B%0A%0A++std::cout+%3C%3C+bar.filename()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar.extension()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar.native()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+bar.c_str()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0218}{https://wg21.link/P0218R1}
 \end{frame}
@@ -2464,6 +2577,10 @@
 		\end{itemize}
 	\end{block}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cfilesystem%3E%0A%23include+%3Cfstream%3E%0A%23include+%3Ciostream%3E%0A+%0Aint+main()%0A%7B%0A++std::filesystem::current_path(std::filesystem::temp_directory_path())%3B%0A++std::filesystem::create_directories(%22foo/bar%22)%3B%0A++std::ofstream(%22foo/baz.txt%22)%3B%0A++std::filesystem::create_symlink(%22bar%22,+%22foo/foo%22)%3B%0A%0A++for+(auto+const%26+dir_entry+:+std::filesystem::recursive_directory_iterator(%22foo%22))%0A++%7B%0A++++std::cout+%3C%3C+dir_entry+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A+%0A++std::filesystem::remove_all(%22foo%22)%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0218}{https://wg21.link/P0218R1}
 \end{frame}
 
@@ -2510,6 +2627,14 @@
 \note[item]{Mais rend cet algorithme parallélisable contrairement à \mintinline{cpp}|std::accumulate()|}
 	\end{block}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cexecution%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+42,+58%7D%3B%0A%0A++std::cout+%3C%3C+std::reduce(std::execution::seq,+std::begin(foo),+std::end(foo))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A+'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+42,+58%7D%3B%0A%0A++std::for_each_n(std::begin(foo),+std::size(foo),+%5B%5D+(int+i)+%7B+std::cout+%3C%3C+i+%3C%3C+%22%5Cn%22%3B+%7D)%3B%0A%7D%0A+'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0024}{https://wg21.link/P0024R2}
 \end{frame}
 
@@ -2526,6 +2651,10 @@
 		// bar : 8 13 55
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+42,+58%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::exclusive_scan(std::begin(foo),+std::end(foo),+std::back_inserter(bar),+8)%3B%0A%0A++for+(const+auto+it+:+bar)%0A++%7B%0A%09++std::cout+%3C%3C+it+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P0024}{https://wg21.link/P0024R2}
 \end{frame}
 
@@ -2539,11 +2668,15 @@
 		vector<int> foo {5, 42, 58};
 		vector<int> bar;
 
-		inclusive_scan(begin(foo), end(foo), back_inserter(bar), 8);
-		// bar : 13 55 113
+		inclusive_scan(begin(foo), end(foo), back_inserter(bar));
+		// bar : 5 47 105
 	\end{minted}
 
 \note[item]{\mintinline{cpp}|exclusive_scan| et \mintinline{cpp}|inclusive_scan| sont proche de \mintinline{cpp}|partial_sum| mais sans garanti d'ordre des \og additions\fg{} avec résultat indéterminé en cas d'opérations non associatives (idem \mintinline{cpp}|reduce()| / \mintinline{cpp}|accumulate()|)}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+42,+58%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::inclusive_scan(std::begin(foo),+std::end(foo),+std::back_inserter(bar))%3B%0A%0A++for+(const+auto+it+:+bar)%0A++%7B%0A%09++std::cout+%3C%3C+it+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0024}{https://wg21.link/P0024R2}
 \end{frame}
@@ -2561,10 +2694,6 @@
 			\item Transformation non appliquée à la graine
 		\end{itemize}
 	\end{block}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:18,positionColumn:2,positionLineNumber:18,selectionStartColumn:2,selectionStartLineNumber:18,startColumn:2,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+%7B5,+42,+58%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::exclusive_scan(std::begin(foo),+std::end(foo),+std::back_inserter(bar),+8)%3B%0A%0A++for+(const+auto+it+:+bar)%0A++%7B%0A%09++std::cout+%3C%3C+it+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A+'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
 
 	\addproposal{P0024}{https://wg21.link/P0024R2}
 \end{frame}
