@@ -53,6 +53,10 @@
 		}
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+foo(int+a,+int+b)%0A++%5B%5Bpre:+a+%3E+0+%26%26+b+%3E+0%5D%5D%0A++%5B%5Bpost+r:+r+%3E+10%5D%5D%0A%7B%0A++++return+a+/+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(120,+3)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(6,+3)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%23if+0%0A++std::cout+%3C%3C+foo(120,+0)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gcontracts-trunk,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(contracts)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{p2660}{https://wg21.link/p2660r0}
 	\addproposal{P2900}{https://wg21.link/P2900R1}
 	\addproposal{P2961}{https://wg21.link/P2961R1}
@@ -111,7 +115,7 @@
 		  0  => { cout << "Aucun"; }
 		  1  => { cout << "Un"; }
 		  __ => { cout << "Plusieurs"; }
-		}
+		};
 	\end{minted}
 
 	\begin{itemize}
@@ -126,8 +130,16 @@
 		  "zero" => { cout << "Aucun"; }
 		  "un"   => { cout << "Un"; }
 		  __     => { cout << "Plusieurs"; }
-		}
+		};
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+x+%3D+%22un%22%3B%0A%0A++inspect(x)%0A++%7B%0A++++%22zero%22+%3D%3E+%7B+std::cout+%3C%3C+%22Aucun%22%3B+%7D%0A++++%22un%22+++%3D%3E+%7B+std::cout+%3C%3C+%22Un%22%3B+%7D%0A++++__+++++%3D%3E+%7B+std::cout+%3C%3C+%22Plusieurs%22%3B+%7D%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(experimental+pattern+matching)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+x+%3D+1%3B%0A++inspect(x)%0A++%7B%0A++++0+++%3D%3E+%7B+std::cout+%3C%3C+%22Aucun%22%3B+%7D%0A++++1+++%3D%3E+%7B+std::cout+%3C%3C+%22Un%22%3B+%7D%0A++++__++%3D%3E+%7B+std::cout+%3C%3C+%22Plusieurs%22%3B+%7D%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(experimental+pattern+matching)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P1371}{https://wg21.link/p1371r3}
 \end{frame}
@@ -147,7 +159,7 @@
 		  [0, y] => { cout << "on y-axis"; }
 		  [x, 0] => { cout << "on x-axis"; }
 		  [x, y] => { cout << x << ',' << y; }
-		}
+		};
 	\end{minted}
 
 	\begin{itemize}
@@ -161,8 +173,12 @@
 		inspect(v) {
 		  <int> i   => { cout << "Entier " << i; }
 		  <float> f => { cout << "Reel " << f; }
-		}
+		};
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+int%3E+p%7B2,+0%7D%3B%0A++inspect(p)%0A++%7B%0A++++%5B0,+0%5D+%3D%3E+%7B+std::cout+%3C%3C+%22on+origin%22%3B+%7D%0A++++%5B0,+y%5D+%3D%3E+%7B+std::cout+%3C%3C+%22on+y-axis%22%3B+%7D%0A++++%5Bx,+0%5D+%3D%3E+%7B+std::cout+%3C%3C+%22on+x-axis%22%3B+%7D%0A++++%5Bx,+y%5D+%3D%3E+%7B+std::cout+%3C%3C+x+%3C%3C+!',!'+%3C%3C+y%3B+%7D%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(experimental+pattern+matching)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P1371}{https://wg21.link/p1371r3}
 \end{frame}
@@ -180,7 +196,7 @@
 		inspect(shape) {
 		  <Circle> [r]       => { cout << 3.14 * r * r; }
 		  <Rectangle> [w, h] => { cout << w * h; }
-		}
+		};
 	\end{minted}
 
 	\begin{itemize}
@@ -190,7 +206,7 @@
 	\begin{minted}{cpp}
 		inspect(p) {
 		  [x, y] if(x > y) => { cout << x << "superieur a" << y; }
-		}
+		};
 	\end{minted}
 
 	\begin{alertblock}{Attention}
@@ -314,6 +330,8 @@
 \begin{frame}[fragile]
 	\frametitle{TS -- Reflection}
 	\begin{minted}{cpp}
+		enum Color { red, green, blue };
+
 		template <typename E> requires is_enum_v<E>
 		constexpr string enum_to_string(E value) {
 		  template for(constexpr auto e : meta::members_of(^E)) {
@@ -324,7 +342,6 @@
 		  return "<unnamed>";
 		}
 
-		enum Color { red, green, blue };
 		enum_to_string(Color::red);  // red
 		enum_to_string(Color(42));   // <unnamed>
 	\end{minted}
