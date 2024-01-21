@@ -29,6 +29,8 @@
 	\addproposal{p2660}{https://wg21.link/p2660r0}
 	\addproposal{P2900}{https://wg21.link/P2900R1}
 	\addproposal{P2961}{https://wg21.link/P2961R1}
+	\addproposal{P2894}{https://wg21.link/p2894r2}
+	\addproposal{P2932}{https://wg21.link/p2932r3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -891,10 +893,12 @@
 			\item Tableau comme type de retour
 		\end{itemize}
 		\item Correction de dysfonctionnements de \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
+		\item Support des graphes et des algorithmes de manipulation des graphes
 	\end{itemize}
 
 	\addproposal{P2821}{https://wg21.link/p2821r4}
 	\addproposal{P2767}{https://wg21.link/p2767r1}
+	\addproposal{P1709}{https://wg21.link/p1709r5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -935,6 +939,16 @@
 	\addproposal{p2527}{https://wg21.link/p2527r2}
 	\addproposal{p2141}{https://wg21.link/p2141r1}
 	\addproposal{p2819}{https://wg21.link/p2819r1}
+\end{frame}
+
+\subsection*{std::optional}
+\begin{frame}[fragile]
+	\frametitle{\mintinline{cpp}|std::optional|}
+	\begin{itemize}
+		\item Support des références par \mintinline{cpp}|std::optional|
+	\end{itemize}
+
+	\addproposal{p2988}{https://wg21.link/p2988r1}
 \end{frame}
 
 \subsection*{Itérateurs}
@@ -982,10 +996,15 @@
 	\begin{itemize}
 		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|, \ldots
 		\item Ajout de \mintinline{cpp}|ranges::size_hint| permettant aux ranges de réserver de la mémoire
+		\item \mintinline{cpp}|views::maybe| contient 0 ou 1 élément d'un objet
+		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sousjacent
+		\item Construction d'une \mintinline{cpp}|sub-string_view| depuis \mintinline{cpp}|std::string|
 	\end{itemize}
 
 	\addproposal{p2846}{https://wg21.link/p2846r1}
 	\addproposal{p2769}{https://wg21.link/p2769r1}
+	\addproposal{p1255}{https://wg21.link/p1255r12}
+	\addproposal{p3044}{https://wg21.link/p3044r0}
 \end{frame}
 
 \subsection*{Traits}
