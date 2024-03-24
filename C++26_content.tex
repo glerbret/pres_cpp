@@ -11,6 +11,55 @@
 	\end{itemize}
 \end{frame}
 
+\subsection*{Dépréciation et suppression}
+\begin{frame}[fragile]
+	\frametitle{Suppression}
+	\begin{itemize}
+		\item Suppression d'éléments précédemment dépréciés
+		\begin{itemize}
+			\item Conversion arithmétique d'énumération
+			\item \mintinline{cpp}|strstream|
+			\item API d'accès atomique à \mintinline{cpp}|std::shared_ptr|
+			\item \mintinline{cpp}|wstring_convert|
+		\end{itemize}
+	\end{itemize}
+
+	\addproposal{P2864}{https://wg21.link/P2864R2}
+	\addproposal{P2867}{https://wg21.link/P2867R1}
+	\addproposal{P2869}{https://wg21.link/P2869R3}
+	\addproposal{P2872}{https://wg21.link/P2872R2}
+\end{frame}
+
+\subsection*{Comportement}
+\begin{frame}[fragile]
+	\frametitle{Erroneous Behavior}
+	\begin{itemize}
+		\item Ajout d'un nouveau type de comportement : \textit{Erroneous Behavior}
+		\item Indique un code incorrect, mais bien défini (dont \textit{Implementation Defined} et \textit{Unspecified Behavior})
+		\item Recommandation au compilateur de lever un warning
+		\item Compilateur peut rejeter le code
+		\item Applicable aux lectures de variables non initialisées
+	\end{itemize}
+
+	\addproposal{P2795}{https://wg21.link/P2795R5}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Boucles infinies}
+	\begin{itemize}
+		\item Les boucles infinies triviales ne sont plus des \textit{Undefined Behavior}
+		\item Alignement avec le comportement du C
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		// Comportement indefini en C++23
+		while (true)
+		{}
+	\end{minted}
+
+	\addproposal{P2809}{https://wg21.link/P2809R3}
+\end{frame}
+
 \subsection*{Syntaxe}
 \begin{frame}[fragile]
 	\frametitle{Vérification statique}
@@ -142,6 +191,35 @@
 	\addproposal{P2169}{https://wg21.link/P2169R4}
 \end{frame}
 
+\subsection*{Classes}
+\begin{frame}[fragile]
+	\frametitle{\mintinline{cpp}|delete|}
+	\begin{itemize}
+		\item Ajout d'un message à \mintinline{cpp}|=delete|
+		\item Permet d'indiquer la raison de la suppression
+		\item Et d'obtenir de meilleures erreurs de compilation
+	\end{itemize}
+
+	\addproposal{P2573}{https://wg21.link/P2573R2}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Variadic friends}
+	\begin{itemize}
+		\item Possibilité de déclaré \mintinline{cpp}|friend| un \textit{parameter pack}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		template <typename... Ts>
+		class Bar {
+		  friend Ts...;  // Invalide en C++23
+		  ...
+		};
+	\end{minted}
+
+	\addproposal{P2893}{https://wg21.link/P2893R3}
+\end{frame}
+
 \subsection*{Conteneurs}
 \begin{frame}[fragile]
 	\frametitle{Conteneurs}
@@ -154,11 +232,13 @@
 		\end{itemize}
 		\item Possibilité d'utiliser \mintinline{cpp}|std::weak_ptr| en tant que clé de conteneur associatif
 		\item \mintinline{cpp}|std::submdspan()| retourne une vue sur un sous-ensemble d'un \mintinline{cpp}|std::mdspan|
+		\item Nouveaux layouts pour \mintinline{cpp}|std::mdspan| : \mintinline{cpp}|layout_left_padded| et \mintinline{cpp}|layout_right_padded|
 	\end{itemize}
 
 	\addproposal{p0843}{https://wg21.link/p0843r9}
 	\addproposal{P1901}{https://wg21.link/P1901R2}
 	\addproposal{P2630}{https://wg21.link/P2630R4}
+	\addproposal{P2642}{https://wg21.link/P2642R5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -166,10 +246,12 @@
 	\begin{itemize}
 		\item Support de \mintinline{cpp}|std::string_view| par \mintinline{cpp}|std::stringstream|
 		\item Interfaçage de \mintinline{cpp}|std::bitset| avec \mintinline{cpp}|std::string_view|
+		\item Concaténation de \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view|
 	\end{itemize}
 
 	\addproposal{P2495}{https://wg21.link/P2495R3}
 	\addproposal{P2697}{https://wg21.link/P2697R1}
+	\addproposal{P2591}{https://wg21.link/P2591R4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -181,6 +263,15 @@
 	\end{itemize}
 
 	\addproposal{P2752}{https://wg21.link/P2752R2}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline{cpp}|reference_wrapper|}
+	\begin{itemize}
+		\item Comparaison de \mintinline{cpp}|std::reference_wrapper|
+	\end{itemize}
+
+	\addproposal{P2944}{https://wg21.link/P2944R2}
 \end{frame}
 
 \subsection*{Algorithme}
@@ -210,6 +301,23 @@
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{Algorithmes}
+	\begin{itemize}
+		\item Algorithmes appelables avec des \textit{list-initialization}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		struct Foo { int x; int y; };
+		vector<Foo> v{ ... };
+
+		find(begin(v), end(v), {3, 4}); // Foo{3, 4} en C++23
+	\end{minted}
+
+	\addproposal{P2248}{https://wg21.link/P2248R8}
+\end{frame}
+
+
+\begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::visit()|}
 	\begin{itemize}
 		\item Versions membres de \mintinline{cpp}|std::visit()| et \mintinline{cpp}|std::visit_format_arg()|
@@ -217,6 +325,40 @@
 
 	\addproposal{P2637}{https://wg21.link/P2637R3}
 \end{frame}
+
+\subsection*{Ranges}
+\begin{frame}[fragile]
+	\frametitle{Ranges}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::views::concat| crée une vue concaténant plusieurs ranges
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> v1{1,2,3}, v2{4,5}, v3{};
+		array  a{6,7,8};
+
+		// 1, 2, 3, 4, 5, 6, 7, 8
+		views::concat(v1, v2, v3, a);
+	\end{minted}
+
+	\begin{itemize}
+		\item Api \og{}vector\fg{} pour la génération de nombres aléatoires
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		array<int, 10> a;
+		mt19937 g(777);
+
+		ranges::generate_random(a, g);
+	\end{minted}
+
+	\addproposal{P2542}{https://wg21.link/P2542R7}
+	\addproposal{P1068}{https://wg21.link/P1068R10}
+\end{frame}
+
+
+
+
 
 \subsection*{Ratio}
 \begin{frame}[fragile]
@@ -303,11 +445,30 @@
 	\addproposal{P0792}{https://wg21.link/P0792R14}
 \end{frame}
 
+\subsection*{Attributs}
+\begin{frame}[fragile]
+	\frametitle{Attributs}
+	\begin{itemize}
+		\item Attributs sur les structured binding
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		auto [a, b [[attribute]], c] = foo();
+	\end{minted}
+
+	\addproposal{P0609}{https://wg21.link/P0609R3}
+\end{frame}
+
 \subsection*{Flux}
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
 		\item Possibilité de fournir une chaîne de format au \textit{runtime}
+		\item Amélioration du support de \mintinline{cpp}|std::filesystem::path|
+		\begin{itemize}
+			\item Présence de caractères d'échappement (p.ex. \mintinline[escapeinside=||]{cpp}{|\textbackslash|n})
+			\item Support de caractère UTF-8
+		\end{itemize}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -329,6 +490,18 @@
 		// Erreur run-time
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++int+i+%3D+0%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%23018X%7D%22,+reinterpret_cast%3Cuintptr_t%3E(%26i))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\addproposal{P2918}{https://wg21.link/P2918R2}
+	\addproposal{P2845}{https://wg21.link/P2845R6}
+	\addproposal{P2587}{https://wg21.link/P2587R3}
+	\addproposal{P2757}{https://wg21.link/P2757R3}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
 		\item Formatage des pointeurs
 	\end{itemize}
@@ -339,17 +512,24 @@
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++int+i+%3D+0%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%23018X%7D%22,+reinterpret_cast%3Cuintptr_t%3E(%26i))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+str+%3D+%22%7B%7D%22%3B%0A++std::cout+%3C%3C+std::format(std::runtime_format(str),+42)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2918}{https://wg21.link/P2918R2}
-	\addproposal{P2587}{https://wg21.link/P2587R3}
-	\addproposal{P2757}{https://wg21.link/P2757R3}
 	\addproposal{P2510}{https://wg21.link/P2510R3}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::print|}
+	\begin{itemize}
+		\item Impression de ligne vide
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		print();
+		// print("") en C++23
+	\end{minted}
+
+	\addproposal{P3142}{https://wg21.link/P3142R0}
 \end{frame}
 
 \subsection*{Durées et temps}
@@ -373,7 +553,26 @@
 	\addproposal{P1759}{https://wg21.link/P1759R6}
 \end{frame}
 
+\subsection*{Concurrence}
+\begin{frame}[fragile]
+	\frametitle{Concurrence}
+	\begin{itemize}
+		\item Version \mintinline{cpp}|atomic| de minimum et maximum
+	\end{itemize}
+
+	\addproposal{P0493}{https://wg21.link/P0493R5}
+\end{frame}
+
 \subsection*{Compilation et implémentation}
+\begin{frame}[fragile]
+	\frametitle{Modules}
+	\begin{itemize}
+		\item Suppression de l'expansion de macros dans les déclarations de module
+	\end{itemize}
+
+	\addproposal{P3034}{https://wg21.link/P3034R1}
+\end{frame}
+
 \begin{frame}[fragile]
 	\frametitle{Debug}
 	\begin{itemize}

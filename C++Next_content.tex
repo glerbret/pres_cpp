@@ -365,15 +365,11 @@
 	\begin{itemize}
 		\item Suppression d'éléments précédemment dépréciés
 		\begin{itemize}
-			\item Conversion arithmétique d'énumération
 			\item Comparaison de tableau C (se fait sur les adresses)
 			\item \mintinline{cpp}|volatile|
-			\item \mintinline{cpp}|std::strstream|
 			\item \mintinline{cpp}|std::allocator|
-			\item API d'accès atomique à \mintinline{cpp}|std::shared_ptr|
 			\item \mintinline{cpp}|std::basic_string::reserve()| sans argument
 			\item \textit{Unicode Conversion Facets}
-			\item \mintinline{cpp}|wstring_convert|
 			\item \textit{Locale Category Facets for Unicode}
 		\end{itemize}
 	\end{itemize}
@@ -382,18 +378,9 @@
 \begin{frame}[fragile]
 	\frametitle{Erroneous behavior}
 	\begin{itemize}
-		\item Ajout d'un nouveau type de comportement : \textit{erroneous behavior}
-		\item Indique un code incorrect, mais bien défini (dont \textit{implementation-defined} et \textit{unspecified behavior})
-		\item Recommandation au compilateur de lever un warning
-		\item Compilateur peut rejeter le code
-		\item Applicable
-		\begin{itemize}
-		 	\item Aux lectures de variables non initialisées
-		 	\item À l'absence de retour des affectations
-		\end{itemize}
+		\item Applicable à l'absence de retour des affectations
 	\end{itemize}
 
-	\addproposal{p2795}{https://wg21.link/p2795r3}
 	\addproposal{p2973}{https://wg21.link/p2973r0}
 \end{frame}
 
@@ -807,31 +794,6 @@
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 \end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Classes}
-	\begin{itemize}
-		\item Possibilité de déclaré \mintinline{cpp}|friend| un \textit{parameter pack}
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		template <typename T>
-		class Foo {
-		  friend T;      // OK en C++23 et avant
-		  ...
-		};
-
-		template <typename... Ts>
-		class Bar {
-		  friend Ts...;  // Invalide en C++23
-		  ...
-		};
-	\end{minted}
-
-	\addproposal{P2763}{https://wg21.link/p2763r1}
-	\addproposal{P2895}{https://wg21.link/p2895r0}
-	\addproposal{p2966}{https://wg21.link/p2966r1}
-\end{frame}
-
 \subsection*{Énumération}
 \begin{frame}[fragile]
 	\frametitle{Énumération}
@@ -906,12 +868,9 @@
 	\begin{itemize}
 		\item Construction de \mintinline{cpp}|std::string_view| depuis des chaînes implicites
 		\item Prise en charge de \mintinline{cpp}|std::string_view| par \mintinline{cpp}|std::from_chars|
-		\item Concaténation de \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view|
 		\item Modification du constructeur de \mintinline{cpp}|std::string| depuis un caractère pour interdire les autres numériques (entiers ou flottants)
 		\item Voire dépréciation de la construction d'un \mintinline{cpp}|std::string| depuis un caractère
 	\end{itemize}
-
-	\addproposal{P2591}{https://wg21.link/P2591R4}
 \end{frame}
 
 \subsection*{Tuples}
@@ -1193,11 +1152,6 @@
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
-		\item Amélioration du support de \mintinline{cpp}|std::filesystem::path|
-		\begin{itemize}
-			\item Présence de caractères d'échappement (p.ex. \mintinline[escapeinside=||]{cpp}{|\textbackslash|n})
-			\item Support de caractère UTF-8
-		\end{itemize}
 		\item Amélioration du support de \mintinline{cpp}|std::chrono::time_point|
 		\item Ajout de formateurs
 		\begin{itemize}
@@ -1209,7 +1163,6 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{p2845}{https://wg21.link/p2845r4}
 	\addproposal{p2945}{https://wg21.link/p2945r0}
 	\addproposal{p3015}{https://wg21.link/p3015r0}
 	\addproposal{p2930}{https://wg21.link/p2930r0}
@@ -1343,7 +1296,6 @@
 \begin{frame}[fragile]
 	\frametitle{Concurrence}
 	\begin{itemize}
-		\item Version \mintinline{cpp}|atomic| de minimum et maximum
 		\item Obtention de l'adresse de l'objet référencé par \mintinline{cpp}|std::atomic_ref| via \mintinline{cpp}|data()|
 		\item Invocation concurrente
 		\item \mintinline{cpp}|std::volatile_load<T>| et \mintinline{cpp}|std::volatile_store<T>|
@@ -1353,7 +1305,6 @@
 		\item Contrôle de la priorité et de la taille de pile des threads
 	\end{itemize}
 
-	\addproposal{p0493}{https://wg21.link/p0493r4}
 	\addproposal{p2835}{https://wg21.link/p2835r0}
 	\addproposal{p2689}{https://wg21.link/p2689r2}
 	\addproposal{p0876}{https://wg21.link/p0876r14}
