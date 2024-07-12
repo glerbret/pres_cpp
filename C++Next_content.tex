@@ -17,6 +17,7 @@
 	\frametitle{TS -- Contracts}
 	\begin{itemize}
 		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
+		\item Probablement intégré à C++26
 		\item Support de la programmation par contrat
 		\item Remplace la vérification via \mintinline{cpp}|assert|
 		\item Et la documentation via commentaires \mintinline[escapeinside=||]{cpp}{|@|pre}, \mintinline[escapeinside=||]{cpp}{|@|post} et \mintinline[escapeinside=||]{cpp}{|@|invariant}
@@ -27,9 +28,10 @@
 	\end{itemize}
 
 	\addproposal{p2660}{https://wg21.link/p2660r0}
-	\addproposal{P2900}{https://wg21.link/P2900R1}
+	\addproposal{P2900}{https://wg21.link/P2900R6}
 	\addproposal{P2961}{https://wg21.link/P2961R1}
 	\addproposal{P2894}{https://wg21.link/p2894r2}
+	\addproposal{P2932}{https://wg21.link/p2932r3}
 	\addproposal{P2932}{https://wg21.link/p2932r3}
 \end{frame}
 
@@ -308,6 +310,7 @@
 \begin{frame}[fragile]
 	\frametitle{TS -- Reflection}
 	\begin{itemize}
+		\item Probablement intégré à C++26 (design validé, wording en cours de revue)
 		\item Réflexion statique uniquement
 		\item Introspection
 		\item Méta-programmation et code \textit{compile-time}
@@ -327,6 +330,7 @@
 
 	\addproposal{N4856}{https://wg21.link/n4856}
 	\addproposal{P1240}{https://wg21.link/p1240r2}
+	\addproposal{p2996}{https://wg21.link/p2996r3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -357,6 +361,8 @@
 	\frametitle{Dépréciation}
 	\begin{itemize}
 		\item Dépréciation des modes d'arrondi (\mintinline{cpp}|fesetround()|)
+		\item Dépréciation des types de caractère signés dans \mintinline{cpp}|iostream|
+		\item Dépréciation de la notion \mintinline{cpp}|trivial|
 	\end{itemize}
 \end{frame}
 
@@ -379,9 +385,11 @@
 	\frametitle{Erroneous behavior}
 	\begin{itemize}
 		\item Applicable à l'absence de retour des affectations
+		\item \mintinline{cpp}|std::erroneous()| provoque un comportement erroné
 	\end{itemize}
 
 	\addproposal{p2973}{https://wg21.link/p2973r0}
+	\addproposal{p3232}{https://wg21.link/p3232r0}
 \end{frame}
 
 \subsection*{Syntaxe}
@@ -404,7 +412,10 @@
 			\item \mintinline{cpp}|assert|
 			\item \mintinline{cpp}|offsetof|
 		\end{itemize}
+		\item Réservation des identifiants commençant par \mintinline[escapeinside=||]{cpp}{|@|} aux annotations
 	\end{itemize}
+
+	\addproposal{p3254}{https://wg21.link/p3254r0}
 \end{frame}
 
 \subsection*{Encodage}
@@ -427,6 +438,7 @@
 		\item Mécanismes \textit{compile-time} vérifiant que deux types ont la même représentation mémoire
 		\item Type \og{}\textit{fixed point decimal}\fg{}
 		\item Entiers larges \mintinline{cpp}|wide_integer<128, unsigned>|
+		\item \mintinline{cpp}|std::int_least128_t|
 		\item Nombres rationnels
 		\item Possibilité de définir des objets \mintinline{cpp}|constexpr|
 		\item \textit{Zero-initialisation} des objets \textit{automatic storage duration}
@@ -439,6 +451,16 @@
 	\addproposal{P3003}{https://wg21.link/P3003R0}
 	\addproposal{P3018}{https://wg21.link/P3018R0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{p3140}{https://wg21.link/p3140r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Types}
+	\begin{itemize}
+		\item Rendre obligatoire le support de \mintinline{cpp}|intptr_t| et \mintinline{cpp}|uintptr_t|
+	\end{itemize}
+
+	\addproposal{p3248}{https://wg21.link/p3248r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -833,7 +855,11 @@
 \note[item]{Intrusif car les mécanismes nécessaires au conteneur (p.ex. les pointeurs de chaînage des listes) sont dans l'objet que gère le conteneur, généralement via héritage}
 
 			\item Conteneurs \mintinline{cpp}|inplace| avec un buffer de taille fixe
+			\item Vecteurs optimisés pour les petites tailles
 		\end{itemize}
+		\item Contrôle de la politique de croissance des vecteurs
+		\item Ajout de \mintinline{cpp}|push_front()| à \mintinline{cpp}|std::vector|
+		\item Allocateur pour \mintinline{cpp}|std::inplace_vector|
 	\end{itemize}
 
 	\addproposal{P1684}{https://wg21.link/p1684r5}
@@ -841,6 +867,8 @@
 	\addproposal{P0447}{https://wg21.link/p0447r23}
 	\addproposal{P3001}{https://wg21.link/p3001r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{p3147}{https://wg21.link/p3147r0}
+	\addproposal{p3160}{https://wg21.link/p3160r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -855,12 +883,31 @@
 			\item Tableau comme type de retour
 		\end{itemize}
 		\item Correction de dysfonctionnements de \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
+		\item Ajout de \mintinline{cpp}|get()|, \mintinline{cpp}|get_ref()| et \mintinline{cpp}|get_as()| à \mintinline{cpp}|std::map| et \mintinline{cpp}|std::unordered_map| : récupération de la valeur associée à une clé
 		\item Support des graphes et des algorithmes de manipulation des graphes
+		\item Initialisation de tableau via une expansion de pattern
 	\end{itemize}
+
+	\begin{minted}{cpp}
+		// Initialisation de tous les elements a 5
+		int a[42] = { 5 ... };
+	\end{minted}
 
 	\addproposal{P2821}{https://wg21.link/p2821r4}
 	\addproposal{P2767}{https://wg21.link/p2767r1}
 	\addproposal{P1709}{https://wg21.link/p1709r5}
+	\addproposal{P3110}{https://wg21.link/p3110r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conteneurs}
+	\begin{itemize}
+		\item Support des \textit{node-handle} par \mintinline{cpp}|std::list| et \mintinline{cpp}|std::forward_list|
+		\item Ajout de \mintinline{cpp}|pop_value()| à \mintinline{cpp}|std::stack|, \mintinline{cpp}|std::queue| et \mintinline{cpp}|std::priority_queue|
+	\end{itemize}
+
+	\addproposal{p3049}{https://wg21.link/p3049r0}
+	\addproposal{p3182}{https://wg21.link/p3182r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -870,7 +917,11 @@
 		\item Prise en charge de \mintinline{cpp}|std::string_view| par \mintinline{cpp}|std::from_chars|
 		\item Modification du constructeur de \mintinline{cpp}|std::string| depuis un caractère pour interdire les autres numériques (entiers ou flottants)
 		\item Voire dépréciation de la construction d'un \mintinline{cpp}|std::string| depuis un caractère
+		\item \mintinline{cpp}|fixed_string| : chaîne de caractères utilisable au compile-time
+		\item Ajout de \mintinline{cpp}|first()| et de \mintinline{cpp}|last()| à \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view| pour récupérer les $n$ premiers ou derniers caractères
 	\end{itemize}
+
+	\addproposal{p3283}{https://wg21.link/p3283r0}
 \end{frame}
 
 \subsection*{Tuples}
@@ -930,11 +981,17 @@
 		\item Gestion des UUID
 		\item Fonctions statistiques (moyenne, médiane, variance, \ldots{})
 		\item Améliorations du générateur aléatoire
+		\item Manipulation de bits : \mintinline{cpp}|bit_reverse|, \mintinline{cpp}|bit_repeat|, \mintinline{cpp}|bit_compress|, \mintinline{cpp}|bit_expand|, \mintinline{cpp}|next_bit_permutation| et \mintinline{cpp}|prev_bit_permutation|
+		\item Fonctions membres \mintinline{cpp}|one()|, \mintinline{cpp}|countl_zero()|, \mintinline{cpp}|countl_one()|, \mintinline{cpp}|countr_zero()|, \mintinline{cpp}|countr_one()|, \mintinline{cpp}|rotl()|, \mintinline{cpp}|rotr()| et \mintinline{cpp}|reverse()| à \mintinline{cpp}|std::bitset|
+		\item \mintinline{cpp}|std::first_factor| retourne le plus petit facteur premier d'un nombre
 	\end{itemize}
 
 	\addproposal{P2848}{https://wg21.link/P2848R0}
 	\addproposal{p1708}{https://wg21.link/p1708r7}
 	\addproposal{p2681}{https://wg21.link/p2681r1}
+	\addproposal{p3104}{https://wg21.link/p3104r0}
+	\addproposal{p3103}{https://wg21.link/p3103r0}
+	\addproposal{p3133}{https://wg21.link/p3133r0}
 \end{frame}
 
 \subsection*{Ranges}
@@ -953,7 +1010,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|, \ldots
+		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|,  \mintinline{cpp}|cache_last|, \ldots
 		\item Ajout de \mintinline{cpp}|ranges::size_hint| permettant aux ranges de réserver de la mémoire
 		\item \mintinline{cpp}|views::maybe| contient 0 ou 1 élément d'un objet
 		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sousjacent
@@ -964,6 +1021,17 @@
 	\addproposal{p2769}{https://wg21.link/p2769r1}
 	\addproposal{p1255}{https://wg21.link/p1255r12}
 	\addproposal{p3044}{https://wg21.link/p3044r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ranges}
+	\begin{itemize}
+		\item \mintinline{cpp}|views::upto| : séquence d'entiers de 0 à $n - 1$
+		\item \mintinline{cpp}|views::to_input| convertit un range en \textit{input-only} range
+	\end{itemize}
+
+	\addproposal{p3060}{https://wg21.link/p3060r1}
+	\addproposal{p3137}{https://wg21.link/p3137r0}
 \end{frame}
 
 \subsection*{Traits}
@@ -1006,6 +1074,8 @@
 \begin{frame}[fragile]
 	\frametitle{Attributs}
 	\begin{itemize}
+		\item Attributs sur les expressions
+		\item Attributs sur les contrats
 		\item Réservation des attributs sans namespace et avec le namespace \mintinline{cpp}|std|
 		\item Possibilité d'implémenter des attributs utilisateurs
 		\item Nouveaux attributs
@@ -1160,12 +1230,14 @@
 			\item \textit{Smart pointers}
 			\item \mintinline{cpp}|std::optional|, \mintinline{cpp}|std::variant|, \mintinline{cpp}|std::any| et \mintinline{cpp}|std::expected|
 			\item \mintinline{cpp}|std::mdspan|, \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
+			\item \mintinline{cpp}|charN_t|
 		\end{itemize}
 	\end{itemize}
 
 	\addproposal{p2945}{https://wg21.link/p2945r0}
 	\addproposal{p3015}{https://wg21.link/p3015r0}
 	\addproposal{p2930}{https://wg21.link/p2930r0}
+	\addproposal{p3258}{https://wg21.link/p3258r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1248,9 +1320,11 @@
 	\begin{itemize}
 		\item Suppression de \mintinline{cpp}|NULL| et interdiction de \mintinline{cpp}|0| comme pointeur nul
 		\item Surcharge de \mintinline{cpp}|new| retournant la taille réellement allouée
+		\item \mintinline{cpp}|pointer_in_range| vérifie si un pointeur est dans une plage
 	\end{itemize}
 
 	\addproposal{p0901}{https://wg21.link/p0901r11}
+	\addproposal{p3234}{https://wg21.link/p3234r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1260,9 +1334,13 @@
 		\item Création de pointeurs intelligents avec une valeur par défaut
 		\item Comparaison entre pointeurs intelligents et pointeurs nus
 		\item Retour covariant avec \mintinline{cpp}|std::unique_ptr<T>| (comme \mintinline{cpp}|T*|)
+		\item Amélioration des \textit{hazard pointers}
+		\item Conversion de \mintinline{cpp}|std::unique_ptr| : \mintinline{cpp}|const_pointer_cast| et \mintinline{cpp}|dynamic_pointer_cast|
 	\end{itemize}
 
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{p3135}{https://wg21.link/p3135r0}
+	\addproposal{p3139}{https://wg21.link/p3139r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1343,6 +1421,7 @@
 \begin{frame}[fragile]
 	\frametitle{Module}
 	\begin{itemize}
+		\item Exigences d'ABI sur les modules
 		\item Communication d'informations aux outils de \textit{build} par les modules
 		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
 	\end{itemize}

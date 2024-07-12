@@ -188,7 +188,20 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cclimits%3E%0A%0Aint+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+1%0A++auto+bar+%3D+foo()%3B%0A%23else%0A++auto+_+%3D+foo()%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
+	\begin{itemize}
+		\item \mintinline{cpp}|std::ignore| pour ignorer un retour de fonction
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		std::ignore = f();
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:12,positionColumn:6,positionLineNumber:12,selectionStartColumn:6,selectionStartLineNumber:12,startColumn:6,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cclimits%3E%0A%0A%5B%5Bnodiscard%5D%5Dint+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+1%0A++foo()%3B%0A%23else%0A++std::ignore+%3D+foo()%3B%0A%23endif%0A%7D%0A'),l:'5',n:'1',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P2169}{https://wg21.link/P2169R4}
+	\addproposal{p2968}{https://wg21.link/p2968r2}
 \end{frame}
 
 \subsection*{Classes}
@@ -235,7 +248,7 @@
 		\item Nouveaux layouts pour \mintinline{cpp}|std::mdspan| : \mintinline{cpp}|layout_left_padded| et \mintinline{cpp}|layout_right_padded|
 	\end{itemize}
 
-	\addproposal{p0843}{https://wg21.link/p0843r9}
+	\addproposal{p0843}{https://wg21.link/p0843r11}
 	\addproposal{P1901}{https://wg21.link/P1901R2}
 	\addproposal{P2630}{https://wg21.link/P2630R4}
 	\addproposal{P2642}{https://wg21.link/P2642R5}
@@ -355,10 +368,6 @@
 	\addproposal{P2542}{https://wg21.link/P2542R7}
 	\addproposal{P1068}{https://wg21.link/P1068R10}
 \end{frame}
-
-
-
-
 
 \subsection*{Ratio}
 \begin{frame}[fragile]
@@ -529,7 +538,12 @@
 		// print("") en C++23
 	\end{minted}
 
+	\begin{itemize}
+		\item Optimisation de \mintinline{cpp}|std::print()|
+	\end{itemize}
+
 	\addproposal{P3142}{https://wg21.link/P3142R0}
+	\addproposal{p3235}{https://wg21.link/p3235r0}
 \end{frame}
 
 \subsection*{Durées et temps}
@@ -558,9 +572,15 @@
 	\frametitle{Concurrence}
 	\begin{itemize}
 		\item Version \mintinline{cpp}|atomic| de minimum et maximum
+		\item \mintinline{cpp}|std::execution| : gestion d'exécution asynchrone
+		\begin{itemize}
+			\item Basé sur des \textit{schedulers}, \textit{senders} et \textit{receivers}
+			\item Et un ensemble d'algorithmes asynchrones
+		\end{itemize}
 	\end{itemize}
 
 	\addproposal{P0493}{https://wg21.link/P0493R5}
+	\addproposal{p2300}{https://wg21.link/p2300r9}
 \end{frame}
 
 \subsection*{Compilation et implémentation}
