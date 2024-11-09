@@ -430,6 +430,37 @@
 	\end{itemize}
 \end{frame}
 
+\subsection*{Ligne de commande}
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::arguments|}
+	\begin{itemize}
+		\item Manipulation des arguments du programme
+		\item Arguments accessibles dans tous le programme, pas uniquement \mintinline{cpp}|main()|
+		\item Gestion de l'encodage
+	\end{itemize}
+
+	\addproposal{p3474}{https://wg21.link/p3474r0}
+\end{frame}
+
+\subsection*{Littéraux}
+\begin{frame}[fragile]
+	\frametitle{Littéraux}
+	\begin{itemize}
+		\item \textit{f-literal}
+		\begin{itemize}
+			\item Chaînes littérales contenant des \textit{placeholders}
+			\item Similaires au \textit{f-string} Python
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int a = 5;
+		auto b = f"Value : {a}";
+	\end{minted}
+
+	\addproposal{p3412}{https://wg21.link/p3412r0}
+\end{frame}
+
 \subsection*{Types}
 \begin{frame}[fragile]
 	\frametitle{Types}
@@ -458,9 +489,15 @@
 	\frametitle{Types}
 	\begin{itemize}
 		\item Rendre obligatoire le support de \mintinline{cpp}|intptr_t| et \mintinline{cpp}|uintptr_t|
+		\item Types flottants compatible ISO/IEC 60559:2020 (résultats davantage reproductibles)
+		\item \mintinline{cpp}|CHAR_BIT| impérativement égal à 8 (\textit{\fg{}There are exactly 8 bits in a byte\fg{}})
+
+\note[item]{Auparavant obligatoirement supérieur ou égal à 8, contraint par les plages garanties de \mintinline{cpp}|signed char| et \mintinline{cpp}|unsigned char|, mais pas d'autres contraintes (même pas multiple de 8)}
 	\end{itemize}
 
 	\addproposal{p3248}{https://wg21.link/p3248r0}
+	\addproposal{p3375}{https://wg21.link/p3375r0}
+	\addproposal{p3477}{https://wg21.link/p3477r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -584,6 +621,27 @@
 
 	\addproposal{P2968}{https://wg21.link/P2968R0}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|__COUNTER__|}
+	\begin{itemize}
+		\item Normalisation de la macro \mintinline{cpp}|__COUNTER__|
+		\item Incrémentée à chaque invocation
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		cout << __COUNTER__ << "\n";	// 0
+		cout << __COUNTER__ << "\n";	// 1
+		cout << __COUNTER__ << "\n";	// 2
+	\end{minted}
+
+	\addproposal{P3384}{https://wg21.link/p3384r0}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+__COUNTER__+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+__COUNTER__+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+__COUNTER__+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
 
 \subsection*{Contrôle de flux}
 \begin{frame}[fragile]
@@ -816,6 +874,15 @@
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{itemize}
+		\item Destructeurs \mintinline{cpp}|consteval|
+	\end{itemize}
+
+	\addproposal{p3421}{https://wg21.link/p3421r0}
+\end{frame}
+
 \subsection*{Énumération}
 \begin{frame}[fragile]
 	\frametitle{Énumération}
@@ -904,10 +971,12 @@
 	\begin{itemize}
 		\item Support des \textit{node-handle} par \mintinline{cpp}|std::list| et \mintinline{cpp}|std::forward_list|
 		\item Ajout de \mintinline{cpp}|pop_value()| à \mintinline{cpp}|std::stack|, \mintinline{cpp}|std::queue| et \mintinline{cpp}|std::priority_queue|
+		\item Fonction libre d'accès \og{}range-checked\fg{} à un élément \mintinline{cpp}|std::at()|
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049r0}
 	\addproposal{p3182}{https://wg21.link/p3182r0}
+	\addproposal{p3404}{https://wg21.link/p3404r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -953,7 +1022,7 @@
 
 \subsection*{std::optional}
 \begin{frame}[fragile]
-	\frametitle{\mintinline{cpp}|std::optional|}
+	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item Support des références par \mintinline{cpp}|std::optional|
 	\end{itemize}
@@ -961,6 +1030,15 @@
 	\addproposal{p2988}{https://wg21.link/p2988r1}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::optional| \& \mintinline[style=white]{cpp}|std::optional|}
+	\begin{itemize}
+		\item \mintinline{cpp}|value_or_construct()| : construction paresseuse de l'alternative
+		\item \mintinline{cpp}|value_or_else()| : appel paresseux d'une fonction en l'absence de valeur
+	\end{itemize}
+
+	\addproposal{p3413}{https://wg21.link/p3413r0}
+\end{frame}
 \subsection*{Itérateurs}
 \begin{frame}[fragile]
 	\frametitle{Itérateurs}
@@ -1028,10 +1106,14 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|views::upto| : séquence d'entiers de 0 à $n - 1$
 		\item \mintinline{cpp}|views::to_input| convertit un range en \textit{input-only} range
+		\item \mintinline{cpp}|views::scan| : version paresseuse de \mintinline{cpp}|std::inclusive_scan|
+		\item \mintinline{cpp}|std::ranges::any_view| : vue \og{}type-erasure\fg{}
 	\end{itemize}
 
 	\addproposal{p3060}{https://wg21.link/p3060r1}
 	\addproposal{p3137}{https://wg21.link/p3137r0}
+	\addproposal{p3351}{https://wg21.link/p3351r1}
+	\addproposal{p3411}{https://wg21.link/p3411r0}
 \end{frame}
 
 \subsection*{Traits}
@@ -1223,6 +1305,11 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::format|}
 	\begin{itemize}
 		\item Amélioration du support de \mintinline{cpp}|std::chrono::time_point|
+		\begin{itemize}
+			\item \mintinline{cpp}|%s| : nombre de ticks depuis l'epoch
+			\item Ajout de précision aux secondes pour le formatage des fractions de secondes
+			\item \mintinline{cpp}|%f| : fractions de secondes
+		\end{itemize}
 		\item Ajout de formateurs
 		\begin{itemize}
 			\item Valeurs atomiques
@@ -1232,12 +1319,27 @@
 			\item \mintinline{cpp}|std::mdspan|, \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 			\item \mintinline{cpp}|charN_t|
 		\end{itemize}
+		\item \mintinline{cpp}|std::format_as()| : formateurs personnalisés basé sur un autre type (p.ex. formatage d'enum comme entiers)
 	\end{itemize}
 
 	\addproposal{p2945}{https://wg21.link/p2945r0}
 	\addproposal{p3015}{https://wg21.link/p3015r0}
 	\addproposal{p2930}{https://wg21.link/p2930r0}
 	\addproposal{p3258}{https://wg21.link/p3258r0}
+	\addproposal{p3070}{https://wg21.link/p3070r1}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::dump|}
+	\begin{itemize}
+		\item Imprime les paramètres de la fonction
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		std::dump(arg1, arg2, ..., argn);
+		// Equivelant a
+		std::println("{} {} ... {}", arg1, arg2, ..., argn);
+	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1263,6 +1365,17 @@
 		chrono::seconds time;
 		scan("start = 10:30", "{0} = {1:%H:%M}", key, time);
 	\end{minted}
+\end{frame}
+
+\subsection*{Durées et temps}
+\begin{frame}[fragile]
+	\frametitle{Durées et temps}
+	\begin{itemize}
+		\item Ajout d'une fonction membre \mintinline{cpp}|resolution()| aux horloges
+		\item Ajout d'horloges \og{}coarses\fg{} moins précises mais plus rapides
+	\end{itemize}
+
+	\addproposal{p3382}{https://wg21.link/p3382r0}
 \end{frame}
 
 \subsection*{Templates}
