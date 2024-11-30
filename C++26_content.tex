@@ -30,6 +30,16 @@
 	\addproposal{P2872}{https://wg21.link/P2872R2}
 \end{frame}
 
+\subsection*{Compatibilité C}
+\begin{frame}[fragile]
+	\frametitle{En-têtes C23}
+	\begin{itemize}
+		\item Support des en-têtes C23 \mintinline{cpp}|<stdbit.h>| et \mintinline{cpp}|<stdckdint.h>|
+	\end{itemize}
+
+	\addproposal{p3370}{https://wg21.link/p3370r1}
+\end{frame}
+
 \subsection*{Comportement}
 \begin{frame}[fragile]
 	\frametitle{Erroneous Behavior}
@@ -379,7 +389,7 @@
 	\addproposal{P2734}{https://wg21.link/P2734R0}
 \end{frame}
 
-\subsection*{constexpr}
+\subsection*{Évaluation \textit{compile-time}}
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|constexpr|}
 	\begin{itemize}
@@ -389,9 +399,25 @@
 			\item \mintinline{cpp}|std::format()| au compile-time
 			\item \mintinline{cpp}|std::function_ref|, \mintinline{cpp}|std::function| et \mintinline{cpp}|std::any| \mintinline{cpp}|constexpr|
 		\end{itemize}
+		\item \textit{Structured bindings} \mintinline{cpp}|constexpr|
+		\item \mintinline{cpp}|atomic| \mintinline{cpp}|constexpr|
 	\end{itemize}
 
 	\addproposal{P2738}{https://wg21.link/P2738R1}
+	\addproposal{P2686}{https://wg21.link/P2686R4}
+	\addproposal{P3309}{https://wg21.link/P3309R2}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Exceptions}
+	\begin{itemize}
+		\item Possibilité de lancer des exceptions dans des fonctions \mintinline{cpp}|consteval|
+		\begin{itemize}
+			\item Erreur de compilation si l'exception est lancé lors d'une évaluation \textit{compile-time}
+		\end{itemize}
+	\end{itemize}
+
+	\addproposal{P3068}{https://wg21.link/P3068R4}
 \end{frame}
 
 \subsection*{Parameters pack}
@@ -424,7 +450,7 @@
 	\addproposal{P2641}{https://wg21.link/P2641R4}
 \end{frame}
 
-\subsection*{Multithreading}
+\subsection*{Parallélisme}
 \begin{frame}[fragile]
 	\frametitle{Gestion mémoire}
 	\begin{itemize}
@@ -434,6 +460,15 @@
 
 	\addproposal{P2530}{https://wg21.link/P2530R3}
 	\addproposal{P2545}{https://wg21.link/P2545R4}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{SIMD (\textit{Single Instruction on Multiple Data}}
+	\begin{itemize}
+		\item Intégration de \mintinline{cpp}|basic_simd|
+	\end{itemize}
+
+	\addproposal{p1928}{https://wg21.link/p1928r12}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
