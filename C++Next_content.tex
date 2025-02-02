@@ -17,7 +17,7 @@
 	\frametitle{TS -- Contracts}
 	\begin{itemize}
 		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
-		\item Probablement intégré à C++26
+		\item Potentiellement intégré à C++26
 		\item Support de la programmation par contrat
 		\item Remplace la vérification via \mintinline{cpp}|assert|
 		\item Et la documentation via commentaires \mintinline[escapeinside=||]{cpp}{|@|pre}, \mintinline[escapeinside=||]{cpp}{|@|post} et \mintinline[escapeinside=||]{cpp}{|@|invariant}
@@ -676,7 +676,12 @@
 		{ ... }
 	\end{minted}
 
+	\begin{itemize}
+		\item \mintinline{cpp}|break label| et \mintinline{cpp}|continue label| appliqués à une boucle englobante
+	\end{itemize}
+
 	\addproposal{P2881}{https://wg21.link/p2881r0}
+	\addproposal{p3568}{https://wg21.link/p3568r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -892,9 +897,11 @@
 	\frametitle{Classes}
 	\begin{itemize}
 		\item Destructeurs \mintinline{cpp}|consteval|
+		\item Données statiques dans les classes locales non nomées
 	\end{itemize}
 
 	\addproposal{p3421}{https://wg21.link/p3421r0}
+	\addproposal{p3588}{https://wg21.link/p3588r0}
 \end{frame}
 
 \subsection*{Énumération}
@@ -1349,6 +1356,7 @@
 			\item \mintinline{cpp}|std::optional|, \mintinline{cpp}|std::variant|, \mintinline{cpp}|std::any| et \mintinline{cpp}|std::expected|
 			\item \mintinline{cpp}|std::mdspan|, \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 			\item \mintinline{cpp}|charN_t|
+			\item \mintinline{cpp}|error_code|
 		\end{itemize}
 		\item \mintinline{cpp}|std::format_as()| : formateurs personnalisés basé sur un autre type (p.ex. formatage d'enum comme entiers)
 	\end{itemize}
