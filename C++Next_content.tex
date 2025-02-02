@@ -169,7 +169,7 @@
 	\begin{itemize}
 		\item []
 		\begin{itemize}
-			\item \mintinline{cpp}|std::variant| et \mintinline{cpp}|std::any|
+			\item \mintinline{cpp}|std::variant|, \mintinline{cpp}|std::any| et \mintinline{cpp}|std::expected|
 		\end{itemize}
 	\end{itemize}
 
@@ -417,6 +417,20 @@
 
 	\addproposal{p3254}{https://wg21.link/p3254r0}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{using}
+	\begin{itemize}
+		\item Accolades pour grouper les déclarations  \mintinline{cpp}|using|
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		using std::chrono::{duration, time_point, duration_cast};
+	\end{minted}
+
+	\addproposal{p3485}{https://wg21.link/p3485r0}
+\end{frame}
+
 
 \subsection*{Encodage}
 \begin{frame}[fragile]
@@ -972,11 +986,13 @@
 		\item Support des \textit{node-handle} par \mintinline{cpp}|std::list| et \mintinline{cpp}|std::forward_list|
 		\item Ajout de \mintinline{cpp}|pop_value()| à \mintinline{cpp}|std::stack|, \mintinline{cpp}|std::queue| et \mintinline{cpp}|std::priority_queue|
 		\item Fonction libre d'accès \og{}range-checked\fg{} à un élément \mintinline{cpp}|std::at()|
+		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::mdspan|
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049r0}
 	\addproposal{p3182}{https://wg21.link/p3182r0}
 	\addproposal{p3404}{https://wg21.link/p3404r0}
+	\addproposal{p3383}{https://wg21.link/p3383r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1039,6 +1055,21 @@
 
 	\addproposal{p3413}{https://wg21.link/p3413r0}
 \end{frame}
+
+\subsection*{Guarded objects}
+\begin{frame}[fragile]
+	\frametitle{\textit{Guarded objects}}
+	\begin{itemize}
+		\item Classes templates protégeant un objet en imposant la prise d'un lock avant l'utilisation
+	\end{itemize}
+
+	\begin{block}{Motivation}
+		Éviter l'oubli de verrouillage d'un mutex avant l'utilisation d'un objet partagé
+	\end{block}
+
+	\addproposal{p3497}{https://wg21.link/p3497r0}
+\end{frame}
+
 \subsection*{Itérateurs}
 \begin{frame}[fragile]
 	\frametitle{Itérateurs}
