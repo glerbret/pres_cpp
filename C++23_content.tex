@@ -30,6 +30,8 @@
 		\item Dépréciation de \mintinline{cpp}|std::aligned_storage| et \mintinline{cpp}|std::aligned_union|
 		\item Dépréciation de \mintinline{cpp}|std::std::numeric_limits::has_denorm|
 	\end{itemize}
+
+	\addproposal{p1413}{https://wg21.link/p1413r3}
 \end{frame}
 
 \subsection*{Syntaxe}
@@ -217,9 +219,16 @@
 
 \note[item]{C'est une \textit{decay-copy} (copie faible ?)}
 \note[item]{\mintinline{cpp}|auto a = x| construit une \textit{lvalue}, non une \textit{prvalue}}
+\note[item]{Donc pas de const ni de volatile et les tableaux C deviennent des pointeurs}
 	\end{itemize}
 
+	\begin{minted}{cpp}
+		const std::string& str = "hello";
+		auto(str); // std::string
+	\end{minted}
+
 	\addproposal{P1401}{https://wg21.link/P1401R5}
+	\addproposal{p0849}{https://wg21.link/p0849r8}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -281,6 +290,7 @@
 	\addproposal{P2242}{https://wg21.link/P2242R3}
 	\addproposal{P2448}{https://wg21.link/P2448R2}
 	\addproposal{P2647}{https://wg21.link/P2647R1}
+	\addproposal{p2273}{https://wg21.link/p2273r3}
 \end{frame}
 
 \subsection*{if consteval}
@@ -1058,9 +1068,11 @@
 		format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 	\end{minted}
 
+	\addproposal{p2216}{https://wg21.link/p2216r3}
 	\addproposal{P2572}{https://wg21.link/P2572R1}
 	\addproposal{P2419}{https://wg21.link/P2419R2}
 	\addproposal{P2372}{https://wg21.link/P2372R3}
+	\addproposal{p2585}{https://wg21.link/p2585r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1109,6 +1121,10 @@
 
 		print("Hello, {}!", name);
 	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::println()| ajoute en outre un saut de ligne
+	\end{itemize}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cprint%3E%0A%0Aint+main()%0A%7B%0A++std::print(%22Hello,+%7B%7D!!%22,+%22foo%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang1701,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic+-stdlib%3Dlibc%2B%2B',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+clang+17.0.1+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -1467,13 +1483,24 @@
 
 \note[item]{Avant seulement des ranges de \textit{glvalues ranges} (vues ou non) et des ranges de \textit{prvalues views}}
 \note[item]{Maintenant aussi des ranges de \textit{prvalues non view ranges}}
-
-		\item Suppression de la contrainte \textit{default constructible} pour les vues
-		\item \mintinline{cpp}|std::ranges::to<>()| construit un conteneur depuis un \mintinline{cpp}|range|
 	\end{itemize}
 
-	\addproposal{P1206}{https://wg21.link/P1206R7}
 	\addproposal{P2278}{https://wg21.link/P2278R4}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Évolutions des ranges et vues}
+	\begin{itemize}
+		\item Suppression de la contrainte \textit{default constructible} pour les vues
+		\item \mintinline{cpp}|std::ranges::to<>()| construit un conteneur depuis une vue
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		auto v = iota('a') | take(10);
+		auto vec = v | ranges::to<vector>();
+	\end{minted}
+
+	\addproposal{P1206}{https://wg21.link/P1206R7}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1634,6 +1661,20 @@
 	\begin{itemize}
 		\item Générateur de coroutines synchrones
 	\end{itemize}
+
+	\begin{minted}{cpp}
+		generator<int> gen(int n) {
+		  for (int a = 0; a < n; ++a)
+		    co_yield a; }
+
+		auto g = gen(5);
+		for(auto i: g) {
+		  cout << i << " "; }
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Cgenerator%3E%0A%23include+%3Ciostream%3E%0A%0Astd::generator%3Cint%3E+gen(int+n)%0A%7B%0A++for+(int+a+%3D+0%3B+a+%3C+n%3B+%2B%2Ba)%0A++++++co_yield+a%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+g+%3D+gen(5)%3B%0A++for(auto+i:+g)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P2502}{https://wg21.link/P2502R2}
 	\addproposal{P2787}{https://wg21.link/P2787R0}
