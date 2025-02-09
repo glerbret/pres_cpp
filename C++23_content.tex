@@ -7,8 +7,8 @@
 	\frametitle{Présentation}
 	\begin{itemize}
 		\item Travaux techniques terminés en février 2023
-		\item Document final en cours de validation internationale
-		\item Dernier \textit{Working Draft} : \href{https://github.com/cplusplus/draft/releases/download/n4917/n4917.pdf}{n4917\linklogo}
+		\item Approuvé en octobre 2024
+		\item Dernier \textit{Working Draft} : \href{https://open-std.org/JTC1/SC22/WG21/docs/papers/2023/n4950.pdf}{n4950\linklogo}
 	\end{itemize}
 \end{frame}
 
@@ -124,7 +124,7 @@
 	\begin{minted}{cpp}
 		struct X { int a, b; };
 
-		X* p = start_lifetime_as<X>(malloc(sizeof(struct X));
+		X* p = start_lifetime_as<X>(malloc(sizeof(struct X)));
 		p->a = 1;
 		p->b = 2;
 	\end{minted}
@@ -1471,10 +1471,12 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		auto foo = view::iota(0, 50);
-		auto bar = view::iota(0, 30);
+		auto foo = views::iota(0, 50);
+		auto bar = views::iota(0, 30);
 
-		if(ranges::starts_with(foo, bar)) { ... }
+		ranges::starts_with(foo, bar); // Vrai
+		ranges::contains(foo, 4);      // Vrai
+		ranges::contains(foo, 70);     // Faux
 	\end{minted}
 
 	\begin{itemize}
@@ -1486,6 +1488,10 @@
 	\end{itemize}
 
 	\addproposal{P2278}{https://wg21.link/P2278R4}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:8,positionColumn:1,positionLineNumber:8,selectionStartColumn:1,selectionStartLineNumber:8,startColumn:1,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++auto+foo+%3D+std::ranges::views::iota(0,+50)%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::ranges::contains(foo,+4)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::ranges::contains(foo,+70)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1496,9 +1502,13 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		auto v = iota('a') | take(10);
+		auto v = views::iota('a') | views::take(10);
 		auto vec = v | ranges::to<vector>();
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++auto+v+%3D+std::ranges::views::iota(!'a!')+%7C+std::ranges::views::take(10)%3B%0A++auto+vec+%3D+v+%7C+std::ranges::to%3Cstd::vector%3E()%3B%0A%0A++std::cout+%3C%3C+vec.size()+%3C%3C+%22%5Cn%22%3B%0A++for(auto+c:+vec)%0A++%7B%0A++++std::cout+%3C%3C+c%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P1206}{https://wg21.link/P1206R7}
 \end{frame}
@@ -1527,6 +1537,10 @@
 		\item \mintinline{cpp}|std::views::adjacent()| et \mintinline{cpp}|std::views::adjacent_transform()|
 	\end{itemize}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Clist%3E%0A%23include+%3Carray%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++auto+x+%3D+std::vector%7B1,+2%7D%3B%0A++auto+y+%3D+std::list%3Cstd::string%3E%7B%22Aa%22,+%22Bb%22,+%22Cc%22%7D%3B%0A++auto+z+%3D+std::array%7B!'A!',+!'B!',+!'C!',+!'D!'%7D%3B%0A%0A++for(std::tuple%3Cint%26,+std::string%26,+char%26%3E+e+:+std::ranges::views::zip(x,+y,+z))%0A++%7B%0A++++std::cout+%3C%3C+std::get%3C0%3E(e)+%3C%3C+!'+!'+%3C%3C+std::get%3C1%3E(e)+%3C%3C+!'+!'+%3C%3C+std::get%3C2%3E(e)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{P2210}{https://wg21.link/P2210R2}
 \end{frame}
 
@@ -1551,10 +1565,18 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		vector v = {1, 2, 2, 3, 0, 4, 5, 2};
+		vector<int> vs = {1, 2, 2, 3, 0, 4, 5, 2};
 
-		v | chunk_by(less_equal{}));   // [[1, 2, 2, 3], [0, 4, 5], [2]]
+		vs | views::chunk_by(less_equal{});   // [[1, 2, 2, 3], [0, 4, 5], [2]]
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+vs+%3D+%7B%22the%22,+%22quick%22,+%22brown%22,+%22fox%22%7D%3B%0A++auto+v+%3D+vs+%7C+std::ranges::views::join_with(!'-!')%3B%0A%0A++for(auto+c+:+v)%0A++%7B%0A++++std::cout+%3C%3C+c%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:65,endLineNumber:9,positionColumn:65,positionLineNumber:9,selectionStartColumn:65,selectionStartLineNumber:9,startColumn:65,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+vs+%3D+%7B1,+2,+2,+3,+0,+4,+5,+2%7D%3B%0A++auto+v+%3D+vs+%7C+std::ranges::views::chunk_by(std::less_equal%7B%7D)%3B%0A%0A++for+(const+auto+subrange:+v)%0A++%7B%0A++++for(const+auto+c:+subrange)%0A++++%7B%0A++++++std::cout+%3C%3C+c+%3C%3C+%22+%22%3B%0A++++%7D%0A++++std::cout+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P2440}{https://wg21.link/P2440R1}
 	\addproposal{P2328}{https://wg21.link/P2328R1}
@@ -1568,22 +1590,30 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		iota(1, 13) | stride(3);  // 1 4 7 10
+		views::iota(1, 13) | views::stride(3);  // 1 4 7 10
 	\end{minted}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::ranges::fold()| équivalent range de \mintinline{cpp}|std::accumulate|
+		\item \mintinline{cpp}|std::ranges::fold_left()| et \mintinline{cpp}|std::ranges::fold_right()|
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		vector<double> v = {0.25, 0.75};
 
-		auto r = ranges::fold(v, 1, plus()); // 2
+		ranges::fold_left(v, 1, plus()); // 2
 	\end{minted}
 
 	\begin{itemize}
 		\item \mintinline{cpp}|std::views::cartesian_product| construit une vue sur le produit cartésien de plusieurs conteneurs
 	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:26,endLineNumber:12,positionColumn:26,positionLineNumber:12,selectionStartColumn:26,selectionStartLineNumber:12,startColumn:26,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++auto+v+%3D+std::ranges::views::iota(1,+13)+%7C+std::ranges::views::stride(3)%3B%0A++auto+vec+%3D+v+%7C+std::ranges::to%3Cstd::vector%3E()%3B%0A%0A++for(auto+c:+vec)%0A++%7B%0A++++std::cout+%3C%3C+c+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:11,positionColumn:1,positionLineNumber:11,selectionStartColumn:1,selectionStartLineNumber:11,startColumn:1,startLineNumber:11),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cranges%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cdouble%3E+v+%3D+%7B0.25,+0.75%7D%3B%0A++std::cout+%3C%3C+std::ranges::fold_left(v,+1,+std::plus())%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P1223}{https://wg21.link/P1223R5}
 	\addproposal{P2322}{https://wg21.link/P2322R6}
@@ -1610,6 +1640,10 @@
 			\item Construction de \mintinline{cpp}|std::map| depuis un \mintinline{cpp}|std::vector| avec l'index pour clé
 		\end{itemize}
 	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++auto+vec+%3D+std::ranges::views::repeat(17,+4)+%7C+std::ranges::to%3Cstd::vector%3E()%3B%0A%0A++for(auto+c:+vec)%0A++%7B%0A++++std::cout+%3C%3C+c+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P2446}{https://wg21.link/P2446R2}
 \end{frame}
