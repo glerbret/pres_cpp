@@ -419,7 +419,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{using}
+	\frametitle{\mintinline[style=white]{cpp}|using|}
 	\begin{itemize}
 		\item Accolades pour grouper les déclarations  \mintinline{cpp}|using|
 	\end{itemize}
@@ -810,7 +810,7 @@
 		\begin{itemize}
 			\item \mintinline{cpp}|operatorX=| à partir de \mintinline{cpp}|operatorX|
 			\item incrément et décrément préfixés à partir de l'addition et de la soustraction
-			\item incrément et décrément postfixés à partir des versions préfixés
+			\item incrément et décrément suffixés à partir des versions préfixés
 			\item \mintinline{cpp}|operator->| et \mintinline{cpp}|operator->*| à partir de \mintinline{cpp}|operator*| et \mintinline{cpp}|operator.|
 
 \note[item]{A priori, \mintinline{cpp}|operator->| et \mintinline{cpp}|operator->*| générés par défaut, génération désactivable avec \mintinline{cpp}|=delete|}
@@ -868,7 +868,7 @@
 \begin{frame}[fragile]
 	\frametitle{Classes}
 	\begin{itemize}
-		\item Qualifieurs autorisés sur les constructeurs
+		\item Qualificateurs autorisés sur les constructeurs
 		\begin{itemize}
 			\item Constructeurs \mintinline{cpp}|const| pour construire systématiquement des objets constants
 			\item Constructeurs non \mintinline{cpp}|const| peuvent construire des objets constants ou non
@@ -897,7 +897,7 @@
 	\frametitle{Classes}
 	\begin{itemize}
 		\item Destructeurs \mintinline{cpp}|consteval|
-		\item Données statiques dans les classes locales non nomées
+		\item Données statiques dans les classes locales non nommées
 	\end{itemize}
 
 	\addproposal{p3421}{https://wg21.link/p3421r0}
@@ -1129,7 +1129,7 @@
 		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|,  \mintinline{cpp}|cache_last|, \ldots
 		\item Ajout de \mintinline{cpp}|ranges::size_hint| permettant aux ranges de réserver de la mémoire
 		\item \mintinline{cpp}|views::maybe| contient 0 ou 1 élément d'un objet
-		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sousjacent
+		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sous-jacent
 		\item Construction d'une \mintinline{cpp}|sub-string_view| depuis \mintinline{cpp}|std::string|
 	\end{itemize}
 
@@ -1376,7 +1376,7 @@
 
 	\begin{minted}{cpp}
 		std::dump(arg1, arg2, ..., argn);
-		// Equivelant a
+		// Equivalant a
 		std::println("{} {} ... {}", arg1, arg2, ..., argn);
 	\end{minted}
 \end{frame}
