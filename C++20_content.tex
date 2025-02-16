@@ -1375,7 +1375,7 @@
 		\item Conteneur : \mintinline{cpp}|range| possédant ses éléments
 		\item \mintinline{cpp}|View|
 		\begin{itemize}
-			\item \mintinline{cpp}|range| ne possédant pas les éléments pointés par \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
+			\item \mintinline{cpp}|range| \og{}paresseux\fg{} ne possédant pas les éléments pointés par \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
 			\item Copie, déplacement et affectation en temps constant
 		\end{itemize}
 		\item \mintinline{cpp}|SizedRange| : taille en temps constant
@@ -1456,7 +1456,7 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		for(int i : views::iota(1, 10))
+		for(int i : iota(1, 10))
 		  cout << i << ' ';   // 1 2 3 4 5 6 7 8 9
   	\end{minted}
 
@@ -1466,7 +1466,7 @@
 
 	\begin{minted}{cpp}
 		int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-		for(int i : views::counted(a, 3))
+		for(int i : counted(a, 3))
 		  cout << i << ' ';   // 1 2 3
   	\end{minted}
 
@@ -1540,9 +1540,9 @@
 \note[item]{Les adapteurs \mintinline{cpp}|XXX_view| ont des \textit{closure object} de la forme \mintinline{cpp}|views::XXX|}
 
 		\begin{itemize}
-			\item \mintinline{cpp}|all_view| : tous les éléments du \mintinline{cpp}|range|
-			\item \mintinline{cpp}|ref_view| : références sur les éléments du \mintinline{cpp}|range|
-			\item \mintinline{cpp}|filter_view| : tous les éléments satisfaisants un prédicat
+			\item \mintinline{cpp}|std::views::all| : tous les éléments du \mintinline{cpp}|range|
+			\item \mintinline{cpp}|std::views::ref| : références sur les éléments du \mintinline{cpp}|range|
+			\item \mintinline{cpp}|std::views::filter| : tous les éléments satisfaisants un prédicat
 		\end{itemize}
 	\end{itemize}
 
@@ -1550,12 +1550,12 @@
 		vector<int> ints{0, 1, 2, 3, 4, 5};
 		auto even = [](int i){ return (i % 2) == 0; };
 
-		ints | views::filter(even);       // 0, 2, 4
+		ints | filter(even);       // 0, 2, 4
 	\end{minted}
 
 	\begin{itemize}
 		\item [] \begin{itemize}
-			\item \mintinline{cpp}|transform_view| : les éléments transformés par l'application d'une fonction
+			\item \mintinline{cpp}|std::views::transform| : les éléments transformés par l'application d'une fonction
 		\end{itemize}
 	\end{itemize}
 
@@ -1563,7 +1563,7 @@
 		vector<int> ints{0, 1, 2, 3, 4, 5};
 		auto foo = [](int i){ return 2 * i; };
 
-		ints | views::transform(foo);  // 0, 2, 4, 6, 8, 10
+		ints | transform(foo);  // 0, 2, 4, 6, 8, 10
 	\end{minted}
 
 	\begin{codesample}
@@ -1581,16 +1581,60 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
-		\item  [] \begin{itemize}
-			\item \mintinline{cpp}|take_view| : les $N$ premiers éléments
-			\item \mintinline{cpp}|take_while_view| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
-			\item \mintinline{cpp}|drop_view| : tous les éléments sauf les $N$ premiers
-			\item \mintinline{cpp}|drop_while_view| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
-			\item \mintinline{cpp}|common_view| convertit une vue en \mintinline{cpp}|common_range|
-			\item \mintinline{cpp}|reverse_view| : éléments en sens inverse
-			\item \mintinline{cpp}|istream_view| : vue par application successive de \mintinline{cpp}|operator>>| sur un flux
+		\item [] \begin{itemize}
+			\item \mintinline{cpp}|std::views::take| : les $N$ premiers éléments
 		\end{itemize}
 	\end{itemize}
+
+	\begin{minted}{cpp}
+		iota(1, 10) | take(foo);  // 1, 2, 3
+	\end{minted}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item \mintinline{cpp}|std::views::take_while| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		iota(1, 10) | take_while([] (int i) { return i != 5; })) // 1, 2, 3, 4
+	\end{minted}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item \mintinline{cpp}|std::views::drop| : tous les éléments sauf les $N$ premiers
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		iota(1, 10) | drop(3)) // 4, 5, 6, 7, 8, 9
+	\end{minted}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item \mintinline{cpp}|std::views::drop_while| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		iota(1, 10) | drop_while([] (int i) { return i != 5; })) // 5, 6, 7, 8, 9
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:38,endLineNumber:6,positionColumn:20,positionLineNumber:6,selectionStartColumn:38,selectionStartLineNumber:6,startColumn:20,startLineNumber:6),source:'%23include+%3Cranges%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++for(int+i+:+std::views::iota(1,+10)+%7C+std::views::take(3))%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:95,endLineNumber:6,positionColumn:95,positionLineNumber:6,selectionStartColumn:41,selectionStartLineNumber:6,startColumn:41,startLineNumber:6),source:'%23include+%3Cranges%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++for(int+i+:+std::views::iota(1,+10)+%7C+std::views::take_while(%5B%5D+(int+i)+%7B+return+i+!!%3D+5%3B+%7D))%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:57,endLineNumber:6,positionColumn:57,positionLineNumber:6,selectionStartColumn:57,selectionStartLineNumber:6,startColumn:57,startLineNumber:6),source:'%23include+%3Cranges%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++for(int+i+:+std::views::iota(1,+10)+%7C+std::views::drop(3))%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:93,endLineNumber:6,positionColumn:93,positionLineNumber:6,selectionStartColumn:64,selectionStartLineNumber:6,startColumn:64,startLineNumber:6),source:'%23include+%3Cranges%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++for(int+i+:+std::views::iota(1,+10)+%7C+std::views::drop_while(%5B%5D+(int+i)+%7B+return+i+!!%3D+5%3B+%7D))%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0896}{https://wg21.link/P0896R4}
 	\addproposal{P1035}{https://wg21.link/P1035R7}
@@ -1600,33 +1644,48 @@
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
 		\item [] \begin{itemize}
-			\item \mintinline{cpp}|join_view| \og aplati\fg{} les éléments d'un \mintinline{cpp}|range|
+			\item \mintinline{cpp}|std::views::common| convertit une vue en \mintinline{cpp}|common_range|
+			\item \mintinline{cpp}|std::views::reverse| : éléments en sens inverse
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		iota(1, 10) | reverse) // 9, 8, 7, 6, 5, 4, 3, 2, 1
+	\end{minted}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item \mintinline{cpp}|std::views::istream| : vue par application successive de \mintinline{cpp}|operator>>| sur un flux
+			\item \mintinline{cpp}|std::views::join| joint les éléments d'un \mintinline{cpp}|range|
 		\end{itemize}
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		vector<string> foo{"hello", " ", "world", "!"};
-		ranges::join_view bar{foo};  // hello world!
+		foo | join);  // hello world!
   	\end{minted}
 
 	\begin{itemize}
 		\item  [] \begin{itemize}
-			\item \mintinline{cpp}|split_view| sépare un \mintinline{cpp}|range| en élément sur un délimiteur donné
+			\item \mintinline{cpp}|std::views::split| et \mintinline{cpp}|std::views::lazy_split| séparent un \mintinline{cpp}|range| en élément sur un délimiteur donné
 		\end{itemize}
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		string foo{"the quick brown fox"};
-		ranges::split_view bar{foo, ' '};
-		// { the, quick, brown, fox }
+		foo | splitbar(' '); // the, quick, brown, fox
   	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++std::string+foo%7B%22the+quick+brown+fox%22%7D%3B%0A++std::ranges::split_view+bar%7Bfoo,+!'+!'%7D%3B%0A++for(auto+baz+:+bar)%0A++%7B%0A++++for(char+c+:+baz)%0A++++%7B%0A++++++std::cout+%3C%3C+c%3B%0A++++%7D%0A++++std::cout+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:61,endLineNumber:6,positionColumn:61,positionLineNumber:6,selectionStartColumn:61,selectionStartLineNumber:6,startColumn:61,startLineNumber:6),source:'%23include+%3Cranges%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++for(int+i+:+std::views::iota(1,+10)+%7C+std::views::reverse)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+foo%7B%22hello%22,+%22+%22,+%22world%22,+%22!!%22%7D%3B%0A++std::ranges::join_view+bar%7Bfoo%7D%3B%0A++for(char+c+:+bar)%0A++%7B%0A++++std::cout+%3C%3C+c%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:8,startColumn:1,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+foo%7B%22hello%22,+%22+%22,+%22world%22,+%22!!%22%7D%3B%0A++for(char+c+:+foo+%7C+std::views::join)%0A++%7B%0A++++std::cout+%3C%3C+c%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Aint+main()%0A%7B%0A++std::string+foo%7B%22the+quick+brown+fox%22%7D%3B%0A++for(auto+baz+:+foo+%7C+std::views::split(!'+!'))%0A++%7B%0A++++for(char+c+:+baz)%0A++++%7B%0A++++++std::cout+%3C%3C+c%3B%0A++++%7D%0A++++std::cout+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0896}{https://wg21.link/P0896R4}
@@ -1637,29 +1696,52 @@
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
 		\item [] \begin{itemize}
-			\item \mintinline{cpp}|elements_view| : vue des $N\textsuperscript{e}$ éléments de chaque \textit{tuple} d'une vue de \textit{tuple-likes}
+			\item \mintinline{cpp}|std::views::elements| : vue des $N\textsuperscript{e}$ éléments d'une vue de \textit{tuple-likes}
 		\end{itemize}
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		map<std::string, int> foo {
 		  {"Lovelace"s, 1815}, {"Turing"s,   1912},
-		  {"Babbage"s,  1791}, {"Hamilton"s, 1936}
-		};
+		  {"Babbage"s,  1791}, {"Hamilton"s, 1936}};
 
-		foo | views::elements<1>;  // 1791 1936 1815 1912
+		foo | elements<1>;  // 1791 1936 1815 1912
 	\end{minted}
 
 	\begin{itemize}
 		\item [] \begin{itemize}
-			\item \mintinline{cpp}|keys_view| : vue des clés de chaque \mintinline{cpp}|std::pair| d'une vue de \mintinline{cpp}|std::pair|
-			\item \mintinline{cpp}|values_view| : vue des valeurs de chaque \mintinline{cpp}|std::pair| d'une vue de \mintinline{cpp}|std::pair|
+			\item \mintinline{cpp}|std::views::keys| : vue des clés d'une vue de \mintinline{cpp}|std::pair|
 		\end{itemize}
-	\item Possible d'utiliser les algorithmes opérants sur les \mintinline{cpp}|range|
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		foo | keys; // Babbage Hamilton Lovelace Turing
+	\end{minted}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item \mintinline{cpp}|std::views::values| : vue des valeurs d'une vue de \mintinline{cpp}|std::pair|
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		foo | values; // 1791 1936 1815 1912
+	\end{minted}
+
+	\begin{itemize}
+		\item Possible d'utiliser les algorithmes opérants sur les \mintinline{cpp}|range|
 	\end{itemize}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cstd::string,+int%3E+foo+%3D+%0A++%7B%0A++++%7B%22Lovelace%22s,+1815%7D,%0A++++%7B%22Turing%22s,+++1912%7D,%0A++++%7B%22Babbage%22s,++1791%7D,%0A++++%7B%22Hamilton%22s,+1936%7D,%0A++%7D%3B%0A%0A++for(auto+i+:+foo+%7C+std::views::elements%3C1%3E)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:38,endLineNumber:18,positionColumn:38,positionLineNumber:18,selectionStartColumn:38,selectionStartLineNumber:18,startColumn:38,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cstd::string,+int%3E+foo+%3D+%0A++%7B%0A++++%7B%22Lovelace%22s,+1815%7D,%0A++++%7B%22Turing%22s,+++1912%7D,%0A++++%7B%22Babbage%22s,++1791%7D,%0A++++%7B%22Hamilton%22s,+1936%7D,%0A++%7D%3B%0A%0A++for(auto+i+:+foo+%7C+std::views::keys)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:5,endLineNumber:16,positionColumn:5,positionLineNumber:16,selectionStartColumn:5,selectionStartLineNumber:16,startColumn:5,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cstd::string,+int%3E+foo+%3D+%0A++%7B%0A++++%7B%22Lovelace%22s,+1815%7D,%0A++++%7B%22Turing%22s,+++1912%7D,%0A++++%7B%22Babbage%22s,++1791%7D,%0A++++%7B%22Hamilton%22s,+1936%7D,%0A++%7D%3B%0A%0A++for(auto+i+:+foo+%7C+std::views::values)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0896}{https://wg21.link/P0896R4}

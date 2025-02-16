@@ -49,6 +49,10 @@
 		\item Recommandation au compilateur de lever un warning
 		\item Compilateur peut rejeter le code
 		\item Applicable aux lectures de variables non initialisées
+		\begin{itemize}
+			\item Doit retourner une valeur \og{}erronée\fg{}
+			\item \ldots{}et non la valeur d'une autre variable récemment libérée
+		\end{itemize}
 	\end{itemize}
 
 	\addproposal{P2795}{https://wg21.link/P2795R5}
@@ -214,6 +218,16 @@
 	\addproposal{p2968}{https://wg21.link/p2968r2}
 \end{frame}
 
+\subsection*{Structured binding}
+\begin{frame}[fragile]
+	\frametitle{Structured binding}
+	\begin{itemize}
+		\item Utilisable comme condition dans les \mintinline{cpp}|if|, \mintinline{cpp}|while|, \mintinline{cpp}|for| et \mintinline{cpp}|switch|
+	\end{itemize}
+
+	\addproposal{p0963}{https://wg21.link/p0963r3}
+\end{frame}
+
 \subsection*{Classes}
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|delete|}
@@ -256,12 +270,14 @@
 		\item Possibilité d'utiliser \mintinline{cpp}|std::weak_ptr| en tant que clé de conteneur associatif
 		\item \mintinline{cpp}|std::submdspan()| retourne une vue sur un sous-ensemble d'un \mintinline{cpp}|std::mdspan|
 		\item Nouveaux layouts pour \mintinline{cpp}|std::mdspan| : \mintinline{cpp}|layout_left_padded| et \mintinline{cpp}|layout_right_padded|
+		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::span|
 	\end{itemize}
 
 	\addproposal{p0843}{https://wg21.link/p0843r11}
 	\addproposal{P1901}{https://wg21.link/P1901R2}
 	\addproposal{P2630}{https://wg21.link/P2630R4}
 	\addproposal{P2642}{https://wg21.link/P2642R5}
+	\addproposal{P2821}{https://wg21.link/p2821r4}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -283,9 +299,12 @@
 		\item \textit{static storage} possible pour les \textit{braced-initializer-list}
 
 \note[item]{Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'\textit{initializer list} puis vers le conteneur}
+
+		\item \mintinline{cpp}|std::span| sur les \textit{braced-initializer-list}
 	\end{itemize}
 
 	\addproposal{P2752}{https://wg21.link/P2752R2}
+	\addproposal{P2447}{https://wg21.link/P2447R6}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -295,6 +314,16 @@
 	\end{itemize}
 
 	\addproposal{P2944}{https://wg21.link/P2944R2}
+\end{frame}
+
+\subsection*{Tuples}
+\begin{frame}[fragile]
+	\frametitle{Tuples}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::complex| deviennent des \textit{tuple-like}
+	\end{itemize}
+
+	\addproposal{p2819}{https://wg21.link/p2819r2}
 \end{frame}
 
 \subsection*{Algorithme}
@@ -377,6 +406,23 @@
 
 	\addproposal{P2542}{https://wg21.link/P2542R7}
 	\addproposal{P1068}{https://wg21.link/P1068R10}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ranges}
+	\begin{itemize}
+		\item Traitement de \mintinline{cpp}|std::optional| comme un range similaire à \mintinline{cpp}|single_view|
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		optional<int> empty;
+		for(int i: empty) { std::cout << i; } // Vide
+
+		optional<int> not_empty;
+		for(int i: not_empty) { std::cout << i; } // Un element
+	\end{minted}
+
+	\addproposal{p3168}{https://wg21.link/p3168r2}
 \end{frame}
 
 \subsection*{Ratio}
@@ -569,8 +615,8 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		print();
-		// print("") en C++23
+		println();
+		// println("") en C++23
 	\end{minted}
 
 	\begin{itemize}

@@ -24,6 +24,7 @@
 		\item Plusieurs propositions initiales concurrentes
 		\item \ldots{} mais un compromis à émerger
 		\item Les contrats de fonctions membres publiques peuvent utiliser des membres privés ou protégés
+		\item Prise en compte de la virtualité (vérification des contrats du type déclaré et du type réel)
 		\item Intégration des contrats à la bibliothèque standard
 	\end{itemize}
 
@@ -53,9 +54,12 @@
 		  pre (i >= 0)
 		  post (r: r > 0) {
 		  contract_assert (i >= 0);
-		  return i + 1;
-		}
+		  return i + 1; }
 	\end{minted}
+
+	\begin{block}{Note}
+		Les paramètres sont considérés constants lors de la vérification des contrats
+	\end{block}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+foo(int+a,+int+b)%0A++%5B%5Bpre:+a+%3E+0+%26%26+b+%3E+0%5D%5D%0A++%5B%5Bpost+r:+r+%3E+10%5D%5D%0A%7B%0A++++return+a+/+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(120,+3)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(6,+3)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%23if+0%0A++std::cout+%3C%3C+foo(120,+0)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gcontracts-trunk,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(contracts)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
@@ -71,12 +75,20 @@
 	\begin{itemize}
 		\item Plusieurs comportements
 		\begin{itemize}
+			\item \mintinline{cpp}|assume| : contrat non vérifié, optimisation en considérant la condition satisfaite
 			\item \mintinline{cpp}|ignore| : contrat non vérifié
-			\item \mintinline{cpp}|enforce| : appel au \textit{handler} de violation de contrat et terminaison
 			\item \mintinline{cpp}|observe| : appel au \textit{handler} de violation de contrat et poursuite
+			\item \mintinline{cpp}|enforce| : appel au \textit{handler} de violation de contrat et terminaison
+			\item \mintinline{cpp}|quick_enforce| : terminaison
 
 \note[item]{\mintinline{cpp}|enforce| : arrêt systématique}
 \note[item]{\mintinline{cpp}|observe| : on laisse le \textit{handler} décider}
+		\end{itemize}
+
+		\item Possiblement
+		\begin{itemize}
+			\item Applicables aux coroutines
+			\item Applicables aux pointeurs de fonction
 		\end{itemize}
 	\end{itemize}
 
@@ -331,6 +343,7 @@
 	\addproposal{N4856}{https://wg21.link/n4856}
 	\addproposal{P1240}{https://wg21.link/p1240r2}
 	\addproposal{p2996}{https://wg21.link/p2996r3}
+	\addproposal{p3294}{https://wg21.link/p3294r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -504,7 +517,7 @@
 	\begin{itemize}
 		\item Rendre obligatoire le support de \mintinline{cpp}|intptr_t| et \mintinline{cpp}|uintptr_t|
 		\item Types flottants compatible ISO/IEC 60559:2020 (résultats davantage reproductibles)
-		\item \mintinline{cpp}|CHAR_BIT| impérativement égal à 8 (\textit{\fg{}There are exactly 8 bits in a byte\fg{}})
+		\item \mintinline{cpp}|CHAR_BIT| impérativement égal à 8 (\textit{\og{}There are exactly 8 bits in a byte\fg{}})
 
 \note[item]{Auparavant obligatoirement supérieur ou égal à 8, contraint par les plages garanties de \mintinline{cpp}|signed char| et \mintinline{cpp}|unsigned char|, mais pas d'autres contraintes (même pas multiple de 8)}
 	\end{itemize}
@@ -537,9 +550,11 @@
 		static_assert(10km / 5km == 2);
 	\end{minted}
 
+	\addproposal{p1935}{https://wg21.link/p1935r2}
 	\addproposal{P2980}{https://wg21.link/P2980R0}
 	\addproposal{P2981}{https://wg21.link/P2981R0}
 	\addproposal{P2982}{https://wg21.link/P2982R0}
+	\addproposal{p3045}{https://wg21.link/p3045r5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -666,7 +681,7 @@
 \note[item]{Alignement sur des évolutions C en cours}
 
 		\item Ajout d'une boucle \mintinline{cpp}|do_until|
-		\item Version \textit{generator-base} de \textit{for loop}
+		\item Version \textit{generator-based} de \textit{for loop}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -881,7 +896,6 @@
 		\end{itemize}
 		\item Constructeurs par déplacement \mintinline{cpp}|=bitcopies|
 		\item Extension de \mintinline{cpp}|=delete| à d'autres construction (variables template)
-		\item \mintinline{cpp}|=delete| avec un message pour le diagnostic de compilation
 		\item Classes de base \mintinline{cpp}|std::noncopyable| et \mintinline{cpp}|std::nonmovable|
 		\item Mécanisme de conversion tableau de structures vers structure de tableaux
 
@@ -963,7 +977,7 @@
 	\frametitle{Conteneurs}
 	\begin{itemize}
 		\item \mintinline{cpp}|span| de taille fixe
-		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::span|
+		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::mdspan|
 		\item Relâchement des contraintes sur les tableaux C
 		\begin{itemize}
 			\item Initialisation des tableaux d'agrégats
@@ -981,10 +995,10 @@
 		int a[42] = { 5 ... };
 	\end{minted}
 
-	\addproposal{P2821}{https://wg21.link/p2821r4}
 	\addproposal{P2767}{https://wg21.link/p2767r1}
 	\addproposal{P1709}{https://wg21.link/p1709r5}
 	\addproposal{P3110}{https://wg21.link/p3110r0}
+	\addproposal{p3383}{https://wg21.link/p3383r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -993,13 +1007,11 @@
 		\item Support des \textit{node-handle} par \mintinline{cpp}|std::list| et \mintinline{cpp}|std::forward_list|
 		\item Ajout de \mintinline{cpp}|pop_value()| à \mintinline{cpp}|std::stack|, \mintinline{cpp}|std::queue| et \mintinline{cpp}|std::priority_queue|
 		\item Fonction libre d'accès \og{}range-checked\fg{} à un élément \mintinline{cpp}|std::at()|
-		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::mdspan|
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049r0}
 	\addproposal{p3182}{https://wg21.link/p3182r0}
 	\addproposal{p3404}{https://wg21.link/p3404r0}
-	\addproposal{p3383}{https://wg21.link/p3383r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1013,6 +1025,7 @@
 		\item Ajout de \mintinline{cpp}|first()| et de \mintinline{cpp}|last()| à \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view| pour récupérer les $n$ premiers ou derniers caractères
 	\end{itemize}
 
+	\addproposal{p3094}{https://wg21.link/p3094r6}
 	\addproposal{p3283}{https://wg21.link/p3283r0}
 \end{frame}
 
@@ -1034,13 +1047,8 @@
 		std::get<0>(t)
 	\end{minted}
 
-	\begin{itemize}
-		\item \mintinline{cpp}|std::complex| deviennent des \textit{tuple-like}
-	\end{itemize}
-
 	\addproposal{p2527}{https://wg21.link/p2527r2}
 	\addproposal{p2141}{https://wg21.link/p2141r1}
-	\addproposal{p2819}{https://wg21.link/p2819r1}
 \end{frame}
 
 \subsection*{std::optional}
@@ -1048,18 +1056,11 @@
 	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
 		\item Support des références par \mintinline{cpp}|std::optional|
-	\end{itemize}
-
-	\addproposal{p2988}{https://wg21.link/p2988r1}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{\mintinline[style=white]{cpp}|std::optional| \& \mintinline[style=white]{cpp}|std::optional|}
-	\begin{itemize}
 		\item \mintinline{cpp}|value_or_construct()| : construction paresseuse de l'alternative
 		\item \mintinline{cpp}|value_or_else()| : appel paresseux d'une fonction en l'absence de valeur
 	\end{itemize}
 
+	\addproposal{p2988}{https://wg21.link/p2988r1}
 	\addproposal{p3413}{https://wg21.link/p3413r0}
 \end{frame}
 
@@ -1146,12 +1147,14 @@
 		\item \mintinline{cpp}|views::to_input| convertit un range en \textit{input-only} range
 		\item \mintinline{cpp}|views::scan| : version paresseuse de \mintinline{cpp}|std::inclusive_scan|
 		\item \mintinline{cpp}|std::ranges::any_view| : vue \og{}type-erasure\fg{}
+		\item \mintinline{cpp}|std::ranges::views::slice| : prends une tranche d'un range
 	\end{itemize}
 
 	\addproposal{p3060}{https://wg21.link/p3060r1}
 	\addproposal{p3137}{https://wg21.link/p3137r0}
 	\addproposal{p3351}{https://wg21.link/p3351r1}
 	\addproposal{p3411}{https://wg21.link/p3411r0}
+	\addproposal{p3216}{https://wg21.link/p3216r0}
 \end{frame}
 
 \subsection*{Traits}
