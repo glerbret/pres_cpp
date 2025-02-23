@@ -1503,7 +1503,6 @@
 \begin{frame}[fragile]
 	\frametitle{Nouveaux ranges et range adaptors}
 	\begin{itemize}
-		\item Amélioration de \mintinline{cpp}|std::views::split()|
 		\item \mintinline{cpp}|std::views::zip()| fusionne plusieurs ranges en un range de tuple
 	\end{itemize}
 
@@ -1540,7 +1539,8 @@
 	\frametitle{Nouveaux ranges et range adaptors}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::views::adjacent()| construit des ranges de $N$ éléments consécutifs du range initial
+		\item \mintinline{cpp}|std::views::adjacent()| construit des ranges de $N$ éléments consécutifs
+		\item \mintinline{cpp}|std::views::pairwise()| construit des ranges de 2 éléments consécutifs
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1548,7 +1548,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::views::adjacent_transform()| construit un range en appliquant un foncteur aux éléments adjacents
+		\item \mintinline{cpp}|std::views::adjacent_transform()| et \mintinline{cpp}|std::views::pairwise_transform()| construisent un range en appliquant une transformation aux éléments adjacents
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1581,7 +1581,7 @@
 	\frametitle{Nouveaux ranges et range adaptors}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::ranges::shift_left()| et \mintinline{cpp}|std::ranges::shift_right()|
-		\item \mintinline{cpp}|std::views::chunck()| coupe un range en blocs de N éléments
+		\item \mintinline{cpp}|std::views::chunck()| coupe un range en blocs de $N$ éléments
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1623,7 +1623,7 @@
 \begin{frame}[fragile]
 	\frametitle{Nouveaux ranges et range adaptors}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::views::find_last()|
+		\item \mintinline{cpp}|std::views::find_last()/find_last_if()/find_last_if_not()|
 		\item \mintinline{cpp}|std::views::stride()| conserve un élément sur $n$
 	\end{itemize}
 
@@ -1632,7 +1632,8 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::ranges::fold_left()| et \mintinline{cpp}|std::ranges::fold_right()|
+		\item \mintinline{cpp}|std::ranges::fold_left()/fold_left_first()/fold_left_with_iter()|
+		\item \mintinline{cpp}|std::ranges::fold_right()/fold_right_last()/fold_right_with_iter()|
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1642,7 +1643,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::views::cartesian_product| construit le produit cartésien de plusieurs conteneurs
+		\item \mintinline{cpp}|std::views::cartesian_product| : produit cartésien de plusieurs ranges
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1667,7 +1668,8 @@
 \begin{frame}[fragile]
 	\frametitle{Nouveaux ranges et range adaptors}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::views::as_rvalue()|
+		\item \mintinline{cpp}|std::views::as_rvalue()| convertit les éléments en \textit{r-value}
+		\item \mintinline{cpp}|std::views::as_const()| constifie les éléments
 		\item \mintinline{cpp}|std::views::repeat()| répète $n$ fois une valeur
 	\end{itemize}
 
@@ -1676,8 +1678,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item Correction de \mintinline{cpp}|std::ranges::istream_view()|
-		\item \mintinline{cpp}|std::views::enumerate()| range index/valeur depuis un range de valeurs
+		\item \mintinline{cpp}|std::views::enumerate()| : vue index/valeur depuis un range de valeurs
 		\begin{itemize}
 			\item Manipulation d'un index dans un \textit{range-based for loop} sans gestion explicite
 			\item Construction de \mintinline{cpp}|std::map| depuis un \mintinline{cpp}|std::vector| avec l'index pour clé
@@ -1687,6 +1688,11 @@
 	\begin{minted}{cpp}
 		"hello" | std::views::enumerate; // (0:h) (1:e) (2:l) (3:l) (4:o)
 	\end{minted}
+
+	\begin{itemize}
+		\item Améliorations de \mintinline{cpp}|std::views::split()|
+		\item Corrections de \mintinline{cpp}|std::ranges::istream_view()|
+	\end{itemize}
 
 	\begin{codesample}
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:54,endLineNumber:9,positionColumn:54,positionLineNumber:9,selectionStartColumn:19,selectionStartLineNumber:7,startColumn:19,startLineNumber:7),source:'%23include+%3Ciostream%3E%0A%23include+%3Cranges%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+s+%3D+%22hello%22%3B%0A%0A++for(auto+%5Bindex,+value%5D:+s+%7C+std::views::enumerate)%0A++%7B%0A++++std::cout+%3C%3C+index+%3C%3C+%22:%22+%3C%3C+value+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}

@@ -1347,9 +1347,8 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Concepts}
 	\begin{itemize}
-		\item \mintinline{cpp}|Range|
+		\item \mintinline{cpp}|Range| : séquence d'éléments définie par
 		\begin{itemize}
-			\item Abstraction pour manipuler une séquence d'éléments
 			\item Itérateur de début
 			\item Sentinelle de fin
 			\begin{itemize}
@@ -1362,14 +1361,14 @@
 			\end{itemize}
 		\end{itemize}
 
-		\item Conteneur : \mintinline{cpp}|range| possédant ses éléments
+		\item Conteneur : range possédant ses éléments
 		\item \mintinline{cpp}|View|
 		\begin{itemize}
-			\item \mintinline{cpp}|range| \og{}paresseux\fg{} ne possédant pas les éléments pointés par \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
+			\item range ne possédant pas les éléments
 			\item Copie, déplacement et affectation en temps constant
 		\end{itemize}
 		\item \mintinline{cpp}|SizedRange| : taille en temps constant
-		\item \mintinline{cpp}|ViewableRange| : \mintinline{cpp}|range| convertible en \mintinline{cpp}|View|
+		\item \mintinline{cpp}|ViewableRange| : range convertible en une vue
 		\item \mintinline{cpp}|CommonRange| : itérateur et sentinelle de même type
 	\end{itemize}
 
@@ -1441,7 +1440,7 @@
 	\frametitle{Ranges -- Factory}
 	\begin{itemize}
 		\item \mintinline{cpp}|std::views::empty| crée une vue vide
-		\item \mintinline{cpp}|std::views::single| crée une vue d'un unique élément
+		\item \mintinline{cpp}|std::views::single| crée une vue sur un unique élément
 		\item \mintinline{cpp}|std::views::iota| crée une vue en incrémentant une valeur initiale
 	\end{itemize}
 
@@ -1451,13 +1450,12 @@
   	\end{minted}
 
 	\begin{itemize}
-		\item \mintinline{cpp}|std::views::counted| crée un \mintinline{cpp}|range| depuis un itérateur et un nombre d'éléments
+		\item \mintinline{cpp}|std::views::counted| crée un vue depuis un itérateur et un nombre d'éléments
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-		for(int i : counted(a, 3))
-		  cout << i << ' ';   // 1 2 3
+		counted(a, 3);   // 1 2 3
   	\end{minted}
 
 	\begin{codesample}
@@ -1471,16 +1469,24 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Ranges -- Range adaptators}
+	\frametitle{Ranges -- Factory}
 	\begin{itemize}
-		\item Appliquent filtres et transformations aux \mintinline{cpp}|range|
-		\item Associés, pour certains, à un \textit{range adaptor closure object}
+		\item \mintinline{cpp}|std::ranges::istream_view| créé une vue sur un un flux d'entrée
+		\item \mintinline{cpp}|std::ranges::subrange()| construit un sous-range depuis
 		\begin{itemize}
-			\item Prends un unique paramètre \mintinline{cpp}|viewable_range|
-			\item Retourne une \mintinline{cpp}|view|
+			\item Une paire d'itérateur
+			\item Un itérateur de début et une sentinelle de fin
 		\end{itemize}
-		\item Évaluation paresseuse des \mintinline{cpp}|view|
 	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+		subrange(begin(vec), begin(vec) + 3);   // 1 2 3
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:73,endLineNumber:8,positionColumn:73,positionLineNumber:8,selectionStartColumn:3,selectionStartLineNumber:7,startColumn:3,startLineNumber:7),source:'%23include+%3Cranges%3E%0A%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+vec%7B1,+2,+3,+4,+5,+6,+7,+8,+9%7D%3B%0A++auto+rg+%3D+std::ranges::subrange(std::begin(vec),+std::begin(vec)+%2B+3)%3B%0A++for(int+i+:+rg)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P0896}{https://wg21.link/P0896R4}
 	\addproposal{P1035}{https://wg21.link/P1035R7}
@@ -1489,6 +1495,8 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
+		\item Appliquent filtres et transformations aux ranges
+		\item Évaluation paresseuse des \mintinline{cpp}|view|
 		\item Peuvent être chaînés avec une syntaxe \og appel de fonction\fg{}
 	\end{itemize}
 
@@ -1504,18 +1512,6 @@
 		R | C | D;
 	\end{minted}
 
-	\begin{itemize}
-		\item Peuvent prendre plusieurs arguments
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		adaptor(range, args...);
-		adaptor(args...)(range);
-		range | adaptor(args...);
-	\end{minted}
-
-\note[item]{\mintinline{cpp}|adaptor(args...)| est forcément une \textit{range adaptor closure object}}
-
 	\addproposal{P0896}{https://wg21.link/P0896R4}
 	\addproposal{P1035}{https://wg21.link/P1035R7}
 \end{frame}
@@ -1523,15 +1519,9 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
-		\item Plusieurs adaptateurs fournis par la bibliothèque standard
-
-\note[item]{Les adapteurs \mintinline{cpp}|XXX_view| ont des \textit{closure object} de la forme \mintinline{cpp}|views::XXX|}
-
-		\begin{itemize}
-			\item \mintinline{cpp}|std::views::all| : tous les éléments du \mintinline{cpp}|range|
-			\item \mintinline{cpp}|std::views::ref| : références sur les éléments du \mintinline{cpp}|range|
-			\item \mintinline{cpp}|std::views::filter| : tous les éléments satisfaisants un prédicat
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::all| : tous les éléments du \mintinline{cpp}|range|
+		\item \mintinline{cpp}|std::views::ref| : références sur les éléments du \mintinline{cpp}|range|
+		\item \mintinline{cpp}|std::views::filter| : tous les éléments satisfaisants un prédicat
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1542,9 +1532,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::transform| : les éléments transformés par l'application d'une fonction
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::transform| applique d'une fonction aux éléments
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1567,9 +1555,7 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::take| : les $N$ premiers éléments
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::take| : les $N$ premiers éléments
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1577,9 +1563,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::take_while| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::take_while| : les éléments jusqu'au premier ne satisfaisant pas un prédicat
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1587,9 +1571,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::drop| : tous les éléments sauf les $N$ premiers
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::drop| : tous les éléments sauf les $N$ premiers
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1597,9 +1579,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::drop_while| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::drop_while| : tous les éléments depuis le premier ne satisfaisant pas un prédicat
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1624,10 +1604,8 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::common| convertit une vue en \mintinline{cpp}|common_range|
-			\item \mintinline{cpp}|std::views::reverse| : éléments en sens inverse
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::common| convertit une vue en \mintinline{cpp}|common_range|
+		\item \mintinline{cpp}|std::views::reverse| : éléments en sens inverse
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1635,10 +1613,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::istream| : vue par application successive de \mintinline{cpp}|operator>>| sur un flux
-			\item \mintinline{cpp}|std::views::join| joint les éléments d'un \mintinline{cpp}|range|
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::join| joint les éléments d'un range
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1647,9 +1622,7 @@
   	\end{minted}
 
 	\begin{itemize}
-		\item  [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::split| et \mintinline{cpp}|std::views::lazy_split| séparent un \mintinline{cpp}|range| en élément sur un délimiteur donné
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::split| et \mintinline{cpp}|std::views::lazy_split| découpent un range
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1672,9 +1645,7 @@
 \begin{frame}[fragile]
 	\frametitle{Ranges -- Range adaptators}
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::elements| : vue des $N\textsuperscript{e}$ éléments d'une vue de \textit{tuple-likes}
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::elements| : $N\textsuperscript{e}$ éléments d'un range de \textit{tuple-likes}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1686,9 +1657,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::keys| : vue des clés d'une vue de \mintinline{cpp}|std::pair|
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::keys| : clés d'un range de \mintinline{cpp}|std::pair|
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1696,9 +1665,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item [] \begin{itemize}
-			\item \mintinline{cpp}|std::views::values| : vue des valeurs d'une vue de \mintinline{cpp}|std::pair|
-		\end{itemize}
+		\item \mintinline{cpp}|std::views::values| : valeurs d'un range de \mintinline{cpp}|std::pair|
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -1706,7 +1673,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item Possible d'utiliser les algorithmes opérants sur les \mintinline{cpp}|range|
+		\item Surcharges des algorithmes opérants sur les ranges
 	\end{itemize}
 
 	\begin{codesample}
@@ -1715,44 +1682,6 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:38,endLineNumber:18,positionColumn:38,positionLineNumber:18,selectionStartColumn:38,selectionStartLineNumber:18,startColumn:38,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cstd::string,+int%3E+foo+%3D+%0A++%7B%0A++++%7B%22Lovelace%22s,+1815%7D,%0A++++%7B%22Turing%22s,+++1912%7D,%0A++++%7B%22Babbage%22s,++1791%7D,%0A++++%7B%22Hamilton%22s,+1936%7D,%0A++%7D%3B%0A%0A++for(auto+i+:+foo+%7C+std::views::keys)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cranges%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Aint+main()%0A%7B%0A++std::map%3Cstd::string,+int%3E+foo+%3D+%0A++%7B%0A++++%7B%22Lovelace%22s,+1815%7D,%0A++++%7B%22Turing%22s,+++1912%7D,%0A++++%7B%22Babbage%22s,++1791%7D,%0A++++%7B%22Hamilton%22s,+1936%7D,%0A++%7D%3B%0A%0A++for(auto+i+:+foo+%7C+std::views::elements%3C1%3E)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{P0896}{https://wg21.link/P0896R4}
-	\addproposal{P1035}{https://wg21.link/P1035R7}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ranges -- Projections}
-	\begin{itemize}
-		\item Paramètres des algorithmes pré-traitant les éléments du \mintinline{cpp}|range|
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		vector foo{-1, 2, -3, 4, -5, 6};
-
-		ranges::sort(foo, {}, [](int i) { return abs(i); });  // -1 2 -3 4 -5 6
-	\end{minted}
-
-\note[item]{La paire d'accolade vide indique d'utiliser la fonction de comparaison par défaut (\mintinline{cpp}|ranges::less|)}
-
-	\begin{itemize}
-		\item Ou extrayant une données des éléments du \mintinline{cpp}|range|
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		struct Task { string desc;
-		              unsigned int priority { 0 }; };
-
-		vector<Task> foo { {"AAA", 10}, {"BBB", 5},
-		                   {"CCC", 8}, {"DDD", 12} };
-
-		sort(foo, greater{}, &Task::priority);  // DDD, AAA, CCC, BBB
-	\end{minted}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cranges%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cvector%3E%0A%0Astruct+Task%0A%7B%0A++std::string+desc%3B%0A++unsigned+int+priority+%7B+0+%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3CTask%3E+foo%0A++%7B%0A++++%7B%22AAA%22,+10%7D,%0A++++%7B%22BBB%22,+5%7D,%0A++++%7B%22CCC%22,+8%7D,%0A++++%7B%22DDD%22,+12%7D,%0A++%7D%3B%0A++%0A++std::ranges::sort(foo,+std::greater%7B%7D,+%26Task::priority)%3B%0A++for(auto+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i.desc+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cranges%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector+foo%7B-1,+2,+-3,+4,+-5,+6%7D%3B%0A%0A++std::ranges::sort(foo,+%7B%7D,+%5B%5D(int+i)+%7B+return+abs(i)%3B+%7D)%3B%0A++for(int+i+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+i+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P0896}{https://wg21.link/P0896R4}

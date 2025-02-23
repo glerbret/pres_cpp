@@ -14,90 +14,6 @@
 
 \subsection*{TS}
 \begin{frame}[fragile]
-	\frametitle{TS -- Contracts}
-	\begin{itemize}
-		\item Retiré du \textit{draft} C++20 et création d'un groupe d'étude en juillet 2019
-		\item Potentiellement intégré à C++26
-		\item Support de la programmation par contrat
-		\item Remplace la vérification via \mintinline{cpp}|assert|
-		\item Et la documentation via commentaires \mintinline[escapeinside=||]{cpp}{|@|pre}, \mintinline[escapeinside=||]{cpp}{|@|post} et \mintinline[escapeinside=||]{cpp}{|@|invariant}
-		\item Plusieurs propositions initiales concurrentes
-		\item \ldots{} mais un compromis à émerger
-		\item Les contrats de fonctions membres publiques peuvent utiliser des membres privés ou protégés
-		\item Prise en compte de la virtualité (vérification des contrats du type déclaré et du type réel)
-		\item Intégration des contrats à la bibliothèque standard
-	\end{itemize}
-
-	\addproposal{p2660}{https://wg21.link/p2660r0}
-	\addproposal{P2900}{https://wg21.link/P2900R6}
-	\addproposal{P2961}{https://wg21.link/P2961R1}
-	\addproposal{P2894}{https://wg21.link/p2894r2}
-	\addproposal{P2932}{https://wg21.link/p2932r3}
-	\addproposal{P2932}{https://wg21.link/p2932r3}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{TS -- Contracts}
-	\begin{itemize}
-		\item Diverses propositions de déclaration
-		\begin{itemize}
-			\item Attributs : \mintinline{cpp}|[[pre:...]]|, \mintinline{cpp}|[[post:...]]| et  \mintinline{cpp}|[[assert:...]]|
-			\item Conditions : \mintinline{cpp}|pre(...)|, \mintinline{cpp}|post(...)| et \mintinline{cpp}|contract_assert(...)|
-			\item Fermetures : \mintinline{cpp}|pre {...}|, \mintinline{cpp}|post(...) {...}|
-			\item Alternatives : \mintinline{cpp}|[{pre:...}]|, \mintinline[escapeinside=||]{cpp}{|@|(pre: ...)}
-		\end{itemize}
-		\item Émergence d'un consensus sur la déclaration sous forme de conditions
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		int f(int i)
-		  pre (i >= 0)
-		  post (r: r > 0) {
-		  contract_assert (i >= 0);
-		  return i + 1; }
-	\end{minted}
-
-	\begin{block}{Note}
-		Les paramètres sont considérés constants lors de la vérification des contrats
-	\end{block}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+foo(int+a,+int+b)%0A++%5B%5Bpre:+a+%3E+0+%26%26+b+%3E+0%5D%5D%0A++%5B%5Bpost+r:+r+%3E+10%5D%5D%0A%7B%0A++++return+a+/+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(120,+3)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(6,+3)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%23if+0%0A++std::cout+%3C%3C+foo(120,+0)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gcontracts-trunk,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(contracts)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{p2660}{https://wg21.link/p2660r0}
-	\addproposal{P2900}{https://wg21.link/P2900R1}
-	\addproposal{P2961}{https://wg21.link/P2961R1}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{TS -- Contracts}
-	\begin{itemize}
-		\item Plusieurs comportements
-		\begin{itemize}
-			\item \mintinline{cpp}|assume| : contrat non vérifié, optimisation en considérant la condition satisfaite
-			\item \mintinline{cpp}|ignore| : contrat non vérifié
-			\item \mintinline{cpp}|observe| : appel au \textit{handler} de violation de contrat et poursuite
-			\item \mintinline{cpp}|enforce| : appel au \textit{handler} de violation de contrat et terminaison
-			\item \mintinline{cpp}|quick_enforce| : terminaison
-
-\note[item]{\mintinline{cpp}|enforce| : arrêt systématique}
-\note[item]{\mintinline{cpp}|observe| : on laisse le \textit{handler} décider}
-		\end{itemize}
-
-		\item Possiblement
-		\begin{itemize}
-			\item Applicables aux coroutines
-			\item Applicables aux pointeurs de fonction
-		\end{itemize}
-	\end{itemize}
-
-	\addproposal{p2660}{https://wg21.link/p2660r0}
-	\addproposal{P2900}{https://wg21.link/P2900R1}
-	\addproposal{P2961}{https://wg21.link/P2961R1}
-\end{frame}
-
-\begin{frame}[fragile]
 	\frametitle{TS -- Networking TS}
 	\begin{itemize}
 		\item Publié en avril 2018
@@ -279,7 +195,6 @@
 	\begin{itemize}
 		\item Exception levée durant une exécution parallèle
 		\item Politique d'exécution \mintinline{cpp}|vector_policy|
-		\item Support de SIMD (\textit{Single Instruction on Multiple Data})
 	\end{itemize}
 
 	\addproposal{N4808}{https://wg21.link/n4808}
@@ -374,6 +289,22 @@
 		\item Dépréciation des modes d'arrondi (\mintinline{cpp}|fesetround()|)
 		\item Dépréciation des types de caractère signés dans \mintinline{cpp}|iostream|
 		\item Dépréciation de la notion \mintinline{cpp}|trivial|
+	\end{itemize}
+\end{frame}
+
+\subsection*{Contract}
+\begin{frame}[fragile]
+	\frametitle{Contracts}
+	\begin{itemize}
+		\item Contrats sur les fonctions virtuelles
+		\item Contrats sur les pointeurs de fonction, sur les pointeurs de fonction membre et leurs alias
+		\item Accès à la valeur initiale des paramètres ou autres entités lors de la vérification des postconditions
+		\item Comportement \og{}assume\fg{} : compilateur peut optimiser en supposant qu'un contrat non vérifié est vrai
+		\item Choix du comportement dans l'assertion du contrat
+		\item Postcondition sur les sorties non normales d'une fonction (exception)
+		\item Contrat non évaluable au run-time
+		\item Sauvegarde d'état pour la vérification de contrat
+		\item Invariants
 	\end{itemize}
 \end{frame}
 
@@ -571,35 +502,6 @@
 			\item Conversion pointeur sur représentation vers pointeur sur objet via \mintinline{cpp}|reinterpret_cast|
 		\end{itemize}
 	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Relocate}
-	\begin{itemize}
-		\item Opération \textit{relocate} (déplacement puis destruction)
-
-\note[item]{Opération généralement implémentable par un simple \mintinline{cpp}|memcpy()|}
-\note[item]{L'idée est de permettre certaines optimisations sur les objets correspondants}
-
-		\begin{itemize}
-			\item Définition de la notion \textit{relocatable}
-			\item Concept \mintinline{cpp}|Relocatable|
-
-\note[item]{En gros, si j'ai bien compris, il s'agit d'objet sur lesquels \mintinline{cpp}|swap()| peut être appelé}
-
-			\item Définition de la notion de \textit{trivial relocatability}
-
-\note[item]{Objets respectant la règle du 0 (pas de définition utilisateur de constructeur de copie/déplacement, d'opérateur d'affection par copie/déplacement ni de destructeur)}
-
-			\item Traits \mintinline{cpp}|std::is_relocatable|, \mintinline{cpp}|std::is_nothrow_relocatable| et \mintinline{cpp}|std::is_trivially_relocatable|
-			\item Attribut \mintinline{cpp}|[[ trivially_relocatable ]]|
-			\item Algorithmes gérant cette opération : \mintinline{cpp}|std::relocate_at()|, \mintinline{cpp}|std::uninitialized_relocate()| et \mintinline{cpp}|std::uninitialized_relocate_n()|
-		\end{itemize}
-	\end{itemize}
-
-	\addproposal{P1144}{https://wg21.link/P1144R9}
-	\addproposal{P2786}{https://wg21.link/P2786R3}
-	\addproposal{P2967}{https://wg21.link/P2967R0}
 \end{frame}
 
 \subsection*{Variables}
@@ -948,7 +850,6 @@
 		\begin{itemize}
 			\item Tableaux multidimensionnels \mintinline{cpp}|std::mdarray|
 			\item Queue concurrente
-			\item \textit{Bucket array} \mintinline{cpp}|std::hive| : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
 			\item Vecteur utilisant un buffer externe
 			\item Conteneurs intrusifs : conteneurs non possédants
 
@@ -964,7 +865,6 @@
 
 	\addproposal{P1684}{https://wg21.link/p1684r5}
 	\addproposal{P0260}{https://wg21.link/p0260r7}
-	\addproposal{P0447}{https://wg21.link/p0447r23}
 	\addproposal{P3001}{https://wg21.link/p3001r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 	\addproposal{p3147}{https://wg21.link/p3147r0}
@@ -1125,14 +1025,12 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|,  \mintinline{cpp}|cache_last|, \ldots
-		\item Ajout de \mintinline{cpp}|ranges::size_hint| permettant aux ranges de réserver de la mémoire
+		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|, \ldots
 		\item \mintinline{cpp}|views::maybe| contient 0 ou 1 élément d'un objet
 		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sous-jacent
 		\item Construction d'une \mintinline{cpp}|sub-string_view| depuis \mintinline{cpp}|std::string|
 	\end{itemize}
 
-	\addproposal{p2846}{https://wg21.link/p2846r1}
 	\addproposal{p2769}{https://wg21.link/p2769r1}
 	\addproposal{p1255}{https://wg21.link/p1255r12}
 	\addproposal{p3044}{https://wg21.link/p3044r0}
@@ -1142,14 +1040,12 @@
 	\frametitle{Ranges}
 	\begin{itemize}
 		\item \mintinline{cpp}|views::upto| : séquence d'entiers de 0 à $n - 1$
-		\item \mintinline{cpp}|views::to_input| convertit un range en \textit{input-only} range
 		\item \mintinline{cpp}|views::scan| : version paresseuse de \mintinline{cpp}|std::inclusive_scan|
 		\item \mintinline{cpp}|std::ranges::any_view| : vue \og{}type-erasure\fg{}
 		\item \mintinline{cpp}|std::ranges::views::slice| : prends une tranche d'un range
 	\end{itemize}
 
 	\addproposal{p3060}{https://wg21.link/p3060r1}
-	\addproposal{p3137}{https://wg21.link/p3137r0}
 	\addproposal{p3351}{https://wg21.link/p3351r1}
 	\addproposal{p3411}{https://wg21.link/p3411r0}
 	\addproposal{p3216}{https://wg21.link/p3216r0}
@@ -1163,12 +1059,10 @@
 		\item Traits et fonctions pour garantir des conversions sans perte
 		\item Trait indiquant si un type \textit{trivially default constructible} peut être initialisé en mettant tous les octets à 0
 		\item Amélioration de l'ergonomie de \mintinline{cpp}|std::integral_constant<int>|
-		\item Trait \mintinline{cpp}|std::is_virtual_base_of| indiquant si une classe est une classe de base virtuelle d'une autre
 	\end{itemize}
 
 	\addproposal{p0870}{https://wg21.link/p0870r5}
 	\addproposal{p2782}{https://wg21.link/p2782r0}
-	\addproposal{p2985}{https://wg21.link/p2985r0}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -1318,25 +1212,6 @@
 		tuple<int, int, int> point{1, 2, 3};
 		int s = sum(point.elems...);
 	\end{minted}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Structured bindings}
-	\begin{itemize}
-		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		tuple<X, Y, Z> f();
-
-		auto [...xs] = f();
-		auto [x, ...rest] = f();
-		auto [x,y,z, ...rest] = f();
-		auto [x, ...rest, z] = f();
-		auto [...a, ...b] = f();  // ill-formed
-	\end{minted}
-
-	\addproposal{p1061}{https://wg21.link/p1061r5}
 \end{frame}
 
 \subsection*{Flux}
@@ -1527,7 +1402,6 @@
 \begin{frame}[fragile]
 	\frametitle{Concurrence}
 	\begin{itemize}
-		\item Obtention de l'adresse de l'objet référencé par \mintinline{cpp}|std::atomic_ref| via \mintinline{cpp}|data()|
 		\item Invocation concurrente
 		\item \mintinline{cpp}|std::volatile_load<T>| et \mintinline{cpp}|std::volatile_store<T>|
 		\item Gestion des processus, de la communication avec ceux-ci et des \textit{pipes}
@@ -1536,7 +1410,6 @@
 		\item Contrôle de la priorité et de la taille de pile des threads
 	\end{itemize}
 
-	\addproposal{p2835}{https://wg21.link/p2835r0}
 	\addproposal{p2689}{https://wg21.link/p2689r2}
 	\addproposal{p0876}{https://wg21.link/p0876r14}
 	\addproposal{p2019}{https://wg21.link/p2019r4}
@@ -1585,12 +1458,10 @@
 \begin{frame}[fragile]
 	\frametitle{Compilation et implémentation}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::embed()| ressources externes disponibles au \textit{runtime}
 		\item Remplaçant à \mintinline{cpp}|#ifdef| ... \mintinline{cpp}|#endif|
 		\item API d'interaction avec le système de build et le compilateur
 	\end{itemize}
 
-	\addproposal{p1967}{https://wg21.link/p1967r11}
 	\addproposal{p2978}{https://wg21.link/p2978r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 \end{frame}
