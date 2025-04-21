@@ -66,13 +66,16 @@
 	\frametitle{Erroneous Behavior}
 	\begin{itemize}
 		\item Ajout d'un nouveau type de comportement : \textit{Erroneous Behavior}
-		\item Indique un code incorrect, mais bien défini (dont \textit{Implementation Defined} et \textit{Unspecified Behavior})
-		\item Recommandation au compilateur de lever un warning
-		\item Compilateur peut rejeter le code
+		\item Indique un code incorrect, mais bien défini
+		\item Recommandation à l'implémentation de fournir unn diagnostic (warning à la compilation, erreur au \textit{runtime}, \ldots{})
 		\item Applicable aux lectures de variables non initialisées
 		\begin{itemize}
 			\item Doit retourner une valeur \og{}erronée\fg{}
-			\item \ldots{}et non la valeur d'une autre variable récemment libérée
+
+\note[item]{Valeur propre à l'implémentation, indiquant la non-initialisation}
+\note[item]{En particulier pas la valeur précédente de la zone mémoire, ni 0}
+
+			\item \ldots{} et non la valeur d'une autre variable récemment libérée
 		\end{itemize}
 	\end{itemize}
 
@@ -743,6 +746,22 @@
 		auto [a, b [[attribute]], c] = foo();
 	\end{minted}
 
+	\begin{itemize}
+		\item \mintinline{cpp}|[[indeterminate]]| indique qu'une variable non initialisée a une valeur indéterminé
+		\begin{itemize}
+			\item Conséquence de l'introduction d'\textit{Erroneous Behavior}
+			\item Permet de revenir au comportement pré-C++26
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int x [[indeterminate]]; // indeterminate value
+		int y;                   // erroneous value
+
+		f(x); // undefined behavior
+		f(y); // erroneous behavior
+	\end{minted}
+
 	\addproposal{P0609}{https://wg21.link/P0609R3}
 \end{frame}
 
@@ -942,6 +961,8 @@
 \note[item]{\mintinline{cpp}|enforce| : arrêt systématique}
 \note[item]{\mintinline{cpp}|observe| : on laisse le \textit{handler} décider}
 		\end{itemize}
+		\item Possibilité de remplacer le \textit{handler} par défaut en définissant une fonction \mintinline{cpp}|handle_contract_violation|
+
 	\end{itemize}
 
 	\addproposal{P2900}{https://wg21.link/P2900R14}
