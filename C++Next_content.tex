@@ -449,11 +449,17 @@
 		\item \mintinline{cpp}|CHAR_BIT| impérativement égal à 8 (\textit{\og{}There are exactly 8 bits in a byte\fg{}})
 
 \note[item]{Auparavant obligatoirement supérieur ou égal à 8, contraint par les plages garanties de \mintinline{cpp}|signed char| et \mintinline{cpp}|unsigned char|, mais pas d'autres contraintes (même pas multiple de 8)}
+
+		\item Entiers de $n$ bits similaires à \mintinline{cpp}|_BitInt| du C
+		\item \mintinline{cpp}|std::to_signed| et \mintinline{cpp}|std::to_unsigned| permet d'obtenir le type signé/non signé correspondant au type initial
 	\end{itemize}
 
 	\addproposal{p3248}{https://wg21.link/p3248r0}
 	\addproposal{p3375}{https://wg21.link/p3375r0}
 	\addproposal{p3477}{https://wg21.link/p3477r0}
+	\addproposal{p3635}{https://wg21.link/p3635r0}
+	\addproposal{p3639}{https://wg21.link/p3639r0}
+	\addproposal{p3643}{https://wg21.link/p3643r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -595,8 +601,28 @@
 		\item \mintinline{cpp}|break label| et \mintinline{cpp}|continue label| appliqués à une boucle englobante
 	\end{itemize}
 
+	\begin{minted}{cpp}
+		outer: for(...) {
+		  for(...) {
+		    if (...) {
+		      break outer; } } }
+	\end{minted}
+
 	\addproposal{P2881}{https://wg21.link/p2881r0}
 	\addproposal{p3568}{https://wg21.link/p3568r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contrôle de flux}
+	\begin{itemize}
+		\item Ajout d'une expression au \textit{range-based for loop} évalué à chaque fin d'itération
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		for(int i = 0; auto x : e; ++i) { ... }
+	\end{minted}
+
+	\addproposal{p3667}{https://wg21.link/p3667r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -743,6 +769,7 @@
 		f(x, y);
 	\end{minted}
 
+	\addproposal{p3668}{https://wg21.link/p3668r0}
 	\addproposal{P2952}{https://wg21.link/p2952r0}
 \end{frame}
 
@@ -763,6 +790,7 @@
 
 	\begin{itemize}
 		\item Opérateur \mintinline{cpp}|nameof|
+		\item Amélioration de la syntaxe pour les surcharges de \mintinline{cpp}|++| et \mintinline{cpp}|--| (\mintinline{cpp}|prefix| / \mintinline{cpp}|postfix|)
 	\end{itemize}
 
 	\addproposal{P2971}{https://wg21.link/p2971r1}
@@ -921,6 +949,7 @@
 		\item Voire dépréciation de la construction d'un \mintinline{cpp}|std::string| depuis un caractère
 		\item \mintinline{cpp}|fixed_string| : chaîne de caractères utilisable au compile-time
 		\item Ajout de \mintinline{cpp}|first()| et de \mintinline{cpp}|last()| à \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view| pour récupérer les $n$ premiers ou derniers caractères
+		\item \mintinline{cpp}|std::zstring_view| équivalent à \mintinline{cpp}|std::string_view| garantissant la présence d'un \mintinline{cpp}|\0| terminal
 	\end{itemize}
 
 	\addproposal{p3094}{https://wg21.link/p3094r6}
@@ -999,6 +1028,7 @@
 		\item Manipulation de bits : \mintinline{cpp}|bit_reverse|, \mintinline{cpp}|bit_repeat|, \mintinline{cpp}|bit_compress|, \mintinline{cpp}|bit_expand|, \mintinline{cpp}|next_bit_permutation| et \mintinline{cpp}|prev_bit_permutation|
 		\item Fonctions membres \mintinline{cpp}|one()|, \mintinline{cpp}|countl_zero()|, \mintinline{cpp}|countl_one()|, \mintinline{cpp}|countr_zero()|, \mintinline{cpp}|countr_one()|, \mintinline{cpp}|rotl()|, \mintinline{cpp}|rotr()| et \mintinline{cpp}|reverse()| à \mintinline{cpp}|std::bitset|
 		\item \mintinline{cpp}|std::first_factor| retourne le plus petit facteur premier d'un nombre
+		\item \mintinline{cpp}|std::uninitialized_relocate|, \mintinline{cpp}|std::uninitialized_relocate_n| et  \mintinline{cpp}|std::uninitialized_relocate_backward|
 	\end{itemize}
 
 	\addproposal{P2848}{https://wg21.link/P2848R0}
@@ -1007,6 +1037,21 @@
 	\addproposal{p3104}{https://wg21.link/p3104r0}
 	\addproposal{p3103}{https://wg21.link/p3103r0}
 	\addproposal{p3133}{https://wg21.link/p3133r0}
+	\addproposal{p3516}{https://wg21.link/p3516r1}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Algorithmes}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::isqrt()| : racine entière d'un nombre positif
+
+\note[item]{Plus grand entier dont le carré est inférieur ou égal au nombre initial}
+
+		\item \mintinline{cpp}|std::clmul()| : multiplication sans retenu (\textit{XOR multiplication})
+	\end{itemize}
+
+	\addproposal{p3605}{https://wg21.link/p3605r0}
+	\addproposal{p3642}{https://wg21.link/p3642r0}
 \end{frame}
 
 \subsection*{Ranges}
@@ -1029,11 +1074,13 @@
 		\item \mintinline{cpp}|views::maybe| contient 0 ou 1 élément d'un objet
 		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sous-jacent
 		\item Construction d'une \mintinline{cpp}|sub-string_view| depuis \mintinline{cpp}|std::string|
+		\item Levée des restriction de \mintinline{cpp}|range::to| pour accepter les vues
 	\end{itemize}
 
 	\addproposal{p2769}{https://wg21.link/p2769r1}
 	\addproposal{p1255}{https://wg21.link/p1255r12}
 	\addproposal{p3044}{https://wg21.link/p3044r0}
+	\addproposal{p3544}{https://wg21.link/p3544r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1317,9 +1364,27 @@
 	\frametitle{Concepts}
 	\begin{itemize}
 		\item Concept pour les algorithmes numériques
+		\item \mintinline{cpp}|either| et \mintinline{cpp}|neither|
 	\end{itemize}
 
+	\begin{minted}{cpp}
+		void func(either<char, short> auto) {...}
+		// Equivalent a
+		template<typename T>
+		requires(same_as<T, char> or same_as<T, short>)
+		void func(T) {...}
+	\end{minted}
+
+	\begin{minted}{cpp}
+		void func(neither<short, int> auto) {...}
+		// Equivalent a
+		template<typename T>
+		requires(not same_as<T, short> and not same_as<T, int>)
+		void func(T) {...}
+	\end{minted}
+
 	\addproposal{p3003}{https://wg21.link/p3003r0}
+	\addproposal{p3625}{https://wg21.link/p3625r0}
 \end{frame}
 
 \subsection*{Polymorphismes}
@@ -1460,9 +1525,11 @@
 	\begin{itemize}
 		\item Remplaçant à \mintinline{cpp}|#ifdef| ... \mintinline{cpp}|#endif|
 		\item API d'interaction avec le système de build et le compilateur
+		\item Ajout d'un offset à \mintinline{cpp}|#embed|
 	\end{itemize}
 
 	\addproposal{p2978}{https://wg21.link/p2978r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{p3540}{https://wg21.link/p3540r1}
 \end{frame}
 \end{document}
