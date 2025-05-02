@@ -85,7 +85,7 @@
 \begin{frame}[fragile]
 	\frametitle{Undefined / unspecified / ill-formed}
 	\begin{itemize}
-		\item La libération d'un pointeur sur un type incomplet depuis \textit{ill-formed}
+		\item La libération d'un pointeur sur un type incomplet devient \textit{ill-formed}
 
 \note[item]{Auparavant, undefined behavior}
 
@@ -326,6 +326,19 @@
 	\frametitle{Structured binding}
 	\begin{itemize}
 		\item Utilisable comme condition dans les \mintinline{cpp}|if|, \mintinline{cpp}|while|, \mintinline{cpp}|for| et \mintinline{cpp}|switch|
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		struct Foo {
+		  int a, b;
+		  operator bool () const { return a != b; }};
+
+		  if(auto [a, b] = Foo{...})
+		  // Equivalent a
+		  if(auto [a, b] = Foo{...}; a != b)
+	\end{minted}
+
+	\begin{itemize}
 		\item Utilisation de \textit{parameters pack} dans les \textit{structures bindings}
 	\end{itemize}
 
@@ -339,6 +352,10 @@
 		auto [...a, ...b] = f();  // ill-formed
 	\end{minted}
 
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo+%0A%7B%0A++int+a%3B%0A++int+b%3B%0A%0A++explicit+operator+bool+()+const%0A++%7B+%0A++++return+a+!!%3D+b%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++if(auto+%5Ba,+b%5D+%3D+Foo%7B2,+5%7D)%0A++%7B%0A++++std::cout+%3C%3C+%222+!!%3D+5%5Cn%22%3B%0A++%7D%0A++else%0A++%7B%0A++++std::cout+%3C%3C+%222+%3D%3D+5%5Cn%22%3B%0A++%7D%0A%0A++if(auto+%5Ba,+b%5D+%3D+Foo%7B2,+2%7D)%0A++%7B%0A++++std::cout+%3C%3C+%222+!!%3D+2%5Cn%22%3B%0A++%7D%0A++else%0A++%7B%0A++++std::cout+%3C%3C+%222+%3D%3D+2%5Cn%22%3B%0A++%7D%0A%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B2c+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+
 	\addproposal{p0963}{https://wg21.link/p0963r3}
 	\addproposal{p1061}{https://wg21.link/p1061r10}
 \end{frame}
@@ -351,6 +368,17 @@
 		\item Permet d'indiquer la raison de la suppression
 		\item Et d'obtenir de meilleures erreurs de compilation
 	\end{itemize}
+
+	\begin{minted}{cpp}
+		void foo() = delete("Unsafe, use bar");
+
+		// Avertisselent: use of deleted function 'void foo()': Unsafe, use bar
+		foo();
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:40,endLineNumber:3,positionColumn:40,positionLineNumber:3,selectionStartColumn:1,selectionStartLineNumber:3,startColumn:1,startLineNumber:3),source:'%23include+%3Ciostream%3E%0A%0Avoid+foo()+%3D+delete(%22Unsafe,+use+bar%22)%3B%0A%0Aint+main()%0A%7B%0A+++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B2c+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P2573}{https://wg21.link/P2573R2}
 \end{frame}
@@ -650,6 +678,10 @@
 
 		first_plus_last(1, 2, 10);  // 11
 	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename...+T%3E%0Avoid+first_plus_last(T...+values)%0A%7B%0A++std::cout+%3C%3C+T...%5B0%5D(values...%5B0%5D+%2B+values...%5Bsizeof...(values)-1%5D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++first_plus_last(1,+2,+10)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B2c+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
 
 	\addproposal{P2662}{https://wg21.link/P2662R3}
 \end{frame}
@@ -988,7 +1020,7 @@
 
 	\begin{minted}{cpp}
 		const unsigned char foo[] = {
-			#embed "art.png"
+			#embed "foo.png"
 		};
 	\end{minted}
 
