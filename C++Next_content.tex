@@ -289,6 +289,7 @@
 		\item Dépréciation des modes d'arrondi (\mintinline{cpp}|fesetround()|)
 		\item Dépréciation des types de caractère signés dans \mintinline{cpp}|iostream|
 		\item Dépréciation de la notion \mintinline{cpp}|trivial|
+		\item Dépréciation des conversions implicites entre \mintinline{cpp}|char8_t|, \mintinline{cpp}|char16_t| et \mintinline{cpp}|char32_t|
 	\end{itemize}
 \end{frame}
 
@@ -414,7 +415,12 @@
 		auto b = f"Value : {a}";
 	\end{minted}
 
+	\begin{itemize}
+		\item Utilisation du préfixe \mintinline{cpp}|0o| pour les nombres octaux (dépréciation de \mintinline{cpp}|0|)
+	\end{itemize}
+
 	\addproposal{p3412}{https://wg21.link/p3412r0}
+	\addproposal{P0085}{https://wg21.link/P0085R0}
 \end{frame}
 
 \subsection*{Types}
@@ -452,6 +458,7 @@
 
 		\item Entiers de $n$ bits similaires à \mintinline{cpp}|_BitInt| du C
 		\item \mintinline{cpp}|std::to_signed| et \mintinline{cpp}|std::to_unsigned| permet d'obtenir le type signé/non signé correspondant au type initial
+		\item Amélioration des nombres \textit{floating-point}
 	\end{itemize}
 
 	\addproposal{p3248}{https://wg21.link/p3248r0}
@@ -460,6 +467,7 @@
 	\addproposal{p3635}{https://wg21.link/p3635r0}
 	\addproposal{p3639}{https://wg21.link/p3639r0}
 	\addproposal{p3643}{https://wg21.link/p3643r0}
+	\addproposal{P3715}{https://wg21.link/P3715R0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -712,7 +720,17 @@
 		foo(100, 10, d: 480, e: false, c: 640);
 	\end{minted}
 
+	\begin{itemize}
+		\item Fourniture d'un paramètre à \mintinline{cpp}|inline|
+		\begin{itemize}
+			\item \mintinline{cpp}|std::noinline| : désactivation de l'inlining
+			\item \mintinline{cpp}|std::normal_inline| : comportement actuel, incitation (équivalent à \mintinline{cpp}|inline| sans paramètre)
+			\item \mintinline{cpp}|std::always_inline| : force l'inlining
+		\end{itemize}
+	\end{itemize}
+
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{p3676}{https://wg21.link/p3676r0}
 \end{frame}
 
 \subsection*{Opérateurs}
@@ -769,7 +787,7 @@
 		f(x, y);
 	\end{minted}
 
-	\addproposal{p3668}{https://wg21.link/p3668r0}
+	\addproposal{p3668}{https://wg21.link/P3668R1}
 	\addproposal{P2952}{https://wg21.link/p2952r0}
 \end{frame}
 
@@ -843,7 +861,7 @@
 	\end{itemize}
 
 	\addproposal{p3421}{https://wg21.link/p3421r0}
-	\addproposal{p3588}{https://wg21.link/p3588r0}
+	\addproposal{p3588}{https://wg21.link/p3588r1}
 \end{frame}
 
 \subsection*{Énumération}
@@ -889,6 +907,7 @@
 		\item Contrôle de la politique de croissance des vecteurs
 		\item Ajout de \mintinline{cpp}|push_front()| à \mintinline{cpp}|std::vector|
 		\item Allocateur pour \mintinline{cpp}|std::inplace_vector|
+		\item Comparaison entre \mintinline{cpp}|std::inplace_vector| de capacités différentes
 	\end{itemize}
 
 	\addproposal{P1684}{https://wg21.link/p1684r5}
@@ -897,6 +916,7 @@
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 	\addproposal{p3147}{https://wg21.link/p3147r0}
 	\addproposal{p3160}{https://wg21.link/p3160r0}
+	\addproposal{p3698}{https://wg21.link/p3698r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -949,11 +969,14 @@
 		\item Voire dépréciation de la construction d'un \mintinline{cpp}|std::string| depuis un caractère
 		\item \mintinline{cpp}|fixed_string| : chaîne de caractères utilisable au compile-time
 		\item Ajout de \mintinline{cpp}|first()| et de \mintinline{cpp}|last()| à \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view| pour récupérer les $n$ premiers ou derniers caractères
-		\item \mintinline{cpp}|std::zstring_view| équivalent à \mintinline{cpp}|std::string_view| garantissant la présence d'un \mintinline{cpp}|\0| terminal
+		\item \mintinline{cpp}|std::zstring_view| équivalent à \mintinline{cpp}|std::string_view| garantissant la présence d'un \mintinline[escapeinside=||]{cpp}{|\textbackslash|0} terminal
+		\item Sentinelle pour les chaînes null-terminée, pour l'usage de range sur ces chaînes
 	\end{itemize}
 
 	\addproposal{p3094}{https://wg21.link/p3094r6}
 	\addproposal{p3283}{https://wg21.link/p3283r0}
+	\addproposal{P3655}{https://wg21.link/P3655R1}
+	\addproposal{P3710}{https://wg21.link/P3710R0}
 \end{frame}
 
 \subsection*{Tuples}
@@ -1025,6 +1048,7 @@
 		\item Gestion des UUID
 		\item Fonctions statistiques (moyenne, médiane, variance, \ldots{})
 		\item Améliorations du générateur aléatoire
+		\item Ajout de fonctions \og{}simples\fg{} pour la génération de nombres aléatoires
 		\item Manipulation de bits : \mintinline{cpp}|bit_reverse|, \mintinline{cpp}|bit_repeat|, \mintinline{cpp}|bit_compress|, \mintinline{cpp}|bit_expand|, \mintinline{cpp}|next_bit_permutation| et \mintinline{cpp}|prev_bit_permutation|
 		\item Fonctions membres \mintinline{cpp}|one()|, \mintinline{cpp}|countl_zero()|, \mintinline{cpp}|countl_one()|, \mintinline{cpp}|countr_zero()|, \mintinline{cpp}|countr_one()|, \mintinline{cpp}|rotl()|, \mintinline{cpp}|rotr()| et \mintinline{cpp}|reverse()| à \mintinline{cpp}|std::bitset|
 		\item \mintinline{cpp}|std::first_factor| retourne le plus petit facteur premier d'un nombre
@@ -1034,6 +1058,7 @@
 	\addproposal{P2848}{https://wg21.link/P2848R0}
 	\addproposal{p1708}{https://wg21.link/p1708r7}
 	\addproposal{p2681}{https://wg21.link/p2681r1}
+	\addproposal{p3689}{https://wg21.link/p3689r0}
 	\addproposal{p3104}{https://wg21.link/p3104r0}
 	\addproposal{p3103}{https://wg21.link/p3103r0}
 	\addproposal{p3133}{https://wg21.link/p3133r0}
@@ -1048,10 +1073,28 @@
 \note[item]{Plus grand entier dont le carré est inférieur ou égal au nombre initial}
 
 		\item \mintinline{cpp}|std::clmul()| : multiplication sans retenu (\textit{XOR multiplication})
+		\item Fonctions de manipulation de caractères
+		\begin{itemize}
+			\item \mintinline{cpp}|is_ascii|, \mintinline{cpp}|is_ascii_alpha|, \mintinline{cpp}|is_ascii_alphanumeric|, \ldots
+			\item \mintinline{cpp}|ascii_to_lower|, \mintinline{cpp}|ascii_to_upper|
+			\item \mintinline{cpp}|ascii_case_insensitive_compare|, \mintinline{cpp}|ascii_case_insensitive_equal|
+			\item Alternative plus riche et robuste aux fonctions de \mintinline{cpp}|<cctype>|
+
+\note[item]{Support de \mintinline{cpp}|char8_t|, \mintinline{cpp}|char16_t| et \mintinline{cpp}|char32_t|, fonction \mintinline{cpp}|constexpr|, meilleure gestion typage}
+
+			\item Fonctions libres de manipulation de \textit{string view-like}
+			\begin{itemize}
+				\item \mintinline{cpp}|std::starts_with()| et \mintinline{cpp}|std::ends_with()|
+				\item \mintinline{cpp}|std::join()|
+				\item \mintinline{cpp}|std::is_null_or_empty()|
+			\end{itemize}
+		\end{itemize}
 	\end{itemize}
 
 	\addproposal{p3605}{https://wg21.link/p3605r0}
 	\addproposal{p3642}{https://wg21.link/p3642r0}
+	\addproposal{p3688}{https://wg21.link/p3688r0}
+	\addproposal{p3711}{https://wg21.link/p3711r0}
 \end{frame}
 
 \subsection*{Ranges}
@@ -1104,12 +1147,18 @@
 	\begin{itemize}
 		\item Trait \mintinline{cpp}|std::is_narrowing_convertible|
 		\item Traits et fonctions pour garantir des conversions sans perte
+		\begin{itemize}
+			\item \mintinline{cpp}|is_value_preserving_convertible_v|
+		\end{itemize}
 		\item Trait indiquant si un type \textit{trivially default constructible} peut être initialisé en mettant tous les octets à 0
 		\item Amélioration de l'ergonomie de \mintinline{cpp}|std::integral_constant<int>|
+		\item \mintinline{cpp}|std::is_always_exhaustive| indique qu'un objet ne contient pas de bit de padding
 	\end{itemize}
 
 	\addproposal{p0870}{https://wg21.link/p0870r5}
 	\addproposal{p2782}{https://wg21.link/p2782r0}
+	\addproposal{P2509}{https://wg21.link/P2509R1}
+	\addproposal{p3707}{https://wg21.link/p3707r0}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -1364,6 +1413,21 @@
 	\frametitle{Concepts}
 	\begin{itemize}
 		\item Concept pour les algorithmes numériques
+		\item \mintinline{cpp}|std::integer| pour les nombres entiers
+		\item \mintinline{cpp}|std::signed_integer| et \mintinline{cpp}|std::unsigned_integer|
+	\end{itemize}
+
+	\begin{block}{\mintinline[style=white]{cpp}|std::integer| vs. \mintinline[style=white]{cpp}|std::integral|}
+		\mintinline{cpp}|char| et \mintinline{cpp}|bool| ne sont pas des \mintinline{cpp}|std::integer|
+	\end{block}
+
+	\addproposal{p3003}{https://wg21.link/p3003r0}
+	\addproposal{p3701}{https://wg21.link/p3701r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Concepts}
+	\begin{itemize}
 		\item \mintinline{cpp}|either| et \mintinline{cpp}|neither|
 	\end{itemize}
 
@@ -1383,7 +1447,6 @@
 		void func(T) {...}
 	\end{minted}
 
-	\addproposal{p3003}{https://wg21.link/p3003r0}
 	\addproposal{p3625}{https://wg21.link/p3625r0}
 \end{frame}
 
@@ -1473,6 +1536,9 @@
 		\item \mintinline{cpp}|std::fiber_context| : changement de contexte \textit{stackfull} sans besoin de \textit{scheduler}
 		\item Ajout d'un nom aux threads et mutex
 		\item Contrôle de la priorité et de la taille de pile des threads
+		\item Déclaration \mintinline{cpp}|const| des fonctions \mintinline{cpp}|lock()| et \mintinline{cpp}|unlock()| des mutex
+
+\note[item]{Pour ne pas devoir déclaré \mintinline{cpp}|mutable| tous les mutex. Déjà le cas dans d'autres langages, p.ex. Rust}
 	\end{itemize}
 
 	\addproposal{p2689}{https://wg21.link/p2689r2}
@@ -1480,6 +1546,7 @@
 	\addproposal{p2019}{https://wg21.link/p2019r4}
 	\addproposal{p3022}{https://wg21.link/p3022r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{p3703}{https://wg21.link/p3703r0}
 \end{frame}
 
 \begin{frame}[fragile]
