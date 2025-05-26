@@ -293,6 +293,21 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Suppression}
+	\begin{itemize}
+		\item Suppression d'éléments précédemment dépréciés
+		\begin{itemize}
+			\item Comparaison de tableau C (se fait sur les adresses)
+			\item \mintinline{cpp}|volatile|
+			\item \mintinline{cpp}|std::allocator|
+			\item \mintinline{cpp}|std::basic_string::reserve()| sans argument
+			\item \textit{Unicode Conversion Facets}
+			\item \textit{Locale Category Facets for Unicode}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
 \subsection*{Contract}
 \begin{frame}[fragile]
 	\frametitle{Contracts}
@@ -309,25 +324,11 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Suppression}
-	\begin{itemize}
-		\item Suppression d'éléments précédemment dépréciés
-		\begin{itemize}
-			\item Comparaison de tableau C (se fait sur les adresses)
-			\item \mintinline{cpp}|volatile|
-			\item \mintinline{cpp}|std::allocator|
-			\item \mintinline{cpp}|std::basic_string::reserve()| sans argument
-			\item \textit{Unicode Conversion Facets}
-			\item \textit{Locale Category Facets for Unicode}
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
+\subsection*{Comportement}
 \begin{frame}[fragile]
 	\frametitle{Erroneous behavior}
 	\begin{itemize}
-		\item Applicable à l'absence de retour des affectations
+		\item Applicable à l'absence de retour des fonctions d'affectations
 		\item \mintinline{cpp}|std::erroneous()| provoque un comportement erroné
 	\end{itemize}
 
@@ -458,7 +459,7 @@
 
 		\item Entiers de $n$ bits similaires à \mintinline{cpp}|_BitInt| du C
 		\item \mintinline{cpp}|std::to_signed| et \mintinline{cpp}|std::to_unsigned| permet d'obtenir le type signé/non signé correspondant au type initial
-		\item Amélioration des nombres \textit{floating-point}
+		\item Amélioration des nombres flottants
 	\end{itemize}
 
 	\addproposal{p3248}{https://wg21.link/p3248r0}
