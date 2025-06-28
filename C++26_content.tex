@@ -616,7 +616,12 @@
 		for(int i: not_empty) { std::cout << i; } // Un element
 	\end{minted}
 
+	\begin{itemize}
+		\item Ajout du choix de l'algorithme de parallélisme aux ranges
+	\end{itemize}
+
 	\addproposal{p3168}{https://wg21.link/p3168r2}
+	\addproposal{p3179}{https://wg21.link/p3179r8}
 \end{frame}
 
 \subsection*{Ratio}
@@ -916,12 +921,18 @@
 			\item Basé sur des \textit{schedulers}, \textit{senders} et \textit{receivers}
 			\item Et un ensemble d'algorithmes asynchrones
 		\end{itemize}
+		\item \mintinline{cpp}|std::async_scope| : RAII sur du code non séquentiel et non \textit{stack-based}
+		\item Contexte d'exécution asynchrone standard (interface aux pools de thread)
+		\item Type pour contenir les \textit{coroutine tasks} : \mintinline{cpp}|std::execution::task|
 	\end{itemize}
 
 	\addproposal{P0493}{https://wg21.link/P0493R5}
 	\addproposal{p2835}{https://wg21.link/p2835r7}
 	\addproposal{p2300}{https://wg21.link/p2300r10}
 	\addproposal{p3325}{https://wg21.link/p3325r5}
+	\addproposal{p3149}{https://wg21.link/p3149r10}
+	\addproposal{p2079}{https://wg21.link/p2079r8}
+	\addproposal{p3552}{https://wg21.link/p3552r2}
 \end{frame}
 
 \subsection*{Générateurs aléatoires}
@@ -1000,6 +1011,52 @@
 	\end{itemize}
 
 	\addproposal{P2900}{https://wg21.link/P2900R14}
+\end{frame}
+
+\subsection*{Reflection}
+\begin{frame}[fragile]
+	\frametitle{Reflection}
+	\begin{itemize}
+		\item Support de la réflexion statique
+		\begin{itemize}
+			\item Un type opaque \mintinline{cpp}|std::meta::info| pour représenter les éléments du programme
+			\item Un opérateur de réflexion \mintinline{cpp}|^^|
+			\item Plusieurs méta-fonctions de réflexion
+			\item Une construction de production des éléments \mintinline{cpp}|[: refl :]|
+		\end{itemize}
+		\item Introspection
+		\item Méta-programmation et code \textit{compile-time}
+		\item Injection
+		\item Construction de données statiques depuis du \textit{compile-time} : \mintinline{cpp}|std::define_static_string|, \mintinline{cpp}|std::define_static_object| et \mintinline{cpp}|std::define_static_array|
+	\end{itemize}
+
+	\addproposal{p2996}{https://wg21.link/p2996r12}
+	\addproposal{p3096}{https://wg21.link/p3096r9}
+	\addproposal{p1306}{https://wg21.link/p1306r4}
+	\addproposal{p3491}{https://wg21.link/p3491r2}
+	\addproposal{p3293}{https://wg21.link/p3293r2}
+	\addproposal{p3394}{https://wg21.link/p3394r3}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Reflection}
+	\begin{minted}{cpp}
+		enum Color { red, green, blue };
+
+		template<typename E, bool Enumerable = meta::is_enumerable_type(^^E)>
+		requires is_enum_v<E>
+		constexpr string_view enum_to_string(E value) {
+		  if constexpr (Enumerable)
+		    template for (constexpr auto e :
+		      define_static_array(meta::enumerators_of(^^E)))
+		  if (value == [:e:])
+		    return meta::identifier_of(e);
+
+		return "<unnamed>"; }
+
+		enum_to_string(Color::red);  // red
+		enum_to_string(Color(42));   // <unnamed>
+	\end{minted}
 \end{frame}
 
 \subsection*{Compilation et implémentation}

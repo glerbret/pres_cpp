@@ -232,56 +232,6 @@
 	\addproposal{N4956}{https://wg21.link/n4956}
 \end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{TS -- Reflection}
-	\begin{itemize}
-		\item Probablement intégré à C++26 (design validé, wording en cours de revue)
-		\item Réflexion statique uniquement
-		\item Introspection
-		\item Méta-programmation et code \textit{compile-time}
-		\item Injection
-		\item Méta-classes
-		\begin{itemize}
-			\item Construction de types de classes (dont les classes elles-mêmes) ayant
-			\begin{itemize}
-				\item Des contraintes
-				\item Des comportements par défaut
-				\item Des opérations par défaut
-			\end{itemize}
-			\item \mintinline{cpp}|class|, \mintinline{cpp}|struct|, \mintinline{cpp}|enum class|, \textit{interface}, \textit{value type}
-		\end{itemize}
-		\item Bindings vers d'autres langages (JS, Python) via ces mécanismes
-	\end{itemize}
-
-	\addproposal{N4856}{https://wg21.link/n4856}
-	\addproposal{P1240}{https://wg21.link/p1240r2}
-	\addproposal{p2996}{https://wg21.link/p2996r3}
-	\addproposal{p3294}{https://wg21.link/p3294r0}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{TS -- Reflection}
-	\begin{minted}{cpp}
-		enum Color { red, green, blue };
-
-		template <typename E> requires is_enum_v<E>
-		constexpr string enum_to_string(E value) {
-		  template for(constexpr auto e : meta::members_of(^E)) {
-		    if(value == [:e:]) {
-		      return string(meta::name_of(e));
-		    }
-		  }
-		  return "<unnamed>";
-		}
-
-		enum_to_string(Color::red);  // red
-		enum_to_string(Color(42));   // <unnamed>
-	\end{minted}
-
-	\addproposal{N4856}{https://wg21.link/n4856}
-	\addproposal{P1240}{https://wg21.link/p1240r2}
-\end{frame}
-
 \subsection*{Dépréciation et suppression}
 \begin{frame}[fragile]
 	\frametitle{Dépréciation}
@@ -1451,6 +1401,24 @@
 	\end{minted}
 
 	\addproposal{p3625}{https://wg21.link/p3625r0}
+\end{frame}
+
+\subsection*{Reflection}
+\begin{frame}[fragile]
+	\frametitle{Reflection}
+	\begin{itemize}
+		\item Méta-classes
+		\begin{itemize}
+			\item Construction de types de classes (dont les classes elles-mêmes) ayant
+			\begin{itemize}
+				\item Des contraintes
+				\item Des comportements par défaut
+				\item Des opérations par défaut
+			\end{itemize}
+			\item \mintinline{cpp}|class|, \mintinline{cpp}|struct|, \mintinline{cpp}|enum class|, \textit{interface}, \textit{value type}
+		\end{itemize}
+		\item Bindings vers d'autres langages (JS, Python) via ces mécanismes
+	\end{itemize}
 \end{frame}
 
 \subsection*{Polymorphismes}
