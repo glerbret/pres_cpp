@@ -240,7 +240,12 @@
 		\item Dépréciation des types de caractère signés dans \mintinline{cpp}|iostream|
 		\item Dépréciation de la notion \mintinline{cpp}|trivial|
 		\item Dépréciation des conversions implicites entre \mintinline{cpp}|char8_t|, \mintinline{cpp}|char16_t| et \mintinline{cpp}|char32_t|
+		\item Dépréciation du paramètre template \mintinline{cpp}|std::char_traits| de \mintinline{cpp}|std::basic_string|, \mintinline{cpp}|std::basic_string_view| et des flux
+		\item Dépréciation de la conversion implicite de \mintinline{cpp}|bool| vers un type caractère
 	\end{itemize}
+
+	\addproposal{p3681}{https://wg21.link/p3681r0}
+	\addproposal{p3765}{https://wg21.link/p3765r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -334,7 +339,10 @@
 \note[item]{Algorithmes défini par Unicode pour travailler sur les séquences de code points}
 
 		\item Support d'Unicode (UTF-8, UTF-16 et UTF-32) dans la bibliothèque standard
+		\item Support des alias \textit{figment} et \textit{abbreviation} des noms de caractère
 	\end{itemize}
+
+	\addproposal{p3733}{https://wg21.link/p3733r0}
 \end{frame}
 
 \subsection*{Ligne de commande}
@@ -580,7 +588,15 @@
 		for(int i = 0; auto x : e; ++i) { ... }
 	\end{minted}
 
-	\addproposal{p3667}{https://wg21.link/p3667r0}
+	\begin{itemize}
+		\item Ranged if-statement
+		\begin{itemize}
+			\item Similaire au range-for si le range n'est pas vide
+			\item Appel du contenu du \mintinline{cpp}|else| si le range est vide
+		\end{itemize}
+	\end{itemize}
+
+	\addproposal{p3784}{https://wg21.link/p3784r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -683,6 +699,19 @@
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 	\addproposal{p3676}{https://wg21.link/p3676r0}
 	\addproposal{n2216}{https://wg21.link/n2216}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contexte d'appel}
+	\begin{itemize}
+		\item \mintinline{cpp}|__local_ctx| récupère la contexte d'appel local
+		\item \ldots ajout à \mintinline{cpp}|std::source_location::current()| d'un paramètre valorisé par défaut à \mintinline{cpp}|__local_ctx|
+
+\note[item]{Permet d'encapsuler \mintinline{cpp}|std::source_location::current()| tout en lui fournissant le contexte d'appel de la classe l'encapsulant}
+
+	\end{itemize}
+
+	\addproposal{p3802}{https://wg21.link/p3802r0}
 \end{frame}
 
 \subsection*{Opérateurs}
@@ -905,11 +934,20 @@
 		\item Support des \textit{node-handle} par \mintinline{cpp}|std::list| et \mintinline{cpp}|std::forward_list|
 		\item Ajout de \mintinline{cpp}|pop_value()| à \mintinline{cpp}|std::stack|, \mintinline{cpp}|std::queue| et \mintinline{cpp}|std::priority_queue|
 		\item Fonction libre d'accès \og{}range-checked\fg{} à un élément \mintinline{cpp}|std::at()|
+		\item Uniformisation de \mintinline{cpp}|std::span| et \mintinline{cpp}|std::string_view|
+		\begin{itemize}
+			\item Ajout de \mintinline{cpp}|remove_prefix()| et \mintinline{cpp}|remove_suffix()| à \mintinline{cpp}|std::span|
+			\item Ajout de \mintinline{cpp}|first()| et \mintinline{cpp}|last()| à \mintinline{cpp}|std::string_view|
+		\end{itemize}
+		\item Ajout de garanties à \mintinline{cpp}|std::array|
+		\item Précision sur le comportement des \mintinline{cpp}|std::array| de taille nulle
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049r0}
 	\addproposal{p3182}{https://wg21.link/p3182r0}
 	\addproposal{p3404}{https://wg21.link/p3404r0}
+	\addproposal{p3729}{https://wg21.link/p3729r0}
+	\addproposal{p3737}{https://wg21.link/p3737r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -964,6 +1002,16 @@
 
 	\addproposal{p2988}{https://wg21.link/p2988r1}
 	\addproposal{p3413}{https://wg21.link/p3413r0}
+\end{frame}
+
+\subsection*{std::expect}
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::expect|}
+	\begin{itemize}
+		\item Ajput de \mintinline{cpp}|has_error()|
+	\end{itemize}
+
+	\addproposal{p3798}{https://wg21.link/p3798r0}
 \end{frame}
 
 \subsection*{Guarded objects}
@@ -1041,12 +1089,32 @@
 				\item \mintinline{cpp}|std::is_null_or_empty()|
 			\end{itemize}
 		\end{itemize}
+		\item \mintinline{cpp}|std::partial_sort_n| et \mintinline{cpp}|std::nth_element_n| prenant un  nombre d'éléments
+		\item Divisions entières avec choix du mode d'arrondi (vers $0$, vers $\pm \infty$, \ldots)
 	\end{itemize}
 
 	\addproposal{p3605}{https://wg21.link/p3605r0}
 	\addproposal{p3642}{https://wg21.link/p3642r0}
-	\addproposal{p3688}{https://wg21.link/p3688r0}
+	\addproposal{p3688}{https://wg21.link/p3688r1}
 	\addproposal{p3711}{https://wg21.link/p3711r0}
+	\addproposal{p3735}{https://wg21.link/p3735r0}
+	\addproposal{p3724}{https://wg21.link/p3724r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Algorithmes}
+	\begin{itemize}
+		\item Suppression de la contrainte de régularité sur les prédicats de \mintinline{cpp}|std::find_if()| et \mintinline{cpp}|std::remove_if()|
+
+\note[item]{Le prédicat n'est plus tenu de fournir toujours le même résultat pour un élément donné, car chaque élément n'est parcouru qu'une fois}
+
+		\item \mintinline{cpp}|std::shl()| et \mintinline{cpp}|std::shr()| : décalage de bits
+		\item \mintinline{cpp}|msb_to_mask| construit le masque permet de récupérer le bit de poids fort
+	\end{itemize}
+
+	\addproposal{p3734}{https://wg21.link/p3734r0}
+	\addproposal{p3793}{https://wg21.link/p3793r0}
+	\addproposal{p3764}{https://wg21.link/p3764r0}
 \end{frame}
 
 \subsection*{Ranges}
@@ -1083,14 +1151,35 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|views::upto| : séquence d'entiers de 0 à $n - 1$
 		\item \mintinline{cpp}|views::scan| : version paresseuse de \mintinline{cpp}|std::inclusive_scan|
-		\item \mintinline{cpp}|std::ranges::any_view| : vue \og{}type-erasure\fg{}
-		\item \mintinline{cpp}|std::ranges::views::slice| : prends une tranche d'un range
+		\item \mintinline{cpp}|ranges::any_view| : vue \og{}type-erasure\fg{}
+		\item \mintinline{cpp}|ranges::views::slice| : prends une tranche d'un range
+		\item Support d'une sentinelle pour les chaînes null-terminées
+		\item Surcharge range de
+		\begin{itemize}
+			\item \mintinline{cpp}|ranges::reduce()|, \mintinline{cpp}|ranges::transform_reduce()|
+			\item \mintinline{cpp}|ranges::inclusive_scan()|, \mintinline{cpp}|ranges::transform_inclusive_scan()|
+			\item \mintinline{cpp}|ranges::exclusive_scan()|, \mintinline{cpp}|ranges::transform_exclusive_scan()|
+		\end{itemize}
+		\item \mintinline{cpp}|ranges::sum()|, \mintinline{cpp}|ranges::product()| et \mintinline{cpp}|ranges::dot()| (produit scalaire)
+
+\note[item]{Ces trois fonctions sont des spécialisations \mintinline{cpp}|range::reduce()| et \mintinline{cpp}|range::transform_reduce()| pour l'addition et la multiplication}
 	\end{itemize}
 
 	\addproposal{p3060}{https://wg21.link/p3060r1}
 	\addproposal{p3351}{https://wg21.link/p3351r1}
 	\addproposal{p3411}{https://wg21.link/p3411r0}
 	\addproposal{p3216}{https://wg21.link/p3216r0}
+	\addproposal{p3705}{https://wg21.link/p3705r0}
+	\addproposal{p3732}{https://wg21.link/p3732r0}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ranges}
+	\begin{itemize}
+		\item Opérations ensemblistes \mintinline{cpp}|views::set_difference|, \mintinline{cpp}|views::set_intersection|, \mintinline{cpp}|views::set_union| et \mintinline{cpp}|views::set_symmetric_difference|
+	\end{itemize}
+
+	\addproposal{p3741}{https://wg21.link/p3741r0}
 \end{frame}
 
 \subsection*{Traits}
@@ -1105,12 +1194,14 @@
 		\item Trait indiquant si un type \textit{trivially default constructible} peut être initialisé en mettant tous les octets à 0
 		\item Amélioration de l'ergonomie de \mintinline{cpp}|std::integral_constant<int>|
 		\item \mintinline{cpp}|std::is_always_exhaustive| indique qu'un objet ne contient pas de bit de padding
+		\item \mintinline{cpp}|is_bitwise_trivially_relocatable|
 	\end{itemize}
 
 	\addproposal{p0870}{https://wg21.link/p0870r5}
 	\addproposal{p2782}{https://wg21.link/p2782r0}
 	\addproposal{P2509}{https://wg21.link/P2509R1}
 	\addproposal{p3707}{https://wg21.link/p3707r0}
+	\addproposal{p3780}{https://wg21.link/p3780r0}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -1355,9 +1446,16 @@
 
 		\item Templates dans les classes locales
 		\item Rendre les \mintinline{cpp}|<>| vides optionnels
+		\item Déduction du type via l'affectation du retour de la fonction
 	\end{itemize}
 
+	\begin{minted}{cpp}
+		template <typename T> T foo {}
+		double bar = foo<deduce>();
+	\end{minted}
+
 	\addproposal{p2989}{https://wg21.link/p2989r0}
+	\addproposal{p3747}{https://wg21.link/p3747r0}
 \end{frame}
 
 \subsection*{Concepts}
@@ -1552,9 +1650,11 @@
 		\item Exigences d'ABI sur les modules
 		\item Communication d'informations aux outils de \textit{build} par les modules
 		\item Gestion de la compatibilité ascendante via la configuration d'un \textit{epoch} au niveau d'un module pour activer des évolutions brisant la compatibilité
+		\item Possibilité d'exporter des macros depuis des modules nommés
 	\end{itemize}
 
 	\addproposal{p2978}{https://wg21.link/p2978r0}
+	\addproposal{p3686}{https://wg21.link/p3686r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1563,10 +1663,12 @@
 		\item Remplaçant à \mintinline{cpp}|#ifdef| ... \mintinline{cpp}|#endif|
 		\item API d'interaction avec le système de build et le compilateur
 		\item Ajout d'un offset à \mintinline{cpp}|#embed|
+		\item Imposition de l'ordre des paramètres de \mintinline{cpp}|#embed|
 	\end{itemize}
 
 	\addproposal{p2978}{https://wg21.link/p2978r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 	\addproposal{p3540}{https://wg21.link/p3540r1}
+	\addproposal{p3731}{https://wg21.link/p3731r0}
 \end{frame}
 \end{document}
