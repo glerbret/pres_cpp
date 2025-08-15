@@ -862,10 +862,8 @@
 	\begin{itemize}
 		\item Exceptions légères (\textit{Zero-overhead deterministic exceptions})
 		\item Objet standard pour le retour d'erreur (\mintinline{cpp}|status_code| et \mintinline{cpp}|error|)
-		\item Récupération des informations de l'exception contenue dans un \mintinline{cpp}|std::exception_ptr|
 	\end{itemize}
 
-	\addproposal{P2927}{https://wg21.link/p2927r0}
 	\addproposal{P1028}{https://wg21.link/p1028r5}
 \end{frame}
 
@@ -904,7 +902,6 @@
 	\frametitle{Conteneurs}
 	\begin{itemize}
 		\item \mintinline{cpp}|span| de taille fixe
-		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::mdspan|
 		\item Relâchement des contraintes sur les tableaux C
 		\begin{itemize}
 			\item Initialisation des tableaux d'agrégats
@@ -925,7 +922,6 @@
 	\addproposal{P2767}{https://wg21.link/p2767r1}
 	\addproposal{P1709}{https://wg21.link/p1709r5}
 	\addproposal{P3110}{https://wg21.link/p3110r0}
-	\addproposal{p3383}{https://wg21.link/p3383r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -995,12 +991,10 @@
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
 	\begin{itemize}
-		\item Support des références par \mintinline{cpp}|std::optional|
 		\item \mintinline{cpp}|value_or_construct()| : construction paresseuse de l'alternative
 		\item \mintinline{cpp}|value_or_else()| : appel paresseux d'une fonction en l'absence de valeur
 	\end{itemize}
 
-	\addproposal{p2988}{https://wg21.link/p2988r1}
 	\addproposal{p3413}{https://wg21.link/p3413r0}
 \end{frame}
 
@@ -1136,20 +1130,17 @@
 		\item Plusieurs nouveaux adaptateurs : \mintinline{cpp}|adjacent_filter|, \mintinline{cpp}|adjacent_remove_if|, \mintinline{cpp}|c_str|, \mintinline{cpp}|generate|, \ldots
 		\item \mintinline{cpp}|views::maybe| contient 0 ou 1 élément d'un objet
 		\item \mintinline{cpp}|views::nullable| adapte un type nullable en un range du type sous-jacent
-		\item Construction d'une \mintinline{cpp}|sub-string_view| depuis \mintinline{cpp}|std::string|
 		\item Levée des restriction de \mintinline{cpp}|range::to| pour accepter les vues
 	\end{itemize}
 
 	\addproposal{p2769}{https://wg21.link/p2769r1}
 	\addproposal{p1255}{https://wg21.link/p1255r12}
-	\addproposal{p3044}{https://wg21.link/p3044r0}
 	\addproposal{p3544}{https://wg21.link/p3544r0}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Ranges}
 	\begin{itemize}
-		\item \mintinline{cpp}|views::upto| : séquence d'entiers de 0 à $n - 1$
 		\item \mintinline{cpp}|views::scan| : version paresseuse de \mintinline{cpp}|std::inclusive_scan|
 		\item \mintinline{cpp}|ranges::any_view| : vue \og{}type-erasure\fg{}
 		\item \mintinline{cpp}|ranges::views::slice| : prends une tranche d'un range
@@ -1165,7 +1156,6 @@
 \note[item]{Ces trois fonctions sont des spécialisations \mintinline{cpp}|range::reduce()| et \mintinline{cpp}|range::transform_reduce()| pour l'addition et la multiplication}
 	\end{itemize}
 
-	\addproposal{p3060}{https://wg21.link/p3060r1}
 	\addproposal{p3351}{https://wg21.link/p3351r1}
 	\addproposal{p3411}{https://wg21.link/p3411r0}
 	\addproposal{p3216}{https://wg21.link/p3216r0}

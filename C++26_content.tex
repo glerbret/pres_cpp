@@ -18,11 +18,13 @@
 		\item Annulation de la dépréciation de \mintinline{cpp}|std::polymorphic_allocator::destroy|
 		\item Dépréciation de \mintinline{cpp}|std::is_trivial| et \mintinline{cpp}|std::is_trivial_v|
 		\item Dépréciation de \mintinline{cpp}|memory_order::consume|
+		\item Dépréciation de l'ellipse sans virgulant la précédant
 	\end{itemize}
 
 	\addproposal{p2875}{https://wg21.link/p2875r4}
 	\addproposal{p3247}{https://wg21.link/p3247r2}
 	\addproposal{p3475}{https://wg21.link/p3475r1}
+	\addproposal{p3176}{https://wg21.link/p3176r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -39,6 +41,7 @@
 			\item Unicode conversion facet (\mintinline{cpp}|<codecvt>|)
 			\item Comparaison entre tableaux C
 		\end{itemize}
+		\item Suppression \mintinline{cpp}|std::execution::split|
 	\end{itemize}
 
 	\addproposal{P2864}{https://wg21.link/P2864R2}
@@ -49,6 +52,7 @@
 	\addproposal{P2871}{https://wg21.link/P2871R3}
 	\addproposal{P2872}{https://wg21.link/P2872R3}
 	\addproposal{p2865}{https://wg21.link/p2865r6}
+	\addproposal{p3682}{https://wg21.link/p3682r0}
 \end{frame}
 
 \subsection*{Compatibilité C}
@@ -89,20 +93,19 @@
 
 \note[item]{Auparavant, undefined behavior}
 
-		\item \mintinline{cpp}|std::observable()| empêche la propagation de supposition basé sur de potentiels comportements indéfinis et la suppression de code basé sur cette supposition
-
-\note[item]{Proposition pour renommer \mintinline{cpp}|std::observable()| en \mintinline{cpp}|std::observable_checkpoint()|}
+		\item \mintinline{cpp}|std::observable_checkpoint()| empêche la propagation de supposition basé sur de potentiels comportements indéfinis et la suppression de code basé sur cette supposition
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		if (!p) cerr << "foo\n"; // Pas de suppression possible
-		observable();
+		observable_checkpoint();
 		if (!p) cerr << "bar\n"; // Suppression possible
 		*p += r;                 // p suppose non-nul
 	\end{minted}
 
 	\addproposal{p3144}{https://wg21.link/p3144r2}
-	\addproposal{p1494}{https://wg21.link/p1494r4}
+	\addproposal{p1494}{https://wg21.link/p1494r5}
+	\addproposal{p3641}{https://wg21.link/p3641r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -281,7 +284,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P3019}{https://wg21.link/P3019R13}
+	\addproposal{P3019}{https://wg21.link/P3019R14}
 \end{frame}
 
 \subsection*{Variables}
@@ -435,6 +438,19 @@
 	\addproposal{P2841}{https://wg21.link/P2841R7}
 \end{frame}
 
+\subsection*{Gestion d'erreur}
+\begin{frame}[fragile]
+	\frametitle{Gestion d'erreur}
+	\begin{itemize}
+		\item Récupération des informations contenues dans un \mintinline{cpp}|std::exception_ptr|
+		\begin{itemize}
+			\item \mintinline{cpp}|exception_ptr_cast| converti un \mintinline{cpp}|std::exception_ptr| en un pointeur sur une exception
+		\end{itemize}
+	\end{itemize}
+
+	\addproposal{P2927}{https://wg21.link/p2927r3}
+\end{frame}
+
 \subsection*{Conteneurs}
 \begin{frame}[fragile]
 	\frametitle{Conteneurs}
@@ -449,26 +465,35 @@
 
 		\end{itemize}
 		\item Possibilité d'utiliser \mintinline{cpp}|std::weak_ptr| en tant que clé de conteneur associatif
-		\item \mintinline{cpp}|std::submdspan()| retourne une vue sur un sous-ensemble d'un \mintinline{cpp}|std::mdspan|
-		\item Nouveaux layouts pour \mintinline{cpp}|std::mdspan| : \mintinline{cpp}|layout_left_padded| et \mintinline{cpp}|layout_right_padded|
-		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::span|
-		\item Ajout de \mintinline{cpp}|dextents| à \mintinline{cpp}|std::mdspan|
 	\end{itemize}
-
-	\begin{minted}{cpp}
-		mdspan<float, extents<dynamic_extent, dynamic_extent,
-		                      dynamic_extent>> foo;
-		// Devient
-		mdspan<float, dextents<3>> foo;
-	\end{minted}
 
 	\addproposal{p0843}{https://wg21.link/p0843r14}
 	\addproposal{P0447}{https://wg21.link/p0447r28}
 	\addproposal{P1901}{https://wg21.link/P1901R2}
 	\addproposal{P2630}{https://wg21.link/P2630R4}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::span|}
+	\begin{itemize}
+		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::span|
+		\item Ajout de \mintinline{cpp}|at()| à \mintinline{cpp}|std::mdspan|
+		\item \mintinline{cpp}|std::submdspan()| retourne une vue sur un sous-ensemble d'un \mintinline{cpp}|std::mdspan|
+		\item Nouveaux layouts pour \mintinline{cpp}|std::mdspan| : \mintinline{cpp}|layout_left_padded| et \mintinline{cpp}|layout_right_padded|
+		\item Ajout de \mintinline{cpp}|dextents| à \mintinline{cpp}|std::mdspan|
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		mdspan<float, extents<dynamic_extent, dynamic_extent,
+		dynamic_extent>> foo;
+		// Devient
+		mdspan<float, dextents<3>> foo;
+	\end{minted}
+
+	\addproposal{P2821}{https://wg21.link/p2821r5}
+	\addproposal{p3383}{https://wg21.link/p3383r3}
 	\addproposal{p3355}{https://wg21.link/p3355r1}
 	\addproposal{P2642}{https://wg21.link/P2642R6}
-	\addproposal{P2821}{https://wg21.link/p2821r5}
 	\addproposal{p2389}{https://wg21.link/p2389r2}
 \end{frame}
 
@@ -516,6 +541,16 @@
 	\end{itemize}
 
 	\addproposal{p2819}{https://wg21.link/p2819r2}
+\end{frame}
+
+\subsection*{std::optional}
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::optional|}
+	\begin{itemize}
+		\item Support des références par \mintinline{cpp}|std::optional|
+	\end{itemize}
+
+	\addproposal{p2988}{https://wg21.link/p2988r12}
 \end{frame}
 
 \subsection*{Algorithme}
@@ -609,11 +644,15 @@
 		\item \mintinline{cpp}|std::views::to_input| convertit un range en \textit{input-only} range
 		\item \mintinline{cpp}|std::ranges::reserve_hint()| permet de réserver la mémoire pour des \textit{non-sized} ranges dont la taille peut être approximer
 		\item Concept \mintinline{cpp}|approximately_sized_range| supporte \mintinline{cpp}|std::ranges::reserve_hint()|
+		\item Construction d'une \mintinline{cpp}|sub-string_view| depuis \mintinline{cpp}|std::string|
+		\item \mintinline{cpp}|views::indices()| : séquence d'entiers de 0 à $n - 1$
 	\end{itemize}
 
 	\addproposal{p3138}{https://wg21.link/p3138r5}
 	\addproposal{p3137}{https://wg21.link/p3137r3}
 	\addproposal{p2846}{https://wg21.link/p2846r6}
+	\addproposal{p3044}{https://wg21.link/p3044r2}
+	\addproposal{p3060}{https://wg21.link/p3060r3}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -635,7 +674,7 @@
 	\end{itemize}
 
 	\addproposal{p3168}{https://wg21.link/p3168r2}
-	\addproposal{p3179}{https://wg21.link/p3179r8}
+	\addproposal{p3179}{https://wg21.link/p3179r9}
 \end{frame}
 
 \subsection*{Ratio}
@@ -658,15 +697,25 @@
 			\item \mintinline{cpp}|std::format()| au compile-time
 			\item \mintinline{cpp}|std::function_ref|, \mintinline{cpp}|std::function| et \mintinline{cpp}|std::any| \mintinline{cpp}|constexpr|
 		\end{itemize}
-		\item \textit{Structured bindings} \mintinline{cpp}|constexpr|
-		\item \mintinline{cpp}|atomic| \mintinline{cpp}|constexpr|
-		\item Placement \mintinline{cpp}|new| \mintinline{cpp}|constexpr|
+		\item Utilisation \mintinline{cpp}|constexpr| de
+		\begin{itemize}
+			\item \textit{Structured bindings}
+			\item \mintinline{cpp}|atomic|
+			\item Placement \mintinline{cpp}|new|
+			\item Conteneurs et adaptateurs
+			\item Héritage virtuel
+			\item \mintinline{cpp}|std::shared_ptr|
+			\item Spécialisations \mintinline{cpp}|std::atomic| des \textit{smart pointers}
+		\end{itemize}
 	\end{itemize}
 
 	\addproposal{P2738}{https://wg21.link/P2738R1}
 	\addproposal{P2686}{https://wg21.link/P2686R5}
 	\addproposal{P3309}{https://wg21.link/P3309R3}
 	\addproposal{p2747}{https://wg21.link/p2747r2}
+	\addproposal{p3372}{https://wg21.link/p3372r3}
+	\addproposal{p3533}{https://wg21.link/p3533r2}
+	\addproposal{p3037}{https://wg21.link/p3037r6}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -938,15 +987,18 @@
 		\item \mintinline{cpp}|std::async_scope| : RAII sur du code non séquentiel et non \textit{stack-based}
 		\item Contexte d'exécution asynchrone standard (interface aux pools de thread)
 		\item Type pour contenir les \textit{coroutine tasks} : \mintinline{cpp}|std::execution::task|
+		\item \mintinline{cpp}|std::store_XXX()| équivalents à \mintinline{cpp}|std::fetch_XXX()| ne retournant pas l'ancienne valeur
 	\end{itemize}
 
 	\addproposal{P0493}{https://wg21.link/P0493R5}
+	\addproposal{p3008}{https://wg21.link/p3008r6}
 	\addproposal{p2835}{https://wg21.link/p2835r7}
 	\addproposal{p2300}{https://wg21.link/p2300r10}
 	\addproposal{p3325}{https://wg21.link/p3325r5}
-	\addproposal{p3149}{https://wg21.link/p3149r10}
-	\addproposal{p2079}{https://wg21.link/p2079r8}
-	\addproposal{p3552}{https://wg21.link/p3552r2}
+	\addproposal{p3149}{https://wg21.link/p3149r11}
+	\addproposal{p2079}{https://wg21.link/p2079r10}
+	\addproposal{p3552}{https://wg21.link/p3552r3}
+	\addproposal{p3111}{https://wg21.link/p3111r8}
 \end{frame}
 
 \subsection*{Générateurs aléatoires}
@@ -1044,12 +1096,13 @@
 		\item Construction de données statiques depuis du \textit{compile-time} : \mintinline{cpp}|std::define_static_string|, \mintinline{cpp}|std::define_static_object| et \mintinline{cpp}|std::define_static_array|
 	\end{itemize}
 
-	\addproposal{p2996}{https://wg21.link/p2996r12}
+	\addproposal{p2996}{https://wg21.link/p2996r13}
 	\addproposal{p3096}{https://wg21.link/p3096r9}
 	\addproposal{p1306}{https://wg21.link/p1306r4}
-	\addproposal{p3491}{https://wg21.link/p3491r2}
+	\addproposal{p3491}{https://wg21.link/p3491r3}
 	\addproposal{p3293}{https://wg21.link/p3293r2}
 	\addproposal{p3394}{https://wg21.link/p3394r3}
+	\addproposal{p3560}{https://wg21.link/p3560r2}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1091,7 +1144,7 @@
 
 	\begin{minted}{cpp}
 		const unsigned char foo[] = {
-			#embed "foo.png"
+		  #embed "foo.png"
 		};
 	\end{minted}
 
