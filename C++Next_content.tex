@@ -418,7 +418,7 @@
 	\addproposal{p3477}{https://wg21.link/p3477r0}
 	\addproposal{p3635}{https://wg21.link/p3635r0}
 	\addproposal{p3639}{https://wg21.link/p3639r0}
-	\addproposal{p3643}{https://wg21.link/p3643r0}
+	\addproposal{p3643}{https://wg21.link/p3643r1}
 	\addproposal{P3715}{https://wg21.link/P3715R0}
 \end{frame}
 
@@ -895,7 +895,13 @@
 	\end{minted}
 
 	\addproposal{P2767}{https://wg21.link/p2767r1}
-	\addproposal{P1709}{https://wg21.link/p1709r5}
+	\addproposal{p3126}{https://wg21.link/p3126r3}
+	\addproposal{p3127}{https://wg21.link/p3127r1}
+	\addproposal{p3128}{https://wg21.link/p3128r3}
+	\addproposal{p3129}{https://wg21.link/p3129r1}
+	\addproposal{p3130}{https://wg21.link/p3130r3}
+	\addproposal{p3131}{https://wg21.link/p3131r3}
+	\addproposal{p3337}{https://wg21.link/p3337r0}
 	\addproposal{P3110}{https://wg21.link/p3110r0}
 \end{frame}
 
@@ -912,6 +918,7 @@
 		\end{itemize}
 		\item Ajout de garanties à \mintinline{cpp}|std::array|
 		\item Précision sur le comportement des \mintinline{cpp}|std::array| de taille nulle
+		\item Ajout de \mintinline{cpp}|reserve()| et \mintinline{cpp}|capacity()| à \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049r0}
@@ -919,6 +926,7 @@
 	\addproposal{p3404}{https://wg21.link/p3404r0}
 	\addproposal{p3729}{https://wg21.link/p3729r0}
 	\addproposal{p3737}{https://wg21.link/p3737r0}
+	\addproposal{p3779}{https://wg21.link/p3779r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -980,7 +988,7 @@
 		\item Ajout de \mintinline{cpp}|has_error()|
 	\end{itemize}
 
-	\addproposal{p3798}{https://wg21.link/p3798r0}
+	\addproposal{p3798}{https://wg21.link/p3798r1}
 \end{frame}
 
 \subsection*{Guarded objects}
@@ -1129,6 +1137,8 @@
 		\item \mintinline{cpp}|ranges::sum()|, \mintinline{cpp}|ranges::product()| et \mintinline{cpp}|ranges::dot()| (produit scalaire)
 
 \note[item]{Ces trois fonctions sont des spécialisations \mintinline{cpp}|range::reduce()| et \mintinline{cpp}|range::transform_reduce()| pour l'addition et la multiplication}
+
+		\item \mintinline{cpp}|views::cycle()| répète un range
 	\end{itemize}
 
 	\addproposal{p3351}{https://wg21.link/p3351r1}
@@ -1136,6 +1146,7 @@
 	\addproposal{p3216}{https://wg21.link/p3216r0}
 	\addproposal{p3705}{https://wg21.link/p3705r0}
 	\addproposal{p3732}{https://wg21.link/p3732r0}
+	\addproposal{p3806}{https://wg21.link/p3806r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1160,6 +1171,7 @@
 		\item Amélioration de l'ergonomie de \mintinline{cpp}|std::integral_constant<int>|
 		\item \mintinline{cpp}|std::is_always_exhaustive| indique qu'un objet ne contient pas de bit de padding
 		\item \mintinline{cpp}|is_bitwise_trivially_relocatable|
+		\item \mintinline{cpp}|std::is_vector_bool_reference<T>|
 	\end{itemize}
 
 	\addproposal{p0870}{https://wg21.link/p0870r5}
@@ -1167,6 +1179,7 @@
 	\addproposal{P2509}{https://wg21.link/P2509R1}
 	\addproposal{p3707}{https://wg21.link/p3707r0}
 	\addproposal{p3780}{https://wg21.link/p3780r0}
+	\addproposal{p3719}{https://wg21.link/p3719r1}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -1557,6 +1570,7 @@
 
 	\addproposal{p2771}{https://wg21.link/p2771r1}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
+	\addproposal{P3810}{https://wg21.link/p3810r0}
 \end{frame}
 
 \subsection*{Concurrence}

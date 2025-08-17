@@ -7,7 +7,7 @@
 	\frametitle{Présentation}
 	\begin{itemize}
 		\item Début formel des travaux en juin 2023
-%		\item Dernier \textit{Working Draft} : \href{https://github.com/cplusplus/draft/releases/download/n4917/n4917.pdf}{n4917\linklogo}
+		\item Dernier \textit{Working Draft} : \href{https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/n5014.pdf}{n5014\linklogo}
 	\end{itemize}
 \end{frame}
 
@@ -103,9 +103,21 @@
 		*p += r;                 // p suppose non-nul
 	\end{minted}
 
+	\begin{itemize}
+		\item Tous les \textit{undefined behavior} du préprocesseur ou du lexer deviennent \textit{ill-formed} sans diagnostic requis
+	\end{itemize}
+
+	\begin{block}{À suivre}
+		\begin{itemize}
+			\item Exiger un diagnostic
+			\item Rendre ces comportements \textit{well-formed}
+		\end{itemize}
+	\end{block}
+
 	\addproposal{p3144}{https://wg21.link/p3144r2}
 	\addproposal{p1494}{https://wg21.link/p1494r5}
 	\addproposal{p3641}{https://wg21.link/p3641r0}
+	\addproposal{p2843}{https://wg21.link/p2843r3}
 \end{frame}
 
 \begin{frame}[fragile]
