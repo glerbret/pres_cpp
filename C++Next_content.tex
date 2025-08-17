@@ -35,7 +35,7 @@
 \begin{frame}[fragile]
 	\frametitle{TS -- Pattern matching}
 	\begin{itemize}
-		\item Utilisation du mot clé \mintinline{cpp}|inspect| (ou \mintinline{cpp}|switch|) et du \textit{wildcard} \mintinline{cpp}|__| (ou \mintinline{cpp}|_|)
+		\item Utilisation du mot clé \mintinline{cpp}|match| (ou \mintinline{cpp}|switch|, ou \mintinline{cpp}|inspect|) et du \textit{wildcard} \mintinline{cpp}|_| (ou \mintinline{cpp}|__|)
 		\item Utilisable sur
 		\begin{itemize}
 			\item Entiers
@@ -43,10 +43,10 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		inspect(x) {
-		  0  => { cout << "Aucun"; }
-		  1  => { cout << "Un"; }
-		  __ => { cout << "Plusieurs"; }
+		x match {
+		  0 => print("Aucun");
+		  1 => print("Un");
+		  _ => print("Plusieurs");
 		};
 	\end{minted}
 
@@ -58,20 +58,21 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		inspect(x) {
-		  "zero" => { cout << "Aucun"; }
-		  "un"   => { cout << "Un"; }
-		  __     => { cout << "Plusieurs"; }
+		x match {
+		  "zero" => print("Aucun");
+		  "un"   => print("Un");
+		  _      => print("Plusieurs");
 		};
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+x+%3D+%22un%22%3B%0A%0A++inspect(x)%0A++%7B%0A++++%22zero%22+%3D%3E+%7B+std::cout+%3C%3C+%22Aucun%22%3B+%7D%0A++++%22un%22+++%3D%3E+%7B+std::cout+%3C%3C+%22Un%22%3B+%7D%0A++++__+++++%3D%3E+%7B+std::cout+%3C%3C+%22Plusieurs%22%3B+%7D%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(experimental+pattern+matching)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:22,endLineNumber:8,positionColumn:22,positionLineNumber:8,selectionStartColumn:11,selectionStartLineNumber:8,startColumn:11,startLineNumber:8),source:'%23include+%3Cprint%3E%0A%0Aint+main()%0A%7B%0A++int+x+%3D+1%3B%0A++x+match%0A++%7B%0A++++0++%3D%3E+std::print(%22Aucun%22)%3B%0A++++1++%3D%3E+std::print(%22Un%22)%3B%0A++++_++%3D%3E+std::print(%22Plusieurs%22)%3B%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(pattern+matching+-+P2688)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+x+%3D+1%3B%0A++inspect(x)%0A++%7B%0A++++0+++%3D%3E+%7B+std::cout+%3C%3C+%22Aucun%22%3B+%7D%0A++++1+++%3D%3E+%7B+std::cout+%3C%3C+%22Un%22%3B+%7D%0A++++__++%3D%3E+%7B+std::cout+%3C%3C+%22Plusieurs%22%3B+%7D%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(experimental+pattern+matching)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Cprint%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+x+%3D+%22un%22%3B%0A%0A++x+match%0A++%7B%0A++++%22zero%22+%3D%3E+std::print(%22Aucun%22)%3B%0A++++%22un%22+++%3D%3E+std::print(%22Un%22)%3B%0A++++_++++++%3D%3E+std::print(%22Plusieurs%22)%3B%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(pattern+matching+-+P2688)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P1371}{https://wg21.link/p1371r3}
+	\addproposal{p2688}{https://wg21.link/p2688r5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -84,11 +85,11 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		inspect(p) {
-		  [0, 0] => { cout << "on origin"; }
-		  [0, y] => { cout << "on y-axis"; }
-		  [x, 0] => { cout << "on x-axis"; }
-		  [x, y] => { cout << x << ',' << y; }
+		p match {
+		  [0, 0] => print("on origin");
+		  [0, let y] => print("on y-axis");
+		  [let x, 0] => print("on x-axis");
+		  let [x, y] => print("{},{}", x, y);
 		};
 	\end{minted}
 
@@ -100,17 +101,20 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		inspect(v) {
-		  <int> i   => { cout << "Entier " << i; }
-		  <float> f => { cout << "Reel " << f; }
+		v match {
+		  int: let i   => print("Entier {}", i);
+		  float: let f => print("Reel {}", f);
 		};
 	\end{minted}
 
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+int%3E+p%7B2,+0%7D%3B%0A++inspect(p)%0A++%7B%0A++++%5B0,+0%5D+%3D%3E+%7B+std::cout+%3C%3C+%22on+origin%22%3B+%7D%0A++++%5B0,+y%5D+%3D%3E+%7B+std::cout+%3C%3C+%22on+y-axis%22%3B+%7D%0A++++%5Bx,+0%5D+%3D%3E+%7B+std::cout+%3C%3C+%22on+x-axis%22%3B+%7D%0A++++%5Bx,+y%5D+%3D%3E+%7B+std::cout+%3C%3C+x+%3C%3C+!',!'+%3C%3C+y%3B+%7D%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(experimental+pattern+matching)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:9,positionColumn:6,positionLineNumber:9,selectionStartColumn:6,selectionStartLineNumber:9,startColumn:6,startLineNumber:9),source:'%23include+%3Cprint%3E%0A%23include+%3Cvariant%3E%0A%0Aint+main()%0A%7B%0A++++std::variant%3Cint,+float%3E+v%7B1%7D%3B%0A%0A++++v+match%0A++++%7B%0A%09++++int:+let+i+++%3D%3E+std::print(%22Entier+%7B%7D%22,+i)%3B%0A%09%09float:+let+f+%3D%3E+std::print(%22Reel+%7B%7D%22,+f)%3B%0A%09%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(pattern+matching+-+P2688)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:9,endLineNumber:13,positionColumn:9,positionLineNumber:13,selectionStartColumn:9,selectionStartLineNumber:13,startColumn:9,startLineNumber:13),source:'%23include+%3Cprint%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+int%3E+p%7B2,+0%7D%3B%0A%0A++p+match%0A++%7B%0A++++%5B0,+0%5D+%3D%3E+std::print(%22on+origin%22)%3B%0A++++%5B0,+let+y%5D+%3D%3E+std::print(%22on+y-axis%22)%3B%0A++++%5Blet+x,+0%5D+%3D%3E+std::print(%22on+x-axis%22)%3B%0A++++let+%5Bx,+y%5D+%3D%3E+std::print(%22%7B%7D,%7B%7D%22,+x,+y)%3B%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(pattern+matching+-+P2688)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
 	\addproposal{P1371}{https://wg21.link/p1371r3}
+	\addproposal{p2688}{https://wg21.link/p2688r5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -123,9 +127,9 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		inspect(shape) {
-		  <Circle> [r]       => { cout << 3.14 * r * r; }
-		  <Rectangle> [w, h] => { cout << w * h; }
+		shape match {
+		  Circle: let [r]       => print("{}", 3.14 * r * r);
+		  Rectangle: let [w, h] => print("{}", w * h);
 		};
 	\end{minted}
 
@@ -134,8 +138,8 @@
 	\end{itemize}
 
 	\begin{minted}{cpp}
-		inspect(p) {
-		  [x, y] if(x > y) => { cout << x << "superieur a" << y; }
+		p match {
+		  let [x, y] if(x > y) => print("{} superieur a {}", x, y);
 		};
 	\end{minted}
 
@@ -144,6 +148,7 @@
 	\end{alertblock}
 
 	\addproposal{P1371}{https://wg21.link/p1371r3}
+	\addproposal{p2688}{https://wg21.link/p2688r5}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -180,9 +185,9 @@
 	\begin{itemize}
 		\item \textit{Scope Guard} : enregistrement d'un foncteur appelé
 		\begin{itemize}
-			\item appelé à la sortie du scope : \mintinline{cpp}|std::scope_exit|
-			\item appelé à la sortie du scope par une exception : \mintinline{cpp}|std::scope_fail|
-			\item appelé à la sortie du scope hors exception : \mintinline{cpp}|std::scope_success|
+			\item à la sortie du scope : \mintinline{cpp}|std::scope_exit|
+			\item à la sortie du scope par une exception : \mintinline{cpp}|std::scope_fail|
+			\item à la sortie du scope hors exception : \mintinline{cpp}|std::scope_success|
 		\end{itemize}
 		\item \textit{RAII wrapper} \mintinline{cpp}|std::unique_resource|
 	\end{itemize}
@@ -266,15 +271,15 @@
 \begin{frame}[fragile]
 	\frametitle{Contracts}
 	\begin{itemize}
-		\item Contrats sur les fonctions virtuelles
-		\item Contrats sur les pointeurs de fonction, sur les pointeurs de fonction membre et leurs alias
+		\item Contrats sur les fonctions virtuelles et héritage de ceux-ci
+		\item Contrats sur les pointeurs de fonction et pointeurs de fonction membre
 		\item Accès à la valeur initiale des paramètres ou autres entités lors de la vérification des postconditions
-		\item Comportement \mintinline{cpp}|assume| : compilateur peut optimiser en supposant qu'un contrat non vérifié est vrai
+		\item Comportement \mintinline{cpp}|assume| : optimisation en supposant le contrat vrai
 		\item Choix du comportement dans l'assertion du contrat
-		\item Postcondition sur les sorties non normales d'une fonction (exception)
-		\item Contrat non évaluable au \textit{run-time}
-		\item Sauvegarde d'état pour la vérification de contrat
+		\item Postcondition sur les sorties non normales d'une fonction (exceptions)
+		\item Contrats non évaluables au \textit{run-time}
 		\item Invariants
+		\item Annotations de types \textit{claim} / \textit{assertion}
 	\end{itemize}
 \end{frame}
 
@@ -291,17 +296,6 @@
 \end{frame}
 
 \subsection*{Syntaxe}
-\begin{frame}[fragile]
-	\frametitle{Vérification statique}
-	\begin{itemize}
-		\item \textit{Procedural function interfaces}
-		\begin{itemize}
-			\item Annotations de types \textit{claim} / \textit{assertion}
-			\item Recouvre des points du contract TS mais plus ambitieux
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
 \begin{frame}[fragile]
 	\frametitle{Mots-clés}
 	\begin{itemize}
@@ -386,15 +380,15 @@
 	\frametitle{Types}
 	\begin{itemize}
 		\item Relâchement des restrictions sur les \mintinline{cpp}|typedef _t|
-		\item Mécanismes \textit{compile-time} vérifiant que deux types ont la même représentation mémoire
-		\item Type \og{}\textit{fixed point decimal}\fg{}
+		\item Vérification à la compilation que deux types ont la même représentation mémoire
+		\item Type \textit{fixed point decimal}
 		\item Entiers larges \mintinline{cpp}|wide_integer<128, unsigned>|
 		\item \mintinline{cpp}|std::int_least128_t|
 		\item Nombres rationnels
 		\item Possibilité de définir des objets \mintinline{cpp}|constexpr|
 		\item \textit{Zero-initialisation} des objets \textit{automatic storage duration}
 		\item Entiers non signés pour lesquels l'\textit{overflow} est un UB
-		\item Rendre les \mintinline{cpp}|std::initializer_list| déplaçables
+		\item \mintinline{cpp}|std::initializer_list| déplaçables
 		\item Détection et gestion des débordements
 		\item Gestion des arrondis
 	\end{itemize}
@@ -408,15 +402,15 @@
 \begin{frame}[fragile]
 	\frametitle{Types}
 	\begin{itemize}
-		\item Rendre obligatoire le support de \mintinline{cpp}|intptr_t| et \mintinline{cpp}|uintptr_t|
+		\item Support obligatoire de \mintinline{cpp}|intptr_t| et \mintinline{cpp}|uintptr_t|
 		\item Types flottants compatible ISO/IEC 60559:2020 (résultats davantage reproductibles)
+		\item Amélioration des nombres flottants
 		\item \mintinline{cpp}|CHAR_BIT| impérativement égal à 8 (\textit{\og{}There are exactly 8 bits in a byte\fg{}})
 
 \note[item]{Auparavant obligatoirement supérieur ou égal à 8, contraint par les plages garanties de \mintinline{cpp}|signed char| et \mintinline{cpp}|unsigned char|, mais pas d'autres contraintes (même pas multiple de 8)}
 
 		\item Entiers de $n$ bits similaires à \mintinline{cpp}|_BitInt| du C
 		\item \mintinline{cpp}|std::to_signed| et \mintinline{cpp}|std::to_unsigned| permet d'obtenir le type signé/non signé correspondant au type initial
-		\item Amélioration des nombres flottants
 	\end{itemize}
 
 	\addproposal{p3248}{https://wg21.link/p3248r0}
@@ -480,13 +474,10 @@
 \begin{frame}[fragile]
 	\frametitle{Shadowing}
 	\begin{itemize}
-		\item Levée de plusieurs restrictions
-		\begin{itemize}
-			\item Masquage avec un type \mintinline{cpp}|void| pour empêcher l'utilisation de la variable masquée
-			\item Initialisation de la nouvelle variable avec l'ancienne variable de même nom
-			\item Masquage sans création d'une nouvelle portée
-			\item Conversion conditionnelle
-		\end{itemize}
+		\item Masquage avec un type \mintinline{cpp}|void| pour empêcher l'utilisation de la variable masquée
+		\item Initialisation de la nouvelle variable avec l'ancienne variable de même nom
+		\item Masquage sans création d'une nouvelle portée
+		\item Conversion conditionnelle
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -496,10 +487,7 @@
 	\end{minted}
 
 	\begin{itemize}
-		\item []
-		\begin{itemize}
-			\item Constification d'un conteneur dans un \textit{range-based for loop}
-		\end{itemize}
+		\item Constification d'un conteneur dans un \textit{range-based for loop}
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -508,19 +496,6 @@
 	\end{minted}
 
 	\addproposal{P2951}{https://wg21.link/P2951R3}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{\mintinline[style=white]{cpp}|std::ignore|}
-	\begin{itemize}
-		\item \mintinline{cpp}|std::ignore| pour ignorer une valeur de retour
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		ignore = printf("Hello\n");
-	\end{minted}
-
-	\addproposal{P2968}{https://wg21.link/P2968R0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -581,7 +556,7 @@
 \begin{frame}[fragile]
 	\frametitle{Contrôle de flux}
 	\begin{itemize}
-		\item Ajout d'une expression au \textit{range-based for loop} évalué à chaque fin d'itération
+		\item Ajout d'une expression à \textit{range-based for loop} évalué à chaque fin d'itération
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -602,7 +577,7 @@
 \begin{frame}[fragile]
 	\frametitle{do expression}
 	\begin{itemize}
-		\item Ajout des \og{}\textit{do expression}\fg{} : instructions traités comme une expression
+		\item Ajout des \textit{do expression} : instructions traités comme une expression
 	\end{itemize}
 
 	\begin{minted}{cpp}
@@ -662,7 +637,7 @@
 \note[item]{RVO déjà garantie en C++17 pour des \textit{prvalues}}
 \note[item]{Optimisation déjà réalisée par certains compilateurs}
 
-		\item Paramètres \mintinline{cpp}|constexpr| et \og{}\textit{maybe} \mintinline{cpp}|constexpr|\fg{}
+		\item Paramètres \mintinline{cpp}|constexpr| et \textit{maybe} \mintinline{cpp}|constexpr|
 		\item Fonctions \textit{heap-free}
 		\item Retour \mintinline{cpp}|std::move(x)| éligible au NRVO si \mintinline{cpp}|x| l'est
 	\end{itemize}
@@ -705,7 +680,7 @@
 	\frametitle{Contexte d'appel}
 	\begin{itemize}
 		\item \mintinline{cpp}|__local_ctx| récupère la contexte d'appel local
-		\item \ldots ajout à \mintinline{cpp}|std::source_location::current()| d'un paramètre valorisé par défaut à \mintinline{cpp}|__local_ctx|
+		\item Ajout à \mintinline{cpp}|std::source_location::current()| d'un paramètre valorisé par défaut à \mintinline{cpp}|__local_ctx|
 
 \note[item]{Permet d'encapsuler \mintinline{cpp}|std::source_location::current()| tout en lui fournissant le contexte d'appel de la classe l'encapsulant}
 
@@ -849,7 +824,7 @@
 \begin{frame}[fragile]
 	\frametitle{Énumération}
 	\begin{itemize}
-		\item Ajout d'énumérations \og{}\textit{flag-only}\fg{}
+		\item Ajout d'énumérations \textit{flag-only}
 		\item Fonctions membres sur les énumérations
 	\end{itemize}
 
@@ -880,7 +855,7 @@
 
 \note[item]{Intrusif car les mécanismes nécessaires au conteneur (p.ex. les pointeurs de chaînage des listes) sont dans l'objet que gère le conteneur, généralement via héritage}
 
-			\item Conteneurs \mintinline{cpp}|inplace| avec un buffer de taille fixe
+			\item Conteneurs \mintinline{cpp}|inplace| avec une capacité fixe
 			\item Vecteurs optimisés pour les petites tailles
 		\end{itemize}
 		\item Contrôle de la politique de croissance des vecteurs
@@ -916,7 +891,7 @@
 
 	\begin{minted}{cpp}
 		// Initialisation de tous les elements a 5
-		int a[42] = { 5 ... };
+		int a[42] = { 5... };
 	\end{minted}
 
 	\addproposal{P2767}{https://wg21.link/p2767r1}
@@ -1002,7 +977,7 @@
 \begin{frame}[fragile]
 	\frametitle{\mintinline[style=white]{cpp}|std::expect|}
 	\begin{itemize}
-		\item Ajput de \mintinline{cpp}|has_error()|
+		\item Ajout de \mintinline{cpp}|has_error()|
 	\end{itemize}
 
 	\addproposal{p3798}{https://wg21.link/p3798r0}
@@ -1012,7 +987,7 @@
 \begin{frame}[fragile]
 	\frametitle{\textit{Guarded objects}}
 	\begin{itemize}
-		\item Classes templates protégeant un objet en imposant la prise d'un lock avant l'utilisation
+		\item Classes templates imposant la prise d'un lock avant l'utilisation d'un objet
 	\end{itemize}
 
 	\begin{block}{Motivation}
@@ -1026,7 +1001,7 @@
 \begin{frame}[fragile]
 	\frametitle{Itérateurs}
 	\begin{itemize}
-		\item API \og itérateurs\fg{} de génération des nombres aléatoire
+		\item API itérateurs de génération des nombres aléatoire
 		\item \mintinline{cpp}|std::iterator_interface| pour la définition de nouveaux itérateurs
 	\end{itemize}
 
@@ -1076,14 +1051,14 @@
 
 \note[item]{Support de \mintinline{cpp}|char8_t|, \mintinline{cpp}|char16_t| et \mintinline{cpp}|char32_t|, fonction \mintinline{cpp}|constexpr|, meilleure gestion typage}
 
-			\item Fonctions libres de manipulation de \textit{string view-like}
+			\item Fonctions libres de manipulation de \textit{string\_view-like}
 			\begin{itemize}
 				\item \mintinline{cpp}|std::starts_with()| et \mintinline{cpp}|std::ends_with()|
 				\item \mintinline{cpp}|std::join()|
 				\item \mintinline{cpp}|std::is_null_or_empty()|
 			\end{itemize}
 		\end{itemize}
-		\item \mintinline{cpp}|std::partial_sort_n| et \mintinline{cpp}|std::nth_element_n| prenant un  nombre d'éléments
+		\item \mintinline{cpp}|std::partial_sort_n| et \mintinline{cpp}|std::nth_element_n| prenant un nombre d'éléments
 		\item Divisions entières avec choix du mode d'arrondi (vers $0$, vers $\pm \infty$, \ldots)
 	\end{itemize}
 
@@ -1098,7 +1073,7 @@
 \begin{frame}[fragile]
 	\frametitle{Algorithmes}
 	\begin{itemize}
-		\item Suppression de la contrainte de régularité sur les prédicats de \mintinline{cpp}|std::find_if()| et \mintinline{cpp}|std::remove_if()|
+		\item Suppression de la contrainte de régularité sur les prédicats de \mintinline{cpp}|std::find_if()|, \mintinline{cpp}|std::remove_if()|, \mintinline{cpp}|std::all_of()|, \mintinline{cpp}|std::any_of()|, \ldots
 
 \note[item]{Le prédicat n'est plus tenu de fournir toujours le même résultat pour un élément donné, car chaque élément n'est parcouru qu'une fois}
 
@@ -1142,14 +1117,14 @@
 	\frametitle{Ranges}
 	\begin{itemize}
 		\item \mintinline{cpp}|views::scan| : version paresseuse de \mintinline{cpp}|std::inclusive_scan|
-		\item \mintinline{cpp}|ranges::any_view| : vue \og{}type-erasure\fg{}
+		\item \mintinline{cpp}|ranges::any_view| : vue type-erasure
 		\item \mintinline{cpp}|ranges::views::slice| : prends une tranche d'un range
 		\item Support d'une sentinelle pour les chaînes null-terminées
 		\item Surcharge range de
 		\begin{itemize}
-			\item \mintinline{cpp}|ranges::reduce()|, \mintinline{cpp}|ranges::transform_reduce()|
-			\item \mintinline{cpp}|ranges::inclusive_scan()|, \mintinline{cpp}|ranges::transform_inclusive_scan()|
-			\item \mintinline{cpp}|ranges::exclusive_scan()|, \mintinline{cpp}|ranges::transform_exclusive_scan()|
+			\item \mintinline{cpp}|reduce()|, \mintinline{cpp}|transform_reduce()|
+			\item \mintinline{cpp}|inclusive_scan()|, \mintinline{cpp}|transform_inclusive_scan()|
+			\item \mintinline{cpp}|exclusive_scan()|, \mintinline{cpp}|transform_exclusive_scan()|
 		\end{itemize}
 		\item \mintinline{cpp}|ranges::sum()|, \mintinline{cpp}|ranges::product()| et \mintinline{cpp}|ranges::dot()| (produit scalaire)
 
@@ -1262,7 +1237,7 @@
 		\item []
 		\begin{itemize}
 			\item Duplication de l'expression pour chaque élément (pas de boucle)
-			\item Éléments de type différent
+			\item Utilisable avec des éléments de type différent
 			\item Utilisable sur \mintinline{cpp}|std::tuple|, \mintinline{cpp}|std::array|, classes destructurables, \ldots{}
 		\end{itemize}
 	\end{itemize}
@@ -1381,7 +1356,7 @@
 
 	\begin{minted}{cpp}
 		std::dump(arg1, arg2, ..., argn);
-		// Equivalant a
+		// Equivalent a
 		std::println("{} {} ... {}", arg1, arg2, ..., argn);
 	\end{minted}
 \end{frame}
@@ -1416,7 +1391,7 @@
 	\frametitle{Durées et temps}
 	\begin{itemize}
 		\item Ajout d'une fonction membre \mintinline{cpp}|resolution()| aux horloges
-		\item Ajout d'horloges \og{}coarses\fg{} moins précises mais plus rapides
+		\item Ajout d'horloges \textit{coarses} moins précises mais plus rapides
 	\end{itemize}
 
 	\addproposal{p3382}{https://wg21.link/p3382r0}
@@ -1548,7 +1523,7 @@
 		\item Création de pointeurs intelligents avec une valeur par défaut
 		\item Comparaison entre pointeurs intelligents et pointeurs nus
 		\item Retour covariant avec \mintinline{cpp}|std::unique_ptr<T>| (comme \mintinline{cpp}|T*|)
-		\item Amélioration des \textit{hazard pointers}
+		\item Améliorationq des \textit{hazard pointers}
 		\item Conversion de \mintinline{cpp}|std::unique_ptr| : \mintinline{cpp}|const_pointer_cast| et \mintinline{cpp}|dynamic_pointer_cast|
 	\end{itemize}
 
