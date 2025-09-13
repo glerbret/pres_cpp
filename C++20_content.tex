@@ -2243,18 +2243,24 @@
 		template <>
 		struct formatter<MyComplex> {
 		  constexpr auto parse(format_parse_context& ctx) {
-		    return ctx.begin();
-		  }
+		    return ctx.begin(); }
 
 		  auto format(const MyComplex& value, format_context& ctx) const {
 		    return format_to(ctx.out(), "{}+{}i", value.real, value.imag);
-		  }
-		};
+		  }};
 
 		format("{}", MyComplex{1, 2});  // "1+2i"
 	\end{minted}
 
+	\begin{block}{Aller plus loin}
+		\begin{itemize}
+			\item Voir \href{https://www.sandordargo.com/blog/2025/07/23/format-your-own-type-part-1}{Format your own type (Part 1)\linklogo} et \href{ https://www.sandordargo.com/blog/2025/07/30/format-your-own-type-part-2}{Format your own type (Part 2)\linklogo}
+		\end{itemize}
+	\end{block}
+
 	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGIAMxmpK4AMngMmAByPgBGmMQgABwAnKQADqgKhE4MHt6%2BAUEZWY4CYRHRLHEJKbaY9qUMQgRMxAR5Pn6BdQ05za0E5VGx8UmpCi1tHQXdEwNDldVjAJS2qF7EyOwcAPQ7ANQIBARpCiB7AO5XAHQKhugk6K3AqNdoLDsxtKjAO2YaZgArDsNAB2Hb%2BDQ7fjEFhMAgAWgAnutiAjUBcGAiCEi0pgEWkBgizCYNABBUkUsz%2BcLIbxYfYmfxuUQKJRtJnYSnmGkMOleBlMtwwuEETnc6m0%2BmYRnMpwTYiYVji8k8qUCmVC1BpRpiFVU3n8wXMhXhYD6ykKrwOfbKYg/YisFhmkKGYBeJjATWgqzk/b%2B/YTdAgECmoz7ZhsJm%2BskB/bhAj7OHaEgAfQAbvEsgITD6NLmACLRylxoMh7W62hChOcpPhNOZ4jZhi5ixlkAMLy0b46wvFv0B9sVnJ6uWCWuEgjIBAZrM5Vvtzvdit9/wx1fr8kETAsNIGbeytz6q029si%2BHb4hCu0Op0ut0er211slwcEYOhgjEM37VMX78xF424KP2sYBmgDATJgqhpMQ%2BxMEBqD7ISTaYBAZ4kKKqYoUoqYQduqhimYABsyGtLh%2BHQQQyyMj6r5xv6CFEPGiZMgWgbviGjpGJgZwgDQDDoBAOGYHhshUaQ%2BxgBwhbScsoEMQGf7HABQG8bK7HtmGwDCeRomUYR1xxMA4QQKsLHyWu9EMYqBAbAwLEKQGfaqgOjGIfs54EBAEETLa9rAI6LDOkYrpGI%2BmDmKRsG3sFZqpgY4WepgpDWYpikYbC8JiYIVFRZ5mHZQZ1H7L5rF0W5DFMUh6ysf47FeTlBEENctVmU5il4FQ%2BwQMpX54IBwHXDuOpImZNEvpV6X7LVGkcR%2BjVEBAtWSeYJJ0aCRYbUWZhBMhAVBSFwAJQ%2ByXXJGKVpdN103ftsVHSdSVetcyYNnOAiWTGt37LZ9kzUBHUMS5YGKTCPXVRGc0aF40aQ0Kv7/gNakKLceAAF5oZ9jKWNYDATRVIPXV1PV9apwEmICFgtoC7FsWxUkyUCcm0V932DhchDTiTiODbxFNWDjljUwW%2BOs2zDGsjK0m0NJIBXeLcazfTmVYUtK3Y%2BtVibWtqVTQr%2BvXTFgV3kYj3umdF2ffLBsxIqTAANaA/rksM%2BmsvW/rSv1fNIaLagEAewb/rq2tL7a7tklG4d8WJebz2vcQs5NjkVt60HxPCQdJvHbHEUvfWieNs2ouB0HXuaZx/GFQQqZLaXQcBiHu3XGHO1BPXDf7AAVFH2dm3nIVvcnH1Ow3wOd3GGe93Fpu52dk7Tknxcsx3Cvlz7VdZTXddpxPitAatzetzrq9Bz3Wczznp3PQvM5Fyno9B%2BPe/7LbSqO1Zu/fS70ksO7X9ryAnNFW2Ud6Exfv9Agh9NZ9gjndY2l9%2B5nQTkvB%2Bn9wENzfg7R%2BbMf4cAYP/DBZcgHK0rn7AOADiFQI1sfOB597ox2vpgfODAh7FxwfrLBH9NxENwUwJQDM0iEIgevEB29/anzZk3GB4c9r0IQQ9OeN94SL3viPdBECuEcNung8wgJhEv1EWQ6utd/bSL0WtVOvDOF224ZI5%2BN1Cz7HqAIya1j0pGIWiYtWB8aHbR1gjFSSNyaU2FlY76Digba13r9YgDlaqA2Bhubk5IExJiYKZEulUvBZHDBdBQhItgb20glQg8QxAgQ0QGG8Cj7xPRlMgNIaQXy7SPILAWe1/jJMqjU6OoUmHISRAQBAOY6K7WUEMkZLY4H%2BEklwdaRYqn%2Bl6dnMKccZRpEmQIZQKiEAtLMBM4ZOYZlzL2lwfM2t0HWXbGgEhzJ4ZiIDrtWhe1GlpAmvc5kDMKZuAITJJZG9bl1SPF8x5ocfRyyBFWIELBYGvKaR8kFbhvmAl%2BdJQGNyvZIo3l5J5mtIWAmhYCWFsjJJvMRfDdFqK/kYsrkCw8DzjFbzxa2AlRL0xwrJQihlXyqVov%2BWLQFWLGVeOZeCrWbdI5bIYDsqcCAKW8pktS9FALMV3OxWC55EK9G0GxoCDlpLBlHJlbshVyK%2BU0tVXS4VoKmWihZdqqFeqWAtyBAwV1gJmmGs2ca2V04zUov5aBYGHBVi0E4ICXgfgOBaFIKgTgbSBYWEDKiIpPIeCkAIJoUNqx7YgEBBofQnBJBRuzXGzgvAziFqzTG0NpA4CwCQNBTAyBEJkAoBAZ4CgdkRFoEIEZmJOAZveGkOg8Icg9vqP2jE0bY0jroKMYAChmCnBGVA%2Bd9BiCRFYNsXgG74gAHkgLTsHbW4IqgW1kmIEuit56W3NHwNG3g/BBAiDEOwKQMhBCKBUOoM9uguD6DdCgaw1h9ADTOJAVYw4BBnA4AiIMbFTDtP%2BPsBEAB1MQuqMNUUdGhvETxBB4GQLwVAjZvxYEg2ZUgxAvBEbYAAFVQJ4KjqwFCpo/bYd84RJ19oHdGjNX5MDbAzRcR0aRs1hojaWs98aODYAva2ogcFVCJGIgiYikh9jAGQMgHqX46P2xohARNYH9i4EICQbG/guDLF4DWrQyxVgICVFgBI1G80FqLRwEtpBZ2kdvVWzNkmpMcDMDJ2Ncn7MhdIGovwkggA%3D%3D%3D}
+
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Astruct+MyComplex%0A%7B%0A++double+real%3B%0A++double+imag%3B%0A%7D%3B%0A%0Atemplate%3C%3E%0Astruct+std::formatter%3CMyComplex%3E%0A%7B%0A++++constexpr+auto+parse(std::format_parse_context%26+ctx)%0A++++%7B%0A++++++++return+ctx.begin()%3B%0A++++%7D%0A+%0A++++auto+format(const+MyComplex%26+value,+std::format_context%26+ctx)+const%0A++++%7B%0A++++++++return+std::format_to(ctx.out(),+%22%7B%7D%2B%7B%7Di%22,+value.real,+value.imag)%3B%0A++++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++++std::cout+%3C%3C+std::format(%22%7B%7D%22,+MyComplex%7B1,+2%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 

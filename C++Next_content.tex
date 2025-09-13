@@ -249,6 +249,7 @@
 		\item Dépréciation de la conversion implicite de \mintinline{cpp}|bool| vers un type caractère
 	\end{itemize}
 
+	\addproposal{p3695}{https://wg21.link/p3695r1}
 	\addproposal{p3681}{https://wg21.link/p3681r0}
 	\addproposal{p3765}{https://wg21.link/p3765r0}
 \end{frame}
@@ -280,7 +281,11 @@
 		\item Contrats non évaluables au \textit{run-time}
 		\item Invariants
 		\item Annotations de types \textit{claim} / \textit{assertion}
+		\item Label sur les contrats
 	\end{itemize}
+
+	\addproposal{p3400}{https://wg21.link/p3400r1}
+	\addproposal{p3831}{https://wg21.link/p3831r0}
 \end{frame}
 
 \subsection*{Comportement}
@@ -323,6 +328,14 @@
 	\addproposal{p3485}{https://wg21.link/p3485r0}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Syntaxe}
+	\begin{itemize}
+		\item Autorisation des \textit{trailing commas} dans davantage de contexte : paramètre de fonction, paramètres templates, \textit{structure bindings}, \ldots
+	\end{itemize}
+
+	\addproposal{p3776}{https://wg21.link/p3776r1}
+\end{frame}
 
 \subsection*{Encodage}
 \begin{frame}[fragile]
@@ -411,6 +424,7 @@
 
 		\item Entiers de $n$ bits similaires à \mintinline{cpp}|_BitInt| du C
 		\item \mintinline{cpp}|std::to_signed| et \mintinline{cpp}|std::to_unsigned| permet d'obtenir le type signé/non signé correspondant au type initial
+		\item Suppression de \mintinline{cpp}|trivially_relocatable_if_eligible| et \mintinline{cpp}|replaceable_if_eligible| et redesing de la fonctionnalité
 	\end{itemize}
 
 	\addproposal{p3248}{https://wg21.link/p3248r0}
@@ -418,8 +432,10 @@
 	\addproposal{p3477}{https://wg21.link/p3477r0}
 	\addproposal{p3635}{https://wg21.link/p3635r0}
 	\addproposal{p3639}{https://wg21.link/p3639r0}
+	\addproposal{p3666}{https://wg21.link/p3666r0}
 	\addproposal{p3643}{https://wg21.link/p3643r1}
 	\addproposal{P3715}{https://wg21.link/P3715R0}
+	\addproposal{p3823}{https://wg21.link/p3823r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -571,7 +587,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{p3784}{https://wg21.link/p3784r0}
+	\addproposal{p3784}{https://wg21.link/p3784r1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -743,6 +759,7 @@
 		f(x, y);
 	\end{minted}
 
+	\addproposal{p3834}{https://wg21.link/p3834r0}
 	\addproposal{p3668}{https://wg21.link/P3668R1}
 	\addproposal{P2952}{https://wg21.link/p2952r0}
 \end{frame}
@@ -814,10 +831,12 @@
 	\begin{itemize}
 		\item Destructeurs \mintinline{cpp}|consteval|
 		\item Données statiques dans les classes locales non nommées
+		\item Génération par défaut des opérateurs d'affectation des classes ayant des données \mintinline{cpp}|const| ou \mintinline{cpp}|&| depuis le constructeur par copie par défaut
 	\end{itemize}
 
 	\addproposal{p3421}{https://wg21.link/p3421r0}
 	\addproposal{p3588}{https://wg21.link/p3588r1}
+	\addproposal{p3812}{https://wg21.link/p3812r0}
 \end{frame}
 
 \subsection*{Énumération}
@@ -894,6 +913,7 @@
 		int a[42] = { 5... };
 	\end{minted}
 
+	\addproposal{p3567}{https://wg21.link/p3567r1}
 	\addproposal{P2767}{https://wg21.link/p2767r1}
 	\addproposal{p3126}{https://wg21.link/p3126r3}
 	\addproposal{p3127}{https://wg21.link/p3127r1}
@@ -919,6 +939,7 @@
 		\item Ajout de garanties à \mintinline{cpp}|std::array|
 		\item Précision sur le comportement des \mintinline{cpp}|std::array| de taille nulle
 		\item Ajout de \mintinline{cpp}|reserve()| et \mintinline{cpp}|capacity()| à \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
+		\item Ajout du \textit{tuple-protocol} au span de taille fixe
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049r0}
@@ -927,6 +948,7 @@
 	\addproposal{p3729}{https://wg21.link/p3729r0}
 	\addproposal{p3737}{https://wg21.link/p3737r0}
 	\addproposal{p3779}{https://wg21.link/p3779r0}
+	\addproposal{p3786}{https://wg21.link/p3786r0}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -976,9 +998,11 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|value_or_construct()| : construction paresseuse de l'alternative
 		\item \mintinline{cpp}|value_or_else()| : appel paresseux d'une fonction en l'absence de valeur
+		\item \mintinline{cpp}|optional<T&>| trivialement copiable
 	\end{itemize}
 
 	\addproposal{p3413}{https://wg21.link/p3413r0}
+	\addproposal{p3836}{https://wg21.link/p3836r0}
 \end{frame}
 
 \subsection*{std::expect}
@@ -1072,7 +1096,7 @@
 
 	\addproposal{p3605}{https://wg21.link/p3605r0}
 	\addproposal{p3642}{https://wg21.link/p3642r0}
-	\addproposal{p3688}{https://wg21.link/p3688r1}
+	\addproposal{p3688}{https://wg21.link/p3688r3}
 	\addproposal{p3711}{https://wg21.link/p3711r0}
 	\addproposal{p3735}{https://wg21.link/p3735r0}
 	\addproposal{p3724}{https://wg21.link/p3724r0}
@@ -1586,6 +1610,8 @@
 		\item Déclaration \mintinline{cpp}|const| des fonctions \mintinline{cpp}|lock()| et \mintinline{cpp}|unlock()| des mutex
 
 \note[item]{Pour ne pas devoir déclaré \mintinline{cpp}|mutable| tous les mutex. Déjà le cas dans d'autres langages, p.ex. Rust}
+
+		\item \mintinline{cpp}|std::try_lock_until()| et \mintinline{cpp}|std::try_lock_for()|
 	\end{itemize}
 
 	\addproposal{p2689}{https://wg21.link/p2689r2}
@@ -1594,6 +1620,7 @@
 	\addproposal{p3022}{https://wg21.link/p3022r0}
 	\addproposal{p2966}{https://wg21.link/p2966r1}
 	\addproposal{p3703}{https://wg21.link/p3703r0}
+	\addproposal{p3832}{https://wg21.link/p3832r0}
 \end{frame}
 
 \begin{frame}[fragile]
