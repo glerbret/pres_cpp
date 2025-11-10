@@ -282,10 +282,12 @@
 		\item Invariants
 		\item Annotations de types \textit{claim} / \textit{assertion}
 		\item Label sur les contrats
+		\item Messages de diagnostic fournis par l'utilisateur
 	\end{itemize}
 
 	\addproposal{p3400}{https://wg21.link/p3400}
 	\addproposal{p3831}{https://wg21.link/p3831}
+	\addproposal{p3099}{https://wg21.link/p3099}
 \end{frame}
 
 \subsection*{Comportement}
@@ -962,12 +964,14 @@
 		\item Ajout de \mintinline{cpp}|first()| et de \mintinline{cpp}|last()| à \mintinline{cpp}|std::string| et \mintinline{cpp}|std::string_view| pour récupérer les $n$ premiers ou derniers caractères
 		\item \mintinline{cpp}|std::zstring_view| équivalent à \mintinline{cpp}|std::string_view| garantissant la présence d'un \mintinline[escapeinside=||]{cpp}{|\textbackslash|0} terminal
 		\item Sentinelle pour les chaînes null-terminée, pour l'usage de range sur ces chaînes
+		\item \mintinline{cpp}|std::cstring_view| : vue systématiquement \textit{null-terminated}
 	\end{itemize}
 
 	\addproposal{p3094}{https://wg21.link/p3094}
 	\addproposal{p3283}{https://wg21.link/p3283}
 	\addproposal{P3655}{https://wg21.link/P3655}
 	\addproposal{P3710}{https://wg21.link/P3710}
+	\addproposal{p3862}{https://wg21.link/p3862}
 \end{frame}
 
 \subsection*{Tuples}
@@ -1111,11 +1115,13 @@
 
 		\item \mintinline{cpp}|std::shl()| et \mintinline{cpp}|std::shr()| : décalage de bits
 		\item \mintinline{cpp}|msb_to_mask| construit le masque permet de récupérer le bit de poids fort
+		\item Gestion du mode d'arrondi sur les calculs avec des \mintinline{cpp}|float|
 	\end{itemize}
 
 	\addproposal{p3734}{https://wg21.link/p3734}
 	\addproposal{p3793}{https://wg21.link/p3793}
 	\addproposal{p3764}{https://wg21.link/p3764}
+	\addproposal{p3864}{https://wg21.link/p3864}
 \end{frame}
 
 \subsection*{Ranges}
@@ -1219,11 +1225,13 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|std::inplace_function| : pendant de \mintinline{cpp}|std::function| sans allocation
 		\item \mintinline{cpp}|std::function_ptr_t| : pointeur générique sur une fonction
+		\item \mintinline{cpp}|std::constructor<T>()| convertit un ensemble de constructeurs en function object
 	\end{itemize}
 
 	\addproposal{p2828}{https://wg21.link/p2828}
 	\addproposal{p2986}{https://wg21.link/p2986}
 	\addproposal{p2966}{https://wg21.link/p2966}
+	\addproposal{p3841}{https://wg21.link/p3841}
 \end{frame}
 
 \subsection*{Attributs}
