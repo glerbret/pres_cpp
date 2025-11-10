@@ -7,7 +7,7 @@
 	\frametitle{Présentation}
 	\begin{itemize}
 		\item Début formel des travaux en juin 2023
-		\item Dernier \textit{Working Draft} : \href{https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/n5014.pdf}{n5014\linklogo}
+		\item Dernier \textit{Working Draft} : \href{https://wg21.link/std}{n5008\linklogo}
 	\end{itemize}
 \end{frame}
 
@@ -21,10 +21,10 @@
 		\item Dépréciation de l'ellipse sans virgulant la précédant
 	\end{itemize}
 
-	\addproposal{p2875}{https://wg21.link/p2875r4}
-	\addproposal{p3247}{https://wg21.link/p3247r2}
-	\addproposal{p3475}{https://wg21.link/p3475r1}
-	\addproposal{p3176}{https://wg21.link/p3176r1}
+	\addproposal{p2875}{https://wg21.link/p2875}
+	\addproposal{p3247}{https://wg21.link/p3247}
+	\addproposal{p3475}{https://wg21.link/p3475}
+	\addproposal{p3176}{https://wg21.link/p3176}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -44,15 +44,15 @@
 		\item Suppression \mintinline{cpp}|std::execution::split|
 	\end{itemize}
 
-	\addproposal{P2864}{https://wg21.link/P2864R2}
-	\addproposal{P2867}{https://wg21.link/P2867R2}
-	\addproposal{p2868}{https://wg21.link/p2868r3}
-	\addproposal{P2869}{https://wg21.link/P2869R4}
-	\addproposal{P2870}{https://wg21.link/P2870R3}
-	\addproposal{P2871}{https://wg21.link/P2871R3}
-	\addproposal{P2872}{https://wg21.link/P2872R3}
-	\addproposal{p2865}{https://wg21.link/p2865r6}
-	\addproposal{p3682}{https://wg21.link/p3682r0}
+	\addproposal{P2864}{https://wg21.link/P2864}
+	\addproposal{P2867}{https://wg21.link/P2867}
+	\addproposal{p2868}{https://wg21.link/p2868}
+	\addproposal{P2869}{https://wg21.link/P2869}
+	\addproposal{P2870}{https://wg21.link/P2870}
+	\addproposal{P2871}{https://wg21.link/P2871}
+	\addproposal{P2872}{https://wg21.link/P2872}
+	\addproposal{p2865}{https://wg21.link/p2865}
+	\addproposal{p3682}{https://wg21.link/p3682}
 \end{frame}
 
 \subsection*{Compatibilité C}
@@ -62,7 +62,7 @@
 		\item Support des en-têtes C23 \mintinline{cpp}|<stdbit.h>| et \mintinline{cpp}|<stdckdint.h>|
 	\end{itemize}
 
-	\addproposal{p3370}{https://wg21.link/p3370r1}
+	\addproposal{p3370}{https://wg21.link/p3370}
 \end{frame}
 
 \subsection*{Comportement}
@@ -83,7 +83,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P2795}{https://wg21.link/P2795R5}
+	\addproposal{P2795}{https://wg21.link/P2795}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -114,10 +114,10 @@
 		\end{itemize}
 	\end{block}
 
-	\addproposal{p3144}{https://wg21.link/p3144r2}
-	\addproposal{p1494}{https://wg21.link/p1494r5}
-	\addproposal{p3641}{https://wg21.link/p3641r0}
-	\addproposal{p2843}{https://wg21.link/p2843r3}
+	\addproposal{p3144}{https://wg21.link/p3144}
+	\addproposal{p1494}{https://wg21.link/p1494}
+	\addproposal{p3641}{https://wg21.link/p3641}
+	\addproposal{p2843}{https://wg21.link/p2843}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -133,7 +133,7 @@
 		{}
 	\end{minted}
 
-	\addproposal{P2809}{https://wg21.link/P2809R3}
+	\addproposal{P2809}{https://wg21.link/P2809}
 \end{frame}
 
 \subsection*{Syntaxe}
@@ -160,7 +160,7 @@
 		\end{itemize}
 	\end{alertblock}
 
-	\addproposal{P2741}{https://wg21.link/P2741R3}
+	\addproposal{P2741}{https://wg21.link/P2741}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -199,7 +199,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P2621}{https://wg21.link/P2621R3}
+	\addproposal{P2621}{https://wg21.link/P2621}
 \end{frame}
 
 \subsection*{Encodage}
@@ -224,10 +224,10 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:3,positionColumn:1,positionLineNumber:3,selectionStartColumn:1,selectionStartLineNumber:3,startColumn:1,startLineNumber:3),source:'%23include+%3Ctext_encoding%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()+%0A%7B%0A++++std::cout+%3C%3C+std::text_encoding::literal().name()+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+std::text_encoding::environment().name()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-std%3Dc%2B%2B26',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2558}{https://wg21.link/P2558R2}
-	\addproposal{P1854}{https://wg21.link/P1854R4}
-	\addproposal{p1885}{https://wg21.link/p1885r12}
-	\addproposal{p2862}{https://wg21.link/p2862r1}
+	\addproposal{P2558}{https://wg21.link/P2558}
+	\addproposal{P1854}{https://wg21.link/P1854}
+	\addproposal{p1885}{https://wg21.link/p1885}
+	\addproposal{p2862}{https://wg21.link/p2862}
 \end{frame}
 
 \subsection*{Types}
@@ -248,7 +248,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cclimits%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::add_sat(3,+4)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+INT_MIN+%3C%3C+%22+%22+%3C%3Cstd::sub_sat(INT_MIN,+1)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+static_cast%3Cint%3E(std::add_sat%3Cunsigned+char%3E(255,+4))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P0543}{https://wg21.link/P0543R3}
+	\addproposal{P0543}{https://wg21.link/P0543}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -266,7 +266,7 @@
 		\item Fonction \mintinline{cpp}|std::relocate()| appelle \mintinline{cpp}|std::trivially_relocate()| ou le constructeur par déplacement selon l'objet
 	\end{itemize}
 
-	\addproposal{P2786}{https://wg21.link/P2786R13}
+	\addproposal{P2786}{https://wg21.link/P2786}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -281,7 +281,7 @@
 		\item Trait \mintinline{cpp}|std::is_replaceable|
 	\end{itemize}
 
-	\addproposal{P2786}{https://wg21.link/P2786R13}
+	\addproposal{P2786}{https://wg21.link/P2786}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -296,7 +296,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P3019}{https://wg21.link/P3019R14}
+	\addproposal{P3019}{https://wg21.link/P3019}
 \end{frame}
 
 \subsection*{Variables}
@@ -332,8 +332,8 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cclimits%3E%0A%0Aint+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+1%0A++auto+bar+%3D+foo()%3B%0A%23else%0A++auto+_+%3D+foo()%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2169}{https://wg21.link/P2169R4}
-	\addproposal{p2968}{https://wg21.link/p2968r2}
+	\addproposal{P2169}{https://wg21.link/P2169}
+	\addproposal{p2968}{https://wg21.link/p2968}
 \end{frame}
 
 \subsection*{Structured binding}
@@ -357,7 +357,7 @@
 		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGIMwAcpK4AMngMmAByPgBGmMQSAGykAA6oCoRODB7evv5BaRmOAmER0SxxCVzJdpgOWUIETMQEOT5%2BgbaY9sUMjc0EpVGx8Um2TS1teZ0KE4PhwxWj1QCUtqhexMjsHOYAzOHI3lgA1CZ7bk6zxJis59gmGgCCj0/XXg4nAGKoqGfPJgA7FZnicTuECCcmOcQU8wRCTjEYa9XmDMKoUrQ8MhCCdUCl4kwiMREb9aCcICsTmgGLNUWdgf84WCTjcCJsGFCTmAwOcACKI5Gghl8lGA0V7WGvBEsJjhSli2HwqgQJheIhnACsFiYpEFmoF/O%2BvyBFjMes1QL5K3ppvpYNm6BAKA2kPObndXPdnvMZm5vL2hrMfu9F0RZwuPuDJk1bgYvqFzKt9O6SltwPtJ0dzrQ6ojHrDTHzUZDgaNvuLYZilbcZ2jsfj0cl6dFAOFeBVao1MZ1eqRBojAp%2BqFN5pOZitNuFduFDoITpdedDtaLy7rfp55eDNfDa4TDYTzen4pTtDTx6VLOzi7dkcLO4r/K3pYLtere/rccPl%2BTbZe4o4NZaE4TVeD8DgtFIVBOA9SxrCzDYtkwOs9h4UgCE0QC1gAaxATUNH0ThJDAzCoM4XgFBAAiMIgwDSDgWAkHROp1RIchKGaYAFGUQxuiEBBUAAd3AtC0BYFI6CJLIeIiWh%2BKE8DILEiT6ASLjmBSBQBIIUhlLoeJIlYHZeD01SAHl1Xk4TSOY5AnmILjyOCVQ6kafBwN4fhBBEMR2CkGRBEUFR1Fo0hdC4fRDGMaxrH0PAYkoyA1nxXpKI4ABaR1%2BVMODLDMZATnSgB1MRyWK9ECGIIt0oJdBDEcZBeFQAA3eJiDwLBEspUhiC8QQ8DYAAVMkurWBREO2PRHXCGS%2BIE6zuF4SrMB2NDBKqlJMKAkCSNC6COGwFzkFYklVACRJ0sSSQTmAZACogSq%2BuwqkIFgqxLD1XBCBIFCuBWJatrWBBbiwBJutw/DCI4YjSEUpqnMo6jAahsxdsg/aAdolY1la4gMmcSQgA}
 	\end{codesample}
 
-	\addproposal{p0963}{https://wg21.link/p0963r3}
+	\addproposal{p0963}{https://wg21.link/p0963}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -376,7 +376,7 @@
 		auto [...a, ...b] = f();  // ill-formed
 	\end{minted}
 
-	\addproposal{p1061}{https://wg21.link/p1061r10}
+	\addproposal{p1061}{https://wg21.link/p1061}
 \end{frame}
 
 \subsection*{Classes}
@@ -399,7 +399,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:40,endLineNumber:3,positionColumn:40,positionLineNumber:3,selectionStartColumn:1,selectionStartLineNumber:3,startColumn:1,startLineNumber:3),source:'%23include+%3Ciostream%3E%0A%0Avoid+foo()+%3D+delete(%22Unsafe,+use+bar%22)%3B%0A%0Aint+main()%0A%7B%0A+++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2573}{https://wg21.link/P2573R2}
+	\addproposal{P2573}{https://wg21.link/P2573}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -416,7 +416,7 @@
 		};
 	\end{minted}
 
-	\addproposal{P2893}{https://wg21.link/P2893R3}
+	\addproposal{P2893}{https://wg21.link/P2893}
 \end{frame}
 
 \subsection*{Template}
@@ -437,7 +437,7 @@
 		S<Concept, Var> s;
 	\end{minted}
 
-	\addproposal{P2841}{https://wg21.link/P2841R7}
+	\addproposal{P2841}{https://wg21.link/P2841}
 \end{frame}
 
 \subsection*{Gestion d'erreur}
@@ -450,7 +450,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P2927}{https://wg21.link/p2927r3}
+	\addproposal{P2927}{https://wg21.link/p2927}
 \end{frame}
 
 \subsection*{Conteneurs}
@@ -469,10 +469,10 @@
 		\item Possibilité d'utiliser \mintinline{cpp}|std::weak_ptr| en tant que clé de conteneur associatif
 	\end{itemize}
 
-	\addproposal{p0843}{https://wg21.link/p0843r14}
-	\addproposal{P0447}{https://wg21.link/p0447r28}
-	\addproposal{P1901}{https://wg21.link/P1901R2}
-	\addproposal{P2630}{https://wg21.link/P2630R4}
+	\addproposal{p0843}{https://wg21.link/p0843}
+	\addproposal{P0447}{https://wg21.link/p0447}
+	\addproposal{P1901}{https://wg21.link/P1901}
+	\addproposal{P2630}{https://wg21.link/P2630}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -496,11 +496,11 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:35,endLineNumber:10,positionColumn:35,positionLineNumber:10,selectionStartColumn:35,selectionStartLineNumber:10,startColumn:35,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cspan%3E%0A%0Aint+main()%0A%7B%0A+++std::vector%3Cint%3E+foo%7B1,+5,+42,+68,+33%7D%3B%0A+++std::span+bar%7Bstd::begin(foo)+%2B+1,+std::end(foo)%7D%3B%0A%0A+++std::cout+%3C%3C+bar.at(1)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2821}{https://wg21.link/p2821r5}
-	\addproposal{p3383}{https://wg21.link/p3383r3}
-	\addproposal{p3355}{https://wg21.link/p3355r1}
-	\addproposal{P2642}{https://wg21.link/P2642R6}
-	\addproposal{p2389}{https://wg21.link/p2389r2}
+	\addproposal{P2821}{https://wg21.link/p2821}
+	\addproposal{p3383}{https://wg21.link/p3383}
+	\addproposal{p3355}{https://wg21.link/p3355}
+	\addproposal{P2642}{https://wg21.link/P2642}
+	\addproposal{p2389}{https://wg21.link/p2389}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -515,9 +515,9 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:11,endLineNumber:9,positionColumn:11,positionLineNumber:9,selectionStartColumn:11,selectionStartLineNumber:9,startColumn:11,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cstring_view%3E%0A%0Aint+main()%0A%7B%0A++++const+std::string+foo%7B%22Hello%22%7D%3B%0A++++const+std::string+bar%7B%22Salut+world!!%22%7D%3B%0A++++const+std::string_view+baz%7Bstd::begin(bar)+%2B+5,+std::end(bar)%7D%3B%0A%0A++++std::cout+%3C%3C+foo+%2B+baz+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2495}{https://wg21.link/P2495R3}
-	\addproposal{P2697}{https://wg21.link/P2697R1}
-	\addproposal{P2591}{https://wg21.link/P2591R5}
+	\addproposal{P2495}{https://wg21.link/P2495}
+	\addproposal{P2697}{https://wg21.link/P2697}
+	\addproposal{P2591}{https://wg21.link/P2591}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -534,8 +534,8 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:23,endLineNumber:9,positionColumn:23,positionLineNumber:9,selectionStartColumn:23,selectionStartLineNumber:9,startColumn:23,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cspan%3E%0A%0Aint+main()%0A%7B%0A++++auto+foo+%3D+%7B5,+7,+12,+42%7D%3B%0A++++const+std::span+bar+%3D+foo%3B%0A%0A++++std::cout+%3C%3C+bar%5B3%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2752}{https://wg21.link/P2752R3}
-	\addproposal{P2447}{https://wg21.link/P2447R6}
+	\addproposal{P2752}{https://wg21.link/P2752}
+	\addproposal{P2447}{https://wg21.link/P2447}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -544,7 +544,7 @@
 		\item Comparaison de \mintinline{cpp}|std::reference_wrapper|
 	\end{itemize}
 
-	\addproposal{P2944}{https://wg21.link/P2944R3}
+	\addproposal{P2944}{https://wg21.link/P2944}
 \end{frame}
 
 \subsection*{Tuples}
@@ -558,7 +558,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:45,endLineNumber:10,positionColumn:45,positionLineNumber:10,selectionStartColumn:45,selectionStartLineNumber:10,startColumn:45,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Ccomplex%3E%0A%0Aint+main()%0A%7B%0A++++const+std::complex%3Cint%3E+foo%7B1,+5%7D%3B%0A++++std::cout+%3C%3C+std::get%3C1%3E(foo)+%3C%3C+%22%5Cn%22%3B%0A%0A++++const+auto+%5Ba,+b%5D+%3D+foo%3B%0A++++std::cout+%3C%3C+%22(%22+%3C%3C+a+%3C%3C+%22,+%22+%3C%3C+b+%3C%3C+%22)%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{p2819}{https://wg21.link/p2819r2}
+	\addproposal{p2819}{https://wg21.link/p2819}
 \end{frame}
 
 \subsection*{std::optional}
@@ -568,7 +568,7 @@
 		\item Support des références par \mintinline{cpp}|std::optional|
 	\end{itemize}
 
-	\addproposal{p2988}{https://wg21.link/p2988r12}
+	\addproposal{p2988}{https://wg21.link/p2988}
 \end{frame}
 
 \subsection*{Algorithme}
@@ -594,9 +594,9 @@
 		linalg::scale(2.0, x); // x = 2.0 * x
 	\end{minted}
 
-	\addproposal{P1673}{https://wg21.link/P1673R13}
-	\addproposal{p3050}{https://wg21.link/p3050r2}
-	\addproposal{p3222}{https://wg21.link/p3222r0}
+	\addproposal{P1673}{https://wg21.link/P1673}
+	\addproposal{p3050}{https://wg21.link/p3050}
+	\addproposal{p3222}{https://wg21.link/p3222}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -616,7 +616,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:62,endLineNumber:20,positionColumn:61,positionLineNumber:20,selectionStartColumn:62,selectionStartLineNumber:20,startColumn:61,startLineNumber:20),source:'%23include+%3Ciostream%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cvector%3E%0A%0Astruct+Foo%0A%7B%0A++++int+x%3B%0A++++int+y%3B%0A%0A++++bool+operator%3D%3D(const+Foo%26+rhs)+const%0A++++%7B%0A++++++++return+x+%3D%3D+rhs.x+%26%26+y+%3D%3D+rhs.y%3B%0A++++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%09const+std::vector%3CFoo%3E+foo%7B%7B1,+2%7D,+%7B3,+4%7D,+%7B3,+5%7D,+%7B7,+12%7D%7D%3B%0A%0A%09const+auto+it+%3D+std::find(std::begin(foo),+std::end(foo),+%7B3,+4%7D)%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+(it+!!%3D+std::end(foo))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2248}{https://wg21.link/P2248R8}
+	\addproposal{P2248}{https://wg21.link/P2248}
 \end{frame}
 
 
@@ -626,7 +626,7 @@
 		\item Versions membres de \mintinline{cpp}|std::visit()| et \mintinline{cpp}|std::visit_format_arg()|
 	\end{itemize}
 
-	\addproposal{P2637}{https://wg21.link/P2637R3}
+	\addproposal{P2637}{https://wg21.link/P2637}
 \end{frame}
 
 \subsection*{Ranges}
@@ -659,8 +659,8 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cranges%3E%0A%23include+%3Cvector%3E%0A%23include+%3Carray%3E%0A%0Aint+main()%0A%7B%0A%09std::vector%3Cint%3E+v1%7B1,2,3%7D,+v2%7B4,5%7D,+v3%7B%7D%3B%0A%09std::array+a%7B6,7,8%7D%3B%0A%0A%09for(const+auto+i:+std::views::concat(v1,+v2,+v3,+a))%0A++++%7B%0A++++++++std::cout+%3C%3C+i+%3C%3C+%22+%22%3B%0A++++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2542}{https://wg21.link/P2542R8}
-	\addproposal{P1068}{https://wg21.link/P1068R11}
+	\addproposal{P2542}{https://wg21.link/P2542}
+	\addproposal{P1068}{https://wg21.link/P1068}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -674,11 +674,11 @@
 		\item \mintinline{cpp}|views::indices()| : séquence d'entiers de 0 à $n - 1$
 	\end{itemize}
 
-	\addproposal{p3138}{https://wg21.link/p3138r5}
-	\addproposal{p3137}{https://wg21.link/p3137r3}
-	\addproposal{p2846}{https://wg21.link/p2846r6}
-	\addproposal{p3044}{https://wg21.link/p3044r2}
-	\addproposal{p3060}{https://wg21.link/p3060r3}
+	\addproposal{p3138}{https://wg21.link/p3138}
+	\addproposal{p3137}{https://wg21.link/p3137}
+	\addproposal{p2846}{https://wg21.link/p2846}
+	\addproposal{p3044}{https://wg21.link/p3044}
+	\addproposal{p3060}{https://wg21.link/p3060}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -699,8 +699,8 @@
 		\item Ajout du choix de l'algorithme de parallélisme aux ranges
 	\end{itemize}
 
-	\addproposal{p3168}{https://wg21.link/p3168r2}
-	\addproposal{p3179}{https://wg21.link/p3179r9}
+	\addproposal{p3168}{https://wg21.link/p3168}
+	\addproposal{p3179}{https://wg21.link/p3179}
 \end{frame}
 
 \subsection*{Ratio}
@@ -710,7 +710,7 @@
 		\item Ajout des préfixes \mintinline{cpp}|quecto|, \mintinline{cpp}|ronto|, \mintinline{cpp}|ronna| et \mintinline{cpp}|quetta|
 	\end{itemize}
 
-	\addproposal{P2734}{https://wg21.link/P2734R0}
+	\addproposal{P2734}{https://wg21.link/P2734}
 \end{frame}
 
 \subsection*{Évaluation \textit{compile-time}}
@@ -735,13 +735,13 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P2738}{https://wg21.link/P2738R1}
-	\addproposal{P2686}{https://wg21.link/P2686R5}
-	\addproposal{P3309}{https://wg21.link/P3309R3}
-	\addproposal{p2747}{https://wg21.link/p2747r2}
-	\addproposal{p3372}{https://wg21.link/p3372r3}
-	\addproposal{p3533}{https://wg21.link/p3533r2}
-	\addproposal{p3037}{https://wg21.link/p3037r6}
+	\addproposal{P2738}{https://wg21.link/P2738}
+	\addproposal{P2686}{https://wg21.link/P2686}
+	\addproposal{P3309}{https://wg21.link/P3309}
+	\addproposal{p2747}{https://wg21.link/p2747}
+	\addproposal{p3372}{https://wg21.link/p3372}
+	\addproposal{p3533}{https://wg21.link/p3533}
+	\addproposal{p3037}{https://wg21.link/p3037}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -753,8 +753,8 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P3068}{https://wg21.link/P3068R6}
-	\addproposal{P3378}{https://wg21.link/P3378R2}
+	\addproposal{P3068}{https://wg21.link/P3068}
+	\addproposal{P3378}{https://wg21.link/P3378}
 \end{frame}
 
 \subsection*{Parameters pack}
@@ -777,7 +777,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename...+T%3E%0Avoid+first_plus_last(T...+values)%0A%7B%0A++std::cout+%3C%3C+T...%5B0%5D(values...%5B0%5D+%2B+values...%5Bsizeof...(values)-1%5D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++first_plus_last(1,+2,+10)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2662}{https://wg21.link/P2662R3}
+	\addproposal{P2662}{https://wg21.link/P2662}
 \end{frame}
 
 \subsection*{Gestion mémoire}
@@ -788,7 +788,7 @@
 		\item \ldots{} en particulier si un membre d'une union est active
 	\end{itemize}
 
-	\addproposal{P2641}{https://wg21.link/P2641R4}
+	\addproposal{P2641}{https://wg21.link/P2641}
 \end{frame}
 
 \subsection*{Parallélisme}
@@ -804,8 +804,8 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P2530}{https://wg21.link/P2530R3}
-	\addproposal{P2545}{https://wg21.link/P2545R4}
+	\addproposal{P2530}{https://wg21.link/P2530}
+	\addproposal{P2545}{https://wg21.link/P2545}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -823,12 +823,12 @@
 		auto e = reduce(d);                               // 6
 	\end{minted}
 
-	\addproposal{p1928}{https://wg21.link/p1928r15}
-	\addproposal{P3430}{https://wg21.link/P3430R3}
-	\addproposal{P3441}{https://wg21.link/P3441R2}
-	\addproposal{P3287}{https://wg21.link/P3287R3}
-	\addproposal{P2663}{https://wg21.link/P2663R7}
-	\addproposal{P2933}{https://wg21.link/P2933R4}
+	\addproposal{p1928}{https://wg21.link/p1928}
+	\addproposal{P3430}{https://wg21.link/P3430}
+	\addproposal{P3441}{https://wg21.link/P3441}
+	\addproposal{P3287}{https://wg21.link/P3287}
+	\addproposal{P2663}{https://wg21.link/P2663}
+	\addproposal{P2933}{https://wg21.link/P2933}
 \end{frame}
 
 \subsection*{Traits}
@@ -838,7 +838,7 @@
 		\item Trait \mintinline{cpp}|std::is_virtual_base_of| indiquant si une classe est une classe de base virtuelle d'une autre
 	\end{itemize}
 
-	\addproposal{p2985}{https://wg21.link/p2985r0}
+	\addproposal{p2985}{https://wg21.link/p2985}
 \end{frame}
 
 \subsection*{Programmation fonctionnelle}
@@ -855,8 +855,8 @@
 		\end{itemize}
 	\end{itemize}
 
-	\addproposal{P2548}{https://wg21.link/P2548R6}
-	\addproposal{P0792}{https://wg21.link/P0792R14}
+	\addproposal{P2548}{https://wg21.link/P2548}
+	\addproposal{P0792}{https://wg21.link/P0792}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -874,7 +874,7 @@
 		bind_front<&S::foo>(s, p1, p2);
 	\end{minted}
 
-	\addproposal{p2714}{https://wg21.link/p2714r1}
+	\addproposal{p2714}{https://wg21.link/p2714}
 \end{frame}
 
 \subsection*{Attributs}
@@ -904,8 +904,8 @@
 		f(y); // erroneous behavior
 	\end{minted}
 
-	\addproposal{P0609}{https://wg21.link/P0609R3}
-	\addproposal{p2795}{https://wg21.link/p2795r5}
+	\addproposal{P0609}{https://wg21.link/P0609}
+	\addproposal{p2795}{https://wg21.link/p2795}
 \end{frame}
 
 \subsection*{Flux}
@@ -943,12 +943,12 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+str+%3D+%22%7B%7D%22%3B%0A++std::cout+%3C%3C+std::format(std::runtime_format(str),+42)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{p2905}{https://wg21.link/p2905r2}
-	\addproposal{P2918}{https://wg21.link/P2918R2}
-	\addproposal{P2845}{https://wg21.link/P2845R8}
-	\addproposal{p2909}{https://wg21.link/p2909r4}
-	\addproposal{P2587}{https://wg21.link/P2587R3}
-	\addproposal{P2757}{https://wg21.link/P2757R3}
+	\addproposal{p2905}{https://wg21.link/p2905}
+	\addproposal{P2918}{https://wg21.link/P2918}
+	\addproposal{P2845}{https://wg21.link/P2845}
+	\addproposal{p2909}{https://wg21.link/p2909}
+	\addproposal{P2587}{https://wg21.link/P2587}
+	\addproposal{P2757}{https://wg21.link/P2757}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -966,7 +966,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++int+i+%3D+0%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%23018X%7D%22,+reinterpret_cast%3Cuintptr_t%3E(%26i))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2510}{https://wg21.link/P2510R3}
+	\addproposal{P2510}{https://wg21.link/P2510}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -988,9 +988,9 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:16,endLineNumber:2,positionColumn:16,positionLineNumber:2,selectionStartColumn:16,selectionStartLineNumber:2,startColumn:16,startLineNumber:2),source:'%23include+%3Ciostream%3E%0A%23include+%3Cprint%3E%0A%0Aint+main()%0A%7B%0A++++std::println(%22ligne+1%22)%3B%0A++++std::println()%3B%0A++++std::println(%22ligne+3%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P3142}{https://wg21.link/P3142R0}
-	\addproposal{p3107}{https://wg21.link/p3107r5}
-	\addproposal{p3235}{https://wg21.link/p3235r3}
+	\addproposal{P3142}{https://wg21.link/P3142}
+	\addproposal{p3107}{https://wg21.link/p3107}
+	\addproposal{p3235}{https://wg21.link/p3235}
 \end{frame}
 
 \subsection*{Durées et temps}
@@ -1000,7 +1000,7 @@
 		\item Spécialisation de \mintinline{cpp}|std::hash| pour \mintinline{cpp}|std::chrono|
 	\end{itemize}
 
-	\addproposal{P2592}{https://wg21.link/P2592R3}
+	\addproposal{P2592}{https://wg21.link/P2592}
 \end{frame}
 
 \subsection*{Système de fichiers}
@@ -1011,7 +1011,7 @@
 		\item \mintinline{cpp}|native_handle()| retourne ce descripteur
 	\end{itemize}
 
-	\addproposal{P1759}{https://wg21.link/P1759R6}
+	\addproposal{P1759}{https://wg21.link/P1759}
 \end{frame}
 
 \subsection*{Concurrence}
@@ -1031,15 +1031,15 @@
 		\item \mintinline{cpp}|std::store_XXX()| équivalents à \mintinline{cpp}|std::fetch_XXX()| ne retournant pas l'ancienne valeur
 	\end{itemize}
 
-	\addproposal{P0493}{https://wg21.link/P0493R5}
-	\addproposal{p3008}{https://wg21.link/p3008r6}
-	\addproposal{p2835}{https://wg21.link/p2835r7}
-	\addproposal{p2300}{https://wg21.link/p2300r10}
-	\addproposal{p3325}{https://wg21.link/p3325r5}
-	\addproposal{p3149}{https://wg21.link/p3149r11}
-	\addproposal{p2079}{https://wg21.link/p2079r10}
-	\addproposal{p3552}{https://wg21.link/p3552r3}
-	\addproposal{p3111}{https://wg21.link/p3111r8}
+	\addproposal{P0493}{https://wg21.link/P0493}
+	\addproposal{p3008}{https://wg21.link/p3008}
+	\addproposal{p2835}{https://wg21.link/p2835}
+	\addproposal{p2300}{https://wg21.link/p2300}
+	\addproposal{p3325}{https://wg21.link/p3325}
+	\addproposal{p3149}{https://wg21.link/p3149}
+	\addproposal{p2079}{https://wg21.link/p2079}
+	\addproposal{p3552}{https://wg21.link/p3552}
+	\addproposal{p3111}{https://wg21.link/p3111}
 \end{frame}
 
 \subsection*{Générateurs aléatoires}
@@ -1049,7 +1049,7 @@
 		\item Ajout des moteurs \textit{counter based Philox}
 	\end{itemize}
 
-	\addproposal{p2075}{https://wg21.link/p2075r6}
+	\addproposal{p2075}{https://wg21.link/p2075}
 \end{frame}
 
 \subsection*{Contract}
@@ -1070,7 +1070,7 @@
 		Version plutôt minimale des contrats
 	\end{block}
 
-	\addproposal{P2900}{https://wg21.link/P2900R14}
+	\addproposal{P2900}{https://wg21.link/P2900}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1097,7 +1097,7 @@
 		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+foo(int+a,+int+b)%0A++%5B%5Bpre:+a+%3E+0+%26%26+b+%3E+0%5D%5D%0A++%5B%5Bpost+r:+r+%3E+10%5D%5D%0A%7B%0A++++return+a+/+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(120,+3)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(6,+3)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%23if+0%0A++std::cout+%3C%3C+foo(120,+0)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gcontracts-trunk,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(contracts)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
 
-	\addproposal{P2900}{https://wg21.link/P2900R14}
+	\addproposal{P2900}{https://wg21.link/P2900}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1117,7 +1117,7 @@
 
 	\end{itemize}
 
-	\addproposal{P2900}{https://wg21.link/P2900R14}
+	\addproposal{P2900}{https://wg21.link/P2900}
 \end{frame}
 
 \subsection*{Reflection}
@@ -1137,13 +1137,13 @@
 		\item Construction de données statiques depuis du \textit{compile-time} : \mintinline{cpp}|std::define_static_string|, \mintinline{cpp}|std::define_static_object| et \mintinline{cpp}|std::define_static_array|
 	\end{itemize}
 
-	\addproposal{p2996}{https://wg21.link/p2996r13}
-	\addproposal{p3096}{https://wg21.link/p3096r9}
-	\addproposal{p1306}{https://wg21.link/p1306r4}
-	\addproposal{p3491}{https://wg21.link/p3491r3}
-	\addproposal{p3293}{https://wg21.link/p3293r2}
-	\addproposal{p3394}{https://wg21.link/p3394r3}
-	\addproposal{p3560}{https://wg21.link/p3560r2}
+	\addproposal{p2996}{https://wg21.link/p2996}
+	\addproposal{p3096}{https://wg21.link/p3096}
+	\addproposal{p1306}{https://wg21.link/p1306}
+	\addproposal{p3491}{https://wg21.link/p3491}
+	\addproposal{p3293}{https://wg21.link/p3293}
+	\addproposal{p3394}{https://wg21.link/p3394}
+	\addproposal{p3560}{https://wg21.link/p3560}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1174,7 +1174,7 @@
 		\item Suppression de l'expansion de macros dans les déclarations de module
 	\end{itemize}
 
-	\addproposal{P3034}{https://wg21.link/P3034R1}
+	\addproposal{P3034}{https://wg21.link/P3034}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1189,7 +1189,7 @@
 		};
 	\end{minted}
 
-	\addproposal{p1967}{https://wg21.link/p1967r14}
+	\addproposal{p1967}{https://wg21.link/p1967}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1200,6 +1200,6 @@
 		\item \mintinline{cpp}|std::is_debugger_present()| permet de savoir si l'exécution se fait dans un debugger
 	\end{itemize}
 
-	\addproposal{P2546}{https://wg21.link/P2546R5}
+	\addproposal{P2546}{https://wg21.link/P2546}
 \end{frame}
 \end{document}
