@@ -277,6 +277,7 @@
 		\item Accès à la valeur initiale des paramètres ou autres entités lors de la vérification des postconditions
 		\item Comportement \mintinline{cpp}|assume| : optimisation en supposant le contrat vrai
 		\item Choix du comportement dans l'assertion du contrat
+		\item Contrat \textit{always-enforced}
 		\item Postcondition sur les sorties non normales d'une fonction (exceptions)
 		\item Contrats non évaluables au \textit{run-time}
 		\item Invariants
@@ -288,6 +289,7 @@
 	\addproposal{p3400}{https://wg21.link/p3400}
 	\addproposal{p3831}{https://wg21.link/p3831}
 	\addproposal{p3099}{https://wg21.link/p3099}
+	\addproposal{p3912}{https://wg21.link/p3912}
 \end{frame}
 
 \subsection*{Comportement}
@@ -395,7 +397,7 @@
 	\frametitle{Types}
 	\begin{itemize}
 		\item Relâchement des restrictions sur les \mintinline{cpp}|typedef _t|
-		\item Vérification à la compilation que deux types ont la même représentation mémoire
+		\item Vérification \textit{compile-time} que deux types ont la même représentation mémoire
 		\item Type \textit{fixed point decimal}
 		\item Entiers larges \mintinline{cpp}|wide_integer<128, unsigned>|
 		\item \mintinline{cpp}|std::int_least128_t|
@@ -790,6 +792,23 @@
 	\addproposal{p2966}{https://wg21.link/p2966}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Opérateurs}
+	\begin{itemize}
+		\item Opérateur unaire postfixé ~ pour permuter un booléen
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		flag~;
+
+		// Equivalent a
+
+		flag = !flag
+	\end{minted}
+
+	\addproposal{p3883}{https://wg21.link/p3883}
+\end{frame}
+
 \subsection*{Structured binding}
 \begin{frame}[fragile]
 	\frametitle{Structured binding}
@@ -942,6 +961,7 @@
 		\item Précision sur le comportement des \mintinline{cpp}|std::array| de taille nulle
 		\item Ajout de \mintinline{cpp}|reserve()| et \mintinline{cpp}|capacity()| à \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 		\item Ajout du \textit{tuple-protocol} au span de taille fixe
+		\item Création de \textit{subspan} à partir d'\textit{offsets} et d'\textit{extents }\textit{compile-time}
 	\end{itemize}
 
 	\addproposal{p3049}{https://wg21.link/p3049}
@@ -951,6 +971,20 @@
 	\addproposal{p3737}{https://wg21.link/p3737}
 	\addproposal{p3779}{https://wg21.link/p3779}
 	\addproposal{p3786}{https://wg21.link/p3786}
+	\addproposal{p3880}{https://wg21.link/p3880}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conteneurs}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::is_pointer_between()| vérifie si un pointeur appartient à une plage mémoire
+	\end{itemize}
+
+	\begin{alertblock}{}
+		Vérifie que l'adresse est dans la plage définie par les bornes, mais aussi que les trois adresses appartiennent au même objet
+	\end{alertblock}
+
+	\addproposal{p3852}{https://wg21.link/p3852}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1002,11 +1036,9 @@
 	\begin{itemize}
 		\item \mintinline{cpp}|value_or_construct()| : construction paresseuse de l'alternative
 		\item \mintinline{cpp}|value_or_else()| : appel paresseux d'une fonction en l'absence de valeur
-		\item \mintinline{cpp}|optional<T&>| trivialement copiable
 	\end{itemize}
 
 	\addproposal{p3413}{https://wg21.link/p3413}
-	\addproposal{p3836}{https://wg21.link/p3836}
 \end{frame}
 
 \subsection*{std::expect}
@@ -1087,12 +1119,14 @@
 
 \note[item]{Support de \mintinline{cpp}|char8_t|, \mintinline{cpp}|char16_t| et \mintinline{cpp}|char32_t|, fonction \mintinline{cpp}|constexpr|, meilleure gestion typage}
 
-			\item Fonctions libres de manipulation de \textit{string\_view-like}
-			\begin{itemize}
-				\item \mintinline{cpp}|std::starts_with()| et \mintinline{cpp}|std::ends_with()|
-				\item \mintinline{cpp}|std::join()|
-				\item \mintinline{cpp}|std::is_null_or_empty()|
-			\end{itemize}
+		\end{itemize}
+
+		\item Support des différents types de caractères (\mintinline{cpp}|char8_t|, \mintinline{cpp}|char16_t|, \mintinline{cpp}|char32_t| et \mintinline{cpp}|wchar_t|) par \mintinline{cpp}|std::to_chars()| et \mintinline{cpp}|std::from_chars()|
+		\item Fonctions libres de manipulation de \textit{string\_view-like}
+		\begin{itemize}
+			\item \mintinline{cpp}|std::starts_with()| et \mintinline{cpp}|std::ends_with()|
+			\item \mintinline{cpp}|std::join()|
+			\item \mintinline{cpp}|std::is_null_or_empty()|
 		\end{itemize}
 		\item \mintinline{cpp}|std::partial_sort_n| et \mintinline{cpp}|std::nth_element_n| prenant un nombre d'éléments
 		\item Divisions entières avec choix du mode d'arrondi (vers $0$, vers $\pm \infty$, \ldots)
@@ -1104,6 +1138,7 @@
 	\addproposal{p3711}{https://wg21.link/p3711}
 	\addproposal{p3735}{https://wg21.link/p3735}
 	\addproposal{p3724}{https://wg21.link/p3724}
+	\addproposal{p3876}{https://wg21.link/p3876}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1116,12 +1151,14 @@
 		\item \mintinline{cpp}|std::shl()| et \mintinline{cpp}|std::shr()| : décalage de bits
 		\item \mintinline{cpp}|msb_to_mask| construit le masque permet de récupérer le bit de poids fort
 		\item Gestion du mode d'arrondi sur les calculs avec des \mintinline{cpp}|float|
+		\item Ajout des fonctions de manipulation de \mintinline{cpp}|float| et \mintinline{cpp}|double| de C23 (\mintinline{cpp}|std::iscanonical()|, \mintinline{cpp}|std::iszero()|, \mintinline{cpp}|std::fadd()|, \ldots)
 	\end{itemize}
 
 	\addproposal{p3734}{https://wg21.link/p3734}
 	\addproposal{p3793}{https://wg21.link/p3793}
 	\addproposal{p3764}{https://wg21.link/p3764}
 	\addproposal{p3864}{https://wg21.link/p3864}
+	\addproposal{p3935}{https://wg21.link/p3935}
 \end{frame}
 
 \subsection*{Ranges}
@@ -1183,9 +1220,11 @@
 	\frametitle{Ranges}
 	\begin{itemize}
 		\item Opérations ensemblistes \mintinline{cpp}|views::set_difference|, \mintinline{cpp}|views::set_intersection|, \mintinline{cpp}|views::set_union| et \mintinline{cpp}|views::set_symmetric_difference|
+		\item \mintinline{cpp}|static_sized_range| : raffinement de \mintinline{cpp}|sized_range| lorsque la taille est connu au \textit{compile-time}
 	\end{itemize}
 
 	\addproposal{p3741}{https://wg21.link/p3741}
+	\addproposal{p3928}{https://wg21.link/p3928}
 \end{frame}
 
 \subsection*{Traits}
@@ -1217,7 +1256,10 @@
 	\frametitle{Lambda}
 	\begin{itemize}
 		\item Capture mutable partielle par les lambdas
+		\item Capture effectuée dans l'ordre des déclarations
 	\end{itemize}
+
+	\addproposal{p3847}{https://wg21.link/p3847}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1381,7 +1423,7 @@
 			\item \mintinline{cpp}|std::optional|, \mintinline{cpp}|std::variant|, \mintinline{cpp}|std::any| et \mintinline{cpp}|std::expected|
 			\item \mintinline{cpp}|std::mdspan|, \mintinline{cpp}|std::flat_map| et \mintinline{cpp}|std::flat_set|
 			\item \mintinline{cpp}|charN_t|
-			\item \mintinline{cpp}|error_code|
+			\item \mintinline{cpp}|std::error_code| et \mintinline{cpp}|std::error_category|
 		\end{itemize}
 		\item \mintinline{cpp}|std::format_as()| : formateurs personnalisés basé sur un autre type (p.ex. formatage d'enum comme entiers)
 	\end{itemize}
@@ -1391,6 +1433,7 @@
 	\addproposal{p2930}{https://wg21.link/p2930}
 	\addproposal{p3258}{https://wg21.link/p3258}
 	\addproposal{p3070}{https://wg21.link/p3070}
+	\addproposal{p3885}{https://wg21.link/p3885}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1525,7 +1568,10 @@
 			\item \mintinline{cpp}|class|, \mintinline{cpp}|struct|, \mintinline{cpp}|enum class|, \textit{interface}, \textit{value type}
 		\end{itemize}
 		\item Bindings vers d'autres langages (JS, Python) via ces mécanismes
+		\item Retour d'un \mintinline{cpp}|std::string| par \mintinline{cpp}|identifier_of()|
 	\end{itemize}
+
+	\addproposal{p3947}{https://wg21.link/p3947}
 \end{frame}
 
 \subsection*{Polymorphismes}
@@ -1620,6 +1666,7 @@
 \note[item]{Pour ne pas devoir déclaré \mintinline{cpp}|mutable| tous les mutex. Déjà le cas dans d'autres langages, p.ex. Rust}
 
 		\item \mintinline{cpp}|std::try_lock_until()| et \mintinline{cpp}|std::try_lock_for()|
+		\item \mintinline{cpp}|std::multi_lock| wrapper RAII gérant plusieurs mutex (comme \mintinline{cpp}|std::scoped_lock|) et proposant toutes les fonctionnalités de \mintinline{cpp}|std::unique_lock| (verrouillage différé, \textit{try lock}, \ldots)
 	\end{itemize}
 
 	\addproposal{p2689}{https://wg21.link/p2689}
@@ -1629,6 +1676,7 @@
 	\addproposal{p2966}{https://wg21.link/p2966}
 	\addproposal{p3703}{https://wg21.link/p3703}
 	\addproposal{p3832}{https://wg21.link/p3832}
+	\addproposal{P3833}{https://wg21.link/p3833}
 \end{frame}
 
 \begin{frame}[fragile]
