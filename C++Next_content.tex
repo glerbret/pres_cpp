@@ -977,7 +977,8 @@
 \begin{frame}[fragile]
 	\frametitle{Conteneurs}
 	\begin{itemize}
-		\item \mintinline{cpp}|std::is_pointer_between()| vérifie si un pointeur appartient à une plage mémoire
+		\item \mintinline{cpp}|std::is_pointer_between()| ou \mintinline{cpp}|std::is_pointer_in_range()| vérifie si un pointeur appartient à une plage mémoire
+		\item
 	\end{itemize}
 
 	\begin{alertblock}{}
@@ -985,6 +986,7 @@
 	\end{alertblock}
 
 	\addproposal{p3852}{https://wg21.link/p3852}
+	\addproposal{p3952}{https://wg21.link/p3952}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1257,9 +1259,11 @@
 	\begin{itemize}
 		\item Capture mutable partielle par les lambdas
 		\item Capture effectuée dans l'ordre des déclarations
+		\item Lambda avec capture assignable par copie ou déplacement si les entités capturées sont assignables
 	\end{itemize}
 
 	\addproposal{p3847}{https://wg21.link/p3847}
+	\addproposal{p3963}{https://wg21.link/p3963}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1434,6 +1438,21 @@
 	\addproposal{p3258}{https://wg21.link/p3258}
 	\addproposal{p3070}{https://wg21.link/p3070}
 	\addproposal{p3885}{https://wg21.link/p3885}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\mintinline[style=white]{cpp}|std::format|}
+	\begin{itemize}
+		\item String interpolation : donnée à formater dans la chaîne de format
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		std::println(t"val : {x}");
+		// Equivalent a
+		std::println("val : {}", x);
+	\end{minted}
+
+	\addproposal{p3951}{https://wg21.link/p3951}
 \end{frame}
 
 \begin{frame}[fragile]
