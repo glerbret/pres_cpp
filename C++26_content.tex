@@ -1072,40 +1072,114 @@
 		Version plutôt minimale des contrats
 	\end{block}
 
+	\begin{block}{Note}
+		Paramètres et variables définies hors du contrat sont constants lors de la vérification des contrats
+	\end{block}
+
 	\addproposal{P2900}{https://wg21.link/P2900}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contrats - Présentation}
+	\begin{alertblock}{Nombreuses critiques}
+		\begin{itemize}
+			\item \href{https://wg21.link/p3909}{P3909 : Contracts should go into a White Paper - even at this late point}
+			\item \href{https://wg21.link/p3851}{P3851 : Position on contracts assertion for C++26}
+			\item \href{https://wg21.link/P4043}{P4043 : Are C++ Contracts Ready to Ship in C++26?}
+			\item \href{https://wg21.link/p4020}{P4020 : Concerns about contract assertions}
+		\end{itemize}
+
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contrats - Présentation}
+	\begin{itemize}
+		\item Fonctions non supportées (futures propositions)
+		\begin{itemize}
+			\item Préconditions et postconditions sur les fonctions virtuelles
+			\item Préconditions et postconditions sur les pointeurs de fonction
+			\item Accès à la valeur originale des paramètres dans les postconditions
+			\item Sémantique \mintinline{cpp}|assume| sur les contrats non vérifiés
+
+\note[item]{Permettait au compilateur d'optimiser en fonction du contrat}
+
+			\item Définition de la sémantique dans la déclaration du contrat
+			\item Définition de propriété du contrat dans la déclaration du contrat
+			\item Postconditions sur les fonctions ne sortant pas
+			\item Postconditions sur les sorties par exception
+			\item Contrats non évaluables au runtime
+			\item État du contrat utilisable hors du contrat
+			\item Invariants
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contrats - Préconditions}
+	\begin{itemize}
+		\item Sur les déclarations de fonctions et coroutines
+		\item Introduites par le mot-clé contextuel \mintinline{cpp}|pre|
+		\item Évaluées après l'initialisation des paramètres et avant le corps de la fonction
+		\item Dans l'ordre des déclarations
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int f(int i)
+		pre (i >= 0)
+		{...}
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Contrats - Postconditions}
+	\begin{itemize}
+		\item Sur les déclarations de fonctions et coroutines
+		\item Introduites par le mot-clé contextuel \mintinline{cpp}|post|
+		\item Évaluées lors d'une sortie normale de fonction
+		\item Après la destruction des variables locales
+		\item Dans l'ordre des déclarations
+		\item Récupération de la valeur de retour dans une variable précédant la condition
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int f(int i)
+		post (r: r > 0)
+		{...}
+	\end{minted}
+
+	\begin{block}{Note}
+		\begin{itemize}
+			\item Seuls les paramètres \mintinline{cpp}|const| ou de type référence sont utilisables
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Contrats - Assertions}
 	\begin{itemize}
-		\item Préconditions sur les déclarations de fonctions et coroutines : \mintinline{cpp}|pre (...)|
-		\item Postconditions sur les déclarations de fonctions et coroutines : \mintinline{cpp}|post (...)|
-		\item \textit{Statement assertion} dans le corps des fonctions: \mintinline{cpp}|contract_assert (...)|
+		\item Dans le corps des fonctions
+		\item Introduite par le mot-clé \mintinline{cpp}|contract_assert|
 	\end{itemize}
 
 	\begin{minted}{cpp}
 		int f(int i)
 		pre (i >= 0)
 		post (r: r > 0) {
-			contract_assert (i >= 0);
-			return i + 1; }
+		  contract_assert (i >= 0);
+		  return i + 1; }
 	\end{minted}
 
-	\begin{block}{Note}
-		Les paramètres sont considérés constants lors de la vérification des contrats
-	\end{block}
-
 	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+foo(int+a,+int+b)%0A++%5B%5Bpre:+a+%3E+0+%26%26+b+%3E+0%5D%5D%0A++%5B%5Bpost+r:+r+%3E+10%5D%5D%0A%7B%0A++++return+a+/+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(120,+3)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(6,+3)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%23if+0%0A++std::cout+%3C%3C+foo(120,+0)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gcontracts-trunk,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(contracts)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:17,positionColumn:5,positionLineNumber:17,selectionStartColumn:6,selectionStartLineNumber:17,startColumn:5,startLineNumber:17),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aconstexpr+int+foo(int+a,+int+b)%0A++%5B%5Bpre:+a+%3E+0+%26%26+b+%3E+0%5D%5D%0A++%5B%5Bpost+r:+r+%3E+10%5D%5D%0A%7B%0A++++return+a+/+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+foo(120,+3)+%3C%3C+%22%5Cn%22%3B%0A%23if+0%0A++std::cout+%3C%3C+foo(6,+3)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%23if+1%0A++std::cout+%3C%3C+foo(120,+0)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g152,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-Wno-unused-parameter',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+15.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
 	\end{codesample}
-
-	\addproposal{P2900}{https://wg21.link/P2900}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Contrats - Comportement}
+	\frametitle{Contrats - Sémantiques}
 	\begin{itemize}
-		\item Plusieurs comportements
+		\item Plusieurs sémantiques
 		\begin{itemize}
 			\item \mintinline{cpp}|ignore| : contrat non vérifié
 			\item \mintinline{cpp}|observe| : appel au \textit{handler} de violation de contrat et poursuite
@@ -1115,11 +1189,17 @@
 \note[item]{\mintinline{cpp}|enforce| : arrêt systématique}
 \note[item]{\mintinline{cpp}|observe| : on laisse le \textit{handler} décider}
 		\end{itemize}
-		\item Possibilité de remplacer le \textit{handler} par défaut en définissant une fonction \mintinline{cpp}|handle_contract_violation|
-
+		\item Si la violation est détectée à la compilation
+		\begin{itemize}
+			\item \mintinline{cpp}|observe| : warning
+			\item \mintinline{cpp}|enforce| et \mintinline{cpp}|quick_enforce| : erreur
+		\end{itemize}
+		\item Possibilité de remplacer le \textit{handler} par défaut :
+		\begin{itemize}
+			\item Fonction \mintinline{cpp}|handle_contract_violation|
+			\item Paramètre de type \mintinline{cpp}|std::contracts::contract_violation|
+		\end{itemize}
 	\end{itemize}
-
-	\addproposal{P2900}{https://wg21.link/P2900}
 \end{frame}
 
 \subsection*{Reflection}
