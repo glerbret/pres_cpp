@@ -7,7 +7,6 @@
   date: datetime.today().display("[day]/[month]/[year]"),
   authors: ("Grégory Lerbret"),
   title-color: main_color,
-  count: "number",
   footer: true,
   toc: true
 )
@@ -33,6 +32,12 @@ This is very interesting cnum(1)
 = C++20
 
 = C++23 "_Pandemic edition_"
+
+== First Slide
+
+This is very interesting cnum(1)
+
+#lorem(20)
 
 = C++26
 

@@ -23,14 +23,12 @@
 #let slides(
   content,
   title: none,
-  footer-title: none,
   date: none,
   authors: (),
   layout: "medium",
   ratio: 4 / 3,
   title-color: none,
   bg-color: white,
-  count: "dot",
   footer: true,
   toc: true,
 ) = {
@@ -42,10 +40,6 @@
   }
   let (height, space) = layouts.at(layout)
   let width = ratio * height
-
-  if count not in (none, "dot", "number", "dot-section") {
-    panic("Unknown Count, valid counts are 'dot' and 'number', or none")
-  }
 
   // Colors
   if title-color == none {
@@ -80,185 +74,41 @@
 
         if heading != none {
           set align(top)
-          block(
-            width: 100%,
-            fill: title-color.darken(50%),
-            height: space * 0.30,
-            outset: (x: 0.5 * space),
-            spacing: 0pt,
-          )[
-            #set text(0.8em, fill: bg-color)
-            #align(horizon)[#if section != none { section.body } else {  }]
 
-          ]
+          if section != none {
+            block(
+              width: 100%,
+              fill: title-color.darken(50%),
+              stroke: title-color.darken(50%),
+              height: space * 0.30,
+              outset: (x: 0.5 * space),
+              spacing: 0pt,
+            )[
+              #set text(0.8em, fill: bg-color)
+              #align(right + horizon)[#section.body]
+
+            ]
+          } else {
+            block(
+              width: 100%,
+              fill: title-color,
+              stroke: title-color,
+              height: space * 0.30,
+              outset: (x: 0.5 * space),
+              spacing: 0pt,
+            )[ ]
+          }
           block(
             width: 100%,
             fill: title-color,
+            stroke: title-color,
             height: space * 0.50,
             outset: (x: 0.5 * space),
             spacing: 0pt,
           )[
             #set text(1.4em, weight: "bold", fill: bg-color)
             #align(horizon)[#heading.body]
-            #if not heading.location().page() == page [
-              #set text(1.4em, weight: "bold", fill: bg-color)
-              #{ numbering("(i)", page - heading.location().page() + 1) }
-            ]
           ]
-        }
-      }
-      // COUNTER ============================================================
-
-      #if count == "dot" {
-        // DOT COUNTER -------------------------
-
-        set align(right + top)
-        context {
-          let last = counter(page).final().first()
-          let current = here().page()
-          let limit = calc.ceil(last / 2)
-          // the limit automatically allows to have even rows of dots
-
-          // if number of pages > 20
-          if last > 20 {
-            v(-space / 1.3)
-            // first row of dots
-            for i in range(1, limit + 1) {
-              // Before the current page
-              if i <= current {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.06cm, fill: fill-color, stroke: 1pt + fill-color))
-                ]
-              } // After the current page
-              else {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.06cm, stroke: 1pt + fill-color))
-                ]
-              }
-            }
-            v(-space / 1.6)
-            linebreak()
-            // second row of dots
-            for i in range(limit + 1, last + 1) {
-              // Before the current page
-              if i <= current {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.06cm, fill: fill-color, stroke: 1pt + fill-color))
-                ]
-              } // After the current page
-              else {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.06cm, stroke: 1pt + fill-color))
-                ]
-              }
-            }
-          } else {
-            // Normal Counter if number of pages < 20
-            v(-space / 1.5)
-            for i in range(1, last + 1) {
-              // Before and including the current page
-              if i <= current {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.08cm, fill: fill-color, stroke: 1pt + fill-color))
-                ]
-              } // After the current page
-              else {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.08cm, stroke: 1pt + fill-color))
-                ]
-              }
-            }
-          }
-        }
-      } else if count == "dot-section" {
-        // DOT SECTION COUNTER -------------------------
-        v(-space / 1.5)
-        set align(right + top)
-        context {
-          let last = counter(page).final().first()
-          let current = here().page()
-
-          // Logic to find the current section
-          let sections = query(heading.where(level: 1))
-          let current_section_nr = counter(heading).get().at(0)
-          let current_section_page = {
-            if current_section_nr > 0 {
-              sections.at(int(current_section_nr - 1)).location().page()
-            } else { 1 } // special case for first section (typically outline)
-          }
-
-          let next_section_page = {
-            if current_section_nr < int(sections.len()) {
-              sections.at(int(current_section_nr)).location().page()
-            } else { last }
-          }
-
-          // Display the counter for all except last section
-          if next_section_page - current_section_page < 3 {
-            // For sections that only have 1 page leave the counter blank
-            // NOTE: that it also dosnt show a counter if last section < 2 pages
-          } else if current_section_nr < int(sections.len()) {
-            // Current Section Dot
-            link((page: current_section_page, x: 0pt, y: 0pt))[
-              #box(rotate(-90deg)[#polygon.regular(
-                stroke: 1pt + fill-color,
-                size: 0.2cm,
-                vertices: 3,
-              )]) #h(0.1cm)
-            ]
-            // Prec and Current Pages Dot
-            for i in range(current_section_page + 1, next_section_page) {
-              if i <= current {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.08cm, fill: fill-color, stroke: 1pt + fill-color))
-                ]
-              } else {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.08cm, stroke: 1pt + fill-color))
-                ]
-              }
-            }
-            // Next Section Dot
-            link((page: next_section_page, x: 0pt, y: 0pt))[
-              #h(0.1cm) #box(rotate(90deg)[#polygon.regular(
-                stroke: 1pt + fill-color,
-                size: 0.2cm,
-                vertices: 3,
-              )])
-            ]
-          } else {
-            // Current Section Dot
-            link((page: current_section_page, x: 0pt, y: 0pt))[
-              #box(rotate(-90deg)[#polygon.regular(
-                stroke: 1pt + fill-color,
-                size: 0.2cm,
-                vertices: 3,
-              )]) #h(0.1cm)
-            ]
-            // Prec and Current Pages Dot (note that the last slide is included by extending range + 1)
-            for i in range(current_section_page + 1, next_section_page + 1) {
-              if i <= current {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.08cm, fill: fill-color, stroke: 1pt + fill-color))
-                ]
-              } else {
-                link((page: i, x: 0pt, y: 0pt))[
-                  #box(circle(radius: 0.08cm, stroke: 1pt + fill-color))
-                ]
-              }
-            }
-          }
-        }
-      } else if count == "number" {
-        // NUMBER COUNTER -------------------------
-        v(-space / 1.5)
-        set align(right + top)
-        context {
-          let last = counter(page).final().first()
-          let current = here().page()
-          set text(weight: "bold")
-          set text(fill: bg-color)
-          [#current / #last]
         }
       }
     ],
@@ -266,43 +116,51 @@
     // FOOTER ----------------------------------------------------
     footer: [
       #if footer == true {
-        set text(0.7em)
-        columns(2, gutter: 0cm)[
+        set align(right + horizon)
+        set text(0.7em, fill: bg-color)
+        columns(3, gutter: 0cm)[
           // Left side of the Footer
-          #align(left)[#block(
-              width: 100%,
-              outset: (left: 0.5 * space, bottom: 0cm),
-              height: 0.3 * space,
-              fill: fill-color,
-              inset: (right: 3pt),
-            )[
-              #v(0.1 * space)
-              #set align(right)
-              #smallcaps()[#if footer-title != none { footer-title } else { title }]
-            ]
+          #block(
+            width: 100%,
+            outset: (left: 0.5 * space, bottom: 0cm),
+            height: 0.3 * space,
+            fill: title-color.darken(50%),
+            inset: (right: 0.5 * space),
+          )[
+            #set align(center + horizon)
+            #smallcaps()[#title]
+          ]
+          // Center of the Footer
+          #block(
+            width: 100%,
+            height: 0.3 * space,
+            fill: title-color.darken(25%),
+          )[
+            #set align(center + horizon)
+            #if authors != none {
+              if (type(authors) != array) { authors = (authors,) }
+              authors.join(", ", last: " and ")
+            } else [#date]
           ]
           // Right Side of the Footer
-          #align(right)[#block(
-              width: 100%,
-              outset: (right: 0.5 * space, bottom: 0cm),
-              height: 0.3 * space,
-              fill: body-color,
-              inset: (left: 3pt),
-            )[
-              #v(0.1 * space)
-              #set align(left)
-              #if authors != none {
-                if (type(authors) != array) { authors = (authors,) }
-                authors.join(", ", last: " and ")
-              } else [#date]
-            ]
+          #block(
+            width: 100%,
+            outset: (right: 0.5 * space, bottom: 0cm),
+            height: 0.3 * space,
+            fill: title-color,
+            inset: (right: -0.4 * space),
+          )[
+            #context {
+              let last = counter(page).final().first()
+              let current = here().page()
+              [#current / #last]
+            }
           ]
         ]
       }
     ],
     footer-descent: 0.3 * space,
   )
-
 
   // SLIDES STYLING --------------------------------------------------
   // Section Slides
