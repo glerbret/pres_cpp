@@ -1,31 +1,47 @@
-#let layouts = (
-  "small": ("height": 9cm, "space": 1.4cm),
-  "medium": ("height": 10.5cm, "space": 1.6cm),
-  "large": ("height": 12cm, "space": 1.8cm),
-)
-#let numberingH(c) = {
-  return numbering(c.numbering, ..counter(heading).at(c.location()))
+#import "@preview/fontawesome:0.6.0": *
+
+// Couleur principale
+#let main_color = rgb("#007F7F")
+
+// Définition de blocs d'affichage (note, avertissement et consieil)
+#let _block(title, content, color) = {
+  set block(width: 100%, inset: 5pt)
+  stack(
+    block(fill: color, stroke: color, outset: (x: 0.5em), radius: (top: 0.4em, bottom: 0cm), text(white)[#strong(
+      title,
+    )]),
+    block(fill: color.lighten(80%), stroke: color, outset: (x: 0.5em), radius: (top: 0cm, bottom: 0.4em), content),
+  )
 }
 
-#let currentH(level: 1) = {
-  let elems = query(selector(heading.where(level: level)).after(here()))
-
-  if elems.len() != 0 and elems.first().location().page() == here().page() {
-    return [#numberingH(elems.first())]
-  } else {
-    elems = query(selector(heading.where(level: level)).before(here()))
-    if elems.len() != 0 {
-      return [#numberingH(elems.last())]
-    }
-  }
-  return ""
+#let noteblock(title, content) = {
+  _block(title, content, main_color)
 }
+
+#let alertblock(title, content) = {
+  _block(title, content, rgb("#BF0000"))
+}
+
+#let adviceblock(title, content) = {
+  _block(title, content, rgb("#009900"))
+}
+
+// Exemple de code en ligne
+#let codecounter = counter("code_counter")
+#let codesample(codelink) = {
+  context place(
+      bottom + right,
+      dx: 15pt - 15pt * codecounter.get().first(),
+        link(codelink)[#text(main_color)[#fa-icon("circle-play", solid: true)]],
+    )
+    context codecounter.step()
+}
+
 #let slides(
   content,
   title: none,
   date: none,
   authors: (),
-  layout: "medium",
   ratio: 4 / 3,
   title-color: none,
   bg-color: white,
@@ -34,21 +50,11 @@
 ) = {
   set text(lang: "fr")
 
-  // Parsing
-  if layout not in layouts {
-    panic("Unknown layout " + layout)
-  }
-  let (height, space) = layouts.at(layout)
+  let height = 10.5cm
+  let space = 1.6cm
   let width = ratio * height
-
-  // Colors
-  if title-color == none {
-    title-color = blue.darken(50%)
-  }
-  let block-color = title-color.lighten(90%)
-  let body-color = title-color.lighten(80%)
-  let header-color = title-color.lighten(65%)
-  let fill-color = title-color.lighten(50%)
+  let title-color = main_color
+  let bg-color = white
 
   // Setup
   set document(
@@ -82,6 +88,7 @@
               stroke: title-color.darken(50%),
               height: space * 0.30,
               outset: (x: 0.5 * space),
+              inset: (right: -0.4 * space),
               spacing: 0pt,
             )[
               #set text(0.8em, fill: bg-color)
@@ -180,35 +187,29 @@
     )
   }
 
-  show heading.where(level: 2): pagebreak(weak: true) // this is where the magic happens
+  show heading.where(level: 2): it => {
+    codecounter.update(0)
+    pagebreak(weak: true)
+  }
+
   show heading: set text(1.1em, fill: title-color)
 
 
   // ADDITIONAL STYLING --------------------------------------------------
-  // Terms
-  show terms.item: it => {
-    set block(width: 100%, inset: 5pt)
-    stack(
-      block(fill: header-color, radius: (top: 0.2em, bottom: 0cm), strong(it.term)),
-      block(fill: block-color, radius: (top: 0cm, bottom: 0.2em), it.description),
-    )
-  }
-
-
   // Code
   show raw.where(block: false): it => {
-    box(fill: block-color, inset: 1pt, radius: 1pt, baseline: 1pt)[#text(it)]
+    box(fill: title-color.lighten(80%), stroke: title-color, inset: 1pt, radius: 1pt, baseline: 1pt)[#text(it)]
   }
 
   show raw.where(block: true): it => {
-    block(radius: 0.5em, fill: block-color, width: 100%, inset: 1em, it)
+    block(radius: 0.4em, fill: title-color.lighten(80%), stroke: title-color, width: 100%, inset: 1em, it)
   }
 
   // Bullet List
   show list: set list(marker: (
-    text(fill: title-color)[•],
-    text(fill: title-color)[‣],
-    text(fill: title-color)[-],
+    text(1.5em, baseline: -0.1em, fill: title-color)[•],
+    text(1.5em, baseline: -0.1em, fill: title-color)[‣],
+    text(1.5em, baseline: -0.1em, fill: title-color)[-],
   ))
 
   // Enum
@@ -231,21 +232,6 @@
 
   set table.hline(stroke: 0.4pt + black)
   set table.vline(stroke: 0.4pt)
-
-  // Quote
-  set quote(block: true)
-  show quote.where(block: true): it => {
-    v(-5pt)
-    block(
-      fill: block-color,
-      inset: 5pt,
-      radius: 1pt,
-      stroke: (left: 3pt + fill-color),
-      width: 100%,
-      outset: (left: -5pt, right: -5pt, top: 5pt, bottom: 5pt),
-    )[#it]
-    v(-5pt)
-  }
 
   // Link
   show link: it => {
@@ -288,12 +274,11 @@
       let el = it.element
       set text(size: 0.7em, fill: white)
       box(
-        fill: fill-color,
+        fill: title-color.lighten(50%),
         outset: (x: 0.0em, y: 0.2em),
         radius: 0.8em,
         height: 0.8em,
         inset: (x: 0.5em),
-        //stroke: (bottom: fill-color),
       )[
         // if no supplement is passed
         #if el.func() == heading and it.supplement == auto {
