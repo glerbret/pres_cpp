@@ -29,6 +29,9 @@
 #codesample("2")
 #codesample("3")
 
+#addproposal("P2875")
+#addproposal("P1234", url: "https://test")
+
 ```cpp
 print("Hello World")
 ```

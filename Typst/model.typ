@@ -30,11 +30,36 @@
 #let codecounter = counter("code_counter")
 #let codesample(codelink) = {
   context place(
-      bottom + right,
-      dx: 15pt - 15pt * codecounter.get().first(),
-        link(codelink)[#text(main_color)[#fa-icon("circle-play", solid: true)]],
-    )
-    context codecounter.step()
+    bottom + right,
+    dx: 15pt - 15pt * codecounter.get().first(),
+    link(codelink)[#text(main_color)[#fa-icon("circle-play", solid: true)]],
+  )
+  context codecounter.step()
+}
+
+// Proposition de norme
+#let proposalcounter = counter("proposal_counter")
+#let addproposal(ref, url: none) = {
+  if (url == none) {
+    url = "https://wg21.link/" + ref
+  }
+
+  context place(
+    bottom + left,
+    dx: -15pt + 50pt * proposalcounter.get().first(),
+    link(url)[
+      #box(fill: white, stroke: main_color, radius: 1em, inset: (
+        left: 0.3em,
+        right: -0.1em,
+        top: -2.8pt,
+        bottom: 2pt,
+      ))[#text(main_color, weight: "bold", top-edge: "baseline", bottom-edge: "baseline", size: 0.9em)[#ref] #text(
+          main_color,
+          size: 1em,
+          baseline: 1pt,
+        )[#fa-icon("circle-play", solid: true)]]],
+  )
+  context proposalcounter.step()
 }
 
 #let slides(
@@ -189,6 +214,7 @@
 
   show heading.where(level: 2): it => {
     codecounter.update(0)
+    proposalcounter.update(0)
     pagebreak(weak: true)
   }
 
@@ -232,16 +258,6 @@
 
   set table.hline(stroke: 0.4pt + black)
   set table.vline(stroke: 0.4pt)
-
-  // Link
-  show link: it => {
-    if type(it.dest) != str {
-      // Local Links
-      it
-    } else {
-      underline(stroke: 0.5pt + title-color)[#it] // Web Links
-    }
-  }
 
   // Outline
   set outline(
