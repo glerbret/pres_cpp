@@ -10,59 +10,2135 @@
 
 = Retour sur C++98 / C++03
 
-== First Slide
+== Rappels historiques
 
-- Aaaa
-  - cccc
-    - dddd
-- bbb
+- Années 80 -- "C with classes" par Bjarne Stroustrup aux Bell Labs
+- 1983 -- renommé C++
+- 1985 -- première version publique de CFront
+- 1985 -- première version de _The C++ Programming Language_
+- 1998 -- première normalisation
+- 2003 -- amendement
+- 2007 -- publication du premier _Technical Report_ (TR1)
 
-#noteblock("a", "bb")
-#alertblock("a", "bb")
+  // Les TR ne sont pas normatifs
+  // An informative document containing information of a different kind from that normally published in a normative document
 
-== AAAA
+  - Partiellement implémenté par certains compilateurs ou Boost
+  - Partiellement repris dans les normes suivantes et TS
 
-/*#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)*/
-#codesample("1")
-#codesample("2")
-#codesample("3")
+// Les TS sont des documents normatifs ayant vocation a être intégrés dans la norme, essentiellement des preview
+// TS : A normative document representing the technical consensus within an ISO committee
 
-#addproposal("P2875")
-#addproposal("P1234", url: "https://test")
+- Projet de TR2 finalement transposé en _Technical Specification_
+
+== Philosophie du C++
+
+- Multi-paradigme
+
+// Procédural, objet, générique et Template metaprogramming
+
+- Typage statique déclaratif
+- Généraliste
+- Initialement, ajout des classes au C
+- Vaste sous-ensemble commun (proche du C) entre C et C++
+- _Zero-overhead abstraction_
+- Compatibilité ascendante forte mais pas absolue
+- Évolutions par les bibliothèques plutôt que par le langage
+- Pas de "magie" dans la bibliothèque standard
+
+== Normalisation
+
+- Normalisé par #link("http://www.open-std.org/JTC1/SC22/WG21/")[l'ISO (JTC1/SC22/WG21 #linklogo())]
+- Comité distinct de celui du C
+
+// C : Working group 14
+
+- ... mais plusieurs membres en commun
+- Pas de propriétaire du C++
+
+// Donc libre de droit, mais la norme ISO définitive est payante
+
+== Normalisation
+
+- Actualité de normalisation, et du C++ en général : #link("https://isocpp.org/")[isocpp.org #linklogo()]
+
+#alertblock("isocpp.org n'est pas le site du comité", text[
+  - Site de _Standard C++ Foundation_ dont le but est la promotion du C++
+  - Les deux sont cependant très proches et partagent de nombreux membres
+])
+
+- ... ainsi que les #link("https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines")[C++ Core Guidelines #linklogo()]
+- #link("https://github.com/cplusplus")[Dépôt GIT #linklogo()] (brouillons et propositions)}
+- Conférence annuelle #link("http://cppcon.org/")[cppcon #linklogo()]
+
+== Norme et support
+
+- Compilateurs
+  - GCC -- #link("https://gcc.gnu.org/projects/cxx-status.html")[C++ Standards Support in GCC #linklogo()]
+  - Clang -- #link("http://clang.llvm.org/cxx_status.html")[C++ Support in Clang #linklogo()]
+  - Visual studio -- #link("https://docs.microsoft.com/fr-fr/cpp/overview/visual-cpp-language-conformance?view=msvc-160")[Conformité du langage Microsoft C++ #linklogo()]
+- Bibliothèques standards
+  - GCC -- #link("https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html")[status.html #linklogo()]
+  - Clang -- #link("https://libcxx.llvm.org/")[C++ Standard Library #linklogo()]
+- Vision globale -- #link("http://en.cppreference.com/w/cpp/compiler_support")[C++ compiler support #linklogo()]
+
+#noteblock("Sites de référence C++", text[
+  - #link("https://en.cppreference.com/w/")[cppreference.com #linklogo()]
+  - #link("https://hackingcpp.com/")[hacking C++ #linklogo()]
+])
+
+== Erreurs -- Code retour
+
+- Plusieurs variantes
+  - Type de retour dédié
+  - Valeur particulière notant un échec (```cpp NULL```, ```cpp -1```)
+  - Récupération de la dernière erreur (```cpp errno```, ```cpp GetLastError()```)
+- Nécessite "un test toutes les deux lignes"
+- Gestion manuelle de la remontée de la pile d'appel
+- Adapté au traitement local des erreurs, pas au traitement "plus haut"
+
+#alertblock("Problèmes et limites", text[
+  - Impact négatif sur la lisibilité
+  - Souvent délaissée dans un contexte d'enseignement ou de formation
+  - Beaucoup de code avec une gestion d'erreur déficiente
+])
+
+== Erreurs -- Exceptions
+
+- Lancées par ```cpp throw```
+- Attrapées par ```cpp catch()``` depuis un bloc ```cpp try```
+
 
 ```cpp
-print("Hello World")
+try {
+  ...
+  // Lancement d'une exception
+  throw logic_error("Oups !");
+  ...
+}
+catch(logic_error& e) {
+  // Traitement de l'exception
+  ...
+}
 ```
 
-== Second slide
+== Erreurs -- Exceptions
 
-aaa
-#codesample("2.1")
+- Type quelconque
+- Idéalement héritant de ```cpp std::exception``` (via ```cpp std::logic_error```, ```cpp std::runtime_error``` ou autres)
+- ```cpp catch(...)``` pour attraper les exceptions de tout type
+- Compatibles avec le _stack unwinding_
+- Pas de ```cpp finally```
+- Appel de ```cpp std::terminate()``` si une exception n'est pas attrapée
+- Utilisées par la bibliothèque standard (p.ex. ```cpp std::bad_alloc```)
+
+== Erreurs -- Critiques des exceptions
+- Critiquées, voire interdites, par certaines normes de codage (p.ex. : #link("https://google.github.io/styleguide/cppguide.html")[Google C++ Style Guide #linklogo()]
+- Arguments très variés
+  - "Je ne comprends pas", "Ça ne sert à rien", ...
+  - Impact négatif sur les performances
+
+#noteblock("À nuancer", text[
+  - Initialement vrai
+  - Actuellement, une exception non levée ne coûte quasiment rien
+  - Souvent comparée à une non gestion d'erreur, est-ce pertinent ?
+])
+
+== Erreurs -- Critiques des exceptions
+
+#list(marker: [ ], list("Mauvais support par les différents outils"))
+
+
+#noteblock("À nuancer", text[
+  - Correctement supportées par les compilateurs actuels
+  - Inégalement gérées par les outils d'analyse, de documentation, ...
+])
+
+#list(
+  marker: [ ],
+  list("Code plus complexe à analyser"),
+
+  //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreur
+
+  list("Difficiles à introduire dans une large base de code sans exception"),
+
+  // Argument de la difficulté d'introduction à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)
+
+  list("Absence d'ABI normalisée"),
+)
+
+//Le problème d'ABI est plus large que les seules exceptions
+
+== Erreurs -- Exception safety
+- _No-throw guarantee_ : l'opération ne peut pas échouer
+
+#adviceblock("Do", text[
+  - Destructeurs et ```cpp swap()``` ne doivent pas lever d'exception
+])
+
+- _Strong exception safety_ : pas d'effet de bord, pas de fuite, état conservé
+- _Basic exception safety_ : pas de fuite, invariants conservés
+- _No exception safety_ : aucune garantie
+
+== Erreurs -- Exception safety
+
+#adviceblock("Do", text[
+  - Privilégiez les garanties les plus fortes possibles
+])
+
+#alertblock("Don't", text[
+- Évitez la garantie faible
+- Évitez absolument le _No exception safety_
+])
+
+== Erreurs -- Exception safety
+
+#adviceblock("Do", text[
+  - Utilisez l'idiome _copy-and-swap_ pour la _Strong exception safety_
+])
+
+```cpp
+class A {
+public:
+  A(const A&);
+  A& operator=(A);
+  friend void swap(A& lhs, A& rhs);  // Nothrow
+};
+
+A& A::operator=(A other) {           // Copy
+  swap(*this, other);                // Swap
+  return *this;
+}
+```
+== Erreurs -- Exceptions et bonnes pratiques
+
+#adviceblock("Do", text[
+  - _Throw by value, catch by const reference_ (voir _C++ Coding Standards_, 73)
+])
+
+#adviceblock("Do", text[
+  - Utilisez des types dédiés héritant de ```cpp std::exception```
+  - Définissez des hiérarchies d'exceptions
+])
+
+#adviceblock("Do", text[
+  - Capturez uniquement là où vous savez traiter l'erreur
+])
+
+== Erreurs -- Exceptions et bonnes pratiques
+
+#alertblock("Don't", text[
+  - N'utilisez jamais les exceptions pour contrôler le flux d'exécution
+  - Ni pour gérer les "échecs attendus"
+  - Réservez les exceptions au signalement d'erreurs
+])
+
+\ // Pour corriger une souci de mise en page avec le footer
+
+== Erreurs -- ```cpp assert```
+
+- Arrête le programme si l'expression est évalué à 0
+- Affiche au moins l'expression, le fichier et la ligne
+
+```cpp
+assert(expression);
+```
+
+- Sans effet lorsque ```cpp NDEBUG``` est défini
+  - Coût nul en _Release_
+  - Inutilisable pour les erreurs d'exécution et le contrôle des entrées
+
+#noteblock("Objectifs", text[
+	- Traquer les erreurs de programmation et les violations de contrat interne
+])
 
 
 
-== Thirs
+/*
 
-#lorem(20)
 
-= C++11
+\begin{frame}[fragile]
+	\frametitle{Erreurs -- Conclusion}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
+			\item Réservez \mintinline{cpp}|assert| aux erreurs de programmation et à la vérification des contrats internes
+		\end{itemize}
+	\end{exampleblock}
 
-= C++14
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Préférez les exceptions aux codes retour (voir \textit{C++ Coding Standards} chap. 72)
+		\end{itemize}
+	\end{exampleblock}
 
-= C++7
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item Jamais d'\mintinline{cpp}|assert| pour les erreurs d'exécution et le contrôle des entrées
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
 
-= C++20
+\subsection*{Gestion des ressources}
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Gestion manuelle}
+	\begin{alertblock}{}
+		Comment gérer les erreurs ?
+	\end{alertblock}
 
-= C++23 "_Pandemic edition_"<label2>
+	\begin{itemize}
+		\item Solution C : \textit{Single Entry Single Exit}, bloc unique de libération
+	\end{itemize}
 
-== First Slide
+	\begin{minted}{cpp}
+		char* memory = malloc(50);
+		if(!memory) goto err;
+		...
+		err:
+		free(memory);
+	\end{minted}
 
-This is very interesting cnum(1)
+	\begin{itemize}
+	\item []
+		\begin{itemize}
+			\item Laborieux
+			\item Difficile à mettre en place en présence d'exceptions
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
-#lorem(20)
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Gestion manuelle}
+	\begin{block}{Quiz : Comment éviter les fuites mémoires ?}
+		\begin{minted}{cpp}
+			char* memory1 = NULL;
+			char* memory2 = NULL;
+			...
+			memory1 = new char[50];
+			...
+			memory2 = new char[200];
+			...
+			delete[] memory1;
+			delete[] memory2;
+		\end{minted}
+	\end{block}
+\end{frame}
 
-= C++26
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Gestion manuelle}
+	\begin{alertblock}{}
+		Comment copier des classes possédant des ressources ?
+	\end{alertblock}
 
-= En ensuite ?
+	\begin{itemize}
+		\item Constructeurs et opérateurs générés copient les adresses des pointeurs
+		\item Une double libération est une erreur
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		struct Foo {
+		public:
+		  Foo() : bar(new char[50]) {}
+		  ~Foo() { delete[] bar; }
+
+		private:
+		  char* bar;
+		};
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Gestion manuelle et bonnes pratiques}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Si une classe manipule une ressource brute, elle doit
+			\begin{itemize}
+				\item Soit définir constructeur de copie et opérateur d'affectation
+				\item Soit les déclarer privés sans les définir (classe non copiable)
+			\end{itemize}
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{\textit{Big Rule of three}}
+		\begin{itemize}
+			\item Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
+
+\note[item]{Forme canonique orthodoxe de Coplien}
+\note[item]{Thèse de Coplien : \textit{Multi-paradigm Design}}
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- RAII}
+
+\note[item]{\textit{Resource Acquisition Is Initialization}}
+
+	\begin{itemize}
+		\item Acquisition des ressources lors de l'initialisation de l'objet
+		\item Libération automatique lors de sa destruction
+
+\note[item]{Proche du \textit{try with resources} de Java ou du \textit{with} de Python}
+
+		\item Propriété intrinsèque des objets par design
+
+\note[item]{Contrairement à Java ou Python où c'est une propriété de l'usage}
+
+		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \ldots{})
+		\item Conséquences
+		\begin{itemize}
+			\item Objets créés dans un état cohérent, testable et utilisable
+			\item Ressources automatiquement libérées à la destruction de l'objet
+
+\note[item]{Et de façon déterministe}
+
+			\item Capsules RAII copiables sans effort
+		\end{itemize}
+	\end{itemize}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Utilisez RAII pour vos objets
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- RAII}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Faites des constructeurs qui construisent des objets
+			\begin{itemize}
+				\item Cohérents
+				\item Utilisables
+				\item Complètement initialisés
+			\end{itemize}
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item Évitez les couples constructeur vide et fonction d'initialisation
+			\item Évitez les couples constructeur vide et ensemble de mutateurs
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Limites du RAII}
+	\begin{alertblock}{Gestion des erreurs}
+		\begin{itemize}
+			\item Pas d'erreur ni d'exception dans les destructeurs
+			\item La libération peut échouer (p.ex. \mintinline{cpp}|flush()| lors de la fermeture de fichier)
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{minted}{cpp}
+		{
+		  ifstream src("input.txt");
+		  ofstream dst("output.txt");
+		  copy_files(src, dst);
+		}
+
+		remove_file(src);  // Potentielle perte de donnees
+	\end{minted}
+
+\note[item]{Problème résolu en forçant l'écriture (\mintinline{cpp}|flush|) en fin de la fonction \mintinline{cpp}|copy_files()| et en remontant une exception en cas d'erreur}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Limites du RAII}
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::auto_ptr|}
+		\begin{itemize}
+			\item Copiable
+			\item La copie transfère la responsabilité de la ressource
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{minted}{cpp}
+		void foo(auto_ptr<int> bar) {}
+
+		auto_ptr<int> bar(new int(5));
+		foo(bar);
+		cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Loi de Déméter}
+
+\note[item]{À strictement parler, gestion de l'accès aux ressources pas de la libération}
+
+	\begin{itemize}
+		\item Principe de connaissance minimale
+		\item Un objet \mintinline{cpp}|A| peut utiliser les services d'un deuxième objet \mintinline{cpp}|B|
+		\item \ldots{} mais ne doit pas utiliser \mintinline{cpp}|B| pour accéder à un troisième objet
+		\item En particulier, une classe n'expose pas ses données
+	\end{itemize}
+
+	\begin{block}{Exceptions}
+		\begin{itemize}
+			\item Agrégats et conteneurs dont le rôle est de contenir des données
+		\end{itemize}
+
+\note[item]{Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'\textit{aggregate} du standard}
+\note[item]{Certains utilisent aussi le terme d'agglomérat, ce qui évite la confusion}
+	\end{block}
+
+	\begin{block}{Objectifs}
+		\begin{itemize}
+			\item Mise en place du RAII
+			\item Meilleure encapsulation
+			\item Respect des \textit{patterns} SOLID et GRASP
+
+\note[item]{Notamment le principe ouvert-fermé, l'inversion de dépendance et le couplage faible}
+\note[item]{GRASP : General Responsibility Assignment Software Patterns (ou Principles)}
+\note[item]{SOLID : SRP, OCP, LSP, ISP, DIP}
+\note[item]{SRP : principe de responsabilité unique}
+\note[item]{OCP : principe ouvert/fermé}
+\note[item]{LSP : Principe de substitution de Liskov}
+\note[item]{ISP : Principe de ségrégation des interfaces}
+\note[item]{DIP : Principe d'inversion des dépendances}
+
+			\item Meilleure lisibilité, maintenabilité et ré-utilisabilité
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Loi de Déméter}
+	\begin{exampleblock}{Do, agrégats}
+		\begin{itemize}
+			\item Préférez les structures aux classes
+			\item Laissez les membres publics
+			\item Fournissez, éventuellement, des constructeurs initialisant les données
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, conteneurs}
+		\begin{itemize}
+			\item Respectez l'interface et la logique des conteneurs standards
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, classes de service}
+		\begin{itemize}
+			\item Exposez des services, pas des données
+			\item Pas de données publiques
+			\item Limitez les accesseurs et les mutateurs
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Loi de Déméter}
+	\begin{block}{Conseil}
+		\begin{itemize}
+			\item N'hésitez pas à étendre l'interface de classe avec des fonctions libres
+			\item Pensez à l'amitié pour cette interface étendue
+			\item Implémentez-la en terme de fonctions membres (p.ex. \mintinline{cpp}|+| à partir de \mintinline{cpp}|+=|)
+		\end{itemize}
+	\end{block}
+
+	\begin{minted}{cpp}
+		class Foo {
+		public:
+		  Foo& operator+=(const Foo& other);
+		};
+
+		Foo operator+(Foo lhs, const Foo& rhs) {
+		  return lhs += rhs;
+		}
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Et le Garbage Collector ?}
+	\begin{itemize}
+		\item Pas de GC dans le langage ni dans la bibliothèque standard
+		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm\linklogo})
+		\item \ldots{} mais limité par manque de support par le langage
+		\item Non déterministe : adapté à la mémoire pas aux autres ressources
+		\item Particulièrement adapté à la gestion des structures cycliques
+		\item D'autres avantages pour la mémoire (compactage, recyclage, \ldots{})
+
+\note[item]{Mais ces fonctionnalités évoluées des GC ne sont probablement pas compatibles avec le fonctionnement du C++}
+	\end{itemize}
+
+	\begin{block}{Wait and see}
+		\begin{itemize}
+			\item Un complément à RAII, pas un concurrent ni un remplaçant
+			\item Indisponible à ce jour
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Conclusion}
+	\begin{exampleblock}{Do, RAII}
+		\begin{itemize}
+			\item Préférez les classes RAII de la bibliothèque standard aux ressources brutes
+			\item Encapsulez les ressources dans des capsules RAII standards
+			\item Concevez vos classes en respectant le RAII
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, Déméter}
+		\begin{itemize}
+			\item Respectez Déméter
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ressources -- Conclusion}
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item Pas de \mintinline{cpp}|delete| dans le code applicatif
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Sous Linux, méfiez-vous de l'\textit{Optimistic Memory Allocator}
+
+\note[item]{Retourne une adresse lors d'un \mintinline{cpp}|new| ou d'un \mintinline{cpp}|malloc()| sans allocation et avec peu de contrôle}
+\note[item]{Allocation uniquement lors de l'usage de la mémoire}
+\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais \mintinline{cpp}|init|}
+\note[item]{Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement}
+
+			\item Pensez à paramétrer correctement l'OS
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\subsection*{STL}
+\begin{frame}[fragile]
+	\frametitle{STL -- Standard Template Library}
+	\begin{itemize}
+		\item Partie de la bibliothèque standard comprenant
+		\begin{itemize}
+			\item Conteneurs et \mintinline{cpp}|std::basic_string|
+			\item Itérateurs
+			\item Algorithmes manipulation les données des conteneurs via les itérateurs
+		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Note}
+		\begin{itemize}
+			\item Quelques algorithmes manipulant directement des données (p.ex. \mintinline{cpp}|std::min()|)
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item Conçue initialement par Alexander Stepanov
+		\begin{itemize}
+			\item Promoteur de la programmation générique
+
+\note[item]{Programmation générique : template en C++, \mintinline{java}|generic| en Java}
+\note[item]{Programmation générique = polymorphisme paramétrique}
+
+			\item Sceptique vis à vis de la POO
+
+\note[item]{Pour Stepanov : POO = hoax (canular)}
+\note[item]{Stepanov ne s'oppose pas à l'abstraction et à encapsulation mais à la façon dont la POO prétend y répondre}
+
+		\end{itemize}
+		\item Basée sur les templates, pas sur la POO
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL -- Standard Template Library}
+	\begin{block}{Intérêts}
+		\begin{itemize}
+			\item $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
+			\item Tout nouvel algorithme est disponible sur tous les conteneurs compatibles
+			\item Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
+			\item Changement de conteneur à effort réduit
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Pour aller plus loin}
+		\begin{itemize}
+			\item Voir \textit{Effective STL} de Scott Meyers
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL -- Standard Template Library}
+	\begin{block}{À nuancer}
+		\begin{itemize}
+			\item Algorithmes membres sur certains conteneurs
+			\begin{itemize}
+				\item Accès par itérateurs insuffisant (p.ex. \mintinline{cpp}|std::list|)
+				\item Habitudes et historiques (p.ex. \mintinline{cpp}|std::string|)
+				\item Performances (p.ex. \mintinline{cpp}|map.find()|)
+			\end{itemize}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\subsection*{STL -- Conteneurs}
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Généralités}
+	\begin{itemize}
+		\item Contiennent des objets copiables et non constants
+		\item \ldots{} qui peuvent être les adresses d'autres objets
+	\end{itemize}
+
+	\begin{alertblock}{Conteneurs de pointeurs}
+		\begin{itemize}
+			\item Pas de libération automatique des objets pointés
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item \ldots{} accessibles via un itérateur
+		\item Fourniture possible d'une politique d'allocation
+		\item Vu des algorithmes, ce qui fournit une paire d'itérateurs, est un conteneur
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::vector|
+		\begin{itemize}
+			\item Tableau de taille variable d'éléments contigus
+			\item Accès indexé
+			\item Croissance en temps amorti
+			\item Modifications en fin de vecteur (coûteux ailleurs)
+			\item Compatible avec l'organisation mémoire des tableaux C
+		\end{itemize}
+	\end{itemize}
+
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
+		\begin{itemize}
+			\item Ne remplit pas tous les pré-requis des conteneurs
+			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
+			\item Voir \textit{Effective STL} item 18
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::list|
+		\begin{itemize}
+			\item Liste doublement chaînée
+			\item Accès bidirectionnel non indexé
+			\item Modification n'importe où à faible coût
+			\item Plusieurs algorithmes membres (tri, fusion, suppression, \ldots{})
+		\end{itemize}
+
+		\item \mintinline{cpp}|std::deque|
+		\begin{itemize}
+			\item \textit{Double-ended queue}
+			\item Proche de \mintinline{cpp}|std::vector| mais extensible aux deux extrémités
+			\item Accès indexé
+			\item Éléments non nécessairement contigus
+			\item Non compatible avec l'organisation mémoire des tableaux C
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::string|
+		\begin{itemize}
+			\item Alias de \mintinline{cpp}|std::basic_string<char>|
+			\item Stockage de chaînes de caractères
+			\item Manipulation de \textit{bytes} et non de caractères encodés
+		\end{itemize}
+	\end{itemize}
+
+	\begin{alertblock}{\mintinline[style=white]{cpp}|std::string| et UTF-8}
+		\begin{itemize}
+			\item \mintinline{cpp}|length()| et \mintinline{cpp}|size()| retournent le nombre de \textit{bytes}, pas de caractères
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item [] \begin{itemize}
+			\item Contiguïté non garantie, mais respectée en pratique
+
+\note[item]{Contiguïté garantie en C++11 et suivant}
+\note[item]{Pas d'implémentation non contigüe connue}
+
+			\item Variante \mintinline{cpp}|std::wstring| pour les caractères larges
+		\end{itemize}
+	\end{itemize}
+
+	\begin{alertblock}{API trop riche}
+		\begin{itemize}
+			\item De nombreuses fonctions membres qui gagneraient à être libres et génériques
+			\item Voir \href{http://www.gotw.ca/gotw/084.htm}{GotW \#84 : Monoliths "Unstrung"\linklogo}
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Conteneurs associatifs}
+	\begin{itemize}
+		\item Quatre saveurs
+		\begin{itemize}
+			\item \mintinline{cpp}|std::map| -- clés-valeurs, ordonné par la clé, unicité des clés
+			\item \mintinline{cpp}|std::multimap| -- clés-valeurs, ordonné par la clé, multiplicité des clés
+			\item \mintinline{cpp}|std::set| -- valeurs ordonnées et uniques
+			\item \mintinline{cpp}|std::multiset| -- valeurs ordonnées et non-uniques
+		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Implémentation}
+		\begin{itemize}
+			\item Pas des tables de hachage
+			\item Généralement des arbres binaires de recherche balancés
+		\end{itemize}
+
+\note[item]{\textit{red-black tree} le plus souvent}
+	\end{block}
+
+	\begin{itemize}
+		\item Critère d'ordre configurable (strictement inférieur par défaut)
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Ordre strict
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item Algorithmes membres (recherche) pour les performances
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Adaptateurs}
+	\begin{itemize}
+		\item Basés sur un autre conteneur pour proposer une API simplifiée
+		\item Avantages et inconvénients du conteneur sous-jacent
+		\item \mintinline{cpp}|std::stack|
+		\begin{itemize}
+			\item Pile LIFO
+			\item Basée sur \mintinline{cpp}|std::vector|, \mintinline{cpp}|std::list| ou \mintinline{cpp}|std::deque|
+		\end{itemize}
+		\item \mintinline{cpp}|std::queue|
+		\begin{itemize}
+			\item File FIFO
+			\item Basée sur \mintinline{cpp}|std::deque| ou \mintinline{cpp}|std::list|
+		\end{itemize}
+		\item \mintinline{cpp}|std::priority_queue|
+		\begin{itemize}
+			\item File dont l'élément de tête est le plus grand
+			\item Basée sur \mintinline{cpp}|std::vector| ou \mintinline{cpp}|std::deque|
+			\item Critère d'ordre configurable (strictement inférieur par défaut)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Adaptateurs}
+	\begin{minted}{cpp}
+		stack<int, vector<int> > foo;
+		for(int i=0; i<5; ++i) foo.push(i);
+
+		// Affiche 4 3 2 1 0
+		while(!foo.empty()) {
+		  cout << ' ' << foo.top();
+		  foo.pop();
+		}
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:4,endLineNumber:9,positionColumn:4,positionLineNumber:9,selectionStartColumn:4,selectionStartLineNumber:9,startColumn:4,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::stack%3Cint,+std::vector%3Cint%3E+%3E+foo%3B%0A++for(int+i%3D0%3B+i%3C5%3B+%2B%2Bi)%0A++%7B%0A++++foo.push(i)%3B%0A++%7D%0A%0A++while(!!foo.empty())%0A++%7B%0A++++std::cout+%3C%3C+!'+!'+%3C%3C+foo.top()%3B%0A++++foo.pop()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- conteneurs non-STL}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::bitset|
+		\begin{itemize}
+			\item Tableau de bits de taille fixe
+			\item Conçu pour réduite l'empreinte mémoire
+			\item Pas d'itérateur ni d'interface STL
+		\end{itemize}
+	\end{itemize}
+
+	\begin{block}{\mintinline[style=white]{cpp}|std::bitset| vs. \mintinline[style=white]{cpp}|std::vector<bool>|}
+		Objectif de gain mémoire adressé par \mintinline{cpp}|std::bitset|, pourquoi \mintinline{cpp}|std::vector<bool>| n'est-il pas un vrai conteneur de booléen ?
+	\end{block}
+
+	\begin{itemize}
+		\item Conteneurs non-standards
+		\begin{itemize}
+			\item Listes simplement chaînées
+			\item Tables de hachage
+			\item Tableaux de taille fixe
+			\item Tampons circulaires
+			\item Arbres et graphes
+			\item Variantes de conteneurs STL
+
+\note[item]{Variantes ciblant un autre compromis : listes en tableau, \textit{ropes}, \textit{map} \og à plat\fg{}, \ldots{}}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- \mintinline[style=white]{cpp}|std::pair|}
+	\begin{itemize}
+		\item Couple de deux valeurs
+		\item Pas un conteneur
+		\begin{itemize}
+			\item Type de retour de la recherche sur les \mintinline{cpp}|std::map| (couple clé-valeur)
+			\item Candidat pour construire des vecteurs indexés par un non-numérique
+		\end{itemize}
+		\item \mintinline{cpp}|std::make_pair| construit une paire
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Choix du conteneur}
+	\begin{exampleblock}{Do, par défaut}
+		\begin{itemize}
+			\item \mintinline{cpp}|std::string| pour les chaînes de caractères
+			\item \mintinline{cpp}|std::vector|
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, performances}
+		\begin{itemize}
+			\item Mesurez avec des données réelles sur la configuration cible
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{alertblock}{Flux d'octets}
+		\begin{itemize}
+			\item Utilisez \mintinline{cpp}|std::vector<unsigned char>|
+			\item Pas \mintinline{cpp}|std::vector<char>| encore moins \mintinline{cpp}|std::string|
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conteneurs -- Choix du conteneur}
+	\begin{block}{Conseils}
+		\begin{itemize}
+			\item Voir \textit{Effective STL} item 1
+			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?\linklogo}
+			\item Pensez à \mintinline{cpp}|reserve()|
+			\item Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
+			\item Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\subsection*{STL -- Itérateurs}
+\begin{frame}[fragile]
+	\frametitle{STL Itérateurs -- Généralités}
+	\begin{itemize}
+		\item Abstraction permettant le parcours des collections d'objets
+		\item Interaction entre conteneurs et algorithmes
+		\item Interface similaire à celle d'un pointeur
+		\item Quatre types
+		\begin{itemize}
+			\item \mintinline{cpp}|iterator| et \mintinline{cpp}|const_iterator|
+			\item \mintinline{cpp}|reverse_iterator| et \mintinline{cpp}|const_reverse_iterator|
+		\end{itemize}
+		\item Itérateurs sur un conteneur : \mintinline{cpp}|begin()| et \mintinline{cpp}|end()|
+		\item Itérateurs inverses sur un conteneur : \mintinline{cpp}|rbegin()| et \mintinline{cpp}|rend()|
+		\item Les itérateurs d'une paire doivent appartenir au même conteneur
+	\end{itemize}
+
+	\begin{alertblock}{Itérateurs de fin}
+		\begin{itemize}
+			\item Pointent un élément après le dernier
+			\item Ne doivent pas être déréférencés ni incrémentés
+		\end{itemize}
+	\end{alertblock}
+
+\note[item]{Un élément après la fin permet de représenter des ensemble vide (si \mintinline{cpp}|begin| et \mintinline{cpp}|end| référence le même élément)}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Itérateurs -- Catégories et opérations}
+	\begin{columns}[T]
+		\begin{column}{0.80\textwidth}
+			\begin{itemize}
+				\item Opérations communes : copie, affectation et incrémentation
+				\item Hiérarchie de cinq catégories
+				\begin{itemize}
+					\item \textit{Input} : égalité (\mintinline{cpp}|==| et \mintinline{cpp}|!=|) et lecture
+					\item \textit{Output} : écriture
+					\item \textit{Forward} : Parcours multiples
+					\item \textit{Bidirectional} : décrémentation
+					\item \textit{Random access}
+					\begin{itemize}
+						\item Déplacement d'un nombre arbitraire (\mintinline{cpp}|+|, \mintinline{cpp}|-|, \mintinline{cpp}|+=|, \mintinline{cpp}|-=| et \mintinline{cpp}|[]|)
+						\item Comparaison (\mintinline{cpp}|<|, \mintinline{cpp}|<=|, \mintinline{cpp}|>|, \mintinline{cpp}|>=|)
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+		\end{column}
+
+		\begin{column}{0.20\textwidth}
+			\begin{picture}(0,10)
+				% Boites
+				\put(0,0){\framebox(32,12)[c]{Input}}
+				\put(36,0){\framebox(32,12)[c]{Output}}
+				\put(0,-30){\framebox(68,12)[c]{Forward}}
+				\put(0,-60){\framebox(68,12)[c]{Bidirectional}}
+				\put(0,-90){\framebox(68,12)[c]{Random Access}}
+
+				%Fleches
+				\put(52,-9){\vector(0,1){9}}
+				\put(16,-9){\vector(0,1){9}}
+				\put(16,-9){\line(1,0){36}}
+				\put(34,-18){\line(0,1){9}}
+				\put(34,-48){\vector(0,1){18}}
+				\put(34,-78){\vector(0,1){18}}
+			\end{picture}
+		\end{column}
+	\end{columns}
+
+	\begin{alertblock}{Attention}
+		Seules les versions mutables de \textit{Forward}, \textit{Bidirectional} et \textit{Random access} itérateurs sont des \textit{Output} itérateurs.
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Itérateurs -- Catégories et conteneurs}
+	\begin{tabular}{ | p{5cm} | p{5cm} |}
+		\hline
+		Conteneur & Catégorie \\
+		\hline
+		\mintinline{cpp}|std::vector| & \textit{Random access} \\
+		\hline
+		\mintinline{cpp}|std::deque| & \textit{Random access} \\
+		\hline
+		\mintinline{cpp}|std::list| & \textit{Bidirectionnal} \\
+		\hline
+		\mintinline{cpp}|std::map| et \mintinline{cpp}|std::multimap| & \textit{Bidirectionnal} \\
+		\hline
+		\mintinline{cpp}|std::set| et \mintinline{cpp}|std::multiset| & \textit{Bidirectionnal} \\
+		\hline
+	\end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Itérateurs -- Itérateurs d'insertion}
+	\begin{itemize}
+		\item Adaptateur d'itérateurs
+		\item De type \textit{Output}
+		\item Insertion de nouveaux éléments
+		\begin{itemize}
+			\item En queue : \mintinline{cpp}|back_inserter|
+			\item En tête : \mintinline{cpp}|front_inserter|
+			\item À la position courante : \mintinline{cpp}|inserter|
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection*{STL -- Algorithmes}
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Foncteurs}
+	\begin{itemize}
+		\item Instances de classe définissant \mintinline{cpp}|operator()|
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		class LessThan {
+		public:
+		  explicit LessThan(int threshold) : m_threshold(threshold) {}
+		  bool operator() (int value) { return value <= m_threshold; }
+
+		private:
+		  int const m_threshold;
+		};
+
+		LessThan func(10);
+		cout << func(5) << "\n";   // 1
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Foncteurs}
+	\begin{itemize}
+		\item Possèdent des données membres
+		\item Foncteurs standards : \mintinline{cpp}|std::plus|, \mintinline{cpp}|std::minus|, \mintinline{cpp}|std::equal|, \mintinline{cpp}|std::less|, \ldots{}
+		\item Constructibles
+		\begin{itemize}
+			\item Depuis des pointeurs de fonctions : \mintinline{cpp}|std::prt_fun|
+			\item Depuis des fonctions membres : \mintinline{cpp}|std::mem_fun|, \mintinline{cpp}|std::mem_fun1|, \ldots{}
+			\item En niant d'autres foncteurs : \mintinline{cpp}|std::not1|, \mintinline{cpp}|std::not2|
+			\item En fixant des paramètres : \mintinline{cpp}|std::bind1st|, \mintinline{cpp}|std::bind2nd|
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Prédicats}
+	\begin{itemize}
+		\item Appelables retournant un booléen (ou un type convertible en booléen)
+		\item Utilisés par de nombreux algorithmes
+		\item De nombreux algorithmes utilisent un prédicat par défaut (p.ex. \mintinline{cpp}|<| ou \mintinline{cpp}|==|)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Parcours}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::for_each()| parcourt un ensemble d'éléments
+		\item \ldots{} et applique un traitement à chaque élément
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		void print(int i) { cout << i << ' '; }
+
+		vector<int> foo{4, 5, 9 ,12};
+		for_each(foo.begin(), foo.end(), print);
+	\end{minted}
+
+	\begin{itemize}
+		\item Version du \textit{map}/\textit{apply} fonctionnel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Parcours}
+	\begin{itemize}
+		\item Retourne le foncteur passé en paramètre
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		struct Aggregate {
+		  Aggregate() : m_sum(0) {}
+		  void operator() (int i) { m_sum += i; }
+		  int m_sum;
+		};
+
+		vector<int> foo{4, 5, 9 ,12};
+		for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
+	\end{minted}
+
+	\begin{itemize}
+		\item Candidat pour le \textit{fold}/\textit{reduce} fonctionnel
+		\item Pas de sémantique, faible utilité
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Recherche linéaire}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::find()| recherche une valeur
+		\item \ldots{} et retourne un itérateur sur celle-ci
+		\item \ldots{} ou l'itérateur de fin si la valeur n'est pas présente
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9 ,12};
+		vector<int>::iterator it1;
+		vector<int>::iterator it2
+
+		it1 = find(foo.begin(), foo.end(), 5);   // it1 pointe sur foo[1]
+		it2 = find(foo.begin(), foo.end(), 19);  // Et it2 sur foo.end()
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Recherche linéaire}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::find_if()| recherche depuis un prédicat
+	\end{itemize}
+
+	\begin{block}{Variantes \mintinline[style=white]{cpp}|_if|}
+		\begin{itemize}
+			\item Les algorithmes suffixés par \mintinline{cpp}|_if| utilisent un prédicat
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::find_first_of()| recherche la première occurrence d'un élément
+		\item \mintinline{cpp}|std::search()| recherche la première occurrence d'un sous-ensemble
+		\item \mintinline{cpp}|std::find_end()| recherche la dernière occurrence d'un sous-ensemble
+		\item \mintinline{cpp}|std::adjacent_find()| recherche deux éléments consécutifs égaux
+		\item \mintinline{cpp}|std::search_n()| recherche la première suite de $n$ éléments consécutifs égaux à une valeur
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Recherche dichotomique}
+	\begin{itemize}
+		\item Pré-requis : ensemble trié
+		\item \mintinline{cpp}|std::lower_bound()| retourne un itérateur sur le premier élément non strictement inférieur à la valeur recherchée
+
+\note[item]{Formulation \og n'est pas strictement inférieur\fg{} semble être une tournure compliquée pour supérieur ou égal, mais c'est précisément ce que fait la fonction et c'est important si on fourni un prédicat de comparaison}
+
+		\item \ldots{} et l'itérateur de fin si un tel élément n'existe pas
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9, 12};
+
+		*lower_bound(foo.begin(), foo.end(), 6);  // 7
+		*lower_bound(foo.begin(), foo.end(), 9);  // 9
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Recherche dichotomique}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::upper_bound()| retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée
+		\item \mintinline{cpp}|std::equal_range()| retourne la paire (\mintinline{cpp}|std::lower_bound|, \mintinline{cpp}|std::upper_bound|)
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Le résultat retourné peut ne pas être la valeur recherchée
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::binary_search()| indique si l'élément cherché est présent
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Recherche dichotomique}
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Pas de fonction de recherche dichotomique retournant l'élément cherché
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{minted}{cpp}
+		vector<int>::iterator foo(vector<int> vec, int val) {
+		  vector<int>::iterator it = lower_bound(vec.begin(), vec.end(), val);
+		  if(it != vec.end() && *it == val) return it;
+		  else return vec.end();
+		}
+
+		vector<int> bar{1, 5, 8, 13, 25, 42};
+		foo(bar, 12);  // vec.end
+		foo(bar, 13);  // iterateur sur 13
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Comptage}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::count()| compte le nombre d'éléments égaux à la valeur fournie
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 3, 9, 5, 5 ,12};
+
+		count(foo.begin(), foo.end(), 5);  // 3
+		count(foo.begin(), foo.end(), 2);  // 0
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::count_if()| compte le nombre d'éléments satisfaisant le prédicat
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Abool+compare(int+nb)%0A%7B%0A++return+nb+%3E%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+8)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+7)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::count_if(foo.begin(),+foo.end(),+compare)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Comparaison}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::equal()| teste l'égalité de deux ensembles (valeur et position)
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9, 12};
+		vector<int> bar{4, 5, 12, 9};
+
+		equal(foo.begin(), foo.end(), foo.begin());  // true
+		equal(foo.begin(), foo.end(), var.begin());  // false
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Comparaison}
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item \mintinline{cpp}|std::equal()| ne vérifie pas les tailles des deux ensembles
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{block}{Et \mintinline[style=white]{cpp}|operator==| ?}
+		\begin{itemize}
+			\item \mintinline{cpp}|operator==| sur des conteneurs teste la taille et le contenu
+		\end{itemize}
+	\end{block}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Préférez \mintinline{cpp}|operator==| à \mintinline{cpp}|std::equal()| pour comparer un conteneur complet
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Comparaison}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::mistmatch()| retourne une paire d'itérateurs sur les premiers éléments différents
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9, 13};
+		vector<int> var{4, 5, 12, 8};
+
+		mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12
+	\end{minted}
+
+	\begin{itemize}
+		\item \ldots{} ou l'itérateur de fin en cas d'égalité
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzLGkAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5rHByN5YANQmsW5OQ8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgs0%2BJgA7FZrjsdkN0CAQC83sRATDzjt%2BKg0RZWjsAKykHYADnpZjRABF9hibpi9ujPlisTi8QSiESDiTYtgdhF6pTqXTGcy2Ry%2BfzBShFrDAYDsQRcSAIqhPGJEggmI83Nq1ZgAI5eMTUQ0AOiiwER8zJTtcSPp0uIzswroYSNm5u1YDWNLcDHDyu5At1eLQXk1B0tCf1hoMtBNZq1Bx2DtQj3ZsVZUvqIbzbh2Mcj0bWsU5WKVUO5lJV8b1wveYsEpN9svpCR2ZnpqKVjY7Or1SZTFvzaoNRuzptDC/TNrttEL/sD3o9qEdXvdvt3bsrqfztajMcnceniY1a%2Bri8zxtXVYL5OL%2BzLvov87Vte9axlczaouyrZgTyTaqum3aiocfYSuWRLonK9JMiO9KSBOsGdo%2BybPg%2BGbLjmxFWra9rkmeQbujRx4%2BvUtHBsRwG3vhJGzhR6ZLlm5GfoWP6lqhAFhhGN4NrBLZctB7b3mqCHEshkoDuhQ7MmOeFTmqiQIohimvCKykEOceKENETAivShmEiZZkgBZxBWT2konAoxYkSweAKPCBDIAgO4um69IMQw6D7qewV0cid7QQR6pEZ%2BABUEDuY6NDEEMYlXhwNZ5SlaWYAojpKGg4U5UBEkgXF4GQTcEGfBw8y0JwNK8H4HBaKQqCcBaljWNiizLA86w8KQBCaM18wANYgDSGj6JwkgdVNPWcLwCggItk1dc1pBwLASCYKorzJiQ5CUPUwAKMohiVEICCoAA7p141oCwiR0FZ6R3SEtCPS9nXdR9X30DEN3MIkChPQQpCg3Q0ShKwqy8Aj4MAPLJoDr1rSdrxXMQN0baQ%2BPILU%2BCdbw/CCCIYjsFIMiCIoKjqHtpC6K0BhGCg1jWPoeARFtkDzKgiTVFtHAALQ4r%2BpgDZYXBcDsUsAOpiLQKuqydBDObwqAvMQxB4FgwvesQXiCHgbAACqZmb8wKMNKx6DiwR/Q9T249wvC65gqzjc9zmJFNLVtat7O9Rw2Cncg53EDsqgMgAbFLyeSDswDIMgBa65bM0hhA/VWJY9K4IQJB7N8XCzL7ofzAgpxYDE3pzQtS0cCtpDA/rJNbTt9cd2YEfdVHdd7bM8yG6kziSEAA}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Remplissage}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::fill()| remplit l'ensemble avec la valeur fournie
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo(4);
+
+		fill(foo.begin(), foo.end(), 12);  // 12 12 12 12
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::fill_n()| idem avec un ensemble défini par sa taille
+	\end{itemize}
+
+	\begin{block}{Constructeur}
+		\begin{itemize}
+			\item Remplissage des conteneurs séquentiels à la construction
+		\end{itemize}
+
+		\begin{minted}{cpp}
+			vector<int> foo(4, 12);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Remplissage}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::generate()| valorise les éléments à partir d'un générateur
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int gen() {
+		  static int i = 0;
+		  i += 5;
+		  return i;
+		}
+
+		vector<int> foo(4);
+		generate(foo.begin(), foo.end(), gen);  // 5 10 15 20
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::generate_n()| idem avec un ensemble défini par sa taille
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu2AjAgcy%2BJgA7FYbrtdrC8PDEQingARXYaA44654vD7SwHckAVipXzxpwIywYCNZ0MxpIxN2JLCYwTRGOxbP2ktxePxBHQIBAr3exCBiIuu34qAgknRsWpcvlipANFotGoqFQADoosAxQstVbra40aRdpIzPrDXLhia0F4kUCgU7UCYmRZKUzycHDrswBx44nY25Q%2BGLFxwzHDiGE0mnm4Q9r02YswXc4m8ym0xHYmXqwnw24GI2DVKsQLobKsT68X6lSqiGrDhrYtg023ZX2FUqzbQAPoMCD9kARJjIADW8%2BCSka0UtqEd0g9sW9Uun/qWQZzceLEaj2cLcbzVZvqbvGfrb/zr6f76tJZfn%2BP7Jt%2BH51tG5bPusTLNq2PodoKNLSr2xoDm8Q7qoImrarq7qSHqvLIReSoBtewEfg%2BUGpi%2BoEUQBEaZpBDaVnRRYMRYpbMd%2BtHUTWFgQY%2BFZNi26yTshiFdhJMrEWhyoYR8I7YWOoa6meU5ySiITEEwBCYAetqYPaS6OtqLoMOgbrIow3p4gA9HZuxMrsXAaC5zlmJSGkrmRfGUUBFb5tWH5MUJ0FBWBHFcWFNGsX5HGCXxjawaJRF4pJtx8p21wcAstCcEyvB%2BBwWikKgnCFgylj4ksKyPBsPCkAQmi5QsG4gEyGj6JwkhFS1ZWcLwCggF1zUlblpBwLASCYKobyBiQ5CUA0wAKMohhVEICCoAA7sVjVoCwSR0LpGTrSEtBbbtxWlYdx30DEq3MEkCjbQQpB3XQ0ShKway8J9D0APKBlde39bNbzXMQq2DaQEPIHU%2BDFbw/CCCIYjsFIMiCIoKjqONpC6G0BhGCg1jWPoeARMNkALKgSQ1MNHAALR%2BoyphVRYACc8S7MzADqYi0Hz/OzQQOm8KgrzEMQeBYDTbrEF4gh4GwAAqVq0ArCwKLVqx6H6wTnZt21g9wvDi5gayNTtOlJC1eUFX1BPlRw2BzcgC3ELsqjxAAbMzfuSMiyDwhA4vKxucy7BAlVWJY7q4IQJD0rEXBzBbDsLAgZxYDEbrtZ13UcL1pA3ZLsPDaNWfF2Yzula7mfjXMCzS2kziSEAA%3D%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Copie}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::copy()| copie les éléments du début vers la fin
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 9, 12};
+		vector<int> bar;
+
+		copy(foo.begin(), foo.end(), back_inserter(bar));
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::copy_backward()| copie les éléments de la fin vers le début
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item À la taille du second ensemble
+			\item Aux ensembles non-disjoints
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmZqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRsfEKtfWNWS2Dnd1FJf0AlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgM0%2BJgA7FZrjsdoN0CAQC83sRATDzjt%2BKg0RYAKykHZmABstNRtK4ZjRABF9hibpi9ujPlisTi8QSiESDiS1tgdhE6lyBYLhShUAkAJ7UVCoAB0UWAiLmZM1WtcSNpStlyAA1gB9YJKerRCCy4gzZFrbmC7EEXHKrywwGAmVyqkWDQmKnsx5uQNgDg7WNRwPO8MWLjhyMBg7xuMJzNuINEkNsiOJrMJ3MHJPBixrdOl/Ox8NuBiN90Kjko3mUhVC70i15i4mCUnOiAADjdHsVfeVautFstAHc6ugNdrdfraeTjQxVwbnTu95Oe16fWg/fWCymwyW89n73fkyG07fK2Wc3HH9Xixm3w2P5eT41nWd6NlSzatlOvZngs/p/leIaSCB8Hlp%2B8FAVSyHRu%2BD7odW9JYTGAFfoWFiooR75Ni2qxtl2qKclC9GfBwcy0JwVK8H4HBaKQqCcNGljWNiCxLA86w8KQBCaCxcyWiAVIaPonCSJx0m8ZwvAKCAilSdxLGkHAsBIJgqivH6JDkJQdTAAoyiGBUQgIKgi5cRJaAsAkdBMFUdkhLQjnOVxPHuZ59AxDZzAJAoTkEKQIV0NEoSsCsvDxWFADyfoBS5akma8VzEDZGmkHlyA1PgXG8PwggiGI7BSDIgiKCo6h6aQugtAYRgoNY1j6HgERaZAcwqlUWkcAAtDi%2BzsqYgmWFwXA7BNADqYi0MtK0mQQxBMLwqAvMQxB4FgQ2msQXiCHgbAACqarQZ1zAoInLHoOLBL5DlOTl3C8DtmArBJi67Qk0msexqltXxHDYKZyDmcQOyqGO9ITfSkg7MAyDIDsEA7ZdlozLjAlWJYtK4IQJB7N8XAzH9YNzAgpxYDEppyQpSkcCppBBftxVaTpDOc2YkM8dD9N6a6pCHSkziSEAA%3D%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Échange}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::swap()| échange deux objets
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int x=10, y=20;   // x:10 y:20
+		swap(x,y);        // x:20 y:10
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::swap_ranges()| échange des éléments de deux ensembles
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo (5,10); // foo: 10 10 10 10 10
+		vector<int> bar (5,33); // bar: 33 33 33 33 33
+
+		swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
+		// foo : 10 33 33 33 10
+		// bar : 10 10 10 33 33
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::iter_swap()| échange deux objets pointés par des itérateurs
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+(5,10)%3B%0A++std::vector%3Cint%3E+bar+(5,33)%3B%0A%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A++std::swap_ranges(foo.begin()+%2B+1,+foo.end()+-+1,+bar.begin())%3B%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Remplacement}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::replace()| remplace toutes les occurrences d'une valeur par une autre
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9 ,12, 5};
+
+		replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::replace_if()| remplace toutes les éléments vérifiant le prédicat par une valeur donnée
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Remplacement}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::replace_copy()| copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
+	\end{itemize}
+
+	\begin{block}{Variantes \mintinline{cpp}|_copy|}
+		\begin{itemize}
+			\item Les algorithmes suffixés par \mintinline{cpp}|_copy| fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::replace_copy_if()| copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2yAQbwA1hBggRdkxZl8TAB2Kw3Xa7U4EJYMXFPS7rAAiu0JBxJt0J9IJN2xuxYTGCEHx0OJXzJRNZZLJQ3QIBAr3exCB2Iuu34qDF0l2AFZSEydXFdqQuGYdZqiRz1uKJVKZadEgYVtQkQA6KLAfnzFXO1wCk06gAc%2BItIol/GIEFSAC9MAB9HG7PBPRkaFnxp5uT2oJ2RzAClPWax4QXXCX7YWkku7a0oRY4oFAjMmTUWPCNxl1w67MAcTtrIPl0Xs4OSgjS6teWuHetdxtuBjTvvF0sc6HlsVDysjmVyogKw5K9bYBvEjXa3W7fWG41as0s9dV232mN4KiOzOu9061VO70e1EY/2BpaZKhuGeBRrGZIJgcSYplBHZftmuYWvslgFkWJZrv2VqbmOE5uPWqqNs2rZplO3bzkBS53jhaDjqRHbTpqs4UcGN4roumGLsOo7bh8e6CMqhHHr6Z4XkaJo3guJZVrxu5HAJB4IvUt5YfemB2kwKzRmgiQAJ6vi6mBugwPoZt%2BDDoKZVYRJp6LRsESgNNEEA2cQHqngGKlcZ6YbZhBqbQbsybIXB6YIWBOaAShViWIW66cRWG6jrReEEUiREtpqbaTgx5G9pRbHeVWKX0emjHMflnLeSBflxnBMEhWmSnEFmEVIRY0VofFZbedxMole26auRlJGDT2PZeRhg6qTRNalRNTFzpVq7TWyy7XBw8y0Jwmq8H4HBaKQqCcPhqGWJWizLI8Gw8KQBCaJt8zoiAmoaPonCSHtD1HZwvAKCAb33Qdm2kHAsBIJgqhvOOJDkJQ9TAAoyiGJUQgIKgADu%2B23WgLCJHQTDVMjIS0GjmP7YduP4/QMSI8wiQKOjBCkFTdDRKErCrLwrM0wA8uOZNY99kNvNcxCI79pAi8gtT4PtvD8IIIhiOwUgyIIigqOowOkLorQGEYKD5pY%2Bh4BE/2QPMqCJNU/0cAAtFK0GmGdFhcFwuz2wA6mItCe17kMEMQTC8KgrzEMQeBYBbPrEF4gh4GwAAqSK0DH8wKJdKx6FKwTE6j6NC9wvBB5gqy3RjweJA9W07V9OvHRw2BQ8gMPELsqh%2BgAbPbXeSLswDIPCEBB/H6KzLsECnTFNi7LghAkCh6xcLMJc1/MaJMFgMQ%2Bs9r3vRwn2kBToeS/9gPrwfZj14djdr8DszzOHqTOJIQA%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Suppression}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::remove()| élimine les éléments égaux à une valeur donnée
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+
+		remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
+	\end{minted}
+
+	\begin{alertblock}{Pas de suppression}
+		\begin{itemize}
+			\item Ramène les éléments à conserver vers le début de l'ensemble
+			\item Retourne l'itérateur correspond à la nouvelle fin
+		\end{itemize}
+	\end{alertblock}
+
+\note[item]{\mintinline{cpp}|std::remove()| ne supprime pas car les algorithmes ne peuvent pas modifier le conteneur, en particulier sa taille, mais seulement son contenu}
+
+	\begin{block}{Idiome \textit{Erase-Remove}}
+		\begin{itemize}
+			\item Suppression via un appel à \mintinline{cpp}|erase()| après le nouvel itérateur de fin
+		\end{itemize}
+
+		\begin{minted}{cpp}
+			foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
+		\end{minted}
+	\end{block}
+
+
+\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::remove(foo.begin(),+foo.end(),+5)%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Suppression}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::remove_if()| élimine les éléments vérifiant le prédicat
+		\item \mintinline{cpp}|std::remove_copy()| copie les éléments différents d'une valeur donnée
+		\item \mintinline{cpp}|std::remove_copy_if()| copie les éléments ne vérifiant pas le prédicat
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Suppression des doublons}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::unique()| élimine les éléments consécutifs égaux sauf le premier
+	\end{itemize}
+
+\note[item]{Tout comme \mintinline{cpp}|remove|, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé}
+\note[item]{L'ordre relatif est préservé, important si la comparaison ne se fait que sur une partie d'un élément composite}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+
+		unique(foo.begin(), foo.end());  // 4 5 7 9 5 ...
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::unique_copy()| copie l'ensemble en ne conservant que le premier des éléments consécutifs égaux
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::unique(foo.begin(),+foo.end())%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Transformation}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::transform()| applique une transformation aux éléments d'un ensemble
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int double_val(int i) { return 2 * i;}
+
+		vector<int> foo{4, 5, 7, 9};
+		vector<int> bar(4);
+		transform(foo.begin(), foo.end(), bar.begin(), double_val);
+		// 8 10 14 18
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Transformation}
+	\begin{itemize}
+		\item Ou de deux ensembles en stockant le résultat dans un troisième
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9};
+		vector<int> bar{2, 3, 6, 1};
+		vector<int> baz(4);
+
+		transform(foo.begin(), foo.end(), bar.begin(),
+		          baz.begin(), plus<int>());
+		// 6 8 13 10
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu3QSwi9AA%2Bs8xBBEQi5l8TPErDddrtTgRlgxdmZdgAqBEHYm3eIAEQJN1xLCYwQg%2BOhRK%2BpMJTNJpOG6BAIFe72IQMRF12/FQwukuwArKRdoldgBOQls2Ii0XiyXSoiyw7y2LYXYRBoQST4w3s66i3YmkAEYiGBT8YgsaioVAAOiiwB5C0VQeDrl5mrtxFDmHDDDjyNRGKxtCdRtJfogaQAXph0Ui8E8WbsNIyEU83LaGsGi5heTXrNY8HzXaLhYK3e6CBKUEskUCgQ3ZWqLHgTGrK2PDrswBwl%2BtnSSe6y%2B2LB5K0F5R4dx8vZ24GCf1939S6hQKNzuh2aPpbBAqlSrNRqtZq9VvL26PSfC0jlfa0J2FMxNViTUADZNS4a9/2NXcpTec05VAm07ULB0cxvZChy9H0/QDJUkxTNMyNjSME3IiN4yYQs6NTSMPSSbwFAwggLl5PD7yjYgCzwYtS1rA5K2rQ0xMXbCm2Elsc32SwOy7N1e34h89xHOtx2w2dp1necj0XZdV0Zbd9i3fiPX3Q83GPdY1TPC8jWvfk2RuDgFloTg1V4PwOC0UhUE4ezlMsd0lhWR4Nh4UgCE0LyFgAaxANUNH0ThJH8xLgs4XgFBADKEsCrzSDgWAkEwVQ3gPEhyEoBpgAUZRDCqIQEFQAB3AK4rQFgkjoJgalakJaA67qAqC/rBvoGJmuYJIFE6ghSBmuholCVg1l4da5oAeQPCaety6q3muYhmvy0gzuQOp8AC3h%2BEEEQxHYKQZEERQVHUUrSF0NoDCMFB20sfQ8AiQrIAWVAkhqQqOAAWnFcTTHCiwuC4XZEYAdTEWhsZx6qiN4VBXmIYg8CwKG42ILxBDwNgABUg1oGmFgUKLVj0cVglG9rOpO7heC9TA1jirrvSSRLvN8nK/pCjhsBq5A6uIXZVAADhgxGYMkXZgGQeEIC9enkrmXYIDCqwwd2XBCBIJTYi4OYRZlhYEDOLAYjjVL0syjhstIKbSeuwrivdgOzHloLFbd0q5gWcm0mcSQgA%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Rotation}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::rotate()| effectue une rotation de l'ensemble, le nouveau début étant fourni par un itérateur
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 5, 7, 9, 12};
+
+		rotate(foo.begin(), foo.begin() + 2, foo.end());  // 7 9 12 4 5
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::rotate_copy()| effectue une rotation et copie le résultat
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9,+12%7D%3B%0A%0A++std::rotate(foo.begin(),+foo.begin()+%2B+2,+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Partitionnement}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::partition()| réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas \ldots{}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		bool is_odd(int i) { return (i % 2) == 1; }
+		vector<int> foo{4, 13, 28, 9 , 54};
+
+		partition(foo.begin(), foo.end(), is_odd);
+		// 9 13 28 4 54 ou 9 13 4 28 54 ou ...)
+	\end{minted}
+
+	\begin{itemize}
+		\item \ldots{} et retourne un itérateur sur le début de la seconde partie
+	\end{itemize}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Ordre relatif non conservé
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Partitionnement}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::stable_partition()| partitionne en conservant l'ordre relatif
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 13, 28, 9 , 54};
+
+		stable_partition(foo.begin(), foo.end(), is_odd);  // 13 9 4 28 54
+	\end{minted}
+
+	\begin{block}{Deux fonctions ?}
+		\begin{itemize}
+			\item Stabilité coûteuse en temps et pas toujours nécessaire
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Partitionnement}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::nth_element()| réordonne les éléments
+		\begin{itemize}
+			\item Élément sur l'itérateur pivot est celui qui serait à cette place si l'ensemble était trié
+			\item Éléments avant ne sont pas supérieurs
+			\item Éléments après ne sont pas inférieurs
+			\item Pas d'ordre particulier au sein des deux sous-ensembles
+		\end{itemize}
+	\end{itemize}
+
+\note[item]{Formulation \og pas supérieur\fg{} étrange mais gère le cas des égalités avec le pivot et la sémantique de l'opérateur fourni}
+
+	\begin{minted}{cpp}
+		vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+		nth_element(foo.begin(), foo.begin() + 3, foo.end());
+		// 2 1 3 4 5 9 6 7 8
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAKykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2eAUAH0MOgIMECCjZl8TAB2Kw3Xa7U4EJYMXbY8xxMz49YAEQOTK4BxJt0JLOhNxxuxYTGCEHx0OJXzJRM5ZLJQ3QIBAr3exCBOIuu34qCl0l2XHWpF2ZgAHAaAJy7A1xSRElnrTkSmVyhWJLppATUJEAOiiwGF8w1XtcIoNqIx6HQjOlMv4xAgqQAXpg0bi8E8mbsNByUU83AHUJ6E5gRVnrNY8KLrjL9uLSVXdk6UItcUCgXmTHELHh2%2BmW4ddmAOP21naHZLuaP6wR5Y2vM3Dq2B%2B23AxFyPazaCeua5XHVOFUqiCrDmr1tg28SdXqDcazRbdlaN2vbrXZXuQBMIvQ0S6Gm6GB78x9P0DU1T0g39UNMUjCcYzjPBE2TbNWQzLNU1bUDC2LO19ksMsKyrKUJ1fac0FnHN0KRdtO27ci%2BwHIcOQnDcX0nEim1o3NFziZdVyjZjnx3QiWIbA8PmPQR1U1KVTQNE1dkJA0ADZLQNHV9UNA12XHJ8JwbQQEDRSpMDYQQAO9TBfX/f1QKAqycIsXZ1NA8DoJY2DC0QtDmRQ7CvNzDD4KLSN7LwpjtzrViFVIuc3AorUOy7OIe3nOjB14sKeR3YiovY3tOLWbiV2HPjxzFTKOHmWhODiXg/A4LRSFQThYtwyx60WZZHg2HhSAITQKvmABrEA4g0fROEkWr%2BsazheAUEAxr6%2BqKtIOBYCQTBVDeWcSHISh6mABRlEMSohAQVAAHc6p6tAWESOgmGqY6QloM7Lrqhrbvu%2BgYkO5hEgUc6CFIL66GiUJWFWXhQZ%2BgB5Wc3qu6bNrea5iEO2bSBR5BanwOreH4QQRDEdgpBkQRFBUdRltIXRWgMIwUFLSx9DwCJ5sgeZUESap5o4ABaOVWVMVqLC4Lhdn5gB1MRaElqXNoIYgmF4VBXmIYg8CwDng2ILxBDwNgABUkVoHX5gUDqVj0OVgme07zqR7heCVzBVh6i7lcSfrKuqqaaaajhsC25AduIXZVCNRT%2BcUyRdmAZB4QgJX9cG2YaRaqwWd2XBCBIHD1i4WYXZ9%2BYEDOLAYmDYbRvGjhJtID7Vcx%2BbFtLuuzH9hrA5L5bZnmdXUmcSQgA%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Tri}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::sort()| trie un ensemble
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{4, 13, 28, 9 , 54};
+
+		sort(foo.begin(), foo.end());  // 4 9 13 28 54
+	\end{minted}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Ordre relatif non conservé
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::stable_sort()| trie l'ensemble en conservant l'ordre relatif
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Tri}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::partial_sort()| réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant \ldots{}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+partial_sort(foo.begin(), foo.begin() + 3, foo.end());
+// 1 2 3 9 8 7 6 5 4
+	\end{minted}
+
+	\begin{itemize}
+		\item \ldots{} les autres éléments n'ont pas d'ordre particulier
+		\item \mintinline{cpp}|std::partial_sort_copy()| copie l'ensemble ordonné à l'image de \mintinline{cpp}|std::partial_sort()|
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:29,startColumn:1,startLineNumber:29),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++++std::sort(foo.begin(),+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++++std::partial_sort(foo.begin(),+foo.begin()+%2B+3,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Mélange}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::random_shuffle()| réordonne aléatoirement l'ensemble
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+		random_shuffle(foo.begin(), foo.end());
+		// 1 8 3 7 9 4 2 6 5
+		// ou ...
+	\end{minted}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++std::random_shuffle(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Fusion}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::merge()| fusionne deux ensembles triés dans un troisième
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{1, 5, 6, 8};
+		vector<int> bar{2, 5};
+		vector<int> baz;
+
+		merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
+		      back_inserter(baz));      // 1 2 5 5 6 8
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::inplace_merge()| fusionne deux sous-ensembles sur place
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8%7D%3B%0A++++std::vector%3Cint%3E+bar%7B2,+5%7D%3B%0A++++std::vector%3Cint%3E+baz%3B%0A%0A++++std::merge(foo.begin(),+foo.end(),+bar.begin(),+bar.end(),+std::back_inserter(baz))%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+baz%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8,+2,+5%7D%3B%0A%0A++++std::inplace_merge(foo.begin(),+foo.begin()+%2B+4,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Opérations ensemblistes}
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Ensembles sans répétition de valeur
+			\item Ensembles triés
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::includes()| vérifie si tous les éléments sont présents dans un autre ensemble
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{1, 5, 6, 8};
+		vector<int> bar{2, 5};
+		vector<int> baz{1, 6};
+
+		includes(foo.begin(), foo.end(), bar.begin(), bar.end());  // faux
+		includes(foo.begin(), foo.end(), baz.begin(), baz.end());  // vrai
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Opérations ensemblistes}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::set_union()| : union de deux ensembles
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{1, 5, 6, 8};
+		vector<int> bar{2, 5};
+		vector<int> baz;
+
+		set_union(foo.begin(), foo.end(), bar.begin(),
+		          bar.end(), back_inserter(baz));   // 1 2 5 6 8
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::set_intersection()| : intersection de deux ensembles
+		\item \mintinline{cpp}|std::set_difference()| : différence de deux ensembles
+		\item \mintinline{cpp}|std::set_symmetric_difference()| : différence symétrique de deux ensembles
+
+\note[item]{\mintinline{cpp}|set_difference()| conserve les éléments présents dans le premier ensemble mais pas dans le second alors que \mintinline{cpp}|set_symmetric_difference()| conserve les éléments présents dans un des ensembles mais pas dans l'autre}
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcYmAJEICBYX1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRY2nsAKykPaxVnxDEAEUOWJuBL2RJJZKIFKOVI22D2EQa9LMrKZ3N5%2BIJQtJ71FlME1JlAC96YzYkqNnyVYSCMSUEt4cDgYKLSSIqhPGIkggmM83Ha1Q9AZgFNRnQA6KLAZELGnB1wo1ky4ghzBhhgx6UNIPRuZzT12sDrJluBi55XY1UOq1eG1Hb1lp0u2huj22o72y2%2BrAB2kJpMpzsZ2NMXVd8P9wcZrNNtx7Iv5wvrE0qpUwkv0s0t4Uaz7i7WSyN0zGMllsjnGvkCtUizfHbdSuNyhUn1fnjdiq8EHUD4t3Evmy1KAgAfS8BgMkDVAh2TCNewYdAUzjcDYLTPtU2QABrf9giURpoggPVM0/AV%2BGICA0l1TB/3hPBni5PYNF5PZKLtPUgxIzAUTo6xrDwVFv1xU8BTXctKy9Zs9RMJkLDwMTqInKcOFk/CCUXflS0tNAK2zZtpwLIt52XdEeSXZSVx4p9yS1N8d1pA0FVZdk9k5fSFJ/dczK3Cyb1lTF5WZB8TLLC8XwlDz9V0r9lOckA/3QwRoiUBwQM7UNh13dNoIQ%2BMkog/t4yQmVUOizCCGw3DUVCgiSGIvBSPI%2BiqJouiGJEgdmKq1jSosA5LE47jwt41cIrUoTGI/cTJKZaSq00uSdL4nElLPMtBo0yctNnBSlIXPE/MtALzOpKz9xso97N83rTM1Nz3wpLz70csqVJci7X3fELTW2kkovwKgqGiRhVlA%2BDIKjNKIzgzL0tSmDQaYfKMOiIqiJKpzIyIliasa6jaJNWrhsHFi2OxjjLC41djN6gbrWW1N9VGqSqdzeT7rmxz3sE%2Bm820uc%2BI2vTZoE3bLss51rOZWzjzuvnzsvILU2uixvMVCXH38589p3UTQuV39MAAhQAE8WDYAhiDwZB/y%2Bn6zn%2BVjEsTZKoKh7LAad3KYbQuGsMRgc8KZlHKuqii6qxjrGsnJj8fazqrGJnqBTJ/iBKWmTRNp8b2cZvn5oetmZNWmbNoMu4WZuDgFloTgmV4PwOC0UhUE4L0ussQUlhWJ5Nh4UgCE0UuFhQkAmQ0fROEkKue7rzheAUEAh%2B7mvS9IOBYCQTBVHeCsSHISgGmABRlEMKohAQVAAHdq87tAWCSOgmBqfeQloI/T%2Br2vL%2Bv%2BgYl35gkgUY%2BCFIN%2BdBoihFYGsXggCP4AHkKxPzPuPVe7wbjEF3pPUgCDkB1HwNXXg/BBAiDEOwKQMhBCKBUOoeepBdBtAMEYFARMbC0DwBEaekAFioCSDUaeHAAC0RJDhclME3BkXA9jcIAOpiFoKIsRq9jZMF4KgN4xATbtngAsYgQFHBsAACrOloCwmMChW6rD0ESYI99D7HzgdwXgxtMBrE7ifYgTAkg9zLhXMeFD64cGwGvZAG9iB7FUPEWI3DYiSD2MAZAyA9gQGNkBFCWYICN2jjYPYuBCAkE6hsLgcxbFuIWAgc4WAYgxn7oPYeHBR6kBfgo1B09Z4FMqWYTxtdvH5PnpmUgSi0jOEkEAA%3D%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Gestion de tas}
+	\begin{block}{Tas}
+		\begin{itemize}
+			\item Structure permettant la récupération de l'élément de plus grande valeur
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::make_heap()| forme un tas depuis un ensemble
+		\item \mintinline{cpp}|std::pop_heap()| déplace l'élément de plus haute valeur en fin d'ensemble
+		\item \mintinline{cpp}|std::push_heap()| ajoute l'élément en fin d'ensemble au tas
+	\end{itemize}
+
+	\begin{block}{Structure}
+		\begin{itemize}
+			\item \mintinline{cpp}|std::pop_heap()| et \mintinline{cpp}|std::push_heap()| maintiennent la structure de tas
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::sort_heap()| tri le tas
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B10,20,30,5,15%7D%3B%0A%0A++std::make_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::pop_heap(foo.begin(),+foo.end())%3B%0A++foo.pop_back()%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.push_back(99)%3B%0A++std::push_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::sort_heap(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Min-max}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::min()| détermine le minimum de deux éléments
+		\item \mintinline{cpp}|std::max()| détermine le maximum de deux éléments
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		min(52, 6);  // 6
+		max(52, 6);  // 52
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::min_element()| détermine le plus petit élément d'un ensemble
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{18, 5, 6, 8};
+
+		min_element(foo.begin(), foo.end()); // Sur 5
+	\end{minted}
+
+	\begin{itemize}
+		\item \mintinline{cpp}|std::max_element()| détermine le plus grand élément d'un ensemble
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A%0A++std::cout+%3C%3C+*std::min_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+*std::max_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Numérique}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::accumulate()| \og ajoute\fg{} tous les éléments de l'ensemble
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{18, 5, 6, 8};
+
+		accumulate(foo.begin(), foo.end(), 1, multiplies<int>()); // 4320
+	\end{minted}
+
+	\begin{itemize}
+		\item Opérateur et valeur initiale configurables
+		\item \textit{Reduce}/\textit{fold} fonctionnel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Numérique}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::adjacent_difference()| \og différence\fg{} entre chaque élément et son prédécesseur
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{18, 5, 6, 8};
+		vector<int> bar;
+
+		adjacent_difference(foo.begin(), foo.end(),
+		                    back_inserter(bar), minus<int>());  // 18 -13 1 2
+	\end{minted}
+
+	\begin{itemize}
+		\item Opérateur configurable
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Numérique}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::inner_product()| : \og produit scalaire\fg{} de deux ensembles
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{1, 2, 3, 4};
+		vector<int> bar{2, 3, 4, 5};
+
+		inner_product(foo.begin(), foo.end(), bar.begin(), 0); // 40
+	\end{minted}
+
+	\begin{itemize}
+		\item Opérateurs et valeur configurables
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Numérique}
+	\begin{itemize}
+		\item \mintinline{cpp}|std::partial_sum()| : \og somme\fg{} partielle d'un ensemble
+		\item Chaque élément résultant est la somme des éléments d'indice inférieur ou égal de l'ensemble de départ
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{1, 2, 3, 4};
+		vector<int> bar;
+
+		partial_sum(foo.begin(), foo.end(), back_inserter(bar)); // 1 3 6 10
+	\end{minted}
+
+	\begin{itemize}
+		\item Opérateur configurable
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAArAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcDB80Twpg2V1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRYuIk9rFSHsAGys%2BIYgAihyxNwJeyJJLQXnhwOBQoIxJATGQyB8XgMBEw1FQqAAdFFgMiFjT1RrXCjWW0pTKWErHElaHhMApKYJLii5s83JKwOtYiCPXz8bjeTDsbj%2BYLhaT3kQKUcqVD9XTMYzWSz2Zyeb6g4TpSSyZGHQRqREGum7hmzSSmOhtHLGAQAPr4KhUaKMVZqzXa3Ws2mGhjoY17QvIADWteCSka0QgheIerDLGCXnt0cdUOdxcF/GIEDSAC9MLX4Xhnty9ho%2BXsj5Lpxrd6rURsLAdLNY8KjS/S/aGsygluKjlei1iCw8BMWITwlI49g9KD1gfT9/XgsNRT/N1IJ9L0GB9OCgzTQMBWDRDvxzT5l3zWNaXpU0zFZDZWUkNNsPwzMZWIqNjhXbAByLTFqL2Wi9mkZkGP5QiZWQ11JTDYIQmIWskmIDAvAcNstUwHUGH7bsjT1a8Ow0vUNBdCC3Bg0DvVgkMELwnEP1LMNWLzakKITVleP4%2Bj0V5RivxYiMSPYsjOOnYtRJJJJujwMRawUHwVL0zSDW01lBxHMdohVLdpzme9LJxTdtzwPcDwvY9T3PS9IOvW8UXPawXzfJiCNLZiRV/CTKsA4DQPA/80I4UzvIJXDGqQtrjNMjCsMs4a0V%2BPAqDKoMAHolr2AAxOVI1tWh6D9WyRqIvy2JjTjnIZVyaLo4TQvDclHNjYLGJu8LGki2hoti7t4r1LTe37FLRwYccMqnBpZ2/C1aCtG07Xu7A10GvKSAKorD1Ks8HxKgDiBvQq71q59LFfeD9sFFqfzFdqTOCoCQLAqmYIG3KrIOsSxt6kz0PM9cWc2Vx5rRTzvg4BZaE4WJeD8DgtFIVBODdQnHwUJYVieTYeFIAhNBFhYhziDR9E4SRJe12XOF4BQQANrXpZF0g4FgJBMFUd4xRIchKAaYAFGUQwqiEBBUAAdyljW0BYJI6CYGpfZCWgA%2BDqWZfDyP6Bib3mCSBRA4IUgU7oaJQlYNZeHztOAHkxQTkPTed94bmIb3zdIOvkDqfApd4fhBBEMR2CkGRBEUFR1Ft0hdDaAwjBQOrLH0PAIktyAFlQJIaktjgAFoiUOblTEVrguD2TeAHUxFoY%2BT%2BdghiCYXhUDeYhiDwLAl%2BNYgvEEPA2AAFXVWg34LGVssVYegiTBFjv7QONduC8BvpgNYGsg63ySNrUW4sTZjzlhwbALsFSRj2KoeIbJN5skkHsYA8o9gQBvp/IcLoIAKysHPPYuBCAkCfBsLgcw4FoIWAgc4WAYjGj1rEA2YsODG1IEne%2BzdLbWz4YbDgZhMEy2wbw222VSCPzSM4SQQA%3D%3D%3D}
+	\end{codesample}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Au delà des conteneurs}
+	\begin{itemize}
+		\item Itérateurs définissables hors des conteneurs
+		\begin{itemize}
+			\item Abstraction du parcours
+			\item Sémantique de pointeurs
+		\end{itemize}
+		\item Algorithmes indépendants du conteneur
+		\item Utilisables sur d'autres ensembles de données
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Au delà des conteneurs}
+	\begin{itemize}
+		\item Tableaux C
+		\begin{itemize}
+			\item Pas un conteneur
+
+\note[item]{Il contient mais est très différent des conteneurs classiques : frustre, minimaliste, rudimentaire, pas de réelle sémantique, peu d'intelligence}
+
+			\begin{itemize}
+				\item Sémantique : Tableau ou pointeur ? Statique ou dynamique ?
+				\item Service : Taille ? Copie ?
+			\end{itemize}
+			\item Simple pointeur comme itérateur
+			\begin{itemize}
+				\item Début : adresse du premier élément
+				\item Fin : adresse suivant le dernier élément
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		int foo[4];
+
+		fill(foo, foo + 4, 5);  // 5 5 5 5
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Algorithmes -- Au delà des conteneurs}
+	\begin{itemize}
+		\item Flux
+		\begin{itemize}
+			\item \mintinline{cpp}|istream_iterator| : \textit{input} itérateur
+			\begin{itemize}
+				\item Début : depuis un flux entrant
+				\item Fin : constructeur par défaut
+			\end{itemize}
+			\item \mintinline{cpp}|ostream_iterator| : \textit{output} itérateur
+			\begin{itemize}
+				\item Depuis un flux sortant, séparateur configurable
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+
+	\begin{minted}{cpp}
+		vector<int> foo{5, 6, 12, 89};
+		ostream_iterator<int> out_it (cout, ", ");
+
+		copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
+	\end{minted}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Séparateur ajouté après chaque élément, y compris le dernier
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{itemize}
+		\item Buffers de flux : \mintinline{cpp}|istreambuf_iterator| et \mintinline{cpp}|ostreambuf_iterator|
+	\end{itemize}
+
+	\begin{codesample}
+		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+	\end{codesample}
+\end{frame}
+
+\subsection*{STL -- Conclusion}
+\begin{frame}[fragile]
+	\frametitle{STL Conclusion}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Préférez les conteneurs aux tableaux C
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item \mintinline{cpp}|operator[]| ne vérifie pas les bornes
+		\end{itemize}
+
+\note[item]{Une implémentation peut mettre une assertion dessus et produire une erreur à l'exécution en debug, p.ex. sur les TU, et une implémentation de qualité devrait le faire}
+	\end{alertblock}
+
+	\begin{alertblock}{Don't}
+		\begin{itemize}
+			\item N'utilisez pas d'itérateur invalidé
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{alertblock}{Attention}
+		\begin{itemize}
+			\item Pas objets polymorphiques dans les conteneurs
+			\item Ou via des pointeurs intelligents
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conclusion}
+	\begin{exampleblock}{Do, performances}
+		\begin{itemize}
+			\item Mesurez !
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{block}{Conseils, performances}
+		\begin{itemize}
+			\item Réfléchissez à votre utilisation des données
+
+\note[item]{Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, \ldots{}}
+
+			\item Méfiez-vous des complexités brutes
+
+\note[item]{La complexité n'est pas ou peu significative pour de petits volumes de données, p.ex. les tris par insertion ou sélection (O($n^{2}$)) plus efficaces que des tris en O($n\ln n$)}
+\note[item]{Les complexités moyennes ne sont pas pertinentes pour des données particuliers, p.ex. tri par insertion efficace sur ensembles presque triés, peu de permutation du tri par sélection donc efficace pour des données lourdes à déplacer}
+		\end{itemize}
+	\end{block}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Préférez les algorithmes standards aux algorithmes tierces et maisons
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{block}{Bémol, performances}
+		\begin{itemize}
+			\item Algorithmes standards généralement très bons
+			\item Mais pas forcément optimaux dans une situation particulière
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conclusion}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Faites vos propres algorithmes plutôt que des boucles
+			\item Faites des algorithmes génériques et compatibles
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do, sémantique}
+		\begin{itemize}
+			\item Le bon algorithme pour la bonne opération
+			\item Définissez la sémantique de vos algorithmes et choisissez un nom explicite
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Préférez les prédicats purs
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{STL Conclusion}
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Vérifiez que les ensembles de destination aient une taille suffisante
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Do}
+		\begin{itemize}
+			\item Vérifiez les pré-conditions des algorithmes (p.ex. ensemble trié)
+			\item Vérifiez le type d'itérateur requis
+			\item Vérifiez les complexités garanties
+		\end{itemize}
+	\end{exampleblock}
+
+	\begin{block}{Aller plus loin}
+		\begin{itemize}
+			\item Voir \href{https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL\%20Algorithms/STL\%20Algorithms\%20-\%20Marshall\%20Clow\%20-\%20CppCon\%202016.pdf}{STL Algorithms\linklogo (Marshall Clow)}
+		\end{itemize}
+	\end{block}
+\end{frame}
+\end{document}
+*/

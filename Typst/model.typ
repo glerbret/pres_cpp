@@ -5,12 +5,19 @@
 
 // Définition de blocs d'affichage (note, avertissement et consieil)
 #let _block(title, content, color) = {
-  set block(width: 100%, inset: 5pt)
+  set block(width: 100%, inset: (x: 0pt, y: 5pt))
+
+  show list: set list(marker: (
+    text(1.5em, baseline: -0.1em, fill: color)[•],
+    text(1.5em, baseline: -0.1em, fill: color)[‣],
+    text(1.5em, baseline: -0.1em, fill: color)[-],
+  ), spacing: 0.65em)
+
   stack(
-    block(fill: color, stroke: color, outset: (x: 0.5em), radius: (top: 0.4em, bottom: 0cm), text(white)[#strong(
+    block(fill: color, stroke: color, outset: (x: 1.2em), radius: (top: 0.4em, bottom: 0cm), text(white)[#strong(
       title,
     )]),
-    block(fill: color.lighten(80%), stroke: color, outset: (x: 0.5em), radius: (top: 0cm, bottom: 0.4em), content),
+    block(fill: color.lighten(80%), stroke: color, outset: (x: 1.2em), radius: (top: 0cm, bottom: 0.4em), content),
   )
 }
 
@@ -26,12 +33,17 @@
   _block(title, content, rgb("#009900"))
 }
 
+// Logo "lien"
+#let linklogo() = {
+  super[#text(main_color, size: 0.5em)[#fa-external-link()]]
+}
+
 // Exemple de code en ligne
 #let codecounter = counter("code_counter")
 #let codesample(codelink) = {
   context place(
     bottom + right,
-    dx: 15pt - 15pt * codecounter.get().first(),
+    dx: 1.5em - 1.4em * codecounter.get().first(),
     link(codelink)[#text(main_color)[#fa-icon("circle-play", solid: true)]],
   )
   context codecounter.step()
@@ -46,17 +58,17 @@
 
   context place(
     bottom + left,
-    dx: -15pt + 50pt * proposalcounter.get().first(),
+    dx: -1.3em + 4.5em * proposalcounter.get().first(),
     link(url)[
       #box(fill: white, stroke: main_color, radius: 1em, inset: (
         left: 0.3em,
         right: -0.1em,
-        top: -2.8pt,
-        bottom: 2pt,
+        top: -0.25em,
+        bottom: 0.18em,
       ))[#text(main_color, weight: "bold", top-edge: "baseline", bottom-edge: "baseline", size: 0.9em)[#ref] #text(
           main_color,
           size: 1em,
-          baseline: 1pt,
+          baseline: 0.1em,
         )[#fa-icon("circle-play", solid: true)]]],
   )
   context proposalcounter.step()
@@ -148,7 +160,6 @@
     // FOOTER ----------------------------------------------------
     footer: [
       #if footer == true {
-        set align(right + horizon)
         set text(0.7em, fill: bg-color)
         columns(3, gutter: 0cm)[
           // Left side of the Footer
@@ -165,6 +176,8 @@
           // Center of the Footer
           #block(
             width: 100%,
+            outset: (right: 0.5 * space,bottom: 0cm),
+            inset: (right: -0.5 * space),
             height: 0.3 * space,
             fill: title-color.darken(25%),
           )[
@@ -177,11 +190,12 @@
           // Right Side of the Footer
           #block(
             width: 100%,
-            outset: (right: 0.5 * space, bottom: 0cm),
+            outset: (right: 0.5 * space, left: -0.5 * space, bottom: 0cm),
             height: 0.3 * space,
             fill: title-color,
             inset: (right: -0.4 * space),
           )[
+            #set align(right + horizon)
             #context {
               let last = counter(page).final().first()
               let current = here().page()
@@ -223,12 +237,8 @@
 
   // ADDITIONAL STYLING --------------------------------------------------
   // Code
-  show raw.where(block: false): it => {
-    box(fill: title-color.lighten(80%), stroke: title-color, inset: 1pt, radius: 1pt, baseline: 1pt)[#text(it)]
-  }
-
   show raw.where(block: true): it => {
-    block(radius: 0.4em, fill: title-color.lighten(80%), stroke: title-color, width: 100%, inset: 1em, it)
+    block(radius: 0.4em, fill: title-color.lighten(80%), stroke: title-color, width: 100%, inset: (x: 0pt, y: 5pt), outset: (x: 1.2em), it)
   }
 
   // Bullet List
@@ -236,7 +246,7 @@
     text(1.5em, baseline: -0.1em, fill: title-color)[•],
     text(1.5em, baseline: -0.1em, fill: title-color)[‣],
     text(1.5em, baseline: -0.1em, fill: title-color)[-],
-  ))
+  ), spacing: 0.65em)
 
   // Enum
   let color_number(nrs) = text(fill: title-color)[*#nrs.*]
