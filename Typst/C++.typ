@@ -146,8 +146,9 @@ catch(logic_error& e) {
 
 == Erreurs -- Critiques des exceptions
 
-#list(marker: [ ], list("Mauvais support par les différents outils"))
-
+#list(marker: [ ], text[
+  - Mauvais support par les différents outils
+])
 
 #noteblock("À nuancer", text[
   - Correctement supportées par les compilateurs actuels
@@ -155,17 +156,17 @@ catch(logic_error& e) {
 ])
 
 #list(
-  marker: [ ],
-  list("Code plus complexe à analyser"),
+  marker: [ ], text[
+  - Code plus complexe à analyser
 
   //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreur
 
-  list("Difficiles à introduire dans une large base de code sans exception"),
+  - Difficiles à introduire dans une large base de code sans exception
 
   // Argument de la difficulté d'introduction à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)
 
-  list("Absence d'ABI normalisée"),
-)
+  - Absence d'ABI normalisée
+])
 
 //Le problème d'ABI est plus large que les seules exceptions
 
@@ -187,8 +188,8 @@ catch(logic_error& e) {
 ])
 
 #alertblock("Don't", text[
-- Évitez la garantie faible
-- Évitez absolument le _No exception safety_
+  - Évitez la garantie faible
+  - Évitez absolument le _No exception safety_
 ])
 
 == Erreurs -- Exception safety
@@ -249,694 +250,506 @@ assert(expression);
   - Inutilisable pour les erreurs d'exécution et le contrôle des entrées
 
 #noteblock("Objectifs", text[
-	- Traquer les erreurs de programmation et les violations de contrat interne
+  - Traquer les erreurs de programmation et les violations de contrat interne
+])
+
+== Erreurs -- Conclusion
+
+#adviceblock("Do", text[
+  - Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
+  - Réservez ```cpp assert``` aux erreurs de programmation et à la vérification des contrats internes
+])
+
+#adviceblock("Do", text[
+  - Préférez les exceptions aux codes retour (voir _C++ Coding Standards_, 72)
+])
+
+
+#alertblock("Don't", text[
+  - Jamais d'```cpp assert``` pour les erreurs d'exécution et le contrôle des entrées
+])
+
+== Ressources -- Gestion manuelle
+
+#alertblock(none, text[
+  - Comment gérer les erreurs ?
+])
+
+- Solution C : _Single Entry Single Exit_, bloc unique de libération
+
+```cpp
+char* memory = malloc(50);
+if(!memory) goto err;
+...
+err:
+free(memory);
+```
+#list(
+  marker: [ ], text[
+  - Laborieux
+  - Difficile à mettre en place en présence d'exceptions
+])
+
+== Ressources -- Gestion manuelle
+
+#noteblock("Quiz : Comment éviter les fuites mémoires ?", ```cpp
+char* memory1 = NULL;
+char* memory2 = NULL;
+...
+memory1 = new char[50];
+...
+memory2 = new char[200];
+...
+delete[] memory1;
+delete[] memory2;
+```)
+
+== Ressources -- Gestion manuelle
+
+#alertblock(none, text[
+  - Comment copier des classes possédant des ressources ?
+])
+
+- Constructeurs et opérateurs générés copient les adresses des pointeurs
+- Une double libération est une erreur
+
+```cpp
+struct Foo {
+public:
+  Foo() : bar(new char[50]) {}
+  ~Foo() { delete[] bar; }
+
+private:
+  char* bar;
+};
+```
+
+== Ressources -- Bonnes pratiques
+
+#adviceblock("Do", text[
+  - Si une classe manipule une ressource brute, elle doit
+    - Soit définir constructeur de copie et opérateur d'affectation
+    - Soit les déclarer privés sans les définir (classe non copiable)
+])
+
+#adviceblock(text[_Big Rule of three_], text[
+  - Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
+])
+
+// Forme canonique orthodoxe de Coplien
+// Thèse de Coplien : Multi-paradigm Design
+
+
+== Ressources -- RAII
+
+// Resource Acquisition Is Initialization
+
+- Acquisition des ressources lors de l'initialisation de l'objet
+- Libération automatique lors de sa destruction
+
+// Proche du try with resources de Java ou du with de Python
+
+- Propriété intrinsèque des objets par design
+
+// Contrairement à Java ou Python où c'est une propriété de l'usage
+
+- Fonctionnement de la bibliothèque standard (conteneurs, fichiers, ...)
+- Conséquences
+  - Objets créés dans un état cohérent, testable et utilisable
+  - Ressources automatiquement libérées à la destruction de l'objet
+
+  // Et de façon déterministe
+
+  - Capsules RAII copiables sans effort
+
+#adviceblock("Do", text[
+  - Utilisez RAII pour vos objets
+])
+
+== Ressources -- RAII
+
+#adviceblock("Do", text[
+  - Faites des constructeurs qui construisent des objets
+    - Cohérents
+    - Utilisables
+    - Complètement initialisés
+])
+
+#alertblock("Don't", text[
+  - Évitez les couples constructeur vide et fonction d'initialisation
+  - Évitez les couples constructeur vide et ensemble de mutateurs
+])
+
+== Ressources -- Limites du RAII
+
+#alertblock("Gestion des erreurs", text[
+  - Pas d'erreur ni d'exception dans les destructeurs
+  - La libération peut échouer (p.ex. ```cpp flush()``` lors de la fermeture de fichier)
+])
+
+```cpp
+{
+  ifstream src("input.txt");
+  ofstream dst("output.txt");
+  copy_files(src, dst);
+}
+
+remove_file(src);  // Potentielle perte de donnees
+```
+
+//Problème résolu en forçant l'écriture (flush) en fin de la fonction copy_files() et en remontant une exception en cas d'erreur
+
+== Ressources -- Limites du RAII
+
+#alertblock(```cpp std::auto_ptr```, text[
+  - Copiable
+  - La copie transfère la responsabilité de la ressource
+])
+
+```cpp
+void foo(auto_ptr<int> bar) {}
+
+auto_ptr<int> bar(new int(5));
+foo(bar);
+cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
+```
+
+== Ressources -- Loi de Déméter
+
+// À strictement parler, gestion de l'accès aux ressources pas de la libération
+
+- Principe de connaissance minimale
+- Un objet ```cpp A``` peut utiliser les services d'un deuxième objet ```cpp B```
+- ... mais ne doit pas utiliser ```cpp B``` pour accéder à un troisième objet
+- En particulier, une classe n'expose pas ses données
+
+#noteblock("Exceptions", text[
+  - Agrégats et conteneurs dont le rôle est de contenir des données
+])
+
+// Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'aggregate du standard}
+// Certains utilisent aussi le terme d'agglomérat, ce qui évite la confusion
+
+#noteblock("Objectifs", text[
+  - Mise en place du RAII
+  - Meilleure encapsulation
+  - Respect des _patterns_ SOLID et GRASP
+  - Meilleure lisibilité, maintenabilité et ré-utilisabilité
+])
+
+// Notamment le principe ouvert-fermé, l'inversion de dépendance et le couplage faible
+// GRASP : General Responsibility Assignment Software Patterns (ou Principles)
+// SOLID : SRP, OCP, LSP, ISP, DIP
+// SRP : principe de responsabilité unique
+// OCP : principe ouvert/fermé
+// LSP : Principe de substitution de Liskov
+// ISP : Principe de ségrégation des interfaces
+// DIP : Principe d'inversion des dépendances
+
+== Ressources -- Loi de Déméter
+
+#adviceblock("Do, agrégats", text[
+  - Préférez les structures aux classes
+  - Laissez les membres publics
+  - Fournissez, éventuellement, des constructeurs initialisant les données
+])
+
+#adviceblock("Do, conteneurs", text[
+  - Respectez l'interface et la logique des conteneurs standards
+])
+
+#adviceblock("Do, classes de service", text[
+  - Exposez des services, pas des données
+  - Pas de données publiques
+  - Limitez les accesseurs et les mutateurs
+])
+
+== Ressources -- Loi de Déméter
+
+#noteblock("Conseils", text[
+  - N'hésitez pas à étendre l'interface de classe avec des fonctions libres
+  - Pensez à l'amitié pour cette interface étendue
+  - Implémentez-la en terme de fonctions membres (p.ex. ```cpp +``` à partir de ```cpp+=```)
+])
+
+```cpp
+class Foo {
+public:
+  Foo& operator+=(const Foo& other);
+};
+
+Foo operator+(Foo lhs, const Foo& rhs) {
+  return lhs += rhs;
+}
+```
+
+== Ressources -- Et le Garbage Collector ?
+
+- Pas de GC dans le langage ni dans la bibliothèque standard
+- Au moins un GC en bibliothèque tierce (#link("http://www.hboehm.info/gc/")[Hans Boehm #linklogo()])
+- ... mais limité par manque de support par le langage
+- Non déterministe : adapté à la mémoire pas aux autres ressources
+- Particulièrement adapté à la gestion des structures cycliques
+- D'autres avantages pour la mémoire (compactage, recyclage, ...)
+
+// Mais ces fonctionnalités évoluées des GC ne sont probablement pas compatibles avec le fonctionnement du C++
+
+#noteblock("Wait and see", text[
+  - Un complément à RAII, pas un concurrent ni un remplaçant
+  - Indisponible à ce jour
+])
+
+== Ressources -- Conclusion
+
+#adviceblock("Do, RAII", text[
+  - Préférez les classes RAII de la bibliothèque standard aux ressources brutes
+  - Encapsulez les ressources dans des capsules RAII standards
+  - Concevez vos classes en respectant le RAII
+])
+
+#adviceblock("Do, Déméter", text[
+  - Respectez Déméter
+])
+
+== Ressources -- Conclusion
+
+#alertblock("Don't", text[
+  - Pas de ```cpp delete``` dans le code applicatif
+])
+
+#alertblock("Attention", text[
+  - Sous Linux, méfiez-vous de l'_Optimistic Memory Allocator_
+
+  // Retourne une adresse lors d'un new ou d'un malloc() sans allocation et avec peu de contrôle
+  // Allocation uniquement lors de l'usage de la mémoire
+  // Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais init
+  // Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement
+
+  - Pensez à paramétrer correctement l'OS
+])
+
+== STL -- Standard Template Library
+- Partie de la bibliothèque standard comprenant
+  - Conteneurs et ```cpp std::basic_string```
+  - Itérateurs
+  - Algorithmes manipulation les données des conteneurs via les itérateurs
+
+#noteblock("Note", text[
+  - Quelques algorithmes manipulant directement des données (p.ex. ```cpp std::min()```)
+])
+
+- Conçue initialement par Alexander Stepanov
+  - Promoteur de la programmation générique
+
+  // Programmation générique : template en C++, generic en Java
+  // Programmation générique = polymorphisme paramétrique
+
+  - Sceptique vis à vis de la POO
+
+// Pour Stepanov : POO = hoax (canular)
+// Stepanov ne s'oppose pas à l'abstraction et à encapsulation mais à la façon dont la POO prétend y répondre
+
+- Basée sur les templates, pas sur la POO
+
+== STL -- Standard Template Library
+
+#noteblock("Intérêts", text[
+  - $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
+  - Tout nouvel algorithme est disponible sur tous les conteneurs compatibles
+  - Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
+  - Changement de conteneur à effort réduit
+])
+
+#noteblock("Pour aller plus loin", text[
+  - Voir _Effective STL_ de Scott Meyers
+])
+
+== STL -- Standard Template Library
+
+#noteblock("À nuancer", text[
+  - Algorithmes membres sur certains conteneurs
+    - Accès par itérateurs insuffisant (p.ex. ```cpp std::list```)
+    - Habitudes et historiques (p.ex. ```cpp std::string```)
+    - Performances (p.ex. ```cpp map.find()```)
+])
+
+== STL Conteneurs -- Généralités
+
+- Contiennent des objets copiables et non constants
+- ... qui peuvent être les adresses d'autres objets
+
+#alertblock("Conteneurs de pointeurs", text[
+  - Pas de libération automatique des objets pointés
+])
+
+- ... accessibles via un itérateur
+- Fourniture possible d'une politique d'allocation
+- Vu des algorithmes, ce qui fournit une paire d'itérateurs, est un conteneur
+
+== STL Conteneurs -- Conteneurs séquentiels
+- ```cpp std::vector```
+  - Tableau de taille variable d'éléments contigus
+  - Accès indexé
+  - Croissance en temps amorti
+  - Modifications en fin de vecteur (coûteux ailleurs)
+  - Compatible avec l'organisation mémoire des tableaux C
+
+#alertblock(text[```cpp std::vector<bool>``` n'est pas un vecteur de booléen], text[
+  - Ne remplit pas tous les pré-requis des conteneurs
+  - ```cpp operator[]``` ne retourne pas le booléen mais un _proxy_ vers celui-ci
+  - Voir _Effective STL_ item 18
+])
+
+== STL Conteneurs -- Conteneurs séquentiels
+
+- ```cpp std::list```
+  - Liste doublement chaînée
+  - Accès bidirectionnel non indexé
+  - Modification n'importe où à faible coût
+  - Plusieurs algorithmes membres (tri, fusion, suppression, ...)
+
+- ```cpp std::deque```
+  - _Double-ended queue_
+  - Proche de ```cpp std::vector``` mais extensible aux deux extrémités
+  - Accès indexé
+  - Éléments non nécessairement contigus
+  - Non compatible avec l'organisation mémoire des tableaux C
+
+== STL Conteneurs -- Conteneurs séquentiels
+- ```cpp std::string```
+  - Alias de ```cpp std::basic_string<char>```
+  - Stockage de chaînes de caractères
+  - Manipulation de _bytes_ et non de caractères encodés
+
+#alertblock(text[```cpp std::string``` et UTF-8], text[
+  - ```cpp length()``` et ```cpp size()``` retournent le nombre de _bytes_, pas de caractères
+])
+
+#list(
+  marker: [ ],
+  text[
+     - Contiguïté non garantie, mais respectée en pratique
+
+    // Contiguïté garantie en C++11 et suivant
+    // Pas d'implémentation non contigüe connue
+
+    - Variante ```cpp std::wstring``` pour les caractères larges
+])
+
+#alertblock("API trop riche", text[
+  - Voir #link("http://www.gotw.ca/gotw/084.htm")[GotW \#84 : Monoliths "Unstrung" #linklogo()]
+])
+
+== STL Conteneurs -- Conteneurs associatifs
+
+- Quatre saveurs
+  - ```cpp std::map``` -- clés-valeurs, ordonné par la clé, unicité des clés
+  - ```cpp std::multimap``` -- clés-valeurs, ordonné par la clé, multiplicité des clés
+  - ```cpp std::set``` -- valeurs ordonnées et uniques
+  - ```cpp std::multiset``` -- valeurs ordonnées et non-uniques
+
+#noteblock("Implémentation", text[
+  - Pas des tables de hachage
+  - Généralement des arbres binaires de recherche balancés
+// red-black tree le plus souvent
+])
+
+- Critère d'ordre - #highlight[strict] - configurable (strictement inférieur par défaut)
+
+- Algorithmes membres (recherche) pour les performances
+
+== STL Conteneurs -- Adaptateurs
+- Basés sur un autre conteneur pour proposer une API simplifiée
+- Avantages et inconvénients du conteneur sous-jacent
+- ```cpp std::stack```
+  - Pile LIFO
+  - Basée sur ```cpp std::vector```, ```cpp std::list``` ou ```cpp std::deque```
+- ```cpp std::queue```
+  - File FIFO
+  - Basée sur ```cpp std::deque``` ou ```cpp std::list```
+- ```cpp std::priority_queue```
+  - File dont l'élément de tête est le plus grand
+  - Basée sur ```cpp std::vector``` ou ```cpp std::deque```
+  - Critère d'ordre configurable (strictement inférieur par défaut)
+
+== STL Conteneurs -- Adaptateurs
+
+```cpp
+stack<int, vector<int> > foo;
+for(int i=0; i<5; ++i) foo.push(i);
+
+// Affiche 4 3 2 1 0
+while(!foo.empty()) {
+  cout << ' ' << foo.top();
+  foo.pop();
+}
+```
+
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:4,endLineNumber:9,positionColumn:4,positionLineNumber:9,selectionStartColumn:4,selectionStartLineNumber:9,startColumn:4,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::stack%3Cint,+std::vector%3Cint%3E+%3E+foo%3B%0A++for(int+i%3D0%3B+i%3C5%3B+%2B%2Bi)%0A++%7B%0A++++foo.push(i)%3B%0A++%7D%0A%0A++while(!!foo.empty())%0A++%7B%0A++++std::cout+%3C%3C+!'+!'+%3C%3C+foo.top()%3B%0A++++foo.pop()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+
+== STL Conteneurs -- conteneurs non-STL
+
+- ```cpp std::bitset```
+  - Tableau de bits de taille fixe
+  - Conçu pour réduite l'empreinte mémoire
+  - Pas d'itérateur ni d'interface STL
+
+#noteblock(text[```cpp std::bitset``` vs. ```cpp std::vector<bool>```], text[
+  - Objectif de gain mémoire adressé par ```cpp std::bitset```, pourquoi ```cpp std::vector<bool>``` n'est-il pas un vrai conteneur de booléen ?
+])
+
+== STL Conteneurs -- conteneurs non-STL
+
+- Conteneurs non-standards
+  - Listes simplement chaînées
+  - Tables de hachage
+  - Tableaux de taille fixe
+  - Tampons circulaires
+  - Arbres et graphes
+  - Variantes de conteneurs STL
+
+// Variantes ciblant un autre compromis : listes en tableau, ropes, map à plat, ...
+
+== STL Conteneurs -- ```cpp std::pair```
+
+- Couple de deux valeurs
+- Pas un conteneur
+  - Type de retour de la recherche sur les \mintinline{cpp}|std::map| (couple clé-valeur)
+  - Candidat pour construire des vecteurs indexés par un non-numérique
+- ```cpp std::make_pair``` construit une paire
+
+== STL Conteneurs -- Choix du conteneur
+
+#adviceblock("Do, par défaut", text[
+  - ```cpp std::string``` pour les chaînes de caractères
+  - ```cpp std::vector```
+])
+
+#adviceblock("Do, performances", text[
+  - Mesurez avec des données réelles sur la configuration cible
+])
+
+#alertblock("Flux d'octets", text[
+  - Utilisez ```cpp std::vector<unsigned char>```
+  - Pas ```cpp std::vector<char>``` encore moins ```cpp std::string```
+])
+
+== STL Conteneurs -- Choix du conteneur
+
+#noteblock("Conseils", text[
+  - Voir _Effective STL_ item 1
+  - Voir #link("https://hackingcpp.com/cpp/design/which_std_sequence_container.png")[Which C++ Standard Sequence Container should I use? #linklogo()]
+  - Pensez à ```cpp reserve()```
+  - Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
+  - Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
 ])
 
 
 
+
+
+
 /*
-
-
-\begin{frame}[fragile]
-	\frametitle{Erreurs -- Conclusion}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
-			\item Réservez \mintinline{cpp}|assert| aux erreurs de programmation et à la vérification des contrats internes
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez les exceptions aux codes retour (voir \textit{C++ Coding Standards} chap. 72)
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item Jamais d'\mintinline{cpp}|assert| pour les erreurs d'exécution et le contrôle des entrées
-		\end{itemize}
-	\end{alertblock}
-\end{frame}
-
-\subsection*{Gestion des ressources}
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Gestion manuelle}
-	\begin{alertblock}{}
-		Comment gérer les erreurs ?
-	\end{alertblock}
-
-	\begin{itemize}
-		\item Solution C : \textit{Single Entry Single Exit}, bloc unique de libération
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		char* memory = malloc(50);
-		if(!memory) goto err;
-		...
-		err:
-		free(memory);
-	\end{minted}
-
-	\begin{itemize}
-	\item []
-		\begin{itemize}
-			\item Laborieux
-			\item Difficile à mettre en place en présence d'exceptions
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Gestion manuelle}
-	\begin{block}{Quiz : Comment éviter les fuites mémoires ?}
-		\begin{minted}{cpp}
-			char* memory1 = NULL;
-			char* memory2 = NULL;
-			...
-			memory1 = new char[50];
-			...
-			memory2 = new char[200];
-			...
-			delete[] memory1;
-			delete[] memory2;
-		\end{minted}
-	\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Gestion manuelle}
-	\begin{alertblock}{}
-		Comment copier des classes possédant des ressources ?
-	\end{alertblock}
-
-	\begin{itemize}
-		\item Constructeurs et opérateurs générés copient les adresses des pointeurs
-		\item Une double libération est une erreur
-	\end{itemize}
-
-	\begin{minted}{cpp}
-		struct Foo {
-		public:
-		  Foo() : bar(new char[50]) {}
-		  ~Foo() { delete[] bar; }
-
-		private:
-		  char* bar;
-		};
-	\end{minted}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Gestion manuelle et bonnes pratiques}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Si une classe manipule une ressource brute, elle doit
-			\begin{itemize}
-				\item Soit définir constructeur de copie et opérateur d'affectation
-				\item Soit les déclarer privés sans les définir (classe non copiable)
-			\end{itemize}
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{\textit{Big Rule of three}}
-		\begin{itemize}
-			\item Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
-
-\note[item]{Forme canonique orthodoxe de Coplien}
-\note[item]{Thèse de Coplien : \textit{Multi-paradigm Design}}
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- RAII}
-
-\note[item]{\textit{Resource Acquisition Is Initialization}}
-
-	\begin{itemize}
-		\item Acquisition des ressources lors de l'initialisation de l'objet
-		\item Libération automatique lors de sa destruction
-
-\note[item]{Proche du \textit{try with resources} de Java ou du \textit{with} de Python}
-
-		\item Propriété intrinsèque des objets par design
-
-\note[item]{Contrairement à Java ou Python où c'est une propriété de l'usage}
-
-		\item Fonctionnement de la bibliothèque standard (conteneurs, fichiers, \ldots{})
-		\item Conséquences
-		\begin{itemize}
-			\item Objets créés dans un état cohérent, testable et utilisable
-			\item Ressources automatiquement libérées à la destruction de l'objet
-
-\note[item]{Et de façon déterministe}
-
-			\item Capsules RAII copiables sans effort
-		\end{itemize}
-	\end{itemize}
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez RAII pour vos objets
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- RAII}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Faites des constructeurs qui construisent des objets
-			\begin{itemize}
-				\item Cohérents
-				\item Utilisables
-				\item Complètement initialisés
-			\end{itemize}
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item Évitez les couples constructeur vide et fonction d'initialisation
-			\item Évitez les couples constructeur vide et ensemble de mutateurs
-		\end{itemize}
-	\end{alertblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Limites du RAII}
-	\begin{alertblock}{Gestion des erreurs}
-		\begin{itemize}
-			\item Pas d'erreur ni d'exception dans les destructeurs
-			\item La libération peut échouer (p.ex. \mintinline{cpp}|flush()| lors de la fermeture de fichier)
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{minted}{cpp}
-		{
-		  ifstream src("input.txt");
-		  ofstream dst("output.txt");
-		  copy_files(src, dst);
-		}
-
-		remove_file(src);  // Potentielle perte de donnees
-	\end{minted}
-
-\note[item]{Problème résolu en forçant l'écriture (\mintinline{cpp}|flush|) en fin de la fonction \mintinline{cpp}|copy_files()| et en remontant une exception en cas d'erreur}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Limites du RAII}
-	\begin{alertblock}{\mintinline[style=white]{cpp}|std::auto_ptr|}
-		\begin{itemize}
-			\item Copiable
-			\item La copie transfère la responsabilité de la ressource
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{minted}{cpp}
-		void foo(auto_ptr<int> bar) {}
-
-		auto_ptr<int> bar(new int(5));
-		foo(bar);
-		cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
-	\end{minted}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Loi de Déméter}
-
-\note[item]{À strictement parler, gestion de l'accès aux ressources pas de la libération}
-
-	\begin{itemize}
-		\item Principe de connaissance minimale
-		\item Un objet \mintinline{cpp}|A| peut utiliser les services d'un deuxième objet \mintinline{cpp}|B|
-		\item \ldots{} mais ne doit pas utiliser \mintinline{cpp}|B| pour accéder à un troisième objet
-		\item En particulier, une classe n'expose pas ses données
-	\end{itemize}
-
-	\begin{block}{Exceptions}
-		\begin{itemize}
-			\item Agrégats et conteneurs dont le rôle est de contenir des données
-		\end{itemize}
-
-\note[item]{Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'\textit{aggregate} du standard}
-\note[item]{Certains utilisent aussi le terme d'agglomérat, ce qui évite la confusion}
-	\end{block}
-
-	\begin{block}{Objectifs}
-		\begin{itemize}
-			\item Mise en place du RAII
-			\item Meilleure encapsulation
-			\item Respect des \textit{patterns} SOLID et GRASP
-
-\note[item]{Notamment le principe ouvert-fermé, l'inversion de dépendance et le couplage faible}
-\note[item]{GRASP : General Responsibility Assignment Software Patterns (ou Principles)}
-\note[item]{SOLID : SRP, OCP, LSP, ISP, DIP}
-\note[item]{SRP : principe de responsabilité unique}
-\note[item]{OCP : principe ouvert/fermé}
-\note[item]{LSP : Principe de substitution de Liskov}
-\note[item]{ISP : Principe de ségrégation des interfaces}
-\note[item]{DIP : Principe d'inversion des dépendances}
-
-			\item Meilleure lisibilité, maintenabilité et ré-utilisabilité
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Loi de Déméter}
-	\begin{exampleblock}{Do, agrégats}
-		\begin{itemize}
-			\item Préférez les structures aux classes
-			\item Laissez les membres publics
-			\item Fournissez, éventuellement, des constructeurs initialisant les données
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{Do, conteneurs}
-		\begin{itemize}
-			\item Respectez l'interface et la logique des conteneurs standards
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{Do, classes de service}
-		\begin{itemize}
-			\item Exposez des services, pas des données
-			\item Pas de données publiques
-			\item Limitez les accesseurs et les mutateurs
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Loi de Déméter}
-	\begin{block}{Conseil}
-		\begin{itemize}
-			\item N'hésitez pas à étendre l'interface de classe avec des fonctions libres
-			\item Pensez à l'amitié pour cette interface étendue
-			\item Implémentez-la en terme de fonctions membres (p.ex. \mintinline{cpp}|+| à partir de \mintinline{cpp}|+=|)
-		\end{itemize}
-	\end{block}
-
-	\begin{minted}{cpp}
-		class Foo {
-		public:
-		  Foo& operator+=(const Foo& other);
-		};
-
-		Foo operator+(Foo lhs, const Foo& rhs) {
-		  return lhs += rhs;
-		}
-	\end{minted}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Et le Garbage Collector ?}
-	\begin{itemize}
-		\item Pas de GC dans le langage ni dans la bibliothèque standard
-		\item Au moins un GC en bibliothèque tierce (\href{http://www.hboehm.info/gc/}{Hans Boehm\linklogo})
-		\item \ldots{} mais limité par manque de support par le langage
-		\item Non déterministe : adapté à la mémoire pas aux autres ressources
-		\item Particulièrement adapté à la gestion des structures cycliques
-		\item D'autres avantages pour la mémoire (compactage, recyclage, \ldots{})
-
-\note[item]{Mais ces fonctionnalités évoluées des GC ne sont probablement pas compatibles avec le fonctionnement du C++}
-	\end{itemize}
-
-	\begin{block}{Wait and see}
-		\begin{itemize}
-			\item Un complément à RAII, pas un concurrent ni un remplaçant
-			\item Indisponible à ce jour
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Conclusion}
-	\begin{exampleblock}{Do, RAII}
-		\begin{itemize}
-			\item Préférez les classes RAII de la bibliothèque standard aux ressources brutes
-			\item Encapsulez les ressources dans des capsules RAII standards
-			\item Concevez vos classes en respectant le RAII
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{Do, Déméter}
-		\begin{itemize}
-			\item Respectez Déméter
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Ressources -- Conclusion}
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item Pas de \mintinline{cpp}|delete| dans le code applicatif
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Sous Linux, méfiez-vous de l'\textit{Optimistic Memory Allocator}
-
-\note[item]{Retourne une adresse lors d'un \mintinline{cpp}|new| ou d'un \mintinline{cpp}|malloc()| sans allocation et avec peu de contrôle}
-\note[item]{Allocation uniquement lors de l'usage de la mémoire}
-\note[item]{Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais \mintinline{cpp}|init|}
-\note[item]{Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement}
-
-			\item Pensez à paramétrer correctement l'OS
-		\end{itemize}
-	\end{alertblock}
-\end{frame}
-
-\subsection*{STL}
-\begin{frame}[fragile]
-	\frametitle{STL -- Standard Template Library}
-	\begin{itemize}
-		\item Partie de la bibliothèque standard comprenant
-		\begin{itemize}
-			\item Conteneurs et \mintinline{cpp}|std::basic_string|
-			\item Itérateurs
-			\item Algorithmes manipulation les données des conteneurs via les itérateurs
-		\end{itemize}
-	\end{itemize}
-
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Quelques algorithmes manipulant directement des données (p.ex. \mintinline{cpp}|std::min()|)
-		\end{itemize}
-	\end{block}
-
-	\begin{itemize}
-		\item Conçue initialement par Alexander Stepanov
-		\begin{itemize}
-			\item Promoteur de la programmation générique
-
-\note[item]{Programmation générique : template en C++, \mintinline{java}|generic| en Java}
-\note[item]{Programmation générique = polymorphisme paramétrique}
-
-			\item Sceptique vis à vis de la POO
-
-\note[item]{Pour Stepanov : POO = hoax (canular)}
-\note[item]{Stepanov ne s'oppose pas à l'abstraction et à encapsulation mais à la façon dont la POO prétend y répondre}
-
-		\end{itemize}
-		\item Basée sur les templates, pas sur la POO
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL -- Standard Template Library}
-	\begin{block}{Intérêts}
-		\begin{itemize}
-			\item $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
-			\item Tout nouvel algorithme est disponible sur tous les conteneurs compatibles
-			\item Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
-			\item Changement de conteneur à effort réduit
-		\end{itemize}
-	\end{block}
-
-	\begin{block}{Pour aller plus loin}
-		\begin{itemize}
-			\item Voir \textit{Effective STL} de Scott Meyers
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL -- Standard Template Library}
-	\begin{block}{À nuancer}
-		\begin{itemize}
-			\item Algorithmes membres sur certains conteneurs
-			\begin{itemize}
-				\item Accès par itérateurs insuffisant (p.ex. \mintinline{cpp}|std::list|)
-				\item Habitudes et historiques (p.ex. \mintinline{cpp}|std::string|)
-				\item Performances (p.ex. \mintinline{cpp}|map.find()|)
-			\end{itemize}
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\subsection*{STL -- Conteneurs}
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Généralités}
-	\begin{itemize}
-		\item Contiennent des objets copiables et non constants
-		\item \ldots{} qui peuvent être les adresses d'autres objets
-	\end{itemize}
-
-	\begin{alertblock}{Conteneurs de pointeurs}
-		\begin{itemize}
-			\item Pas de libération automatique des objets pointés
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{itemize}
-		\item \ldots{} accessibles via un itérateur
-		\item Fourniture possible d'une politique d'allocation
-		\item Vu des algorithmes, ce qui fournit une paire d'itérateurs, est un conteneur
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
-	\begin{itemize}
-		\item \mintinline{cpp}|std::vector|
-		\begin{itemize}
-			\item Tableau de taille variable d'éléments contigus
-			\item Accès indexé
-			\item Croissance en temps amorti
-			\item Modifications en fin de vecteur (coûteux ailleurs)
-			\item Compatible avec l'organisation mémoire des tableaux C
-		\end{itemize}
-	\end{itemize}
-
-	\begin{alertblock}{\mintinline[style=white]{cpp}|std::vector<bool>| n'est pas un vecteur de booléen}
-		\begin{itemize}
-			\item Ne remplit pas tous les pré-requis des conteneurs
-			\item \mintinline{cpp}|operator[]| ne retourne pas le booléen mais un \textit{proxy} vers celui-ci
-			\item Voir \textit{Effective STL} item 18
-		\end{itemize}
-	\end{alertblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
-	\begin{itemize}
-		\item \mintinline{cpp}|std::list|
-		\begin{itemize}
-			\item Liste doublement chaînée
-			\item Accès bidirectionnel non indexé
-			\item Modification n'importe où à faible coût
-			\item Plusieurs algorithmes membres (tri, fusion, suppression, \ldots{})
-		\end{itemize}
-
-		\item \mintinline{cpp}|std::deque|
-		\begin{itemize}
-			\item \textit{Double-ended queue}
-			\item Proche de \mintinline{cpp}|std::vector| mais extensible aux deux extrémités
-			\item Accès indexé
-			\item Éléments non nécessairement contigus
-			\item Non compatible avec l'organisation mémoire des tableaux C
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Conteneurs séquentiels}
-	\begin{itemize}
-		\item \mintinline{cpp}|std::string|
-		\begin{itemize}
-			\item Alias de \mintinline{cpp}|std::basic_string<char>|
-			\item Stockage de chaînes de caractères
-			\item Manipulation de \textit{bytes} et non de caractères encodés
-		\end{itemize}
-	\end{itemize}
-
-	\begin{alertblock}{\mintinline[style=white]{cpp}|std::string| et UTF-8}
-		\begin{itemize}
-			\item \mintinline{cpp}|length()| et \mintinline{cpp}|size()| retournent le nombre de \textit{bytes}, pas de caractères
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Contiguïté non garantie, mais respectée en pratique
-
-\note[item]{Contiguïté garantie en C++11 et suivant}
-\note[item]{Pas d'implémentation non contigüe connue}
-
-			\item Variante \mintinline{cpp}|std::wstring| pour les caractères larges
-		\end{itemize}
-	\end{itemize}
-
-	\begin{alertblock}{API trop riche}
-		\begin{itemize}
-			\item De nombreuses fonctions membres qui gagneraient à être libres et génériques
-			\item Voir \href{http://www.gotw.ca/gotw/084.htm}{GotW \#84 : Monoliths "Unstrung"\linklogo}
-		\end{itemize}
-	\end{alertblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Conteneurs associatifs}
-	\begin{itemize}
-		\item Quatre saveurs
-		\begin{itemize}
-			\item \mintinline{cpp}|std::map| -- clés-valeurs, ordonné par la clé, unicité des clés
-			\item \mintinline{cpp}|std::multimap| -- clés-valeurs, ordonné par la clé, multiplicité des clés
-			\item \mintinline{cpp}|std::set| -- valeurs ordonnées et uniques
-			\item \mintinline{cpp}|std::multiset| -- valeurs ordonnées et non-uniques
-		\end{itemize}
-	\end{itemize}
-
-	\begin{block}{Implémentation}
-		\begin{itemize}
-			\item Pas des tables de hachage
-			\item Généralement des arbres binaires de recherche balancés
-		\end{itemize}
-
-\note[item]{\textit{red-black tree} le plus souvent}
-	\end{block}
-
-	\begin{itemize}
-		\item Critère d'ordre configurable (strictement inférieur par défaut)
-	\end{itemize}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Ordre strict
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{itemize}
-		\item Algorithmes membres (recherche) pour les performances
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Adaptateurs}
-	\begin{itemize}
-		\item Basés sur un autre conteneur pour proposer une API simplifiée
-		\item Avantages et inconvénients du conteneur sous-jacent
-		\item \mintinline{cpp}|std::stack|
-		\begin{itemize}
-			\item Pile LIFO
-			\item Basée sur \mintinline{cpp}|std::vector|, \mintinline{cpp}|std::list| ou \mintinline{cpp}|std::deque|
-		\end{itemize}
-		\item \mintinline{cpp}|std::queue|
-		\begin{itemize}
-			\item File FIFO
-			\item Basée sur \mintinline{cpp}|std::deque| ou \mintinline{cpp}|std::list|
-		\end{itemize}
-		\item \mintinline{cpp}|std::priority_queue|
-		\begin{itemize}
-			\item File dont l'élément de tête est le plus grand
-			\item Basée sur \mintinline{cpp}|std::vector| ou \mintinline{cpp}|std::deque|
-			\item Critère d'ordre configurable (strictement inférieur par défaut)
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Adaptateurs}
-	\begin{minted}{cpp}
-		stack<int, vector<int> > foo;
-		for(int i=0; i<5; ++i) foo.push(i);
-
-		// Affiche 4 3 2 1 0
-		while(!foo.empty()) {
-		  cout << ' ' << foo.top();
-		  foo.pop();
-		}
-	\end{minted}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:4,endLineNumber:9,positionColumn:4,positionLineNumber:9,selectionStartColumn:4,selectionStartLineNumber:9,startColumn:4,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::stack%3Cint,+std::vector%3Cint%3E+%3E+foo%3B%0A++for(int+i%3D0%3B+i%3C5%3B+%2B%2Bi)%0A++%7B%0A++++foo.push(i)%3B%0A++%7D%0A%0A++while(!!foo.empty())%0A++%7B%0A++++std::cout+%3C%3C+!'+!'+%3C%3C+foo.top()%3B%0A++++foo.pop()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- conteneurs non-STL}
-	\begin{itemize}
-		\item \mintinline{cpp}|std::bitset|
-		\begin{itemize}
-			\item Tableau de bits de taille fixe
-			\item Conçu pour réduite l'empreinte mémoire
-			\item Pas d'itérateur ni d'interface STL
-		\end{itemize}
-	\end{itemize}
-
-	\begin{block}{\mintinline[style=white]{cpp}|std::bitset| vs. \mintinline[style=white]{cpp}|std::vector<bool>|}
-		Objectif de gain mémoire adressé par \mintinline{cpp}|std::bitset|, pourquoi \mintinline{cpp}|std::vector<bool>| n'est-il pas un vrai conteneur de booléen ?
-	\end{block}
-
-	\begin{itemize}
-		\item Conteneurs non-standards
-		\begin{itemize}
-			\item Listes simplement chaînées
-			\item Tables de hachage
-			\item Tableaux de taille fixe
-			\item Tampons circulaires
-			\item Arbres et graphes
-			\item Variantes de conteneurs STL
-
-\note[item]{Variantes ciblant un autre compromis : listes en tableau, \textit{ropes}, \textit{map} \og à plat\fg{}, \ldots{}}
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- \mintinline[style=white]{cpp}|std::pair|}
-	\begin{itemize}
-		\item Couple de deux valeurs
-		\item Pas un conteneur
-		\begin{itemize}
-			\item Type de retour de la recherche sur les \mintinline{cpp}|std::map| (couple clé-valeur)
-			\item Candidat pour construire des vecteurs indexés par un non-numérique
-		\end{itemize}
-		\item \mintinline{cpp}|std::make_pair| construit une paire
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Choix du conteneur}
-	\begin{exampleblock}{Do, par défaut}
-		\begin{itemize}
-			\item \mintinline{cpp}|std::string| pour les chaînes de caractères
-			\item \mintinline{cpp}|std::vector|
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{Do, performances}
-		\begin{itemize}
-			\item Mesurez avec des données réelles sur la configuration cible
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{alertblock}{Flux d'octets}
-		\begin{itemize}
-			\item Utilisez \mintinline{cpp}|std::vector<unsigned char>|
-			\item Pas \mintinline{cpp}|std::vector<char>| encore moins \mintinline{cpp}|std::string|
-		\end{itemize}
-	\end{alertblock}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{STL Conteneurs -- Choix du conteneur}
-	\begin{block}{Conseils}
-		\begin{itemize}
-			\item Voir \textit{Effective STL} item 1
-			\item Voir \href{https://hackingcpp.com/cpp/design/which_std_sequence_container.png}{Which C++ Standard Sequence Container should I use?\linklogo}
-			\item Pensez à \mintinline{cpp}|reserve()|
-			\item Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
-			\item Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
-		\end{itemize}
-	\end{block}
-\end{frame}
 
 \subsection*{STL -- Itérateurs}
 \begin{frame}[fragile]
@@ -2142,3 +1955,12 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 \end{frame}
 \end{document}
 */
+
+
+= C++11
+
+= C++14
+
+= C++17
+
+= C++20

@@ -5,20 +5,27 @@
 
 // Définition de blocs d'affichage (note, avertissement et consieil)
 #let _block(title, content, color) = {
-  set block(width: 100%, inset: (x: 0pt, y: 5pt))
+  set block(width: 100%, inset: (x: 0pt, y: 3pt))
 
-  show list: set list(marker: (
-    text(1.5em, baseline: -0.1em, fill: color)[•],
-    text(1.5em, baseline: -0.1em, fill: color)[‣],
-    text(1.5em, baseline: -0.1em, fill: color)[-],
-  ), spacing: 0.65em)
-
-  stack(
-    block(fill: color, stroke: color, outset: (x: 1.2em), radius: (top: 0.4em, bottom: 0cm), text(white)[#strong(
-      title,
-    )]),
-    block(fill: color.lighten(80%), stroke: color, outset: (x: 1.2em), radius: (top: 0cm, bottom: 0.4em), content),
+  show list: set list(
+    marker: (
+      text(1.5em, baseline: -0.1em, fill: color)[•],
+      text(1.5em, baseline: -0.1em, fill: color)[‣],
+      text(1.5em, baseline: -0.1em, fill: color)[-],
+    ),
+    spacing: 0.65em,
   )
+
+  if (title != none) {
+    stack(
+      block(fill: color, stroke: color, outset: (x: 1.2em), radius: (top: 0.4em, bottom: 0cm), text(white)[#strong(
+        title,
+      )]),
+      block(fill: color.lighten(80%), stroke: color, outset: (x: 1.2em), radius: (top: 0cm, bottom: 0.4em), content),
+    )
+  } else {
+    block(fill: color.lighten(80%), stroke: color, outset: (x: 1.2em), radius: (top: 0.4em, bottom: 0.4em), content)
+  }
 }
 
 #let noteblock(title, content) = {
@@ -86,6 +93,7 @@
   toc: true,
 ) = {
   set text(lang: "fr")
+  set par(spacing: 0.8em)
 
   let height = 10.5cm
   let space = 1.6cm
@@ -176,7 +184,7 @@
           // Center of the Footer
           #block(
             width: 100%,
-            outset: (right: 0.5 * space,bottom: 0cm),
+            outset: (right: 0.5 * space, bottom: 0cm),
             inset: (right: -0.5 * space),
             height: 0.3 * space,
             fill: title-color.darken(25%),
@@ -234,19 +242,29 @@
 
   show heading: set text(1.1em, fill: title-color)
 
-
   // ADDITIONAL STYLING --------------------------------------------------
   // Code
   show raw.where(block: true): it => {
-    block(radius: 0.4em, fill: title-color.lighten(80%), stroke: title-color, width: 100%, inset: (x: 0pt, y: 5pt), outset: (x: 1.2em), it)
+    block(
+      radius: 0.4em,
+      fill: white,
+      stroke: title-color,
+      width: 100%,
+      inset: (x: 0pt, y: 5pt),
+      outset: (x: 1.2em),
+      it,
+    )
   }
 
   // Bullet List
-  show list: set list(marker: (
-    text(1.5em, baseline: -0.1em, fill: title-color)[•],
-    text(1.5em, baseline: -0.1em, fill: title-color)[‣],
-    text(1.5em, baseline: -0.1em, fill: title-color)[-],
-  ), spacing: 0.65em)
+  show list: set list(
+    marker: (
+      text(1.5em, baseline: -0.1em, fill: title-color)[•],
+      text(1.5em, baseline: -0.1em, fill: title-color)[‣],
+      text(1.5em, baseline: -0.1em, fill: title-color)[-],
+    ),
+    spacing: 0.65em,
+  )
 
   // Enum
   let color_number(nrs) = text(fill: title-color)[*#nrs.*]
@@ -333,7 +351,7 @@
       authors = (authors,)
     }
     set page(footer: none, header: none, margin: 0cm)
-    block(height: 2%)
+    block(height: 5%)
     align(center)[#block(
       inset: (x: 0.5 * space, y: 1em),
       radius: 10pt,
@@ -342,9 +360,10 @@
       height: 15%,
       align(center + horizon)[#text(2.0em, weight: "bold", fill: bg-color, title)],
     )]
+    block(height: 5%)
     block(
       width: 100%,
-      height: 70%,
+      height: 60%,
       inset: (x: 0.5 * space, top: 0cm, bottom: 1em),
       align(center + top, authors.join(", ", last: " & "))
         + if date != none { text(1em)[ \ ] }
