@@ -72,7 +72,7 @@
         right: -0.1em,
         top: -0.25em,
         bottom: 0.18em,
-      ))[#text(main_color, weight: "bold", top-edge: "baseline", bottom-edge: "baseline", size: 0.9em)[#ref] #text(
+      ))[#text(main_color, weight: "bold", top-edge: "baseline", bottom-edge: "baseline", size: 0.9em)[#upper(ref)] #text(
           main_color,
           size: 1em,
           baseline: 0.1em,
