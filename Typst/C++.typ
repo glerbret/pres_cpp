@@ -1,5 +1,6 @@
 #import "./model.typ": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
+#import "@preview/cetz:0.4.2"
 
 #show: slides.with(
   title: "C++",
@@ -833,7 +834,7 @@ while(!foo.empty()) {
   } else if y == 5 { (x: 1pt + black, bottom: 1pt + black) } else { (x: 1pt + black, bottom: 0.5pt + black) },
   table.header(
     table.cell(fill: main_color.lighten(60%), [*Conteneur*]),
-    table.cell(fill: main_color.lighten(60%), [*Catégorie*])
+    table.cell(fill: main_color.lighten(60%), [*Catégorie*]),
   ),
   [```cpp std::vector``` ], [ _Random access_],
   [```cpp std::deque``` ], [ _Random access_],
@@ -923,7 +924,7 @@ for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
 - ```cpp std::find()``` recherche une valeur
 - ... et retourne un itérateur sur celle-ci
 - .. ou l'itérateur de fin si la valeur n'est pas présente
-	\end{itemize}
+  \end{itemize}
 
 ```cpp
 vector<int> foo{4, 5, 9 ,12};
@@ -948,7 +949,9 @@ it2 = find(foo.begin(), foo.end(), 19);  // Et it2 sur foo.end()
 - ```cpp std::adjacent_find()``` recherche deux éléments consécutifs égaux
 - ```cpp std::search_n()``` recherche la première suite de $n$ éléments consécutifs égaux à une valeur
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 
 == STL Algorithmes -- Recherche dichotomique
@@ -984,7 +987,7 @@ vector<int> foo{4, 5, 7, 9, 12};
   - Pas de fonction de recherche dichotomique retournant l'élément cherché
 ])
 
-	```cpp
+```cpp
 vector<int>::iterator foo(vector<int> vec, int val) {
 vector<int>::iterator it = lower_bound(vec.begin(), vec.end(), val);
   if(it != vec.end() && *it == val) return it;
@@ -996,7 +999,9 @@ foo(bar, 12);  // vec.end
 foo(bar, 13);  // iterateur sur 13
 ```
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D",
+)
 
 == STL Algorithmes -- Comptage
 
@@ -1011,7 +1016,9 @@ count(foo.begin(), foo.end(), 2);  // 0
 
 - ```cpp std::count_if()``` compte le nombre d'éléments satisfaisant le prédicat
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Abool+compare(int+nb)%0A%7B%0A++return+nb+%3E%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+8)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+7)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::count_if(foo.begin(),+foo.end(),+compare)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Abool+compare(int+nb)%0A%7B%0A++return+nb+%3E%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+8)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+7)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::count_if(foo.begin(),+foo.end(),+compare)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Comparaison
 
@@ -1052,7 +1059,9 @@ mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12
 
 - ... ou l'itérateur de fin en cas d'égalité
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzLGkAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5rHByN5YANQmsW5OQ8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgs0%2BJgA7FZrjsdkN0CAQC83sRATDzjt%2BKg0RZWjsAKykHYADnpZjRABF9hibpi9ujPlisTi8QSiESDiTYtgdhF6pTqXTGcy2Ry%2BfzBShFrDAYDsQRcSAIqhPGJEggmI83Nq1ZgAI5eMTUQ0AOiiwER8zJTtcSPp0uIzswroYSNm5u1YDWNLcDHDyu5At1eLQXk1B0tCf1hoMtBNZq1Bx2DtQj3ZsVZUvqIbzbh2Mcj0bWsU5WKVUO5lJV8b1wveYsEpN9svpCR2ZnpqKVjY7Or1SZTFvzaoNRuzptDC/TNrttEL/sD3o9qEdXvdvt3bsrqfztajMcnceniY1a%2Bri8zxtXVYL5OL%2BzLvov87Vte9axlczaouyrZgTyTaqum3aiocfYSuWRLonK9JMiO9KSBOsGdo%2BybPg%2BGbLjmxFWra9rkmeQbujRx4%2BvUtHBsRwG3vhJGzhR6ZLlm5GfoWP6lqhAFhhGN4NrBLZctB7b3mqCHEshkoDuhQ7MmOeFTmqiQIohimvCKykEOceKENETAivShmEiZZkgBZxBWT2konAoxYkSweAKPCBDIAgO4um69IMQw6D7qewV0cid7QQR6pEZ%2BABUEDuY6NDEEMYlXhwNZ5SlaWYAojpKGg4U5UBEkgXF4GQTcEGfBw8y0JwNK8H4HBaKQqCcBaljWNiizLA86w8KQBCaM18wANYgDSGj6JwkgdVNPWcLwCggItk1dc1pBwLASCYKorzJiQ5CUPUwAKMohiVEICCoAA7p141oCwiR0FZ6R3SEtCPS9nXdR9X30DEN3MIkChPQQpCg3Q0ShKwqy8Aj4MAPLJoDr1rSdrxXMQN0baQ%2BPILU%2BCdbw/CCCIYjsFIMiCIoKjqHtpC6K0BhGCg1jWPoeARFtkDzKgiTVFtHAALQ4r%2BpgDZYXBcDsUsAOpiLQKuqydBDObwqAvMQxB4FgwvesQXiCHgbAACqZmb8wKMNKx6DiwR/Q9T249wvC65gqzjc9zmJFNLVtat7O9Rw2Cncg53EDsqgMgAbFLyeSDswDIMgBa65bM0hhA/VWJY9K4IQJB7N8XCzL7ofzAgpxYDE3pzQtS0cCtpDA/rJNbTt9cd2YEfdVHdd7bM8yG6kziSEAA")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzLGkAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5rHByN5YANQmsW5OQ8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgs0%2BJgA7FZrjsdkN0CAQC83sRATDzjt%2BKg0RZWjsAKykHYADnpZjRABF9hibpi9ujPlisTi8QSiESDiTYtgdhF6pTqXTGcy2Ry%2BfzBShFrDAYDsQRcSAIqhPGJEggmI83Nq1ZgAI5eMTUQ0AOiiwER8zJTtcSPp0uIzswroYSNm5u1YDWNLcDHDyu5At1eLQXk1B0tCf1hoMtBNZq1Bx2DtQj3ZsVZUvqIbzbh2Mcj0bWsU5WKVUO5lJV8b1wveYsEpN9svpCR2ZnpqKVjY7Or1SZTFvzaoNRuzptDC/TNrttEL/sD3o9qEdXvdvt3bsrqfztajMcnceniY1a%2Bri8zxtXVYL5OL%2BzLvov87Vte9axlczaouyrZgTyTaqum3aiocfYSuWRLonK9JMiO9KSBOsGdo%2BybPg%2BGbLjmxFWra9rkmeQbujRx4%2BvUtHBsRwG3vhJGzhR6ZLlm5GfoWP6lqhAFhhGN4NrBLZctB7b3mqCHEshkoDuhQ7MmOeFTmqiQIohimvCKykEOceKENETAivShmEiZZkgBZxBWT2konAoxYkSweAKPCBDIAgO4um69IMQw6D7qewV0cid7QQR6pEZ%2BABUEDuY6NDEEMYlXhwNZ5SlaWYAojpKGg4U5UBEkgXF4GQTcEGfBw8y0JwNK8H4HBaKQqCcBaljWNiizLA86w8KQBCaM18wANYgDSGj6JwkgdVNPWcLwCggItk1dc1pBwLASCYKorzJiQ5CUPUwAKMohiVEICCoAA7p141oCwiR0FZ6R3SEtCPS9nXdR9X30DEN3MIkChPQQpCg3Q0ShKwqy8Aj4MAPLJoDr1rSdrxXMQN0baQ%2BPILU%2BCdbw/CCCIYjsFIMiCIoKjqHtpC6K0BhGCg1jWPoeARFtkDzKgiTVFtHAALQ4r%2BpgDZYXBcDsUsAOpiLQKuqydBDObwqAvMQxB4FgwvesQXiCHgbAACqZmb8wKMNKx6DiwR/Q9T249wvC65gqzjc9zmJFNLVtat7O9Rw2Cncg53EDsqgMgAbFLyeSDswDIMgBa65bM0hhA/VWJY9K4IQJB7N8XCzL7ofzAgpxYDE3pzQtS0cCtpDA/rJNbTt9cd2YEfdVHdd7bM8yG6kziSEAA",
+)
 
 == STL Algorithmes -- Remplissage
 
@@ -1069,9 +1078,9 @@ fill(foo.begin(), foo.end(), 12);  // 12 12 12 12
 #noteblock("Constructeur", text[
   - Remplissage des conteneurs séquentiels à la construction
 
-```cpp
-vector<int> foo(4, 12);
-```
+  ```cpp
+  vector<int> foo(4, 12);
+  ```
 ])
 
 == STL Algorithmes -- Remplissage
@@ -1091,7 +1100,9 @@ generate(foo.begin(), foo.end(), gen);  // 5 10 15 20
 
 - ```cpp std::generate_n()``` idem avec un ensemble défini par sa taille
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu2AjAgcy%2BJgA7FYbrtdrC8PDEQingARXYaA44654vD7SwHckAVipXzxpwIywYCNZ0MxpIxN2JLCYwTRGOxbP2ktxePxBHQIBAr3exCBiIuu34qAgknRsWpcvlipANFotGoqFQADoosAxQstVbra40aRdpIzPrDXLhia0F4kUCgU7UCYmRZKUzycHDrswBx44nY25Q%2BGLFxwzHDiGE0mnm4Q9r02YswXc4m8ym0xHYmXqwnw24GI2DVKsQLobKsT68X6lSqiGrDhrYtg023ZX2FUqzbQAPoMCD9kARJjIADW8%2BCSka0UtqEd0g9sW9Uun/qWQZzceLEaj2cLcbzVZvqbvGfrb/zr6f76tJZfn%2BP7Jt%2BH51tG5bPusTLNq2PodoKNLSr2xoDm8Q7qoImrarq7qSHqvLIReSoBtewEfg%2BUGpi%2BoEUQBEaZpBDaVnRRYMRYpbMd%2BtHUTWFgQY%2BFZNi26yTshiFdhJMrEWhyoYR8I7YWOoa6meU5ySiITEEwBCYAetqYPaS6OtqLoMOgbrIow3p4gA9HZuxMrsXAaC5zlmJSGkrmRfGUUBFb5tWH5MUJ0FBWBHFcWFNGsX5HGCXxjawaJRF4pJtx8p21wcAstCcEyvB%2BBwWikKgnCFgylj4ksKyPBsPCkAQmi5QsG4gEyGj6JwkhFS1ZWcLwCggF1zUlblpBwLASCYKobyBiQ5CUA0wAKMohhVEICCoAA7sVjVoCwSR0LpGTrSEtBbbtxWlYdx30DEq3MEkCjbQQpB3XQ0ShKway8J9D0APKBlde39bNbzXMQq2DaQEPIHU%2BDFbw/CCCIYjsFIMiCIoKjqONpC6G0BhGCg1jWPoeARMNkALKgSQ1MNHAALR%2BoyphVRYACc8S7MzADqYi0Hz/OzQQOm8KgrzEMQeBYDTbrEF4gh4GwAAqVq0ArCwKLVqx6H6wTnZt21g9wvDi5gayNTtOlJC1eUFX1BPlRw2BzcgC3ELsqjxAAbMzfuSMiyDwhA4vKxucy7BAlVWJY7q4IQJD0rEXBzBbDsLAgZxYDEbrtZ13UcL1pA3ZLsPDaNWfF2Yzula7mfjXMCzS2kziSEAA%3D%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu2AjAgcy%2BJgA7FYbrtdrC8PDEQingARXYaA44654vD7SwHckAVipXzxpwIywYCNZ0MxpIxN2JLCYwTRGOxbP2ktxePxBHQIBAr3exCBiIuu34qAgknRsWpcvlipANFotGoqFQADoosAxQstVbra40aRdpIzPrDXLhia0F4kUCgU7UCYmRZKUzycHDrswBx44nY25Q%2BGLFxwzHDiGE0mnm4Q9r02YswXc4m8ym0xHYmXqwnw24GI2DVKsQLobKsT68X6lSqiGrDhrYtg023ZX2FUqzbQAPoMCD9kARJjIADW8%2BCSka0UtqEd0g9sW9Uun/qWQZzceLEaj2cLcbzVZvqbvGfrb/zr6f76tJZfn%2BP7Jt%2BH51tG5bPusTLNq2PodoKNLSr2xoDm8Q7qoImrarq7qSHqvLIReSoBtewEfg%2BUGpi%2BoEUQBEaZpBDaVnRRYMRYpbMd%2BtHUTWFgQY%2BFZNi26yTshiFdhJMrEWhyoYR8I7YWOoa6meU5ySiITEEwBCYAetqYPaS6OtqLoMOgbrIow3p4gA9HZuxMrsXAaC5zlmJSGkrmRfGUUBFb5tWH5MUJ0FBWBHFcWFNGsX5HGCXxjawaJRF4pJtx8p21wcAstCcEyvB%2BBwWikKgnCFgylj4ksKyPBsPCkAQmi5QsG4gEyGj6JwkhFS1ZWcLwCggF1zUlblpBwLASCYKobyBiQ5CUA0wAKMohhVEICCoAA7sVjVoCwSR0LpGTrSEtBbbtxWlYdx30DEq3MEkCjbQQpB3XQ0ShKway8J9D0APKBlde39bNbzXMQq2DaQEPIHU%2BDFbw/CCCIYjsFIMiCIoKjqONpC6G0BhGCg1jWPoeARMNkALKgSQ1MNHAALR%2BoyphVRYACc8S7MzADqYi0Hz/OzQQOm8KgrzEMQeBYDTbrEF4gh4GwAAqVq0ArCwKLVqx6H6wTnZt21g9wvDi5gayNTtOlJC1eUFX1BPlRw2BzcgC3ELsqjxAAbMzfuSMiyDwhA4vKxucy7BAlVWJY7q4IQJD0rEXBzBbDsLAgZxYDEbrtZ13UcL1pA3ZLsPDaNWfF2Yzula7mfjXMCzS2kziSEAA%3D%3D%3D",
+)
 
 == STL Algorithmes -- Copie
 
@@ -1111,7 +1122,9 @@ copy(foo.begin(), foo.end(), back_inserter(bar));
   - Aux ensembles non-disjoints
 ])
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmZqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRsfEKtfWNWS2Dnd1FJf0AlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgM0%2BJgA7FZrjsdoN0CAQC83sRATDzjt%2BKg0RYAKykHZmABstNRtK4ZjRABF9hibpi9ujPlisTi8QSiESDiS1tgdhE6lyBYLhShUAkAJ7UVCoAB0UWAiLmZM1WtcSNpStlyAA1gB9YJKerRCCy4gzZFrbmC7EEXHKrywwGAmVyqkWDQmKnsx5uQNgDg7WNRwPO8MWLjhyMBg7xuMJzNuINEkNsiOJrMJ3MHJPBixrdOl/Ox8NuBiN90Kjko3mUhVC70i15i4mCUnOiAADjdHsVfeVautFstAHc6ugNdrdfraeTjQxVwbnTu95Oe16fWg/fWCymwyW89n73fkyG07fK2Wc3HH9Xixm3w2P5eT41nWd6NlSzatlOvZngs/p/leIaSCB8Hlp%2B8FAVSyHRu%2BD7odW9JYTGAFfoWFiooR75Ni2qxtl2qKclC9GfBwcy0JwVK8H4HBaKQqCcNGljWNiCxLA86w8KQBCaCxcyWiAVIaPonCSJx0m8ZwvAKCAilSdxLGkHAsBIJgqivH6JDkJQdTAAoyiGBUQgIKgi5cRJaAsAkdBMFUdkhLQjnOVxPHuZ59AxDZzAJAoTkEKQIV0NEoSsCsvDxWFADyfoBS5akma8VzEDZGmkHlyA1PgXG8PwggiGI7BSDIgiKCo6h6aQugtAYRgoNY1j6HgERaZAcwqlUWkcAAtDi%2BzsqYgmWFwXA7BNADqYi0MtK0mQQxBMLwqAvMQxB4FgQ2msQXiCHgbAACqarQZ1zAoInLHoOLBL5DlOTl3C8DtmArBJi67Qk0msexqltXxHDYKZyDmcQOyqGO9ITfSkg7MAyDIDsEA7ZdlozLjAlWJYtK4IQJB7N8XAzH9YNzAgpxYDEppyQpSkcCppBBftxVaTpDOc2YkM8dD9N6a6pCHSkziSEAA%3D%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmZqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRsfEKtfWNWS2Dnd1FJf0AlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgM0%2BJgA7FZrjsdoN0CAQC83sRATDzjt%2BKg0RYAKykHZmABstNRtK4ZjRABF9hibpi9ujPlisTi8QSiESDiS1tgdhE6lyBYLhShUAkAJ7UVCoAB0UWAiLmZM1WtcSNpStlyAA1gB9YJKerRCCy4gzZFrbmC7EEXHKrywwGAmVyqkWDQmKnsx5uQNgDg7WNRwPO8MWLjhyMBg7xuMJzNuINEkNsiOJrMJ3MHJPBixrdOl/Ox8NuBiN90Kjko3mUhVC70i15i4mCUnOiAADjdHsVfeVautFstAHc6ugNdrdfraeTjQxVwbnTu95Oe16fWg/fWCymwyW89n73fkyG07fK2Wc3HH9Xixm3w2P5eT41nWd6NlSzatlOvZngs/p/leIaSCB8Hlp%2B8FAVSyHRu%2BD7odW9JYTGAFfoWFiooR75Ni2qxtl2qKclC9GfBwcy0JwVK8H4HBaKQqCcNGljWNiCxLA86w8KQBCaCxcyWiAVIaPonCSJx0m8ZwvAKCAilSdxLGkHAsBIJgqivH6JDkJQdTAAoyiGBUQgIKgi5cRJaAsAkdBMFUdkhLQjnOVxPHuZ59AxDZzAJAoTkEKQIV0NEoSsCsvDxWFADyfoBS5akma8VzEDZGmkHlyA1PgXG8PwggiGI7BSDIgiKCo6h6aQugtAYRgoNY1j6HgERaZAcwqlUWkcAAtDi%2BzsqYgmWFwXA7BNADqYi0MtK0mQQxBMLwqAvMQxB4FgQ2msQXiCHgbAACqarQZ1zAoInLHoOLBL5DlOTl3C8DtmArBJi67Qk0msexqltXxHDYKZyDmcQOyqGO9ITfSkg7MAyDIDsEA7ZdlozLjAlWJYtK4IQJB7N8XAzH9YNzAgpxYDEppyQpSkcCppBBftxVaTpDOc2YkM8dD9N6a6pCHSkziSEAA%3D%3D%3D",
+)
 
 == STL Algorithmes -- Échange
 
@@ -1135,7 +1148,9 @@ swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
 
 - ```cpp std::iter_swap()``` échange deux objets pointés par des itérateurs
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+(5,10)%3B%0A++std::vector%3Cint%3E+bar+(5,33)%3B%0A%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A++std::swap_ranges(foo.begin()+%2B+1,+foo.end()+-+1,+bar.begin())%3B%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+(5,10)%3B%0A++std::vector%3Cint%3E+bar+(5,33)%3B%0A%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A++std::swap_ranges(foo.begin()+%2B+1,+foo.end()+-+1,+bar.begin())%3B%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Remplacement
 
@@ -1159,7 +1174,9 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
 
 - ```cpp std::replace_copy_if()``` copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2yAQbwA1hBggRdkxZl8TAB2Kw3Xa7U4EJYMXFPS7rAAiu0JBxJt0J9IJN2xuxYTGCEHx0OJXzJRNZZLJQ3QIBAr3exCB2Iuu34qDF0l2AFZSEydXFdqQuGYdZqiRz1uKJVKZadEgYVtQkQA6KLAfnzFXO1wCk06gAc%2BItIol/GIEFSAC9MAB9HG7PBPRkaFnxp5uT2oJ2RzAClPWax4QXXCX7YWkku7a0oRY4oFAjMmTUWPCNxl1w67MAcTtrIPl0Xs4OSgjS6teWuHetdxtuBjTvvF0sc6HlsVDysjmVyogKw5K9bYBvEjXa3W7fWG41as0s9dV232mN4KiOzOu9061VO70e1EY/2BpaZKhuGeBRrGZIJgcSYplBHZftmuYWvslgFkWJZrv2VqbmOE5uPWqqNs2rZplO3bzkBS53jhaDjqRHbTpqs4UcGN4roumGLsOo7bh8e6CMqhHHr6Z4XkaJo3guJZVrxu5HAJB4IvUt5YfemB2kwKzRmgiQAJ6vi6mBugwPoZt%2BDDoKZVYRJp6LRsESgNNEEA2cQHqngGKlcZ6YbZhBqbQbsybIXB6YIWBOaAShViWIW66cRWG6jrReEEUiREtpqbaTgx5G9pRbHeVWKX0emjHMflnLeSBflxnBMEhWmSnEFmEVIRY0VofFZbedxMole26auRlJGDT2PZeRhg6qTRNalRNTFzpVq7TWyy7XBw8y0Jwmq8H4HBaKQqCcPhqGWJWizLI8Gw8KQBCaJt8zoiAmoaPonCSHtD1HZwvAKCAb33Qdm2kHAsBIJgqhvOOJDkJQ9TAAoyiGJUQgIKgADu%2B23WgLCJHQTDVMjIS0GjmP7YduP4/QMSI8wiQKOjBCkFTdDRKErCrLwrM0wA8uOZNY99kNvNcxCI79pAi8gtT4PtvD8IIIhiOwUgyIIigqOowOkLorQGEYKD5pY%2Bh4BE/2QPMqCJNU/0cAAtFK0GmGdFhcFwuz2wA6mItCe17kMEMQTC8KgrzEMQeBYBbPrEF4gh4GwAAqSK0DH8wKJdKx6FKwTE6j6NC9wvBB5gqy3RjweJA9W07V9OvHRw2BQ8gMPELsqh%2BgAbPbXeSLswDIPCEBB/H6KzLsECnTFNi7LghAkCh6xcLMJc1/MaJMFgMQ%2Bs9r3vRwn2kBToeS/9gPrwfZj14djdr8DszzOHqTOJIQA%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2yAQbwA1hBggRdkxZl8TAB2Kw3Xa7U4EJYMXFPS7rAAiu0JBxJt0J9IJN2xuxYTGCEHx0OJXzJRNZZLJQ3QIBAr3exCB2Iuu34qDF0l2AFZSEydXFdqQuGYdZqiRz1uKJVKZadEgYVtQkQA6KLAfnzFXO1wCk06gAc%2BItIol/GIEFSAC9MAB9HG7PBPRkaFnxp5uT2oJ2RzAClPWax4QXXCX7YWkku7a0oRY4oFAjMmTUWPCNxl1w67MAcTtrIPl0Xs4OSgjS6teWuHetdxtuBjTvvF0sc6HlsVDysjmVyogKw5K9bYBvEjXa3W7fWG41as0s9dV232mN4KiOzOu9061VO70e1EY/2BpaZKhuGeBRrGZIJgcSYplBHZftmuYWvslgFkWJZrv2VqbmOE5uPWqqNs2rZplO3bzkBS53jhaDjqRHbTpqs4UcGN4roumGLsOo7bh8e6CMqhHHr6Z4XkaJo3guJZVrxu5HAJB4IvUt5YfemB2kwKzRmgiQAJ6vi6mBugwPoZt%2BDDoKZVYRJp6LRsESgNNEEA2cQHqngGKlcZ6YbZhBqbQbsybIXB6YIWBOaAShViWIW66cRWG6jrReEEUiREtpqbaTgx5G9pRbHeVWKX0emjHMflnLeSBflxnBMEhWmSnEFmEVIRY0VofFZbedxMole26auRlJGDT2PZeRhg6qTRNalRNTFzpVq7TWyy7XBw8y0Jwmq8H4HBaKQqCcPhqGWJWizLI8Gw8KQBCaJt8zoiAmoaPonCSHtD1HZwvAKCAb33Qdm2kHAsBIJgqhvOOJDkJQ9TAAoyiGJUQgIKgADu%2B23WgLCJHQTDVMjIS0GjmP7YduP4/QMSI8wiQKOjBCkFTdDRKErCrLwrM0wA8uOZNY99kNvNcxCI79pAi8gtT4PtvD8IIIhiOwUgyIIigqOowOkLorQGEYKD5pY%2Bh4BE/2QPMqCJNU/0cAAtFK0GmGdFhcFwuz2wA6mItCe17kMEMQTC8KgrzEMQeBYBbPrEF4gh4GwAAqSK0DH8wKJdKx6FKwTE6j6NC9wvBB5gqy3RjweJA9W07V9OvHRw2BQ8gMPELsqh%2BgAbPbXeSLswDIPCEBB/H6KzLsECnTFNi7LghAkCh6xcLMJc1/MaJMFgMQ%2Bs9r3vRwn2kBToeS/9gPrwfZj14djdr8DszzOHqTOJIQA%3D%3D",
+)
 
 == STL Algorithmes -- Suppression
 
@@ -1181,14 +1198,18 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
 #noteblock(text[Idiome _Erase-Remove_], text[
   - Suppression via un appel à ```cpp erase()``` après le nouvel itérateur de fin
 
-```cpp
-foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
-```
+  ```cpp
+  foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
+  ```
 ])
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::remove(foo.begin(),+foo.end(),+5)%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::remove(foo.begin(),+foo.end(),+5)%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 
 == STL Algorithmes -- Suppression
@@ -1212,7 +1233,9 @@ unique(foo.begin(), foo.end());  // 4 5 7 9 5 ...
 
 - ```cpp std::unique_copy()``` copie l'ensemble en ne conservant que le premier des éléments consécutifs égaux
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::unique(foo.begin(),+foo.end())%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::unique(foo.begin(),+foo.end())%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Transformation
 
@@ -1241,7 +1264,9 @@ transform(foo.begin(), foo.end(), bar.begin(),
 // 6 8 13 10
 ```
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu3QSwi9AA%2Bs8xBBEQi5l8TPErDddrtTgRlgxdmZdgAqBEHYm3eIAEQJN1xLCYwQg%2BOhRK%2BpMJTNJpOG6BAIFe72IQMRF12/FQwukuwArKRdoldgBOQls2Ii0XiyXSoiyw7y2LYXYRBoQST4w3s66i3YmkAEYiGBT8YgsaioVAAOiiwB5C0VQeDrl5mrtxFDmHDDDjyNRGKxtCdRtJfogaQAXph0Ui8E8WbsNIyEU83LaGsGi5heTXrNY8HzXaLhYK3e6CBKUEskUCgQ3ZWqLHgTGrK2PDrswBwl%2BtnSSe6y%2B2LB5K0F5R4dx8vZ24GCf1939S6hQKNzuh2aPpbBAqlSrNRqtZq9VvL26PSfC0jlfa0J2FMxNViTUADZNS4a9/2NXcpTec05VAm07ULB0cxvZChy9H0/QDJUkxTNMyNjSME3IiN4yYQs6NTSMPSSbwFAwggLl5PD7yjYgCzwYtS1rA5K2rQ0xMXbCm2Elsc32SwOy7N1e34h89xHOtx2w2dp1necj0XZdV0Zbd9i3fiPX3Q83GPdY1TPC8jWvfk2RuDgFloTg1V4PwOC0UhUE4ezlMsd0lhWR4Nh4UgCE0LyFgAaxANUNH0ThJH8xLgs4XgFBADKEsCrzSDgWAkEwVQ3gPEhyEoBpgAUZRDCqIQEFQAB3AK4rQFgkjoJgalakJaA67qAqC/rBvoGJmuYJIFE6ghSBmuholCVg1l4da5oAeQPCaety6q3muYhmvy0gzuQOp8AC3h%2BEEEQxHYKQZEERQVHUUrSF0NoDCMFB20sfQ8AiQrIAWVAkhqQqOAAWnFcTTHCiwuC4XZEYAdTEWhsZx6qiN4VBXmIYg8CwKG42ILxBDwNgABUg1oGmFgUKLVj0cVglG9rOpO7heC9TA1jirrvSSRLvN8nK/pCjhsBq5A6uIXZVAADhgxGYMkXZgGQeEIC9enkrmXYIDCqwwd2XBCBIJTYi4OYRZlhYEDOLAYjjVL0syjhstIKbSeuwrivdgOzHloLFbd0q5gWcm0mcSQgA%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu3QSwi9AA%2Bs8xBBEQi5l8TPErDddrtTgRlgxdmZdgAqBEHYm3eIAEQJN1xLCYwQg%2BOhRK%2BpMJTNJpOG6BAIFe72IQMRF12/FQwukuwArKRdoldgBOQls2Ii0XiyXSoiyw7y2LYXYRBoQST4w3s66i3YmkAEYiGBT8YgsaioVAAOiiwB5C0VQeDrl5mrtxFDmHDDDjyNRGKxtCdRtJfogaQAXph0Ui8E8WbsNIyEU83LaGsGi5heTXrNY8HzXaLhYK3e6CBKUEskUCgQ3ZWqLHgTGrK2PDrswBwl%2BtnSSe6y%2B2LB5K0F5R4dx8vZ24GCf1939S6hQKNzuh2aPpbBAqlSrNRqtZq9VvL26PSfC0jlfa0J2FMxNViTUADZNS4a9/2NXcpTec05VAm07ULB0cxvZChy9H0/QDJUkxTNMyNjSME3IiN4yYQs6NTSMPSSbwFAwggLl5PD7yjYgCzwYtS1rA5K2rQ0xMXbCm2Elsc32SwOy7N1e34h89xHOtx2w2dp1necj0XZdV0Zbd9i3fiPX3Q83GPdY1TPC8jWvfk2RuDgFloTg1V4PwOC0UhUE4ezlMsd0lhWR4Nh4UgCE0LyFgAaxANUNH0ThJH8xLgs4XgFBADKEsCrzSDgWAkEwVQ3gPEhyEoBpgAUZRDCqIQEFQAB3AK4rQFgkjoJgalakJaA67qAqC/rBvoGJmuYJIFE6ghSBmuholCVg1l4da5oAeQPCaety6q3muYhmvy0gzuQOp8AC3h%2BEEEQxHYKQZEERQVHUUrSF0NoDCMFB20sfQ8AiQrIAWVAkhqQqOAAWnFcTTHCiwuC4XZEYAdTEWhsZx6qiN4VBXmIYg8CwKG42ILxBDwNgABUg1oGmFgUKLVj0cVglG9rOpO7heC9TA1jirrvSSRLvN8nK/pCjhsBq5A6uIXZVAADhgxGYMkXZgGQeEIC9enkrmXYIDCqwwd2XBCBIJTYi4OYRZlhYEDOLAYjjVL0syjhstIKbSeuwrivdgOzHloLFbd0q5gWcm0mcSQgA%3D%3D",
+)
 
 == STL Algorithmes -- Rotation
 
@@ -1255,7 +1280,9 @@ rotate(foo.begin(), foo.begin() + 2, foo.end());  // 7 9 12 4 5
 
 - ```cpp std::rotate_copy()``` effectue une rotation et copie le résultat
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9,+12%7D%3B%0A%0A++std::rotate(foo.begin(),+foo.begin()+%2B+2,+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9,+12%7D%3B%0A%0A++std::rotate(foo.begin(),+foo.begin()+%2B+2,+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Partitionnement
 
@@ -1306,7 +1333,9 @@ nth_element(foo.begin(), foo.begin() + 3, foo.end());
 // 2 1 3 4 5 9 6 7 8
 ```
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAKykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2eAUAH0MOgIMECCjZl8TAB2Kw3Xa7U4EJYMXbY8xxMz49YAEQOTK4BxJt0JLOhNxxuxYTGCEHx0OJXzJRM5ZLJQ3QIBAr3exCBOIuu34qCl0l2XHWpF2ZgAHAaAJy7A1xSRElnrTkSmVyhWJLppATUJEAOiiwGF8w1XtcIoNqIx6HQjOlMv4xAgqQAXpg0bi8E8mbsNByUU83AHUJ6E5gRVnrNY8KLrjL9uLSVXdk6UItcUCgXmTHELHh2%2BmW4ddmAOP21naHZLuaP6wR5Y2vM3Dq2B%2B23AxFyPazaCeua5XHVOFUqiCrDmr1tg28SdXqDcazRbdlaN2vbrXZXuQBMIvQ0S6Gm6GB78x9P0DU1T0g39UNMUjCcYzjPBE2TbNWQzLNU1bUDC2LO19ksMsKyrKUJ1fac0FnHN0KRdtO27ci%2BwHIcOQnDcX0nEim1o3NFziZdVyjZjnx3QiWIbA8PmPQR1U1KVTQNE1dkJA0ADZLQNHV9UNA12XHJ8JwbQQEDRSpMDYQQAO9TBfX/f1QKAqycIsXZ1NA8DoJY2DC0QtDmRQ7CvNzDD4KLSN7LwpjtzrViFVIuc3AorUOy7OIe3nOjB14sKeR3YiovY3tOLWbiV2HPjxzFTKOHmWhODiXg/A4LRSFQThYtwyx60WZZHg2HhSAITQKvmABrEA4g0fROEkWr%2BsazheAUEAxr6%2BqKtIOBYCQTBVDeWcSHISh6mABRlEMSohAQVAAHc6p6tAWESOgmGqY6QloM7Lrqhrbvu%2BgYkO5hEgUc6CFIL66GiUJWFWXhQZ%2BgB5Wc3qu6bNrea5iEO2bSBR5BanwOreH4QQRDEdgpBkQRFBUdRltIXRWgMIwUFLSx9DwCJ5sgeZUESap5o4ABaOVWVMVqLC4Lhdn5gB1MRaElqXNoIYgmF4VBXmIYg8CwDng2ILxBDwNgABUkVoHX5gUDqVj0OVgme07zqR7heCVzBVh6i7lcSfrKuqqaaaajhsC25AduIXZVCNRT%2BcUyRdmAZB4QgJX9cG2YaRaqwWd2XBCBIHD1i4WYXZ9%2BYEDOLAYmDYbRvGjhJtID7Vcx%2BbFtLuuzH9hrA5L5bZnmdXUmcSQgA%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAKykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2eAUAH0MOgIMECCjZl8TAB2Kw3Xa7U4EJYMXbY8xxMz49YAEQOTK4BxJt0JLOhNxxuxYTGCEHx0OJXzJRM5ZLJQ3QIBAr3exCBOIuu34qCl0l2XHWpF2ZgAHAaAJy7A1xSRElnrTkSmVyhWJLppATUJEAOiiwGF8w1XtcIoNqIx6HQjOlMv4xAgqQAXpg0bi8E8mbsNByUU83AHUJ6E5gRVnrNY8KLrjL9uLSVXdk6UItcUCgXmTHELHh2%2BmW4ddmAOP21naHZLuaP6wR5Y2vM3Dq2B%2B23AxFyPazaCeua5XHVOFUqiCrDmr1tg28SdXqDcazRbdlaN2vbrXZXuQBMIvQ0S6Gm6GB78x9P0DU1T0g39UNMUjCcYzjPBE2TbNWQzLNU1bUDC2LO19ksMsKyrKUJ1fac0FnHN0KRdtO27ci%2BwHIcOQnDcX0nEim1o3NFziZdVyjZjnx3QiWIbA8PmPQR1U1KVTQNE1dkJA0ADZLQNHV9UNA12XHJ8JwbQQEDRSpMDYQQAO9TBfX/f1QKAqycIsXZ1NA8DoJY2DC0QtDmRQ7CvNzDD4KLSN7LwpjtzrViFVIuc3AorUOy7OIe3nOjB14sKeR3YiovY3tOLWbiV2HPjxzFTKOHmWhODiXg/A4LRSFQThYtwyx60WZZHg2HhSAITQKvmABrEA4g0fROEkWr%2BsazheAUEAxr6%2BqKtIOBYCQTBVDeWcSHISh6mABRlEMSohAQVAAHc6p6tAWESOgmGqY6QloM7Lrqhrbvu%2BgYkO5hEgUc6CFIL66GiUJWFWXhQZ%2BgB5Wc3qu6bNrea5iEO2bSBR5BanwOreH4QQRDEdgpBkQRFBUdRltIXRWgMIwUFLSx9DwCJ5sgeZUESap5o4ABaOVWVMVqLC4Lhdn5gB1MRaElqXNoIYgmF4VBXmIYg8CwDng2ILxBDwNgABUkVoHX5gUDqVj0OVgme07zqR7heCVzBVh6i7lcSfrKuqqaaaajhsC25AduIXZVCNRT%2BcUyRdmAZB4QgJX9cG2YaRaqwWd2XBCBIHD1i4WYXZ9%2BYEDOLAYmDYbRvGjhJtID7Vcx%2BbFtLuuzH9hrA5L5bZnmdXUmcSQgA%3D",
+)
 
 == STL Algorithmes -- Tri
 
@@ -1338,7 +1367,9 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 - ... les autres éléments n'ont pas d'ordre particulier
 - ```cpp std::partial_sort_copy()``` copie l'ensemble ordonné à l'image de ```cpp std::partial_sort()```
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:29,startColumn:1,startLineNumber:29),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++++std::sort(foo.begin(),+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++++std::partial_sort(foo.begin(),+foo.begin()+%2B+3,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:29,startColumn:1,startLineNumber:29),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++++std::sort(foo.begin(),+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++++std::partial_sort(foo.begin(),+foo.begin()+%2B+3,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Mélange
 
@@ -1352,7 +1383,9 @@ random_shuffle(foo.begin(), foo.end());
 // ou ...
 ```
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++std::random_shuffle(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++std::random_shuffle(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Fusion
 
@@ -1369,7 +1402,9 @@ merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
 
 - ```cpp std::inplace_merge()``` fusionne deux sous-ensembles sur place
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8%7D%3B%0A++++std::vector%3Cint%3E+bar%7B2,+5%7D%3B%0A++++std::vector%3Cint%3E+baz%3B%0A%0A++++std::merge(foo.begin(),+foo.end(),+bar.begin(),+bar.end(),+std::back_inserter(baz))%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+baz%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8,+2,+5%7D%3B%0A%0A++++std::inplace_merge(foo.begin(),+foo.begin()+%2B+4,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8%7D%3B%0A++++std::vector%3Cint%3E+bar%7B2,+5%7D%3B%0A++++std::vector%3Cint%3E+baz%3B%0A%0A++++std::merge(foo.begin(),+foo.end(),+bar.begin(),+bar.end(),+std::back_inserter(baz))%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+baz%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8,+2,+5%7D%3B%0A%0A++++std::inplace_merge(foo.begin(),+foo.begin()+%2B+4,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Opérations ensemblistes
 
@@ -1407,7 +1442,9 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 
 // set_difference() conserve les éléments présents dans le premier ensemble mais pas dans le second alors que set_symmetric_difference() conserve les éléments présents dans un des ensembles mais pas dans l'autre}
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcYmAJEICBYX1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRY2nsAKykPaxVnxDEAEUOWJuBL2RJJZKIFKOVI22D2EQa9LMrKZ3N5%2BIJQtJ71FlME1JlAC96YzYkqNnyVYSCMSUEt4cDgYKLSSIqhPGIkggmM83Ha1Q9AZgFNRnQA6KLAZELGnB1wo1ky4ghzBhhgx6UNIPRuZzT12sDrJluBi55XY1UOq1eG1Hb1lp0u2huj22o72y2%2BrAB2kJpMpzsZ2NMXVd8P9wcZrNNtx7Iv5wvrE0qpUwkv0s0t4Uaz7i7WSyN0zGMllsjnGvkCtUizfHbdSuNyhUn1fnjdiq8EHUD4t3Evmy1KAgAfS8BgMkDVAh2TCNewYdAUzjcDYLTPtU2QABrf9giURpoggPVM0/AV%2BGICA0l1TB/3hPBni5PYNF5PZKLtPUgxIzAUTo6xrDwVFv1xU8BTXctKy9Zs9RMJkLDwMTqInKcOFk/CCUXflS0tNAK2zZtpwLIt52XdEeSXZSVx4p9yS1N8d1pA0FVZdk9k5fSFJ/dczK3Cyb1lTF5WZB8TLLC8XwlDz9V0r9lOckA/3QwRoiUBwQM7UNh13dNoIQ%2BMkog/t4yQmVUOizCCGw3DUVCgiSGIvBSPI%2BiqJouiGJEgdmKq1jSosA5LE47jwt41cIrUoTGI/cTJKZaSq00uSdL4nElLPMtBo0yctNnBSlIXPE/MtALzOpKz9xso97N83rTM1Nz3wpLz70csqVJci7X3fELTW2kkovwKgqGiRhVlA%2BDIKjNKIzgzL0tSmDQaYfKMOiIqiJKpzIyIliasa6jaJNWrhsHFi2OxjjLC41djN6gbrWW1N9VGqSqdzeT7rmxz3sE%2Bm820uc%2BI2vTZoE3bLss51rOZWzjzuvnzsvILU2uixvMVCXH38589p3UTQuV39MAAhQAE8WDYAhiDwZB/y%2Bn6zn%2BVjEsTZKoKh7LAad3KYbQuGsMRgc8KZlHKuqii6qxjrGsnJj8fazqrGJnqBTJ/iBKWmTRNp8b2cZvn5oetmZNWmbNoMu4WZuDgFloTgmV4PwOC0UhUE4L0ussQUlhWJ5Nh4UgCE0UuFhQkAmQ0fROEkKue7rzheAUEAh%2B7mvS9IOBYCQTBVHeCsSHISgGmABRlEMKohAQVAAHdq87tAWCSOgmBqfeQloI/T%2Br2vL%2Bv%2BgYl35gkgUY%2BCFIN%2BdBoihFYGsXggCP4AHkKxPzPuPVe7wbjEF3pPUgCDkB1HwNXXg/BBAiDEOwKQMhBCKBUOoeepBdBtAMEYFARMbC0DwBEaekAFioCSDUaeHAAC0RJDhclME3BkXA9jcIAOpiFoKIsRq9jZMF4KgN4xATbtngAsYgQFHBsAACrOloCwmMChW6rD0ESYI99D7HzgdwXgxtMBrE7ifYgTAkg9zLhXMeFD64cGwGvZAG9iB7FUPEWI3DYiSD2MAZAyA9gQGNkBFCWYICN2jjYPYuBCAkE6hsLgcxbFuIWAgc4WAYgxn7oPYeHBR6kBfgo1B09Z4FMqWYTxtdvH5PnpmUgSi0jOEkEAA%3D%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcYmAJEICBYX1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRY2nsAKykPaxVnxDEAEUOWJuBL2RJJZKIFKOVI22D2EQa9LMrKZ3N5%2BIJQtJ71FlME1JlAC96YzYkqNnyVYSCMSUEt4cDgYKLSSIqhPGIkggmM83Ha1Q9AZgFNRnQA6KLAZELGnB1wo1ky4ghzBhhgx6UNIPRuZzT12sDrJluBi55XY1UOq1eG1Hb1lp0u2huj22o72y2%2BrAB2kJpMpzsZ2NMXVd8P9wcZrNNtx7Iv5wvrE0qpUwkv0s0t4Uaz7i7WSyN0zGMllsjnGvkCtUizfHbdSuNyhUn1fnjdiq8EHUD4t3Evmy1KAgAfS8BgMkDVAh2TCNewYdAUzjcDYLTPtU2QABrf9giURpoggPVM0/AV%2BGICA0l1TB/3hPBni5PYNF5PZKLtPUgxIzAUTo6xrDwVFv1xU8BTXctKy9Zs9RMJkLDwMTqInKcOFk/CCUXflS0tNAK2zZtpwLIt52XdEeSXZSVx4p9yS1N8d1pA0FVZdk9k5fSFJ/dczK3Cyb1lTF5WZB8TLLC8XwlDz9V0r9lOckA/3QwRoiUBwQM7UNh13dNoIQ%2BMkog/t4yQmVUOizCCGw3DUVCgiSGIvBSPI%2BiqJouiGJEgdmKq1jSosA5LE47jwt41cIrUoTGI/cTJKZaSq00uSdL4nElLPMtBo0yctNnBSlIXPE/MtALzOpKz9xso97N83rTM1Nz3wpLz70csqVJci7X3fELTW2kkovwKgqGiRhVlA%2BDIKjNKIzgzL0tSmDQaYfKMOiIqiJKpzIyIliasa6jaJNWrhsHFi2OxjjLC41djN6gbrWW1N9VGqSqdzeT7rmxz3sE%2Bm820uc%2BI2vTZoE3bLss51rOZWzjzuvnzsvILU2uixvMVCXH38589p3UTQuV39MAAhQAE8WDYAhiDwZB/y%2Bn6zn%2BVjEsTZKoKh7LAad3KYbQuGsMRgc8KZlHKuqii6qxjrGsnJj8fazqrGJnqBTJ/iBKWmTRNp8b2cZvn5oetmZNWmbNoMu4WZuDgFloTgmV4PwOC0UhUE4L0ussQUlhWJ5Nh4UgCE0UuFhQkAmQ0fROEkKue7rzheAUEAh%2B7mvS9IOBYCQTBVHeCsSHISgGmABRlEMKohAQVAAHdq87tAWCSOgmBqfeQloI/T%2Br2vL%2Bv%2BgYl35gkgUY%2BCFIN%2BdBoihFYGsXggCP4AHkKxPzPuPVe7wbjEF3pPUgCDkB1HwNXXg/BBAiDEOwKQMhBCKBUOoeepBdBtAMEYFARMbC0DwBEaekAFioCSDUaeHAAC0RJDhclME3BkXA9jcIAOpiFoKIsRq9jZMF4KgN4xATbtngAsYgQFHBsAACrOloCwmMChW6rD0ESYI99D7HzgdwXgxtMBrE7ifYgTAkg9zLhXMeFD64cGwGvZAG9iB7FUPEWI3DYiSD2MAZAyA9gQGNkBFCWYICN2jjYPYuBCAkE6hsLgcxbFuIWAgc4WAYgxn7oPYeHBR6kBfgo1B09Z4FMqWYTxtdvH5PnpmUgSi0jOEkEAA%3D%3D%3D",
+)
 
 == STL Algorithmes -- Gestion de tas
 
@@ -1425,7 +1462,9 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 
 - ```cpp std::sort_heap()``` tri le tas
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B10,20,30,5,15%7D%3B%0A%0A++std::make_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::pop_heap(foo.begin(),+foo.end())%3B%0A++foo.pop_back()%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.push_back(99)%3B%0A++std::push_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::sort_heap(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B10,20,30,5,15%7D%3B%0A%0A++std::make_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::pop_heap(foo.begin(),+foo.end())%3B%0A++foo.pop_back()%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.push_back(99)%3B%0A++std::push_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::sort_heap(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Min-max
 
@@ -1447,7 +1486,9 @@ min_element(foo.begin(), foo.end()); // Sur 5
 
 - ```cpp std::max_element()``` détermine le plus grand élément d'un ensemble
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A%0A++std::cout+%3C%3C+*std::min_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+*std::max_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A%0A++std::cout+%3C%3C+*std::min_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+*std::max_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Algorithmes -- Numérique
 
@@ -1507,7 +1548,9 @@ partial_sum(foo.begin(), foo.end(), back_inserter(bar));
 
 - Opérateur configurable
 
-#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAArAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcDB80Twpg2V1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRYuIk9rFSHsAGys%2BIYgAihyxNwJeyJJLQXnhwOBQoIxJATGQyB8XgMBEw1FQqAAdFFgMiFjT1RrXCjWW0pTKWErHElaHhMApKYJLii5s83JKwOtYiCPXz8bjeTDsbj%2BYLhaT3kQKUcqVD9XTMYzWSz2Zyeb6g4TpSSyZGHQRqREGum7hmzSSmOhtHLGAQAPr4KhUaKMVZqzXa3Ws2mGhjoY17QvIADWteCSka0QgheIerDLGCXnt0cdUOdxcF/GIEDSAC9MLX4Xhnty9ho%2BXsj5Lpxrd6rURsLAdLNY8KjS/S/aGsygluKjlei1iCw8BMWITwlI49g9KD1gfT9/XgsNRT/N1IJ9L0GB9OCgzTQMBWDRDvxzT5l3zWNaXpU0zFZDZWUkNNsPwzMZWIqNjhXbAByLTFqL2Wi9mkZkGP5QiZWQ11JTDYIQmIWskmIDAvAcNstUwHUGH7bsjT1a8Ow0vUNBdCC3Bg0DvVgkMELwnEP1LMNWLzakKITVleP4%2Bj0V5RivxYiMSPYsjOOnYtRJJJJujwMRawUHwVL0zSDW01lBxHMdohVLdpzme9LJxTdtzwPcDwvY9T3PS9IOvW8UXPawXzfJiCNLZiRV/CTKsA4DQPA/80I4UzvIJXDGqQtrjNMjCsMs4a0V%2BPAqDKoMAHolr2AAxOVI1tWh6D9WyRqIvy2JjTjnIZVyaLo4TQvDclHNjYLGJu8LGki2hoti7t4r1LTe37FLRwYccMqnBpZ2/C1aCtG07Xu7A10GvKSAKorD1Ks8HxKgDiBvQq71q59LFfeD9sFFqfzFdqTOCoCQLAqmYIG3KrIOsSxt6kz0PM9cWc2Vx5rRTzvg4BZaE4WJeD8DgtFIVBODdQnHwUJYVieTYeFIAhNBFhYhziDR9E4SRJe12XOF4BQQANrXpZF0g4FgJBMFUd4xRIchKAaYAFGUQwqiEBBUAAdyljW0BYJI6CYGpfZCWgA%2BDqWZfDyP6Bib3mCSBRA4IUgU7oaJQlYNZeHztOAHkxQTkPTed94bmIb3zdIOvkDqfApd4fhBBEMR2CkGRBEUFR1Ft0hdDaAwjBQOrLH0PAIktyAFlQJIaktjgAFoiUOblTEVrguD2TeAHUxFoY%2BT%2BdghiCYXhUDeYhiDwLAl%2BNYgvEEPA2AAFXVWg34LGVssVYegiTBFjv7QONduC8BvpgNYGsg63ySNrUW4sTZjzlhwbALsFSRj2KoeIbJN5skkHsYA8o9gQBvp/IcLoIAKysHPPYuBCAkCfBsLgcw4FoIWAgc4WAYjGj1rEA2YsODG1IEne%2BzdLbWz4YbDgZhMEy2wbw222VSCPzSM4SQQA%3D%3D%3D")
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAArAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcDB80Twpg2V1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRYuIk9rFSHsAGys%2BIYgAihyxNwJeyJJLQXnhwOBQoIxJATGQyB8XgMBEw1FQqAAdFFgMiFjT1RrXCjWW0pTKWErHElaHhMApKYJLii5s83JKwOtYiCPXz8bjeTDsbj%2BYLhaT3kQKUcqVD9XTMYzWSz2Zyeb6g4TpSSyZGHQRqREGum7hmzSSmOhtHLGAQAPr4KhUaKMVZqzXa3Ws2mGhjoY17QvIADWteCSka0QgheIerDLGCXnt0cdUOdxcF/GIEDSAC9MLX4Xhnty9ho%2BXsj5Lpxrd6rURsLAdLNY8KjS/S/aGsygluKjlei1iCw8BMWITwlI49g9KD1gfT9/XgsNRT/N1IJ9L0GB9OCgzTQMBWDRDvxzT5l3zWNaXpU0zFZDZWUkNNsPwzMZWIqNjhXbAByLTFqL2Wi9mkZkGP5QiZWQ11JTDYIQmIWskmIDAvAcNstUwHUGH7bsjT1a8Ow0vUNBdCC3Bg0DvVgkMELwnEP1LMNWLzakKITVleP4%2Bj0V5RivxYiMSPYsjOOnYtRJJJJujwMRawUHwVL0zSDW01lBxHMdohVLdpzme9LJxTdtzwPcDwvY9T3PS9IOvW8UXPawXzfJiCNLZiRV/CTKsA4DQPA/80I4UzvIJXDGqQtrjNMjCsMs4a0V%2BPAqDKoMAHolr2AAxOVI1tWh6D9WyRqIvy2JjTjnIZVyaLo4TQvDclHNjYLGJu8LGki2hoti7t4r1LTe37FLRwYccMqnBpZ2/C1aCtG07Xu7A10GvKSAKorD1Ks8HxKgDiBvQq71q59LFfeD9sFFqfzFdqTOCoCQLAqmYIG3KrIOsSxt6kz0PM9cWc2Vx5rRTzvg4BZaE4WJeD8DgtFIVBODdQnHwUJYVieTYeFIAhNBFhYhziDR9E4SRJe12XOF4BQQANrXpZF0g4FgJBMFUd4xRIchKAaYAFGUQwqiEBBUAAdyljW0BYJI6CYGpfZCWgA%2BDqWZfDyP6Bib3mCSBRA4IUgU7oaJQlYNZeHztOAHkxQTkPTed94bmIb3zdIOvkDqfApd4fhBBEMR2CkGRBEUFR1Ft0hdDaAwjBQOrLH0PAIktyAFlQJIaktjgAFoiUOblTEVrguD2TeAHUxFoY%2BT%2BdghiCYXhUDeYhiDwLAl%2BNYgvEEPA2AAFXVWg34LGVssVYegiTBFjv7QONduC8BvpgNYGsg63ySNrUW4sTZjzlhwbALsFSRj2KoeIbJN5skkHsYA8o9gQBvp/IcLoIAKysHPPYuBCAkCfBsLgcw4FoIWAgc4WAYjGj1rEA2YsODG1IEne%2BzdLbWz4YbDgZhMEy2wbw222VSCPzSM4SQQA%3D%3D%3D",
+)
 
 == STL Algorithmes -- Au delà des conteneurs
 
@@ -1522,7 +1565,7 @@ partial_sum(foo.begin(), foo.end(), back_inserter(bar));
 - Tableaux C
   - Pas un conteneur
 
-//Il contient mais est très différent des conteneurs classiques : frustre, minimaliste, rudimentaire, pas de réelle sémantique, peu d'intelligence
+    //Il contient mais est très différent des conteneurs classiques : frustre, minimaliste, rudimentaire, pas de réelle sémantique, peu d'intelligence
 
     - Sémantique : Tableau ou pointeur ? Statique ou dynamique ?
     - Service : Taille ? Copie ?
@@ -1543,14 +1586,14 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
     - Début : depuis un flux entrant
     - Fin : constructeur par défaut
   - ```cpp ostream_iterator``` : \textit{output} itérateur
-	  - Depuis un flux sortant, séparateur configurable
+    - Depuis un flux sortant, séparateur configurable
 
-	```cpp
-		vector<int> foo{5, 6, 12, 89};
-		ostream_iterator<int> out_it (cout, ", ");
+  ```cpp
+  	vector<int> foo{5, 6, 12, 89};
+  	ostream_iterator<int> out_it (cout, ", ");
 
-		copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
-	```
+  	copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
+  ```
 
 #alertblock("Attention", text[
   - Séparateur ajouté après chaque élément, y compris le dernier
@@ -1558,7 +1601,9 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 
 - Buffers de flux : ```cpp istreambuf_iterator``` et ```cpp ostreambuf_iterator```
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 == STL Conclusion
 #adviceblock("Do", text[
@@ -1568,7 +1613,7 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 #alertblock("Attention", text[
   - ```cpp operator[]``` ne vérifie pas les bornes
 
-// Une implémentation peut mettre une assertion dessus et produire une erreur à l'exécution en debug, p.ex. sur les TU, et une implémentation de qualité devrait le faire
+  // Une implémentation peut mettre une assertion dessus et produire une erreur à l'exécution en debug, p.ex. sur les TU, et une implémentation de qualité devrait le faire
 ])
 
 #alertblock("Don't", text[
@@ -1589,16 +1634,16 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 #noteblock("Conseils, performances", text[
   - Réfléchissez à votre utilisation des données
 
-// Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, ...
+  // Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, ...
 
   - Méfiez-vous des complexités brutes
 
-// La complexité n'est pas ou peu significative pour de petits volumes de données, p.ex. les tris par insertion ou sélection (O($n^{2}$)) plus efficaces que des tris en O($n\ln n$)}
-// Les complexités moyennes ne sont pas pertinentes pour des données particuliers, p.ex. tri par insertion efficace sur ensembles presque triés, peu de permutation du tri par sélection donc efficace pour des données lourdes à déplacer}
+  // La complexité n'est pas ou peu significative pour de petits volumes de données, p.ex. les tris par insertion ou sélection (O($n^{2}$)) plus efficaces que des tris en O($n\ln n$)}
+  // Les complexités moyennes ne sont pas pertinentes pour des données particuliers, p.ex. tri par insertion efficace sur ensembles presque triés, peu de permutation du tri par sélection donc efficace pour des données lourdes à déplacer}
 ])
 
 #adviceblock("Do", text[
-- Préférez les algorithmes standards aux algorithmes tierces et maisons
+  - Préférez les algorithmes standards aux algorithmes tierces et maisons
 ])
 
 #noteblock("Bémol, performances", text[
@@ -1668,14 +1713,14 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   - Rupture de comptabilité ascendante
   - Implémenté sur un unique compilateur et inutilisé en pratique
 
-// Un seul front end EDG, utilisé par deux compilateurs (Comeau et ICC) mais la fonctionnalité n'était pas active chez Intel
-// Suppression soutenue par l'équipe d'EDG
+  // Un seul front end EDG, utilisé par deux compilateurs (Comeau et ICC) mais la fonctionnalité n'était pas active chez Intel
+  // Suppression soutenue par l'équipe d'EDG
 ])
 
 #noteblock("Motivations", text[
   - Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1426.pdf")[N1426 #linklogo()]
 
-// En gros les motivations sont : peu utile, peu demandé, compliqué à implémenter et compliqué à utiliser}
+  // En gros les motivations sont : peu utile, peu demandé, compliqué à implémenter et compliqué à utiliser}
 ])
 
 #addproposal("N1426")
@@ -1704,9 +1749,9 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   - ```cpp N``` = 8, 16, 32 ou 64
   - ```cpp int<N>_t``` obligatoirement en complément à 2
 
-// En C++, pas de contrainte sur les autres types entiers signés avant C++20
-// En C (avant C23), d'autres représentations possibles : signe + valeur (avec deux codages de 0, algorithme d'addition/ multiplication non canonique) et complément à 1 où chaque bit du positif est inversé pour donner le négatif, là encore deux valeurs de 0
-// Complément à 2 : inversion de chaque bit (complément à 1) puis ajout de 1
+  // En C++, pas de contrainte sur les autres types entiers signés avant C++20
+  // En C (avant C23), d'autres représentations possibles : signe + valeur (avec deux codages de 0, algorithme d'addition/ multiplication non canonique) et complément à 1 où chaque bit du positif est inversé pour donner le négatif, là encore deux valeurs de 0
+  // Complément à 2 : inversion de chaque bit (complément à 1) puis ajout de 1
 
   - Pas de bit de _padding_
   - Support optionnel
@@ -1735,12 +1780,12 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 - Types POD (_Plain Old Data_) : classes et structures POD, unions POD, types scalaires et tableaux de ces types
 - Certaines constructions permises uniquement sur les types POD
 
-// Permises uniquement sur les POD vue de la norme tout du moins. En pratique, certaines opérations peuvent fonctionner sur des types non-POD sur une implémentation particulière
+  // Permises uniquement sur les POD vue de la norme tout du moins. En pratique, certaines opérations peuvent fonctionner sur des types non-POD sur une implémentation particulière
 
   - Utilisation de ```cpp memcpy()``` ou ```cpp memmove()```
   - Utilisation de ```cpp goto``` au-delà de la déclaration d'une variable
 
-// C'est à dire depuis un point où la variable n'est pas dans le scope vers un point où la variable est déjà dans le scope
+  // C'est à dire depuis un point où la variable n'est pas dans le scope vers un point où la variable est déjà dans le scope
 
   - Utilisation de ```cpp reinterpret_cast```
   - Accès au début commun d'une union par un membre non actif
@@ -1851,7 +1896,7 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   - Constructeurs ou destructeurs ```cpp =default``` autorisés
   - Données membres non-statiques plus nécessairement publiques
 
-//Mais doivent toutes avoir la même portée, car en C++, le compilateur peut réordonner les données de portées différentes
+  //Mais doivent toutes avoir la même portée, car en C++, le compilateur peut réordonner les données de portées différentes
 
   - Classes de base non virtuelles autorisées
 
@@ -1905,7 +1950,9 @@ foo();      // Affiche V2
   - Évolution de bibliothèques et conservation des versions précédentes
 ])
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%0Anamespace+V1%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V1%5Cn%22%3B%0A++%7D%0A%7D%0A%0Ainline+namespace+V2%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V2%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++V1::foo()%3B%0A++V2::foo()%3B%0A%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%0Anamespace+V1%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V1%5Cn%22%3B%0A++%7D%0A%7D%0A%0Ainline+namespace+V2%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V2%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++V1::foo()%3B%0A++V2::foo()%3B%0A%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 #addproposal("N2535")
 
@@ -1920,13 +1967,13 @@ foo();      // Affiche V2
 - Cohabite mal avec les surcharges
 
 #noteblock("Quiz : Quelle surcharge est éligible ?", text[
-```cpp
-void foo(char*) { cout << "chaine\n"; }
-void foo(int) { cout << "entier\n"; }
+  ```cpp
+  void foo(char*) { cout << "chaine\n"; }
+  void foo(int) { cout << "entier\n"; }
 
-foo(0);
-foo(NULL);
-```
+  foo(0);
+  foo(NULL);
+  ```
 ])
 
 == ``` 0``` ou ``` NULL``` ? ``` nullptr``` !
@@ -1947,7 +1994,9 @@ foo(nullptr);  // Version pointeur
   - Utilisez ```cpp nullptr``` plutôt que ```cpp 0``` ou ```cpp NULL```
 ])
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+void+foo(char*)%0A%7B%0A++std::cout+%3C%3C+%22chaine%5Cn%22%3B%0A%7D%0A%0Astatic+void+foo(int)%0A%7B%0A++std::cout+%3C%3C+%22entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(0)%3B%0A%23if+1%0A++foo(NULL)%3B%0A%23else%0A++foo(nullptr)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+void+foo(char*)%0A%7B%0A++std::cout+%3C%3C+%22chaine%5Cn%22%3B%0A%7D%0A%0Astatic+void+foo(int)%0A%7B%0A++std::cout+%3C%3C+%22entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(0)%3B%0A%23if+1%0A++foo(NULL)%3B%0A%23else%0A++foo(nullptr)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 #addproposal("N2431")
 
@@ -1968,166 +2017,245 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
   - Préférez les vérifications _compile-time_ ou _link-time_ aux vérifications _run-time_
 ])
 
-#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++static_assert(sizeof(int)+%3D%3D+3,+%22Taille+incorrecte%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++static_assert(sizeof(int)+%3D%3D+3,+%22Taille+incorrecte%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
 #addproposal("N1720")
 
+== ``` constexpr```
+
+- Indique une expression constante
+- Donc évaluable et utilisable à la compilation
+- Implicitement ```cpp const```
+- Fonctions ```cpp constexpr``` implicitement ```cpp inline```
+- Contenu des fonctions ```cpp constexpr``` limité
+  - ```cpp static_assert```
+  - ```cpp typedef```
+  - ```cpp using```
+  - Exactement une expression ```cpp return```
+
+// Et des null statements, mais ça n'a pas d'intérêt
+
+```cpp
+constexpr int foo() { return 42; }
+
+char bar[foo()];
+```
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+constexpr+int+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++char+bar%5Bfoo()%5D+%3D+%22azerty%22%3B%0A%0A++std::cout+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
+
+#addproposal("N2235")
+
+== ``` constexpr```
+
+```cpp
+constexpr int foo() { return 42; }
+
+int a = 42;
+switch(a) {
+  case foo():
+    break;
+
+  default:
+    break;
+}
+```
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+constexpr+int+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++int+a+%3D+42%3B%0A++switch(a)%0A++%7B%0A++++case+foo():%0A++++++std::cout+%3C%3C+%22case+foo%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22defuault%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
+
+#addproposal("N2235")
+
+== ``` constexpr```
+
+- Sous certaines conditions restrictives, ```cpp const``` sur une variable est suffisant
+
+// type entier ou énumération, initialisé à la déclaration par une expression constante
+
+```cpp
+const int a = 42;
+char bar[a];
+```
+
+#alertblock(text[_Variable-Length Array_], text[
+  - Pas de rapport entre VLA et ```cpp constexpr```
+  - VLA est un mécanisme _run-time_
+])
+
+// VLA est une fonctionnalité C, non reprise en C++, mais proposée sous forme d'extension par certains compilateurs. Elle consiste à accepter les tableaux de taille définie au run-time
+
+#adviceblock("Do", text[
+  - Déclarez ```cpp constexpr``` les constantes et fonctions évaluables en _compile-time_
+])
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:13,endLineNumber:6,positionColumn:13,positionLineNumber:6,selectionStartColumn:13,selectionStartLineNumber:6,startColumn:13,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++const+int+a+%3D+42%3B%0A++char+bar%5Ba%5D+%3D+%22azerty%22%3B%0A%0A++std::cout+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
+
+== Extended ``` sizeof```}
+
+- ```cpp sizeof``` sur des membres non statiques
 
 
-== \mintinline[style=white]{cpp}```constexpr```}
-	\begin{itemize}
-		\item Indique une expression constante
-		\item Donc évaluable et utilisable à la compilation
-		\item Implicitement ```cpp const```
-		\item Fonctions ```cpp constexpr``` implicitement ```cpp inline```
-		\item Contenu des fonctions ```cpp constexpr``` limité
-		\begin{itemize}
-			\item ```cpp static_assert```
-			\item ```cpp typedef```
-			\item ```cpp using```
-			\item Exactement une expression ```cpp return```
-		\end{itemize}
+```cpp
+struct Foo { int bar; };
 
-\note[item]{Et des \textit{null statements}, mais ça n'a pas d'intérêt}
-	\end{itemize}
+// Valide en C++11, mal-forme en C++98/03
+cout << sizeof Foo::bar;
+```
 
-	```cpp
-		constexpr int foo() { return 42; }
+// Mal-formé (ill-formed) n'implique pas une erreur de compilation ni même un avertissement, seulement que ce n'est pas correct vu de la norme
 
-		char bar[foo()];
-	```
+#noteblock("Note", text[
+  - En pratique, cet exemple compile en mode C++98 sous GCC
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+constexpr+int+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++char+bar%5Bfoo()%5D+%3D+%22azerty%22%3B%0A%0A++std::cout+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+bar%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sizeof+Foo::bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+)
 
-	\addproposal{N2235}{https://wg21.link/N2235}
+#addproposal("n2253")
 
+== Sémantique de déplacement
 
+- Deux constats
+  - Copie potentiellement coûteuse ou impossible
+  - Copie inutile lorsque l'objet source est immédiatement détruit
 
-== \mintinline[style=white]{cpp}```constexpr```}
-	```cpp
-		constexpr int foo() { return 42; }
+#noteblock("Optimisation des copies", text[
+  - Partiellement adressé en C++98/03 par l'élision de copie et (N)RVO
+])
 
-		int a = 42;
-		switch(a) {
-		  case foo():
-		    break;
+- Échange de données légères plutôt que copie profonde
+- Déplacement seulement si
+  - Type déplaçable
+  - Instance sur le point d'être détruite ou explicitement déplacée
 
-		  default:
-		    break;
-		}
-	```
+#alertblock("Attention", text[
+  - Les données ne sont plus présentes dans l'objet initial
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+constexpr+int+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++int+a+%3D+42%3B%0A++switch(a)%0A++%7B%0A++++case+foo():%0A++++++std::cout+%3C%3C+%22case+foo%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22defuault%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2235}{https://wg21.link/N2235}
-
-
-
-== \mintinline[style=white]{cpp}```constexpr```}
-	\begin{itemize}
-		\item Sous certaines conditions restrictives, ```cpp const``` sur une variable est suffisant
-
-\note[item]{type entier ou énumération, initialisé à la déclaration par une expression constante}
-	\end{itemize}
-
-	```cpp
-		const int a = 42;
-		char bar[a];
-	```
-
-	\begin{alertblock}{\textit{Variable-Length Array}}
-		\begin{itemize}
-			\item Pas de rapport entre VLA et ```cpp constexpr```
-			\item VLA est un mécanisme \textit{run-time}
-		\end{itemize}
-	\end{alertblock}
-
-\note[item]{VLA est une fonctionnalité C, non reprise en C++, mais proposée sous forme d'extension par certains compilateurs. Elle consiste à accepter les tableaux de taille définie au \textit{run-time}}
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Déclarez ```cpp constexpr``` les constantes et fonctions évaluables en \textit{compile-time}
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:13,endLineNumber:6,positionColumn:13,positionLineNumber:6,selectionStartColumn:13,selectionStartLineNumber:6,startColumn:13,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++const+int+a+%3D+42%3B%0A++char+bar%5Ba%5D+%3D+%22azerty%22%3B%0A%0A++std::cout+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-
-
-== Extended \mintinline[style=white]{cpp}```sizeof```}
-	\begin{itemize}
-		\item ```cpp sizeof``` sur des membres non statiques
-	\end{itemize}
-
-	```cpp
-		struct Foo { int bar; };
-
-		// Valide en C++11, mal-forme en C++98/03
-		cout << sizeof Foo::bar;
-	```
-
-\note[item]{Mal-formé (\textit{ill-formed}) n'implique pas une erreur de compilation ni même un avertissement, seulement que ce n'est pas correct vu de la norme}
-
-	\begin{block}{Note}
-		\begin{itemize}
-			\item En pratique, cet exemple compile en mode C++98 sous GCC
-		\end{itemize}
-	\end{block}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+bar%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sizeof+Foo::bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{n2253}{https://wg21.link/n2253}
-
-
-== Sémantique de déplacement}
-	\begin{itemize}
-		\item Deux constats
-		\begin{itemize}
-			\item Copie potentiellement coûteuse ou impossible
-			\item Copie inutile lorsque l'objet source est immédiatement détruit
-		\end{itemize}
-	\end{itemize}
-
-	\begin{block}{Optimisation des copies}
-		\begin{itemize}
-			\item Partiellement adressé en C++98/03 par l'élision de copie et (N)RVO
-		\end{itemize}
-	\end{block}
-
-	\begin{itemize}
-		\item Échange de données légères plutôt que copie profonde
-		\item Déplacement seulement si
-		\begin{itemize}
-			\item Type déplaçable
-			\item Instance sur le point d'être détruite ou explicitement déplacée
-		\end{itemize}
-	\end{itemize}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Les données ne sont plus présentes dans l'objet initial
-		\end{itemize}
-	\end{alertblock}
-
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
-
-
+#addproposal("N2118")
+#addproposal("n2439")
+#addproposal("N2844")
+#addproposal("N3053")
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Copie
-	\end{itemize}
+
+- Copie
+
+// TODO
+
+#cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  // Your drawing code goes here
+
+// Draw a rect from A(0, 0) to B(1, 1)
+rect((0, 0), (1, 1), name: "a")
+rect((1, 0), (2, 1))
+
+rect((1, -1), (2, -1.5))
+content("a", [A])
+// Show the points
+set-style(content: (frame: "circle", padding: 1pt, fill: white))
+content((0, 0), [A]); content((1, 1), [B])
+})
+
+/*
+  #diagram(
+    node-stroke: 0.06em,
+    spacing: (0em, 2em),
+    label-size: 0.5em,
+
+    node(
+      (0, 0),
+      inset: 0em,
+      [#table(
+        columns: (10fr, 9fr, 9fr),
+        align: horizon,
+        stroke: 0.4pt + black,
+        text(weight: "regular")[Vecteur 1], text(weight: "regular")[Cap n], text(weight: "regular")[Taille n],
+      )],
+      name: <vec1>,
+      width: 15em,
+    ),
+
+    node((1, 0), [], name: <spacer>, width: 1em, stroke: 1em),
+
+    node(
+      (2, 0),
+      inset: 0em,
+      [#table(
+        columns: (10fr, 9fr, 9fr),
+        align: horizon,
+        stroke: 0.4pt + black,
+        text(weight: "regular")[Vecteur 2], text(weight: "regular")[Cap 0], text(weight: "regular")[Taille 0],
+      )],
+      name: <vec2>,
+      width: 15em,
+    ),
+
+    node(
+      (rel: (0,0) to),
+//(0,1),
+      inset: 0em,
+      [#table(
+        columns: (1fr, 1fr, 1fr, 1fr),
+        align: horizon,
+        stroke: 0.4pt + black,
+        text(weight: "regular")[Obj1], text(weight: "regular")[Obj2], text(weight: "regular")[...],text(weight: "regular")[Objn],
+      )],
+      name: <vec2>,
+      width: 10em,
+
+    ),
+
+    node(
+      (2, 1),
+      inset: 0em,
+      [#table(
+        columns: (1fr),
+        align: horizon,
+        stroke: 0.4pt + black,
+        text(weight: "regular")[_null_],
+      )],
+      name: <vec2>,
+      width: 2.5em,
+    ),
+
+
+    //      node((1,1), [Obj1],name: <tail2>, width: 3em),
+    //      node((2,1), [Obj2],name: <tail2>, width: 3em),
+    //      node((3,1), [...],name: <tail2>, width: 3em),
+    //      node((4,1), [Objn],name: <tail2>, width: 3em),
+*/
+    /*      node((0, 0), [Input], name: <input>, width: 3.5em),
+    node((2, 0), [Output], name: <output>, width: 3.5em),
+    node((1, 1), [Forward], shape: rect, name: <forward>, width: 7.5em),
+    node((1, 2), [Bidirectional], shape: rect, name: <bidir>, width: 7.5em),
+    node((1, 3), [Random Access], shape: rect, name: <random>, width: 7.5em),
+    edge(
+      <input.south>,
+      ((), "|-", ((), 50%, <forward.north>)),
+      ((), "-|", ((), 100%, <forward.north>)),
+      <forward.north>,
+      "<|-",
+    ),
+    edge(
+      <output.south>,
+      ((), "|-", ((), 50%, <forward.north>)),
+      ((), "-|", ((), 100%, <forward.north>)),
+      <forward.north>,
+      "<|-",
+    ),
+    edge(<forward>, <bidir>, "<|-"),
+    edge(<bidir>, <random>, "<|-"),
+  )*/
+
 /*
 	\begin{picture}(0,0)(-50,0)
 		% Boites
@@ -2154,17 +2282,11 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 		\put(125,-12){\vector(1,0){15}}
 	\end{picture}
 */
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
-
-
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Copie
-	\end{itemize}
+
+- Copie
+
 /*
 	\begin{picture}(0,0)(-50,0)
 		% Boites
@@ -2220,17 +2342,13 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 		\put(125,-47){\vector(1,0){15}}
 	\end{picture}
 */
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
 
 
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Copie
-	\end{itemize}
+
+- Copie
+
 /*
 	\begin{picture}(0,0)(-50,0)
 		% Boites
@@ -2315,17 +2433,13 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 		\put(125,-82){\vector(1,0){15}}
 	\end{picture}
 */
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
 
 
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Copie
-	\end{itemize}
+
+- Copie
+
 /*
 	\begin{picture}(0,0)(-50,0)
 		% Boites
@@ -2439,17 +2553,13 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 		\put(125,-126){\vector(1,0){15}}
 	\end{picture}
 */
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
 
 
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Déplacement
-	\end{itemize}
+
+- Déplacement
+
 /*
 	\begin{picture}(0,0)(-50,0)
 		% Boites
@@ -2476,17 +2586,13 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 		\put(125,-12){\vector(1,0){15}}
 	\end{picture}
 */
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
 
 
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Déplacement
-	\end{itemize}
+
+- Déplacement
+
 /*
 	\begin{picture}(0,0)(-50,0)
 		% Boites
@@ -2543,4585 +2649,3317 @@ static_assert(sizeof(int) == 3, "Taille incorrecte");
 		\put(40,-47){\vector(1,0){10}}
 	\end{picture}
 */
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
 
 
+== Sémantique de déplacement
 
-== Sémantique de déplacement}
-	\begin{itemize}
-		\item \textit{rvalue reference}
-		\begin{itemize}
-			\item Référence sur un objet temporaire ou sur le point d'être détruit
-			\item Noté par une double esperluette : ```cpp T&& value```
-		\end{itemize}
-		\item Deux fonctions de conversion
-		\begin{itemize}
-			\item ```cpp std::move()``` convertit le paramètre en \textit{rvalue}
+- _rvalue reference_
+  - Référence sur un objet temporaire ou sur le point d'être détruit
+  - Noté par une double esperluette : ```cpp T&& value```
+- Deux fonctions de conversion
+  - ```cpp std::move()``` convertit le paramètre en _rvalue_
 
-\note[item]{```cpp std::move()``` force la sémantique de déplacement sur l'objet}
+// std::move force la sémantique de déplacement sur l'objet}
 
-			\item ```cpp std::forward()``` convertit le paramètre en \textit{rvalue} s'il n'est pas une \textit{lvalue reference}
-		\end{itemize}
-	\end{itemize}
+  - ```cpp std::forward()``` convertit le paramètre en _rvalue_ s'il n'est pas une _lvalue reference_
 
-	\begin{block}{\textit{rvalue}, \textit{lvalue}, \ldots{} ?}
-		\begin{itemize}
-			\item Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{N3337\linklogo} §3.10
-		\end{itemize}
-	\end{block}
+#noteblock(text[_rvalue_, _lvalue_, ... ?}], text[
+- Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf")[N3337 #linklogo() §3.10]
+])
 
-	\begin{block}{\mintinline[style=white]{cpp}```std::forward()``` ?}
-		\begin{itemize}
-			\item \textit{perfect forwarding} (Voir \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm}{N1385\linklogo})
-		\end{itemize}
-	\end{block}
+#noteblock(text[``` std::forward()``` ?}], text[
+- _perfect forwarding_ (Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm")[N1385 #linklogo])
+])
 
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
+== Sémantique de déplacement
 
+- Rendre une classe déplaçable
+  - Constructeur par déplacement ```cpp T(const T&&)```
+  - Opérateur d'affectation par déplacement ```cpp T& operator=(const T&&)```
 
+#noteblock("Génération implicite", text[
+  - Pas de constructeur par copie, d'opérateur d'affectation, de destructeur, ni l'autre déplacement _user-declared_
+])
+
+#alertblock(text[_user-declared_ ? _user-provided_ ?], text[
+  - _user-declared_ : fonction déclarée par l'utilisateur, y compris ```cpp =default```
+  - _user-provided_ : corps de la fonction fourni par l'utilisateur
+])
 
 == Sémantique de déplacement}
-	\begin{itemize}
-		\item Rendre une classe déplaçable
-		\begin{itemize}
-			\item Constructeur par déplacement ```cpp T(const T&&)```
-			\item Opérateur d'affectation par déplacement ```cpp T& operator=(const T&&)```
-		\end{itemize}
-	\end{itemize}
 
-	\begin{block}{Génération implicite}
-		\begin{itemize}
-			\item Pas de constructeur par copie, d'opérateur d'affectation, de destructeur, ni l'autre déplacement \textit{user-declared}
-		\end{itemize}
-	\end{block}
+#noteblock(text[_Rule of five_], text[
+  - Si une classe déclare destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
 
-	\begin{alertblock}{\textit{user-declared} ? \textit{user-provided} ?}
-		\begin{itemize}
-			\item \textit{user-declared} : fonction déclarée par l'utilisateur, y compris ```cpp =default```
-			\item \textit{user-provided} : corps de la fonction fourni par l'utilisateur
-		\end{itemize}
-	\end{alertblock}
+  // Contrairement à Rule of three, l'absence des constructeur et opérateur d'affectation par déplacement n'est pas une erreur grave, mais une optimisation manquée
+])
 
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
+#noteblock(text[_Rule of zero_], text[
+  - Lorsque c'est possible, n'en définissez aucune
 
+  // Rule of zero s'applique typiquement aux classes sans gestion explicite d'ownership, c'est à dire sans membres qu'il faut explicitement libérés, fermés, ... Ce qui devrait être le cas par défaut
+])
 
+#noteblock("Pour aller plus loin", text[
+  - Voir #link("https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf")[Élégance, style épuré et classe #linklogo() (Loïc Joly)]
+])
 
 == Sémantique de déplacement}
-	\begin{block}{\textit{Rule of five}}
-		\begin{itemize}
-			\item Si une classe déclare destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
 
-\note[item]{Contrairement à \textit{Rule of three}, l'absence des constructeur et opérateur d'affectation par déplacement n'est pas une erreur grave, mais une optimisation manquée}
-		\end{itemize}
-	\end{block}
+#noteblock("Dans la bibliothèque standard", text[
+  - Nombreuses classes standards déplaçables (thread, flux, ...)
 
-	\begin{block}{\textit{Rule of zero}}
-		\begin{itemize}
-			\item Lorsque c'est possible, n'en définissez aucune
+  // Mutex et lock ne sont pas copiables ni déplaçables
 
-\note[item]{\textit{Rule of zero} s'applique typiquement aux classes sans gestion explicite d'\textit{ownership}, c'est à dire sans membres qu'il faut explicitement libérés, fermés, \ldots{}. Ce qui devrait être le cas par défaut}
-		\end{itemize}
-	\end{block}
+  - Évolution de contraintes : déplaçable plutôt que copiable
 
-	\begin{block}{Pour aller plus loin}
-		\begin{itemize}
-			\item Voir \href{https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf}{Élégance, style épuré et classe\linklogo (Loïc Joly)}
-		\end{itemize}
-	\end{block}
+  // Évolution des contraintes notamment pour les conteneurs et les algorithmes
 
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
+  - Implémentations utilisant le déplacement si possible
+])
 
+\
 
+== Initializer list
 
-== Sémantique de déplacement}
-	\begin{block}{Dans la bibliothèque standard}
-		\begin{itemize}
-			\item Nombreuses classes standards déplaçables (thread, flux, \ldots{})
+- Initialisation des conteneurs
 
-\note[item]{Mutex et lock ne sont pas copiables ni déplaçables}
+```cpp
+vector<int> foo;
+foo.push_back(1);
+foo.push_back(56);
+foo.push_back(18);
+foo.push_back(3);
 
-			\item Évolution de contraintes : déplaçable plutôt que copiable
+// Devient
 
-\note[item]{Évolution des contraintes notamment pour les conteneurs et les algorithmes}
+vector<int> foo{1, 56, 18, 3};
+```
 
-			\item Implémentations utilisant le déplacement si possible
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+56,+18,+3%7D%3B%0A%0A++std::cout+%3C%3C+foo.size()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{N2118}{https://wg21.link/N2118}
-	\addproposal{n2439}{https://wg21.link/n2439}
-	\addproposal{N2844}{https://wg21.link/N2844}
-	\addproposal{N3053}{https://wg21.link/N3053}
+#addproposal("N2672")
 
+== Initializer list
 
+- Classe ```cpp std::initializer_list``` pour accéder aux valeurs de la liste
 
-== Initializer list}
-	\begin{itemize}
-		\item Initialisation des conteneurs
-	\end{itemize}
+#alertblock("Accéder, pas contenir !", text[
+  - ```cpp std::initializer_list``` référence mais ne contient pas les valeurs
+  - Valeurs contenues dans un tableau temporaire de même durée de vie
+  - Copier un ```cpp std::initializer_list``` ne copie pas les données
+])
 
-	```cpp
-		vector<int> foo;
-		foo.push_back(1);
-		foo.push_back(56);
-		foo.push_back(18);
-		foo.push_back(3);
+- Fonctions membres ```cpp size()```, ```cpp begin()```, ```cpp end()```
+- Construction automatique depuis une liste de valeurs entre accolades
 
-		// Devient
+== Initializer list
 
-		vector<int> foo{1, 56, 18, 3};
-	```
+- Constructeurs peuvent prendre un ```cpp std::initializer_list``` en paramètre
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+56,+18,+3%7D%3B%0A%0A++std::cout+%3C%3C+foo.size()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+MaClasse(initializer_list<value_type> itemList);
+```
 
-	\addproposal{N2672}{https://wg21.link/N2672}
+- Ainsi que toute autre fonction
+- Intégré aux conteneurs de la bibliothèque standard
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cinitializer_list%3E%0A%0Astruct+Foo%0A%7B%0A++Foo(std::initializer_list%3Cint%3E+l)+:+m_vec(l)%0A++%7B%0A++++std::cout+%3C%3C+l.size()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++void+append(std::initializer_list%3Cint%3E+l)%0A++%7B%0A++++for(std::initializer_list%3Cint%3E::iterator+it+%3D+l.begin()%3B+it+!!%3D+l.end()%3B+%2B%2Bit)%0A++++%7B%0A++++++m_vec.push_back(*it)%3B%0A++++%7D%0A++%7D%0A%0A++std::vector%3Cint%3E+m_vec%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo+%3D+%7B1,+2,+3,+4,+5%7D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.append(%7B6,+7,+8%7D)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
 
-== Initializer list}
-	\begin{itemize}
-		\item Classe ```cpp std::initializer_list``` pour accéder aux valeurs de la liste
-	\end{itemize}
+== Initializer list
 
-	\begin{alertblock}{Accéder, pas contenir !}
-		\begin{itemize}
-			\item ```cpp std::initializer_list``` référence mais ne contient pas les valeurs
-			\item Valeurs contenues dans un tableau temporaire de même durée de vie
-			\item Copier un ```cpp std::initializer_list``` ne copie pas les données
-		\end{itemize}
-	\end{alertblock}
+#adviceblock("Do", text[
+  - Préférez ```cpp std::initializer_list``` aux insertions successives
+])
 
-	\begin{itemize}
-		\item Fonctions membres ```cpp size()```, ```cpp begin()```, ```cpp end()```
-		\item Construction automatique depuis une liste de valeurs entre accolades
-	\end{itemize}
+#alertblock("Don't", text[
+  - N'utilisez pas ```cpp std::initializer_list``` pour copier ou transformer
+  - Utilisez les algorithmes et constructeurs idoines
+])
 
-	\addproposal{N2672}{https://wg21.link/N2672}
+== Uniform Initialization
 
+- Plusieurs types d'initialisation en C++98/03
 
+```cpp
+int a = 2;
+int b(2);
+int c[] = {1, 2, 3};
+int d;
+```
 
-== Initializer list}
-	\begin{itemize}
-		\item Constructeurs peuvent prendre un ```cpp std::initializer_list``` en paramètre
-	\end{itemize}
+== Uniform Initialization
 
-	```cpp
-		MaClasse(initializer_list<value_type> itemList);
-	```
+- Mais aucune de générique
 
-	\begin{itemize}
-		\item Ainsi que toute autre fonction
-		\item Intégré aux conteneurs de la bibliothèque standard
-	\end{itemize}
+```cpp
+int a(2);        // Definition de l'entier a
+int b();         // Declaration d'une fonction
+int c(foo);      // ???
+int d[] (1, 2);  // KO
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cinitializer_list%3E%0A%0Astruct+Foo%0A%7B%0A++Foo(std::initializer_list%3Cint%3E+l)+:+m_vec(l)%0A++%7B%0A++++std::cout+%3C%3C+l.size()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++void+append(std::initializer_list%3Cint%3E+l)%0A++%7B%0A++++for(std::initializer_list%3Cint%3E::iterator+it+%3D+l.begin()%3B+it+!!%3D+l.end()%3B+%2B%2Bit)%0A++++%7B%0A++++++m_vec.push_back(*it)%3B%0A++++%7D%0A++%7D%0A%0A++std::vector%3Cint%3E+m_vec%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo+%3D+%7B1,+2,+3,+4,+5%7D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.append(%7B6,+7,+8%7D)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+int a[] = {1, 2, 3};        // OK
 
-	\addproposal{N2672}{https://wg21.link/N2672}
+struct Foo { int a; };
+Foo foo = {1};              // OK
 
+vector<int> b = {1, 2, 3};  // KO
+int c{8}                    // KO
+```
 
+// L'initialisation de Foo fonctionne car c'est un POD (pas de classe de base, pas de virtuel, etc.)
 
-\frametitle{Initializer list}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::initializer_list``` aux insertions successives
-		\end{itemize}
-	\end{exampleblock}
+== Uniform Initialization
 
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item N'utilisez pas ```cpp std::initializer_list``` pour copier ou transformer
-			\item Utilisez les algorithmes et constructeurs idoines
-		\end{itemize}
-	\end{alertblock}
+- En C++ 11, l'initialisation via ```cpp {}``` est générique
 
+```cpp
+int a[] = {1, 2, 3};         // OK
+Foo b = {5};                 // OK
+vector<int> c = {1, 2, 3};   // OK
+int d = {8};                 // OK
+int e = {};                  // OK
+```
 
+- Avec ou sans ```cpp =```
 
-== Uniform Initialization}
-	\begin{itemize}
-		\item Plusieurs types d'initialisation en C++98/03
-	\end{itemize}
+```cpp
+int a[]{1, 2, 3};            // OK
+Foo b{5};                    // OK
+vector<int> c{1, 2, 3};      // OK
+int d{8};                    // OK
+int e{};                     // OK
+```
 
-	```cpp
-		int a = 2;
-		int b(2);
-		int c[] = {1, 2, 3};
-		int d;
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Astruct+Foo+%0A%7B%0A++int+foo%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++int+a%5B%5D+%3D+%7B1,+2,+3%7D%3B%0A++Foo+b+%3D+%7B5%7D%3B%0A++std::vector%3Cint%3E+c+%3D+%7B1,+2,+3%7D%3B%0A++int+d%7B8%7D%3B%0A++int+e%7B%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-Wno-unused-variable+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Uniform Initialization
 
+- Dans différents contextes
 
-== Uniform Initialization}
-	\begin{itemize}
-		\item Mais aucune de générique
-	\end{itemize}
+```cpp
+int* p = new int{4};
+long l = long{2};
 
-	```cpp
-		int a(2);        // Definition de l'entier a
-		int b();         // Declaration d'une fonction
-		int c(foo);      // ???
-		int d[] (1, 2);  // KO
-	```
+void f(int);
+f({2});
+```
 
-	```cpp
-		int a[] = {1, 2, 3};        // OK
+== Uniform Initialization
 
-		struct Foo { int a; };
-		Foo foo = {1};              // OK
+#alertblock("Attention", text[
+  - Pas de troncature avec ```cpp {}```
 
-		vector<int> b = {1, 2, 3};  // KO
-		int c{8}                    // KO
-	```
+```cpp
+int foo{2.5};  // Erreur
+```
+])
 
-\note[item]{L'initialisation de ```cpp Foo``` fonctionne car c'est un POD (pas de classe de base, pas de virtuel, etc.)}
+#alertblock("Attention", text[
+  - Si le constructeur par ```cpp std::initializer_list``` existe, il est utilisé
 
+```cpp
+vector<int> foo{2};  // 2
+vector<int> foo(2);  // 0 0
+```
+])
 
+== Uniform Initialization
 
-== Uniform Initialization}
-	\begin{itemize}
-		\item En C++ 11, l'initialisation via ```cpp {}``` est générique
-	\end{itemize}
+#alertblock("Contraintes sur l'initialisation d'agrégats", text[
+  - Pas d'héritage
+  - Pas de constructeur fourni par l'utilisateur
+  - Pas d'initialisation _brace-or-equal-initializers_
+  - Pas de fonction virtuelle ni de membre non statique protégé ou privé
+])
 
-	```cpp
-		int a[] = {1, 2, 3};         // OK
-		Foo b = {5};                 // OK
-		vector<int> c = {1, 2, 3};   // OK
-		int d = {8};                 // OK
-		int e = {};                  // OK
-	```
+#adviceblock("Do", text[
+  - Préférez l'initialisation ```cpp {}``` aux autres formes
+])
 
-	\begin{itemize}
-		\item Avec ou sans ```cpp =```
-	\end{itemize}
+== ``` auto```
 
-	```cpp
-		int a[]{1, 2, 3};            // OK
-		Foo b{5};                    // OK
-		vector<int> c{1, 2, 3};      // OK
-		int d{8};                    // OK
-		int e{};                     // OK
-	```
+- Déduction (ou inférence) de type depuis l'initialisation
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Astruct+Foo+%0A%7B%0A++int+foo%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++int+a%5B%5D+%3D+%7B1,+2,+3%7D%3B%0A++Foo+b+%3D+%7B5%7D%3B%0A++std::vector%3Cint%3E+c+%3D+%7B1,+2,+3%7D%3B%0A++int+d%7B8%7D%3B%0A++int+e%7B%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-Wno-unused-variable+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#alertblock("Attention", text[
+  - Inférence de type $\neq$ typage dynamique
+  - Inférence de type $\neq$ typage faible
+  - Typage dynamique $\neq$ typage faible
+])
 
+#noteblock("Vocabulaire", text[
+  - Statique : type porté par la variable et ne varie pas
+  - Dynamique : type porté par la valeur
+  - Absence : variable non typée, type imposé par l'opération
+])
 
+#addproposal("N1984")
+#addproposal("n1737")
+#addproposal("n2546")
 
-== Uniform Initialization}
-	\begin{itemize}
-		\item Dans différents contextes
-	\end{itemize}
+== ``` auto```
 
-	```cpp
-		int* p = new int{4};
-		long l = long{2};
+- ```cpp auto``` définit une variable dont le type est déduit
 
-		void f(int);
-		f({2});
-	```
+```cpp
+auto i = 2;  // int
+```
 
+- Règles de déduction proches de celles des templates
+- Listes entre accolades inférées comme des ```cpp std::initializer_list```
 
+#alertblock("Attention", text[
+  - Référence, ```cpp const``` et ```cpp volatile``` perdus durant la déduction
 
-== Uniform Initialization}
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Pas de troncature avec ```cpp {}```
-		\end{itemize}
+```cpp
+const int i = 2;
+auto j = i;  // int
+```
+])
 
-		```cpp
-			int foo{2.5};  // Erreur
-		```
-	\end{alertblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+2%3B+%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Si le constructeur par ```cpp std::initializer_list``` existe, il est utilisé
-		\end{itemize}
+== ``` auto```
 
-		```cpp
-			vector<int> foo{2};  // 2
-			vector<int> foo(2);  // 0 0
-		```
-	\end{alertblock}
+- Combinaison possible avec ```cpp const```, ```cpp volatile``` ou ```cpp &```
 
+```cpp
+const auto i = 2;
 
+int j = 3;
+auto& k = j;
+```
 
-== Uniform Initialization}
-	\begin{alertblock}{Contraintes sur l'initialisation d'agrégats}
-		\begin{itemize}
-			\item Pas d'héritage
-			\item Pas de constructeur fourni par l'utilisateur
-			\item Pas d'initialisation \textit{brace-or-equal-initializers}
-			\item Pas de fonction virtuelle ni de membre non statique protégé ou privé
-		\end{itemize}
-	\end{alertblock}
+- Typer explicitement l'initialiseur permet de forcer le type déduit
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez l'initialisation ```cpp {}``` aux autres formes
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+// unsigned long
+auto i = static_cast<unsigned long>(2);
+auto j = 2UL
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+static_cast%3Cunsigned+long%3E(2)%3B%0A++assert(typeid(i)+%3D%3D+typeid(unsigned+long))%3B%0A++%0A++auto+j+%3D+2UL%3B%0A++assert(typeid(j)+%3D%3D+typeid(unsigned+long))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== ``` auto```
 
-== \mintinline[style=white]{cpp}```auto```}
-	\begin{itemize}
-		\item Déduction (ou inférence) de type depuis l'initialisation
-	\end{itemize}
+- Tendance forte "Almost Always Auto" (AAA)
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Inférence de type $\neq$ typage dynamique
-			\item Inférence de type $\neq$ typage faible
-			\item Typage dynamique $\neq$ typage faible
-		\end{itemize}
-	\end{alertblock}
+#noteblock("Pour aller plus loin", text[
+  - Voir #link("href{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/")[GotW 94 : AAA Style #linklogo()]
+])
 
-	\begin{block}{Vocabulaire}
-		\begin{itemize}
-			\item Statique : type porté par la variable et ne varie pas
-			\item Dynamique : type porté par la valeur
-			\item Absence : variable non typée, type imposé par l'opération
-		\end{itemize}
-	\end{block}
+- Plusieurs avantages
+  - Variables forcément initialisées
+  - Typage correct et précis
+  - Garanties conservées au fil des corrections et refactoring
+  - Généricité et simplification du code
 
-	\addproposal{N1984}{https://wg21.link/N1984}
-	\addproposal{n1737}{https://wg21.link/n1737}
-	\addproposal{n2546}{https://wg21.link/n2546}
+#noteblock("Quiz", text[
+- Type de retour de ```cpp std::list<std::string>::size()``` ?
+])
 
+== ``` auto```
 
+- Limitations - solutions
+  - Erreur de déduction - typage explicite de l'initialiseur
+  - Initialisation impossible - ```cpp decltype```
+  - Interfaces, rôles, contexte - concepts ?
 
-== \mintinline[style=white]{cpp}```auto```}
-	\begin{itemize}
-		\item ```cpp auto``` définit une variable dont le type est déduit
-	\end{itemize}
+//Mais il faut attendre C++20 pour avoir les concepts
 
-	```cpp
-		auto i = 2;  // int
-	```
+#alertblock("Compatibilité", text[
+- ```cpp auto``` présent en C++98/03 avec un sens radicalement différent
 
-	\begin{itemize}
-		\item Règles de déduction proches de celles des templates
-		\item Listes entre accolades inférées comme des ```cpp std::initializer_list```
-	\end{itemize}
+// Sens en C++98/03 : variable de type automatique (c'est à dire sur la pile) par opposition à statique (cas par défaut et donc inutilisé en pratique)
+])
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Référence, ```cpp const``` et ```cpp volatile``` perdus durant la déduction
-		\end{itemize}
+== ``` decltype```
 
-		```cpp
-			const int i = 2;
-			auto j = i;  // int
-		```
-	\end{alertblock}
+- Déduction du type d'une variable ou d'une expression
+- Permet donc la création d'une variable du même type
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+2%3B+%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+int a;
+long b;
 
-	\addproposal{N1984}{https://wg21.link/N1984}
-	\addproposal{n1737}{https://wg21.link/n1737}
-	\addproposal{n2546}{https://wg21.link/n2546}
+decltype(a) c;         // int
+decltype(a + b) d;     // long
+```
 
+- Généralement, déduction sans aucune modification du type
+// Donc conservation des références, const, etc.
+- Depuis une _lvalue_ de type ```cpp T``` autre qu'un nom de variable : ```cpp T&```
 
+```cpp
+decltype( (a) ) e;     // int&
+```
 
-== \mintinline[style=white]{cpp}```auto```}
-	\begin{itemize}
-		\item Combinaison possible avec ```cpp const```, ```cpp volatile``` ou ```cpp &```
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++int+a%3B%0A++long+b%3B%0A%0A++decltype+(a)+c%3B%0A++decltype+(a+%2B+b)+d%3B%0A%0A++assert(typeid(c)+%3D%3D+typeid(int))%3B%0A++assert(typeid(d)+%3D%3D+typeid(long))%3B%0A%0A%23if+0%0A++decltype(+(a)+)+e%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		const auto i = 2;
+#addproposal("N2343")
+#addproposal("N3276")
 
-		int j = 3;
-		auto& k = j;
-	```
+== ``` declval```
 
-	\begin{itemize}
-		\item Typer explicitement l'initialiseur permet de forcer le type déduit
-	\end{itemize}
+- Utilisation de fonctions membres dans ```cpp decltype``` sans instance
+- Typiquement sur des templates acceptant des types sans constructeur commun mais avec une fonction membre commune
 
-	```cpp
-		// unsigned long
-		auto i = static_cast<unsigned long>(2);
-		auto j = 2UL
-	```
+```cpp
+struct foo {
+  foo(const foo&) {}
+  int bar () const { return 1; }
+};
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+static_cast%3Cunsigned+long%3E(2)%3B%0A++assert(typeid(i)+%3D%3D+typeid(unsigned+long))%3B%0A++%0A++auto+j+%3D+2UL%3B%0A++assert(typeid(j)+%3D%3D+typeid(unsigned+long))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+decltype(foo().bar()) a = 5;               // Erreur
+decltype(std::declval<foo>().bar()) b = 5; // OK, int
+```
 
-	\addproposal{N1984}{https://wg21.link/N1984}
-	\addproposal{n1737}{https://wg21.link/n1737}
-	\addproposal{n2546}{https://wg21.link/n2546}
+#alertblock("Attention", text[
+- Uniquement dans des contextes non évalués
+])
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Astruct+foo%0A%7B%0A++foo(const+foo%26)+%7B%7D%0A++int+bar()+const+%7B+return+1%3B+%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%23if+0%0A++decltype(foo().bar())+a+%3D+5%3B%0A%23endif%0A++decltype(std::declval%3Cfoo%3E().bar())+b+%3D+5%3B%0A%0A++assert(typeid(b)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Déduction du type retour
 
-== \mintinline[style=white]{cpp}```auto```}
-	\begin{itemize}
-		\item Tendance forte \textit{Almost Always Auto} (AAA)
-	\end{itemize}
+- Combinaison de ```cpp auto``` et ```cpp decltype```
 
-	\begin{block}{Pour aller plus loin}
-		\begin{itemize}
-			\item Voir \href{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}{GotW 94 : AAA Style\linklogo}
-		\end{itemize}
-	\end{block}
+```cpp
+auto add(int a, int b) -> decltype(a + b) {
+  return a + b;
+}
+```
 
-	\begin{itemize}
-		\item Plusieurs avantages
-		\begin{itemize}
-			\item Variables forcément initialisées
-			\item Typage correct et précis
-			\item Garanties conservées au fil des corrections et refactoring
-			\item Généricité et simplification du code
-		\end{itemize}
-	\end{itemize}
+- Particulièrement utiles pour des fonctions templates
 
-	\pause
+#noteblock(text[Quiz : ``` T```, ``` U``` ou autre ?], text[
+```cpp
+template<typename T, typename U> ??? add(T a, U b) {
+  return a + b;
+}
+```
+])
 
-	\begin{block}{Quiz}
-		\begin{itemize}
-			\item Type de retour de ```cpp std::list<std::string>::size()``` ?
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aauto+add(int+a,+int+b)+-%3E+decltype(a+%2B+b)+%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+add(1,+3)%3B%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-
-
-== \mintinline[style=white]{cpp}```auto```}
-	\begin{itemize}
-		\item Limitations - solutions
-		\begin{itemize}
-			\item Erreur de déduction - typage explicite de l'initialiseur
-			\item Initialisation impossible - ```cpp decltype```
-			\item Interfaces, rôles, contexte - concepts ?
-
-\note[item]{Mais il faut attendre C++20 pour avoir les concepts}
-		\end{itemize}
-	\end{itemize}
-
-	\begin{alertblock}{Compatibilité}
-		\begin{itemize}
-			\item ```cpp auto``` présent en C++98/03 avec un sens radicalement différent
-		\end{itemize}
-
-\note[item]{Sens en C++98/03 : variable de type automatique (c'est à dire sur la pile) par opposition à statique (cas par défaut et donc inutilisé en pratique)}
-	\end{alertblock}
-
-
-
-== \mintinline[style=white]{cpp}```decltype```}
-	\begin{itemize}
-		\item Déduction du type d'une variable ou d'une expression
-		\item Permet donc la création d'une variable du même type
-	\end{itemize}
-
-	```cpp
-		int a;
-		long b;
-
-		decltype(a) c;         // int
-		decltype(a + b) d;     // long
-	```
-
-	\begin{itemize}
-		\item Généralement, déduction sans aucune modification du type
-
-\note[item]{Donc conservation des références, ```cpp const```, etc.}
-
-		\item Depuis une \textit{lvalue} de type ```cpp T``` autre qu'un nom de variable : ```cpp T&```
-	\end{itemize}
-
-	```cpp
-		decltype( (a) ) e;     // int&
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++int+a%3B%0A++long+b%3B%0A%0A++decltype+(a)+c%3B%0A++decltype+(a+%2B+b)+d%3B%0A%0A++assert(typeid(c)+%3D%3D+typeid(int))%3B%0A++assert(typeid(d)+%3D%3D+typeid(long))%3B%0A%0A%23if+0%0A++decltype(+(a)+)+e%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2343}{https://wg21.link/N2343}
-	\addproposal{N3276}{https://wg21.link/N3276}
-
-
-
-== \mintinline[style=white]{cpp}```declval```}
-	\begin{itemize}
-		\item Utilisation de fonctions membres dans ```cpp decltype``` sans instance
-		\item Typiquement sur des templates acceptant des types sans constructeur commun mais avec une fonction membre commune
-	\end{itemize}
-
-	```cpp
-		struct foo {
-		  foo(const foo&) {}
-		  int bar () const { return 1; }
-		};
-
-		decltype(foo().bar()) a = 5;               // Erreur
-		decltype(std::declval<foo>().bar()) b = 5; // OK, int
-	```
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Uniquement dans des contextes non évalués
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Astruct+foo%0A%7B%0A++foo(const+foo%26)+%7B%7D%0A++int+bar()+const+%7B+return+1%3B+%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%23if+0%0A++decltype(foo().bar())+a+%3D+5%3B%0A%23endif%0A++decltype(std::declval%3Cfoo%3E().bar())+b+%3D+5%3B%0A%0A++assert(typeid(b)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-
+#addproposal("n2541")
 
 == Déduction du type retour}
-	\begin{itemize}
-		\item Combinaison de ```cpp auto``` et ```cpp decltype```
-	\end{itemize}
 
-	```cpp
-		auto add(int a, int b) -> decltype(a + b) {
-		  return a + b;
-		}
-	```
+#noteblock("Solution", text[
+  - Pas de bonne réponse en typage explicite
+  // Une solution historique : un seul type template et on compte sur les conversions implicites voire on demande des conversions explicites
+  - Mais l'inférence de type vient à notre secours
+])
 
-	\begin{itemize}
-		\item Particulièrement utiles pour des fonctions templates
-	\end{itemize}
+```cpp
+template<typename T, typename U>
+auto add(T a, U b) -> decltype(a + b) {
+  return a + b;
+}
+```
 
-	\begin{block}{Quiz : \mintinline[style=white]{cpp}```T```, \mintinline[style=white]{cpp}```U``` ou autre ?}
-		```cpp
-			template<typename T, typename U> ??? add(T a, U b) {
-			  return a + b;
-			}
-		```
-	\end{block}
+#adviceblock("do", text[
+  - Utilisez la déduction du type retour dans vos fonctions templates
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aauto+add(int+a,+int+b)+-%3E+decltype(a+%2B+b)+%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+add(1,+3)%3B%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Atemplate%3Ctypename+T,+typename+U%3E%0Aauto+add(T+a,+U+b)+-%3E+decltype(a+%2B+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+add(1UL,+3)%3B%0A++assert(typeid(i)+%3D%3D+typeid(unsigned+long))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{n2541}{https://wg21.link/n2541}
+#addproposal("n2541")
 
+== ``` std::array```
 
+- ```cpp std::array```
+  - Tableau de taille fixe connue à la compilation
+  - Éléments contigus
+  - Accès indexé
 
-== Déduction du type retour}
-	\begin{block}{Solution}
-		\begin{itemize}
-			\item Pas de bonne réponse en typage explicite
+```cpp
+array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9};
 
-\note[item]{Une solution historique : un seul type template et on compte sur les conversions implicites voire on demande des conversions explicites}
+accumulate(foo.begin(), foo.end(), 0); // 49
+```
 
-			\item Mais l'inférence de type vient à notre secours
-		\end{itemize}
-	\end{block}
+```cpp
+array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
+// Erreur de compilation
+```
 
-	```cpp
-		template<typename T, typename U>
-		auto add(T a, U b) -> decltype(a + b) {
-		  return a + b;
-		}
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9,+17%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{exampleblock}{do}
-		\begin{itemize}
-			\item Utilisez la déduction du type retour dans vos fonctions templates
-		\end{itemize}
-	\end{exampleblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9%7D%3B%0A++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Atemplate%3Ctypename+T,+typename+U%3E%0Aauto+add(T+a,+U+b)+-%3E+decltype(a+%2B+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+add(1UL,+3)%3B%0A++assert(typeid(i)+%3D%3D+typeid(unsigned+long))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#addproposal("n1836")
 
-	\addproposal{n2541}{https://wg21.link/n2541}
+== ``` std::array```
 
 
+#list(marker: [ ], text[
+  - Vérification des index à la compilation
+])
 
-== \mintinline[style=white]{cpp}```std::array```}
-	\begin{itemize}
-		\item ```cpp std::array```
-		\begin{itemize}
-			\item Tableau de taille fixe connue à la compilation
-			\item Éléments contigus
-			\item Accès indexé
-		\end{itemize}
-	\end{itemize}
+```cpp
+array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9};
 
-	```cpp
-		array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9};
+get<2>(foo);  // 9
+get<8>(foo);  // Erreur de compilation
+```
 
-		accumulate(foo.begin(), foo.end(), 0); // 49
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9%7D%3B%0A++std::cout+%3C%3C+std::get%3C2%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%23if+0%0A++std::cout+%3C%3C+std::get%3C8%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
-		// Erreur de compilation
-	```
+#addproposal("n1836")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9,+17%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+== ``` std::forward_list```
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9%7D%3B%0A++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Liste simplement chaînée ```cpp std::forward_list```
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+```cpp
+forward_list<int> foo{2, 5, 9, 8, 2, 6, 8, 9, 12};
 
+accumulate(foo.begin(), foo.end(), 0); // 61
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cforward_list%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::forward_list%3Cint%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== \mintinline[style=white]{cpp}```std::array```}
-	\begin{itemize}
-		\item[]\begin{itemize}
-			\item Vérification des index à la compilation
-		\end{itemize}
-	\end{itemize}
+== Conteneurs associatifs
 
-	```cpp
-		array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9};
+- Conteneurs associatifs sous forme de tables de hachage
+  - ```cpp std::unordered_map```
+  - ```cpp std::unordered_multimap```
+  - ```cpp std::unordered_set```
+  - ```cpp std::unordered_multiset```
+- Versions non ordonnées de ```cpp std::map```, ```cpp std::set```, ...
 
-		get<2>(foo);  // 9
-		get<8>(foo);  // Erreur de compilation
-	```
+#noteblock(text[``` unordered_<XXX>``` ?], text[
+  - Nombreuses implémentations ```cpp hash_<XXX>``` existantes
+  - Structures fondamentalement non ordonnées
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Carray%3E%0A%0Aint+main()%0A%7B%0A++std::array%3Cint,+8%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9%7D%3B%0A++std::cout+%3C%3C+std::get%3C2%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%23if+0%0A++std::cout+%3C%3C+std::get%3C8%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cunordered_map%3E%0A%0Aint+main()%0A%7B%0A++std::unordered_map%3Cint,+std::string%3E+foo%7B%7B5,+%22Une+chaine%22%7D,+%7B42,+%22La+reponse%22%7D%7D%3B%0A%0A++std::cout+%3C%3C++foo%5B42%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+#addproposal("n1836")
 
+== ``` shrink_to_fit()```
 
+- ```cpp shrink_to_fit()``` réduit la capacité des ```cpp std::vector```, ```cpp std::deque``` et ```cpp std::string``` à leur taille
+// Pour être précis, ce n'est pas nécessairement exactement à la taille ça peut être plus grand - à la discrétion de l'implémentation (performances, cohérence, ...) -, mais l'idée est là
 
-\frametitle{\mintinline[style=white]{cpp}```std::forward_list```}
-	\begin{itemize}
-		\item Liste simplement chaînée ```cpp std::forward_list```
-	\end{itemize}
+```cpp
+vector<int> foo{12, 25};
 
-	```cpp
-		forward_list<int> foo{2, 5, 9, 8, 2, 6, 8, 9, 12};
+foo.reserve(15);      // Taille : 2, capacite : 15
+foo.shrink_to_fit();  // Taille : 2, capacite : 2
+```
 
-		accumulate(foo.begin(), foo.end(), 0); // 61
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B12,+25%7D%3B%0A++foo.reserve(15)%3B%0A++std::cout+%3C%3C+foo.size()+%3C%3C+%22+/+%22+%3C%3C+foo.capacity()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.shrink_to_fit()%3B%0A++std::cout+%3C%3C+foo.size()+%3C%3C+%22+/+%22+%3C%3C+foo.capacity()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cforward_list%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::forward_list%3Cint%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== ``` data()```
 
+- ```cpp data()``` récupère le "tableau C" d'un ```cpp std::vector```
 
+#noteblock(text[``` foo.data()``` ou ``` &foo[0]``` ?], text[
+  - Comportement identique
+  - Préférez ```cpp foo.data()``` sémantiquement plus clair
+])
 
-== Conteneurs associatifs}
-	\begin{itemize}
-		\item Conteneurs associatifs sous forme de tables de hachage
-		\begin{itemize}
-			\item ```cpp std::unordered_map```
-			\item ```cpp std::unordered_multimap```
-			\item ```cpp std::unordered_set```
-			\item ```cpp std::unordered_multiset```
-		\end{itemize}
-		\item Versions non ordonnées de ```cpp std::map```, ```cpp std::set```, \ldots{}
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Avoid+bar(const+int*+data,+const+size_t+size)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+size%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+data%5Bi%5D+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B12,+25%7D%3B%0A%0A++bar(foo.data(),+foo.size())%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{block}{\mintinline[style=white]{cpp}```unordered_<XXX>``` ?}
-		\begin{itemize}
-			\item Nombreuses implémentations ```cpp hash_<XXX>``` existantes
-			\item Structures fondamentalement non ordonnées
-		\end{itemize}
-	\end{block}
+== ``` emplace()```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cunordered_map%3E%0A%0Aint+main()%0A%7B%0A++std::unordered_map%3Cint,+std::string%3E+foo%7B%7B5,+%22Une+chaine%22%7D,+%7B42,+%22La+reponse%22%7D%7D%3B%0A%0A++std::cout+%3C%3C++foo%5B42%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp emplace()```, ```cpp emplace_back()``` et ```cpp emplace_front()``` construisent dans le conteneur depuis les paramètres d'un des constructeurs de l'élément
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+```cpp
+class Point {
+public:
+  Point(int a, int b);
+};
 
+vector<Point> foo;
+foo.emplace_back(2, 5);
+```
 
+#noteblock("Objectif", text[
+- Éliminer des copies inutiles et gagner en performance
+])
 
-== \mintinline[style=white]{cpp}```shrink_to_fit()```}
-	\begin{itemize}
-		\item ```cpp shrink_to_fit()``` réduit la capacité des ```cpp std::vector```, ```cpp std::deque``` et ```cpp std::string``` à leur taille
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aclass+Point+%0A%7B%0Apublic:%0A++Point(int+a,+int+b)%0A++++:+m_a(a)%0A++++,+m_b(b)%0A++%7B%0A++%7D%0A%0A++int+m_a%3B%0A++int+m_b%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3CPoint%3E+foo%3B%0A++foo.emplace_back(2,+5)%3B%0A%0A++std::cout+%3C%3C+foo%5B0%5D.m_a+%3C%3C+%22+%22+%3C%3C+foo%5B0%5D.m_b+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-\note[item]{Pour être précis, ce n'est pas nécessairement exactement à la taille ça peut être plus grand - à la discrétion de l'implémentation (performances, cohérence, \ldots{}) -, mais l'idée est là}
+== ``` std::string```
 
-	```cpp
-		vector<int> foo{12, 25};
+- Évolutions de ```cpp std::string```
+  - Éléments obligatoirement contigus
+  - ```cpp data()``` retourne une chaîne C valide (synonyme à ```cpp c_str()```)
+// En C++98, data() renvoyait les caractères de la chaîne mais pas nécessairement sous forme d'une chaîne C valide (pas obligatoirement de 0 terminal)
+  - ```cpp front()``` retourne le premier caractère d'une chaîne
+  - ```cpp back()``` retourne le dernier caractère d'une chaîne
+  - ```cpp pop_back()``` supprime le dernier caractère d'une chaîne
+  - Interdiction du _Copy-on-Write_
 
-		foo.reserve(15);      // Taille : 2, capacite : 15
-		foo.shrink_to_fit();  // Taille : 2, capacite : 2
-	```
+== ``` std::bitset```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B12,+25%7D%3B%0A++foo.reserve(15)%3B%0A++std::cout+%3C%3C+foo.size()+%3C%3C+%22+/+%22+%3C%3C+foo.capacity()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.shrink_to_fit()%3B%0A++std::cout+%3C%3C+foo.size()+%3C%3C+%22+/+%22+%3C%3C+foo.capacity()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Évolutions de ```cpp std::bitset```
+  - ```cpp all()``` teste si tous les bits sont levés
+  - ```cpp to_ullong()``` convertit en ```cpp unsigned long long```
 
+```cpp
+bitset<5> foo;
+foo.all();        // False
 
+foo.set(2);
+foo.to_ullong();  // 4
 
-== \mintinline[style=white]{cpp}```data()```}
-	\begin{itemize}
-		\item ```cpp data()``` récupère le \og tableau C\fg{} d'un ```cpp std::vector```
-	\end{itemize}
+foo.set();
+foo.all();        // True
+foo.to_ullong();  // 31
+```
 
-	\begin{block}{\mintinline[style=white]{cpp}```foo.data()``` ou \mintinline[style=white]{cpp}```&foo[0]``` ?}
-		\begin{itemize}
-			\item Comportement identique
-			\item Préférez ```cpp foo.data()``` sémantiquement plus clair
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbitset%3E%0A%0Aint+main()%0A%7B%0A++std::bitset%3C5%3E+foo%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.set(2)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.to_ullong()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.set()%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.to_ullong()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Avoid+bar(const+int*+data,+const+size_t+size)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+size%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+data%5Bi%5D+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B12,+25%7D%3B%0A%0A++bar(foo.data(),+foo.size())%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Conteneurs - Choix
 
+#adviceblock("Do", text[
+  - Préférez ```cpp std::array``` lorsque la taille est fixe et connue
+  - Sinon préférez ```cpp std::vector```
+])
 
+\
 
-== \mintinline[style=white]{cpp}```emplace()```}
-	\begin{itemize}
-		\item ```cpp emplace()```, ```cpp emplace_back()``` et ```cpp emplace_front()``` construisent dans le conteneur depuis les paramètres d'un des constructeurs de l'élément
-	\end{itemize}
+== Itérateurs
 
-	```cpp
-		class Point {
-		public:
-		  Point(int a, int b);
-		};
+- Fonctions membres ```cpp cbegin()```, ```cpp cend()```, ```cpp crbegin()``` et ```cpp crend()``` retournant des ```cpp const_iterator```
+// Les fonctions begin(), end(), etc. retournent des const_iterator si le conteneur est const, des iterator dans le cas contraire
+- Fonctions libres ```cpp std::begin()``` et ```cpp std::end()```
+  - Conteneur : appel des fonctions membres
+  - Tableau C : adresse du premier élément et suivant le dernier élément
 
-		vector<Point> foo;
-		foo.emplace_back(2, 5);
-	```
+```cpp
+int foo[] = {1, 2, 3, 4};
+vector<int> bar{2, 3, 4, 5};
 
-	\begin{block}{Objectif}
-		\begin{itemize}
-			\item Éliminer des copies inutiles et gagner en performance
-		\end{itemize}
-	\end{block}
+accumulate(begin(foo), end(foo), 0);  // 10
+accumulate(begin(bar), end(bar), 0);  // 14
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aclass+Point+%0A%7B%0Apublic:%0A++Point(int+a,+int+b)%0A++++:+m_a(a)%0A++++,+m_b(b)%0A++%7B%0A++%7D%0A%0A++int+m_a%3B%0A++int+m_b%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3CPoint%3E+foo%3B%0A++foo.emplace_back(2,+5)%3B%0A%0A++std::cout+%3C%3C+foo%5B0%5D.m_a+%3C%3C+%22+%22+%3C%3C+foo%5B0%5D.m_b+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++int+foo%5B%5D+%3D+%7B1,+2,+3,+4%7D%3B%0A++std::vector%3Cint%3E+bar%7B2,+3,+4,+5%7D%3B%0A%0A++std::cout+%3C%3C+std::accumulate(begin(foo),+end(foo),+0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::accumulate(begin(bar),+end(bar),+0)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Itérateurs
 
+#list(marker: [ ], text[
+  - Compatibles avec les conteneurs non-STL proposant ```cpp begin()``` et ```cpp end()```
+  - Surchargeable sans modification du conteneur pour les autres
+])
 
-== \mintinline[style=white]{cpp}```std::string```}
-	\begin{itemize}
-		\item Évolutions de ```cpp std::string```
-		\begin{itemize}
-			\item Éléments obligatoirement contigus
-			\item ```cpp data()``` retourne une chaîne C valide (synonyme à ```cpp c_str()```)
+```cpp
+class Foo {
+public:
+  int* first();
+  const int* first() const;
+};
 
-\note[item]{En C++98, ```cpp data()``` renvoyait les caractères de la chaîne mais pas nécessairement sous forme d'une chaîne C valide (pas obligatoirement de 0 terminal)}
+int* begin(Foo& foo) {
+  return foo.first();
+}
 
-			\item ```cpp front()``` retourne le premier caractère d'une chaîne
-			\item ```cpp back()``` retourne le dernier caractère d'une chaîne
-			\item ```cpp pop_back()``` supprime le dernier caractère d'une chaîne
-			\item Interdiction du \textit{Copy-on-Write}
-		\end{itemize}
-	\end{itemize}
+const int* begin(const Foo& foo) {
+  return foo.first();
+}
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aclass+Foo+%0A%7B%0Apublic:%0A++int*+first()+%7B+return+std::begin(m_data)%3B+%7D%3B%0A++int*+last()+%7B+return+std::end(m_data)%3B+%7D%3B%0A%0Aprivate:%0A++static+int+m_data%5B3%5D%3B%0A%7D%3B%0A%0Aint+Foo::m_data%5B3%5D+%3D+%7B5,+8,+12%7D%3B%0A%0Aint*+begin(Foo%26+foo)%0A%7B%0A++return+foo.first()%3B%0A%7D%0A%0Aint*+end(Foo%26+foo)%0A%7B%0A++return+foo.last()%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A%0A++std::cout+%3C%3C+std::accumulate(begin(foo),+end(foo),+0)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Itérateurs
 
-== \mintinline[style=white]{cpp}```std::bitset```}
-	\begin{itemize}
-		\item Évolutions de ```cpp std::bitset```
-		\begin{itemize}
-			\item ```cpp all()``` teste si tous les bits sont levés
-			\item ```cpp to_ullong()``` convertit en ```cpp unsigned long long```
-		\end{itemize}
-	\end{itemize}
+#noteblock("Conseils", text[
+  - ```cpp using std::begin``` et ```cpp using std::end``` permet l'ADL malgré la surcharge
+])
 
-	```cpp
-		bitset<5> foo;
-		foo.all();        // False
+#alertblock("Don't", text[
+  - N'ouvrez pas le namespace ```cpp std``` pour spécialiser
+])
 
-		foo.set(2);
-		foo.to_ullong();  // 4
+#adviceblock("Do", text[
+  - Préférez ```cpp std::begin()``` et ```cpp std::end()``` aux fonctions membres
+])
 
-		foo.set();
-		foo.all();        // True
-		foo.to_ullong();  // 31
-	```
+== Itérateurs
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbitset%3E%0A%0Aint+main()%0A%7B%0A++std::bitset%3C5%3E+foo%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.set(2)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.to_ullong()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.set()%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.to_ullong()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp std::prev()``` et ```cpp std::next()``` retournent l'itérateur suivant ou précédent
+- Adaptateur d'itérateur ```cpp std::move_iterator``` retournant des _rvalue reference_ lors du déréférencement
 
+```cpp
+vector<string> foo(3), bar{"one","two","three"};
 
+typedef vector<string>::iterator Iter;
 
-== Conteneurs - Choix}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::array``` lorsque la taille est fixe et connue
-			\item Sinon préférez ```cpp std::vector```
-		\end{itemize}
-	\end{exampleblock}
+copy(move_iterator<Iter>(bar.begin()),
+     move_iterator<Iter>(bar.end()),
+     foo.begin());
+// foo : "one" "two" "three"
+// bar : "" "" ""
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%0Atypedef+std::vector%3Cstd::string%3E::iterator+Iter%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+foo(3)%3B%0A++std::vector%3Cstd::string%3E+bar%7B%22one%22,%22two%22,%22three%22%7D%3B%0A++std::copy(std::move_iterator%3CIter%3E(bar.begin()),+std::move_iterator%3CIter%3E(bar.end()),+foo.begin())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+foo%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+bar%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Itérateurs}
-	\begin{itemize}
-		\item Fonctions membres ```cpp cbegin()```, ```cpp cend()```, ```cpp crbegin()``` et ```cpp crend()``` retournant des ```cpp const_iterator```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%0Atypedef+std::vector%3Cstd::string%3E::iterator+Iter%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+3,+8,+12%7D%3B%0A%0A++auto+it+%3D+std::begin(foo)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+%22+%22+%3C%3C+*next(it)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-\note[item]{Les fonctions ```cpp begin()```, ```cpp end()```, etc. retournent des ```cpp const_iterator``` si le conteneur est ```cpp const```, des ```cpp iterator``` dans le cas contraire}
+== Foncteurs prédéfinis
 
-		\item Fonctions libres ```cpp std::begin()``` et ```cpp std::end()```
-		\begin{itemize}
-			\item Conteneur : appel des fonctions membres
-			\item Tableau C : adresse du premier élément et suivant le dernier élément
-		\end{itemize}
-	\end{itemize}
+- Et bit à bit ```cpp std::bit_and()```
+- Ou inclusif bit à bit ```cpp std::bit_or()```
+- Ou exclusif bit à bit ```cpp std::bit_xor()```
 
-	```cpp
-		int foo[] = {1, 2, 3, 4};
-		vector<int> bar{2, 3, 4, 5};
+```cpp
+vector<unsigned char> foo{0x10, 0x20, 0x30};
+vector<unsigned char> bar{0xFF, 0x25, 0x00};
+vector<unsigned char> baz;
 
-		accumulate(begin(foo), end(foo), 0);  // 10
-		accumulate(begin(bar), end(bar), 0);  // 14
-	```
+transform(begin(foo), end(foo), begin(bar), back_inserter(baz),
+          bit_and<unsigned char>());  // baz : 0x10, 0x20, 0x00
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++int+foo%5B%5D+%3D+%7B1,+2,+3,+4%7D%3B%0A++std::vector%3Cint%3E+bar%7B2,+3,+4,+5%7D%3B%0A%0A++std::cout+%3C%3C+std::accumulate(begin(foo),+end(foo),+0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::accumulate(begin(bar),+end(bar),+0)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+transform(begin(foo), end(foo), begin(bar), back_inserter(baz),
+          bit_or<unsigned char>());   // baz : 0xFF, 0x25, 0x30
 
+transform(begin(foo), end(foo), begin(bar), back_inserter(baz),
+          bit_xor<unsigned char>());  // baz : 0xEF, 0x05, 0x30
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ciomanip%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cunsigned+char%3E+foo%7B0x10,+0x20,+0x30%7D%3B%0A++std::vector%3Cunsigned+char%3E+bar%7B0xFF,+0x25,+0x00%7D%3B%0A++std::vector%3Cunsigned+char%3E+baz%3B%0A%0A++std::transform(std::begin(foo),+std::end(foo),+std::begin(bar),+std::back_inserter(baz),+std::bit_xor%3Cunsigned+char%3E())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+std::hex+%3C%3C+std::setfill(!'0!')+%3C%3C+std::setw(2)+%3C%3C+static_cast%3Cunsigned+int%3E(baz%5Bi%5D)+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'1',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Itérateurs}
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Compatibles avec les conteneurs non-STL proposant ```cpp begin()``` et ```cpp end()```
-			\item Surchargeable sans modification du conteneur pour les autres
-		\end{itemize}
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ciomanip%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cunsigned+char%3E+foo%7B0x10,+0x20,+0x30%7D%3B%0A++std::vector%3Cunsigned+char%3E+bar%7B0xFF,+0x25,+0x00%7D%3B%0A++std::vector%3Cunsigned+char%3E+baz%3B%0A++std::transform(std::begin(foo),+std::end(foo),+std::begin(bar),+std::back_inserter(baz),+std::bit_or%3Cunsigned+char%3E())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+std::hex+%3C%3C+std::setfill(!'0!')+%3C%3C+std::setw(2)+%3C%3C+static_cast%3Cunsigned+int%3E(baz%5Bi%5D)+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		class Foo {
-		public:
-		  int* first();
-		  const int* first() const;
-		};
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ciomanip%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cunsigned+char%3E+foo%7B0x10,+0x20,+0x30%7D%3B%0A++std::vector%3Cunsigned+char%3E+bar%7B0xFF,+0x25,+0x00%7D%3B%0A++std::vector%3Cunsigned+char%3E+baz%3B%0A%0A++std::transform(std::begin(foo),+std::end(foo),+std::begin(bar),+std::back_inserter(baz),+std::bit_and%3Cunsigned+char%3E())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+std::hex+%3C%3C+std::setfill(!'0!')+%3C%3C+std::setw(2)+%3C%3C+static_cast%3Cunsigned+int%3E(baz%5Bi%5D)+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		int* begin(Foo& foo) {
-		  return foo.first();
-		}
+== Algorithmes -- Recherche linéaire
 
-		const int* begin(const Foo& foo) {
-		  return foo.first();
-		}
-	```
+- ```cpp std::find_if_not()``` recherche le premier élément ne vérifiant pas le prédicat
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aclass+Foo+%0A%7B%0Apublic:%0A++int*+first()+%7B+return+std::begin(m_data)%3B+%7D%3B%0A++int*+last()+%7B+return+std::end(m_data)%3B+%7D%3B%0A%0Aprivate:%0A++static+int+m_data%5B3%5D%3B%0A%7D%3B%0A%0Aint+Foo::m_data%5B3%5D+%3D+%7B5,+8,+12%7D%3B%0A%0Aint*+begin(Foo%26+foo)%0A%7B%0A++return+foo.first()%3B%0A%7D%0A%0Aint*+end(Foo%26+foo)%0A%7B%0A++return+foo.last()%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A%0A++std::cout+%3C%3C+std::accumulate(begin(foo),+end(foo),+0)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+vector<int> foo{1, 4, 5, 9, 12};
 
+find_if_not(begin(foo), end(foo), is_odd); // 4
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::cout+%3C%3C+*std::find_if_not(std::begin(foo),+std::end(foo),+is_odd)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Itérateurs}
-	\begin{block}{Conseils}
-		\begin{itemize}
-			\item ```cpp using std::begin``` et ```cpp using std::end``` permet l'ADL malgré la surcharge
-		\end{itemize}
-	\end{block}
+== Algorithmes -- Comparaison
 
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item N'ouvrez pas le namespace ```cpp std``` pour spécialiser
-		\end{itemize}
-	\end{alertblock}
+- ```cpp std::all_of()``` teste si tous les éléments de l'ensemble vérifient un prédicat
+- Retourne vrai si l'ensemble est vide
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::begin()``` et ```cpp std::end()``` aux fonctions membres
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+vector<int> foo{1, 4, 5, 9, 12};
+vector<int> bar{1, 5, 9};
+vector<int> baz{4, 12};
 
+all_of(begin(foo), end(foo), is_odd); // False
+all_of(begin(bar), end(bar), is_odd); // True
+all_of(begin(baz), end(baz), is_odd); // False
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::all_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+9%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::all_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::all_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Itérateurs}
-	\begin{itemize}
-		\item ```cpp std::prev()``` et ```cpp std::next()``` retournent l'itérateur suivant ou précédent
-		\item Adaptateur d'itérateur ```cpp std::move_iterator``` retournant des \textit{rvalue reference} lors du déréférencement
-	\end{itemize}
+== Algorithmes -- Comparaison
 
-	```cpp
-		vector<string> foo(3), bar{"one","two","three"};
+- ```cpp std::any_of()``` teste si au moins un élément vérifie un prédicat
+- Retourne faux si l'ensemble est vide
 
-		typedef vector<string>::iterator Iter;
+```cpp
+vector<int> foo{1, 4, 5, 9, 12};
+vector<int> bar{1, 5, 9};
+vector<int> baz{4, 12};
 
-		copy(move_iterator<Iter>(bar.begin()),
-		     move_iterator<Iter>(bar.end()),
-		     foo.begin());
-		// foo : "one" "two" "three"
-		// bar : "" "" ""
-	```
+any_of(begin(foo), end(foo), is_odd); // True
+any_of(begin(bar), end(bar), is_odd); // True
+any_of(begin(baz), end(baz), is_odd); // False
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%0Atypedef+std::vector%3Cstd::string%3E::iterator+Iter%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+foo(3)%3B%0A++std::vector%3Cstd::string%3E+bar%7B%22one%22,%22two%22,%22three%22%7D%3B%0A++std::copy(std::move_iterator%3CIter%3E(bar.begin()),+std::move_iterator%3CIter%3E(bar.end()),+foo.begin())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+foo%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+bar%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::any_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+9%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::any_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::any_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%0Atypedef+std::vector%3Cstd::string%3E::iterator+Iter%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+3,+8,+12%7D%3B%0A%0A++auto+it+%3D+std::begin(foo)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+%22+%22+%3C%3C+*next(it)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Algorithmes -- Comparaison
 
+- ```cpp std::none_of()``` teste si aucun élément ne vérifie le prédicat
+- Retourne vrai si l'ensemble est vide
 
-== Foncteurs prédéfinis}
-	\begin{itemize}
-		\item Et bit à bit ```cpp std::bit_and()```
-		\item Ou inclusif bit à bit ```cpp std::bit_or()```
-		\item Ou exclusif bit à bit ```cpp std::bit_xor()```
-	\end{itemize}
+```cpp
+vector<int> foo{1, 4, 5, 9, 12};
+vector<int> bar{1, 5, 9};
+vector<int> baz{4, 12};
 
-	```cpp
-		vector<unsigned char> foo{0x10, 0x20, 0x30};
-		vector<unsigned char> bar{0xFF, 0x25, 0x00};
-		vector<unsigned char> baz;
+none_of(begin(foo), end(foo), is_odd); // False
+none_of(begin(bar), end(bar), is_odd); // False
+none_of(begin(baz), end(baz), is_odd); // True
+```
 
-		transform(begin(foo), end(foo), begin(bar), back_inserter(baz),
-		          bit_and<unsigned char>());  // baz : 0x10, 0x20, 0x00
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::none_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+9%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::none_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::none_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		transform(begin(foo), end(foo), begin(bar), back_inserter(baz),
-		          bit_or<unsigned char>());   // baz : 0xFF, 0x25, 0x30
+== Algorithmes -- Permutation
 
-		transform(begin(foo), end(foo), begin(bar), back_inserter(baz),
-		          bit_xor<unsigned char>());  // baz : 0xEF, 0x05, 0x30
-	```
+- ```cpp std::is_permutation()``` teste si un ensemble est la permutation d'un autre
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ciomanip%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cunsigned+char%3E+foo%7B0x10,+0x20,+0x30%7D%3B%0A++std::vector%3Cunsigned+char%3E+bar%7B0xFF,+0x25,+0x00%7D%3B%0A++std::vector%3Cunsigned+char%3E+baz%3B%0A%0A++std::transform(std::begin(foo),+std::end(foo),+std::begin(bar),+std::back_inserter(baz),+std::bit_xor%3Cunsigned+char%3E())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+std::hex+%3C%3C+std::setfill(!'0!')+%3C%3C+std::setw(2)+%3C%3C+static_cast%3Cunsigned+int%3E(baz%5Bi%5D)+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'1',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+```cpp
+vector<int> foo{1, 4, 5, 9, 12};
+vector<int> bar{1, 5, 4, 9, 12};
+vector<int> baz{5, 4, 3, 9, 1};
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ciomanip%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cunsigned+char%3E+foo%7B0x10,+0x20,+0x30%7D%3B%0A++std::vector%3Cunsigned+char%3E+bar%7B0xFF,+0x25,+0x00%7D%3B%0A++std::vector%3Cunsigned+char%3E+baz%3B%0A++std::transform(std::begin(foo),+std::end(foo),+std::begin(bar),+std::back_inserter(baz),+std::bit_or%3Cunsigned+char%3E())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+std::hex+%3C%3C+std::setfill(!'0!')+%3C%3C+std::setw(2)+%3C%3C+static_cast%3Cunsigned+int%3E(baz%5Bi%5D)+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+is_permutation(begin(foo), end(foo), begin(bar)); // true
+is_permutation(begin(foo), end(foo), begin(baz)); // false
+```
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ciomanip%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cunsigned+char%3E+foo%7B0x10,+0x20,+0x30%7D%3B%0A++std::vector%3Cunsigned+char%3E+bar%7B0xFF,+0x25,+0x00%7D%3B%0A++std::vector%3Cunsigned+char%3E+baz%3B%0A%0A++std::transform(std::begin(foo),+std::end(foo),+std::begin(bar),+std::back_inserter(baz),+std::bit_and%3Cunsigned+char%3E())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+std::hex+%3C%3C+std::setfill(!'0!')+%3C%3C+std::setw(2)+%3C%3C+static_cast%3Cunsigned+int%3E(baz%5Bi%5D)+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::vector%3Cint%3E+bar%7B5,+4,+12,+9,+1%7D%3B%0A%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_permutation(begin(foo),+end(foo),+begin(bar))+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::vector%3Cint%3E+bar%7B5,+4,+12,+7,+1%7D%3B%0A%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_permutation(begin(foo),+end(foo),+begin(bar))+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Algorithmes -- Copie
 
+- ```cpp std::copy_n()``` copie les n premiers éléments d'un ensemble
 
-== Algorithmes -- Recherche linéaire}
-	\begin{itemize}
-		\item ```cpp std::find_if_not()``` recherche le premier élément ne vérifiant pas le prédicat
-	\end{itemize}
+```cpp
+vector<int> foo{1, 4, 5, 9, 12}, bar;
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12};
+copy_n(begin(foo), 3, back_inserter(bar)); // 1 4 5
+```
 
-		find_if_not(begin(foo), end(foo), is_odd); // 4
-	```
+- ```cpp std::copy_if()``` copie les éléments vérifiant un prédicat
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::cout+%3C%3C+*std::find_if_not(std::begin(foo),+std::end(foo),+is_odd)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+vector<int> foo{1, 4, 5, 9, 12}, bar;
 
+copy_if(begin(foo), end(foo), back_inserter(bar), is_odd); // 1 5 9
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::copy_if(std::begin(foo),+std::end(foo),+std::back_inserter(bar),+is_odd)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Algorithmes -- Comparaison}
-	\begin{itemize}
-		\item ```cpp std::all_of()``` teste si tous les éléments de l'ensemble vérifient un prédicat
-		\item Retourne vrai si l'ensemble est vide
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::copy_n(std::begin(foo),+4,+std::back_inserter(bar))%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12};
-		vector<int> bar{1, 5, 9};
-		vector<int> baz{4, 12};
+== Algorithmes -- Déplacement
 
-		all_of(begin(foo), end(foo), is_odd); // False
-		all_of(begin(bar), end(bar), is_odd); // True
-		all_of(begin(baz), end(baz), is_odd); // False
-	```
+- ```cpp std::move()``` déplace les éléments d'un ensemble du début vers la fin
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::all_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+9%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::all_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::all_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+vector<string> foo{"aa", "bb", "cc"};
+vector<string> bar;
 
+move(begin(foo), end(foo), back_inserter(bar));
+// foo : "", "", ""
+// bar : "aa", "bb", "cc"
+```
 
+- ```cpp std::move_backward()``` déplace les éléments de la fin vers le début
+- Versions "déplacement" de ```cpp std::copy()``` et ```cpp std::copy_backward()```
 
-== Algorithmes -- Comparaison}
-	\begin{itemize}
-		\item ```cpp std::any_of()``` teste si au moins un élément vérifie un prédicat
-		\item Retourne faux si l'ensemble est vide
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+foo%7B%22aa%22,+%22bb%22,+%22cc%22%7D%3B%0A++std::vector%3Cstd::string%3E+bar%3B%0A%0A++std::move(std::begin(foo),+std::end(foo),+std::back_inserter(bar))%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+foo%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+bar%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12};
-		vector<int> bar{1, 5, 9};
-		vector<int> baz{4, 12};
+== Algorithmes -- Partitionnement
 
-		any_of(begin(foo), end(foo), is_odd); // True
-		any_of(begin(bar), end(bar), is_odd); // True
-		any_of(begin(baz), end(baz), is_odd); // False
-	```
+- ```cpp std::is_partitioned()``` indique si un ensemble est partitionné
+// C'est à dire si les éléments vérifiant un prédicat sont avant ceux ne le vérifiant pas
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::any_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+9%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::any_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::any_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+vector<int> foo{4, 5, 9, 12};
+vector<int> bar{9, 5, 4, 12};
 
+is_partitioned(begin(foo), end(foo), is_odd); // false
+is_partitioned(begin(bar), end(bar), is_odd); // true
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%7B9,+5,+4,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_partitioned(std::begin(foo),+std::end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_partitioned(std::begin(bar),+std::end(bar),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Algorithmes -- Comparaison}
-	\begin{itemize}
-		\item ```cpp std::none_of()``` teste si aucun élément ne vérifie le prédicat
-		\item Retourne vrai si l'ensemble est vide
-	\end{itemize}
+== Algorithmes -- Partitionnement
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12};
-		vector<int> bar{1, 5, 9};
-		vector<int> baz{4, 12};
+- ```cpp std::partition_copy()``` copie l'ensemble en le partitionnant
+- ```cpp std::partition_point()``` retourne le point de partition d'un ensemble partitionné
+  - C'est à dire le premier élément ne vérifiant pas le prédicat
 
-		none_of(begin(foo), end(foo), is_odd); // False
-		none_of(begin(bar), end(bar), is_odd); // False
-		none_of(begin(baz), end(baz), is_odd); // True
-	```
+```cpp
+vector<int> foo{9, 5, 4, 12};
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::none_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+9%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::none_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+12%7D%3B%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::none_of(begin(foo),+end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+partition_point(begin(foo), end(foo), is_odd); // 4
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+5,+4,+12%7D%3B%0A%0A++std::cout+%3C%3C+*std::partition_point(std::begin(foo),+std::end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Algorithmes -- Tri
 
-== Algorithmes -- Permutation}
-	\begin{itemize}
-		\item ```cpp std::is_permutation()``` teste si un ensemble est la permutation d'un autre
-	\end{itemize}
+- ```cpp std::is_sorted()``` indique si l'ensemble est ordonnée (ordre ascendant)
+// Possibilité de fournir un foncteur de comparaison (< par défaut)
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12};
-		vector<int> bar{1, 5, 4, 9, 12};
-		vector<int> baz{5, 4, 3, 9, 1};
+```cpp
+vector<int> foo{4, 5, 9, 12};
+vector<int> bar{9, 5, 4, 12};
 
-		is_permutation(begin(foo), end(foo), begin(bar)); // true
-		is_permutation(begin(foo), end(foo), begin(baz)); // false
-	```
+is_sorted(begin(foo), end(foo)); // true
+is_sorted(begin(bar), end(bar)); // false
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Ausing+std::begin%3B%0Ausing+std::end%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::vector%3Cint%3E+bar%7B5,+4,+12,+9,+1%7D%3B%0A%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_permutation(begin(foo),+end(foo),+begin(bar))+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++++std::vector%3Cint%3E+bar%7B5,+4,+12,+7,+1%7D%3B%0A%0A++++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_permutation(begin(foo),+end(foo),+begin(bar))+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp std::is_sorted_until()``` détermine le premier élément mal placé
 
+```cpp
+vector<int> foo{4, 5, 9, 3, 12};
 
+is_sorted_until(begin(foo), end(foo)); // 3
+```
 
-== Algorithmes -- Copie}
-	\begin{itemize}
-		\item ```cpp std::copy_n()``` copie les n premiers éléments d'un ensemble
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+3,+12%7D%3B%0A%0A++std::cout+%3C%3C+*std::is_sorted_until(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12}, bar;
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%7B9,+5,+4,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_sorted(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_sorted(std::begin(bar),+std::end(bar))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		copy_n(begin(foo), 3, back_inserter(bar)); // 1 4 5
-	```
+== Algorithmes -- Mélange
 
-	\begin{itemize}
-		\item ```cpp std::copy_if()``` copie les éléments vérifiant un prédicat
-	\end{itemize}
+- ```cpp std::shuffle()``` mélange l'ensemble grâce à un générateur de nombre aléatoire uniforme
 
-	```cpp
-		vector<int> foo{1, 4, 5, 9, 12}, bar;
+```cpp
+vector<int> foo{4, 5, 9, 12};
+unsigned seed = now().time_since_epoch().count();
 
-		copy_if(begin(foo), end(foo), back_inserter(bar), is_odd); // 1 5 9
-	```
+shuffle(begin(foo), end(foo), default_random_engine(seed));
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::copy_if(std::begin(foo),+std::end(foo),+std::back_inserter(bar),+is_odd)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Crandom%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++unsigned+seed+%3D+std::chrono::system_clock::now().time_since_epoch().count()%3B%0A%0A++std::shuffle(std::begin(foo),+std::end(foo),+std::default_random_engine(seed))%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::copy_n(std::begin(foo),+4,+std::back_inserter(bar))%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Algorithmes -- Gestion de tas
 
+- ```cpp std::is_heap()``` indique si l'ensemble forme un tas
 
+```cpp
+vector<int> foo{4, 5, 9, 3, 12};
 
-== Algorithmes -- Déplacement}
-	\begin{itemize}
-		\item ```cpp std::move()``` déplace les éléments d'un ensemble du début vers la fin
-	\end{itemize}
+is_heap(begin(foo), end(foo));  // false
+make_heap(begin(foo), end(foo));
+is_heap(begin(foo), end(foo));  // true
+```
 
-	```cpp
-		vector<string> foo{"aa", "bb", "cc"};
-		vector<string> bar;
+- ```cpp std::is_heap_until()``` indique le premier élément qui n'est pas dans la position correspondant à un tas
 
-		move(begin(foo), end(foo), back_inserter(bar));
-		// foo : "", "", ""
-		// bar : "aa", "bb", "cc"
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+3,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_heap(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A++std::make_heap(std::begin(foo),+std::end(foo))%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_heap(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item ```cpp std::move_backward()``` déplace les éléments de la fin vers le début
-		\item Versions \og déplacement\fg{} de ```cpp std::copy()``` et ```cpp std::copy_backward()```
-	\end{itemize}
+== Algorithmes -- Min-max
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cstd::string%3E+foo%7B%22aa%22,+%22bb%22,+%22cc%22%7D%3B%0A++std::vector%3Cstd::string%3E+bar%3B%0A%0A++std::move(std::begin(foo),+std::end(foo),+std::back_inserter(bar))%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+foo%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22!'%22+%3C%3C+bar%5Bi%5D+%3C%3C+%22!'+%22%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp std::minmax()``` retourne la paire constituée du plus petit et du plus grand de deux éléments
 
+```cpp
+minmax(5, 2); // 2 - 5
+```
 
+- ```cpp std::minmax_element()``` retourne la paire constituée des itérateurs sur le plus petit et le plus grand élément d'un ensemble
 
-== Algorithmes -- Partitionnement}
-	\begin{itemize}
-		\item ```cpp std::is_partitioned()``` indique si un ensemble est partitionné
+```cpp
+vector<int> foo{18, 5, 6, 8};
 
-\note[item]{C'est à dire si les éléments vérifiant un prédicat sont avant ceux ne le vérifiant pas}
-	\end{itemize}
+minmax_element(foo.begin(), foo.end()); // 5 - 18
+```
 
-	```cpp
-		vector<int> foo{4, 5, 9, 12};
-		vector<int> bar{9, 5, 4, 12};
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A++auto+p+%3D+std::minmax_element(std::begin(foo),+std::end(foo))%3B%0A%0A++std::cout+%3C%3C+*(p.first)+%3C%3C+%22+%22+%3C%3C+*(p.second)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		is_partitioned(begin(foo), end(foo), is_odd); // false
-		is_partitioned(begin(bar), end(bar), is_odd); // true
-	```
+== Algorithmes -- Numérique
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%7B9,+5,+4,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_partitioned(std::begin(foo),+std::end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_partitioned(std::begin(bar),+std::end(bar),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp std::iota()``` affecte des valeurs successives aux éléments d'un ensemble
 
+```cpp
+vector<int> foo(5);
 
+iota(begin(foo), end(foo), 50); // 50 51 52 53 54
+```
 
-== Algorithmes -- Partitionnement}
-	\begin{itemize}
-		\item ```cpp std::partition_copy()``` copie l'ensemble en le partitionnant
-		\item ```cpp std::partition_point()``` retourne le point de partition d'un ensemble partitionné
-		\begin{itemize}
-			\item C'est à dire le premier élément ne vérifiant pas le prédicat
-		\end{itemize}
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(5)%3B%0A++%0A++std::iota(std::begin(foo),+std::end(foo),+50)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		vector<int> foo{9, 5, 4, 12};
+== Algorithmes -- Conclusion
 
-		partition_point(begin(foo), end(foo), is_odd); // 4
-	```
+#adviceblock("Do", text[
+  - Continuez à suivre les règles C++98/03 à propos des algorithmes
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i+%25+2)+%3D%3D+1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+5,+4,+12%7D%3B%0A%0A++std::cout+%3C%3C+*std::partition_point(std::begin(foo),+std::end(foo),+is_odd)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#adviceblock("Do", text[
+  - Privilégiez la sémantique lorsque plusieurs algorithmes sont utilisables
+])
 
+== Range-based for loop
 
+- Itération sur un conteneur complet
 
-== Algorithmes -- Tri}
-	\begin{itemize}
-		\item ```cpp std::is_sorted()``` indique si l'ensemble est ordonnée (ordre ascendant)
-	\end{itemize}
+```cpp
+vector<int> foo{4, 8, 12, 37};
 
-\note[item]{Possibilité de fournir un foncteur de comparaison (```cpp <``` par défaut)}
+for(int var : foo)
+  cout << var << " ";    // Affiche 4 8 12 37
+```
 
-	```cpp
-		vector<int> foo{4, 5, 9, 12};
-		vector<int> bar{9, 5, 4, 12};
+- Compatible avec ```cpp auto```
 
-		is_sorted(begin(foo), end(foo)); // true
-		is_sorted(begin(bar), end(bar)); // false
-	```
+```cpp
+vector<int> foo{4, 8, 12, 37};
 
-	\begin{itemize}
-		\item ```cpp std::is_sorted_until()``` détermine le premier élément mal placé
-	\end{itemize}
+for(auto var : foo)
+  cout << var << " ";    // Affiche 4 8 12 37
+```
 
-	```cpp
-		vector<int> foo{4, 5, 9, 3, 12};
+- Utilisable sur tout conteneur
+  - Exposant ```cpp begin()``` et ```cpp end()```
+  - Utilisable avec ```cpp std::begin()``` et ```cpp std::end()```
 
-		is_sorted_until(begin(foo), end(foo)); // 3
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+8,+12,+37%7D%3B%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+3,+12%7D%3B%0A%0A++std::cout+%3C%3C+*std::is_sorted_until(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+8,+12,+37%7D%3B%0A%0A++for(int+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%7B9,+5,+4,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_sorted(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_sorted(std::begin(bar),+std::end(bar))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#addproposal("N2930")
+#addproposal("N3271")
 
+== Range-based for loop
 
+#alertblock("Modification des éléments", text[
+  - La variable d'itération doit être une référence
 
-== Algorithmes -- Mélange}
-	\begin{itemize}
-		\item ```cpp std::shuffle()``` mélange l'ensemble grâce à un générateur de nombre aléatoire uniforme
-	\end{itemize}
+```cpp
+vector<int> foo(4);
 
-	```cpp
-		vector<int> foo{4, 5, 9, 12};
-		unsigned seed = now().time_since_epoch().count();
+for(auto& var : foo)
+  var = 5;    // foo : 5 5 5 5
+```
+])
 
-		shuffle(begin(foo), end(foo), default_random_engine(seed));
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A%0A++for(auto%26+var+:+foo)%0A++%7B%0A++++var+%3D+5%3B%0A++%7D%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Crandom%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++unsigned+seed+%3D+std::chrono::system_clock::now().time_since_epoch().count()%3B%0A%0A++std::shuffle(std::begin(foo),+std::end(foo),+std::default_random_engine(seed))%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Range-based for loop
 
+#adviceblock("Do", text[
+  - Préférez _range-based for loop_ aux boucles classiques et à ```cpp std::for_each()```
+])
 
+// std::for_each() n'a plus d'intérêt en C++11 mais redevient utile en C++17 avec les politiques d'exécution parallélisées
 
-== Algorithmes -- Gestion de tas}
-	\begin{itemize}
-		\item ```cpp std::is_heap()``` indique si l'ensemble forme un tas
-	\end{itemize}
+#noteblock("Conseils", text[
+  - Contrairement à ```cpp for```, l'indice de l'itération n'est pas disponible
+  - Malgré tout, préférez la _range-based for loop_ avec un indice externe à ```cpp for```
+])
 
-	```cpp
-		vector<int> foo{4, 5, 9, 3, 12};
+#adviceblock("Do", text[
+  - Utilisez l'inférence de type sur la variable d'itération
+])
 
-		is_heap(begin(foo), end(foo));  // false
-		make_heap(begin(foo), end(foo));
-		is_heap(begin(foo), end(foo));  // true
-	```
+== ``` std::string``` et conversions
 
-	\begin{itemize}
-		\item ```cpp std::is_heap_until()``` indique le premier élément qui n'est pas dans la position correspondant à un tas
-	\end{itemize}
+- Fonctions de conversion d'une chaîne de caractères en un nombre
+  - ```cpp std::stoi()``` vers ```cpp int```
+  - ```cpp std::stol()``` vers ```cpp long```
+  - ```cpp std::stoul()``` vers ```cpp unsigned long```
+  - ```cpp std::stoll()``` vers ```cpp long long```
+  - ```cpp std::stoull()``` vers ```cpp unsigned long long```
+  - ```cpp std::stof()``` vers ```cpp float```
+  - ```cpp std::stod()``` vers ```cpp double```
+  - ```cpp std::stold()``` vers ```cpp long double```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+3,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_heap(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A++std::make_heap(std::begin(foo),+std::end(foo))%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_heap(std::begin(foo),+std::end(foo))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+stoi("56"); // 56
+```
 
+- S'arrêtent sur le premier caractère non convertible
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++int+a+%3D+std::stoi(%2242%22)%3B%0A%0A++std::cout+%3C%3C+a+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Algorithmes -- Min-max}
-	\begin{itemize}
-		\item ```cpp std::minmax()``` retourne la paire constituée du plus petit et du plus grand de deux éléments
-	\end{itemize}
+== ``` std::string``` et conversions
 
-	```cpp
-		minmax(5, 2); // 2 - 5
-	```
+- ```cpp std::to_string()``` convertit d'un nombre en une chaîne de caractères
 
-	\begin{itemize}
-		\item ```cpp std::minmax_element()``` retourne la paire constituée des itérateurs sur le plus petit et le plus grand élément d'un ensemble
-	\end{itemize}
+```cpp
+to_string(56); // "56"
+```
 
-	```cpp
-		vector<int> foo{18, 5, 6, 8};
+- ```cpp std::to_wstring()``` convertit vers une chaîne de caractères larges
 
-		minmax_element(foo.begin(), foo.end()); // 5 - 18
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+b+%3D+std::to_string(56)%3B%0A%0A++std::cout+%3C%3C+b+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A++auto+p+%3D+std::minmax_element(std::begin(foo),+std::end(foo))%3B%0A%0A++std::cout+%3C%3C+*(p.first)+%3C%3C+%22+%22+%3C%3C+*(p.second)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== ``` std::string``` et conversions
 
+#alertblock("Attention", text[
+  - Pas de fonction ```cpp std::stoui()``` de conversion vers un ```cpp unsigned int```
+])
 
+#adviceblock("Do", text[
+  - Préférez ```cpp std::sto...()``` à ```cpp sscanf()```, ```cpp atoi()``` ou ```cpp strto...()```
+])
 
-== Algorithmes -- Numérique}
-	\begin{itemize}
-		\item ```cpp std::iota()``` affecte des valeurs successives aux éléments d'un ensemble
-	\end{itemize}
+#adviceblock("Do", text[
+  - Préférez ```cpp std::to_string()``` à ```cpp snprintf()``` ou ```cpp itoa()```
+])
 
-	```cpp
-		vector<int> foo(5);
+#noteblock("Alternative et complément", text[
+- ```cpp Boost.Lexical_cast``` permet de telles conversions et quelques autres
+])
 
-		iota(begin(foo), end(foo), 50); // 50 51 52 53 54
-	```
+== Chaînes de caractères UTF
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(5)%3B%0A++%0A++std::iota(std::begin(foo),+std::end(foo),+50)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp char``` doit pouvoir contenir un encodage 8 bits UTF-8
+// Pas de garantie en C++98/03, implémentation-defined
+- ```cpp char16_t``` représente un code point 16 bits
+- ```cpp char32_t``` représente un code point 32 bits
+- ```cpp std::u16string``` spécialisation de ```cpp basic_string``` pour caractères 16 bits
+- ```cpp std::u32string``` spécialisation de ```cpp basic_string``` pour caractères 32 bits
+- Même interface que ```cpp std::string```
 
+#addproposal("N2249")
 
+== Nouvelles chaînes littérales
 
-== Algorithmes -- Conclusion}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Continuez à suivre les règles C++98/03 à propos des algorithmes
-		\end{itemize}
-	\end{exampleblock}
+- Chaînes littérales UTF-8, UTF-16 et UTF32
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Privilégiez la sémantique lorsque plusieurs algorithmes sont utilisables
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+string u8str     = u8"UTF-8 string";
+u16string u16str = u"UTF-16 string";
+u32string u32str = U"UTF-32 string";
+```
 
+#addproposal("N2442")
 
-== Range-based for loop}
-	\begin{itemize}
-		\item Itération sur un conteneur complet
-	\end{itemize}
+== Nouvelles chaînes littérales
 
-	```cpp
-		vector<int> foo{4, 8, 12, 37};
+- Chaînes littérales brutes (sans interprétation des échappements)
+// Utile pour écrire des expressions rationnelles, des commandes shell ou autres qui ont aussi leurs échappements
+  - Préfixées par ```cpp R```
+  - Encadrées par une paire de parenthèses
+  - Éventuellement complétées d'un délimiteur
 
-		for(int var : foo)
-		  cout << var << " ";    // Affiche 4 8 12 37
-	```
+```cpp
+// Affiche Message\n en une seule \n ligne
+cout << R"(Message\n en une seule \n ligne)";
+cout << R"--(Message\n en une seule \n ligne)--";
+```
 
-	\begin{itemize}
-		\item Compatible avec ```cpp auto```
-	\end{itemize}
+- Composition possible des deux type de chaînes littérales
 
-	```cpp
-		vector<int> foo{4, 8, 12, 37};
+```cpp
+u8R"(Message\n en une seule \n ligne)";
+```
 
-		for(auto var : foo)
-		  cout << var << " ";    // Affiche 4 8 12 37
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+R%22(Message%5Cn+en+une+seule+%5Cn+ligne)%22+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+R%22--(Message%5Cn+en+une+seule+%5Cn+ligne)--%22+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+u8R%22(Message%5Cn+en+une+seule+%5Cn+ligne)%22+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item Utilisable sur tout conteneur
-		\begin{itemize}
-			\item Exposant ```cpp begin()``` et ```cpp end()```
-			\item Utilisable avec ```cpp std::begin()``` et ```cpp std::end()```
-		\end{itemize}
-	\end{itemize}
+#addproposal("N2442")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+8,+12,+37%7D%3B%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+== User-defined literals
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+8,+12,+37%7D%3B%0A%0A++for(int+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Possibilité de définir des littéraux "utilisateur"
+- Nombre (entier ou réel), caractère ou chaîne suffixé par un identifiant
+- Identifiants non standards préfixés par ```cpp _```
+- Définit via ```cpp operator""suffixe```
 
-	\addproposal{N2930}{https://wg21.link/N2930}
-	\addproposal{N3271}{https://wg21.link/N3271}
+#noteblock("Motivations", text[
+  - Pas de conversion implicite
+  - Expressivité
+// Exemple d'expressivité : des classes de "quantité" avec des user-defined literals pour les unités
+])
 
+#addproposal("N2765")
 
+== User-defined literals
 
-== Range-based for loop}
-	\begin{alertblock}{Modification des éléments}
-		\begin{itemize}
-			\item La variable d'itération doit être une référence
-		\end{itemize}
+- Littéraux brutes : chaîne C entièrement analysée par l'opérateur
 
-		```cpp
-			vector<int> foo(4);
+```cpp
+class Foo {
+public: explicit Foo(int a) : m_a{a} {}
+private: int m_a; };
 
-			for(auto& var : foo)
-			  var = 5;    // foo : 5 5 5 5
-  		```
-	\end{alertblock}
+Foo operator""_b(const char* str) {
+  unsigned long long a = 0;
+  for(size_t i = 0; str[i]; ++i) a = (a * 2) + (str[i] - '0');
+  return Foo(a); }
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A%0A++for(auto%26+var+:+foo)%0A++%7B%0A++++var+%3D+5%3B%0A++%7D%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+Foo foo = 6        // Erreur de compilation
+Foo bar = 0110_b;  // 6
+```
 
-	\addproposal{N2930}{https://wg21.link/N2930}
-	\addproposal{N3271}{https://wg21.link/N3271}
+#alertblock("Restrictions", text[
+  - Uniquement pour les littéraux numériques
+])
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++explicit+Foo(int+a)%0A++++:+m_a%7Ba%7D%0A++%7B%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate:%0A++int+m_a%3B%0A%7D%3B%0A%0Astatic+Foo+operator%22%22_b(const+char*+str)%0A%7B%0A++unsigned+long+long+a+%3D+0%3B%0A++for(size_t+i+%3D+0%3B+str%5Bi%5D%3B+%2B%2Bi)%0A++%7B%0A++++a+%3D+(a+*+2)+%2B+(str%5Bi%5D+-+!'0!')%3B%0A++%7D%0A++return+Foo(a)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Foo+foo+%3D+6%3B%0A%23else%0A++Foo+foo+%3D+0110_b%3B%0A%23endif%0A++foo.print()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+#addproposal("N2765")
 
-== Range-based for loop}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez \textit{range-based for loop} aux boucles classiques et à ```cpp std::for_each()```
-		\end{itemize}
-	\end{exampleblock}
+== User-defined literals
 
-\note[item]{```cpp std::for_each()``` n'a plus d'intérêt en C++11 mais redevient utile en C++17 avec les politiques d'exécution parallélisées}
+- Littéraux préparés par le compilateur
+  - Littéraux entiers : ```cpp unsigned long long int```
+  - Littéraux réels : ```cpp long double```
+  - Littéraux caractères : ```cpp char```, ```cpp wchar_t```, ```cpp char16_t``` ou ```cpp char32_t```
+  - Chaînes littérales : couple pointeur sur caractères et ```cpp size_t```
 
-	\begin{block}{Conseils}
-		\begin{itemize}
-			\item Contrairement à ```cpp for```, l'indice de l'itération n'est pas disponible
-			\item Malgré tout, préférez la \textit{range-based for loop} avec un indice externe à ```cpp for```
-		\end{itemize}
-	\end{block}
+```cpp
+Foo operator""_f(unsigned long long int a) {
+  return Foo(a); }
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez l'inférence de type sur la variable d'itération
-		\end{itemize}
-	\end{exampleblock}
+Foo operator""_f(const char* str, size_t) {
+  return Foo(std::stoull(str)); }
 
+Foo baz = 12_f;    // OK
+Foo bar = "12"_f;  // OK
+```
 
-== \mintinline[style=white]{cpp}```std::string``` et conversions}
-	\begin{itemize}
-		\item Fonctions de conversion d'une chaîne de caractères en un nombre
-		\begin{itemize}
-			\item ```cpp std::stoi()``` vers ```cpp int```
-			\item ```cpp std::stol()``` vers ```cpp long```
-			\item ```cpp std::stoul()``` vers ```cpp unsigned long```
-			\item ```cpp std::stoll()``` vers ```cpp long long```
-			\item ```cpp std::stoull()``` vers ```cpp unsigned long long```
-			\item ```cpp std::stof()``` vers ```cpp float```
-			\item ```cpp std::stod()``` vers ```cpp double```
-			\item ```cpp std::stold()``` vers ```cpp long double```
-		\end{itemize}
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++explicit+Foo(int+a)%0A++++:+m_a%7Ba%7D%0A++%7B%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate:%0A++int+m_a%3B%0A%7D%3B%0A%0Astatic+Foo+operator+%22%22+_f(unsigned+long+long+int+a)%0A%7B%0A++return+Foo(a)%3B%0A%7D%0A%0Astatic+Foo+operator%22%22_f(const+char*+str,+size_t+/*+length+*/)%0A%7B%0A++return+Foo(std::stoull(str))%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Foo+foo+%3D+12%3B%0A%23endif%0A%0A++Foo+bar+%3D+12_f%3B%0A++bar.print()%3B%0A%0A++Foo+baz+%3D+%2212%22_f%3B%0A++baz.print()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		stoi("56"); // 56
-	```
+#addproposal("N2765")
 
-	\begin{itemize}
-		\item S'arrêtent sur le premier caractère non convertible
-	\end{itemize}
+== ``` std::tuple```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++int+a+%3D+std::stoi(%2242%22)%3B%0A%0A++std::cout+%3C%3C+a+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Collection d'objets de type divers
+- Généralisation de ```cpp std::pair```
 
+```cpp
+tuple<int, char, long> foo;
+```
 
+- ```cpp std::make_tuple()``` construit un ```cpp std::tuple```
 
-== \mintinline[style=white]{cpp}```std::string``` et conversions}
-	\begin{itemize}
-		\item ```cpp std::to_string()``` convertit d'un nombre en une chaîne de caractères
-	\end{itemize}
+```cpp
+tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
+```
 
-	```cpp
-		to_string(56); // "56"
-	```
+#noteblock(text[``` std::make_tuple``` ou constructeur ?], text[
+  - ```cpp std::make_tuple()``` permet la déduction de types, pas le constructeur
 
-	\begin{itemize}
-		\item ```cpp std::to_wstring()``` convertit vers une chaîne de caractères larges
-	\end{itemize}
+```cpp
+auto foo{5, 'e', 98L};              // KO
+auto bar = make_tuple(5, 'e', 98L); // OK
+```
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+b+%3D+std::to_string(56)%3B%0A%0A++std::cout+%3C%3C+b+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#addproposal("n1836")
 
+== ``` std::tuple```
 
+- Fonction de déstructuration ```cpp std::tie()```
+- Et une constante pour ignorer des éléments ```cpp std::ignore```
 
-== \mintinline[style=white]{cpp}```std::string``` et conversions}
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Pas de fonction ```cpp std::stoui()``` de conversion vers un ```cpp unsigned int```
-		\end{itemize}
-	\end{alertblock}
+```cpp
+int a; long b;
+tie(a, ignore, b) = foo;
+```
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::sto...()``` à ```cpp sscanf()```, ```cpp atoi()``` ou ```cpp strto...()```
-		\end{itemize}
-	\end{exampleblock}
+// C++17 introduit les structured binding qui améliore grandement la déstructuration en proposant une syntaxe plus simple et claire
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::to_string()``` à ```cpp snprintf()``` ou ```cpp itoa()```
-		\end{itemize}
-	\end{exampleblock}
+- ```cpp std::get<>()``` accède aux éléments du ```cpp std::tuple``` par l'indice
 
-	\begin{block}{Alternative et complément}
-		\begin{itemize}
-			\item ```cpp Boost.Lexical_cast``` permet de telles conversions et quelques autres
-		\end{itemize}
-	\end{block}
+```cpp
+char c = get<1>(foo);
+```
 
+#alertblock("Attention", text[
+  - Les indices commencent à 0
+])
 
-== Chaînes de caractères UTF}
-	\begin{itemize}
-		\item ```cpp char``` doit pouvoir contenir un encodage 8 bits UTF-8
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A%0A++std::string+c+%3D+std::get%3C1%3E(foo)%3B%0A++std::cout+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-\note[item]{Pas de garantie en C++98/03, implémentation-defined}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A%0A++int+a%3B%0A++double+b%3B%0A%0A++std::tie(a,+std::ignore,+b)+%3D+foo%3B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		\item ```cpp char16_t``` représente un code point 16 bits
-		\item ```cpp char32_t``` représente un code point 32 bits
-		\item ```cpp std::u16string``` spécialisation de ```cpp basic_string``` pour caractères 16 bits
-		\item ```cpp std::u32string``` spécialisation de ```cpp basic_string``` pour caractères 32 bits
-		\item Même interface que ```cpp std::string```
-	\end{itemize}
+#addproposal("n1836")
 
-	\addproposal{N2249}{https://wg21.link/N2249}
+== ``` std::tuple```
 
+- ```cpp std::tuple_cat()``` concatène deux ```cpp std::tuple```
 
-== Nouvelles chaînes littérales}
-	\begin{itemize}
-		\item Chaînes littérales UTF-8, UTF-16 et UTF32
-	\end{itemize}
+```cpp
+auto foo = make_tuple(5, 'e');
+auto bar = make_tuple(98L, 'r');
+auto baz = tuple_cat(foo, bar);               // 5 'e' 98L 'r'
+```
 
-	```cpp
-		string u8str     = u8"UTF-8 string";
-		u16string u16str = u"UTF-16 string";
-		u32string u32str = U"UTF-32 string";
-	```
+- Classe représentant la taille ```cpp std::tuple_size```
 
-	\addproposal{N2442}{https://wg21.link/N2442}
+```cpp
+	tuple_size<decltype(baz)>::value;             // 4
+```
 
+- Classe représentant le type des éléments ```cpp std::tuple_element```
 
+```cpp
+tuple_element<0, decltype(baz)>::type first;  // int
+```
 
-== Nouvelles chaînes littérales}
-	\begin{itemize}
-		\item Chaînes littérales brutes (sans interprétation des échappements)
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A++auto+bar+%3D+std::make_tuple(12,+5UL)%3B%0A++auto+baz+%3D+std::tuple_cat(foo,+bar)%3B%0A%0A++std::cout+%3C%3C+std::tuple_size%3Cdecltype(baz)%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-\note[item]{Utile pour écrire des expressions rationnelles, des commandes shell ou autres qui ont aussi leurs échappements}
+#addproposal("n1836")
 
-		\begin{itemize}
-			\item Préfixées par ```cpp R```
-			\item Encadrées par une paire de parenthèses
-			\item Éventuellement complétées d'un délimiteur
-		\end{itemize}
-	\end{itemize}
+== ``` std::tuple```
 
-	```cpp
-		// Affiche Message\n en une seule \n ligne
-		cout << R"(Message\n en une seule \n ligne)";
-		cout << R"--(Message\n en une seule \n ligne)--";
-	```
+#alertblock("Don't", text[
+  - N'utilisez pas ```cpp std::tuple``` pour remplacer une structure
+  - ```cpp std::tuple``` regroupe localement des éléments sans lien sémantique
+])
 
-	\begin{itemize}
-		\item Composition possible des deux type de chaînes littérales
-	\end{itemize}
+#adviceblock("Do", text[
+  - Préférez un ```cpp std::tuple``` de retour aux paramètres "_OUT_"
+])
 
-	```cpp
-		u8R"(Message\n en une seule \n ligne)";
-	```
+== ``` fstream```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+R%22(Message%5Cn+en+une+seule+%5Cn+ligne)%22+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+R%22--(Message%5Cn+en+une+seule+%5Cn+ligne)--%22+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+u8R%22(Message%5Cn+en+une+seule+%5Cn+ligne)%22+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Construction depuis des ```cpp std::string```
 
-	\addproposal{N2442}{https://wg21.link/N2442}
+```cpp
+string filename{"foo.txt"};
 
+// C++ 98
+ofstream file(filename.c_str());
 
-== User-defined literals}
-	\begin{itemize}
-		\item Possibilité de définir des littéraux \og utilisateur\fg{}
-		\item Nombre (entier ou réel), caractère ou chaîne suffixé par un identifiant
-		\item Identifiants non standards préfixés par ```cpp _```
-		\item Définit via ```cpp operator""suffixe```
-	\end{itemize}
+// C++ 11
+ofstream file{filename};
+```
 
-	\begin{block}{Motivations}
-		\begin{itemize}
-			\item Pas de conversion implicite
-			\item Expressivité
+== ``` =default``` et ``` =delete```
 
-\note[item]{Exemple d'expressivité : des classes de \og quantité\fg{} avec des \textit{user-defined literals} pour les unités}
-		\end{itemize}
-	\end{block}
+- Applicables aux fonctions générées implicitement le compilateur
+  - Constructeur par défaut, par copie et par déplacement
+  - Destructeur
+  - Opérateur d'affectation
+  - Opérateur d'affectation par déplacement
+- ```cpp =default``` force le compilateur à générer l'implémentation triviale
+- ```cpp =delete``` désactive la génération implicite de la fonction
+- ```cpp =delete``` peut aussi s'appliquer aux fonctions héritées pour les supprimer
 
-	\addproposal{N2765}{https://wg21.link/N2765}
+#addproposal("N2346")
 
+== ``` =default``` et ``` =delete```
 
+```cpp
+class Foo {
+  public: Foo(int) {}
+  public: Foo() = default;
 
-== User-defined literals}
-	\begin{itemize}
-		\item Littéraux brutes : chaîne C entièrement analysée par l'opérateur
-	\end{itemize}
+  private: Foo(const Foo&) = delete;
+  private: Foo& operator=(const Foo&) = delete;
+};
+```
 
-	```cpp
-		class Foo {
-		public: explicit Foo(int a) : m_a{a} {}
-		private: int m_a; };
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++Foo(int)+%7B%7D%0A%23if+1%0A++Foo()+%3D+default%3B%0A%23endif%0A%0Aprivate:%0A++Foo(const+Foo%26)+%3D+delete%3B%0A++Foo%26+operator%3D(const+Foo%26)+%3D+delete%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A++Foo+bar(5)%3B%0A%23if+0%0A++Foo+baz(bar)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		Foo operator""_b(const char* str) {
-		  unsigned long long a = 0;
-		  for(size_t i = 0; str[i]; ++i)
-		    a = (a * 2) + (str[i] - '0');
-		  return Foo(a); }
+== ``` =default``` et ``` =delete```
 
-		Foo foo = 6        // Erreur de compilation
-		Foo bar = 0110_b;  // 6
-	```
+#adviceblock("Do", text[
+  - Préférez ```cpp =default``` à une implémentation manuelle avec le même effet
+])
 
-	\begin{alertblock}{Restrictions}
-		\begin{itemize}
-			\item Uniquement pour les littéraux numériques
-		\end{itemize}
-	\end{alertblock}
+#adviceblock("Do", text[
+- Préférez ```cpp =delete``` à une déclaration privée sans définition
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++explicit+Foo(int+a)%0A++++:+m_a%7Ba%7D%0A++%7B%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate:%0A++int+m_a%3B%0A%7D%3B%0A%0Astatic+Foo+operator%22%22_b(const+char*+str)%0A%7B%0A++unsigned+long+long+a+%3D+0%3B%0A++for(size_t+i+%3D+0%3B+str%5Bi%5D%3B+%2B%2Bi)%0A++%7B%0A++++a+%3D+(a+*+2)+%2B+(str%5Bi%5D+-+!'0!')%3B%0A++%7D%0A++return+Foo(a)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Foo+foo+%3D+6%3B%0A%23else%0A++Foo+foo+%3D+0110_b%3B%0A%23endif%0A++foo.print()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#noteblock(text[``` =default``` ou non définition ?], text[
+  - Consensus plutôt du côté de la non-définition
+  - Intérêt documentaire réel à ```cpp =default```
+])
 
-	\addproposal{N2765}{https://wg21.link/N2765}
+== Initialisation par défaut des membres
 
+- Initialisation des membres lors de la déclaration
 
+```cpp
+struct Foo {
+  Foo() {}
+  int m_a{2};
+};
+```
 
-== User-defined literals}
-	\begin{itemize}
-		\item Littéraux préparés par le compilateur
-		\begin{itemize}
-			\item Littéraux entiers : ```cpp unsigned long long int```
-			\item Littéraux réels : ```cpp long double```
-			\item Littéraux caractères : ```cpp char```, ```cpp wchar_t```, ```cpp char16_t``` ou ```cpp char32_t```
-			\item Chaînes littérales : couple pointeur sur caractères et ```cpp size_t```
-		\end{itemize}
-	\end{itemize}
+#alertblock("Restriction", text[
+  - Pas d'initialisation avec ```cpp ()```
+  - Initialisation avec ```cpp =``` uniquement sur des types copiables
+])
 
-	```cpp
-		Foo operator""_f(unsigned long long int a) {
-		  return Foo(a); }
+#adviceblock("Do", text[
+  - Préférez l'initialisation des membres à l'initialisation par constructeurs pour les initialisations avec une valeur connue à la compilation
+])
 
-		Foo operator""_f(const char* str, size_t) {
-		  return Foo(std::stoull(str)); }
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A%0A++std::cout+%3C%3C+foo.m_a+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		Foo baz = 12_f;    // OK
-		Foo bar = "12"_f;  // OK
-	```
+#addproposal("N2756")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++explicit+Foo(int+a)%0A++++:+m_a%7Ba%7D%0A++%7B%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate:%0A++int+m_a%3B%0A%7D%3B%0A%0Astatic+Foo+operator+%22%22+_f(unsigned+long+long+int+a)%0A%7B%0A++return+Foo(a)%3B%0A%7D%0A%0Astatic+Foo+operator%22%22_f(const+char*+str,+size_t+/*+length+*/)%0A%7B%0A++return+Foo(std::stoull(str))%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Foo+foo+%3D+12%3B%0A%23endif%0A%0A++Foo+bar+%3D+12_f%3B%0A++bar.print()%3B%0A%0A++Foo+baz+%3D+%2212%22_f%3B%0A++baz.print()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Délégation de constructeur
 
-	\addproposal{N2765}{https://wg21.link/N2765}
+- Utilisation d'un constructeur dans l'implémentation d'un second
+- ... en 'l'initialisant' dans la liste d'initialisation
 
+```cpp
+struct Foo {
+  Foo(int a) : m_a(a) {}
+  Foo() : Foo(2) {}
+  int m_a;
+};
+```
 
-== \mintinline[style=white]{cpp}```std::tuple```}
-	\begin{itemize}
-		\item Collection d'objets de type divers
-		\item Généralisation de ```cpp std::pair```
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++Foo(int+a)%0A++++:+m_a(a)%0A++%7B%0A++%7D%0A%0A++Foo()%0A++++:+Foo(2)%0A++%7B%0A++%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate:%0A++int+m_a%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo(4)%3B%0A++Foo+bar%3B%0A%0A++foo.print()%3B%0A++bar.print()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		tuple<int, char, long> foo;
-	```
+#addproposal("N1986")
 
-	\begin{itemize}
-		\item ```cpp std::make_tuple()``` construit un ```cpp std::tuple```
-	\end{itemize}
+== Délégation de constructeur
 
-	```cpp
-		tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
-	```
+#adviceblock("Do", text[
+  - Utilisez la délégation de constructeur pour mutualiser le code commun
+])
 
-	\begin{block}{\mintinline[style=white]{cpp}```std::make_tuple``` ou constructeur ?}
-		\begin{itemize}
-			\item ```cpp std::make_tuple()``` permet la déduction de types, pas le constructeur
-		\end{itemize}
+#alertblock("Don't", text[
+  - Évitez la délégation pour l'initialisation constante de membres
+  - Préférez l'initialisation par défaut des membres
+])
 
-		```cpp
-			auto foo{5, 'e', 98L};              // KO
-			auto bar = make_tuple(5, 'e', 98L); // OK
-		```
-	\end{block}
+== Héritage de constructeur
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Indique que la classe hérite des constructeurs de la classe mère
+- Génération du constructeur correspondant par le compilateur
+  - Paramètres du constructeur de base
+  - Appelle le constructeur de base correspondant
+  - Initialise les membres sans fournir de paramètres
 
+```cpp
+struct Foo {
+  Foo() {}
+  Foo(int a) : m_a(a) {}
+  int m_a{2};
+};
 
+struct Bar : Foo {
+  using Foo::Foo;
+};
+```
 
-== \mintinline[style=white]{cpp}```std::tuple```}
-	\begin{itemize}
-		\item Fonction de déstructuration ```cpp std::tie()```
-		\item Et une constante pour ignorer des éléments ```cpp std::ignore```
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++Foo(int+a)%0A++++:+m_a(a)%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++using+Foo::Foo%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++Foo+foo%3B%0A++++Foo+bar(4)%3B%0A%0A++++std::cout+%3C%3C+foo.m_a+%3C%3C+!'+!'+%3C%3C+bar.m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++Bar+foo%3B%0A++++Bar+bar(4)%3B%0A%0A++++std::cout+%3C%3C+foo.m_a+%3C%3C+!'+!'+%3C%3C+bar.m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		int a; long b;
-		tie(a, ignore, b) = foo;
-	```
+#addproposal("N2540")
 
-\note[item]{C++17 introduit les \textit{structured binding} qui améliore grandement la déstructuration en proposant une syntaxe plus simple et claire}
+== Héritage de constructeur
 
-	\begin{itemize}
-		\item ```cpp std::get<>()``` accède aux éléments du ```cpp std::tuple``` par l'indice
-	\end{itemize}
+- Redéfinition possible dans la classe dérivée
 
-	```cpp
-		char c = get<1>(foo);
-	```
+```cpp
+struct Bar : Foo {
+  using Foo::Foo;
+  Bar() : Foo(5) {}
+};
+```
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Les indices commencent à 0
-		\end{itemize}
-	\end{alertblock}
+#alertblock("Valeurs par défaut", text[
+  - Génération de toutes les combinaisons de constructeurs sans valeur par défaut correspondantes au constructeur de base avec des valeurs par défaut
+  // Ainsi Foo(int, int = 2) va injecter Bar(int) et Bar(int, int)
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A%0A++std::string+c+%3D+std::get%3C1%3E(foo)%3B%0A++std::cout+%3C%3C+c+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+#alertblock("Héritage multiple", text[
+  - Héritage impossible de deux constructeurs avec la même signature
+])
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A%0A++int+a%3B%0A++double+b%3B%0A%0A++std::tie(a,+std::ignore,+b)+%3D+foo%3B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++Foo(int+a)%0A++++:+m_a(a)%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++using+Foo::Foo%3B%0A++Bar()%0A++++:+Foo(5)+%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Bar+foo%3B%0A++Bar+bar(4)%3B%0A%0A++std::cout+%3C%3C+foo.m_a+%3C%3C+!'+!'+%3C%3C+bar.m_a+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+#addproposal("N2540")
 
+== ``` override```
 
+- Indique la redéfinition d'une fonction d'une classe de base
 
-== \mintinline[style=white]{cpp}```std::tuple```}
-	\begin{itemize}
-		\item ```cpp std::tuple_cat()``` concatène deux ```cpp std::tuple```
-	\end{itemize}
+```cpp
+struct Foo {
+  Foo() {}
+  virtual void f(int);
+};
 
-	```cpp
-		auto foo = make_tuple(5, 'e');
-		auto bar = make_tuple(98L, 'r');
-		auto baz = tuple_cat(foo, bar);               // 5 'e' 98L 'r'
-	```
+struct Bar : Foo {
+  Bar() {}
+  void f(int) override;
+};
+```
 
-	\begin{itemize}
-		\item Classe représentant la taille ```cpp std::tuple_size```
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%0A++void+f(int)+override%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		tuple_size<decltype(baz)>::value;             // 4
-	```
+#addproposal("N2928")
+#addproposal("N3206")
+#addproposal("N3272")
 
-	\begin{itemize}
-		\item Classe représentant le type des éléments ```cpp std::tuple_element```
-	\end{itemize}
+== ``` override```
 
-	```cpp
-		tuple_element<0, decltype(baz)>::type first;  // int
-	```
+- Provoque une erreur de compilation si
+  - La fonction n'existe pas dans la classe de base
+  - La fonction de la classe de base n'est pas virtuelle
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+std::string,+double%3E+foo+%3D+std::make_tuple(42,+%22FOO%22,+25.2)%3B%0A++auto+bar+%3D+std::make_tuple(12,+5UL)%3B%0A++auto+baz+%3D+std::tuple_cat(foo,+bar)%3B%0A%0A++std::cout+%3C%3C+std::tuple_size%3Cdecltype(baz)%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+struct Foo {
+  virtual void f(int);
+  virtual void g(int) const;
+  void h(int);
+};
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+struct Bar : Foo {
+  void f(float) override;   // Erreur
+  void g(int) override;     // Erreur
+  void h(int) override;     // Erreur
+};
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()+%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%0A++virtual+void+g(int)+const%0A++%7B%7D%0A%0A++void+h(int)%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%0A++void+f(float)+override%0A++%7B%7D%0A%0A++void+g(int)+override%0A++%7B%7D%0A%0A++void+h(int)+override%0A++%7B%7D%0A%0A++void+i(int)+override%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== ``` override```
 
-== \mintinline[style=white]{cpp}```std::tuple```}
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item N'utilisez pas ```cpp std::tuple``` pour remplacer une structure
-			\item ```cpp std::tuple``` regroupe localement des éléments sans lien sémantique
-		\end{itemize}
-	\end{alertblock}
+#noteblock("Objectifs", text[
+  - Documentaire
+  - Détection des non-reports de modifications lors d'un refactoring
+  - Détection des redéfinitions involontaires
+])
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez un ```cpp std::tuple``` de retour aux paramètres \og{}\textit{OUT}\fg{}
-		\end{itemize}
-	\end{exampleblock}
+#adviceblock("Do", text[
+  - Marquez ```cpp override``` les fonctions que vous redéfinissez
+])
 
+#adviceblock("Do", text[
+  - Utilisez ```cpp virtual``` à la base de l'arbre d'héritage
+  - Utilisez ```cpp override``` sur les redéfinitions
+// Si une fonction est virtuelle, toutes ces redéfinitions le sont qu'elles soient ou non marquées comme tel}
+])
 
-== \mintinline[style=white]{cpp}```fstream```}
-	\begin{itemize}
-		\item Construction depuis des ```cpp std::string```
-	\end{itemize}
+== ``` final```
 
-	```cpp
-		string filename{"foo.txt"};
+- Indique qu'une classe ne peut pas être dérivée
 
-		// C++ 98
-		ofstream file(filename.c_str());
+```cpp
+struct Foo final {
+  virtual void f(int);
+};
 
-		// C++ 11
-		ofstream file{filename};
-	```
+struct Bar : Foo {   // Erreur
+  void f(int);
+};
+```
 
+- Aussi bien via l'héritage public que privé
 
-== \mintinline[style=white]{cpp}```=default``` et \mintinline[style=white]{cpp}```=delete```}
-	\begin{itemize}
-		\item Applicables aux fonctions générées implicitement le compilateur
-		\begin{itemize}
-			\item Constructeur par défaut, par copie et par déplacement
-			\item Destructeur
-			\item Opérateur d'affectation
-			\item Opérateur d'affectation par déplacement
-		\end{itemize}
-		\item ```cpp =default``` force le compilateur à générer l'implémentation triviale
-		\item ```cpp =delete``` désactive la génération implicite de la fonction
-		\item ```cpp =delete``` peut aussi s'appliquer aux fonctions héritées pour les supprimer
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo+final%0A%7B%0A++Foo()%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		class Foo {
-		  public: Foo(int) {}
-		  public: Foo() = default;
+#addproposal("N3206")
+#addproposal("N3272")
 
-		  private: Foo(const Foo&) = delete;
-		  private: Foo& operator=(const Foo&) = delete;
-		};
-	```
+== ``` final```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++Foo(int)+%7B%7D%0A%23if+1%0A++Foo()+%3D+default%3B%0A%23endif%0A%0Aprivate:%0A++Foo(const+Foo%26)+%3D+delete%3B%0A++Foo%26+operator%3D(const+Foo%26)+%3D+delete%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A++Foo+bar(5)%3B%0A%23if+0%0A++Foo+baz(bar)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Ou qu'une fonction ne peut plus être redéfinie
 
-	\addproposal{N2346}{https://wg21.link/N2346}
+```cpp
+struct Foo {
+  virtual void f(int);
+};
 
+struct Bar : Foo {
+  void f(int) final;
+};
 
+struct Baz : Bar {
+  void f(int);       // Erreur
+};
+```
 
-== \mintinline[style=white]{cpp}```=default``` et \mintinline[style=white]{cpp}```=delete```}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp =default``` à une implémentation manuelle avec le même effet
-		\end{itemize}
-	\end{exampleblock}
+#adviceblock("Do", text[
+  - Utilisez ```cpp final``` avec parcimonie
+])
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp =delete``` à une déclaration privée sans définition
-		\end{itemize}
-	\end{exampleblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%0A++virtual+void+f(int)+final%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Baz+:+Bar%0A%7B%0A++Baz()%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{block}{\mintinline[style=white]{cpp}```=default``` ou non définition ?}
-		\begin{itemize}
-			\item Consensus plutôt du côté de la non-définition
-			\item Intérêt documentaire réel à ```cpp =default```
-		\end{itemize}
-	\end{block}
+== Opérateurs de conversion explicite
 
+- Extension de ```cpp explicit``` aux opérateurs de conversion
+- ... qui ne définissent alors plus de conversion implicite
 
+```cpp
+struct Foo { operator int() { return 5; } };
 
-== Initialisation par défaut des membres}
-	\begin{itemize}
-		\item Initialisation des membres lors de la déclaration
-	\end{itemize}
+Foo f;
+int a = f;                    // OK
+int b = static_cast<int>(f);  // OK
+```
 
-	```cpp
-		struct Foo {
-		  Foo() {}
-		  int m_a{2};
-		};
-	```
+```cpp
+struct Foo { explicit operator int() { return 5; } };
 
-	\begin{alertblock}{Restriction}
-		\begin{itemize}
-			\item Pas d'initialisation avec ```cpp ()```
-			\item Initialisation avec ```cpp =``` uniquement sur des types copiables
-		\end{itemize}
-	\end{alertblock}
+Foo f;
+int a = f;                    // Erreur
+int b = static_cast<int>(f);  // OK
+```
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez l'initialisation des membres à l'initialisation par constructeurs pour les initialisations avec une valeur connue à la compilation
-		\end{itemize}
-	\end{exampleblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++operator+int()%0A++%7B%0A++++return+5%3B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar%0A%7B%0A++explicit+operator+int()%0A++%7B%0A++++return+5%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++Foo+f%3B%0A++++int+a+%3D+f%3B%0A++++int+b+%3D+static_cast%3Cint%3E(f)%3B%0A++++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++Bar+f%3B%0A%23if+1%0A++++int+a+%3D+f%3B%0A%23endif%0A++++int+b+%3D+static_cast%3Cint%3E(f)%3B%0A++++std::cout+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A%0A++std::cout+%3C%3C+foo.m_a+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#addproposal("N2437")
 
-	\addproposal{N2756}{https://wg21.link/N2756}
+== ``` noexcept```
 
+- Indique qu'une fonction ne jette pas d'exception
+// Rôle documentaire et permet au compilateur d'effectuer certaines optimisations (p. ex. sur le choix entre déplacement et copie)
+// Appelle std::terminate() lorsque la fonction ne respecte pas son contrat et lance une exception
+// std::terminate() appelle le \textit{handler} correspondant qui par défaut est std::abort() qui arrête violemment le programme}
 
+```cpp
+void foo() noexcept {}
+```
 
-== Délégation de constructeur}
-	\begin{itemize}
-		\item Utilisation d'un constructeur dans l'implémentation d'un second
-		\item \ldots{} en \og l'initialisant\fg{} dans la liste d'initialisation
-	\end{itemize}
+- Pilotable par une expression booléenne
 
-	```cpp
-		struct Foo {
-		  Foo(int a) : m_a(a) {}
-		  Foo() : Foo(2) {}
-		  int m_a;
-		};
-	```
+```cpp
+void foo() noexcept(true) {}
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++Foo(int+a)%0A++++:+m_a(a)%0A++%7B%0A++%7D%0A%0A++Foo()%0A++++:+Foo(2)%0A++%7B%0A++%7D%0A%0A++void+print()%0A++%7B%0A++++std::cout+%3C%3C+m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0Aprivate:%0A++int+m_a%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo(4)%3B%0A++Foo+bar%3B%0A%0A++foo.print()%3B%0A++bar.print()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#noteblock("Dépréciation", text[
+  - Les spécifications d'exception sont dépréciées
+  - Voir #link("http://www.gotw.ca/publications/mill22.htm")[A Pragmatic Look at Exception Specifications #linklogo()] (Herb Sutter)
+  // En pratique, seule throw() était utilisée et utilisable et a été remplacée par noexcept
+])
 
-	\addproposal{N1986}{https://wg21.link/N1986}
+#addproposal("N3050")
 
+== ``` noexcept```
 
+- Opérateur ```cpp noexcept()``` teste, au \textit{compile-time}, si une expression peut ou non lever une exception
+- Pour l'appel de fonction, teste si la fonction est ```cpp noexcept```
 
-== Délégation de constructeur}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez la délégation de constructeur pour mutualiser le code commun
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+noexcept(foo()); // true
+```
 
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item Évitez la délégation pour l'initialisation constante de membres
-			\item Préférez l'initialisation par défaut des membres
-		\end{itemize}
-	\end{alertblock}
+#adviceblock("Do", text[
+  - Marquez ```cpp noexcept``` les fonctions qui sémantiquement ne jette pas d'exception
+])
 
+== Conversion exception - pointeur
 
+- Quasi-pointeur ```cpp std::exception_ptr``` à responsabilité partagée sur une exception
+- ```cpp std::current_exception()``` récupère un pointeur sur l'exception courante
+- ```cpp std::rethrow_exception()``` relance l'exception contenue dans ```cpp std::exception_ptr```
+- ```cpp std::make_exception_ptr()``` construit ```cpp std::exception_ptr``` depuis une exception
 
-== Héritage de constructeur}
-	\begin{itemize}
-		\item Indique que la classe hérite des constructeurs de la classe mère
-		\item Génération du constructeur correspondant par le compilateur
-		\begin{itemize}
-			\item Paramètres du constructeur de base
-			\item Appelle le constructeur de base correspondant
-			\item Initialise les membres sans fournir de paramètres
-		\end{itemize}
-	\end{itemize}
+#addproposal("n2179")
 
-	```cpp
-		struct Foo {
-		  Foo() {}
-		  Foo(int a) : m_a(a) {}
-		  int m_a{2};
-		};
+== Conversion exception - pointeur
 
-		struct Bar : Foo {
-		  using Foo::Foo;
-		};
-	```
+```cpp
+void foo() { throw 42; }
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++Foo(int+a)%0A++++:+m_a(a)%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++using+Foo::Foo%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++Foo+foo%3B%0A++++Foo+bar(4)%3B%0A%0A++++std::cout+%3C%3C+foo.m_a+%3C%3C+!'+!'+%3C%3C+bar.m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++Bar+foo%3B%0A++++Bar+bar(4)%3B%0A%0A++++std::cout+%3C%3C+foo.m_a+%3C%3C+!'+!'+%3C%3C+bar.m_a+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+try {
+  foo();
+}
+catch(...) {
+  exception_ptr bar = current_exception();
+  rethrow_exception(bar);
+}
+```
 
-	\addproposal{N2540}{https://wg21.link/N2540}
+#noteblock("Motivation", text[
+  - Faire passer la barrière des threads aux exceptions
+])
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Avoid+foo()%0A%7B%0A++throw+42%3B%0A%7D%0A%0Avoid+bar(std::exception_ptr+e)%0A%7B%0A++std::rethrow_exception(e)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++foo()%3B%0A++%7D%0A++catch(...)%0A++%7B%0A++++std::exception_ptr+e+%3D+std::current_exception()%3B%0A++++bar(e)%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:54.83028720626631,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:45.16971279373369,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+#addproposal("n2179")
 
-== Héritage de constructeur}
-	\begin{itemize}
-		\item Redéfinition possible dans la classe dérivée
-	\end{itemize}
+== Nested exception
 
-	```cpp
-		struct Bar : Foo {
-		  using Foo::Foo;
-		  Bar() : Foo(5) {}
-		};
-	```
+- ```cpp std::nested_exception``` contient une exception imbriquée
+- ```cpp nested_ptr()``` récupère un pointeur sur l'exception imbriquée
+- ```cpp rethrow_nested()``` relance l'exception imbriquée
+- ```cpp std::rethrow_if_nested()``` relance l'exception imbriquée si elle existe
+- ```cpp std::throw_with_nested()``` lance une exception embarquant l'exception courante
 
-	\begin{alertblock}{Valeurs par défaut}
-		\begin{itemize}
-			\item Génération de toutes les combinaisons de constructeurs sans valeur par défaut correspondantes au constructeur de base avec des valeurs par défaut
-		\end{itemize}
+```cpp
+void foo() {
+  try { throw 42; }
+  catch(...) { throw_with_nested(logic_error("bar")); }
+}
 
-\note[item]{Ainsi ```cpp Foo(int, int = 2)``` va injecter ```cpp Bar(int)``` et ```cpp Bar(int, int)```}
-	\end{alertblock}
+try { foo(); }
+catch(logic_error &e) { std::rethrow_if_nested(e); }
+```
 
-	\begin{alertblock}{Héritage multiple}
-		\begin{itemize}
-			\item Héritage impossible de deux constructeurs avec la même signature
-		\end{itemize}
-	\end{alertblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Avoid+foo()+%0A%7B%0A++try+%0A++%7B+%0A++++throw+42%3B%0A++%7D%0A++catch(...)%0A++%7B+%0A++++std::throw_with_nested(std::logic_error(%22bar%22))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++foo()%3B%0A++%7D%0A++catch(std::logic_error+%26e)%0A++%7B%0A%23if+0%0A++++std::rethrow_if_nested(e)%3B%0A%23else%0A++++throw%3B%0A%23endif%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++Foo(int+a)%0A++++:+m_a(a)%0A++%7B%7D%0A%0A++int+m_a%7B2%7D%3B%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++using+Foo::Foo%3B%0A++Bar()%0A++++:+Foo(5)+%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Bar+foo%3B%0A++Bar+bar(4)%3B%0A%0A++std::cout+%3C%3C+foo.m_a+%3C%3C+!'+!'+%3C%3C+bar.m_a+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== ``` enum class```
 
-	\addproposal{N2540}{https://wg21.link/N2540}
+- Énumérations mieux typées
+- Sans conversions implicites
+- Énumérés locaux à l'énumération
 
+```cpp
+enum class Foo { BAR1, BAR2 };
 
+Foo foo = Foo::BAR1;
+```
 
-== \mintinline[style=white]{cpp}```override```}
-	\begin{itemize}
-		\item Indique la redéfinition d'une fonction d'une classe de base
-	\end{itemize}
+- Possibilité de fournir le type sous-jacent
+// Sur les énumérations classiques aussi
 
-	```cpp
-		struct Foo {
-		  Foo() {}
-		  virtual void f(int);
-		};
+```cpp
+enum class Foo : unsigned char { BAR1, BAR2 };
+```
 
-		struct Bar : Foo {
-		  Bar() {}
-		  void f(int) override;
-		};
-	```
+- ```cpp std::underlying_type``` permet de récupérer ce type sous-jacent
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%0A++void+f(int)+override%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Aenum+class+Foo+:+unsigned+int%0A%7B+%0A++BAR1,%0A++BAR2,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Foo+foo+%3D+BAR2%3B%0A%23else%0A++Foo+foo+%3D+Foo::BAR2%3B%0A%23endif%0A%0A%23if+0%0A++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A%23else%0A++std::cout+%3C%3C+static_cast%3Cstd::underlying_type%3CFoo%3E::type%3E(foo)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{N2928}{https://wg21.link/N2928}
-	\addproposal{N3206}{https://wg21.link/N3206}
-	\addproposal{N3272}{https://wg21.link/N3272}
+#addproposal("N2347")
 
+== ``` enum class```
 
+#adviceblock("Do", text[
+  - Préférez les énumérations fortement typées
+])
 
-== \mintinline[style=white]{cpp}```override```}
-	\begin{itemize}
-		\item Provoque une erreur de compilation si
-		\begin{itemize}
-			\item La fonction n'existe pas dans la classe de base
-			\item La fonction de la classe de base n'est pas virtuelle
-		\end{itemize}
-	\end{itemize}
+#noteblock("Bémol", text[
+  - Pas de méthode simple et robuste pour récupérer la valeur ou l'intitulé de l'énuméré
+])
 
-	```cpp
-		struct Foo {
-		  virtual void f(int);
-		  virtual void g(int) const;
-		  void h(int);
-		};
+== ``` std::function```
 
-		struct Bar : Foo {
-		  void f(float) override;   // Erreur
-		  void g(int) override;     // Erreur
-		  void h(int) override;     // Erreur
-		};
-	```
+// Fonction de première classe (first-class citizens) : utilisables comme paramètre ou retour de fonction
+// Fonction d'ordre supérieur : prend en paramètre ou retourne une autre fonction
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()+%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%0A++virtual+void+g(int)+const%0A++%7B%7D%0A%0A++void+h(int)%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%0A++void+f(float)+override%0A++%7B%7D%0A%0A++void+g(int)+override%0A++%7B%7D%0A%0A++void+h(int)+override%0A++%7B%7D%0A%0A++void+i(int)+override%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Encapsule un appelable de n'importe quel type
 
-	\addproposal{N2928}{https://wg21.link/N2928}
-	\addproposal{N3206}{https://wg21.link/N3206}
-	\addproposal{N3272}{https://wg21.link/N3272}
+```cpp
+int foo(int, int);
 
+function<int(int, int)> bar = foo;
+```
 
+- Copiable
+- Peut être passer en paramètre ou retourner par une fonction
 
-== \mintinline[style=white]{cpp}```override```}
-	\begin{block}{Objectifs}
-		\begin{itemize}
-			\item Documentaire
-			\item Détection des non-reports de modifications lors d'un refactoring
-			\item Détection des redéfinitions involontaires
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Aint+foo(int+a,+int+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int,+int)%3E+bar+%3D+foo%3B%0A%0A++std::cout+%3C%3C+bar(1,2)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Marquez ```cpp override``` les fonctions que vous redéfinissez
-		\end{itemize}
-	\end{exampleblock}
+#addproposal("n1836")
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez ```cpp virtual``` à la base de l'arbre d'héritage
-			\item Utilisez ```cpp override``` sur les redéfinitions
-		\end{itemize}
+== ``` std::mem_fn```
 
-\note[item]{Si une fonction est virtuelle, toutes ces redéfinitions le sont qu'elles soient ou non marquées comme tel}
-	\end{exampleblock}
+- Convertit une fonction membre en _function object_ prenant une instance en paramètre
 
+```cpp
+struct Foo { int f(int a) { return 2 * a; } };
 
+Foo foo;
+function<int(Foo, int)> bar = mem_fn(&Foo::f);
+bar(foo, 5);   // 10
+```
 
-== \mintinline[style=white]{cpp}```final```}
-	\begin{itemize}
-		\item Indique qu'une classe ne peut pas être dérivée
-	\end{itemize}
+#noteblock("Note", text[
+  - Type de retour non spécifié mais stockable dans ```cpp std::function```
+])
 
-	```cpp
-		struct Foo final {
-		  virtual void f(int);
-		};
+#noteblock("Dépréciation", text[
+- Dépréciation de ```cpp std::mem_fun```, ```cpp std::ptr_fun``` et consorts
+// Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes
+// Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)
+])
 
-		struct Bar : Foo {   // Erreur
-		  void f(int);
-		};
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astruct+Foo%0A%7B%0A++int+f(int+a)%0A++%7B%0A++++return+2+*+a%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A++std::function%3Cint(Foo,+int)%3E+bar+%3D+std::mem_fn(%26Foo::f)%3B%0A%0A++std::cout+%3C%3C+bar(foo,+5)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item Aussi bien via l'héritage public que privé
-	\end{itemize}
+#addproposal("n1836")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo+final%0A%7B%0A++Foo()%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== ``` std::bind```
 
-	\addproposal{N3206}{https://wg21.link/N3206}
-	\addproposal{N3272}{https://wg21.link/N3272}
+- Construction de _function object_ en liant des paramètres à un appelable
+- _Placeholders_ ```cpp std::placholders::_1```, ```cpp std::placholders::_2```, ... pour lier les paramètres du _function object_ à l'appelable
 
+```cpp
+int foo(int a, int b) { return (a - 1) * b; }
 
+function<int(int)> bar = bind(&foo, _1, 2);
+bar(3);               // 4
 
-== \mintinline[style=white]{cpp}```final```}
-	\begin{itemize}
-		\item Ou qu'une fonction ne peut plus être redéfinie
-	\end{itemize}
+auto baz = bind(&foo, _2, _1);
+baz(3, 2, 1, 2, 3);   // 3
+```
 
-	```cpp
-		struct Foo {
-		  virtual void f(int);
-		};
+// Avec auto, il est possible de passer autant de paramètres surnuméraires que souhaiter
 
-		struct Bar : Foo {
-		  void f(int) final;
-		};
+#noteblock("Dépréciation", text[
+  - Dépréciation de ```cpp std::bind1st``` et ```cpp std::bind2nd```
+  // Version C++98 mais limités car ne pouvait que convertir une fonction binaire en fonction unaire en liant le premier ou le second paramètre
+])
 
-		struct Baz : Bar {
-		  void f(int);       // Erreur
-		};
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+a,+int+b)%0A%7B%0A++return+(a+-+1)+*+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int)%3E+bar+%3D+std::bind(%26foo,+std::placeholders::_1,+2)%3B%0A++std::cout+%3C%3C+bar(3)+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+std::bind(%26foo,+std::placeholders::_2,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+baz(3,+2,+1,+2,+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez ```cpp final``` avec parcimonie
-		\end{itemize}
-	\end{exampleblock}
+#addproposal("n1836")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%0A++Bar()%0A++%7B%7D%0A%0A++virtual+void+f(int)+final%0A++%7B%7D%0A%7D%3B%0A%0Astruct+Baz+:+Bar%0A%7B%0A++Baz()%0A++%7B%7D%0A%0A++virtual+void+f(int)%0A++%7B%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== lambda et fermeture
 
-	\addproposal{N3206}{https://wg21.link/N3206}
-	\addproposal{N3272}{https://wg21.link/N3272}
+#noteblock("Vocabulaire", text[
+  - Lambda : fonction anonyme
+  - Fermeture : capture des variables libres de l'environnement lexical
+])
 
+- ```cpp [capture](paramètres) spécificateurs -> type_retour {instructions}```
 
+```cpp
+int bar = 4;
+auto foo = [&bar] (int a) -> int { bar *= a; return a; };
 
-== Opérateurs de conversion explicite}
-	\begin{itemize}
-		\item Extension de ```cpp explicit``` aux opérateurs de conversion
-		\item \ldots{} qui ne définissent alors plus de conversion implicite
-	\end{itemize}
+int baz = foo(5);  // bar : 20, baz : 5
+```
 
-	```cpp
-		struct Foo { operator int() { return 5; } };
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+4%3B%0A++auto+foo+%3D+%5B%26bar%5D+(int+a)+-%3E+int+%7B+bar+*%3D+a%3B+return+a%3B%7D%3B%0A%0A++std::cout+%3C%3C+foo(5)+%3C%3C+!'+!'+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		Foo f;
-		int a = f;                    // OK
-		int b = static_cast<int>(f);  // OK
-	```
+#addproposal("N2550")
+#addproposal("N2658")
+#addproposal("N2927")
 
-	```cpp
-		struct Foo { explicit operator int() { return 5; } };
+== lambda et fermeture
 
-		Foo f;
-		int a = f;                    // Erreur
-		int b = static_cast<int>(f);  // OK
-	```
+- Capture
+  - ```cpp []``` : pas de capture
+  - ```cpp [x]``` : capture x par valeur
+  - ```cpp [&y]``` : capture y par référence
+  - ```cpp [=]```  : capture tout par valeur
+  - ```cpp [&]``` : capture tout par référence
+  - ```cpp [x, &y]``` : capture x par valeur et y par référence
+  - ```cpp [=, &z]``` : capture z par référence et le reste par copie
+  - ```cpp [&, z]``` : capture z par valeur et le reste par référence
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++operator+int()%0A++%7B%0A++++return+5%3B%0A++%7D%0A%7D%3B%0A%0Astruct+Bar%0A%7B%0A++explicit+operator+int()%0A++%7B%0A++++return+5%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++%7B%0A++++Foo+f%3B%0A++++int+a+%3D+f%3B%0A++++int+b+%3D+static_cast%3Cint%3E(f)%3B%0A++++std::cout+%3C%3C+a+%3C%3C+!'+!'+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++Bar+f%3B%0A%23if+1%0A++++int+a+%3D+f%3B%0A%23endif%0A++++int+b+%3D+static_cast%3Cint%3E(f)%3B%0A++++std::cout+%3C%3C+b+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== lambda et fermeture
 
-	\addproposal{N2437}{https://wg21.link/N2437}
+- La capture de variables membres se fait par la capture de  ```cpp this```
+  - Soit explicitement via ```cpp [this]```
 
+#alertblock(text[Capture de ``` this```], text[
+  - Capture du pointeur, non de l'objet
+])
 
-== \mintinline[style=white]{cpp}```noexcept```}
-	\begin{itemize}
-		\item Indique qu'une fonction ne jette pas d'exception
 
-\note[item]{Rôle documentaire et permet au compilateur d'effectuer certaines optimisations (p. ex. sur le choix entre déplacement et copie)}
-\note[item]{Appelle ```cpp std::terminate()``` lorsque la fonction ne respecte pas son contrat et lance une exception}
-\note[item]{```cpp std::terminate()``` appelle le \textit{handler} correspondant qui par défaut est ```cpp std::abort()``` qui arrête violemment le programme}
-	\end{itemize}
+#list(marker: [ ], text[
+  - Soit via ```cpp [=]``` ou ```cpp [&]```
+])
 
-	```cpp
-		void foo() noexcept {}
-	```
+== lambda et fermeture
 
-	\begin{itemize}
-		\item Pilotable par une expression booléenne
-	\end{itemize}
+- Préservation de la constante des variables capturées
+// Même avec mutable
+- Pas de capture des variables globales et statiques
 
-	```cpp
-		void foo() noexcept(true) {}
-	```
+#alertblock("Attention", text[
+  - Par défaut, les variables capturées par copie ne sont pas modifiables
 
-	\begin{block}{Dépréciation}
-		\begin{itemize}
-			\item Les spécifications d'exception sont dépréciées
-			\item Voir \href{http://www.gotw.ca/publications/mill22.htm}{A Pragmatic Look at Exception Specifications\linklogo} (Herb Sutter)
-		\end{itemize}
+```cpp
+int i = 5;
 
-\note[item]{En pratique, seule ```cpp throw()``` était utilisée et utilisable et a été remplacée par ```cpp noexcept```}
-	\end{block}
+auto foo = [=] () { cout << ++i << "\n"; };          // Erreur
+uto bar = [=] () mutable { cout << ++i << "\n"; };  // OK
+```
 
-	\addproposal{N3050}{https://wg21.link/N3050}
+// Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale
+])
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+i+%3D+5%3B%0A%0A%23if+1%0A++auto+foo+%3D+%5B%3D%5D+()+%7B+std::cout+%3C%3C+%2B%2Bi+%3C%3C+%22%5Cn%22%3B+%7D%3B%0A++foo()%3B%0A%23endif%0A%0A++auto+bar+%3D+%5B%3D%5D+()+mutable+%7B+std::cout+%3C%3C+%2B%2Bi+%3C%3C+%22%5Cn%22%3B+%7D%3B%0A++bar()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== lambda et fermeture
 
-== \mintinline[style=white]{cpp}```noexcept```}
-	\begin{itemize}
-		\item Opérateur ```cpp noexcept()``` teste, au \textit{compile-time}, si une expression peut ou non lever une exception
-		\item Pour l'appel de fonction, teste si la fonction est ```cpp noexcept```
-	\end{itemize}
+- Spécificateurs
+  - ```cpp mutable``` : modification possible des variables capturées par copie
+  - ```cpp noexcept``` : ne lève pas d'exception
+- Omission possible du type de retour si
+  - Unique instruction
+  - Un ```cpp return```
+- Omission possible d'une liste de paramètres vide
 
-	```cpp
-		noexcept(foo()); // true
-	```
+```cpp
+auto foo = [] { return 5; };
+```
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Marquez ```cpp noexcept``` les fonctions qui sémantiquement ne jette pas d'exception
-		\end{itemize}
-	\end{exampleblock}
+#alertblock("Exception", text[
+  - Omission impossible si la lambda est ```cpp mutable```
+])
 
-	\addproposal{N3050}{https://wg21.link/N3050}
+== lambda, ``` std::function```, ... - Conclusion
 
+#adviceblock("Do", text[
+  - Préférez les lambdas aux ```cpp std::function```
+  - Préférez les lambdas à ```cpp std::bind()```
+])
 
+// Les lambdas sont généralement plus efficaces
 
-== Conversion exception - pointeur}
-	\begin{itemize}
-		\item Quasi-pointeur ```cpp std::exception_ptr``` à responsabilité partagée sur une exception
-		\item ```cpp std::current_exception()``` récupère un pointeur sur l'exception courante
-		\item ```cpp std::rethrow_exception()``` relance l'exception contenue dans ```cpp std::exception_ptr```
-		\item ```cpp std::make_exception_ptr()``` construit ```cpp std::exception_ptr``` depuis une exception
-	\end{itemize}
+#noteblock("Motivations", text[
+  - Lisibilité, expressivité et performances
+  - Voir #link("https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf")[Practical Performance Practices #linklogo()]
 
-	\addproposal{n2179}{https://wg21.link/n2179}
+// Entre autres, il y a aussi des remarques intéressantes sur le choix des conteneurs, des pointeurs intelligents, sur std::endl, etc.
+])
 
+#alertblock("Attention", text[
+  - Prenez garde à la durée de vie des variables capturées par référence
+])
 
+== ``` std::reference_wrapper```
 
-== Conversion exception - pointeur}
-	```cpp
-		void foo() { throw 42; }
+- Encapsule un objet en émulant une référence
+- Construction par ```cpp std::ref()``` et ```cpp std::cref()```
+- Copiable
 
-		try {
-		  foo();
-		}
-		catch(...) {
-		  exception_ptr bar = current_exception();
-		  rethrow_exception(bar);
-		}
-	```
+```cpp
+int a{10};
+reference_wrapper<int> aref = ref(a);
 
-	\begin{block}{Motivation}
-		\begin{itemize}
-			\item Faire passer la barrière des threads aux exceptions
-		\end{itemize}
-	\end{block}
+aref++; // a : 11
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Avoid+foo()%0A%7B%0A++throw+42%3B%0A%7D%0A%0Avoid+bar(std::exception_ptr+e)%0A%7B%0A++std::rethrow_exception(e)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++foo()%3B%0A++%7D%0A++catch(...)%0A++%7B%0A++++std::exception_ptr+e+%3D+std::current_exception()%3B%0A++++bar(e)%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:54.83028720626631,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:45.16971279373369,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Aint+main()%0A%7B%0A++int+a%7B10%7D%3B%0A%0A++std::reference_wrapper%3Cint%3E+aref+%3D+std::ref(a)%3B%0A++aref%2B%2B%3B%0A++std::cout+%3C%3C+a+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{n2179}{https://wg21.link/n2179}
+#addproposal("n1836")
 
+== Double chevron
 
+- C++98/03 : ```cpp >>``` est toujours l'opérateur de décalage
+- C++11 : peut être une double fermeture de template
 
-== Nested exception}
-	\begin{itemize}
-		\item ```cpp std::nested_exception``` contient une exception imbriquée
-		\item ```cpp nested_ptr()``` récupère un pointeur sur l'exception imbriquée
-		\item ```cpp rethrow_nested()``` relance l'exception imbriquée
-		\item ```cpp std::rethrow_if_nested()``` relance l'exception imbriquée si elle existe
-		\item ```cpp std::throw_with_nested()``` lance une exception embarquant l'exception courante
-	\end{itemize}
+```cpp
+vector<vector<int>> foo;
+// Invalide en C++98/03
+// Valide en C++11
+```
 
-	```cpp
-		void foo() {
-		  try { throw 42; }
-		  catch(...) { throw_with_nested(logic_error("bar")); }
-		}
+// En C++98/03, il fallait un espace entre les deux >
 
-		try { foo(); }
-		catch(logic_error &e) { std::rethrow_if_nested(e); }
-	```
+- Utilisation de parenthèses pour forcer l'interprétation en tant qu'opérateur
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Avoid+foo()+%0A%7B%0A++try+%0A++%7B+%0A++++throw+42%3B%0A++%7D%0A++catch(...)%0A++%7B+%0A++++std::throw_with_nested(std::logic_error(%22bar%22))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++foo()%3B%0A++%7D%0A++catch(std::logic_error+%26e)%0A++%7B%0A%23if+0%0A++++std::rethrow_if_nested(e)%3B%0A%23else%0A++++throw%3B%0A%23endif%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+vector<array<int, (0x10 >> 3) >> foo;
+```
 
+#addproposal("N1757")
 
-== \mintinline[style=white]{cpp}```enum class```}
-	\begin{itemize}
-		\item Énumérations mieux typées
-		\item Sans conversions implicites
-		\item Énumérés locaux à l'énumération
-	\end{itemize}
+== Alias de template
 
-	```cpp
-		enum class Foo { BAR1, BAR2 };
+- En C++98/03, ```cpp typedef``` définit des alias sur des templates
+- ... seulement si tous les paramètres templates sont explicites
 
-		Foo foo = Foo::BAR1;
-	```
+```cpp
+template <typename T, typename U, int V>
+class Foo;
 
-	\begin{itemize}
-		\item Possibilité de fournir le type sous-jacent
+typedef Foo<int, int, 5> Baz;  // OK
 
-\note[item]{Sur les énumérations classiques aussi}
-	\end{itemize}
+template <typename U>
+typedef Foo<int, U, 5> Bar;    // Incorrect
+```
 
-	```cpp
-		enum class Foo : unsigned char { BAR1, BAR2 };
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T,+typename+U,+int+V%3E%0Aclass+Foo%0A%7B%0A%7D%3B%0A%0Atypedef+Foo%3Cint,+int,+5%3E+Baz%3B%0A%0A%23if+0%0Atemplate+%3Ctypename+U%3E%0Atypedef+Foo%3Cint,+U,+5%3E+Bar%3B%0A%23endif%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item ```cpp std::underlying_type``` permet de récupérer ce type sous-jacent
-	\end{itemize}
+#addproposal("N2258")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Aenum+class+Foo+:+unsigned+int%0A%7B+%0A++BAR1,%0A++BAR2,%0A%7D%3B%0A%0Aint+main()%0A%7B%0A%23if+0%0A++Foo+foo+%3D+BAR2%3B%0A%23else%0A++Foo+foo+%3D+Foo::BAR2%3B%0A%23endif%0A%0A%23if+0%0A++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A%23else%0A++std::cout+%3C%3C+static_cast%3Cstd::underlying_type%3CFoo%3E::type%3E(foo)+%3C%3C+%22%5Cn%22%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Alias de template
 
-	\addproposal{N2347}{https://wg21.link/N2347}
+- ```cpp using``` permet la création d'alias ne définissant que certains paramètres
 
+```cpp
+template <typename U>
+using Bar = Foo<int, U, 5>;
+```
 
+#noteblock(text[``` using``` de types], text[
+  - ```cpp using``` n'est pas réservé aux templates
 
-== \mintinline[style=white]{cpp}```enum class```}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez les énumérations fortement typées
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+using Error = int;
+```
+])
 
-	\begin{block}{Bémol}
-		\begin{itemize}
-			\item Pas de méthode simple et robuste pour récupérer la valeur ou l'intitulé de l'énuméré
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T,+typename+U,+int+V%3E%0Aclass+Foo%0A%7B%0A%7D%3B%0A%0Ausing+Baz+%3D+Foo%3Cint,+int,+5%3E%3B%0A%0Atemplate+%3Ctypename+U%3E%0Ausing+Bar+%3D+Foo%3Cint,+U,+5%3E%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+#addproposal("N2258")
 
-== \mintinline[style=white]{cpp}```std::function```}
-\note[item]{Fonction de première classe (\og first-class citizens\fg{}) : utilisables comme paramètre ou retour de fonction}
-\note[item]{Fonction d'ordre supérieur : prend en paramètre ou retourne une autre fonction}
+== Extern template
 
-	\begin{itemize}
-		\item Encapsule un appelable de n'importe quel type
-	\end{itemize}
+- Indique que le template est instancié dans une autre unité de compilation
+- Inutile de l'instancier ici
 
-	```cpp
-		int foo(int, int);
+```cpp
+extern template class std::vector<int>;
+```
 
-		function<int(int, int)> bar = foo;
-	```
+#noteblock("Objectif", text[
+  - Réduction du temps de compilation
+])
 
-	\begin{itemize}
-		\item Copiable
-		\item Peut être passer en paramètre ou retourner par une fonction
-	\end{itemize}
+#addproposal("N1987")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Aint+foo(int+a,+int+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int,+int)%3E+bar+%3D+foo%3B%0A%0A++std::cout+%3C%3C+bar(1,2)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Variadic template
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Template à nombre de paramètres variable
+- Définition avec ```cpp typename...```
 
+```cpp
+template<typename... Args>
+class Foo;
+```
 
+- Récupération de la liste avec ```cpp ...```
 
-== \mintinline[style=white]{cpp}```std::mem_fn```}
-	\begin{itemize}
-		\item Convertit une fonction membre en \textit{function object} prenant une instance en paramètre
-	\end{itemize}
+```cpp
+template<typename... Args>
+void bar(Args... parameters);
+```
 
-	```cpp
-		struct Foo { int f(int a) { return 2 * a; } };
+#addproposal("N2242")
+#addproposal("N2555")
 
-		Foo foo;
-		function<int(Foo, int)> bar = mem_fn(&Foo::f);
-		bar(foo, 5);   // 10
-	```
+== Variadic template
 
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Type de retour non spécifié mais stockable dans ```cpp std::function```
-		\end{itemize}
-	\end{block}
+- Récupération de la taille avec ```cpp sizeof...```
 
-	\begin{block}{Dépréciation}
-		\begin{itemize}
-			\item Dépréciation de ```cpp std::mem_fun```, ```cpp std::ptr_fun``` et consorts
-		\end{itemize}
+```cpp
+template<typename... Args>
+class Foo {
+public:
+  static const unsigned int size = sizeof...(Args);
+};
+```
 
-\note[item]{Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes}
-\note[item]{Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Aclass+Foo%0A%7B%0Apublic:%0A++static+const+unsigned+int+size+%3D+sizeof...(Args)%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+Foo%3Cint,+int,+long%3E::size+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astruct+Foo%0A%7B%0A++int+f(int+a)%0A++%7B%0A++++return+2+*+a%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A++std::function%3Cint(Foo,+int)%3E+bar+%3D+std::mem_fn(%26Foo::f)%3B%0A%0A++std::cout+%3C%3C+bar(foo,+5)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Variadic template
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Utilisation récursive par spécialisation
 
+```cpp
+// Condition d'arret
+template<typename T>
+T sum(T val) {
+  return val;
+}
 
+template<typename T, typename... Args>
+T sum(T val, Args... values) {
+  return val + sum(values...);
+}
 
-== \mintinline[style=white]{cpp}```std::bind```}
-	\begin{itemize}
-		\item Construction de \textit{function object} en liant des paramètres à un appelable
-		\item \textit{Placeholders} ```cpp std::placholders::_1```, ```cpp std::placholders::_2```, \ldots{} pour lier les paramètres du \textit{function object} à l'appelable
-	\end{itemize}
+sum(1, 5, 56, 9);                   // 71
+sum(string("Un"), string("Deux"));  // "UnDeux"
+```
 
-	```cpp
-		int foo(int a, int b) { return (a - 1) * b; }
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0A//+Condition+d!'arret%0Atemplate%3Ctypename+T%3E%0AT+sum(T+val)%0A%7B%0A++return+val%3B%0A%7D%0A%0Atemplate%3Ctypename+T,+typename...+Args%3E%0AT+sum(T+val,+Args...+values)%0A%7B%0A++return+val+%2B+sum(values...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+5,+56,+9)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		function<int(int)> bar = bind(&foo, _1, 2);
-		bar(3);               // 4
+== Variadic template
 
-		auto baz = bind(&foo, _2, _1);
-		baz(3, 2, 1, 2, 3);   // 3
-	```
+- Ou expansion sur une expression et une fonction d'expansion
 
-\note[item]{Avec auto, il est possible de passer autant de paramètres surnuméraires que souhaiter}
+```cpp
+template<typename... T> void pass(T&&...) {}
 
-	\begin{block}{Dépréciation}
-		\begin{itemize}
-			\item Dépréciation de ```cpp std::bind1st``` et ```cpp std::bind2nd```
-		\end{itemize}
+int total = 0;
+int foo(int i) {
+  total += i;
+  return i;
+}
 
-\note[item]{Version C++98 mais limités car ne pouvait que convertir une fonction binaire en fonction unaire en liant le premier ou le second paramètre}
-	\end{block}
+template<typename... T>
+int sum(T... t) {
+  pass((foo(t))...); return total;
+}
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+a,+int+b)%0A%7B%0A++return+(a+-+1)+*+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int)%3E+bar+%3D+std::bind(%26foo,+std::placeholders::_1,+2)%3B%0A++std::cout+%3C%3C+bar(3)+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+std::bind(%26foo,+std::placeholders::_2,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+baz(3,+2,+1,+2,+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+sum(1, 2, 3, 5);  // 11
+```
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename...+T%3E+%0Avoid+pass(T%26%26...)%0A%7B%0A%7D%0A%0Aint+total+%3D+0%3B%0Aint+foo(int+i)%0A%7B%0A++total+%2B%3D+i%3B%0A++return+i%3B%0A%7D%0A%0Atemplate%3Ctypename...+T%3E%0Aint+sum(T...+t)%0A%7B%0A++pass((foo(t))...)%3B+%0A++return+total%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+5)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Variadic template
 
+#alertblock("Contraintes de l'expansion", text[
+  - Paramètre unique
+  - Ne retournant pas ```cpp void```
+  - Pas d'ordre garanti
+])
 
-== lambda et fermeture}
-	\begin{block}{Vocabulaire}
-		\begin{itemize}
-			\item Lambda : fonction anonyme
-			\item Fermeture : capture des variables libres de l'environnement lexical
-		\end{itemize}
-	\end{block}
+- Candidat naturel ```cpp std::initializer_list```
+- ... constructible depuis un \textit{variadic template}
 
-	\begin{itemize}
-		\item ```cpp [capture](paramètres) spécificateurs -> type_retour {instructions}```
-	\end{itemize}
+```cpp
+template<typename... T>
+int foo(T... t) {
+  initializer_list<int>{ t... };
+}
 
-	```cpp
-		int bar = 4;
-		auto foo = [&bar] (int a) -> int { bar *= a; return a; };
+foo(1, 2, 3, 5);
+```
 
-		int baz = foo(5);  // bar : 20, baz : 5
-	```
+== Variadic template
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+bar+%3D+4%3B%0A++auto+foo+%3D+%5B%26bar%5D+(int+a)+-%3E+int+%7B+bar+*%3D+a%3B+return+a%3B%7D%3B%0A%0A++std::cout+%3C%3C+foo(5)+%3C%3C+!'+!'+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ... qui règle le problème de l'ordre
 
-	\addproposal{N2550}{https://wg21.link/N2550}
-	\addproposal{N2658}{https://wg21.link/N2658}
-	\addproposal{N2927}{https://wg21.link/N2927}
+```cpp
+int total = 0;
+int foo(int i) {
+  total += i; return i;
+}
 
+template<typename... T>
+int sum(T... t) {
+  initializer_list<int>{ (foo(t), 0)... };
+  return total;
+}
 
+sum(1, 2, 3, 5);  // 11
+```
 
-== lambda et fermeture}
-	\begin{itemize}
-		\item Capture
-		\begin{itemize}
-			\item{} ```cpp []``` : pas de capture
-			\item{} ```cpp [x]``` : capture x par valeur
-			\item{} ```cpp [&y]``` : capture y par référence
-			\item{} ```cpp [=]```  : capture tout par valeur
-			\item{} ```cpp [&]``` : capture tout par référence
-			\item{} ```cpp [x, &y]``` : capture x par valeur et y par référence
-			\item{} ```cpp [=, &z]``` : capture z par référence et le reste par copie
-			\item{} ```cpp [&, z]``` : capture z par valeur et le reste par référence
-		\end{itemize}
-		\item La capture de variables membres se fait par la capture de  ```cpp this```
-		\begin{itemize}
-			\item Soit explicitement via ```cpp [this]```
-		\end{itemize}
-	\end{itemize}
+// ,0 permet de régler le souci du retour void
 
-	\begin{alertblock}{Capture de \mintinline[style=white]{cpp}```this```}
-		\begin{itemize}
-			\item Capture du pointeur, non de l'objet
-		\end{itemize}
-	\end{alertblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+total+%3D+0%3B%0Aint+foo(int+i)%0A%7B%0A++total+%2B%3D+i%3B%0A++return+i%3B%0A%7D%0A%0Atemplate%3Ctypename...+T%3E%0Aint+sum(T...+t)%0A%7B%0A++std::initializer_list%3Cint%3E%7B+(foo(t),+0)...+%7D%3B%0A++return+total%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+5)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item [] \begin{itemize}
-			\item Soit via ```cpp [=]``` ou ```cpp [&]```
-		\end{itemize}
-	\end{itemize}
+== Variadic template
 
-	\addproposal{N2550}{https://wg21.link/N2550}
-	\addproposal{N2658}{https://wg21.link/N2658}
-	\addproposal{N2927}{https://wg21.link/N2927}
+- .. sur n'importe quelle expression prenant un paramètre
 
+//Donc appelle de fonction ou lambda mais aussi simple expression
 
+```cpp
+template<typename... T>
+auto sum(T... t) {
+  typename common_type<T...>::type result{};
+  initializer_list<int>{ (result += t, 0)... };
+  return result;
+}
 
-== lambda et fermeture}
-	\begin{itemize}
-		\item Préservation de la constante des variables capturées
+sum(1, 2, 3, 5);  // 11
+```
 
-\note[item]{Même avec ```cpp mutable```}
+```cpp
+template<typename... T>
+void print(T... t) {
+  initializer_list<int>{ (cout << t << " ", 0)... };
+}
 
-		\item Pas de capture des variables globales et statiques
-	\end{itemize}
+print(1, 2, 3, 5);
+```
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Par défaut, les variables capturées par copie ne sont pas modifiables
-		\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename+...+T%3E%0Atypename+std::common_type%3CT...%3E::type+sum(T+...+t)%0A%7B%0A++typename+std::common_type%3CT...%3E::type+result%7B%7D%3B%0A++std::initializer_list%3Cint%3E%7B+(result+%2B%3D+t,+0)...+%7D%3B%0A++return+result%3B%0A%7D%0A%0Atemplate%3Ctypename+...+T%3E%0Avoid+print(T+...+t)%0A%7B%0A++std::initializer_list%3Cint%3E%7B+(std::cout+%3C%3C+t+%3C%3C+%22+%22,+0)...+%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+5)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%0A++print(1,+2,+3,+5)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		```cpp
-			int i = 5;
+== ``` std::enable_if```
 
-			auto foo = [=] () { cout << ++i << "\n"; };          // Erreur
-			auto bar = [=] () mutable { cout << ++i << "\n"; };  // OK
-		```
+- Classe template sur une expression booléenne et un type
+- Définition du type seulement si l'expression booléenne est vraie
+- Templates disponibles uniquement pour certains types
 
-\note[item]{Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale}
-	\end{alertblock}
+```cpp
+template<class T,
+typename enable_if<is_integral<T>::value, T>::type* = nullptr>
+void foo(T data) { }
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+i+%3D+5%3B%0A%0A%23if+1%0A++auto+foo+%3D+%5B%3D%5D+()+%7B+std::cout+%3C%3C+%2B%2Bi+%3C%3C+%22%5Cn%22%3B+%7D%3B%0A++foo()%3B%0A%23endif%0A%0A++auto+bar+%3D+%5B%3D%5D+()+mutable+%7B+std::cout+%3C%3C+%2B%2Bi+%3C%3C+%22%5Cn%22%3B+%7D%3B%0A++bar()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+foo(42);
+foo("azert");    // Erreur
+```
 
-	\addproposal{N2550}{https://wg21.link/N2550}
-	\addproposal{N2658}{https://wg21.link/N2658}
-	\addproposal{N2927}{https://wg21.link/N2927}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate%3Cclass+T,+typename+std::enable_if%3Cstd::is_integral%3CT%3E::value,+T%3E::type*+%3D+nullptr%3E%0Avoid+foo(T+data)%0A%7B%0A++std::cout+%3C%3C+data+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0Atemplate%3Cclass+T,+typename+std::enable_if%3C!!std::is_integral%3CT%3E::value,+T%3E::type*+%3D+nullptr%3E%0Avoid+bar(T)%0A%7B%0A++std::cout+%3C%3C+%22Generique%5Cn%22%3B%0A%7D%0A%0Atemplate%3Cclass+T,typename+std::enable_if%3Cstd::is_integral%3CT%3E::value,+T%3E::type*+%3D+nullptr%3E%0Avoid+bar(T)%0A%7B%0A++std::cout+%3C%3C+%22Entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(42)%3B%0A%23if+0%0A++foo(%22azert%22)%3B%0A%23endif%0A%0A++bar(42)%3B%0A++bar(%22azert%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Types locaux en arguments templates
 
+- Utilisation des types locaux non-nommés comme arguments templates
 
-== lambda et fermeture}
-	\begin{itemize}
-		\item Spécificateurs
-		\begin{itemize}
-			\item ```cpp mutable``` : modification possible des variables capturées par copie
-			\item ```cpp noexcept``` : ne lève pas d'exception
-		\end{itemize}
+```cpp
+vector<int> foo)
+struct Less {
+  bool operator()(int a, int b) { return a < b; }
+};
 
-		\item Omission possible du type de retour si
-		\begin{itemize}
-			\item Unique instruction
-			\item Un ```cpp return```
-		\end{itemize}
+sort(foo.begin(), foo.end(), Less());
+```
 
-		\item Omission possible d'une liste de paramètres vide
-	\end{itemize}
+- Y compris des lambdas
 
-	```cpp
-		auto foo = [] { return 5; };
-	```
+```cpp
+sort(foo.begin(), foo.end(),
+     [] (int a, int b) { return a < b; });
+```
 
-	\begin{alertblock}{Exception}
-		\begin{itemize}
-			\item Omission impossible si la lambda est ```cpp mutable```
-		\end{itemize}
-	\end{alertblock}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+2,+8,+12,+3%7D%3B%0A++std::sort(foo.begin(),+foo.end(),+%5B%5D+(int+a,+int+b)+%7B+return+a+%3C+b%3B+%7D)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{N2550}{https://wg21.link/N2550}
-	\addproposal{N2658}{https://wg21.link/N2658}
-	\addproposal{N2927}{https://wg21.link/N2927}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astruct+Less%0A%7B%0A++bool+operator()(int+a,+int+b)%0A++%7B%0A++++return+a+%3C+b%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+2,+8,+12,+3%7D%3B%0A++std::sort(foo.begin(),+foo.end(),+Less())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+#addproposal("N2657")
 
+== Type traits -- Helper
 
-== lambda, \mintinline[style=white]{cpp}```std::function```, \ldots{} - Conclusion}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez les lambdas aux ```cpp std::function```
-			\item Préférez les lambdas à ```cpp std::bind()```
-		\end{itemize}
-	\end{exampleblock}
+- Constante _compile-time_ ```cpp std::integral_constant```
+- ```cpp std::integral_constant``` booléen vrai ```cpp true_type```
+- ```cpp std::integral_constant``` booléen faux ```cpp false_type```
 
-\note[item]{Les lambdas sont généralement plus efficaces}
+```cpp
+template <unsigned n>
+struct factorial
+  : integral_constant<int, n*factorial<n-1>::value> {};
 
-	\begin{block}{Motivations}
-		\begin{itemize}
-			\item Lisibilité, expressivité et performances
-			\item Voir \href{https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf}{Practical Performance Practices\linklogo}
-		\end{itemize}
+template <>
+struct factorial<0>
+  : integral_constant<int, 1> {};
+	factorial<5>::value;  // 120 en compile-time
+```
 
-\note[item]{Entre autres, il y a aussi des remarques intéressantes sur le choix des conteneurs, des pointeurs intelligents, sur ```cpp std::endl```, etc.}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate+%3Cunsigned+n%3E%0Astruct+factorial+:+std::integral_constant%3Cint,+n*factorial%3Cn-1%3E::value%3E+%0A%7B%7D%3B%0A%0Atemplate+%3C%3E%0Astruct+factorial%3C0%3E+:+std::integral_constant%3Cint,+1%3E%0A%7B%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+factorial%3C5%3E::value+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Prenez garde à la durée de vie des variables capturées par référence
-		\end{itemize}
-	\end{alertblock}
+#addproposal("n1836")
 
+== Type traits -- Trait
 
+- Détermine, à la compilation, les caractéristiques des types
+- ```cpp std::is_array``` : tableau C
 
-== \mintinline[style=white]{cpp}```std::reference_wrapper```}
-	\begin{itemize}
-		\item Encapsule un objet en émulant une référence
-		\item Construction par ```cpp std::ref()``` et ```cpp std::cref()```
-		\item Copiable
-	\end{itemize}
+```cpp
+is_array<int>::value;        // false
+is_array<int[3]>::value;     // true
+```
 
-	```cpp
-		int a{10};
-		reference_wrapper<int> aref = ref(a);
+- ```cpp std::is_integral``` : type entier
 
-		aref++; // a : 11
-	```
+```cpp
+is_integral<short>::value;   // true
+is_integral<string>::value;  // false
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Aint+main()%0A%7B%0A++int+a%7B10%7D%3B%0A%0A++std::reference_wrapper%3Cint%3E+aref+%3D+std::ref(a)%3B%0A++aref%2B%2B%3B%0A++std::cout+%3C%3C+a+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctype_traits%3E%0A%0Aint+main()%0A%7B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_array%3Cint%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_array%3Cint%5B3%5D%3E::value+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::is_integral%3Cshort%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::is_integral%3Cstd::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\addproposal{n1836}{https://wg21.link/n1836}
-
-
-== Double chevron}
-	\begin{itemize}
-		\item C++98/03 : ```cpp >>``` est toujours l'opérateur de décalage
-		\item C++11 : peut être une double fermeture de template
-	\end{itemize}
-
-	```cpp
-		vector<vector<int>> foo;
-		// Invalide en C++98/03
-		// Valide en C++11
-	```
-
-\note[item]{En C++98/03, il fallait un espace entre les deux >}
-
-	\begin{itemize}
-		\item Utilisation de parenthèses pour forcer l'interprétation en tant qu'opérateur
-	\end{itemize}
-
-	```cpp
-		vector<array<int, (0x10 >> 3) >> foo;
-	```
-
-	\addproposal{N1757}{https://wg21.link/N1757}
-
-
-
-== Alias de template}
-	\begin{itemize}
-		\item En C++98/03, ```cpp typedef``` définit des alias sur des templates
-		\item \ldots{} seulement si tous les paramètres templates sont explicites
-	\end{itemize}
-
-	```cpp
-		template <typename T, typename U, int V>
-		class Foo;
-
-		typedef Foo<int, int, 5> Baz;  // OK
-
-		template <typename U>
-		typedef Foo<int, U, 5> Bar;    // Incorrect
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T,+typename+U,+int+V%3E%0Aclass+Foo%0A%7B%0A%7D%3B%0A%0Atypedef+Foo%3Cint,+int,+5%3E+Baz%3B%0A%0A%23if+0%0Atemplate+%3Ctypename+U%3E%0Atypedef+Foo%3Cint,+U,+5%3E+Bar%3B%0A%23endif%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2258}{https://wg21.link/N2258}
-
-
-
-== Alias de template}
-	\begin{itemize}
-		\item ```cpp using``` permet la création d'alias ne définissant que certains paramètres
-	\end{itemize}
-
-	```cpp
-		template <typename U>
-		using Bar = Foo<int, U, 5>;
-	```
-
-	\begin{block}{\mintinline[style=white]{cpp}```using``` de types}
-		\begin{itemize}
-			\item ```cpp using``` n'est pas réservé aux templates
-		\end{itemize}
-
-		```cpp
-			using Error = int;
-		```
-	\end{block}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T,+typename+U,+int+V%3E%0Aclass+Foo%0A%7B%0A%7D%3B%0A%0Ausing+Baz+%3D+Foo%3Cint,+int,+5%3E%3B%0A%0Atemplate+%3Ctypename+U%3E%0Ausing+Bar+%3D+Foo%3Cint,+U,+5%3E%3B%0A%0Aint+main()%0A%7B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2258}{https://wg21.link/N2258}
-
-
-
-== Extern template}
-	\begin{itemize}
-		\item Indique que le template est instancié dans une autre unité de compilation
-		\item Inutile de l'instancier ici
-	\end{itemize}
-
-	```cpp
-		extern template class std::vector<int>;
-	```
-
-	\begin{block}{Objectif}
-		\begin{itemize}
-			\item Réduction du temps de compilation
-		\end{itemize}
-	\end{block}
-
-	\addproposal{N1987}{https://wg21.link/N1987}
-
-
-
-== Variadic template}
-	\begin{itemize}
-		\item Template à nombre de paramètres variable
-		\item Définition avec ```cpp typename...```
-	\end{itemize}
-
-	```cpp
-		template<typename... Args>
-		class Foo;
-	```
-
-	\begin{itemize}
-		\item Récupération de la liste avec ```cpp ...```
-	\end{itemize}
-
-	```cpp
-		template<typename... Args>
-		void bar(Args... parameters);
-	```
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== Variadic template}
-	\begin{itemize}
-		\item Récupération de la taille avec ```cpp sizeof...```
-	\end{itemize}
-
-	```cpp
-		template<typename... Args>
-		class Foo {
-		public:
-		  static const unsigned int size = sizeof...(Args);
-		};
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Aclass+Foo%0A%7B%0Apublic:%0A++static+const+unsigned+int+size+%3D+sizeof...(Args)%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+Foo%3Cint,+int,+long%3E::size+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== Variadic template}
-	\begin{itemize}
-		\item Utilisation récursive par spécialisation
-	\end{itemize}
-
-	```cpp
-		// Condition d'arret
-		template<typename T>
-		T sum(T val) {
-		  return val;
-		}
-
-		template<typename T, typename... Args>
-		T sum(T val, Args... values) {
-		  return val + sum(values...);
-		}
-
-		sum(1, 5, 56, 9);                   // 71
-		sum(string("Un"), string("Deux"));  // "UnDeux"
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0A//+Condition+d!'arret%0Atemplate%3Ctypename+T%3E%0AT+sum(T+val)%0A%7B%0A++return+val%3B%0A%7D%0A%0Atemplate%3Ctypename+T,+typename...+Args%3E%0AT+sum(T+val,+Args...+values)%0A%7B%0A++return+val+%2B+sum(values...)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+5,+56,+9)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== Variadic template}
-	\begin{itemize}
-		\item Ou expansion sur une expression et une fonction d'expansion
-	\end{itemize}
-
-	```cpp
-		template<typename... T> void pass(T&&...) {}
-
-		int total = 0;
-		int foo(int i) {
-		  total += i;
-		  return i;
-		}
-
-		template<typename... T>
-		int sum(T... t) {
-		  pass((foo(t))...); return total;
-		}
-
-		sum(1, 2, 3, 5);  // 11
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename...+T%3E+%0Avoid+pass(T%26%26...)%0A%7B%0A%7D%0A%0Aint+total+%3D+0%3B%0Aint+foo(int+i)%0A%7B%0A++total+%2B%3D+i%3B%0A++return+i%3B%0A%7D%0A%0Atemplate%3Ctypename...+T%3E%0Aint+sum(T...+t)%0A%7B%0A++pass((foo(t))...)%3B+%0A++return+total%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+5)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== Variadic template}
-	\begin{alertblock}{Contraintes de l'expansion}
-		\begin{itemize}
-			\item Paramètre unique
-			\item Ne retournant pas ```cpp void```
-			\item Pas d'ordre garanti
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{itemize}
-		\item Candidat naturel ```cpp std::initializer_list```
-		\item \ldots{} constructible depuis un \textit{variadic template}
-	\end{itemize}
-
-	```cpp
-		template<typename... T>
-		int foo(T... t) {
-		  initializer_list<int>{ t... };
-		}
-
-		foo(1, 2, 3, 5);
-	```
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== Variadic template}
-	\begin{itemize}
-		\item \ldots{} qui règle le problème de l'ordre
-	\end{itemize}
-
-	```cpp
-		int total = 0;
-		int foo(int i) {
-		  total += i; return i;
-		}
-
-		template<typename... T>
-		int sum(T... t) {
-		  initializer_list<int>{ (foo(t), 0)... };
-		  return total;
-		}
-
-		sum(1, 2, 3, 5);  // 11
-	```
-
-\note[item]{,0 permet de régler le souci du retour void}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+total+%3D+0%3B%0Aint+foo(int+i)%0A%7B%0A++total+%2B%3D+i%3B%0A++return+i%3B%0A%7D%0A%0Atemplate%3Ctypename...+T%3E%0Aint+sum(T...+t)%0A%7B%0A++std::initializer_list%3Cint%3E%7B+(foo(t),+0)...+%7D%3B%0A++return+total%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+5)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== Variadic template}
-	\begin{itemize}
-		\item \ldots{} sur n'importe quelle expression prenant un paramètre
-
-\note[item]{Donc appelle de fonction ou lambda mais aussi simple expression}
-	\end{itemize}
-
-	```cpp
-		template<typename... T>
-		auto sum(T... t) {
-		  typename common_type<T...>::type result{};
-		  initializer_list<int>{ (result += t, 0)... };
-		  return result;
-		}
-
-		sum(1, 2, 3, 5);  // 11
-	```
-
-	```cpp
-		template<typename... T>
-		void print(T... t) {
-		  initializer_list<int>{ (cout << t << " ", 0)... };
-		}
-
-		print(1, 2, 3, 5);
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Atemplate%3Ctypename+...+T%3E%0Atypename+std::common_type%3CT...%3E::type+sum(T+...+t)%0A%7B%0A++typename+std::common_type%3CT...%3E::type+result%7B%7D%3B%0A++std::initializer_list%3Cint%3E%7B+(result+%2B%3D+t,+0)...+%7D%3B%0A++return+result%3B%0A%7D%0A%0Atemplate%3Ctypename+...+T%3E%0Avoid+print(T+...+t)%0A%7B%0A++std::initializer_list%3Cint%3E%7B+(std::cout+%3C%3C+t+%3C%3C+%22+%22,+0)...+%7D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sum(1,+2,+3,+5)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+sum(std::string(%22Un%22),+std::string(%22Deux%22))+%3C%3C+!'%5Cn!'%3B%0A%0A++print(1,+2,+3,+5)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{N2242}{https://wg21.link/N2242}
-	\addproposal{N2555}{https://wg21.link/N2555}
-
-
-
-== \mintinline[style=white]{cpp}```std::enable_if```}
-	\begin{itemize}
-		\item Classe template sur une expression booléenne et un type
-		\item Définition du type seulement si l'expression booléenne est vraie
-		\item Templates disponibles uniquement pour certains types
-	\end{itemize}
-
-	```cpp
-		template<class T,
-		typename enable_if<is_integral<T>::value, T>::type* = nullptr>
-		void foo(T data) { }
-
-		foo(42);
-		foo("azert");    // Erreur
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate%3Cclass+T,+typename+std::enable_if%3Cstd::is_integral%3CT%3E::value,+T%3E::type*+%3D+nullptr%3E%0Avoid+foo(T+data)%0A%7B%0A++std::cout+%3C%3C+data+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0Atemplate%3Cclass+T,+typename+std::enable_if%3C!!std::is_integral%3CT%3E::value,+T%3E::type*+%3D+nullptr%3E%0Avoid+bar(T)%0A%7B%0A++std::cout+%3C%3C+%22Generique%5Cn%22%3B%0A%7D%0A%0Atemplate%3Cclass+T,typename+std::enable_if%3Cstd::is_integral%3CT%3E::value,+T%3E::type*+%3D+nullptr%3E%0Avoid+bar(T)%0A%7B%0A++std::cout+%3C%3C+%22Entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(42)%3B%0A%23if+0%0A++foo(%22azert%22)%3B%0A%23endif%0A%0A++bar(42)%3B%0A++bar(%22azert%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-
-
-== Types locaux en arguments templates}
-	\begin{itemize}
-		\item Utilisation des types locaux non-nommés comme arguments templates
-	\end{itemize}
-
-	```cpp
-		vector<int> foo)
-		struct Less {
-		  bool operator()(int a, int b) { return a < b; }
-		};
-
-		sort(foo.begin(), foo.end(), Less());
-	```
-
-	\begin{itemize}
-		\item Y compris des lambdas
-	\end{itemize}
-
-	```cpp
-		sort(foo.begin(), foo.end(),
-		     [] (int a, int b) { return a < b; });
- 	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+2,+8,+12,+3%7D%3B%0A++std::sort(foo.begin(),+foo.end(),+%5B%5D+(int+a,+int+b)+%7B+return+a+%3C+b%3B+%7D)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astruct+Less%0A%7B%0A++bool+operator()(int+a,+int+b)%0A++%7B%0A++++return+a+%3C+b%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+2,+8,+12,+3%7D%3B%0A++std::sort(foo.begin(),+foo.end(),+Less())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
- 	\addproposal{N2657}{https://wg21.link/N2657}
-
-
-== Type traits -- Helper}
-	\begin{itemize}
-		\item Constante \textit{compile-time} ```cpp std::integral_constant```
-		\item ```cpp std::integral_constant``` booléen vrai ```cpp true_type```
-		\item ```cpp std::integral_constant``` booléen faux ```cpp false_type```
-	\end{itemize}
-
-	```cpp
-		template <unsigned n>
-		struct factorial
-		  : integral_constant<int, n*factorial<n-1>::value> {};
-
-		template <>
-		struct factorial<0>
-		  : integral_constant<int, 1> {};
-
-		factorial<5>::value;  // 120 en compile-time
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate+%3Cunsigned+n%3E%0Astruct+factorial+:+std::integral_constant%3Cint,+n*factorial%3Cn-1%3E::value%3E+%0A%7B%7D%3B%0A%0Atemplate+%3C%3E%0Astruct+factorial%3C0%3E+:+std::integral_constant%3Cint,+1%3E%0A%7B%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+factorial%3C5%3E::value+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-
-
+#addproposal("n1836")
 
 == Type traits -- Trait}
-	\begin{itemize}
-		\item Détermine, à la compilation, les caractéristiques des types
-		\item ```cpp std::is_array``` : tableau C
-	\end{itemize}
 
-	```cpp
-		is_array<int>::value;        // false
-		is_array<int[3]>::value;     // true
-	```
+- ```cpp std::is_fundamental``` : type fondamental (entier, réel, ```cpp void``` ou ```cpp nullptr_t```)
 
-	\begin{itemize}
-		\item ```cpp std::is_integral``` : type entier
-	\end{itemize}
+```cpp
+is_fundamental<short>::value;   // true
+is_fundamental<string>::value;  // false
+is_fundamental<void*>::value;   // false
+```
 
-	```cpp
-		is_integral<short>::value;   // true
-		is_integral<string>::value;  // false
-	```
+- ```cpp std::is_const``` : type constant
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctype_traits%3E%0A%0Aint+main()%0A%7B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_array%3Cint%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_array%3Cint%5B3%5D%3E::value+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::is_integral%3Cshort%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::is_integral%3Cstd::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+is_const<const short>::value;  // true
+is_const<string>::value;       // false
+```
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctype_traits%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_fundamental%3Cshort%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_fundamental%3Cstd::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_fundamental%3Cvoid*%3E::value+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::is_const%3Cconst+short%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::is_const%3Cstd::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Type traits -- Trait
 
+- ```cpp std::is_base_of``` : base d'un autre type
 
-== Type traits -- Trait}
-	\begin{itemize}
-		\item ```cpp std::is_fundamental``` : type fondamental (entier, réel, ```cpp void``` ou ```cpp nullptr_t```)
-	\end{itemize}
+```cpp
+struct Foo {};
+struct Bar : Foo {};
 
-	```cpp
-		is_fundamental<short>::value;   // true
-		is_fundamental<string>::value;  // false
-		is_fundamental<void*>::value;   // false
-	```
+is_base_of<int, int>::value;        // false
+is_base_of<string, string>::value;  // true
+is_base_of<Foo, Bar>::value;        // true
+is_base_of<Bar, Foo>::value;        // false
+```
 
-	\begin{itemize}
-		\item ```cpp std::is_const``` : type constant
-	\end{itemize}
+- Et bien d'autres ...
 
-	```cpp
-		is_const<const short>::value;  // true
-		is_const<string>::value;       // false
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctype_traits%3E%0A%0Astruct+Foo%0A%7B%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3Cint,+int%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3Cstd::string,+std::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3CFoo,+Bar%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3CBar,+Foo%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctype_traits%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_fundamental%3Cshort%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_fundamental%3Cstd::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_fundamental%3Cvoid*%3E::value+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::is_const%3Cconst+short%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::is_const%3Cstd::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Type traits -- Transformations
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Construction d'un type par transformation d'un type existant
+- ```cpp std::add_const``` : type ```cpp const```
 
+```cpp
+typedef add_const<int>::type A;         // const int
+typedef add_const<const int>::type B;   // const int
+typedef add_const<const int*>::type C;  // const int* const
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atypedef+std::add_const%3Cint%3E::type+A%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_const%3CA%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Type traits -- Trait}
-	\begin{itemize}
-		\item ```cpp std::is_base_of``` : base d'un autre type
-	\end{itemize}
+#addproposal("n1836")
 
-	```cpp
-		struct Foo {};
-		struct Bar : Foo {};
+== Type traits -- Transformations
 
-		is_base_of<int, int>::value;        // false
-		is_base_of<string, string>::value;  // true
-		is_base_of<Foo, Bar>::value;        // true
-		is_base_of<Bar, Foo>::value;        // false
-	```
+- ```cpp std::make_unsigned``` : type non signé correspondant
 
-	\begin{itemize}
-		\item Et bien d'autres \ldots{}
-	\end{itemize}
+```cpp
+enum Foo {bar};
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctype_traits%3E%0A%0Astruct+Foo%0A%7B%7D%3B%0A%0Astruct+Bar+:+Foo%0A%7B%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3Cint,+int%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3Cstd::string,+std::string%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3CFoo,+Bar%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_base_of%3CBar,+Foo%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+typedef make_unsigned<int>::type A;             // unsigned int
+typedef make_unsigned<unsigned>::type B;        // unsigned int
+typedef make_unsigned<const unsigned>::type C;  // const unsigned int
+typedef make_unsigned<Foo>::type D;             // unsigned int
+```
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Et bien d'autres ...
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Aenum+Foo%0A%7B%0A++bar%0A%7D%3B%0A%0Atypedef+std::make_unsigned%3Cint%3E::type+A%3B%0Atypedef+std::make_unsigned%3CFoo%3E::type+B%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3Cint%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3CFoo%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3CA%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3CB%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+#addproposal("n1836")
 
-== Type traits -- Transformations}
-	\begin{itemize}
-		\item Construction d'un type par transformation d'un type existant
-		\item ```cpp std::add_const``` : type ```cpp const```
-	\end{itemize}
+== Pointeurs intelligents
 
-	```cpp
-		typedef add_const<int>::type A;         // const int
-		typedef add_const<const int>::type B;   // const int
-		typedef add_const<const int*>::type C;  // const int* const
-	```
+- RAII appliqué aux pointeurs et aux ressources allouées
+- Objets à sémantique de pointeur gérant la durée de vie des objets
+- Garantie de libération
+- Garantie de cohérence
+- Historiquement
+  - ```cpp std::auto_ptr```
+  - ```cpp boost::scoped_ptr``` et ```cpp boost::scoped_array```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atypedef+std::add_const%3Cint%3E::type+A%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_const%3CA%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Pointeurs intelligents -- ``` std::unique_ptr```
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Responsabilité exclusive
+- Non copiable, mais déplaçable
+- Testable
 
+```cpp
+unique_ptr<int> p(new int);
+*p = 42;
+```
 
+- ```cpp release()``` relâche la responsabilité de la ressource
+// La ressource n'est pas libérée, mais le pointeur n'en a plus la responsabilité (pointeur brut retourné)
+- ```cpp reset()``` change la ressource possédée
+// L'objet précédemment pointé est libéré
+// Possible de fournir un pointeur nullptr à reset() (valeur par défaut) pour simplement libérer l'objet contenu
+- ```cpp get()``` récupère un pointeur brut sur la ressource
+// P.ex. pour appeler une API C
 
-== Type traits -- Transformations}
-	\begin{itemize}
-		\item ```cpp std::make_unsigned``` : type non signé correspondant
-	\end{itemize}
+#alertblock("Attention", text[
+  - Ne pas utilisez le pointeur retourné par ```cpp get()``` pour libérer la ressource
+])
 
-	```cpp
-		enum Foo {bar};
+== Pointeurs intelligents -- ``` std::unique_ptr```
 
-		typedef make_unsigned<int>::type A;             // unsigned int
-		typedef make_unsigned<unsigned>::type B;        // unsigned int
-		typedef make_unsigned<const unsigned>::type C;  // const unsigned int
-		typedef make_unsigned<Foo>::type D;             // unsigned int
-	```
+- Fourniture possible de la fonction de libération
 
-	\begin{itemize}
-		\item Et bien d'autres \ldots{}
-	\end{itemize}
+```cpp
+FILE *fp = fopen("foo.txt", "w");
+unique_ptr<FILE, int(*)(FILE*)> p(fp, &fclose);
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Aenum+Foo%0A%7B%0A++bar%0A%7D%3B%0A%0Atypedef+std::make_unsigned%3Cint%3E::type+A%3B%0Atypedef+std::make_unsigned%3CFoo%3E::type+B%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3Cint%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3CFoo%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3CA%3E::value+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::is_unsigned%3CB%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- Spécialisation pour les tableaux C
+  - Sans ```cpp *``` et ```cpp ->```
+  - Mais avec ```cpp []```
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+```cpp
+std::unique_ptr<int[]> foo (new int[5]);
+for(int i=0; i<5; ++i) foo[i] = i;
+```
 
+#noteblock("Dépréciation", text[
+  - Dépréciation de ```cpp std::auto_ptr```
+])
 
-== Pointeurs intelligents}
-	\begin{itemize}
-		\item RAII appliqué aux pointeurs et aux ressources allouées
-		\item Objets à sémantique de pointeur gérant la durée de vie des objets
-		\item Garantie de libération
-		\item Garantie de cohérence
-		\item Historiquement
-		\begin{itemize}
-			\item ```cpp std::auto_ptr```
-			\item ```cpp boost::scoped_ptr``` et ```cpp boost::scoped_array```
-		\end{itemize}
-	\end{itemize}
+== Pointeurs intelligents -- ``` std::shared_ptr```
 
+- Responsabilité partagée de la ressource
+- Comptage de références
+- Copiable (incrémentation du compteur de références)
+- Testable
 
+```cpp
+shared_ptr<int> p(new int());
+*p = 42;
+```
 
-== Pointeurs intelligents -- \mintinline[style=white]{cpp}```std::unique_ptr```}
-	\begin{itemize}
-		\item Responsabilité exclusive
-		\item Non copiable, mais déplaçable
-		\item Testable
-	\end{itemize}
+- ```cpp reset()``` change la ressource possédée
+// Avec ajustement des compteurs de références et libération si nécessaire
+- ```cpp use_count()``` retourne le nombre de possesseurs de la ressource
+- ```cpp unique()``` indique si la possession est unique
+- Fourniture possible de la fonction de libération
 
-	```cpp
-		unique_ptr<int> p(new int);
-		*p = 42;
-	```
+#addproposal("n1836")
 
-	\begin{itemize}
-		\item ```cpp release()``` relâche la responsabilité de la ressource
+== Pointeurs intelligents -- ``` std::make_shared()```
 
-\note[item]{La ressource n'est pas libérée, mais le pointeur n'en a plus la responsabilité (pointeur brut retourné)}
+- Allocation et construction de l'objet dans le ```cpp std::shared_ptr```
 
-		\item ```cpp reset()``` change la ressource possédée
+```cpp
+shared_ptr<int> p = make_shared<int>(42);
+```
 
-\note[item]{L'objet précédemment pointé est libéré}
-\note[item]{Possible de fournir un pointeur ```cpp nullptr``` à ```cpp reset()``` (valeur par défaut) pour simplement libérer l'objet contenu}
+#noteblock("Objectifs", text[
+  - Pas de ```cpp new``` explicite, plus robuste
 
-		\item ```cpp get()``` récupère un pointeur brut sur la ressource
+```cpp
+// Fuite possible en cas d'exception depuis bar()
+foo(shared_ptr<int>(new int(42)), bar());
+```
 
-\note[item]{P.ex. pour appeler une API C}
-	\end{itemize}
+  - Allocation unique pour la ressource et le compteur de référence
+])
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Ne pas utilisez le pointeur retourné par ```cpp get()``` pour libérer la ressource
-		\end{itemize}
-	\end{alertblock}
+#adviceblock("Do", text[
+  - Utilisez ```cpp std::make_shared()``` pour construire vos ```cpp std::shared_ptr```
+])
 
+== Pointeurs intelligents -- ``` std::weak_ptr```
 
+- Aucune responsabilité sur la ressource
+- Collabore avec ```cpp std::shared_ptr```
+- ... sans impact sur le comptage de références
+- Pas de création depuis un pointeur nu
 
-== Pointeurs intelligents -- \mintinline[style=white]{cpp}```std::unique_ptr```}
-	\begin{itemize}
-		\item Fourniture possible de la fonction de libération
-	\end{itemize}
+#noteblock("Objectif", text[
+\item Rompre les cycles
+])
 
-	```cpp
-		FILE *fp = fopen("foo.txt", "w");
-		unique_ptr<FILE, int(*)(FILE*)> p(fp, &fclose);
-	```
+```cpp
+shared_ptr<int> sp(new int(20));
+weak_ptr<int> wp(sp);
+```
 
-	\begin{itemize}
-		\item Spécialisation pour les tableaux C
-		\begin{itemize}
-			\item Sans ```cpp *``` et ```cpp ->```
-			\item Mais avec ```cpp []```
-		\end{itemize}
-	\end{itemize}
+#addproposal("n1836")
 
-	```cpp
-		std::unique_ptr<int[]> foo (new int[5]);
-		for(int i=0; i<5; ++i) foo[i] = i;
-	```
+== Pointeurs intelligents -- ``` std::weak_ptr```
 
-	\begin{block}{Dépréciation}
-		\begin{itemize}
-			\item Dépréciation de ```cpp std::auto_ptr```
-		\end{itemize}
-	\end{block}
+- Pas d'accès à la ressource
+- Convertible en ```cpp std::shared_ptr``` via ```cpp lock()```
+// Retourne un ```cpp std::shared_ptr``` vide si la ressource n'existe plus
 
+```cpp
+shared_ptr<int> sp = wp.lock();
+```
 
+- ```cpp reset()``` vide le pointeur
+- ```cpp use_count()``` retourne le nombre de possesseurs de la ressource
+// Possesseurs aux nombres desquels notre ```cpp std::weak_ptr``` n'appartient pas
+- ```cpp expired()``` indique si le ```cpp std::weak_ptr``` ne référence plus une ressource valide
+// Soit il pointe sur rien, soit la ressource a été libérée car n'avait plus de ```cpp std::shared_ptr``` sur elle
 
-== Pointeurs intelligents -- \mintinline[style=white]{cpp}```std::shared_ptr```}
-	\begin{itemize}
-		\item Responsabilité partagée de la ressource
-		\item Comptage de références
-		\item Copiable (incrémentation du compteur de références)
-		\item Testable
-	\end{itemize}
+== Pointeurs intelligents -- Conclusion
 
-	```cpp
-		shared_ptr<int> p(new int());
-		*p = 42;
-	```
+#alertblock("Don't", text[
+  - N'utilisez pas de pointeurs bruts possédants
+])
 
-	\begin{itemize}
-		\item ```cpp reset()``` change la ressource possédée
+#adviceblock("Do", text[
+  - Réfléchissez à la responsabilité de vos ressources
+])
 
-\note[item]{Avec ajustement des compteurs de références et libération si nécessaire}
+#adviceblock("Do", text[
+  - Préférez ```cpp std::unique_ptr``` à ```cpp std::shared_ptr```
+  - Préférez une responsabilité unique à une responsabilité partagée
+])
 
-		\item ```cpp use_count()``` retourne le nombre de possesseurs de la ressource
-		\item ```cpp unique()``` indique si la possession est unique
-		\item Fourniture possible de la fonction de libération
-	\end{itemize}
+== Pointeurs intelligents -- Conclusion
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+#adviceblock("Do", text[
+  - Brisez les cycles à l'aide de ```cpp std::weak_ptr```
+])
 
+#alertblock("Attention", text[
+  - Passez par un ```cpp std::unique_ptr``` temporaire intermédiaire pour insérer des éléments dans un conteneur de ```cpp std::unique_ptr```
+  - Voir #link("https://accu.org/index.php/journals/2271")[Overload 134 - C++ Antipatterns linklogo()]
+// push_back d'un pointeur brute n'est pas possible et emplace_back peut échouer en laissant fuir le pointeur
+])
 
+#adviceblock("Do", text[
+  - Transférez au plus tôt la responsabilité à un pointeur intelligent
+])
 
-== Pointeurs intelligents -- \mintinline[style=white]{cpp}```std::make_shared()```}
-	\begin{itemize}
-		\item Allocation et construction de l'objet dans le ```cpp std::shared_ptr```
-	\end{itemize}
+== Pointeurs intelligents -- Conclusion
 
-	```cpp
-		shared_ptr<int> p = make_shared<int>(42);
-	```
+#noteblock("Pour aller plus loin", text[
+  - Voir #link("http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/")[Pointeurs intelligents #linklogo() (Loïc Joly)]
+])
 
-	\begin{block}{Objectifs}
-		\begin{itemize}
-			\item Pas de ```cpp new``` explicite, plus robuste
-		\end{itemize}
+#noteblock("Sous silence", text[
+  - Allocateurs, mémoire non-initialisée, alignement, ...
+])
 
-		```cpp
-			// Fuite possible en cas d'exception depuis bar()
-			foo(shared_ptr<int>(new int(42)), bar());
-		```
+#noteblock("Mais aussi", text[
+  - Support minimal des _Garbage Collector_
+  // Support enlevé en C++23 : trop restrictif, inutilisé, conceptions très différentes et variés dans les langages à GC
+  - Mais pas de GC standard
+])
 
-		\begin{itemize}
-			\item Allocation unique pour la ressource et le compteur de référence
-		\end{itemize}
-	\end{block}
+== Attributs
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Utilisez ```cpp std::make_shared()``` pour construire vos ```cpp std::shared_ptr```
-		\end{itemize}
-	\end{exampleblock}
+- Syntaxe standard pour les directives de compilation _inlines_
+- ... y compris celles spécifiques à un compilateur
+- Remplace la directive ```cpp #pragma```
+- Et les mots-clé propriétaires (```cpp __attribute__```, ```cpp __declspec```)
 
+```cpp
+[[ attribut ]]
+```
 
+- Peut être multiple
 
-== Pointeurs intelligents -- \mintinline[style=white]{cpp}```std::weak_ptr```}
-	\begin{itemize}
-		\item Aucune responsabilité sur la ressource
-		\item Collabore avec ```cpp std::shared_ptr```
-		\item \ldots{} sans impact sur le comptage de références
-		\item Pas de création depuis un pointeur nu
-	\end{itemize}
+```cpp
+[[ attribut1, attribut2 ]]
+```
 
-	\begin{block}{Objectif}
-		\begin{itemize}
-			\item Rompre les cycles
-		\end{itemize}
-	\end{block}
+#addproposal("N2761")
 
-	```cpp
-		shared_ptr<int> sp(new int(20));
-		weak_ptr<int> wp(sp);
-	```
+== Attributs
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+- Peut prendre des arguments
 
+```cpp
+[[ attribut(arg1, arg2) ]]
+```
 
+- Peut être dans un namespace et spécifique à une implémentation
 
-== Pointeurs intelligents -- \mintinline[style=white]{cpp}```std::weak_ptr```}
-	\begin{itemize}
-		\item Pas d'accès à la ressource
-		\item Convertible en ```cpp std::shared_ptr``` via ```cpp lock()```
+```cpp
+[[ vendor::attribut ]]
+```
 
-\note[item]{Retourne un ```cpp std::shared_ptr``` vide si la ressource n'existe plus}
-	\end{itemize}
+#noteblock("Exemple", text[
+  - les attributs ```cpp gsl``` des "C++ Core Guidelines Checker" de Microsoft
 
-	```cpp
-		shared_ptr<int> sp = wp.lock();
-	```
+```cpp
+[[ gsl::suppress(26400) ]]
+```
+])
 
-	\begin{itemize}
-		\item ```cpp reset()``` vide le pointeur
-		\item ```cpp use_count()``` retourne le nombre de possesseurs de la ressource
+== Attributs
 
-\note[item]{Possesseurs aux nombres desquels notre ```cpp std::weak_ptr``` n'appartient pas}
+- Placé après le nom pour les entités nommées
 
-		\item ```cpp expired()``` indique si le ```cpp std::weak_ptr``` ne référence plus une ressource valide
+```cpp
+int [[ attribut1 ]] i [[ attribut2 ]];
+// Attribut1 s'applique au type
+// Attribut2 s'applique a i
+```
 
-\note[item]{Soit il pointe sur rien, soit la ressource a été libérée car n'avait plus de ```cpp std::shared_ptr``` sur elle}
-	\end{itemize}
+- Placé avant l'entité sinon
 
-	\addproposal{n1836}{https://wg21.link/n1836}
+```cpp
+[[ attribut ]] return i;
+// Attribut s'applique au return
+```
 
+#adviceblock("Bonus", text[
+  - Aussi une information à destination des développeurs
+])
 
 
-== Pointeurs intelligents -- Conclusion}
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item N'utilisez pas de pointeurs bruts possédants
-		\end{itemize}
-	\end{alertblock}
+== Attribut ``` [[ noreturn ]]```
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Réfléchissez à la responsabilité de vos ressources
-		\end{itemize}
-	\end{exampleblock}
+- Indique qu'une fonction ne retourne pas
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::unique_ptr``` à ```cpp std::shared_ptr```
-			\item Préférez une responsabilité unique à une responsabilité partagée
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+[[ noreturn ]] void foo() { throw "error"; }
+```
 
+#alertblock("Attention", text[
+  - Qui ne retourne pas
+  - Pas qui ne retourne rien
+])
 
+#noteblock("Usage", text[
+  - Boucle infinie, sortie de l'application, exception systématique
+])
 
-== Pointeurs intelligents -- Conclusion}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Brisez les cycles à l'aide de ```cpp std::weak_ptr```
-		\end{itemize}
-	\end{exampleblock}
+#noteblock("Sous silence", text[
+  - ```cpp [[ carries_dependency ]]```
+])
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Passez par un ```cpp std::unique_ptr``` temporaire intermédiaire pour insérer des éléments dans un conteneur de ```cpp std::unique_ptr```
-			\item Voir \href{https://accu.org/index.php/journals/2271}{Overload 134 - C++ Antipatterns\linklogo}
-		\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0A%5B%5B+noreturn+%5D%5D+void+foo()%0A%7B%0A%23if+0%0A++throw+std::runtime_error(%22foo%22)%3B%0A%23endif%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-\note[item]{```cpp push_back``` d'un pointeur brute n'est pas possible et ```cpp emplace_back``` peut échouer en laissant fuir le pointeur}
-	\end{alertblock}
+== Rapport
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Transférez au plus tôt la responsabilité à un pointeur intelligent
-		\end{itemize}
-	\end{exampleblock}
+// La rapport est dans le type, pas dans les valeurs ou les instances
 
+- ```cpp std::ratio``` représente un rapport entre deux nombres
+- Numérateur et dénominateur sont des paramètres templates
+- ```cpp num``` accède au numérateur
+- ```cpp den``` accède au dénominateur
 
+```cpp
+ratio<6, 2> r;
+cout << r.num << "/" << r.den;   // 3/1
+```
 
-== Pointeurs intelligents -- Conclusion}
-	\begin{block}{Pour aller plus loin}
-		\begin{itemize}
-			\item Voir \href{http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/}{Pointeurs intelligents\linklogo (Loïc Joly)}
-		\end{itemize}
-	\end{block}
+- Instanciations standards des préfixes du système international d'unités
+  - yocto, zepto, atto, femto, pico, nano, micro, milli, centi, déci
+  - déca, hecto, kilo, méga, giga, téra, péta, exa, zetta, yotta
 
-	\begin{block}{Sous silence}
-		\begin{itemize}
-			\item Allocateurs, mémoire non-initialisée, alignement, \ldots{}
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cratio%3E%0A%0Aint+main()%0A%7B%0A++std::ratio%3C6,+2%3E+r%3B%0A++std::cout+%3C%3C+r.num+%3C%3C+!'/!'+%3C%3C+r.den+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{block}{Mais aussi}
-		\begin{itemize}
-			\item Support minimal des \textit{Garbage Collector}
+== Rapport
 
-\note[item]{Support enlevé en C++23 : trop restrictif, inutilisé, conceptions très différentes et variés dans les langages à GC}
+- Méta-fonctions arithmétiques
+  - ```cpp std::ratio_add()```, ```cpp std::ratio_subtract()```
+  - ```cpp std::ratio_multiply()```, ```cpp std::ratio_divide()```
+// Méta car elles agissent sur les types et non sur les valeurs
 
-			\item Mais pas de GC standard
-		\end{itemize}
-	\end{block}
+```cpp
+ratio_add<ratio<6, 2>, ratio<2, 3>> r;
+cout << r.num << "/" << r.den;   // 11/3
+```
 
+- Méta-fonctions de comparaison
+  - ```cpp std::ratio_equal()```, ```cpp std::ratio_not_equal()```
+  - ```cpp std::ratio_less()```, ```cpp std::ratio_less_equal()```
+  - ```cpp std::ratio_greater()``` et ```cpp std::ratio_greater_equal()```
 
-== Attributs}
-	\begin{itemize}
-		\item Syntaxe standard pour les directives de compilation \textit{inlines}
-		\item \ldots{} y compris celles spécifiques à un compilateur
-		\item Remplace la directive ```cpp #pragma```
-		\item Et les mots-clé propriétaires (```cpp __attribute__```, ```cpp __declspec```)
-	\end{itemize}
+```cpp
+ratio_less_equal<ratio<6, 2>, ratio<2, 3>>::value;  // false
+```
 
-	```cpp
-		[[ attribut ]]
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cratio%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%0A++++++++++++%3C%3C+std::ratio_less_equal%3Cstd::ratio%3C6,+2%3E,+std::ratio%3C2,+3%3E%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item Peut être multiple
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cratio%3E%0A%0Aint+main()%0A%7B%0A++std::ratio_add%3Cstd::ratio%3C6,+2%3E,+std::ratio%3C2,+3%3E%3E+r%3B%0A%0A++std::cout+%3C%3C+r.num+%3C%3C+!'/!'+%3C%3C+r.den+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		[[ attribut1, attribut2 ]]
-	```
+== Durées
 
-	\addproposal{N2761}{https://wg21.link/N2761}
+- Classe template ```cpp std::chrono::duration```
+- Unité dépendante d'un ratio avec la seconde
+- Instanciations standards _hours_, _minutes_, _seconds_, _milliseconds_, _microseconds_ et _nanosecond_
 
+```cpp
+milliseconds foo(12000);  // 12000 ms
+foo.count();              // 12000
+```
 
+- ```cpp count()``` retourne la valeur
+- ```cpp period``` est le type représentant le ratio
 
-== Attributs}
-	\begin{itemize}
-		\item Peut prendre des arguments
-	\end{itemize}
+```cpp
+milliseconds foo(12000);
+foo.count() * milliseconds::period::num /
+              milliseconds::period::den;  // 12
+```
 
-	```cpp
-		[[ attribut(arg1, arg2) ]]
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::milliseconds+foo(12000)%3B%0A%0A++std::cout+%3C%3C+foo.count()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.count()+*+std::chrono::milliseconds::period::num+/+std::chrono::milliseconds::period::den+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item Peut être dans un namespace et spécifique à une implémentation
-	\end{itemize}
+== Durées
 
-	```cpp
-		[[ vendor::attribut ]]
-	```
+- Opérateurs de manipulation des durées (ajout, suppression, ...)
 
-	\begin{block}{Exemple}
-		les attributs ```cpp gsl``` des \og C++ Core Guidelines Checker\fg{} de Microsoft
+```cpp
+milliseconds foo(500);
+milliseconds bar(10);
+foo += bar;   // 510
+foo /= 2;     // 255
+```
 
-		```cpp
-			[[ gsl::suppress(26400) ]]
-		```
-	\end{block}
+- Opérateurs de comparaison entre durées
+- ```cpp zero()``` crée une durée nulle
+- ```cpp min()``` crée la plus petite valeur possible
+- ```cpp max()``` crée la plus grande valeur possible
 
-	\addproposal{N2761}{https://wg21.link/N2761}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::milliseconds+foo(500)%3B%0A++std::chrono::milliseconds+bar(10)%3B%0A%0A++foo+%2B%3D+bar%3B%0A++std::cout+%3C%3C+foo.count()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo+/%3D+2%3B%0A++std::cout+%3C%3C+foo.count()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Temps relatif
 
+- ```cpp std::chrono::time_point``` temps relatif depuis l'epoch
 
-== Attributs}
-	\begin{itemize}
-		\item Placé après le nom pour les entités nommées
-	\end{itemize}
+#noteblock("Epoch", text[
+  - Origine des temps de l'OS (1 janvier 1970 00h00 sur Unix)
+])
 
-	```cpp
-		int [[ attribut1 ]] i [[ attribut2 ]];
-		// Attribut1 s'applique au type
-		// Attribut2 s'applique a i
-	```
+- ```cpp time_since_epoch()``` retourne la durée depuis l'epoch
+- Opérateurs d'ajout et de suppression d'une durée
+- Opérateurs de comparaison entre ```cpp time_point```
+- ```cpp min()``` retourne le plus petit temps relatif
+- ```cpp max()``` retourne le plus grand temps relatif
 
-	\begin{itemize}
-		\item Placé avant l'entité sinon
-	\end{itemize}
+== Horloges
 
-	```cpp
-		[[ attribut ]] return i;
-		// Attribut s'applique au return
-	```
+- Horloge temps-réel du système ```cpp std::chrono::system_clock```
+- ```cpp now()``` récupère temps courant
 
-	\begin{exampleblock}{Bonus}
-		\begin{itemize}
-			\item Aussi une information à destination des développeurs
-		\end{itemize}
-	\end{exampleblock}
+```cpp
+system_clock::time_point today = system_clock::now();
+today.time_since_epoch().count();
+```
 
-	\addproposal{N2761}{https://wg21.link/N2761}
+- ```cpp to_time_t()``` converti en ```cpp time_t```
+- ```cpp fromtime_t()``` construit depuis ```cpp time_t```
 
+```cpp
+system_clock::time_point today = system_clock::now();
+time_t tt = system_clock::to_time_t(today);
+ctime(&tt);
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::system_clock::time_point+today+%3D+std::chrono::system_clock::now()%3B%0A%0A++time_t+tt+%3D+std::chrono::system_clock::to_time_t(today)%3B%0A++std::cout+%3C%3C+ctime(%26tt)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Attribut \mintinline[style=white]{cpp}```[[ noreturn ]]```}
-	\begin{itemize}
-		\item Indique qu'une fonction ne retourne pas
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::system_clock::time_point+today+%3D+std::chrono::system_clock::now()%3B%0A++std::cout+%3C%3C+today.time_since_epoch().count()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		[[ noreturn ]] void foo() { throw "error"; }
-	```
+== Horloges
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Qui ne retourne pas
-			\item Pas qui ne retourne rien
-		\end{itemize}
-	\end{alertblock}
+- Horloge monotone de mesure des intervalles ```cpp std::chrono::steady_clock```
+// Monotone, c'est à dire que cette horloge n'est jamais réglée, en particulier une mise à l'heure durant la mesure n'a pas d'impact sur la mesure
+// Pas le cas de std::chrono::system_clock qui mesure le temps par rapport à epoch et dont la valeur est impactée par la mise à l'heure
+// A priori, sous Linux, pas d'appel système pour récupérer la valeur
 
-	\begin{block}{Usage}
-		\begin{itemize}
-			\item Boucle infinie, sortie de l'application, exception systématique
-		\end{itemize}
-	\end{block}
+- ```cpp now()``` récupère temps courant
 
-	\begin{block}{Sous silence}
-		\begin{itemize}
-			\item ```cpp [[ carries_dependency ]]```
-		\end{itemize}
-	\end{block}
+```cpp
+steady_clock::time_point t1 = steady_clock::now();
+...
+steady_clock::time_point t2 = steady_clock::now();
+duration<double> time_span =
+duration_cast<duration<double>>(t2 - t1);
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0A%5B%5B+noreturn+%5D%5D+void+foo()%0A%7B%0A%23if+0%0A++throw+std::runtime_error(%22foo%22)%3B%0A%23endif%0A%7D%0A%0Aint+main()%0A%7B%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Horloges
 
+- Horloge avec le plus petit intervalle entre deux _ticks_ ```cpp std::chrono::high_resolution_clock```
+- Possible synonyme de ```cpp std::chrono::system_clock``` ou ```cpp std::chrono::steady_clock```
 
-== Rapport}
+#adviceblock("Do", text[
+  - Préférez ```cpp std::clock::duration``` aux entiers pour manipuler les durées
+])
 
-\note[item]{La rapport est dans le type, pas dans les valeurs ou les instances}
+#alertblock("Attention", text[
+  - N'espérez pas une précision arbitrairement grande des horloges
+])
 
-	\begin{itemize}
-		\item ```cpp std::ratio``` représente un rapport entre deux nombres
-		\item Numérateur et dénominateur sont des paramètres templates
-		\item ```cpp num``` accède au numérateur
-		\item ```cpp den``` accède au dénominateur
-	\end{itemize}
+== Thread Local Storage
 
-	```cpp
-		ratio<6, 2> r;
-		cout << r.num << "/" << r.den;   // 3/1
-	```
+- Spécificateur de classe de stockage ```cpp thread_local```
+- Influant sur la durée de stockage
+- Compatible avec ```cpp static``` et ```cpp extern```
+- Rend propres au thread des objets normalement partagés
+// Typiquement des variables globales ou statiques
+// C'est à dire qu'il y a une instance de la variable par thread
+- Instance propre au thread créée à la création du thread
+- Valeur initiale héritée du thread créateur
 
-	\begin{itemize}
-		\item Instanciations standards des préfixes du système international d'unités
-		\begin{itemize}
-			\item yocto, zepto, atto, femto, pico, nano, micro, milli, centi, déci
-			\item déca, hecto, kilo, méga, giga, téra, péta, exa, zetta, yotta
-		\end{itemize}
-	\end{itemize}
+```cpp
+thread_local int foo = 0;
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cratio%3E%0A%0Aint+main()%0A%7B%0A++std::ratio%3C6,+2%3E+r%3B%0A++std::cout+%3C%3C+r.num+%3C%3C+!'/!'+%3C%3C+r.den+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#addproposal("N2659")
 
+== Variables atomiques -- ``` std::atomic```
 
+- Encapsulation de types de base fournissant des opérations atomiques
+- Atomicité de l'affectation, de l'incrémentation et de la décrémentation
 
-== Rapport}
-	\begin{itemize}
-		\item Méta-fonctions arithmétiques
-		\begin{itemize}
-			\item ```cpp std::ratio_add()```, ```cpp std::ratio_subtract()```
-			\item ```cpp std::ratio_multiply()```, ```cpp std::ratio_divide()```
-		\end{itemize}
+```cpp
+atomic<int> foo{5};
+++foo;
+```
 
-\note[item]{Méta car elles agissent sur les types et non sur les valeurs}
-	\end{itemize}
+- ```cpp store()``` stocke une nouvelle valeur
+- ```cpp load()``` lit la valeur
+- ```cpp exchange()``` met à jour et retourne la valeur avant modification
 
-	```cpp
-		ratio_add<ratio<6, 2>, ratio<2, 3>> r;
-		cout << r.num << "/" << r.den;   // 11/3
-	```
+#addproposal("N2427")
 
-	\begin{itemize}
-		\item Méta-fonctions de comparaison
-		\begin{itemize}
-			\item ```cpp std::ratio_equal()```, ```cpp std::ratio_not_equal()```
-			\item ```cpp std::ratio_less()```, ```cpp std::ratio_less_equal()```
-			\item ```cpp std::ratio_greater()``` et ```cpp std::ratio_greater_equal()```
-		\end{itemize}
-	\end{itemize}
+== Variables atomiques -- ``` std::atomic```
 
-	```cpp
-		ratio_less_equal<ratio<6, 2>, ratio<2, 3>>::value;  // false
-	```
+- ```cpp compare_exchange_weak``` et ```cpp compare_exchange_strong```
+// Différence weak / strong : weak peu échouer dans certains cas. Lorsque cela se produit, aucune valeur n'est modifiée
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cratio%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%0A++++++++++++%3C%3C+std::ratio_less_equal%3Cstd::ratio%3C6,+2%3E,+std::ratio%3C2,+3%3E%3E::value+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+  - Si ```cpp std::atomic``` est égal à la valeur attendue, il est mis à jour avec une valeur fournie
+  - Sinon, il n'est pas modifié et la valeur attendue prends la valeur de ```cpp std::atomic```
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cratio%3E%0A%0Aint+main()%0A%7B%0A++std::ratio_add%3Cstd::ratio%3C6,+2%3E,+std::ratio%3C2,+3%3E%3E+r%3B%0A%0A++std::cout+%3C%3C+r.num+%3C%3C+!'/!'+%3C%3C+r.den+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+atomic<int> foo{5};
+int bar{5};
 
+foo.compare_exchange_strong(bar, 10);  // foo : 10, bar : 5
+foo.compare_exchange_strong(bar, 8);   // foo : 10, bar : 10
+```
 
-== Durées}
-	\begin{itemize}
-		\item Classe template ```cpp std::chrono::duration```
-		\item Unité dépendante d'un ratio avec la seconde
-		\item Instanciations standards \textit{hours}, \textit{minutes}, \textit{seconds}, \textit{milliseconds}, \textit{microseconds} et \textit{nanosecond}
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A++int+bar%7B5%7D%3B%0A%0A++foo.compare_exchange_strong(bar,+10)%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22+%22+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A++foo.compare_exchange_strong(bar,+8)%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22+%22+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	```cpp
-		milliseconds foo(12000);  // 12000 ms
-		foo.count();              // 12000
-	```
+== Variables atomiques -- ``` std::atomic```
 
-	\begin{itemize}
-		\item ```cpp count()``` retourne la valeur
-		\item ```cpp period``` est le type représentant le ratio
-	\end{itemize}
+- ```cpp fetch_add()``` addition et retour de la valeur avant modification
 
-	```cpp
-		milliseconds foo(12000);
-		foo.count() * milliseconds::period::num /
-		              milliseconds::period::den;  // 12
-	```
+```cpp
+	atomic<int> foo{5};
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::milliseconds+foo(12000)%3B%0A%0A++std::cout+%3C%3C+foo.count()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.count()+*+std::chrono::milliseconds::period::num+/+std::chrono::milliseconds::period::den+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+	cout << foo.fetch_add(10) << " ";
+	cout << foo;        // Affiche 5 15
+```
 
+- ```cpp fetch_sub()``` soustraction et retour de la valeur avant modification
+- ```cpp fetch_and()``` et binaire et retour de la valeur avant modification
+- ```cpp fetch_or()``` ou binaire et retour de la valeur avant modification
+- ```cpp fetch_xor()``` ou exclusif et retour de la valeur avant modification
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A%0A++std::cout+%3C%3C+foo.fetch_add(10)+%3C%3C+%22+%22%3B%0A++std::cout+%3C%3C+foo%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Durées}
-	\begin{itemize}
-		\item Opérateurs de manipulation des durées (ajout, suppression, \ldots{})
-	\end{itemize}
+== Variables atomiques -- ``` std::atomic```
 
-	```cpp
-		milliseconds foo(500);
-		milliseconds bar(10);
-		foo += bar;   // 510
-		foo /= 2;     // 255
-	```
+- Plusieurs instanciations standards (```cpp std::atomic_bool```, ```cpp std::atomic_int```, ...)
 
-	\begin{itemize}
-		\item Opérateurs de comparaison entre durées
-		\item ```cpp zero()``` crée une durée nulle
-		\item ```cpp min()``` crée la plus petite valeur possible
-		\item ```cpp max()``` crée la plus grande valeur possible
-	\end{itemize}
+#noteblock("Mais aussi", text[
+  - Plusieurs fonctions "C-style", similaires aux fonctions membres de ```cpp std::atomic```, manipulant atomiquement des données
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::milliseconds+foo(500)%3B%0A++std::chrono::milliseconds+bar(10)%3B%0A%0A++foo+%2B%3D+bar%3B%0A++std::cout+%3C%3C+foo.count()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo+/%3D+2%3B%0A++std::cout+%3C%3C+foo.count()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+== Variables atomiques -- ``` std::atomic_flag```
 
+- Gestion atomique de _flags_
+- Non copiable, non déplaçable, _lock free_
+- ```cpp clear()``` remet à 0 le _flag_
+- ```cpp test_and_set()``` lève le _flag_ et retourne sa valeur avant modification
 
+```cpp
+atomic_flag foo = ATOMIC_FLAG_INIT;
 
-== Temps relatif}
-	\begin{itemize}
-		\item ```cpp std::chrono::time_point``` temps relatif depuis l'epoch
-	\end{itemize}
+foo.test_and_set();  // false
+foo.test_and_set();  // true
+foo.clear();
+foo.test_and_set();  // false
+```
 
-	\begin{block}{Epoch}
-		\begin{itemize}
-			\item Origine des temps de l'OS (1 janvier 1970 00h00 sur Unix)
-		\end{itemize}
-	\end{block}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic_flag+foo+%3D+ATOMIC_FLAG_INIT%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.test_and_set()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.test_and_set()+%3C%3C+%22%5Cn%22%3B%0A++foo.clear()%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.test_and_set()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item ```cpp time_since_epoch()``` retourne la durée depuis l'epoch
-		\item Opérateurs d'ajout et de suppression d'une durée
-		\item Opérateurs de comparaison entre ```cpp time_point```
-		\item ```cpp min()``` retourne le plus petit temps relatif
-		\item ```cpp max()``` retourne le plus grand temps relatif
-	\end{itemize}
+== Threads -- ``` std::thread```
 
+- Représente un fil d'exécution
+- Déplaçable mais non copiable
+- Constructible depuis une fonction et sa liste de paramètre
 
+```cpp
+void foo(int);
 
-== Horloges}
-	\begin{itemize}
-		\item Horloge temps-réel du système ```cpp std::chrono::system_clock```
-		\item ```cpp now()``` récupère temps courant
-	\end{itemize}
+thread t(foo, 10);
+```
 
-	```cpp
-		system_clock::time_point today = system_clock::now();
-		today.time_since_epoch().count();
-	```
+- Thread initialisé démarre immédiatement
+- ```cpp joignable()``` indique si le thread est joignable
+  - Pas construit par défaut
+  - Pas été déplacé
+  - Ni joint ni détaché
 
-	\begin{itemize}
-		\item ```cpp to_time_t()``` converti en ```cpp time_t```
-		\item ```cpp fromtime_t()``` construit depuis ```cpp time_t```
-	\end{itemize}
+== Threads -- ``` std::thread```
 
-	```cpp
-		system_clock::time_point today = system_clock::now();
-		time_t tt = system_clock::to_time_t(today);
-		ctime(&tt);
-	```
+- ```cpp join()``` attend la fin d'exécution du thread
+- ```cpp detach()``` détache le thread
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::system_clock::time_point+today+%3D+std::chrono::system_clock::now()%3B%0A%0A++time_t+tt+%3D+std::chrono::system_clock::to_time_t(today)%3B%0A++std::cout+%3C%3C+ctime(%26tt)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
+```cpp
+void foo(size_t imax) {
+  for(size_t i = 0; i < imax; ++i)
+    cout << "thread " << i << '\n';
+}
 
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::chrono::system_clock::time_point+today+%3D+std::chrono::system_clock::now()%3B%0A++std::cout+%3C%3C+today.time_since_epoch().count()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+size_t imax = 40;
+thread t(foo, imax);
 
+for(size_t i = 0; i < imax; ++i)
+  cout << "main " << i << '\n';
+t.join();
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Horloges}
-	\begin{itemize}
-		\item Horloge monotone de mesure des intervalles ```cpp std::chrono::steady_clock```
+== Threads -- ``` std::this_thread```
 
-\note[item]{Monotone, c'est à dire que cette horloge n'est jamais réglée, en particulier une mise à l'heure durant la mesure n'a pas d'impact sur la mesure}
-\note[item]{Pas le cas de ```cpp std::chrono::system_clock``` qui mesure le temps par rapport à epoch et dont la valeur est impactée par la mise à l'heure}
-\note[item]{A priori, sous Linux, pas d'appel système pour récupérer la valeur}
+- Représente le thread courant
+- ```cpp yield()``` permet de "passer son tour"
+// C'est à dire d'indiquer à l'ordonnanceur qu'il peut replanifier
+- ```cpp sleep_for()``` suspend l'exécution sur la durée spécifiée
 
-		\item ```cpp now()``` récupère temps courant
-	\end{itemize}
+```cpp
+this_thread::sleep_for(chrono::seconds(5));
+```
 
-	```cpp
-		steady_clock::time_point t1 = steady_clock::now();
-		...
-		steady_clock::time_point t2 = steady_clock::now();
-		duration<double> time_span =
-		duration_cast<duration<double>>(t2 - t1);
-	```
+- ```cpp sleep_until()``` suspend le thread jusqu'au temps demandé
 
+#alertblock("Attention", text[
+- Ne vous attendez pas à des attentes arbitrairement précises
+// À l'échéance, le thread n'interrompt pas les autres pour reprendre la main
+])
 
+#noteblock("Attentes passives", text[
+  - Les autres threads continuent de s'exécuter
+])
 
-== Horloges}
-	\begin{itemize}
-		\item Horloge avec le plus petit intervalle entre deux \textit{ticks} ```cpp std::chrono::high_resolution_clock```
-		\item Possible synonyme de ```cpp std::chrono::system_clock``` ou ```cpp std::chrono::steady_clock```
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++std::cout+%3C%3C+%22Main%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ```cpp std::clock::duration``` aux entiers pour manipuler les durées
-		\end{itemize}
-	\end{exampleblock}
+== Mutex -- ``` std::mutex```
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item N'espérez pas une précision arbitrairement grande des horloges
-		\end{itemize}
-	\end{alertblock}
+- Verrou pour l'accès exclusif à une section de code
+- ```cpp lock()``` verrouille le mutex
+- ... en attendant sa libération s'il est déjà verrouillé
+- ```cpp try_lock()``` verrouille le mutex s'il est libre, retourne ```cpp false``` sinon
+- ```cpp unlock()``` relâche le mutex
 
+#alertblock("Attention", text[
+  - ```cpp lock()``` sur un mutex verrouillé par le même thread provoque un _deadlock_
+])
 
-== Thread Local Storage}
-	\begin{itemize}
-		\item Spécificateur de classe de stockage ```cpp thread_local```
-		\item Influant sur la durée de stockage
-		\item Compatible avec ```cpp static``` et ```cpp extern```
-		\item Rend propres au thread des objets normalement partagés
+- ```cpp std::recursive_mutex``` variante verrouillable plusieurs fois par un même thread
+// Il faut le relâcher autant de fois pour qu'il soit effectivement non verrouillé
 
-\note[item]{Typiquement des variables globales ou statiques}
-\note[item]{C'est à dire qu'il y a une instance de la variable par thread}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+g_mutex%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++g_mutex.lock()%3B%0A++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++g_mutex.unlock()%3B%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++g_mutex.lock()%3B%0A++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++g_mutex.unlock()%3B%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		\item Instance propre au thread créée à la création du thread
-		\item Valeur initiale héritée du thread créateur
-	\end{itemize}
+== Mutex -- ``` std::timed_mutex```
 
-	```cpp
-		thread_local int foo = 0;
-	```
+- Similaire à ```cpp std::mutex```
+- ... proposant en complément des _try lock_ temporisés
+- ```cpp try_lock_for()``` attend, si le mutex est verrouillé, la libération de celui-ci ou l'expiration d'une durée
+- ```cpp try_lock_until()``` attend, si le mutex est verrouillé, la libération de celui-ci ou l'atteinte d'un temps
+- ```cpp std::recursive_timed_mutex``` est une variante de ```cpp std::timed_mutex``` verrouillable plusieurs fois par un même thread
 
-	\addproposal{N2659}{https://wg21.link/N2659}
+== Mutex -- ``` std::lock_guard```
 
+- Capsule RAII sur les mutex
+- Constructible uniquement depuis un mutex
+- Verrouille le mutex à la création et le relâche à la destruction
 
+```cpp
+mutex mtx;
+{
+  lock_guard<mutex> lock(mtx);  // Prise du mutex
+  ...
+}  // Liberation du mutex
+```
 
-== Variables atomiques -- \mintinline[style=white]{cpp}```std::atomic```}
-	\begin{itemize}
-		\item Encapsulation de types de base fournissant des opérations atomiques
-		\item Atomicité de l'affectation, de l'incrémentation et de la décrémentation
-	\end{itemize}
+#noteblock("Note", text[
+  - Gestion du mutex entièrement confiée au _lock_
+])
 
-	```cpp
-		atomic<int> foo{5};
-		++foo;
-	```
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+mtx%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::lock_guard%3Cstd::mutex%3E+lock(mtx)%3B%0A++++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::lock_guard%3Cstd::mutex%3E+lock(mtx)%3B%0A++++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-	\begin{itemize}
-		\item ```cpp store()``` stocke une nouvelle valeur
-		\item ```cpp load()``` lit la valeur
-		\item ```cpp exchange()``` met à jour et retourne la valeur avant modification
-	\end{itemize}
+== Mutex -- ``` std::unique_lock```
 
-	\addproposal{N2427}{https://wg21.link/N2427}
+- Capsule RAII des mutex
+- Supporte les mutex verrouillés ou non
+- Relâche le mutex à la destruction
+- Expose les méthodes de verrouillage et libération des mutex
 
+```cpp
+mutex mtx;
+{
+  unique_lock<mutex> lock(mtx, defer_lock);
+  ...
+  lock.lock();  // Prise du mutex
+  ...
+}  // Liberation du mutex
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+mtx%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::unique_lock%3Cstd::mutex%3E+lock(mtx,+std::defer_lock)%3B%0A++++++lock.lock()%3B%0A++++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::lock_guard%3Cstd::mutex%3E+lock(mtx)%3B%0A++++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Variables atomiques -- \mintinline[style=white]{cpp}```std::atomic```}
-	\begin{itemize}
-		\item ```cpp compare_exchange_weak``` et ```cpp compare_exchange_strong```
+== Mutex -- ``` std::unique_lock```
 
-\note[item]{Différence \textit{weak} / \textit{strong} : \textit{weak} peu échouer dans certains cas. Lorsque cela se produit, aucune valeur n'est modifiée}
+- Comportements multiples à de la création
+  - Verrouillage immédiat
+  - Tentative de verrouillage
+  - Acquisition sans verrouillage
+  - Acquisition d'un mutex déjà verrouillé
+- ```cpp mutex()``` retourne le mutex associé
+- ```cpp owns_lock()``` teste si le \textit{lock} a un mutex associé et l'a verrouillé
+- ```cpp operator bool()``` encapsule ```cpp owns_lock()```
 
-		\begin{itemize}
-			\item Si ```cpp std::atomic``` est égal à la valeur attendue, il est mis à jour avec une valeur fournie
-			\item Sinon, il n'est pas modifié et la valeur attendue prends la valeur de ```cpp std::atomic```
-		\end{itemize}
-	\end{itemize}
+#noteblock("Note", text[
+  - Gestion du mutex conservée, garantie de libération
+])
 
-	```cpp
-		atomic<int> foo{5};
-		int bar{5};
+== Mutex -- Gestion multiple
 
-		foo.compare_exchange_strong(bar, 10);  // foo : 10, bar : 5
-		foo.compare_exchange_strong(bar, 8);   // foo : 10, bar : 10
-	```
+- ```cpp std::lock()``` verrouille tous les mutex passés en paramètre
+- ... sans produire de _deadlock_
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A++int+bar%7B5%7D%3B%0A%0A++foo.compare_exchange_strong(bar,+10)%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22+%22+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A++foo.compare_exchange_strong(bar,+8)%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22+%22+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+mutex mtx1, mtx2;
+lock(mtx1, mtx2);
+```
 
+- ```cpp std::try_lock``` tente de verrouiller dans l'ordre tous les mutex passés en paramètre
+- ... et relâche les mutex déjà pris en cas d'échec sur l'un d'eux
 
+#codesample("https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuwQIh0zoJ2eXZqsM615bO27IjwEqFeFyuXxudzcLC8BEwqhBlwuvXQIBA0Nhqk2LAIqiKWJxZh2VlBFwAbqg8OhNvxUBBEgAvTAAfQImzwLCYqkmbxMAHZiedNtSSHS8IyWWy7gARTYaImSv5sjnw5YWbaWax4bkXIV8gVC3X8t4Gg3I1G0VDIADWTOAXiqL12ZrRMLhJ02FutXAg2Nx3NVxpNm2daBhkMV5jMDye6C46rM4d2Ct2irASwArG4GGmiYHDVK88GCCiQA88AoWY8jiWFPRMLEmfxiHTi6iAcQgaiWHRaOWmgJ0AoIFwNJN/frtryC6CpzyyRSqREqqLxaz2ZztZcjTrhc2Gcy19LZfK8JClZz5dZNZvDRPb4Whc7PTa7Q6/s70W7ltgPZarWYfQJccHyLEtQ1ZP4IzMKMq2eBNI0TNxkzcVMMyzHMAx3fNC2dMsK2jatUVrTB60bEUQ0BBhUC7Hs%2BzQBhB2HdMx1zHc%2BWnLcOLeYJWQ5YIIE3PVA33CV10xHYZUkOVMMFUDUQI55NgIb0aVIc8uVY2TcNgqkCAApcyHU4CSVkpsVwPZMZWktVT0VMTLw1SwtUDISsMnO9TVbEBn0A3E1N9MxjNkk0nz/W17WIR03A/V0VR/Z9vV9PFnWeVBYgIJlnyCoM5O8sLX0i98vM/OLf2tACArUlL0DSjKss0nKQ1mCCUyTSM%2BIYeNEOQ1CTEzbMlhkk12Jwry8MrGMiLrBszIojsqJo2heyUejGJHFihsnDihWUgA6bQKQYASGqUsx9sO46ZJGi4OGmWhOHTXg/A4LRSGojgUMctUFFmeZbhWHhSAITRbumK0QHTDR9E4SQnpBt7OF4BQQCh4GXtu0g4FgJA4SaGESHISgqmABRlEMEohAQVAAHdnsBtAWFiOgmDKBgyZCWhKZp57XoZpn6BiEnmFiBQqYIUg%2BboaJQlYRZeElgWAHkYS52n4dx5BzmIEnEdIDWKnwZ7eH4QQRDEdgpBkQRFBUdR0dIXQigMIwUCvSx9DwCJkcgaZauSZGOAAWmRCTTC%2Brg40DgB1MRaE2aO4QIYgmF4VBSWiYhKUwb2BNIYgvEEdlMAAFVQTwc%2BmH65gWHpi2CdmKaptXuF4JOSM4QHqeT2IQbuh64ft97sFUPGiGITZVAADgANkD6fJE2YBkGQTYICTgurUmVfPqsd3NlwQgSHVZYplb3vpgQatulz8HIehjhYdIHnU915HUfP%2B%2BzAH173rP9Gx1IOnYgiRnCSCAA%3D%3D")
 
-== Variables atomiques -- \mintinline[style=white]{cpp}```std::atomic```}
-	\begin{itemize}
-		\item ```cpp fetch_add()``` addition et retour de la valeur avant modification
-	\end{itemize}
+== Mutex -- ``` std::call_once()```
 
-	```cpp
-		atomic<int> foo{5};
+- Garantit l'appel unique (pour un _flag_ donnée) de la fonction en paramètre
+- Si la fonction a déjà été exécutée, ```cpp std::call_once()``` retourne sans exécuter la fonction
+- Si la fonction est en cours d'exécution, ```cpp std::call_once()``` attend la fin de cette exécution avant de retourner
 
-		cout << foo.fetch_add(10) << " ";
-		cout << foo;        // Affiche 5 15
-	```
+```cpp
+void foo(int, char);
 
-	\begin{itemize}
-		\item ```cpp fetch_sub()``` soustraction et retour de la valeur avant modification
-		\item ```cpp fetch_and()``` et binaire et retour de la valeur avant modification
-		\item ```cpp fetch_or()``` ou binaire et retour de la valeur avant modification
-		\item ```cpp fetch_xor()``` ou exclusif et retour de la valeur avant modification
-	\end{itemize}
+once_flag flag;
+call_once(flag, foo, 42, 'r');
+```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A%0A++std::cout+%3C%3C+foo.fetch_add(10)+%3C%3C+%22+%22%3B%0A++std::cout+%3C%3C+foo%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#noteblock("Cas d'utilisation", text[
+  - Appelle par un unique thread d'une fonction d'initialisation
+])
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmutex%3E%0A%0Avoid+foo(int+a,+char+b)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+%22-%22+%3C%3C+b+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::once_flag+flag%3B%0A++std::once_flag+other%3B%0A%0A++std::call_once(flag,+foo,+42,+!'r!')%3B%0A++std::call_once(flag,+foo,+43,+!'s!')%3B%0A++std::call_once(other,+foo,+44,+!'t!')%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Variables conditionnelles -- Principe
 
-== Variables atomiques -- \mintinline[style=white]{cpp}```std::atomic```}
-	\begin{itemize}
-		\item Plusieurs instanciations standards (```cpp std::atomic_bool```, ```cpp std::atomic_int```, \ldots{})
-	\end{itemize}
+- Mise en attente du thread sur la variable conditionnelle
+- Réveil du thread lors de la notification de la variable
+- Protection par verrou
+  - Prise du verrou avant l'appel à la fonction d'attente
+  - Relâchement du verrou par la fonction
+  - Reprise du verrou lors de la notification avant le déblocage du thread
 
-	\begin{block}{Mais aussi}
-		\begin{itemize}
-			\item Plusieurs fonctions \og C-style\fg{}, similaires aux fonctions membres de ```cpp std::atomic```, manipulant atomiquement des données
-		\end{itemize}
-	\end{block}
+== Variables conditionnelles -- ``` condition_variable```
 
+- Uniquement avec ```cpp std::unique_lock```
+- ```cpp wait()``` met en attente le thread
 
+```cpp
+mutex mtx;
+condition_variable cv;
 
-== Variables atomiques -- \mintinline[style=white]{cpp}```std::atomic_flag```}
-	\begin{itemize}
-		\item Gestion atomique de \textit{flags}
-		\item Non copiable, non déplaçable, \textit{lock free}
-		\item ```cpp clear()``` remet à 0 le \textit{flag}
-		\item ```cpp test_and_set()``` lève le \textit{flag} et retourne sa valeur avant modification
-	\end{itemize}
+unique_lock<std::mutex> lck(mtx);
+cv.wait(lck);
+```
 
-	```cpp
-		atomic_flag foo = ATOMIC_FLAG_INIT;
+#noteblock("Note", text[
+  - Possibilité de fournir un prédicat
+    - Blocage seulement s'il retourne ```cpp false```
+    - Déblocage seulement s'il retourne ```cpp true```
+])
 
-		foo.test_and_set();  // false
-		foo.test_and_set();  // true
-		foo.clear();
-		foo.test_and_set();  // false
-	```
+== Variables conditionnelles -- ``` condition_variable```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic_flag+foo+%3D+ATOMIC_FLAG_INIT%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.test_and_set()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.test_and_set()+%3C%3C+%22%5Cn%22%3B%0A++foo.clear()%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.test_and_set()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp wait_for()``` met en attente le thread, au maximum la durée donnée
+- ```cpp wait_until()``` met en attente le thread, au maximum jusqu'au temps donné
 
+#noteblock("Note", text[
+  - ```cpp wait_for()``` et ```cpp wait_until()``` indique si l'exécution a repris suite à un timeout
+])
 
+== Variables conditionnelles -- ``` condition_variable```
 
-== Threads -- \mintinline[style=white]{cpp}```std::thread```}
-	\begin{itemize}
-		\item Représente un fil d'exécution
-		\item Déplaçable mais non copiable
-		\item Constructible depuis une fonction et sa liste de paramètre
-	\end{itemize}
+- ```cpp notify_one()``` notifie un des threads en attente sur la variable conditionnelle
 
-	```cpp
-		void foo(int);
+#alertblock("Attention", text[
+  - Impossible de choisir quel thread notifié avec ```cpp notify_one()```
+])
 
-		thread t(foo, 10);
-	```
+- ```cpp notify_all()``` notifie tous les threads en attente
+- ```cpp std::condition_variable_any``` similaire à ```cpp std::condition_variable```
+- ... sans être limité à ```cpp std::unique_lock```
+- ```cpp std::notify_all_at_thread_exit()```
+  - Indique de notifier tous les threads à la fin du thread courant
+  - Prend un verrou qui sera libéré à la fin du thread
 
-	\begin{itemize}
-		\item Thread initialisé démarre immédiatement
-		\item ```cpp joignable()``` indique si le thread est joignable
-		\begin{itemize}
-			\item Pas construit par défaut
-			\item Pas été déplacé
-			\item Ni joint ni détaché
-		\end{itemize}
-	\end{itemize}
+== Variables conditionnelles -- ``` condition_variable```
 
+```cpp
+mutex mtx;
+condition_variable cv;
 
+void print_id(int id) {
+  unique_lock<mutex> lck(mtx);
+  cv.wait(lck);
+  cout << "thread " << id << '\n';
+}
 
-== Threads -- \mintinline[style=white]{cpp}```std::thread```}
-	\begin{itemize}
-		\item ```cpp join()``` attend la fin d'exécution du thread
-		\item ```cpp detach()``` détache le thread
-	\end{itemize}
+thread threads[10];
+for(int i = 0; i<10; ++i)
+  threads[i] = thread(print_id, i);
+this_thread::sleep_for(chrono::seconds(5));
+cv.notify_all();
+for(auto& th : threads) th.join();
+```
 
-	```cpp
-		void foo(size_t imax) {
-		  for(size_t i = 0; i < imax; ++i)
-		    cout << "thread " << i << '\n';
-		}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%23include+%3Ccondition_variable%3E%0A%0Astd::mutex+mtx%3B%0Astd::condition_variable+cv%3B%0A%0Avoid+print_id(int+id)%0A%7B%0A++std::unique_lock%3Cstd::mutex%3E+lck(mtx)%3B%0A++cv.wait(lck)%3B%0A++std::cout+%3C%3C+%22thread+%22+%3C%3C+id+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::thread+threads%5B10%5D%3B%0A%0A++for(int+i+%3D+0%3B+i%3C10%3B+%2B%2Bi)%0A++%7B%0A++++threads%5Bi%5D+%3D+std::thread(print_id,+i)%3B%0A++%7D%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++cv.notify_all()%3B%0A%0A++for(auto%26+th+:+threads)%0A++%7B%0A++++th.join()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-		size_t imax = 40;
-		thread t(foo, imax);
+== Futures et promise -- Principe
 
-		for(size_t i = 0; i < imax; ++i)
-		  cout << "main " << i << '\n';
-		t.join();
-	```
+- ```cpp std::promise``` contient une valeur
+  - Disponible ultérieurement
+  - Récupérable, éventuellement dans un autre thread, via ```cpp std::future```
+- ```cpp std::future``` permet la récupération d'une valeur disponible ultérieurement
+  - Depuis un ```cpp std::promise```
+  - Depuis un appel asynchrone ou différé de fonction
+- Mécanismes asynchrones
+- ```cpp std::future``` définissent des points de synchronisation
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#noteblock("Note", text[
+  - ```cpp std::promise``` et ```cpp std::future``` peuvent également manipuler des exceptions
+])
 
+== Futures et promise -- ``` std::future```
 
+- Utilisable uniquement s'il est valide (associé à un état partagé)
+- Construit valide que par certaines fonctions fournisseuses
+- Déplaçable mais non copiable
+- Prêt lorsque la valeur, ou une exception, est disponible
+- ```cpp valid()``` teste s'il est valide
+- ```cpp wait()``` attend qu'il soit prêt
+- ```cpp wait_for()``` attend qu'il soit prêt, au plus la durée donnée
+- ```cpp wait_until()``` attend qu'il soit prêt, au plus jusqu'au temps donné
+- ```cpp get()``` attend qu'il soit prêt, retourne la valeur (ou lève l'exception) et libère l'état partagé
 
-== Threads -- \mintinline[style=white]{cpp}```std::this_thread```}
-	\begin{itemize}
-		\item Représente le thread courant
-		\item ```cpp yield()``` permet de \og passer son tour\fg{}
+== Futures et promise -- ``` std::future```
 
-\note[item]{C'est à dire d'indiquer à l'ordonnanceur qu'il peut replanifier}
+- ```cpp share()``` construit un ```cpp std::shared_future``` depuis le ```cpp std::future```
 
-		\item ```cpp sleep_for()``` suspend l'exécution sur la durée spécifiée
-	\end{itemize}
+#alertblock("Attention", text[
+  - Après un appel à ```cpp share()```, le ```cpp std::future``` n'est plus valide
+])
 
-	```cpp
-		this_thread::sleep_for(chrono::seconds(5));
-	```
+- ```cpp std::shared_future``` similaires à ```cpp std::future```
+  - Mais copiables
+  - Responsabilité partagée sur l'état partagé
+  - Valeur lisible à plusieurs reprises
 
-	\begin{itemize}
-		\item ```cpp sleep_until()``` suspend le thread jusqu'au temps demandé
-	\end{itemize}
+== Futures et promise -- ``` std::async()```
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Ne vous attendez pas à des attentes arbitrairement précises
-		\end{itemize}
+- Appelle la fonction fournie
+- Et retourne, sans attendre la fin de l'exécution, un ```cpp std::future```
+- ```cpp std::future``` permettant de récupérer la valeur de retour de la fonction
 
-\note[item]{À l'échéance, le thread n'interrompt pas les autres pour reprendre la main}
-	\end{alertblock}
+#noteblock("Note", text[
+  - Deux politiques d'exécution de la fonction appelée
+    - Exécution asynchrone
+    - Exécution différée à l'appel de ```cpp wait()``` ou ```cpp get()```
+  - Par défaut le choix est laissé à l'implémentation
+])
 
-	\begin{block}{Attentes passives}
-		\begin{itemize}
-			\item Les autres threads continuent de s'exécuter
-		\end{itemize}
-	\end{block}
+== Futures et promise -- ``` std::async()```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++std::cout+%3C%3C+%22Main%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+int foo() {
+  this_thread::sleep_for(chrono::seconds(5));
+  return 10;
+}
 
+future<int> bar = async(launch::async, foo);
+...
+cout << bar.get() << "\n";
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Aint+foo()%0A%7B%0A++std::cout+%3C%3C+%22Begin+foo%5Cn%22%3B%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++std::cout+%3C%3C+%22End+foo%5Cn%22%3B%0A++return+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::future%3Cint%3E+bar+%3D+async(std::launch::async,+foo)%3B%0A++std::cout+%3C%3C+%22Attente%5Cn%22%3B%0A++std::this_thread::sleep_for(std::chrono::seconds(1))%3B%0A++std::cout+%3C%3C+%22Attente%5Cn%22%3B%0A++std::cout+%3C%3C+bar.get()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Mutex -- \mintinline[style=white]{cpp}```std::mutex```}
-	\begin{itemize}
-		\item Verrou pour l'accès exclusif à une section de code
-		\item ```cpp lock()``` verrouille le mutex
-		\item \ldots{} en attendant sa libération s'il est déjà verrouillé
-		\item ```cpp try_lock()``` verrouille le mutex s'il est libre, retourne ```cpp false``` sinon
-		\item ```cpp unlock()``` relâche le mutex
-	\end{itemize}
+== Futures et promise -- ``` std::promise```
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item ```cpp lock()``` sur un mutex verrouillé par le même thread provoque un \textit{deadlock}
-		\end{itemize}
-	\end{alertblock}
+- Objet que l'on promet de valoriser ultérieurement
+- Déplaçable mais non copiable
+- Partage un état avec le ```cpp std::future``` associé
+- ```cpp get_future()``` retourne le ```cpp std::future``` associé
 
-	\begin{itemize}
-		\item ```cpp std::recursive_mutex``` variante verrouillable plusieurs fois par un même thread
+#alertblock("Attention", text[
+  - Un seul ```cpp std::future``` par ```cpp std::promise``` peut être récupéré
+])
 
-\note[item]{Il faut le relâcher autant de fois pour qu'il soit effectivement non verrouillé}
-	\end{itemize}
+== Futures et promise -- ``` std::promise```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+g_mutex%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++g_mutex.lock()%3B%0A++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++g_mutex.unlock()%3B%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++g_mutex.lock()%3B%0A++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++g_mutex.unlock()%3B%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp set_value()``` affecte une valeur et passe l'état partagé à prêt
+- ```cpp set_exception()``` affecte une exception et passe l'état partagé à prêt
+- ```cpp set_value_at_thread_exit()``` affecte une valeur, l'état partagé passera à prêt à la fin du thread
+- ```cpp set_exception_at_thread_exit()``` affecte une exception, l'état partagé passera à prêt à la fin du thread
 
+== Futures et promise -- ``` std::promise```
 
+```cpp
+void foo(future<int>& fut) {
+  int x = fut.get();
+  cout << x << '\n';
+}
 
-== Mutex -- \mintinline[style=white]{cpp}```std::timed_mutex```}
-	\begin{itemize}
-		\item Similaire à ```cpp std::mutex```
-		\item \ldots{} proposant en complément des \textit{try lock} temporisés
-		\item ```cpp try_lock_for()``` attend, si le mutex est verrouillé, la libération de celui-ci ou l'expiration d'une durée
-		\item ```cpp try_lock_until()``` attend, si le mutex est verrouillé, la libération de celui-ci ou l'atteinte d'un temps
-		\item ```cpp std::recursive_timed_mutex``` est une variante de ```cpp std::timed_mutex``` verrouillable plusieurs fois par un même thread
-	\end{itemize}
+promise<int> prom;
+future<int> fut = prom.get_future();
+thread th1(foo, ref(fut));
+...
+prom.set_value(10);
+th1.join();
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Avoid+foo(std::future%3Cint%3E%26+fut)%0A%7B%0A++int+x+%3D+fut.get()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::promise%3Cint%3E+prom%3B%0A++std::future%3Cint%3E+fut+%3D+prom.get_future()%3B%0A++std::thread+th1(foo,+ref(fut))%3B%0A%0A++std::this_thread::sleep_for(std::chrono::seconds(2))%3B%0A%0A++prom.set_value(10)%3B%0A++th1.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Futures et promise -- ``` std::packaged_task```
 
-== Mutex -- \mintinline[style=white]{cpp}```std::lock_guard```}
-	\begin{itemize}
-		\item Capsule RAII sur les mutex
-		\item Constructible uniquement depuis un mutex
-		\item Verrouille le mutex à la création et le relâche à la destruction
-	\end{itemize}
+- Encapsulation d'un appelable similaire à ```cpp std::function```
+- ... dont la valeur de retour est récupérable par un ```cpp std::future```
+- Partage un état avec le ```cpp std::future``` associé
+- ```cpp valid()``` teste s'il est associé à un état partagé (contient un appelable)
+- ```cpp get_future()``` retourne le ```cpp std::future``` associé
 
-	```cpp
-		mutex mtx;
-		{
-		  lock_guard<mutex> lock(mtx);  // Prise du mutex
-		  ...
-		}  // Liberation du mutex
-	```
+#alertblock("Attention", text[
+  - Un seul ```cpp std::future``` par ```cpp std::packaged_task``` peut être récupéré
+])
 
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Gestion du mutex entièrement confiée au \textit{lock}
-		\end{itemize}
-	\end{block}
+== Futures et promise -- ``` std::packaged_task```
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+mtx%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::lock_guard%3Cstd::mutex%3E+lock(mtx)%3B%0A++++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::lock_guard%3Cstd::mutex%3E+lock(mtx)%3B%0A++++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+- ```cpp operator()``` appelle l'appelable, affecte sa valeur de retour (ou l'exception levée) au ```cpp std::future``` et passe l'état partagé à prêt
+- ```cpp reset()``` réinitialise l'état partagé en conservant l'appelable
 
+#noteblock("note", text[
+  - ```cpp reset()``` permet d'appeler une nouvelle fois l'appelable
+])
 
+- ```cpp make_ready_at_thread_exit()``` appelle l'appelable et affecte sa valeur de retour (ou l'exception levée), l'état partagé passera à prêt à la fin
 
-== Mutex -- \mintinline[style=white]{cpp}```std::unique_lock```}
-	\begin{itemize}
-		\item Capsule RAII des mutex
-		\item Supporte les mutex verrouillés ou non
-		\item Relâche le mutex à la destruction
-		\item Expose les méthodes de verrouillage et libération des mutex
-	\end{itemize}
+== Futures et promise -- ``` std::packaged_task```
 
-	```cpp
-		mutex mtx;
-		{
-		  unique_lock<mutex> lock(mtx, defer_lock);
-		  ...
-		  lock.lock();  // Prise du mutex
-		  ...
-		}  // Liberation du mutex
-	```
+```cpp
+void foo(future<int>& fut) {
+  int x = fut.get();
+  cout << x << '\n';
+}
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+mtx%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::unique_lock%3Cstd::mutex%3E+lock(mtx,+std::defer_lock)%3B%0A++++++lock.lock()%3B%0A++++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++%7B%0A++++++std::lock_guard%3Cstd::mutex%3E+lock(mtx)%3B%0A++++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++%7D%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+int bar() { return 10; }
 
+packaged_task<int()> tsk(bar);
+future<int> fut = tsk.get_future();
+thread th1(foo, std::ref(fut));
+...
+tsk();
+th1.join();
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:8,endLineNumber:21,positionColumn:8,positionLineNumber:21,selectionStartColumn:8,selectionStartLineNumber:21,startColumn:8,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Avoid+foo(std::future%3Cint%3E%26+fut)%0A%7B%0A++int+x+%3D+fut.get()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+bar()%0A%7B%0A++return+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::packaged_task%3Cint()%3E+tsk(bar)%3B%0A++std::future%3Cint%3E+fut+%3D+tsk.get_future()%3B%0A++std::thread+th1(foo,+std::ref(fut))%3B%0A%0A++std::this_thread::sleep_for(std::chrono::seconds(2))%3B%0A%0A++tsk()%3B%0A++th1.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
-== Mutex -- \mintinline[style=white]{cpp}```std::unique_lock```}
-	\begin{itemize}
-		\item Comportements multiples à de la création
-		\begin{itemize}
-			\item Verrouillage immédiat
-			\item Tentative de verrouillage
-			\item Acquisition sans verrouillage
-			\item Acquisition d'un mutex déjà verrouillé
-		\end{itemize}
-		\item ```cpp mutex()``` retourne le mutex associé
-		\item ```cpp owns_lock()``` teste si le \textit{lock} a un mutex associé et l'a verrouillé
-		\item ```cpp operator bool()``` encapsule ```cpp owns_lock()```
-	\end{itemize}
+== Conclusion
 
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Gestion du mutex conservée, garantie de libération
-		\end{itemize}
-	\end{block}
+#adviceblock("Do, dans cet ordre", text[
+  - Évitez de partager variables et ressources
+  - Préférez les partages en lecture seule
+  - Préférez les structures de données gérant les accès concurrents
+  // std::atomic`, conteneur lock-free, conteneur thread-safe, etc.
+  - Protégez l'accès par mutex ou autres barrières
+])
 
+#adviceblock("Do", text[
+  - Encapsulez les mutex dans des ```cpp std::lock_guard``` ou ```cpp std::unique_lock```
+])
 
+== Conclusion
 
-== Mutex -- Gestion multiple}
-	\begin{itemize}
-		\item ```cpp std::lock()``` verrouille tous les mutex passés en paramètre
-		\item \ldots{} sans produire de \textit{deadlock}
-	\end{itemize}
+#adviceblock("Do", text[
+  - Analysez vos cas d'utilisation pour choisir le bon outil
+])
 
-	```cpp
-		mutex mtx1, mtx2;
-		lock(mtx1, mtx2);
-	```
+#alertblock("Attention", text[
+  - Très faibles garanties de _thread-safety_ de la part des conteneurs standards
+  // En gros plusieurs threads peuvent lire un même conteneur et plusieurs threads peuvent lire ou écrire simultanément des conteneurs différents sans problème et c'est à peu prés tout
+])
 
-	\begin{itemize}
-		\item ```cpp std::try_lock``` tente de verrouiller dans l'ordre tous les mutex passés en paramètre
-		\item \ldots{} et relâche les mutex déjà pris en cas d'échec sur l'un d'eux
-	\end{itemize}
+#adviceblock("Do", text[
+  - ```cpp Boost.Lockfree``` pour des structures de données _thread-safe_ et _lock-free_
+])
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuwQIh0zoJ2eXZqsM615bO27IjwEqFeFyuXxudzcLC8BEwqhBlwuvXQIBA0Nhqk2LAIqiKWJxZh2VlBFwAbqg8OhNvxUBBEgAvTAAfQImzwLCYqkmbxMAHZiedNtSSHS8IyWWy7gARTYaImSv5sjnw5YWbaWax4bkXIV8gVC3X8t4Gg3I1G0VDIADWTOAXiqL12ZrRMLhJ02FutXAg2Nx3NVxpNm2daBhkMV5jMDye6C46rM4d2Ct2irASwArG4GGmiYHDVK88GCCiQA88AoWY8jiWFPRMLEmfxiHTi6iAcQgaiWHRaOWmgJ0AoIFwNJN/frtryC6CpzyyRSqREqqLxaz2ZztZcjTrhc2Gcy19LZfK8JClZz5dZNZvDRPb4Whc7PTa7Q6/s70W7ltgPZarWYfQJccHyLEtQ1ZP4IzMKMq2eBNI0TNxkzcVMMyzHMAx3fNC2dMsK2jatUVrTB60bEUQ0BBhUC7Hs%2BzQBhB2HdMx1zHc%2BWnLcOLeYJWQ5YIIE3PVA33CV10xHYZUkOVMMFUDUQI55NgIb0aVIc8uVY2TcNgqkCAApcyHU4CSVkpsVwPZMZWktVT0VMTLw1SwtUDISsMnO9TVbEBn0A3E1N9MxjNkk0nz/W17WIR03A/V0VR/Z9vV9PFnWeVBYgIJlnyCoM5O8sLX0i98vM/OLf2tACArUlL0DSjKss0nKQ1mCCUyTSM%2BIYeNEOQ1CTEzbMlhkk12Jwry8MrGMiLrBszIojsqJo2heyUejGJHFihsnDihWUgA6bQKQYASGqUsx9sO46ZJGi4OGmWhOHTXg/A4LRSGojgUMctUFFmeZbhWHhSAITRbumK0QHTDR9E4SQnpBt7OF4BQQCh4GXtu0g4FgJA4SaGESHISgqmABRlEMEohAQVAAHdnsBtAWFiOgmDKBgyZCWhKZp57XoZpn6BiEnmFiBQqYIUg%2BboaJQlYRZeElgWAHkYS52n4dx5BzmIEnEdIDWKnwZ7eH4QQRDEdgpBkQRFBUdR0dIXQigMIwUCvSx9DwCJkcgaZauSZGOAAWmRCTTC%2Brg40DgB1MRaE2aO4QIYgmF4VBSWiYhKUwb2BNIYgvEEdlMAAFVQTwc%2BmH65gWHpi2CdmKaptXuF4JOSM4QHqeT2IQbuh64ft97sFUPGiGITZVAADgANkD6fJE2YBkGQTYICTgurUmVfPqsd3NlwQgSHVZYplb3vpgQatulz8HIehjhYdIHnU915HUfP%2B%2BzAH173rP9Gx1IOnYgiRnCSCAA%3D%3D}
-	\end{codesample}
+#noteblock("Pour aller plus loin", text[
+  - Voir _C++ Concurrency in action_ d'Anthony Williams
+  // Anthony Williams est coauteur des propositions de multi-threading dans C++11 et co-auteur de Boost.Thread
+])
 
+== Expressions rationnelles (regex)
 
+- ```cpp std::basic_regex``` représente une expression rationnelle
+- Instanciations standards ```cpp std::regex``` et ```cpp std::wregex```
+- Construite depuis une chaîne représentant l'expression
+- ... et des drapeaux de configuration
+  - #underline[ECMAScript], basic POSIX, extended POSIX, awk, grep, egrep
+  - Case sensitive ou non
+  - Prise en compte de la locale
+  - ...
 
-== Mutex -- \mintinline[style=white]{cpp}```std::call_once()```}
-	\begin{itemize}
-		\item Garantit l'appel unique (pour un \textit{flag} donnée) de la fonction en paramètre
-		\item Si la fonction a déjà été exécutée, ```cpp std::call_once()``` retourne sans exécuter la fonction
-		\item Si la fonction est en cours d'exécution, ```cpp std::call_once()``` attend la fin de cette exécution avant de retourner
-	\end{itemize}
+```cpp
+regex foo("[0-9A-Z]+", icase);
+```
 
-	```cpp
-		void foo(int, char);
+#addproposal("n1836")
+#addproposal("N1429")
 
-		once_flag flag;
-		call_once(flag, foo, 42, 'r');
-	```
+== Expressions rationnelles (regex)
 
-	\begin{block}{Cas d'utilisation}
-		\begin{itemize}
-			\item Appelle par un unique thread d'une fonction d'initialisation
-		\end{itemize}
-	\end{block}
+- ```cpp std::regex_search()``` recherche
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cmutex%3E%0A%0Avoid+foo(int+a,+char+b)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+%22-%22+%3C%3C+b+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::once_flag+flag%3B%0A++std::once_flag+other%3B%0A%0A++std::call_once(flag,+foo,+42,+!'r!')%3B%0A++std::call_once(flag,+foo,+43,+!'s!')%3B%0A++std::call_once(other,+foo,+44,+!'t!')%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+```cpp
+regex r("[0-9]+");
+regex_search(string("123"), r);         // true
+regex_search(string("abcd123efg"), r);  // true
+regex_search(string("abcdefg"), r);     // false
+```
 
+ ```cpp std::regex_match()``` vérifie la correspondance
 
+```cpp
+regex r("[0-9]+");
+regex_match(string("123"), r);          // true
+regex_match(string("abcd123efg"), r);   // false
+regex_match(string("abcdefg"), r);      // false
+```
 
-== Variables conditionnelles -- Principe}
-	\begin{itemize}
-		\item Mise en attente du thread sur la variable conditionnelle
-		\item Réveil du thread lors de la notification de la variable
-		\item Protection par verrou
-		\begin{itemize}
-			\item Prise du verrou avant l'appel à la fonction d'attente
-			\item Relâchement du verrou par la fonction
-			\item Reprise du verrou lors de la notification avant le déblocage du thread
-		\end{itemize}
-	\end{itemize}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_match(std::string(%22123%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_match(std::string(%22abcd123efg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_match(std::string(%22abcdefg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_search(std::string(%22123%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_search(std::string(%22abcd123efg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_search(std::string(%22abcdefg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Expressions rationnelles (regex)
 
-== Variables conditionnelles -- \mintinline[style=white]{cpp}```std::condition_variable```}
-	\begin{itemize}
-		\item Uniquement avec ```cpp std::unique_lock```
-		\item ```cpp wait()``` met en attente le thread
-	\end{itemize}
+- Capture de sous-expressions dans ```cpp std::match_results```
+- Instanciations standards ```cpp std::cmatch```, ```cpp std::wcmatch```, ```cpp std::smatch``` et ```cpp std::wsmatch```
+- ```cpp empty()``` teste la vacuité de la capture
+- ```cpp size()``` retourne le nombre de captures
+- Itérateurs sur les captures
+- Sur chaque élément capturé
+  - ```cpp str()``` : la chaîne capturée
+  - ```cpp length()``` : sa longueur
+  - ```cpp position()``` : sa position dans la chaîne de recherche
+  - ```cpp suffix()``` : la séquence de caractères suivant la capture
+  - ```cpp prefix()``` : la séquence de caractères précédant la capture
 
-	```cpp
-		mutex mtx;
-		condition_variable cv;
+== Expressions rationnelles (regex)
 
-		unique_lock<std::mutex> lck(mtx);
-		cv.wait(lck);
-	```
+```cpp
+string s("abcd123efg");
+regex r("[0-9]+");
+smatch m;
 
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Possibilité de fournir un prédicat
-			\begin{itemize}
-				\item Blocage seulement s'il retourne ```cpp false```
-				\item Déblocage seulement s'il retourne ```cpp true```
-			\end{itemize}
-		\end{itemize}
-	\end{block}
+regex_search(s, m, r);
+m.size();       // 1
+m.str(0);       // 123
+m.position(0);  // 4
+m.prefix();     // abcd
+m.suffix();     // efg
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::string+s(%22abcd123efg%22)%3B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::smatch+m%3B%0A%0A++std::regex_search(s,+m,+r)%3B%0A++std::cout+%3C%3C+m.size()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.str(0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.position(0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.prefix()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.suffix()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Expressions rationnelles (regex)
 
-== Variables conditionnelles -- \mintinline[style=white]{cpp}```std::condition_variable```}
-	\begin{itemize}
-		\item ```cpp wait_for()``` met en attente le thread, au maximum la durée donnée
-		\item ```cpp wait_until()``` met en attente le thread, au maximum jusqu'au temps donné
-	\end{itemize}
+- Fonction de remplacement : ```cpp std::regex_replace()```
 
-	\begin{block}{Note}
-		\begin{itemize}
-			\item ```cpp wait_for()``` et ```cpp wait_until()``` indique si l'exécution a repris suite à un timeout
-		\end{itemize}
-	\end{block}
+```cpp
+string s("abcd123efg");
+regex r("[0-9]+");
+regex_replace(s, r, "-"); // abcd-efg
+```
 
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::string+s(%22abcd123efg%22)%3B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::cout+%3C%3C+std::regex_replace(s,+r,+%22-%22)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
+== Expressions rationnelles (regex)
 
-== Variables conditionnelles -- \mintinline[style=white]{cpp}```std::condition_variable```}
-	\begin{itemize}
-		\item ```cpp notify_one()``` notifie un des threads en attente sur la variable conditionnelle
-	\end{itemize}
+#adviceblock("Do", text[
+  - Préférez les expressions rationnelles aux analyseurs "à la main"
+])
 
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Impossible de choisir quel thread notifié avec ```cpp notify_one()```
-	\end{itemize}
-	\end{alertblock}
+#alertblock("Don't", text[
+  - N'utilisez pas les expressions rationnelles pour les traitements triviaux
+  - Préférez les algorithmes
+])
 
-	\begin{itemize}
-		\item ```cpp notify_all()``` notifie tous les threads en attente
-		\item ```cpp std::condition_variable_any``` similaire à ```cpp std::condition_variable```
-		\item \ldots{} sans être limité à ```cpp std::unique_lock```
-		\item ```cpp std::notify_all_at_thread_exit()```
-		\begin{itemize}
-			\item Indique de notifier tous les threads à la fin du thread courant
-			\item Prend un verrou qui sera libéré à la fin du thread
-		\end{itemize}
-	\end{itemize}
+#noteblock("Conseil", text[
+  - Encapsulez les expressions rationnelles ayant une sémantique claire et utilisées plusieurs fois dans une fonction dédiée au nom évocateur
+])
 
+#noteblock("Performance", text[
+  - Construction très coûteuse de l'expression rationnelle
+])
 
+== Nombres aléatoires
 
-== Variables conditionnelles -- \mintinline[style=white]{cpp}```std::condition_variable```}
-	```cpp
-		mutex mtx;
-		condition_variable cv;
+- Générateurs pseudo-aléatoires initialisés par une graine (congruence linéaire, Mersenne, ...)
+- Générateur aléatoire
 
-		void print_id(int id) {
-		  unique_lock<mutex> lck(mtx);
-		  cv.wait(lck);
-		  cout << "thread " << id << '\n';
-		}
+#alertblock("Attention", text[
+  - Peut ne pas être présent sur certaines implémentations
+  - Peut être un générateur pseudo-aléatoire (entropie nulle) sur d'autres
+])
 
-		thread threads[10];
-		for(int i = 0; i<10; ++i)
-		  threads[i] = thread(print_id, i);
-		this_thread::sleep_for(chrono::seconds(5));
-		cv.notify_all();
-		for(auto& th : threads) th.join();
-	```
+- Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, ...)
+- Fonction de normalisation ramenant la séquence générée dans [0,1)
 
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%23include+%3Ccondition_variable%3E%0A%0Astd::mutex+mtx%3B%0Astd::condition_variable+cv%3B%0A%0Avoid+print_id(int+id)%0A%7B%0A++std::unique_lock%3Cstd::mutex%3E+lck(mtx)%3B%0A++cv.wait(lck)%3B%0A++std::cout+%3C%3C+%22thread+%22+%3C%3C+id+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::thread+threads%5B10%5D%3B%0A%0A++for(int+i+%3D+0%3B+i%3C10%3B+%2B%2Bi)%0A++%7B%0A++++threads%5Bi%5D+%3D+std::thread(print_id,+i)%3B%0A++%7D%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++cv.notify_all()%3B%0A%0A++for(auto%26+th+:+threads)%0A++%7B%0A++++th.join()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
+#addproposal("n1836")
 
+== Nombres aléatoires
+```cpp
+	default_random_engine gen;
+	uniform_int_distribution<int> distribution(0,9);
+	gen.seed(system_clock::now().time_since_epoch().count());
 
+	// Nombre aleatoire entre 0 et 9
+	distribution(gen);
+```
 
-== Futures et promise -- Principe}
-	\begin{itemize}
-		\item ```cpp std::promise``` contient une valeur
-		\begin{itemize}
-			\item Disponible ultérieurement
-			\item Récupérable, éventuellement dans un autre thread, via ```cpp std::future```
-		\end{itemize}
-		\item ```cpp std::future``` permet la récupération d'une valeur disponible ultérieurement
-		\begin{itemize}
-			\item Depuis un ```cpp std::promise```
-			\item Depuis un appel asynchrone ou différé de fonction
-		\end{itemize}
-		\item Mécanismes asynchrones
-		\item ```cpp std::future``` définissent des points de synchronisation
-	\end{itemize}
+#adviceblock("Do", text[
+  - Préférez ces générateurs et distributions à ```cpp rand()```
+])
 
-	\begin{block}{Note}
-		\begin{itemize}
-			\item ```cpp std::promise``` et ```cpp std::future``` peuvent également manipuler des exceptions
-		\end{itemize}
-	\end{block}
+#noteblock("Quiz", text[
+Comment générer un tirage équiprobable entre 6 et 42 avec ```cpp rand()```
+])
 
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::future```}
-	\begin{itemize}
-		\item Utilisable uniquement s'il est valide (associé à un état partagé)
-		\item Construit valide que par certaines fonctions fournisseuses
-		\item Déplaçable mais non copiable
-		\item Prêt lorsque la valeur, ou une exception, est disponible
-		\item ```cpp valid()``` teste s'il est valide
-		\item ```cpp wait()``` attend qu'il soit prêt
-		\item ```cpp wait_for()``` attend qu'il soit prêt, au plus la durée donnée
-		\item ```cpp wait_until()``` attend qu'il soit prêt, au plus jusqu'au temps donné
-		\item ```cpp get()``` attend qu'il soit prêt, retourne la valeur (ou lève l'exception) et libère l'état partagé
-	\end{itemize}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::future```}
-	\begin{itemize}
-		\item ```cpp share()``` construit un ```cpp std::shared_future``` depuis le ```cpp std::future```
-	\end{itemize}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Après un appel à ```cpp share()```, le ```cpp std::future``` n'est plus valide
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{itemize}
-		\item ```cpp std::shared_future``` similaires à ```cpp std::future```
-		\begin{itemize}
-			\item Mais copiables
-			\item Responsabilité partagée sur l'état partagé
-			\item Valeur lisible à plusieurs reprises
-		\end{itemize}
-	\end{itemize}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::async()```}
-	\begin{itemize}
-		\item Appelle la fonction fournie
-		\item Et retourne, sans attendre la fin de l'exécution, un ```cpp std::future```
-		\item ```cpp std::future``` permettant de récupérer la valeur de retour de la fonction
-	\end{itemize}
-
-	\begin{block}{Note}
-		\begin{itemize}
-			\item Deux politiques d'exécution de la fonction appelée
-			\begin{itemize}
-				\item Exécution asynchrone
-				\item Exécution différée à l'appel de ```cpp wait()``` ou ```cpp get()```
-			\end{itemize}
-			\item Par défaut le choix est laissé à l'implémentation
-		\end{itemize}
-	\end{block}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::async()```}
-	```cpp
-		int foo() {
-		  this_thread::sleep_for(chrono::seconds(5));
-		  return 10;
-		}
-
-		future<int> bar = async(launch::async, foo);
-		...
-		cout << bar.get() << "\n";
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Aint+foo()%0A%7B%0A++std::cout+%3C%3C+%22Begin+foo%5Cn%22%3B%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++std::cout+%3C%3C+%22End+foo%5Cn%22%3B%0A++return+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::future%3Cint%3E+bar+%3D+async(std::launch::async,+foo)%3B%0A++std::cout+%3C%3C+%22Attente%5Cn%22%3B%0A++std::this_thread::sleep_for(std::chrono::seconds(1))%3B%0A++std::cout+%3C%3C+%22Attente%5Cn%22%3B%0A++std::cout+%3C%3C+bar.get()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::promise```}
-	\begin{itemize}
-		\item Objet que l'on promet de valoriser ultérieurement
-		\item Déplaçable mais non copiable
-		\item Partage un état avec le ```cpp std::future``` associé
-		\item ```cpp get_future()``` retourne le ```cpp std::future``` associé
-	\end{itemize}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Un seul ```cpp std::future``` par ```cpp std::promise``` peut être récupéré
-		\end{itemize}
-	\end{alertblock}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::promise```}
-	\begin{itemize}
-		\item ```cpp set_value()``` affecte une valeur et passe l'état partagé à prêt
-		\item ```cpp set_exception()``` affecte une exception et passe l'état partagé à prêt
-		\item ```cpp set_value_at_thread_exit()``` affecte une valeur, l'état partagé passera à prêt à la fin du thread
-		\item ```cpp set_exception_at_thread_exit()``` affecte une exception, l'état partagé passera à prêt à la fin du thread
-	\end{itemize}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::promise```}
-	```cpp
-		void foo(future<int>& fut) {
-		  int x = fut.get();
-		  cout << x << '\n';
-		}
-
-		promise<int> prom;
-		future<int> fut = prom.get_future();
-		thread th1(foo, ref(fut));
-		...
-		prom.set_value(10);
-		th1.join();
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Avoid+foo(std::future%3Cint%3E%26+fut)%0A%7B%0A++int+x+%3D+fut.get()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::promise%3Cint%3E+prom%3B%0A++std::future%3Cint%3E+fut+%3D+prom.get_future()%3B%0A++std::thread+th1(foo,+ref(fut))%3B%0A%0A++std::this_thread::sleep_for(std::chrono::seconds(2))%3B%0A%0A++prom.set_value(10)%3B%0A++th1.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::packaged_task```}
-	\begin{itemize}
-		\item Encapsulation d'un appelable similaire à ```cpp std::function```
-		\item \ldots{} dont la valeur de retour est récupérable par un ```cpp std::future```
-		\item Partage un état avec le ```cpp std::future``` associé
-		\item ```cpp valid()``` teste s'il est associé à un état partagé (contient un appelable)
-		\item ```cpp get_future()``` retourne le ```cpp std::future``` associé
-	\end{itemize}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Un seul ```cpp std::future``` par ```cpp std::packaged_task``` peut être récupéré
-		\end{itemize}
-	\end{alertblock}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::packaged_task```}
-	\begin{itemize}
-		\item ```cpp operator()``` appelle l'appelable, affecte sa valeur de retour (ou l'exception levée) au ```cpp std::future``` et passe l'état partagé à prêt
-		\item ```cpp reset()``` réinitialise l'état partagé en conservant l'appelable
-	\end{itemize}
-
-	\begin{block}{note}
-		\begin{itemize}
-			\item ```cpp reset()``` permet d'appeler une nouvelle fois l'appelable
-		\end{itemize}
-	\end{block}
-
-	\begin{itemize}
-		\item ```cpp make_ready_at_thread_exit()``` appelle l'appelable et affecte sa valeur de retour (ou l'exception levée), l'état partagé passera à prêt à la fin
-	\end{itemize}
-
-
-
-== Futures et promise -- \mintinline[style=white]{cpp}```std::packaged_task```}
-	```cpp
-		void foo(future<int>& fut) {
-		  int x = fut.get();
-		  cout << x << '\n';
-		}
-
-		int bar() { return 10; }
-
-		packaged_task<int()> tsk(bar);
-		future<int> fut = tsk.get_future();
-		thread th1(foo, std::ref(fut));
-		...
-		tsk();
-		th1.join();
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:8,endLineNumber:21,positionColumn:8,positionLineNumber:21,selectionStartColumn:8,selectionStartLineNumber:21,startColumn:8,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Avoid+foo(std::future%3Cint%3E%26+fut)%0A%7B%0A++int+x+%3D+fut.get()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+bar()%0A%7B%0A++return+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::packaged_task%3Cint()%3E+tsk(bar)%3B%0A++std::future%3Cint%3E+fut+%3D+tsk.get_future()%3B%0A++std::thread+th1(foo,+std::ref(fut))%3B%0A%0A++std::this_thread::sleep_for(std::chrono::seconds(2))%3B%0A%0A++tsk()%3B%0A++th1.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-
-
-== Conclusion}
-	\begin{exampleblock}{Do, dans cet ordre}
-		\begin{itemize}
-			\item Évitez de partager variables et ressources
-			\item Préférez les partages en lecture seule
-			\item Préférez les structures de données gérant les accès concurrents
-
-\note[item]{```cpp std::atomic```, conteneur \textit{lock-free}, conteneur \textit{thread-safe}, etc.}
-
-			\item Protégez l'accès par mutex ou autres barrières
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Encapsulez les mutex dans des ```cpp std::lock_guard``` ou ```cpp std::unique_lock```
-		\end{itemize}
-	\end{exampleblock}
-
-
-
-== Conclusion}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Analysez vos cas d'utilisation pour choisir le bon outil
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Très faibles garanties de \textit{thread-safety} de la part des conteneurs standards
-		\end{itemize}
-
-\note[item]{En gros plusieurs threads peuvent lire un même conteneur et plusieurs threads peuvent lire ou écrire simultanément des conteneurs différents sans problème et c'est à peu prés tout}
-	\end{alertblock}
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item ```cpp Boost.Lockfree``` pour des structures de données \textit{thread-safe} et \textit{lock-free}
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{block}{Pour aller plus loin}
-		\begin{itemize}
-			\item Voir \textit{C++ Concurrency in action} d'Anthony Williams
-		\end{itemize}
-
-\note[item]{Anthony Williams est coauteur des propositions de \textit{multi-threading} dans C++11 et co-auteur de ```cpp Boost.Thread```}
-	\end{block}
-
-
-== Expressions rationnelles (regex)}
-	\begin{itemize}
-		\item ```cpp std::basic_regex``` représente une expression rationnelle
-		\item Instanciations standards ```cpp std::regex``` et ```cpp std::wregex```
-		\item Construite depuis une chaîne représentant l'expression
-		\item \ldots{} et des drapeaux de configuration
-		\begin{itemize}
-			\item Grammaire : \underline{ECMAScript}, basic POSIX, extended POSIX, awk, grep, egrep
-			\item Case sensitive ou non
-			\item Prise en compte de la locale
-			\item \ldots{}
-		\end{itemize}
-	\end{itemize}
-
-	```cpp
-		regex foo("[0-9A-Z]+", icase);
-	```
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-	\addproposal{N1429}{https://wg21.link/N1429}
-
-
-
-== Expressions rationnelles (regex)}
-	\begin{itemize}
-		\item```cpp std::regex_search()``` recherche
-	\end{itemize}
-
-	```cpp
-		regex r("[0-9]+");
-		regex_search(string("123"), r);         // true
-		regex_search(string("abcd123efg"), r);  // true
-		regex_search(string("abcdefg"), r);     // false
-	```
-
-	\begin{itemize}
-		\item ```cpp std::regex_match()``` vérifie la correspondance
-	\end{itemize}
-
-	```cpp
-		regex r("[0-9]+");
-		regex_match(string("123"), r);          // true
-		regex_match(string("abcd123efg"), r);   // false
-		regex_match(string("abcdefg"), r);      // false
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_match(std::string(%22123%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_match(std::string(%22abcd123efg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_match(std::string(%22abcdefg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_search(std::string(%22123%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_search(std::string(%22abcd123efg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::regex_search(std::string(%22abcdefg%22),+r)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-	\addproposal{N1429}{https://wg21.link/N1429}
-
-
-
-== Expressions rationnelles (regex)}
-	\begin{itemize}
-		\item Capture de sous-expressions dans ```cpp std::match_results```
-		\item Instanciations standards ```cpp std::cmatch```, ```cpp std::wcmatch```, ```cpp std::smatch``` et ```cpp std::wsmatch```
-		\item ```cpp empty()``` teste la vacuité de la capture
-		\item ```cpp size()``` retourne le nombre de captures
-		\item Itérateurs sur les captures
-		\item Sur chaque élément capturé
-		\begin{itemize}
-			\item ```cpp str()``` : la chaîne capturée
-			\item ```cpp length()``` : sa longueur
-			\item ```cpp position()``` : sa position dans la chaîne de recherche
-			\item ```cpp suffix()``` : la séquence de caractères suivant la capture
-			\item ```cpp prefix()``` : la séquence de caractères précédant la capture
-		\end{itemize}
-	\end{itemize}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-	\addproposal{N1429}{https://wg21.link/N1429}
-
-
-
-== Expressions rationnelles (regex)}
-	```cpp
-		string s("abcd123efg");
-		regex r("[0-9]+");
-		smatch m;
-
-		regex_search(s, m, r);
-		m.size();       // 1
-		m.str(0);       // 123
-		m.position(0);  // 4
-		m.prefix();     // abcd
-		m.suffix();     // efg
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::string+s(%22abcd123efg%22)%3B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::smatch+m%3B%0A%0A++std::regex_search(s,+m,+r)%3B%0A++std::cout+%3C%3C+m.size()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.str(0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.position(0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.prefix()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.suffix()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-	\addproposal{N1429}{https://wg21.link/N1429}
-
-
-
-== Expressions rationnelles (regex)}
-	\begin{itemize}
-		\item Fonction de remplacement : ```cpp std::regex_replace()```
-	\end{itemize}
-
-	```cpp
-		string s("abcd123efg");
-		regex r("[0-9]+");
-		regex_replace(s, r, "-"); // abcd-efg
-	```
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::string+s(%22abcd123efg%22)%3B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::cout+%3C%3C+std::regex_replace(s,+r,+%22-%22)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-	\addproposal{N1429}{https://wg21.link/N1429}
-
-
-
-== Expressions rationnelles (regex)}
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez les expressions rationnelles aux analyseurs \og à la main\fg{}
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{alertblock}{Don't}
-		\begin{itemize}
-			\item N'utilisez pas les expressions rationnelles pour les traitements triviaux
-			\item Préférez les algorithmes
-		\end{itemize}
- 	\end{alertblock}
-
-	\begin{block}{Conseil}
-		\begin{itemize}
-			\item Encapsulez les expressions rationnelles ayant une sémantique claire et utilisées plusieurs fois dans une fonction dédiée au nom évocateur
-		\end{itemize}
-	\end{block}
-
-	\begin{block}{Performance}
-		\begin{itemize}
-			\item Construction très coûteuse de l'expression rationnelle
-		\end{itemize}
-	\end{block}
-
-
-== Nombres aléatoires}
-	\begin{itemize}
-		\item Générateurs pseudo-aléatoires initialisés par une graine (congruence linéaire, Mersenne, \ldots{})
-		\item Générateur aléatoire
-	\end{itemize}
-
-	\begin{alertblock}{Attention}
-		\begin{itemize}
-			\item Peut ne pas être présent sur certaines implémentations
-			\item Peut être un générateur pseudo-aléatoire (entropie nulle) sur d'autres
-		\end{itemize}
-	\end{alertblock}
-
-	\begin{itemize}
-		\item Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, \ldots{})
-		\item Fonction de normalisation ramenant la séquence générée dans [0,1)
-	\end{itemize}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-
-
-
-== Nombres aléatoires}
-	```cpp
-		default_random_engine gen;
-		uniform_int_distribution<int> distribution(0,9);
-		gen.seed(system_clock::now().time_since_epoch().count());
-
-		// Nombre aleatoire entre 0 et 9
-		distribution(gen);
-	```
-
-	\begin{exampleblock}{Do}
-		\begin{itemize}
-			\item Préférez ces générateurs et distributions à ```cpp rand()```
-		\end{itemize}
-	\end{exampleblock}
-
-	\begin{block}{Quiz}
-		Comment générer un tirage équiprobable entre 6 et 42 avec ```cpp rand()```
-	\end{block}
-
-	\begin{codesample}
-		\sample{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::default_random_engine+generator%3B%0A++std::uniform_int_distribution%3Cint%3E+distribution(0,9)%3B%0A%0A++generator.seed(std::chrono::system_clock::now().time_since_epoch().count())%3B%0A++std::cout+%3C%3C+distribution(generator)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}
-	\end{codesample}
-
-	\addproposal{n1836}{https://wg21.link/n1836}
-
-\end{document}
+#codesample("https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::default_random_engine+generator%3B%0A++std::uniform_int_distribution%3Cint%3E+distribution(0,9)%3B%0A%0A++generator.seed(std::chrono::system_clock::now().time_since_epoch().count())%3B%0A++std::cout+%3C%3C+distribution(generator)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4")
 
 = C++14
 
