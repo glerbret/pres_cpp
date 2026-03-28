@@ -57,12 +57,13 @@
 - Actualité de normalisation, et du C++ en général : #link("https://isocpp.org/")[isocpp.org #linklogo()]
 
 #alertblock("isocpp.org n'est pas le site du comité", text[
-  - Site de _Standard C++ Foundation_ dont le but est la promotion du C++
-  - Les deux sont cependant très proches et partagent de nombreux membres
+  Site de _Standard C++ Foundation_ dont le but est la promotion du C++
+
+  Les deux sont cependant très proches et partagent de nombreux membres
 ])
 
 - ... ainsi que les #link("https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines")[C++ Core Guidelines #linklogo()]
-- #link("https://github.com/cplusplus")[Dépôt GIT #linklogo()] (brouillons et propositions)}
+- #link("https://github.com/cplusplus")[Dépôt GIT #linklogo()] (brouillons et propositions)
 - Conférence annuelle #link("http://cppcon.org/")[cppcon #linklogo()]
 
 == Norme et support
@@ -77,8 +78,9 @@
 - Vision globale -- #link("http://en.cppreference.com/w/cpp/compiler_support")[C++ compiler support #linklogo()]
 
 #noteblock("Sites de référence C++", text[
-  - #link("https://en.cppreference.com/w/")[cppreference.com #linklogo()]
-  - #link("https://hackingcpp.com/")[hacking C++ #linklogo()]
+  #link("https://en.cppreference.com/w/")[cppreference.com #linklogo()]
+
+  #link("https://hackingcpp.com/")[hacking C++ #linklogo()]
 ])
 
 == Erreurs -- Code retour
@@ -92,9 +94,11 @@
 - Adapté au traitement local des erreurs, pas au traitement "plus haut"
 
 #alertblock("Problèmes et limites", text[
-  - Impact négatif sur la lisibilité
-  - Souvent délaissée dans un contexte d'enseignement ou de formation
-  - Beaucoup de code avec une gestion d'erreur déficiente
+  Impact négatif sur la lisibilité
+
+  Souvent délaissée dans un contexte d'enseignement ou de formation
+
+  Beaucoup de code avec une gestion d'erreur déficiente
 ])
 
 == Erreurs -- Exceptions
@@ -133,9 +137,11 @@ catch(logic_error& e) {
   - Impact négatif sur les performances
 
 #noteblock("À nuancer", text[
-  - Initialement vrai
-  - Actuellement, une exception non levée ne coûte quasiment rien
-  - Souvent comparée à une non gestion d'erreur, est-ce pertinent ?
+  Initialement vrai
+
+  Actuellement, une exception non levée ne coûte quasiment rien
+
+  Souvent comparée à une non gestion d'erreur, est-ce pertinent ?
 ])
 
 == Erreurs -- Critiques des exceptions
@@ -145,8 +151,9 @@ catch(logic_error& e) {
 ])
 
 #noteblock("À nuancer", text[
-  - Correctement supportées par les compilateurs actuels
-  - Inégalement gérées par les outils d'analyse, de documentation, ...
+  Correctement supportées par les compilateurs actuels
+
+  Inégalement gérées par les outils d'analyse, de documentation, ...
 ])
 
 #list(
@@ -170,7 +177,7 @@ catch(logic_error& e) {
 - _No-throw guarantee_ : l'opération ne peut pas échouer
 
 #adviceblock("Do", text[
-  - Destructeurs et ```cpp swap()``` ne doivent pas lever d'exception
+  Destructeurs et ```cpp swap()``` ne doivent pas lever d'exception
 ])
 
 - _Strong exception safety_ : pas d'effet de bord, pas de fuite, état conservé
@@ -180,18 +187,21 @@ catch(logic_error& e) {
 == Erreurs -- Exception safety
 
 #adviceblock("Do", text[
-  - Privilégiez les garanties les plus fortes possibles
+  Privilégiez les garanties les plus fortes possibles
 ])
 
 #alertblock("Don't", text[
-  - Évitez la garantie faible
-  - Évitez absolument le _No exception safety_
+  Évitez la garantie faible
+])
+
+#alertblock("Don't", text[
+  Évitez absolument le _No exception safety_
 ])
 
 == Erreurs -- Exception safety
 
 #adviceblock("Do", text[
-  - Utilisez l'idiome _copy-and-swap_ pour la _Strong exception safety_
+  Utilisez l'idiome _copy-and-swap_ pour la _Strong exception safety_
 ])
 
 ```cpp
@@ -210,27 +220,32 @@ A& A::operator=(A other) {           // Copy
 == Erreurs -- Exceptions et bonnes pratiques
 
 #adviceblock("Do", text[
-  - _Throw by value, catch by const reference_ (voir _C++ Coding Standards_, 73)
+  _Throw by value, catch by const reference_ (voir _C++ Coding Standards_, 73)
 ])
 
 #adviceblock("Do", text[
-  - Utilisez des types dédiés héritant de ```cpp std::exception```
-  - Définissez des hiérarchies d'exceptions
+  Utilisez des types dédiés héritant de ```cpp std::exception```
 ])
 
 #adviceblock("Do", text[
-  - Capturez uniquement là où vous savez traiter l'erreur
+  Définissez des hiérarchies d'exceptions
+])
+
+#adviceblock("Do", text[
+  Capturez uniquement là où vous savez traiter l'erreur
 ])
 
 == Erreurs -- Exceptions et bonnes pratiques
 
 #alertblock("Don't", text[
-  - N'utilisez jamais les exceptions pour contrôler le flux d'exécution
-  - Ni pour gérer les "échecs attendus"
-  - Réservez les exceptions au signalement d'erreurs
+  N'utilisez jamais les exceptions pour contrôler le flux d'exécution
+
+  Ni pour gérer les "échecs attendus"
 ])
 
-\ // Pour corriger une souci de mise en page avec le footer
+#alertblock("Don't", text[
+  Réservez les exceptions au signalement d'erreurs
+])
 
 == Erreurs -- ```cpp assert```
 
@@ -246,29 +261,31 @@ assert(expression);
   - Inutilisable pour les erreurs d'exécution et le contrôle des entrées
 
 #noteblock("Objectifs", text[
-  - Traquer les erreurs de programmation et les violations de contrat interne
+  Traquer les erreurs de programmation et les violations de contrat interne
 ])
 
 == Erreurs -- Conclusion
 
 #adviceblock("Do", text[
-  - Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
-  - Réservez ```cpp assert``` aux erreurs de programmation et à la vérification des contrats internes
+  Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
 ])
 
 #adviceblock("Do", text[
-  - Préférez les exceptions aux codes retour (voir _C++ Coding Standards_, 72)
+  Réservez ```cpp assert``` aux erreurs de programmation et à la vérification des contrats internes
 ])
 
+#adviceblock("Do", text[
+  Préférez les exceptions aux codes retour (voir _C++ Coding Standards_, 72)
+])
 
 #alertblock("Don't", text[
-  - Jamais d'```cpp assert``` pour les erreurs d'exécution et le contrôle des entrées
+  Jamais d'```cpp assert``` pour les erreurs d'exécution et le contrôle des entrées
 ])
 
 == Ressources -- Gestion manuelle
 
 #alertblock(none, text[
-  - Comment gérer les erreurs ?
+  Comment gérer les erreurs ?
 ])
 
 - Solution C : _Single Entry Single Exit_, bloc unique de libération
@@ -305,7 +322,7 @@ delete[] memory2;
 == Ressources -- Gestion manuelle
 
 #alertblock(none, text[
-  - Comment copier des classes possédant des ressources ?
+  Comment copier des classes possédant des ressources ?
 ])
 
 - Constructeurs et opérateurs générés copient les adresses des pointeurs
@@ -325,18 +342,17 @@ private:
 == Ressources -- Bonnes pratiques
 
 #adviceblock("Do", text[
-  - Si une classe manipule une ressource brute, elle doit
-    - Soit définir constructeur de copie et opérateur d'affectation
-    - Soit les déclarer privés sans les définir (classe non copiable)
+  Si une classe manipule une ressource brute, elle doit
+  - Soit définir constructeur de copie et opérateur d'affectation
+  - Soit les déclarer privés sans les définir (classe non copiable)
 ])
 
 #adviceblock(text[_Big Rule of three_], text[
-  - Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
+  Si vous devez définir le constructeur de copie, l'opérateur d'affectation ou le destructeur, alors vous devriez définir les trois
 ])
 
 // Forme canonique orthodoxe de Coplien
 // Thèse de Coplien : Multi-paradigm Design
-
 
 == Ressources -- RAII
 
@@ -361,56 +377,61 @@ private:
   - Capsules RAII copiables sans effort
 
 #adviceblock("Do", text[
-  - Utilisez RAII pour vos objets
+  Utilisez RAII pour vos objets
 ])
 
 == Ressources -- RAII
 
 #adviceblock("Do", text[
-  - Faites des constructeurs qui construisent des objets
-    - Cohérents
-    - Utilisables
-    - Complètement initialisés
+  Faites des constructeurs qui construisent des objets
+  - Cohérents
+  - Utilisables
+  - Complètement initialisés
 ])
 
 #alertblock("Don't", text[
-  - Évitez les couples constructeur vide et fonction d'initialisation
-  - Évitez les couples constructeur vide et ensemble de mutateurs
+  Évitez les couples constructeur vide et fonction d'initialisation
+])
+
+#alertblock("Don't", text[
+  Évitez les couples constructeur vide et ensemble de mutateurs
 ])
 
 == Ressources -- Limites du RAII
 
 #alertblock("Gestion des erreurs", text[
-  - Pas d'erreur ni d'exception dans les destructeurs
-  - La libération peut échouer (p.ex. ```cpp flush()``` lors de la fermeture de fichier)
+  Pas d'erreur ni d'exception dans les destructeurs
+
+  La libération peut échouer (p.ex. ```cpp flush()``` lors de la fermeture de fichier)
+
+  ```cpp
+  {
+    ifstream src("input.txt");
+    ofstream dst("output.txt");
+    copy_files(src, dst);
+  }
+
+  remove_file(src);  // Potentielle perte de donnees
+  ```
+
+  //Problème résolu en forçant l'écriture (flush) en fin de la fonction copy_files() et en remontant une exception en cas d'erreur
 ])
-
-```cpp
-{
-  ifstream src("input.txt");
-  ofstream dst("output.txt");
-  copy_files(src, dst);
-}
-
-remove_file(src);  // Potentielle perte de donnees
-```
-
-//Problème résolu en forçant l'écriture (flush) en fin de la fonction copy_files() et en remontant une exception en cas d'erreur
 
 == Ressources -- Limites du RAII
 
 #alertblock(```cpp std::auto_ptr```, text[
-  - Copiable
-  - La copie transfère la responsabilité de la ressource
+  Copiable
+
+  La copie transfère la responsabilité de la ressource
+
+  ```cpp
+  void foo(auto_ptr<int> bar) {}
+
+  auto_ptr<int> bar(new int(5));
+  foo(bar);
+  cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
+  ```
 ])
-
-```cpp
-void foo(auto_ptr<int> bar) {}
-
-auto_ptr<int> bar(new int(5));
-foo(bar);
-cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
-```
 
 == Ressources -- Loi de Déméter
 
@@ -422,64 +443,72 @@ cout << *bar << "\n";  // Erreur : bar n'est plus utilisable
 - En particulier, une classe n'expose pas ses données
 
 #noteblock("Exceptions", text[
-  - Agrégats et conteneurs dont le rôle est de contenir des données
-])
+  Agrégats et conteneurs dont le rôle est de contenir des données
 
-// Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'aggregate du standard}
-// Certains utilisent aussi le terme d'agglomérat, ce qui évite la confusion
+  // Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'aggregate du standard}
+  // Certains utilisent aussi le terme d'agglomérat, ce qui évite la confusion
+])
 
 #noteblock("Objectifs", text[
-  - Mise en place du RAII
-  - Meilleure encapsulation
-  - Respect des _patterns_ SOLID et GRASP
-  - Meilleure lisibilité, maintenabilité et ré-utilisabilité
-])
+  Mise en place du RAII
 
-// Notamment le principe ouvert-fermé, l'inversion de dépendance et le couplage faible
-// GRASP : General Responsibility Assignment Software Patterns (ou Principles)
-// SOLID : SRP, OCP, LSP, ISP, DIP
-// SRP : principe de responsabilité unique
-// OCP : principe ouvert/fermé
-// LSP : Principe de substitution de Liskov
-// ISP : Principe de ségrégation des interfaces
-// DIP : Principe d'inversion des dépendances
+  Meilleure encapsulation
+
+  Respect des _patterns_ SOLID et GRASP
+
+  Meilleure lisibilité, maintenabilité et ré-utilisabilité
+  // Notamment le principe ouvert-fermé, l'inversion de dépendance et le couplage faible
+  // GRASP : General Responsibility Assignment Software Patterns (ou Principles)
+  // SOLID : SRP, OCP, LSP, ISP, DIP
+  // SRP : principe de responsabilité unique
+  // OCP : principe ouvert/fermé
+  // LSP : Principe de substitution de Liskov
+  // ISP : Principe de ségrégation des interfaces
+  // DIP : Principe d'inversion des dépendances
+])
 
 == Ressources -- Loi de Déméter
 
 #adviceblock("Do, agrégats", text[
-  - Préférez les structures aux classes
-  - Laissez les membres publics
-  - Fournissez, éventuellement, des constructeurs initialisant les données
+  Préférez les structures aux classes
+
+  Laissez les membres publics
+
+  Fournissez, éventuellement, des constructeurs initialisant les données
 ])
 
 #adviceblock("Do, conteneurs", text[
-  - Respectez l'interface et la logique des conteneurs standards
+  Respectez l'interface et la logique des conteneurs standards
 ])
 
 #adviceblock("Do, classes de service", text[
-  - Exposez des services, pas des données
-  - Pas de données publiques
-  - Limitez les accesseurs et les mutateurs
+  Exposez des services, pas des données
+
+  Pas de données publiques
+
+  Limitez les accesseurs et les mutateurs
 ])
 
 == Ressources -- Loi de Déméter
 
 #noteblock("Conseils", text[
-  - N'hésitez pas à étendre l'interface de classe avec des fonctions libres
-  - Pensez à l'amitié pour cette interface étendue
-  - Implémentez-la en terme de fonctions membres (p.ex. ```cpp +``` à partir de ```cpp+=```)
+  N'hésitez pas à étendre l'interface de classe avec des fonctions libres
+
+  Pensez à l'amitié pour cette interface étendue
+
+  Implémentez-la en terme de fonctions membres (p.ex. ```cpp +``` à partir de ```cpp+=```)
+
+  ```cpp
+  class Foo {
+  public:
+    Foo& operator+=(const Foo& other);
+  };
+
+  Foo operator+(Foo lhs, const Foo& rhs) {
+    return lhs += rhs;
+  }
+  ```
 ])
-
-```cpp
-class Foo {
-public:
-  Foo& operator+=(const Foo& other);
-};
-
-Foo operator+(Foo lhs, const Foo& rhs) {
-  return lhs += rhs;
-}
-```
 
 == Ressources -- Et le Garbage Collector ?
 
@@ -493,37 +522,40 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 // Mais ces fonctionnalités évoluées des GC ne sont probablement pas compatibles avec le fonctionnement du C++
 
 #noteblock("Wait and see", text[
-  - Un complément à RAII, pas un concurrent ni un remplaçant
-  - Indisponible à ce jour
+  Un complément à RAII, pas un concurrent ni un remplaçant
+
+  Indisponible à ce jour
 ])
 
 == Ressources -- Conclusion
 
 #adviceblock("Do, RAII", text[
-  - Préférez les classes RAII de la bibliothèque standard aux ressources brutes
-  - Encapsulez les ressources dans des capsules RAII standards
-  - Concevez vos classes en respectant le RAII
+  Préférez les classes RAII de la bibliothèque standard aux ressources brutes
+
+  Encapsulez les ressources dans des capsules RAII standards
+
+  Concevez vos classes en respectant le RAII
 ])
 
 #adviceblock("Do, Déméter", text[
-  - Respectez Déméter
+  Respectez Déméter
 ])
 
 == Ressources -- Conclusion
 
 #alertblock("Don't", text[
-  - Pas de ```cpp delete``` dans le code applicatif
+  Pas de ```cpp delete``` dans le code applicatif
 ])
 
 #alertblock("Attention", text[
-  - Sous Linux, méfiez-vous de l'_Optimistic Memory Allocator_
+  Sous Linux, méfiez-vous de l'_Optimistic Memory Allocator_
 
   // Retourne une adresse lors d'un new ou d'un malloc() sans allocation et avec peu de contrôle
   // Allocation uniquement lors de l'usage de la mémoire
-  // Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du \textit{uptime}, de la priorité ou du propriétaire ?) mais jamais init
+  // Si manque de mémoire à ce moment : une application est tuée (probablement le demandeur ou la plus gourmande, influence du uptime, de la priorité ou du propriétaire ?) mais jamais init
   // Pourquoi OMA : les logiciels demandent plus de mémoire que ce qu'ils utilisent réellement
 
-  - Pensez à paramétrer correctement l'OS
+  Pensez à paramétrer correctement l'OS
 ])
 
 == STL -- Standard Template Library
@@ -533,7 +565,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
   - Algorithmes manipulation les données des conteneurs via les itérateurs
 
 #noteblock("Note", text[
-  - Quelques algorithmes manipulant directement des données (p.ex. ```cpp std::min()```)
+  Quelques algorithmes manipulant directement des données (p.ex. ```cpp std::min()```)
 ])
 
 - Conçue initialement par Alexander Stepanov
@@ -552,23 +584,26 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 == STL -- Standard Template Library
 
 #noteblock("Intérêts", text[
-  - $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
-  - Tout nouvel algorithme est disponible sur tous les conteneurs compatibles
-  - Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
-  - Changement de conteneur à effort réduit
+  $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
+
+  Tout nouvel algorithme est disponible sur tous les conteneurs compatibles
+
+  Tout nouveau conteneur bénéficie de tous les algorithmes compatibles
+
+  Changement de conteneur à effort réduit
 ])
 
 #noteblock("Pour aller plus loin", text[
-  - Voir _Effective STL_ de Scott Meyers
+  Voir _Effective STL_ de Scott Meyers
 ])
 
 == STL -- Standard Template Library
 
 #noteblock("À nuancer", text[
-  - Algorithmes membres sur certains conteneurs
-    - Accès par itérateurs insuffisant (p.ex. ```cpp std::list```)
-    - Habitudes et historiques (p.ex. ```cpp std::string```)
-    - Performances (p.ex. ```cpp map.find()```)
+  Algorithmes membres sur certains conteneurs
+  - Accès par itérateurs insuffisant (p.ex. ```cpp std::list```)
+  - Habitudes et historiques (p.ex. ```cpp std::string```)
+  - Performances (p.ex. ```cpp map.find()```)
 ])
 
 == STL Conteneurs -- Généralités
@@ -577,7 +612,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 - ... qui peuvent être les adresses d'autres objets
 
 #alertblock("Conteneurs de pointeurs", text[
-  - Pas de libération automatique des objets pointés
+  Pas de libération automatique des objets pointés
 ])
 
 - ... accessibles via un itérateur
@@ -593,9 +628,11 @@ Foo operator+(Foo lhs, const Foo& rhs) {
   - Compatible avec l'organisation mémoire des tableaux C
 
 #alertblock(text[``` std::vector<bool>``` n'est pas un vecteur de booléen], text[
-  - Ne remplit pas tous les pré-requis des conteneurs
-  - ```cpp operator[]``` ne retourne pas le booléen mais un _proxy_ vers celui-ci
-  - Voir _Effective STL_ item 18
+  Ne remplit pas tous les pré-requis des conteneurs
+
+  ```cpp operator[]``` ne retourne pas le booléen mais un _proxy_ vers celui-ci
+
+  Voir _Effective STL_ item 18
 ])
 
 == STL Conteneurs -- Conteneurs séquentiels
@@ -620,7 +657,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
   - Manipulation de _bytes_ et non de caractères encodés
 
 #alertblock(text[```cpp std::string``` et UTF-8], text[
-  - ```cpp length()``` et ```cpp size()``` retournent le nombre de _bytes_, pas de caractères
+  ```cpp length()``` et ```cpp size()``` retournent le nombre de _bytes_, pas de caractères
 ])
 
 #list(
@@ -636,7 +673,7 @@ Foo operator+(Foo lhs, const Foo& rhs) {
 )
 
 #alertblock("API trop riche", text[
-  - Voir #link("http://www.gotw.ca/gotw/084.htm")[GotW \#84 : Monoliths "Unstrung" #linklogo()]
+  Voir #link("http://www.gotw.ca/gotw/084.htm")[GotW \#84 : Monoliths "Unstrung" #linklogo()]
 ])
 
 == STL Conteneurs -- Conteneurs associatifs
@@ -648,8 +685,9 @@ Foo operator+(Foo lhs, const Foo& rhs) {
   - ```cpp std::multiset``` -- valeurs ordonnées et non-uniques
 
 #noteblock("Implémentation", text[
-  - Pas des tables de hachage
-  - Généralement des arbres binaires de recherche balancés
+  Pas des tables de hachage
+
+  Généralement des arbres binaires de recherche balancés
   // red-black tree le plus souvent
 ])
 
@@ -696,7 +734,7 @@ while(!foo.empty()) {
   - Pas d'itérateur ni d'interface STL
 
 #noteblock(text[``` std::bitset``` vs. ``` std::vector<bool>```], text[
-  - Objectif de gain mémoire adressé par ```cpp std::bitset```, pourquoi ```cpp std::vector<bool>``` n'est-il pas un vrai conteneur de booléen ?
+  Objectif de gain mémoire adressé par ```cpp std::bitset```, pourquoi ```cpp std::vector<bool>``` n'est-il pas un vrai conteneur de booléen ?
 ])
 
 == STL Conteneurs -- conteneurs non-STL
@@ -722,27 +760,39 @@ while(!foo.empty()) {
 == STL Conteneurs -- Choix du conteneur
 
 #adviceblock("Do, par défaut", text[
-  - ```cpp std::string``` pour les chaînes de caractères
-  - ```cpp std::vector```
+  ```cpp std::string``` pour les chaînes de caractères
+
+  ```cpp std::vector```
 ])
 
 #adviceblock("Do, performances", text[
-  - Mesurez avec des données réelles sur la configuration cible
+  Mesurez avec des données réelles sur la configuration cible
 ])
 
 #alertblock("Flux d'octets", text[
-  - Utilisez ```cpp std::vector<unsigned char>```
-  - Pas ```cpp std::vector<char>``` encore moins ```cpp std::string```
+  Utilisez ```cpp std::vector<unsigned char>```
+
+  Pas ```cpp std::vector<char>``` encore moins ```cpp std::string```
 ])
 
 == STL Conteneurs -- Choix du conteneur
 
 #noteblock("Conseils", text[
-  - Voir _Effective STL_ item 1
-  - Voir #link("https://hackingcpp.com/cpp/design/which_std_sequence_container.png")[Which C++ Standard Sequence Container should I use? #linklogo()]
-  - Pensez à ```cpp reserve()```
-  - Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
-  - Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
+  Voir _Effective STL_ item 1
+
+  Voir #link("https://hackingcpp.com/cpp/design/which_std_sequence_container.png")[Which C++ Standard Sequence Container should I use? #linklogo()]
+])
+
+#noteblock("Conseil", text[
+  Pensez à ```cpp reserve()```
+])
+
+#noteblock("Conseil", text[
+  Une insertion en vrac suivie d'un tri peut être plus efficace qu'une insertion en place
+])
+
+#noteblock("Conseil", text[
+  Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
 ])
 
 == STL Itérateurs -- Généralités
@@ -758,8 +808,9 @@ while(!foo.empty()) {
 - Les itérateurs d'une paire doivent appartenir au même conteneur
 
 #alertblock("Itérateurs de fin", text[
-  - Pointent un élément après le dernier
-  - Ne doivent pas être déréférencés ni incrémentés
+  Pointent un élément après le dernier
+
+  Ne doivent pas être déréférencés ni incrémentés
 ])
 
 // Un élément après la fin permet de représenter des ensemble vide (si begin et end référence le même élément)
@@ -932,7 +983,7 @@ it2 = find(foo.begin(), foo.end(), 19);  // Et it2 sur foo.end()
 - ```cpp std::find_if()``` recherche depuis un prédicat
 
 #noteblock(text[Variantes ```cpp _if```], text[
-  - Les algorithmes suffixés par ```cpp _if``` utilisent un prédicat
+  Les algorithmes suffixés par ```cpp _if``` utilisent un prédicat
 ])
 
 - ```cpp std::find_first_of()``` recherche la première occurrence d'un élément
@@ -968,7 +1019,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 - ```cpp std::equal_range()``` retourne la paire (```cpp std::lower_bound```, ```cpp std::upper_bound```)
 
 #alertblock("Attention", text[
-  - Le résultat retourné peut ne pas être la valeur recherchée
+  Le résultat retourné peut ne pas être la valeur recherchée
 ])
 
 - ```cpp std::binary_search()``` indique si l'élément cherché est présent
@@ -976,7 +1027,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 == STL Algorithmes -- Recherche dichotomique
 
 #alertblock("Attention", text[
-  - Pas de fonction de recherche dichotomique retournant l'élément cherché
+  Pas de fonction de recherche dichotomique retournant l'élément cherché
 ])
 
 ```cpp
@@ -1027,15 +1078,15 @@ equal(foo.begin(), foo.end(), var.begin());  // false
 == STL Algorithmes -- Comparaison
 
 #alertblock("Attention", text[
-  - ```cpp std::equal()``` ne vérifie pas les tailles des deux ensembles
+  ```cpp std::equal()``` ne vérifie pas les tailles des deux ensembles
 ])
 
 #noteblock(text[Et ```operator==``` ?], text[
-  - ```cpp operator==``` sur des conteneurs teste la taille et le contenu
+  ```cpp operator==``` sur des conteneurs teste la taille et le contenu
 ])
 
 #adviceblock("Do", text[
-  - Préférez ```cpp operator==``` à ```cpp std::equal()``` pour comparer un conteneur complet
+  Préférez ```cpp operator==``` à ```cpp std::equal()``` pour comparer un conteneur complet
 ])
 
 == STL Algorithmes -- Comparaison
@@ -1068,7 +1119,7 @@ fill(foo.begin(), foo.end(), 12);  // 12 12 12 12
 - ```cpp std::fill_n()``` idem avec un ensemble défini par sa taille
 
 #noteblock("Constructeur", text[
-  - Remplissage des conteneurs séquentiels à la construction
+  Remplissage des conteneurs séquentiels à la construction
 
   ```cpp
   vector<int> foo(4, 12);
@@ -1110,8 +1161,9 @@ copy(foo.begin(), foo.end(), back_inserter(bar));
 - ```cpp std::copy_backward()``` copie les éléments de la fin vers le début
 
 #alertblock("Attention", text[
-  - À la taille du second ensemble
-  - Aux ensembles non-disjoints
+  À la taille du second ensemble
+
+  Aux ensembles non-disjoints
 ])
 
 #codesample(
@@ -1161,7 +1213,7 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
 - ```cpp std::replace_copy()``` copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
 
 #noteblock(```cpp _copy```, text[
-  - Les algorithmes suffixés par ```cpp _copy``` fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
+  Les algorithmes suffixés par ```cpp _copy``` fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
 ])
 
 - ```cpp std::replace_copy_if()``` copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
@@ -1181,14 +1233,15 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
 ```
 
 #alertblock("Pas de suppression", text[
-  - Ramène les éléments à conserver vers le début de l'ensemble
-  - Retourne l'itérateur correspond à la nouvelle fin
+  Ramène les éléments à conserver vers le début de l'ensemble
+
+  Retourne l'itérateur correspond à la nouvelle fin
 ])
 
 // std::remove() ne supprime pas car les algorithmes ne peuvent pas modifier le conteneur, en particulier sa taille, mais seulement son contenu
 
 #noteblock(text[Idiome _Erase-Remove_], text[
-  - Suppression via un appel à ```cpp erase()``` après le nouvel itérateur de fin
+  Suppression via un appel à ```cpp erase()``` après le nouvel itérateur de fin
 
   ```cpp
   foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
@@ -1291,7 +1344,7 @@ partition(foo.begin(), foo.end(), is_odd);
 - ... et retourne un itérateur sur le début de la seconde partie
 
 #alertblock("Attention", text[
-  - Ordre relatif non conservé
+  Ordre relatif non conservé
 ])
 
 == STL Algorithmes -- Partitionnement
@@ -1305,7 +1358,7 @@ stable_partition(foo.begin(), foo.end(), is_odd);  // 13 9 4 28 54
 ```
 
 #noteblock("Deux fonctions ?", text[
-  - Stabilité coûteuse en temps et pas toujours nécessaire
+  Stabilité coûteuse en temps et pas toujours nécessaire
 ])
 
 == STL Algorithmes -- Partitionnement
@@ -1340,7 +1393,7 @@ sort(foo.begin(), foo.end());  // 4 9 13 28 54
 ```
 
 #alertblock("Attention", text[
-  - Ordre relatif non conservé
+  Ordre relatif non conservé
 ])
 
 - ```cpp std::stable_sort()``` trie l'ensemble en conservant l'ordre relatif
@@ -1401,8 +1454,9 @@ merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
 == STL Algorithmes -- Opérations ensemblistes
 
 #alertblock("Attention", text[
-  - Ensembles sans répétition de valeur
-  - Ensembles triés
+  Ensembles sans répétition de valeur
+
+  Ensembles triés
 ])
 
 - ```cpp std::includes()``` vérifie si tous les éléments sont présents dans un autre ensemble
@@ -1441,7 +1495,7 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 == STL Algorithmes -- Gestion de tas
 
 #noteblock("Tas", text[
-  - Structure permettant la récupération de l'élément de plus grande valeur
+  Structure permettant la récupération de l'élément de plus grande valeur
 ])
 
 - ```cpp std::make_heap()``` forme un tas depuis un ensemble
@@ -1449,7 +1503,7 @@ set_union(foo.begin(), foo.end(), bar.begin(),
 - ```cpp std::push_heap()``` ajoute l'élément en fin d'ensemble au tas
 
 #noteblock("Structure", text[
-  - ```cpp std::pop_heap()``` et ```cpp std::push_heap()``` maintiennent la structure de tas
+  ```cpp std::pop_heap()``` et ```cpp std::push_heap()``` maintiennent la structure de tas
 ])
 
 - ```cpp std::sort_heap()``` tri le tas
@@ -1574,10 +1628,10 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 == STL Algorithmes -- Au delà des conteneurs
 
 - Flux
-  - ```cpp istream_iterator``` : \textit{input} itérateur
+  - ```cpp istream_iterator``` : input itérateur
     - Début : depuis un flux entrant
     - Fin : constructeur par défaut
-  - ```cpp ostream_iterator``` : \textit{output} itérateur
+  - ```cpp ostream_iterator``` : output itérateur
     - Depuis un flux sortant, séparateur configurable
 
   ```cpp
@@ -1588,7 +1642,7 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   ```
 
 #alertblock("Attention", text[
-  - Séparateur ajouté après chaque élément, y compris le dernier
+  Séparateur ajouté après chaque élément, y compris le dernier
 ])
 
 - Buffers de flux : ```cpp istreambuf_iterator``` et ```cpp ostreambuf_iterator```
@@ -1599,77 +1653,86 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 
 == STL Conclusion
 #adviceblock("Do", text[
-  - Préférez les conteneurs aux tableaux C
+  Préférez les conteneurs aux tableaux C
 ])
 
 #alertblock("Attention", text[
-  - ```cpp operator[]``` ne vérifie pas les bornes
+  ```cpp operator[]``` ne vérifie pas les bornes
 
   // Une implémentation peut mettre une assertion dessus et produire une erreur à l'exécution en debug, p.ex. sur les TU, et une implémentation de qualité devrait le faire
 ])
 
 #alertblock("Don't", text[
-  - N'utilisez pas d'itérateur invalidé
+  N'utilisez pas d'itérateur invalidé
 ])
 
 #alertblock("Attention", text[
-  - Pas objets polymorphiques dans les conteneurs
-  - Ou via des pointeurs intelligents
+  Pas objets polymorphiques dans les conteneurs
+
+  Ou via des pointeurs intelligents
 ])
 
 == STL Conclusion
 
 #adviceblock("Do, performances", text[
-  - Mesurez !
+  Mesurez !
 ])
 
 #noteblock("Conseils, performances", text[
-  - Réfléchissez à votre utilisation des données
+  Réfléchissez à votre utilisation des données
 
   // Utilisation des données : zone critique/non critique, découpage d'algorithmes, données particulières (triées, lourdes à copier), compromis temps/mémoire, stabilité (tri), mise en cache, ...
 
-  - Méfiez-vous des complexités brutes
+  Méfiez-vous des complexités brutes
 
   // La complexité n'est pas ou peu significative pour de petits volumes de données, p.ex. les tris par insertion ou sélection (O($n^{2}$)) plus efficaces que des tris en O($n\ln n$)}
   // Les complexités moyennes ne sont pas pertinentes pour des données particuliers, p.ex. tri par insertion efficace sur ensembles presque triés, peu de permutation du tri par sélection donc efficace pour des données lourdes à déplacer}
 ])
 
 #adviceblock("Do", text[
-  - Préférez les algorithmes standards aux algorithmes tierces et maisons
+  Préférez les algorithmes standards aux algorithmes tierces et maisons
 ])
 
 #noteblock("Bémol, performances", text[
-  - Algorithmes standards généralement bons, mais pas optimaux dans toutes les situations
+  Algorithmes standards généralement bons, mais pas optimaux dans toutes les situations
 ])
 
 == STL Conclusion
 
 #adviceblock("Do", text[
-  - Faites vos propres algorithmes plutôt que des boucles
-  - Faites des algorithmes génériques et compatibles
+  Faites vos propres algorithmes plutôt que des boucles
+
+  Faites des algorithmes génériques et compatibles
 ])
 
 #adviceblock("Do, sémantique", text[
-  - Le bon algorithme pour la bonne opération
-  - Définissez la sémantique de vos algorithmes et choisissez un nom explicite
+  Le bon algorithme pour la bonne opération
+
+  Définissez la sémantique de vos algorithmes et choisissez un nom explicite
 ])
 
 #adviceblock("Do", text[
-  - Préférez les prédicats purs
+  Préférez les prédicats purs
 ])
 
 == STL Conclusion
 
 #adviceblock("Do", text[
-  - Vérifiez que les ensembles de destination aient une taille suffisante
+  Vérifiez que les ensembles de destination aient une taille suffisante
 ])
 
 #adviceblock("Do", text[
-  - Vérifiez les pré-conditions des algorithmes (p.ex. ensemble trié)
-  - Vérifiez le type d'itérateur requis
-  - Vérifiez les complexités garanties
+  Vérifiez les pré-conditions des algorithmes (p.ex. ensemble trié)
+])
+
+#adviceblock("Do", text[
+  Vérifiez le type d'itérateur requis
+])
+
+#adviceblock("Do", text[
+  Vérifiez les complexités garanties
 ])
 
 #noteblock("Aller plus loin", text[
-  - Voir #link("https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL%20Algorithms/STL%20Algorithms%20-%20Marshall%20Clow%20-%20CppCon%202016.pdf")[STL Algorithms #linklogo() (Marshall Clow)]
+  Voir #link("https://github.com/CppCon/CppCon2016/blob/master/Presentations/STL%20Algorithms/STL%20Algorithms%20-%20Marshall%20Clow%20-%20CppCon%202016.pdf")[STL Algorithms #linklogo() (Marshall Clow)]
 ])

@@ -421,6 +421,8 @@ char bar[a];
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:13,endLineNumber:6,positionColumn:13,positionLineNumber:6,selectionStartColumn:13,selectionStartLineNumber:6,startColumn:13,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++const+int+a+%3D+42%3B%0A++char+bar%5Ba%5D+%3D+%22azerty%22%3B%0A%0A++std::cout+%3C%3C+bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
+#addproposal("N2235")
+
 == Extended ``` sizeof```
 
 - ```cpp sizeof``` sur des membres non statiques
@@ -997,6 +999,11 @@ cout << sizeof Foo::bar;
   _perfect forwarding_ (Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm")[N1385 #linklogo])
 ])
 
+#addproposal("N2118")
+#addproposal("n2439")
+#addproposal("N2844")
+#addproposal("N3053")
+
 == Sémantique de déplacement
 
 - Rendre une classe déplaçable
@@ -1012,6 +1019,11 @@ cout << sizeof Foo::bar;
 
   _user-provided_ : corps de la fonction fourni par l'utilisateur
 ])
+
+#addproposal("N2118")
+#addproposal("n2439")
+#addproposal("N2844")
+#addproposal("N3053")
 
 == Sémantique de déplacement
 
@@ -1031,6 +1043,11 @@ cout << sizeof Foo::bar;
   Voir #link("https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf")[Élégance, style épuré et classe #linklogo() (Loïc Joly)]
 ])
 
+#addproposal("N2118")
+#addproposal("n2439")
+#addproposal("N2844")
+#addproposal("N3053")
+
 == Sémantique de déplacement
 
 #noteblock("Dans la bibliothèque standard", text[
@@ -1043,7 +1060,10 @@ cout << sizeof Foo::bar;
   Implémentations utilisant le déplacement si possible
 ])
 
-\
+#addproposal("N2118")
+#addproposal("n2439")
+#addproposal("N2844")
+#addproposal("N3053")
 
 == Initializer list
 
@@ -1082,6 +1102,8 @@ vector<int> foo{1, 56, 18, 3};
 - Fonctions membres ```cpp size()```, ```cpp begin()```, ```cpp end()```
 - Construction automatique depuis une liste de valeurs entre accolades
 
+#addproposal("N2672")
+
 == Initializer list
 
 - Constructeurs peuvent prendre un ```cpp std::initializer_list``` en paramètre
@@ -1097,6 +1119,7 @@ MaClasse(initializer_list<value_type> itemList);
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cinitializer_list%3E%0A%0Astruct+Foo%0A%7B%0A++Foo(std::initializer_list%3Cint%3E+l)+:+m_vec(l)%0A++%7B%0A++++std::cout+%3C%3C+l.size()+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++void+append(std::initializer_list%3Cint%3E+l)%0A++%7B%0A++++for(std::initializer_list%3Cint%3E::iterator+it+%3D+l.begin()%3B+it+!!%3D+l.end()%3B+%2B%2Bit)%0A++++%7B%0A++++++m_vec.push_back(*it)%3B%0A++++%7D%0A++%7D%0A%0A++std::vector%3Cint%3E+m_vec%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo+%3D+%7B1,+2,+3,+4,+5%7D%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.append(%7B6,+7,+8%7D)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.m_vec.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo.m_vec%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
+#addproposal("N2672")
 
 == Initializer list
 
@@ -1109,6 +1132,8 @@ MaClasse(initializer_list<value_type> itemList);
 
   Utilisez les algorithmes et constructeurs idoines
 ])
+
+#addproposal("N2672")
 
 == Uniform Initialization
 
@@ -1265,6 +1290,10 @@ auto i = 2;  // int
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+2%3B+%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
+#addproposal("N1984")
+#addproposal("n1737")
+#addproposal("n2546")
+
 == ``` auto```
 
 - Combinaison possible avec ```cpp const```, ```cpp volatile``` ou ```cpp &```
@@ -1288,6 +1317,10 @@ auto j = 2UL
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+static_cast%3Cunsigned+long%3E(2)%3B%0A++assert(typeid(i)+%3D%3D+typeid(unsigned+long))%3B%0A++%0A++auto+j+%3D+2UL%3B%0A++assert(typeid(j)+%3D%3D+typeid(unsigned+long))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
+#addproposal("N1984")
+#addproposal("n1737")
+#addproposal("n2546")
+
 == ``` auto```
 
 - Tendance forte "Almost Always Auto" (AAA)
@@ -1306,6 +1339,10 @@ auto j = 2UL
   Type de retour de ```cpp std::list<std::string>::size()``` ?
 ])
 
+#addproposal("N1984")
+#addproposal("n1737")
+#addproposal("n2546")
+
 == ``` auto```
 
 - Limitations - solutions
@@ -1320,6 +1357,10 @@ auto j = 2UL
 
   // Sens en C++98/03 : variable de type automatique (c'est à dire sur la pile) par opposition à statique (cas par défaut et donc inutilisé en pratique)
 ])
+
+#addproposal("N1984")
+#addproposal("n1737")
+#addproposal("n2546")
 
 == ``` decltype```
 
@@ -1484,6 +1525,8 @@ accumulate(foo.begin(), foo.end(), 0); // 61
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cforward_list%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::forward_list%3Cint%3E+foo%7B2,+5,+9,+8,+2,+6,+8,+9,+12%7D%3B%0A%0A++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
+
+#addproposal("n1836")
 
 == Conteneurs associatifs
 
@@ -2047,6 +2090,9 @@ for(auto var : foo)
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A%0A++for(auto%26+var+:+foo)%0A++%7B%0A++++var+%3D+5%3B%0A++%7D%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
+#addproposal("N2930")
+#addproposal("N3271")
+
 == Range-based for loop
 
 #adviceblock("Do", text[
@@ -2063,6 +2109,9 @@ for(auto var : foo)
 #adviceblock("Do", text[
   Utilisez l'inférence de type sur la variable d'itération
 ])
+
+#addproposal("N2930")
+#addproposal("N3271")
 
 == ``` std::string``` et conversions
 
