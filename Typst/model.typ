@@ -88,7 +88,8 @@
 
   context place(
     bottom + left,
-    dx: -1.3em + 4.5em * proposalcounter.get().first(),
+    dx: if (proposalcounter.get().first() < 6) {-1.3em + 4.5em * proposalcounter.get().first()} else {-1.3em + 4.5em * (proposalcounter.get().first() - 6)},
+    dy: if (proposalcounter.get().first() < 6) { -0em } else { 1.1em},
     link(url)[
       #box(fill: white, stroke: main_color, radius: 1em, inset: (
         left: 0.3em,

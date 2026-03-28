@@ -194,9 +194,7 @@
   - Données membres non-statiques dans une seule classe de l'hiérarchie
   - Pas de classe de base du type de la première donnée membre non-statique
 
-#noteblock("En résumé", text[
-  Organisation mémoire similaire aux structures C
-])
+#noteblock("En résumé", "Organisation mémoire similaire aux structures C")
 
 #addproposal("n2342")
 
@@ -270,9 +268,7 @@ V2::foo();  // Affiche V2
 foo();      // Affiche V2
 ```
 
-#noteblock("Motivation", text[
-  Évolution de bibliothèques et conservation des versions précédentes
-])
+#noteblock("Motivation", "Évolution de bibliothèques et conservation des versions précédentes")
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%0Anamespace+V1%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V1%5Cn%22%3B%0A++%7D%0A%7D%0A%0Ainline+namespace+V2%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V2%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++V1::foo()%3B%0A++V2::foo()%3B%0A%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -437,9 +433,7 @@ cout << sizeof Foo::bar;
 
 // Mal-formé (ill-formed) n'implique pas une erreur de compilation ni même un avertissement, seulement que ce n'est pas correct vu de la norme
 
-#noteblock("Note", text[
-  En pratique, cet exemple compile en mode C++98 sous GCC
-])
+#noteblock("Note", "En pratique, cet exemple compile en mode C++98 sous GCC")
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astruct+Foo%0A%7B%0A++int+bar%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+sizeof+Foo::bar+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -453,18 +447,14 @@ cout << sizeof Foo::bar;
   - Copie potentiellement coûteuse ou impossible
   - Copie inutile lorsque l'objet source est immédiatement détruit
 
-#noteblock("Optimisation des copies", text[
-  Partiellement adressé en C++98/03 par l'élision de copie et (N)RVO
-])
+#noteblock("Optimisation des copies", "Partiellement adressé en C++98/03 par l'élision de copie et (N)RVO")
 
 - Échange de données légères plutôt que copie profonde
 - Déplacement seulement si
   - Type déplaçable
   - Instance sur le point d'être détruite ou explicitement déplacée
 
-#alertblock("Attention", text[
-  Les données ne sont plus présentes dans l'objet initial
-])
+#alertblock("Attention", "Les données ne sont plus présentes dans l'objet initial")
 
 #addproposal("N2118")
 #addproposal("n2439")
