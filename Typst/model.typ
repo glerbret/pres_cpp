@@ -5,26 +5,49 @@
 
 // Définition de blocs d'affichage (note, avertissement et consieil)
 #let _block(title, content, color) = {
-  set block(width: 100%, inset: (x: 0pt, y: 3pt))
-
-  show list: set list(
-    marker: (
-      text(1.5em, baseline: -0.1em, fill: color)[•],
-      text(1.5em, baseline: -0.1em, fill: color)[‣],
-      text(1.5em, baseline: -0.1em, fill: color)[-],
-    ),
-    spacing: 0.65em,
-  )
+  show raw.where(block: true): it => {
+    align(center)[
+      #block(
+        width: 97%,
+        align(left)[#it],
+      )]
+  }
 
   if (title != none) {
     stack(
-      block(fill: color, stroke: color, outset: (x: 1.2em), radius: (top: 0.4em, bottom: 0cm), text(white)[#strong(
-        title,
-      )]),
-      block(fill: color.lighten(80%), stroke: color, outset: (x: 1.2em), radius: (top: 0cm, bottom: 0.4em), content),
+      block(
+        width: 100%,
+        fill: color,
+        stroke: color,
+        outset: (x: 1em),
+        inset: (x: 0pt, top: 3pt, bottom: 4pt),
+        radius: (top: 0.4em, bottom: 0cm),
+        text(
+          white,
+        )[#strong(
+          title,
+        )],
+      ),
+      block(
+        width: 100%,
+        fill: color.lighten(80%),
+        stroke: color,
+        outset: (x: 1em),
+        radius: (top: 0cm, bottom: 0.4em),
+        inset: (x: 0pt, top: 5pt, bottom: 5pt),
+        content,
+      ),
     )
   } else {
-    block(fill: color.lighten(80%), stroke: color, outset: (x: 1.2em), radius: (top: 0.4em, bottom: 0.4em), content)
+    block(
+      width: 100%,
+      fill: color.lighten(80%),
+      stroke: color,
+      outset: (x: 1em),
+      radius: (top: 0.4em, bottom: 0.4em),
+      inset: (x: 0pt, top: 3pt, bottom: 5pt),
+      content,
+    )
   }
 }
 
@@ -72,7 +95,9 @@
         right: -0.1em,
         top: -0.25em,
         bottom: 0.18em,
-      ))[#text(main_color, weight: "bold", top-edge: "baseline", bottom-edge: "baseline", size: 0.9em)[#upper(ref)] #text(
+      ))[#text(main_color, weight: "bold", top-edge: "baseline", bottom-edge: "baseline", size: 0.9em)[#upper(
+          ref,
+        )] #text(
           main_color,
           size: 1em,
           baseline: 0.1em,

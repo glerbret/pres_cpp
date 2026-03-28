@@ -110,8 +110,9 @@
 - Types entiers signés obligatoirement en compléments à 2
 
 #noteblock("Situation pré-C++20", text[
-  - Pas de contrainte en C++
-  - 3 choix en C : signe + mantisse, complément à 1 et complément à 2
+  Pas de contrainte en C++
+
+  3 choix en C : signe + mantisse, complément à 1 et complément à 2
 ])
 
 // Le même changement a eu lieu en C2x
@@ -119,7 +120,7 @@
 // Complément à 2 : négation de tous les bits, puis ajout de 1
 
 #alertblock("Compatibilité", text[
-  - En pratique, toutes les implémentations actuelles sont en complément à 2
+  En pratique, toutes les implémentations actuelles sont en complément à 2
 ])
 
 - Précision de comportements sur des types entiers signés
@@ -143,8 +144,9 @@
 - Type ```cpp u8string``` pour les chaînes UTF-8
 
 #noteblock("Motivation", text[
-  - Suppression de l'ambiguïté caractère UTF-8 / littéral
-  - Suppression d'ambiguïté sur les surcharges et spécialisation de template
+  Suppression de l'ambiguïté caractère UTF-8 / littéral
+
+  Suppression d'ambiguïté sur les surcharges et spécialisation de template
 ])
 
 #addproposal("P0482")
@@ -155,8 +157,8 @@
 - Modification de la définition d'agrégat :
   - C++17 : pas de constructeur _user-provided_
   - C++20 : pas de constructeur _user-declared_
-  // Ni ==default, ni ==delete
-  // Y compris dans les classes de base
+// Ni ==default, ni ==delete
+// Y compris dans les classes de base
 
 ```cpp
 // Agregat en C++17 pas en C++20
@@ -180,9 +182,11 @@ U u{.b = "foo"};
 ```
 
 #alertblock("Restrictions", text[
-  - Uniquement sur les agrégats et les unions
-  - Initialisation des champs dans leur ordre de déclaration
-  - Initialisation d'un unique membre d'une union
+  Uniquement sur les agrégats et les unions
+
+  Initialisation des champs dans leur ordre de déclaration
+
+  Initialisation d'un unique membre d'une union
 
   // Par contre, il est permis de ne pas initialiser des champs d'un agrégat}
 ])
@@ -202,12 +206,13 @@ U u{.b = "foo"};
 - Initialisation des agrégats via des données parenthésées
 
 #noteblock(text[``` {}``` ou ``` ()```], text[
-  - ```cpp {}``` permet l'utilisation d'_initializer list_
-  - ```cpp ()``` permet les conversions avec perte de précision
+  ```cpp {}``` permet l'utilisation d'_initializer list_
+
+  ```cpp ()``` permet les conversions avec perte de précision
 ])
 
 #noteblock("Motivations", text[
-  - Fonctions transférant les arguments à un constructeur sur des agrégats
+  Fonctions transférant les arguments à un constructeur sur des agrégats
   // Comme std::make_unique() ou emplace_back()
 ])
 
@@ -356,21 +361,15 @@ Bar f3() {
 - Réécrit ```cpp a@b``` en ```cpp a<=>b@0``` ou ```cpp 0@b<=>a```
 
 #adviceblock("Comparaison hétérogène", text[
-  - Une unique version à écrire (```cpp A<=>B``` ou ```cpp B<=>A```)
+  Une unique version à écrire (```cpp A<=>B``` ou ```cpp B<=>A```)
 ])
-
-#addproposal("P1185")
-#addproposal("P1186")
-#addproposal("P0768")
-
-== spaceship operator -- ``` operator<=>```
 
 - Peut être déclaré ```cpp =default``` et généré par
   - ```cpp operator<=>``` des bases et membres
   - ```cpp operator==``` et ```cpp operator<```
 
 #alertblock("Attention", text[
-  - Uniquement pour des comparaisons homogènes
+  Uniquement pour des comparaisons homogènes
 ])
 
 - Utilisation de l'opérateur binaire déclaré s'il existe
@@ -401,12 +400,12 @@ Bar f3() {
 - Peut être déclaré ```cpp =default``` et généré par ```cpp operator==``` des bases et membres
 
 #alertblock(text[Génération de ``` operator==```], text[
-  - Pas de génération depuis ```cpp operator<=>```
+  Pas de génération depuis ```cpp operator<=>```
   // Initialement, operator== et operator!= aussi résolu via operator<=>. Modifié pour ne pas avoir des tests d'égalité non optimaux "par erreur" via le fallback sur operator<=> (p.ex. court-circuit sur la taille de conteneurs)
 ])
 
 #adviceblock(text[``` =default``` implicite], text[
-  - Implicitement ```cpp =default``` lorsque ```cpp operator<=>``` est ```cpp =default```
+  Implicitement ```cpp =default``` lorsque ```cpp operator<=>``` est ```cpp =default```
 ])
 
 #codesample(
@@ -420,12 +419,15 @@ Bar f3() {
 == spaceship operator -- Conclusion
 
 #adviceblock("Do", text[
-  - Privilégiez ```cpp operator<=>``` aux opérateurs ```cpp <```, ```cpp <=```, ```cpp >``` et ```cpp >=```
-  - Déclarez ```cpp operator<=>``` et ```cpp operator==``` ```cpp =default``` si possible
+  Privilégiez ```cpp operator<=>``` aux opérateurs ```cpp <```, ```cpp <=```, ```cpp >``` et ```cpp >=```
+])
+
+#adviceblock("Do", text[
+  Déclarez ```cpp operator<=>``` et ```cpp operator==``` ```cpp =default``` si possible
 ])
 
 #alertblock("Don't", text[
-  - Ne mélangez pas ```cpp operator<=>``` et opérateurs d'ordre dans une même classe
+  Ne mélangez pas ```cpp operator<=>``` et opérateurs d'ordre dans une même classe
 ])
 
 == Nested namespace
@@ -458,7 +460,7 @@ namespace A {
 - Alternative au mécanisme d'inclusion
 
 #alertblock(text[Modules et ``` namespace```], text[
-  - Ne replace pas les ```cpp namespace```
+  Ne replace pas les ```cpp namespace```
 ])
 
 #list(marker: [ ], text[
@@ -470,7 +472,7 @@ namespace A {
 ])
 
 #alertblock("Bibliothèque standard", text[
-  - En C++20, la bibliothèque standard n'utilise pas les modules
+  En C++20, la bibliothèque standard n'utilise pas les modules
 ])
 
 #addproposal("P1103")
@@ -514,12 +516,12 @@ void bar(int j) { return 3 * j; }
 ```
 
 #noteblock("Note", text[
-  - _Implementation Unit_ a accès aux déclarations non exportées du module
+  _Implementation Unit_ a accès aux déclarations non exportées du module
   // Les déclarations non exportées sont visibles de l'ensemble du module
 ])
 
 #alertblock("Mais ...", text[
-  - Pas les autres unités de compilation même si elles importent le module
+  Pas les autres unités de compilation même si elles importent le module
 ])
 
 #addproposal("P1103")
@@ -540,7 +542,7 @@ module foo:part;
 ```
 
 #alertblock(text[_Primary Module Interface Unit_], text[
-  - Une et une seule _Interface Unit_ sans nom de partition par module
+  Une et une seule _Interface Unit_ sans nom de partition par module
 ])
 
 - Un élément peut être déclaré dans une partition et défini dans une autre
@@ -615,8 +617,9 @@ struct s {};
 ```
 
 #alertblock("Restriction", text[
-  - Uniquement dans une _Primary Module Interface Unit_
-  - Qui doit être la seule unité du module
+  Uniquement dans une _Primary Module Interface Unit_
+
+  Qui doit être la seule unité du module
 ])
 
 #addproposal("P1103")
@@ -691,13 +694,13 @@ export import "bar.h";
   - Comportement similaire à ```cpp std::vector::reserve()```
 
 #noteblock("Rappel", text[
-  - Après ```cpp reserve()```, la capacité est supérieure ou égale à la capacité demandée
+  Après ```cpp reserve()```, la capacité est supérieure ou égale à la capacité demandée
 ])
 
 - Dépréciation de ```cpp reserve()``` sans paramètre
 
 #adviceblock("Réduction à la capacité utile", text[
-  - Utilisez ```cpp shrink_to_fit()``` et non ```cpp reserve()```
+  Utilisez ```cpp shrink_to_fit()``` et non ```cpp reserve()```
 ])
 
 #addproposal("P0966")
@@ -801,7 +804,7 @@ auto foo = to_array("foo");
 ```
 
 #alertblock(text[``` \0``` terminal], text[
-  - Le ``` \0``` terminal est un élément du tableau
+  Le ``` \0``` terminal est un élément du tableau
 ])
 
 #codesample(
@@ -892,7 +895,7 @@ span<int> baz = bar.first(2);  // 0, 1
 - ... retournent un itérateur vers la fin (resp. début) du nouvel ensemble
 
 #noteblock("Taille et décalage", text[
-  - Opération sans effet si le décalage est supérieur la taille de l'ensemble
+  Opération sans effet si le décalage est supérieur la taille de l'ensemble
 ])
 
 ```cpp
@@ -926,7 +929,7 @@ bit_width(7u);       // 3
 ```
 
 #alertblock("Restriction", text[
-  - Uniquement sur des entiers non signés
+  Uniquement sur des entiers non signés
 ])
 
 #codesample(
@@ -952,7 +955,7 @@ popcount(6u);  // 2
 ```
 
 #alertblock("Restriction", text[
-  - Uniquement sur des entiers non signés
+  Uniquement sur des entiers non signés
 ])
 
 #codesample(
@@ -969,7 +972,7 @@ popcount(6u);  // 2
   - Conversion ```cpp constexpr``` si possible
 
 #alertblock("Restriction", text[
-  - Uniquement sur des types _trivially copyable_
+  Uniquement sur des types _trivially copyable_
 ])
 
 #addproposal("P0476")
@@ -992,7 +995,7 @@ popcount(6u);  // 2
 - ```cpp std::midpoint()``` : demi-somme de deux valeurs (entières ou flottantes)
 
 #noteblock("Règle d'arrondi", text[
-  - La demi-somme d'entiers est entière et arrondie vers le premier paramètre
+  La demi-somme d'entiers est entière et arrondie vers le premier paramètre
 
   ```cpp
   midpoint(2, 4);  // 3
@@ -1046,10 +1049,11 @@ lerp(10, 20, 1);    // 20
 // Pour être précis, les range adaptors manipulent seulement les viewable ranges
 
 #noteblock("Pour aller plus loin", text[
-  - #link(
-      "https://accu.org/content/conf2009/AndreiAlexandrescu_iterators-must-go.pdf",
-    )[Iterators Must Go #linklogo() (Andrei Alexandrescu)]
-  - #link("http://ericniebler.com/")[Blog d'Eric Niebler #linklogo()]
+  #link(
+    "https://accu.org/content/conf2009/AndreiAlexandrescu_iterators-must-go.pdf",
+  )[Iterators Must Go #linklogo() (Andrei Alexandrescu)]
+
+  #link("http://ericniebler.com/")[Blog d'Eric Niebler #linklogo()]
 ])
 
 #addproposal("P0896")
@@ -1086,8 +1090,9 @@ lerp(10, 20, 1);    // 20
 - ```cpp ContiguousRange``` : fournit ```cpp contiguous_iterator```
 
 #noteblock("En résumé", text[
-  - Conteneurs : possession, copie profonde
-  - Vues : référence, copie superficielle
+  Conteneurs : possession, copie profonde
+
+  Vues : référence, copie superficielle
 ])
 
 #addproposal("P0896")
@@ -1111,7 +1116,7 @@ lerp(10, 20, 1);    // 20
 - ```cpp data()``` et ```cpp cdata()``` retournent l'adresse de début du ```cpp range```
 
 #alertblock("Restrictions", text[
-  - ```cpp data()``` et ```cpp cdata()``` uniquement sur des ```cpp ContiguousRange```
+  ```cpp data()``` et ```cpp cdata()``` uniquement sur des ```cpp ContiguousRange```
 ])
 
 - Surcharges de différents algorithmes prenant un ```cpp range``` en paramètre
@@ -1374,8 +1379,9 @@ cin >> setw(24) >> a; // Seuls 24 caracteres sont lus
 - API de formatage inspiré de la bibliothèque #link("https://github.com/fmtlib/fmt")[``` {fmt}```]
 
 #noteblock("Motivations", text[
-  - Formatage "à la C" non extensible et peu sûr
-  - Flux complexes, peu performants, peu propices à l'internationalisation et la localisation, formateurs globaux
+  Formatage "à la C" non extensible et peu sûr
+
+  Flux complexes, peu performants, peu propices à l'internationalisation et la localisation, formateurs globaux
   // Peu propices à la localisation car le format et l'ordre des éléments est dans le code lui-même et ne peut pas être sortie facilement
   // Les formateurs sont globaux, ainsi l'injection de std::hex dans un flux va passer tous les affichages des entiers en hexadécimal jusqu'à un changement explicite et pas uniquement celui concerné
 ])
@@ -1385,7 +1391,7 @@ cin >> setw(24) >> a; // Seuls 24 caracteres sont lus
 - Format sous forme de chaînes utilisant ```cpp {}``` comme _placeholder_
 
 #noteblock("Alternatives à C++20", text[
-  - Utilisez ```cpp {fmt}``` ou ```cpp Boost.Format```
+  Utilisez ```cpp {fmt}``` ou ```cpp Boost.Format```
 ])
 
 #addproposal("P0645")
@@ -1465,8 +1471,9 @@ vformat("{}", make_format_args("a"));
   - ```cpp format-spec``` : spécifications, optionnelles, du format
 
 #noteblock("Séquences d'échappement", text[
-  - ```cpp {{``` affiche ```cpp {```
-  - ```cpp }}``` affiche ```cpp }```
+  ```cpp {{``` affiche ```cpp {```
+
+  ```cpp }}``` affiche ```cpp }```
 ])
 
 #addproposal("P0645")
@@ -1488,7 +1495,7 @@ format("{} et {}", "a", "b");   // "a et b"
 ```
 
 #alertblock("Limite", text[
-  - Impossible d'en n'omettre que certains
+  Impossible d'en n'omettre que certains
 ])
 
 #codesample(
@@ -1769,7 +1776,7 @@ format("{:%F %T}", chrono::system_clock::now());
   - Exception levée par un formateur
 
 #noteblock("Valeur surnuméraire", text[
-  - Les valeurs surnuméraires ne sont pas des erreurs et sont ignorées
+  Les valeurs surnuméraires ne sont pas des erreurs et sont ignorées
 ])
 
 #addproposal("P0645")
@@ -1809,7 +1816,7 @@ format("{}", MyComplex{1, 2});  // "1+2i"
 ```
 
 #noteblock("Aller plus loin", text[
-  - Voir #link("https://www.sandordargo.com/blog/2025/07/23/format-your-own-type-part-1")[Format your own type (Part 1) #linklogo()] et #link("https://www.sandordargo.com/blog/2025/07/30/format-your-own-type-part-2")[Format your own type (Part 2) #linklogo()]
+  Voir #link("https://www.sandordargo.com/blog/2025/07/23/format-your-own-type-part-1")[Format your own type (Part 1) #linklogo()] et #link("https://www.sandordargo.com/blog/2025/07/30/format-your-own-type-part-2")[Format your own type (Part 2) #linklogo()]
 ])
 
 #codesample(
@@ -1852,7 +1859,7 @@ double* a = new double[]{1, 2, 3};
 - ```cpp std::destroying_delete_t``` : pas de destruction avant l'appel à ```cpp delete()```
 
 #noteblock("Intérêt", text[
-  - Conserver des informations nécessaire à la libération
+  Conserver des informations nécessaire à la libération
 ])
 
 ```cpp
@@ -1866,7 +1873,7 @@ struct Foo {
 ```
 
 #alertblock("Ne pas oublier", text[
-  - La destruction doit être appelée explicitement
+  La destruction doit être appelée explicitement
 ])
 
 #addproposal("P0722")
@@ -1900,7 +1907,7 @@ struct Foo {
 - Conversion des horloges entre-elles
 
 #alertblock(text[Conversion de ```cpp std::chrono::file_clock```], text[
-  - Support optionnel des conversions entre ```cpp std::chrono::file_clock``` et ```cpp std::chrono::utc_clock``` ou ```cpp std::chrono::system_clock```
+  Support optionnel des conversions entre ```cpp std::chrono::file_clock``` et ```cpp std::chrono::utc_clock``` ou ```cpp std::chrono::system_clock```
 ])
 
 - Pseudo-horloge ```cpp std::chrono::local_t``` temps dans la _timezone_ locale
@@ -1937,7 +1944,7 @@ struct Foo {
   - Et différentes combinaisons permettant de construire une date complète
 
 #alertblock("Convention anglo-saxonne", text[
-  - Le premier jour de la semaine est le dimanche
+  Le premier jour de la semaine est le dimanche
 ])
 
 #addproposal("P0355")
@@ -1988,11 +1995,11 @@ zoned_time zt = {"Asia/Tokyo", tp};
 == Date et heure
 
 #noteblock("Alternative à C++20", text[
-  - Utilisez ```cpp Boost.DateTime```
+  Utilisez ```cpp Boost.DateTime```
 ])
 
 #noteblock("Pour aller plus loin", text[
-  - #link("http://site.icu-project.org/home")[```cpp ICU``` #linklogo()] supporte de nombreux calendriers et mécanismes de localisation
+  #link("http://site.icu-project.org/home")[```cpp ICU``` #linklogo()] supporte de nombreux calendriers et mécanismes de localisation
   // ICU : International Components for Unicode
 ])
 
@@ -2013,7 +2020,7 @@ for(size_t i = 0; const auto& bar : foo) {
   - fonctions libres ```cpp std::begin()``` et ```cpp std::end()```
 
 #noteblock("Intérêt", text[
-  - Itération (via des fonctions libres) d'éléments ayant une fonction membre ```cpp begin()``` ou ```cpp end()``` mais pas les deux
+  Itération (via des fonctions libres) d'éléments ayant une fonction membre ```cpp begin()``` ou ```cpp end()``` mais pas les deux
 ])
 
 // Fonction membre qui n'est probablement pas une fonction d'itération
@@ -2040,7 +2047,7 @@ sqr(x);      // Erreur
 ```
 
 #alertblock("Restriction", text[
-  - Pas de pointeur dans des contextes ```cpp consteval```
+  Pas de pointeur dans des contextes ```cpp consteval```
 ])
 
 #codesample(
@@ -2061,7 +2068,7 @@ sqr(x);      // Erreur
 == ``` constexpr```
 
 - Initialisation triviale dans des contextes ```cpp constexpr```
-- ```cpp std::is_constant_evaluated()``` pour savoir si l'évaluation est _compile-time_
+- ```cpp std::is_constant_evaluated()``` teste si l'évaluation est _compile-time_
 - Prise en compte accrue dans la bibliothèque standard
 - Assouplissement des restrictions
   - Fonctions virtuelles ```cpp constexpr```
@@ -2109,7 +2116,7 @@ auto f2 = [=] { return b; };
 - Recherche de ```cpp get()``` : seules les fonctions membres templates dont le premier paramètre template n'est pas un type sont retenues
 
 #noteblock("Motivation", text[
-  - Utiliser des classes possédant un ```cpp get()``` indépendant de l'interface _tuple-like_
+  Utiliser des classes possédant un ```cpp get()``` indépendant de l'interface _tuple-like_
 ])
 
 ```cpp
@@ -2133,7 +2140,7 @@ auto& [y] = x;
 
 - Utilisation possible de classes
   - _strong structural equality_
-    - Classes de base et membres non statiques avec une _defaulted_ ```cpp operator==```
+    - Classes de base et membres non statiques avec un _defaulted_ ```cpp operator==```
     - Pas de référence
     - Pas de type flottant
   - Pas d'union
@@ -2583,7 +2590,7 @@ template<class T> concept totally_ordered =
   - Permet de récupérer le type
 
 #noteblock("Usage", text[
-  - Spécification de contraintes sur paramètres : types identiques, itérateur, ...
+  Spécification de contraintes sur paramètres : types identiques, itérateur, ...
 ])
 
 ```cpp
@@ -2753,7 +2760,7 @@ t.request_stop();
   - ```cpp arrive_and_wait()``` décrémente le compteur et attend qu'il atteigne zéro
 
 #alertblock("Pas d'incrément", text[
-  - Impossible d'incrémenter un ```cpp std::latch``` et de revenir à sa valeur initiale
+  Impossible d'incrémenter un ```cpp std::latch``` et de revenir à sa valeur initiale
 ])
 
 #codesample(
@@ -2842,7 +2849,7 @@ create_directory("a/b/c");
   - Pas de conversion en ```cpp bool```
   - Pas de _narrowing conversion_
 
-#addproposal("P0608")&
+#addproposal("P0608")
 
 == ``` std::visit()```
 
