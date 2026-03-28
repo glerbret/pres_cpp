@@ -11,8 +11,3 @@
 )
 
 #include "c++98_content.typ"
-#include "c++11_content.typ"
-#include "c++14_content.typ"
-#include "c++17_content.typ"
-#include "c++20_content.typ"
-#include "c++23_content.typ"
