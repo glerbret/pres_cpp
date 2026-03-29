@@ -461,513 +461,530 @@ cout << sizeof Foo::bar;
 #addproposal("N2844")
 #addproposal("N3053")
 
-== Sémantique de déplacement}
+== Sémantique de déplacement
 
 - Copie
-
-// TODO
 
 #cetz.canvas(length: 1em, {
   import cetz.draw: *
-  // Your drawing code goes here
 
-  // Draw a rect from A(0, 0) to B(1, 1)
-  rect((0, 0), (1, 1), name: "a")
-  rect((1, 0), (2, 1))
+  // Grille pour le tracer, changer la couleur pour l'affiche ou pas
+  grid((0,0), (30,-17), stroke: white)
 
-  rect((1, -1), (2, -1.5))
-  content("a", [A])
-  // Show the points
-  set-style(content: (frame: "circle", padding: 1pt, fill: white))
-  content((0, 0), [A])
-  content((1, 1), [B])
+  rect((4, 0), (8, -1), name: "vec1_0")
+  rect((8, 0), (10, -1), name: "cap1_0")
+  rect((10, 0), (12, -1), name: "size1_0")
+  content("vec1_0", text(size: 0.7em)[Vecteur 1])
+  content("cap1_0", text(size: 0.7em)[Cap. n])
+  content("size1_0", text(size: 0.7em)[Tail. n])
+
+  rect((6, -2), (8, -3), name: "obj11_0")
+  rect((8, -2), (10, -3), name: "obj12_0")
+  rect((10, -2), (12, -3), name: "obj13_0")
+  rect((12, -2), (14, -3), name: "obj14_0")
+  content("obj11_0", text(size: 0.7em)[Obj1])
+  content("obj12_0", text(size: 0.7em)[Obj2])
+  content("obj13_0", text(size: 0.7em)[...])
+  content("obj14_0", text(size: 0.7em)[Objn])
+
+  line((5, -1), (5, -2.5))
+  line((5, -2.5), (6, -2.5))
+
+  rect((16, 0), (20, -1), name: "vec2_0")
+  rect((20, 0), (22, -1), name: "cap2_0")
+  rect((22, 0), (24, -1), name: "size2_0")
+  content("vec2_0", text(size: 0.7em)[Vecteur 2])
+  content("cap2_0", text(size: 0.7em)[Cap. 0])
+  content("size2_0", text(size: 0.7em)[Tail. 0])
+
+  rect((18, -2), (20, -3), name: "obj21_0")
+  content("obj21_0", text(size: 0.7em)[_null_])
+
+  line((17, -1), (17, -2.5))
+  line((17, -2.5), (18, -2.5))
 })
 
-/*
-  #diagram(
-    node-stroke: 0.06em,
-    spacing: (0em, 2em),
-    label-size: 0.5em,
-
-    node(
-      (0, 0),
-      inset: 0em,
-      [#table(
-        columns: (10fr, 9fr, 9fr),
-        align: horizon,
-        stroke: 0.4pt + black,
-        text(weight: "regular")[Vecteur 1], text(weight: "regular")[Cap n], text(weight: "regular")[Taille n],
-      )],
-      name: <vec1>,
-      width: 15em,
-    ),
-
-    node((1, 0), [], name: <spacer>, width: 1em, stroke: 1em),
-
-    node(
-      (2, 0),
-      inset: 0em,
-      [#table(
-        columns: (10fr, 9fr, 9fr),
-        align: horizon,
-        stroke: 0.4pt + black,
-        text(weight: "regular")[Vecteur 2], text(weight: "regular")[Cap 0], text(weight: "regular")[Taille 0],
-      )],
-      name: <vec2>,
-      width: 15em,
-    ),
-
-    node(
-      (rel: (0,0) to),
-//(0,1),
-      inset: 0em,
-      [#table(
-        columns: (1fr, 1fr, 1fr, 1fr),
-        align: horizon,
-        stroke: 0.4pt + black,
-        text(weight: "regular")[Obj1], text(weight: "regular")[Obj2], text(weight: "regular")[...],text(weight: "regular")[Objn],
-      )],
-      name: <vec2>,
-      width: 10em,
-
-    ),
-
-    node(
-      (2, 1),
-      inset: 0em,
-      [#table(
-        columns: (1fr),
-        align: horizon,
-        stroke: 0.4pt + black,
-        text(weight: "regular")[_null_],
-      )],
-      name: <vec2>,
-      width: 2.5em,
-    ),
-
-
-    //      node((1,1), [Obj1],name: <tail2>, width: 3em),
-    //      node((2,1), [Obj2],name: <tail2>, width: 3em),
-    //      node((3,1), [...],name: <tail2>, width: 3em),
-    //      node((4,1), [Objn],name: <tail2>, width: 3em),
-*/
-/*      node((0, 0), [Input], name: <input>, width: 3.5em),
-  node((2, 0), [Output], name: <output>, width: 3.5em),
-  node((1, 1), [Forward], shape: rect, name: <forward>, width: 7.5em),
-  node((1, 2), [Bidirectional], shape: rect, name: <bidir>, width: 7.5em),
-  node((1, 3), [Random Access], shape: rect, name: <random>, width: 7.5em),
-  edge(
-    <input.south>,
-    ((), "```-", ((), 50%, <forward.north>)),
-    ((), "-```", ((), 100%, <forward.north>)),
-    <forward.north>,
-    "<```-",
-  ),
-  edge(
-    <output.south>,
-    ((), "```-", ((), 50%, <forward.north>)),
-    ((), "-```", ((), 100%, <forward.north>)),
-    <forward.north>,
-    "<```-",
-  ),
-  edge(<forward>, <bidir>, "<```-"),
-  edge(<bidir>, <random>, "<```-"),
-)*/
-
-/*
-	\begin{picture}(0,0)(-50,0)
-		% Boites
-		\put(20,0){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,0){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,0){\framebox(20,8)[c]{\tiny Taille m}}
-
-		\put(110,0){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,0){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(160,0){\framebox(20,8)[c]{\tiny Taille 0}}
-
-		\put(50,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-16){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
-
-		\put(140,-16){\framebox(14,8)[c]{\tiny $null$}}
-
-		% Fleches
-		\put(35,0){\line(0,-1){12}}
-		\put(35,-12){\vector(1,0){15}}
-
-		\put(125,0){\line(0,-1){12}}
-		\put(125,-12){\vector(1,0){15}}
-	\end{picture}
-*/
-
-== Sémantique de déplacement}
+== Sémantique de déplacement
 
 - Copie
 
-/*
-	\begin{picture}(0,0)(-50,0)
-		% Boites
-		\put(20,0){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,0){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,0){\framebox(20,8)[c]{\tiny Taille m}}
+#cetz.canvas(length: 1em, {
+  import cetz.draw: *
 
-		\put(110,0){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,0){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(160,0){\framebox(20,8)[c]{\tiny Taille 0}}
+  // Grille pour le tracer, changer la couleur pour l'affiche ou pas
+  grid((0,0), (30,-17), stroke: white)
 
-		\put(50,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-16){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, 0), (8, -1), name: "vec1_0")
+  rect((8, 0), (10, -1), name: "cap1_0")
+  rect((10, 0), (12, -1), name: "size1_0")
+  content("vec1_0", text(size: 0.7em)[Vecteur 1])
+  content("cap1_0", text(size: 0.7em)[Cap. n])
+  content("size1_0", text(size: 0.7em)[Tail. n])
 
-		\put(140,-16){\framebox(14,8)[c]{\tiny $null$}}
+  rect((6, -2), (8, -3), name: "obj11_0")
+  rect((8, -2), (10, -3), name: "obj12_0")
+  rect((10, -2), (12, -3), name: "obj13_0")
+  rect((12, -2), (14, -3), name: "obj14_0")
+  content("obj11_0", text(size: 0.7em)[Obj1])
+  content("obj12_0", text(size: 0.7em)[Obj2])
+  content("obj13_0", text(size: 0.7em)[...])
+  content("obj14_0", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,0){\line(0,-1){12}}
-		\put(35,-12){\vector(1,0){15}}
+  line((5, -1), (5, -2.5))
+  line((5, -2.5), (6, -2.5))
 
-		\put(125,0){\line(0,-1){12}}
-		\put(125,-12){\vector(1,0){15}}
+  rect((16, 0), (20, -1), name: "vec2_0")
+  rect((20, 0), (22, -1), name: "cap2_0")
+  rect((22, 0), (24, -1), name: "size2_0")
+  content("vec2_0", text(size: 0.7em)[Vecteur 2])
+  content("cap2_0", text(size: 0.7em)[Cap. 0])
+  content("size2_0", text(size: 0.7em)[Tail. 0])
 
-		% Texte
-		\put(0,-25){\tiny \color{teal}Allocation}
+  rect((18, -2), (20, -3), name: "obj21_0")
+  content("obj21_0", text(size: 0.7em)[_null_])
 
-		% Boites
-		\put(20,-35){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,-35){\framebox(20,8)[c]{\tiny Taille m}}
+  line((17, -1), (17, -2.5))
+  line((17, -2.5), (18, -2.5))
 
-		\put(110,-35){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-35){\framebox(20,8)[c]{\tiny Taille 0}}
+  rect((2, -3.1), (10, -3.9), name: "alloc", stroke: white)
+  content("alloc", box(width: 8em, align(left)[#text(main_color, size: 0.7em)[Allocation]]))
 
-		\put(50,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-51){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, -4), (8, -5), name: "vec1_1")
+  rect((8, -4), (10, -5), name: "cap1_1")
+  rect((10, -4), (12, -5), name: "size1_1")
+  content("vec1_1", text(size: 0.7em)[Vecteur 1])
+  content("cap1_1", text(size: 0.7em)[Cap. n])
+  content("size1_1", text(size: 0.7em)[Tail. n])
 
-		\put(140,-51){\framebox(14,8)[c]{\tiny }}
-		\put(154,-51){\framebox(14,8)[c]{\tiny }}
-		\put(168,-51){\framebox(14,8)[c]{\tiny }}
-		\put(182,-51){\framebox(14,8)[c]{\tiny }}
+  rect((6, -6), (8, -7), name: "obj11_1")
+  rect((8, -6), (10, -7), name: "obj12_1")
+  rect((10, -6), (12, -7), name: "obj13_1")
+  rect((12, -6), (14, -7), name: "obj14_1")
+  content("obj11_1", text(size: 0.7em)[Obj1])
+  content("obj12_1", text(size: 0.7em)[Obj2])
+  content("obj13_1", text(size: 0.7em)[...])
+  content("obj14_1", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,-35){\line(0,-1){12}}
-		\put(35,-47){\vector(1,0){15}}
+  line((5, -5), (5, -6.5))
+  line((5, -6.5), (6, -6.5))
 
-		\put(125,-35){\line(0,-1){12}}
-		\put(125,-47){\vector(1,0){15}}
-	\end{picture}
-*/
+  rect((16, -4), (20, -5), name: "vec2_1")
+  rect((20, -4), (22, -5), name: "cap2_1")
+  rect((22, -4), (24, -5), name: "size2_1")
+  content("vec2_1", text(size: 0.7em)[Vecteur 2])
+  content("cap2_1", text(size: 0.7em)[Cap. n])
+  content("size2_1", text(size: 0.7em)[Tail. 0])
 
+  rect((18, -6), (20, -7), name: "obj21_1")
+  rect((20, -6), (22, -7), name: "obj22_1")
+  rect((22, -6), (24, -7), name: "obj23_1")
+  rect((24, -6), (26, -7), name: "obj24_1")
 
+  line((17, -5), (17, -6.5))
+  line((17, -6.5), (18, -6.5))
+})
 
-== Sémantique de déplacement}
-
-- Copie
-
-/*
-	\begin{picture}(0,0)(-50,0)
-		% Boites
-		\put(20,0){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,0){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,0){\framebox(20,8)[c]{\tiny Taille m}}
-
-		\put(110,0){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,0){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(160,0){\framebox(20,8)[c]{\tiny Taille 0}}
-
-		\put(50,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-16){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
-
-		\put(140,-16){\framebox(14,8)[c]{\tiny $null$}}
-
-		% Fleches
-		\put(35,0){\line(0,-1){12}}
-		\put(35,-12){\vector(1,0){15}}
-
-		\put(125,0){\line(0,-1){12}}
-		\put(125,-12){\vector(1,0){15}}
-
-		% Texte
-		\put(0,-25){\tiny \color{teal}Allocation}
-
-		% Boites
-		\put(20,-35){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,-35){\framebox(20,8)[c]{\tiny Taille m}}
-
-		\put(110,-35){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-35){\framebox(20,8)[c]{\tiny Taille 0}}
-
-		\put(50,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-51){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
-
-		\put(140,-51){\framebox(14,8)[c]{\tiny }}
-		\put(154,-51){\framebox(14,8)[c]{\tiny }}
-		\put(168,-51){\framebox(14,8)[c]{\tiny }}
-		\put(182,-51){\framebox(14,8)[c]{\tiny }}
-
-		% Fleches
-		\put(35,-35){\line(0,-1){12}}
-		\put(35,-47){\vector(1,0){15}}
-
-		\put(125,-35){\line(0,-1){12}}
-		\put(125,-47){\vector(1,0){15}}
-
-		% Texte
-		\put(0,-60){\tiny \color{teal}Copie des éléments}
-
-		% Boites
-		\put(20,-70){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-70){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,-70){\framebox(20,8)[c]{\tiny Taille m}}
-
-		\put(110,-70){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-70){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-70){\framebox(20,8)[c]{\tiny Taille 1}}
-
-		\put(50,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-86){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
-
-		\put(140,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(154,-86){\framebox(14,8)[c]{\tiny }}
-		\put(168,-86){\framebox(14,8)[c]{\tiny }}
-		\put(182,-86){\framebox(14,8)[c]{\tiny }}
-
-		% Fleches
-		\put(35,-70){\line(0,-1){12}}
-		\put(35,-82){\vector(1,0){15}}
-
-		\put(125,-70){\line(0,-1){12}}
-		\put(125,-82){\vector(1,0){15}}
-	\end{picture}
-*/
-
-
-
-== Sémantique de déplacement}
+== Sémantique de déplacement
 
 - Copie
 
-/*
-	\begin{picture}(0,0)(-50,0)
-		% Boites
-		\put(20,0){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,0){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,0){\framebox(20,8)[c]{\tiny Taille m}}
+#cetz.canvas(length: 1em, {
+  import cetz.draw: *
 
-		\put(110,0){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,0){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(160,0){\framebox(20,8)[c]{\tiny Taille 0}}
+  // Grille pour le tracer, changer la couleur pour l'affiche ou pas
+  grid((0,0), (30,-17), stroke: white)
 
-		\put(50,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-16){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, 0), (8, -1), name: "vec1_0")
+  rect((8, 0), (10, -1), name: "cap1_0")
+  rect((10, 0), (12, -1), name: "size1_0")
+  content("vec1_0", text(size: 0.7em)[Vecteur 1])
+  content("cap1_0", text(size: 0.7em)[Cap. n])
+  content("size1_0", text(size: 0.7em)[Tail. n])
 
-		\put(140,-16){\framebox(14,8)[c]{\tiny $null$}}
+  rect((6, -2), (8, -3), name: "obj11_0")
+  rect((8, -2), (10, -3), name: "obj12_0")
+  rect((10, -2), (12, -3), name: "obj13_0")
+  rect((12, -2), (14, -3), name: "obj14_0")
+  content("obj11_0", text(size: 0.7em)[Obj1])
+  content("obj12_0", text(size: 0.7em)[Obj2])
+  content("obj13_0", text(size: 0.7em)[...])
+  content("obj14_0", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,0){\line(0,-1){12}}
-		\put(35,-12){\vector(1,0){15}}
+  line((5, -1), (5, -2.5))
+  line((5, -2.5), (6, -2.5))
 
-		\put(125,0){\line(0,-1){12}}
-		\put(125,-12){\vector(1,0){15}}
+  rect((16, 0), (20, -1), name: "vec2_0")
+  rect((20, 0), (22, -1), name: "cap2_0")
+  rect((22, 0), (24, -1), name: "size2_0")
+  content("vec2_0", text(size: 0.7em)[Vecteur 2])
+  content("cap2_0", text(size: 0.7em)[Cap. 0])
+  content("size2_0", text(size: 0.7em)[Tail. 0])
 
-		% Texte
-		\put(0,-25){\tiny \color{teal}Allocation}
+  rect((18, -2), (20, -3), name: "obj21_0")
+  content("obj21_0", text(size: 0.7em)[_null_])
 
-		% Boites
-		\put(20,-35){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,-35){\framebox(20,8)[c]{\tiny Taille m}}
+  line((17, -1), (17, -2.5))
+  line((17, -2.5), (18, -2.5))
 
-		\put(110,-35){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-35){\framebox(20,8)[c]{\tiny Taille 0}}
+  rect((2, -3.1), (10, -3.9), name: "alloc", stroke: white)
+  content("alloc", box(width: 8em, align(left)[#text(main_color, size: 0.7em)[Allocation]]))
 
-		\put(50,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-51){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, -4), (8, -5), name: "vec1_1")
+  rect((8, -4), (10, -5), name: "cap1_1")
+  rect((10, -4), (12, -5), name: "size1_1")
+  content("vec1_1", text(size: 0.7em)[Vecteur 1])
+  content("cap1_1", text(size: 0.7em)[Cap. n])
+  content("size1_1", text(size: 0.7em)[Tail. n])
 
-		\put(140,-51){\framebox(14,8)[c]{\tiny }}
-		\put(154,-51){\framebox(14,8)[c]{\tiny }}
-		\put(168,-51){\framebox(14,8)[c]{\tiny }}
-		\put(182,-51){\framebox(14,8)[c]{\tiny }}
+  rect((6, -6), (8, -7), name: "obj11_1")
+  rect((8, -6), (10, -7), name: "obj12_1")
+  rect((10, -6), (12, -7), name: "obj13_1")
+  rect((12, -6), (14, -7), name: "obj14_1")
+  content("obj11_1", text(size: 0.7em)[Obj1])
+  content("obj12_1", text(size: 0.7em)[Obj2])
+  content("obj13_1", text(size: 0.7em)[...])
+  content("obj14_1", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,-35){\line(0,-1){12}}
-		\put(35,-47){\vector(1,0){15}}
+  line((5, -5), (5, -6.5))
+  line((5, -6.5), (6, -6.5))
 
-		\put(125,-35){\line(0,-1){12}}
-		\put(125,-47){\vector(1,0){15}}
+  rect((16, -4), (20, -5), name: "vec2_1")
+  rect((20, -4), (22, -5), name: "cap2_1")
+  rect((22, -4), (24, -5), name: "size2_1")
+  content("vec2_1", text(size: 0.7em)[Vecteur 2])
+  content("cap2_1", text(size: 0.7em)[Cap. n])
+  content("size2_1", text(size: 0.7em)[Tail. 0])
 
-		% Texte
-		\put(0,-60){\tiny \color{teal}Copie des éléments}
+  rect((18, -6), (20, -7), name: "obj21_1")
+  rect((20, -6), (22, -7), name: "obj22_1")
+  rect((22, -6), (24, -7), name: "obj23_1")
+  rect((24, -6), (26, -7), name: "obj24_1")
 
-		% Boites
-		\put(20,-70){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-70){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,-70){\framebox(20,8)[c]{\tiny Taille m}}
+  line((17, -5), (17, -6.5))
+  line((17, -6.5), (18, -6.5))
 
-		\put(110,-70){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-70){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-70){\framebox(20,8)[c]{\tiny Taille 1}}
+  rect((2, -7.1), (10, -7.9), name: "alloc", stroke: white)
+  content("alloc", box(width: 8em, align(left)[#text(main_color, size: 0.7em)[Copie des éléments]]))
 
-		\put(50,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-86){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, -8), (8, -9), name: "vec1_2")
+  rect((8, -8), (10, -9), name: "cap1_2")
+  rect((10, -8), (12, -9), name: "size1_2")
+  content("vec1_2", text(size: 0.7em)[Vecteur 1])
+  content("cap1_2", text(size: 0.7em)[Cap. n])
+  content("size1_2", text(size: 0.7em)[Tail. n])
 
-		\put(140,-86){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(154,-86){\framebox(14,8)[c]{\tiny }}
-		\put(168,-86){\framebox(14,8)[c]{\tiny }}
-		\put(182,-86){\framebox(14,8)[c]{\tiny }}
+  rect((6, -10), (8, -11), name: "obj11_2")
+  rect((8, -10), (10, -11), name: "obj12_2")
+  rect((10, -10), (12, -11), name: "obj13_2")
+  rect((12, -10), (14, -11), name: "obj14_2")
+  content("obj11_2", text(size: 0.7em)[Obj1])
+  content("obj12_2", text(size: 0.7em)[Obj2])
+  content("obj13_2", text(size: 0.7em)[...])
+  content("obj14_2", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,-70){\line(0,-1){12}}
-		\put(35,-82){\vector(1,0){15}}
+  line((5, -9), (5, -10.5))
+  line((5, -10.5), (6, -10.5))
 
-		\put(125,-70){\line(0,-1){12}}
-		\put(125,-82){\vector(1,0){15}}
+  rect((16, -8), (20, -9), name: "vec2_2")
+  rect((20, -8), (22, -9), name: "cap2_2")
+  rect((22, -8), (24, -9), name: "size2_2")
+  content("vec2_2", text(size: 0.7em)[Vecteur 2])
+  content("cap2_2", text(size: 0.7em)[Cap. n])
+  content("size2_2", text(size: 0.7em)[Tail. 1])
 
-		% Texte
-		\put(107,-100){...}
+  rect((18, -10), (20, -11), name: "obj21_2")
+  rect((20, -10), (22, -11), name: "obj22_2")
+  rect((22, -10), (24, -11), name: "obj23_2")
+  rect((24, -10), (26, -11), name: "obj24_2")
+  content("obj21_2", text(size: 0.7em)[Obj1])
 
-		% Boites
-		\put(20,-114){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-114){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,-114){\framebox(20,8)[c]{\tiny Taille m}}
+  line((17, -9), (17, -10.5))
+  line((17, -10.5), (18, -10.5))
+})
 
-		\put(110,-114){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-114){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-114){\framebox(20,8)[c]{\tiny Taille m}}
+== Sémantique de déplacement
 
-		\put(50,-130){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-130){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-130){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-130){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+- Copie
 
-		\put(140,-130){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(154,-130){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(168,-130){\framebox(14,8)[c]{\tiny ...}}
-		\put(182,-130){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+#cetz.canvas(length: 1em, {
+  import cetz.draw: *
 
-		% Fleches
-		\put(35,-114){\line(0,-1){12}}
-		\put(35,-126){\vector(1,0){15}}
+  // Grille pour le tracer, changer la couleur pour l'affiche ou pas
+  grid((0,0), (30,-17), stroke: white)
 
-		\put(125,-114){\line(0,-1){12}}
-		\put(125,-126){\vector(1,0){15}}
-	\end{picture}
-*/
+  rect((4, 0), (8, -1), name: "vec1_0")
+  rect((8, 0), (10, -1), name: "cap1_0")
+  rect((10, 0), (12, -1), name: "size1_0")
+  content("vec1_0", text(size: 0.7em)[Vecteur 1])
+  content("cap1_0", text(size: 0.7em)[Cap. n])
+  content("size1_0", text(size: 0.7em)[Tail. n])
 
+  rect((6, -2), (8, -3), name: "obj11_0")
+  rect((8, -2), (10, -3), name: "obj12_0")
+  rect((10, -2), (12, -3), name: "obj13_0")
+  rect((12, -2), (14, -3), name: "obj14_0")
+  content("obj11_0", text(size: 0.7em)[Obj1])
+  content("obj12_0", text(size: 0.7em)[Obj2])
+  content("obj13_0", text(size: 0.7em)[...])
+  content("obj14_0", text(size: 0.7em)[Objn])
 
+  line((5, -1), (5, -2.5))
+  line((5, -2.5), (6, -2.5))
 
-== Sémantique de déplacement}
+  rect((16, 0), (20, -1), name: "vec2_0")
+  rect((20, 0), (22, -1), name: "cap2_0")
+  rect((22, 0), (24, -1), name: "size2_0")
+  content("vec2_0", text(size: 0.7em)[Vecteur 2])
+  content("cap2_0", text(size: 0.7em)[Cap. 0])
+  content("size2_0", text(size: 0.7em)[Tail. 0])
+
+  rect((18, -2), (20, -3), name: "obj21_0")
+  content("obj21_0", text(size: 0.7em)[_null_])
+
+  line((17, -1), (17, -2.5))
+  line((17, -2.5), (18, -2.5))
+
+  rect((2, -3.1), (10, -3.9), name: "alloc", stroke: white)
+  content("alloc", box(width: 8em, align(left)[#text(main_color, size: 0.7em)[Allocation]]))
+
+  rect((4, -4), (8, -5), name: "vec1_1")
+  rect((8, -4), (10, -5), name: "cap1_1")
+  rect((10, -4), (12, -5), name: "size1_1")
+  content("vec1_1", text(size: 0.7em)[Vecteur 1])
+  content("cap1_1", text(size: 0.7em)[Cap. n])
+  content("size1_1", text(size: 0.7em)[Tail. n])
+
+  rect((6, -6), (8, -7), name: "obj11_1")
+  rect((8, -6), (10, -7), name: "obj12_1")
+  rect((10, -6), (12, -7), name: "obj13_1")
+  rect((12, -6), (14, -7), name: "obj14_1")
+  content("obj11_1", text(size: 0.7em)[Obj1])
+  content("obj12_1", text(size: 0.7em)[Obj2])
+  content("obj13_1", text(size: 0.7em)[...])
+  content("obj14_1", text(size: 0.7em)[Objn])
+
+  line((5, -5), (5, -6.5))
+  line((5, -6.5), (6, -6.5))
+
+  rect((16, -4), (20, -5), name: "vec2_1")
+  rect((20, -4), (22, -5), name: "cap2_1")
+  rect((22, -4), (24, -5), name: "size2_1")
+  content("vec2_1", text(size: 0.7em)[Vecteur 2])
+  content("cap2_1", text(size: 0.7em)[Cap. n])
+  content("size2_1", text(size: 0.7em)[Tail. 0])
+
+  rect((18, -6), (20, -7), name: "obj21_1")
+  rect((20, -6), (22, -7), name: "obj22_1")
+  rect((22, -6), (24, -7), name: "obj23_1")
+  rect((24, -6), (26, -7), name: "obj24_1")
+
+  line((17, -5), (17, -6.5))
+  line((17, -6.5), (18, -6.5))
+
+  rect((2, -7.1), (10, -7.9), name: "alloc", stroke: white)
+  content("alloc", box(width: 8em, align(left)[#text(main_color, size: 0.7em)[Copie des éléments]]))
+
+  rect((4, -8), (8, -9), name: "vec1_2")
+  rect((8, -8), (10, -9), name: "cap1_2")
+  rect((10, -8), (12, -9), name: "size1_2")
+  content("vec1_2", text(size: 0.7em)[Vecteur 1])
+  content("cap1_2", text(size: 0.7em)[Cap. n])
+  content("size1_2", text(size: 0.7em)[Tail. n])
+
+  rect((6, -10), (8, -11), name: "obj11_2")
+  rect((8, -10), (10, -11), name: "obj12_2")
+  rect((10, -10), (12, -11), name: "obj13_2")
+  rect((12, -10), (14, -11), name: "obj14_2")
+  content("obj11_2", text(size: 0.7em)[Obj1])
+  content("obj12_2", text(size: 0.7em)[Obj2])
+  content("obj13_2", text(size: 0.7em)[...])
+  content("obj14_2", text(size: 0.7em)[Objn])
+
+  line((5, -9), (5, -10.5))
+  line((5, -10.5), (6, -10.5))
+
+  rect((16, -8), (20, -9), name: "vec2_2")
+  rect((20, -8), (22, -9), name: "cap2_2")
+  rect((22, -8), (24, -9), name: "size2_2")
+  content("vec2_2", text(size: 0.7em)[Vecteur 2])
+  content("cap2_2", text(size: 0.7em)[Cap. n])
+  content("size2_2", text(size: 0.7em)[Tail. 1])
+
+  rect((18, -10), (20, -11), name: "obj21_2")
+  rect((20, -10), (22, -11), name: "obj22_2")
+  rect((22, -10), (24, -11), name: "obj23_2")
+  rect((24, -10), (26, -11), name: "obj24_2")
+  content("obj21_2", text(size: 0.7em)[Obj1])
+
+  line((17, -9), (17, -10.5))
+  line((17, -10.5), (18, -10.5))
+
+  rect((4, -11.1), (26, -11.5), name: "alloc", stroke: white)
+  content("alloc", [...])
+
+  rect((4, -12), (8, -13), name: "vec1_3")
+  rect((8, -12), (10, -13), name: "cap1_3")
+  rect((10, -12), (12, -13), name: "size1_3")
+  content("vec1_3", text(size: 0.7em)[Vecteur 1])
+  content("cap1_3", text(size: 0.7em)[Cap. n])
+  content("size1_3", text(size: 0.7em)[Tail. n])
+
+  rect((6, -14), (8, -15), name: "obj11_3")
+  rect((8, -14), (10, -15), name: "obj12_3")
+  rect((10, -14), (12, -15), name: "obj13_3")
+  rect((12, -14), (14, -15), name: "obj14_3")
+  content("obj11_3", text(size: 0.7em)[Obj1])
+  content("obj12_3", text(size: 0.7em)[Obj2])
+  content("obj13_3", text(size: 0.7em)[...])
+  content("obj14_3", text(size: 0.7em)[Objn])
+
+  line((5, -13), (5, -14.5))
+  line((5, -14.5), (6, -14.5))
+
+  rect((16, -12), (20, -13), name: "vec2_3")
+  rect((20, -12), (22, -13), name: "cap2_3")
+  rect((22, -12), (24, -13), name: "size2_3")
+  content("vec2_3", text(size: 0.7em)[Vecteur 2])
+  content("cap2_3", text(size: 0.7em)[Cap. n])
+  content("size2_3", text(size: 0.7em)[Tail. n])
+
+  rect((18, -14), (20, -15), name: "obj21_3")
+  rect((20, -14), (22, -15), name: "obj22_3")
+  rect((22, -14), (24, -15), name: "obj23_3")
+  rect((24, -14), (26, -15), name: "obj24_3")
+  content("obj21_3", text(size: 0.7em)[Obj1])
+  content("obj22_3", text(size: 0.7em)[Obj2])
+  content("obj23_3", text(size: 0.7em)[...])
+  content("obj24_3", text(size: 0.7em)[Objn])
+
+  line((17, -13), (17, -14.5))
+  line((17, -14.5), (18, -14.5))
+})
+
+== Sémantique de déplacement
 
 - Déplacement
 
-/*
-	\begin{picture}(0,0)(-50,0)
-		% Boites
-		\put(20,0){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,0){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,0){\framebox(20,8)[c]{\tiny Taille m}}
+#cetz.canvas(length: 1em, {
+  import cetz.draw: *
 
-		\put(110,0){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,0){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(160,0){\framebox(20,8)[c]{\tiny Taille 0}}
+  // Grille pour le tracer, changer la couleur pour l'affiche ou pas
+  grid((0,0), (30,-17), stroke: white)
 
-		\put(50,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-16){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, 0), (8, -1), name: "vec1_0")
+  rect((8, 0), (10, -1), name: "cap1_0")
+  rect((10, 0), (12, -1), name: "size1_0")
+  content("vec1_0", text(size: 0.7em)[Vecteur 1])
+  content("cap1_0", text(size: 0.7em)[Cap. n])
+  content("size1_0", text(size: 0.7em)[Tail. n])
 
-		\put(140,-16){\framebox(14,8)[c]{\tiny $null$}}
+  rect((6, -2), (8, -3), name: "obj11_0")
+  rect((8, -2), (10, -3), name: "obj12_0")
+  rect((10, -2), (12, -3), name: "obj13_0")
+  rect((12, -2), (14, -3), name: "obj14_0")
+  content("obj11_0", text(size: 0.7em)[Obj1])
+  content("obj12_0", text(size: 0.7em)[Obj2])
+  content("obj13_0", text(size: 0.7em)[...])
+  content("obj14_0", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,0){\line(0,-1){12}}
-		\put(35,-12){\vector(1,0){15}}
+  line((5, -1), (5, -2.5))
+  line((5, -2.5), (6, -2.5))
 
-		\put(125,0){\line(0,-1){12}}
-		\put(125,-12){\vector(1,0){15}}
-	\end{picture}
-*/
+  rect((16, 0), (20, -1), name: "vec2_0")
+  rect((20, 0), (22, -1), name: "cap2_0")
+  rect((22, 0), (24, -1), name: "size2_0")
+  content("vec2_0", text(size: 0.7em)[Vecteur 2])
+  content("cap2_0", text(size: 0.7em)[Cap. 0])
+  content("size2_0", text(size: 0.7em)[Tail. 0])
 
+  rect((18, -2), (20, -3), name: "obj21_0")
+  content("obj21_0", text(size: 0.7em)[_null_])
 
+  line((17, -1), (17, -2.5))
+  line((17, -2.5), (18, -2.5))
+})
 
-== Sémantique de déplacement}
+== Sémantique de déplacement
 
 - Déplacement
 
-/*
-	\begin{picture}(0,0)(-50,0)
-		% Boites
-		\put(20,0){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,0){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(70,0){\framebox(20,8)[c]{\tiny Taille m}}
+#cetz.canvas(length: 1em, {
+  import cetz.draw: *
 
-		\put(110,0){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,0){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(160,0){\framebox(20,8)[c]{\tiny Taille 0}}
+  // Grille pour le tracer, changer la couleur pour l'affiche ou pas
+  grid((0,0), (30,-17), stroke: white)
 
-		\put(50,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-16){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-16){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, 0), (8, -1), name: "vec1_0")
+  rect((8, 0), (10, -1), name: "cap1_0")
+  rect((10, 0), (12, -1), name: "size1_0")
+  content("vec1_0", text(size: 0.7em)[Vecteur 1])
+  content("cap1_0", text(size: 0.7em)[Cap. n])
+  content("size1_0", text(size: 0.7em)[Tail. n])
 
-		\put(140,-16){\framebox(14,8)[c]{\tiny $null$}}
+  rect((6, -2), (8, -3), name: "obj11_0")
+  rect((8, -2), (10, -3), name: "obj12_0")
+  rect((10, -2), (12, -3), name: "obj13_0")
+  rect((12, -2), (14, -3), name: "obj14_0")
+  content("obj11_0", text(size: 0.7em)[Obj1])
+  content("obj12_0", text(size: 0.7em)[Obj2])
+  content("obj13_0", text(size: 0.7em)[...])
+  content("obj14_0", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,0){\line(0,-1){12}}
-		\put(35,-12){\vector(1,0){15}}
+  line((5, -1), (5, -2.5))
+  line((5, -2.5), (6, -2.5))
 
-		\put(125,0){\line(0,-1){12}}
-		\put(125,-12){\vector(1,0){15}}
+  rect((16, 0), (20, -1), name: "vec2_0")
+  rect((20, 0), (22, -1), name: "cap2_0")
+  rect((22, 0), (24, -1), name: "size2_0")
+  content("vec2_0", text(size: 0.7em)[Vecteur 2])
+  content("cap2_0", text(size: 0.7em)[Cap. 0])
+  content("size2_0", text(size: 0.7em)[Tail. 0])
 
-		% Texte
-		\put(0,-25){\tiny \color{teal}Permutation}
+  rect((18, -2), (20, -3), name: "obj21_0")
+  content("obj21_0", text(size: 0.7em)[_null_])
 
-		% Boites
-		\put(20,-35){\framebox(30,8)[c]{\tiny Vecteur 1}}
-		\put(50,-35){\framebox(20,8)[c]{\tiny Cap 0}}
-		\put(70,-35){\framebox(20,8)[c]{\tiny Taille 0}}
+  line((17, -1), (17, -2.5))
+  line((17, -2.5), (18, -2.5))
 
-		\put(110,-35){\framebox(30,8)[c]{\tiny Vecteur 2}}
-		\put(140,-35){\framebox(20,8)[c]{\tiny Cap n}}
-		\put(160,-35){\framebox(20,8)[c]{\tiny Taille m}}
+  rect((2, -3.1), (10, -3.9), name: "alloc", stroke: white)
+  content("alloc", box(width: 8em, align(left)[#text(main_color, size: 0.7em)[Déplacement]]))
 
-		\put(50,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{1}}}
-		\put(64,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{2}}}
-		\put(78,-51){\framebox(14,8)[c]{\tiny ...}}
-		\put(92,-51){\framebox(14,8)[c]{\tiny Obj\textsubscript{m}}}
+  rect((4, -4), (8, -5), name: "vec1_1")
+  rect((8, -4), (10, -5), name: "cap1_1")
+  rect((10, -4), (12, -5), name: "size1_1")
+  content("vec1_1", text(size: 0.7em)[Vecteur 1])
+  content("cap1_1", text(size: 0.7em)[Cap. 0])
+  content("size1_1", text(size: 0.7em)[Tail. 0])
 
-		\put(140,-51){\framebox(14,8)[c]{\tiny $null$}}
+  rect((6, -6), (8, -7), name: "obj11_1")
+  rect((8, -6), (10, -7), name: "obj12_1")
+  rect((10, -6), (12, -7), name: "obj13_1")
+  rect((12, -6), (14, -7), name: "obj14_1")
+  content("obj11_1", text(size: 0.7em)[Obj1])
+  content("obj12_1", text(size: 0.7em)[Obj2])
+  content("obj13_1", text(size: 0.7em)[...])
+  content("obj14_1", text(size: 0.7em)[Objn])
 
-		% Fleches
-		\put(35,-35){\line(0,-1){20}}
-		\put(35,-55){\line(1,0){95}}
-		\put(130,-55){\line(0,1){8}}
-		\put(130,-47){\vector(1,0){10}}
+  line((5, -5), (5, -7.5))
+  line((5, -7.5), (17.5, -7.5))
+  line((17.5, -7.5), (17.5, -6.5))
+  line((17.5, -6.5), (18, -6.5))
 
-		\put(125,-35){\line(0,-1){4}}
-		\put(125,-39){\line(-1,0){85}}
-		\put(40,-39){\line(0,-1){8}}
-		\put(40,-47){\vector(1,0){10}}
-	\end{picture}
-*/
+  rect((16, -4), (20, -5), name: "vec2_1")
+  rect((20, -4), (22, -5), name: "cap2_1")
+  rect((22, -4), (24, -5), name: "size2_1")
+  content("vec2_1", text(size: 0.7em)[Vecteur 2])
+  content("cap2_1", text(size: 0.7em)[Cap. n])
+  content("size2_1", text(size: 0.7em)[Tail. n])
 
+  rect((18, -6), (20, -7), name: "obj21_1")
+  content("obj21_1", text(size: 0.7em)[_null_])
+
+  line((17, -5), (17, -5.5))
+  line((17, -5.5), (5.5, -5.5))
+  line((5.5, -5.5), (5.5, -6.5))
+  line((5.5, -6.5), (6, -6.5))
+})
 
 == Sémantique de déplacement
 
