@@ -903,83 +903,69 @@ post (r: r > 0) {
   - Paramètre de type ```cpp std::contracts::contract_violation```
 
 #addproposal("P2900")
-//!!!!!!!!!!!!!!!!
-== Reflection}
-\begin{itemize}
-\item Support de la réflexion statique
-\begin{itemize}
-\item Un type opaque ```cpp std::meta::info``` pour représenter les éléments du programme
-\item Un opérateur de réflexion ```cpp ^^```
-\item Plusieurs méta-fonctions de réflexion
-\item Une construction de production des éléments ```cpp [: refl :]```
-\end{itemize}
-\item Introspection
-\item Méta-programmation et code \textit{compile-time}
-\item Injection
-\item Construction de données statiques depuis du \textit{compile-time} : ```cpp std::define_static_string```, ```cpp std::define_static_object``` et ```cpp std::define_static_array```
-\end{itemize}
 
-#addproposal{p2996}{https://wg21.link/p2996}
-#addproposal{p3096}{https://wg21.link/p3096}
-#addproposal{p1306}{https://wg21.link/p1306}
-#addproposal{p3491}{https://wg21.link/p3491}
-#addproposal{p3293}{https://wg21.link/p3293}
-#addproposal{p3394}{https://wg21.link/p3394}
-#addproposal{p3560}{https://wg21.link/p3560}
+== Reflection
 
+- Support de la réflexion statique
+  - Un type opaque ```cpp std::meta::info``` pour représenter les éléments du programme
+  - Un opérateur de réflexion ```cpp ^^```
+  - Plusieurs méta-fonctions de réflexion
+  - Une construction de production des éléments ```cpp [: refl :]```
+- Introspection
+- Méta-programmation et code _compile-time_
+- Injection
+- Construction de données statiques depuis du _compile-time_ : ```cpp std::define_static_string```, ```cpp std::define_static_object``` et ```cpp std::define_static_array```
 
+#addproposal("p2996")
+#addproposal("p3096")
+#addproposal("p1306")
+#addproposal("p3491")
+#addproposal("p3293")
+#addproposal("p3394")
+#addproposal("p3560")
 
 == Reflection}
-```cpp
-	enum Color { red, green, blue };
-
-	template<typename E, bool Enumerable = meta::is_enumerable_type(^^E)>
-	requires is_enum_v<E>
-	constexpr string_view enum_to_string(E value) {
-	  if constexpr (Enumerable)
-	    template for (constexpr auto e :
-	      define_static_array(meta::enumerators_of(^^E)))
-	  if (value == [:e:])
-	    return meta::identifier_of(e);
-
-	return "<unnamed>"; }
-
-	enum_to_string(Color::red);  // red
-	enum_to_string(Color(42));   // <unnamed>
-```
-
-
-== Modules}
-\begin{itemize}
-\item Suppression de l'expansion de macros dans les déclarations de module
-\end{itemize}
-
-#addproposal{P3034}{https://wg21.link/P3034}
-
-
-
-== Compilation et implémentation}
-\begin{itemize}
-\item ```cpp #embed``` ressources externes disponibles au \textit{runtime}
-\end{itemize}
 
 ```cpp
-	const unsigned char foo[] = {
-	  #embed "foo.png"
-	};
+enum Color { red, green, blue };
+
+template<typename E, bool Enumerable = meta::is_enumerable_type(^^E)>
+requires is_enum_v<E>
+constexpr string_view enum_to_string(E value) {
+  if constexpr (Enumerable)
+    template for (constexpr auto e :
+      define_static_array(meta::enumerators_of(^^E)))
+  if (value == [:e:])
+    return meta::identifier_of(e);
+
+return "<unnamed>"; }
+
+enum_to_string(Color::red);  // red
+enum_to_string(Color(42));   // <unnamed>
 ```
 
-#addproposal{p1967}{https://wg21.link/p1967}
+== Modules
 
+- Suppression de l'expansion de macros dans les déclarations de module
 
+#addproposal("P3034")
 
-== Debug}
-\begin{itemize}
-\item ```cpp std::breakpoint()``` : point d'arrêt dans le programme
-\item ```cpp std::breakpoint_if_debugging``` : point d'arrêt si l'exécution se fait dans un debugger
-\item ```cpp std::is_debugger_present()``` permet de savoir si l'exécution se fait dans un debugger
-\end{itemize}
+== Compilation et implémentation
 
-#addproposal{P2546}{https://wg21.link/P2546}
+- ```cpp #embed``` ressources externes disponibles au \textit{runtime}
 
-\end{document}
+```cpp
+const unsigned char foo[] = {
+  #embed "foo.png"
+};
+```
+
+#addproposal("p1967")
+
+== Debug
+
+- ```cpp std::breakpoint()``` : point d'arrêt dans le programme
+- ```cpp std::breakpoint_if_debugging``` : point d'arrêt si l'exécution se fait dans un debugger
+- ```cpp std::is_debugger_present()``` permet de savoir si l'exécution se fait dans un debugger
+
+#addproposal("P2546")
