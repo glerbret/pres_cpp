@@ -1,6 +1,4 @@
 #import "./model.typ": *
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import "@preview/cetz:0.4.2"
 
 = C++26
 

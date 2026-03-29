@@ -1,6 +1,5 @@
 #import "./model.typ": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import "@preview/cetz:0.4.2"
 
 = C++17
 
@@ -906,85 +905,58 @@ baz("azerty"); // 6
 #addproposal("P0036")
 
 == Fold expression
+#columns(2)[#align(center)[
+    #block(stroke: 0.05em + black, inset: (x: 1em, bottom: 1em, top: 0.5em), radius: 0.4em, text[_Right fold_
+      #v(2em)
 
-TODO
+      #diagram(spacing: (0.5em, 0.5em), {
+        node((0, 1), "1")
+        node((1, 0), "f")
+        node((2, 1), "f")
+        node((1, 2), "2")
+        node((3, 2), "f")
+        node((2, 3), "3")
+        node((4, 3), "f")
+        node((3, 4), "4")
+        node((5, 4), "z")
 
-/*
-\begin{center}
-\begin{tikzpicture}[framed,background rectangle/.style={draw=black,fill=white,rounded corners,general shadow={fill=lightgray,shadow xshift= 4pt,shadow yshift=-4pt}}]
-\coordinate (i) at (0,0);
-\coordinate (o) at (4.5cm,0);
-\coordinate (l) at (2.5cm,0);
+        edge((0, 1), (1, 0))
+        edge((1, 0), (2, 1))
+        edge((1, 2), (2, 1))
+        edge((2, 1), (3, 2))
+        edge((2, 3), (3, 2))
+        edge((3, 2), (4, 3))
+        edge((3, 4), (4, 3))
+        edge((4, 3), (5, 4))
+      })])
+  ]
+  #colbreak()
 
-\begin{scope}[sibling distance=12mm,level distance=6mm]
-\node at (i) {:}
-child {node {1}}
-child {node {:}
-child {node {2}}
-child {node {:}
-child {node {3}}
-child {node {:}
-child {node {4}}
-child {node {[ ]}}
-}
-}
-};
+  #align(center)[
+    #block(stroke: 0.05em + black, inset: (x: 1em, bottom: 1em, top: 0.5em), radius: 0.4em, text[
+      _Left fold_
+      #v(2em)
 
-\node at (o)  {$f$}
-child {node {1}}
-child {node {$f$}
-child {node {2}}
-child {node {$f$}
-child {node {3}}
-child {node {$f$}
-child {node {4}}
-child {node {$z$}}
-}
-}
-};
-\end{scope}
+      #diagram(spacing: (0.5em, 0.5em), {
+        node((0, 4), "z")
+        node((1, 3), "f")
+        node((2, 4), "1")
+        node((2, 2), "f")
+        node((3, 3), "2")
+        node((3, 1), "f")
+        node((4, 2), "3")
+        node((4, 0), "f")
+        node((5, 1), "4")
 
-\node at (l) {\textit{Right fold}};
-\end{tikzpicture}
-\\
-\phantom{text}\\
-\begin{tikzpicture}[framed,background rectangle/.style={draw=black,fill=white,rounded corners,general shadow={fill=lightgray,shadow xshift= 4pt,shadow yshift=-4pt}}]
-\coordinate (i) at (0,0);
-\coordinate (o) at (6.35cm,0);
-\coordinate (l) at (2.5cm,0);
-
-\begin{scope}[sibling distance=12mm,level distance=6mm]
-\node at (i) {:}
-child {node {1}}
-child {node {:}
-child {node {2}}
-child {node {:}
-child {node {3}}
-child {node {:}
-child {node {4}}
-child {node {[ ]}}
-}
-}
-};
-
-\node at (o) {$f$}
-child {node {$f$}
-child {node {$f$}
-child {node {$f$}
-child {node {$z$}}
-child {node {1}}
-}
-child {node {2}}
-}
-child {node {3}}
-}
-child {node {4}};
-\end{scope}
-
-\node at (l) {\textit{Left fold}};
-\end{tikzpicture}
-\end{center}
-*/
+        edge((0, 4), (1, 3))
+        edge((2, 4), (1, 3))
+        edge((1, 3), (2, 2))
+        edge((2, 2), (3, 3))
+        edge((2, 2), (3, 1))
+        edge((3, 1), (4, 2))
+        edge((3, 1), (4, 0))
+        edge((4, 0), (5, 1))
+      })])]]
 
 == Fold expression
 

@@ -1,6 +1,5 @@
 #import "./model.typ": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import "@preview/cetz:0.4.2"
 
 = Retour sur C++98 / C++03
 

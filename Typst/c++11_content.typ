@@ -1,6 +1,6 @@
 #import "./model.typ": *
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
 #import "@preview/cetz:0.4.2"
+
 = C++11
 
 == Présentation
@@ -469,7 +469,11 @@ cout << sizeof Foo::bar;
   import cetz.draw: *
 
   // Grille pour le tracer, changer la couleur pour l'affiche ou pas
-  grid((0,0), (30,-17), stroke: white)
+  grid(
+    (0, 0),
+    (30, -17),
+    stroke: white,
+  )
 
   rect((4, 0), (8, -1), name: "vec1_0")
   rect((8, 0), (10, -1), name: "cap1_0")
@@ -512,7 +516,11 @@ cout << sizeof Foo::bar;
   import cetz.draw: *
 
   // Grille pour le tracer, changer la couleur pour l'affiche ou pas
-  grid((0,0), (30,-17), stroke: white)
+  grid(
+    (0, 0),
+    (30, -17),
+    stroke: white,
+  )
 
   rect((4, 0), (8, -1), name: "vec1_0")
   rect((8, 0), (10, -1), name: "cap1_0")
@@ -592,7 +600,11 @@ cout << sizeof Foo::bar;
   import cetz.draw: *
 
   // Grille pour le tracer, changer la couleur pour l'affiche ou pas
-  grid((0,0), (30,-17), stroke: white)
+  grid(
+    (0, 0),
+    (30, -17),
+    stroke: white,
+  )
 
   rect((4, 0), (8, -1), name: "vec1_0")
   rect((8, 0), (10, -1), name: "cap1_0")
@@ -710,7 +722,11 @@ cout << sizeof Foo::bar;
   import cetz.draw: *
 
   // Grille pour le tracer, changer la couleur pour l'affiche ou pas
-  grid((0,0), (30,-17), stroke: white)
+  grid(
+    (0, 0),
+    (30, -17),
+    stroke: white,
+  )
 
   rect((4, 0), (8, -1), name: "vec1_0")
   rect((8, 0), (10, -1), name: "cap1_0")
@@ -869,7 +885,11 @@ cout << sizeof Foo::bar;
   import cetz.draw: *
 
   // Grille pour le tracer, changer la couleur pour l'affiche ou pas
-  grid((0,0), (30,-17), stroke: white)
+  grid(
+    (0, 0),
+    (30, -17),
+    stroke: white,
+  )
 
   rect((4, 0), (8, -1), name: "vec1_0")
   rect((8, 0), (10, -1), name: "cap1_0")
@@ -912,7 +932,11 @@ cout << sizeof Foo::bar;
   import cetz.draw: *
 
   // Grille pour le tracer, changer la couleur pour l'affiche ou pas
-  grid((0,0), (30,-17), stroke: white)
+  grid(
+    (0, 0),
+    (30, -17),
+    stroke: white,
+  )
 
   rect((4, 0), (8, -1), name: "vec1_0")
   rect((8, 0), (10, -1), name: "cap1_0")
@@ -1502,9 +1526,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 == ``` std::array```
 
-#list(marker: [],
-  list(indent: 5pt, text[Vérification des index à la compilation]),
-)
+#list(marker: [], list(indent: 5pt, text[Vérification des index à la compilation]))
 
 ```cpp
 array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9};
@@ -1673,9 +1695,10 @@ accumulate(begin(bar), end(bar), 0);  // 14
 
 == Itérateurs
 
-#list(marker: [],
+#list(
+  marker: [],
   list(indent: 5pt, text[Compatibles avec les conteneurs non-STL proposant ```cpp begin()``` et ```cpp end()```]),
-  list(indent: 5pt, text[Surchargeable sans modification du conteneur pour les autres])
+  list(indent: 5pt, text[Surchargeable sans modification du conteneur pour les autres]),
 )
 
 ```cpp
@@ -2964,9 +2987,7 @@ int baz = foo(5);  // bar : 20, baz : 5
   Capture du pointeur, non de l'objet
 ])
 
-#list(marker: [],
-  list(indent: 5pt, text[Soit via ```cpp [=]``` ou ```cpp [&]```])
-)
+#list(marker: [], list(indent: 5pt, text[Soit via ```cpp [=]``` ou ```cpp [&]```]))
 
 == lambda et fermeture
 
@@ -4222,8 +4243,8 @@ cv.wait(lck);
 
 #noteblock("Note", text[
   Possibilité de fournir un prédicat
-    - Blocage seulement s'il retourne ```cpp false```
-    - Déblocage seulement s'il retourne ```cpp true```
+  - Blocage seulement s'il retourne ```cpp false```
+  - Déblocage seulement s'il retourne ```cpp true```
 ])
 
 == Variables conditionnelles -- ``` condition_variable```
@@ -4322,8 +4343,8 @@ for(auto& th : threads) th.join();
 
 #noteblock("Note", text[
   Deux politiques d'exécution de la fonction appelée
-    - Exécution asynchrone
-    - Exécution différée à l'appel de ```cpp wait()``` ou ```cpp get()```
+  - Exécution asynchrone
+  - Exécution différée à l'appel de ```cpp wait()``` ou ```cpp get()```
   Le choix par défaut est laissé à l'implémentation
 ])
 
