@@ -105,7 +105,6 @@
 - Lancées par ```cpp throw```
 - Attrapées par ```cpp catch()``` depuis un bloc ```cpp try```
 
-
 ```cpp
 try {
   ...
@@ -145,9 +144,7 @@ catch(logic_error& e) {
 
 == Erreurs -- Critiques des exceptions
 
-#list(marker: [ ], text[
-  - Mauvais support par les différents outils
-])
+#list(marker: [], list(indent: 5pt, "Mauvais support par les différents outils"))
 
 #noteblock("À nuancer", text[
   Correctement supportées par les compilateurs actuels
@@ -156,21 +153,14 @@ catch(logic_error& e) {
 ])
 
 #list(
-  marker: [ ],
-  text[
-    - Code plus complexe à analyser
-
-    //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreur
-
-    - Difficiles à introduire dans une large base de code sans exception
-
-    // Argument de la difficulté d'introduction à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)
-
-    - Absence d'ABI normalisée
-  ],
+  marker: [],
+  list(indent: 5pt, "Code plus complexe à analyser"),
+  //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreur
+  list(indent: 5pt, "Difficiles à introduire dans une large base de code sans exception"),
+  // Argument de la difficulté d'introduction à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)
+  list(indent: 5pt, "Absence d'ABI normalisée"),
+  //Le problème d'ABI est plus large que les seules exceptions
 )
-
-//Le problème d'ABI est plus large que les seules exceptions
 
 == Erreurs -- Exception safety
 - _No-throw guarantee_ : l'opération ne peut pas échouer
@@ -219,7 +209,7 @@ A& A::operator=(A other) {           // Copy
 == Erreurs -- Exceptions et bonnes pratiques
 
 #adviceblock("Do", text[
-  _Throw by value, catch by const reference_ (voir _C++ Coding Standards_, 73)
+  _Throw by value, catch by const reference_ (voir _C++ Coding Standards_)
 ])
 
 #adviceblock("Do", text[
@@ -274,7 +264,7 @@ assert(expression);
 ])
 
 #adviceblock("Do", text[
-  Préférez les exceptions aux codes retour (voir _C++ Coding Standards_, 72)
+  Préférez les exceptions aux codes retour (voir _C++ Coding Standards_)
 ])
 
 #alertblock("Don't", text[
@@ -296,13 +286,11 @@ if(!memory) goto err;
 err:
 free(memory);
 ```
-#list(
-  marker: [ ],
-  text[
-    - Laborieux
-    - Difficile à mettre en place en présence d'exceptions
-  ],
-)
+
+#list(marker: [], list(indent: 5pt, "Laborieux"), list(
+  indent: 5pt,
+  "Difficile à mettre en place en présence d'exceptions",
+))
 
 == Ressources -- Gestion manuelle
 
@@ -419,9 +407,7 @@ private:
 == Ressources -- Limites du RAII
 
 #alertblock(```cpp std::auto_ptr```, text[
-  Copiable
-
-  La copie transfère la responsabilité de la ressource
+  Copiable, la copie transfère la responsabilité de la ressource
 
   ```cpp
   void foo(auto_ptr<int> bar) {}
@@ -444,7 +430,7 @@ private:
 #noteblock("Exceptions", text[
   Agrégats et conteneurs dont le rôle est de contenir des données
 
-  // Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'aggregate du standard}
+  // Agrégat désigne ici des classes, ou structures, qui agrègent un ensemble de données ensembles sans comportement ni invariant. Ce n'est pas exactement la même chose que l'aggregate du standard
   // Certains utilisent aussi le terme d'agglomérat, ce qui évite la confusion
 ])
 
@@ -659,17 +645,10 @@ private:
   ```cpp length()``` et ```cpp size()``` retournent le nombre de _bytes_, pas de caractères
 ])
 
-#list(
-  marker: [ ],
-  text[
-    - Contiguïté non garantie, mais respectée en pratique
-
-    // Contiguïté garantie en C++11 et suivant
-    // Pas d'implémentation non contigüe connue
-
-    - Variante ```cpp std::wstring``` pour les caractères larges
-  ],
-)
+#list(marker: [], list(indent: 5pt, "Contiguïté non garantie, mais respectée en pratique"), list(
+  indent: 5pt,
+  text[Variante ```cpp std::wstring``` pour les caractères larges],
+))
 
 #alertblock("API trop riche", text[
   Voir #link("http://www.gotw.ca/gotw/084.htm")[GotW \#84 : Monoliths "Unstrung" #linklogo()]
@@ -960,21 +939,18 @@ for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
 - Candidat pour le _fold_/_reduce_ fonctionnel
 - Pas de sémantique, faible utilité
 
-
 == STL Algorithmes -- Recherche linéaire
 
 - ```cpp std::find()``` recherche une valeur
 - ... et retourne un itérateur sur celle-ci
-- .. ou l'itérateur de fin si la valeur n'est pas présente
+- ... ou l'itérateur de fin si la valeur n'est pas présente
   \end{itemize}
 
 ```cpp
 vector<int> foo{4, 5, 9 ,12};
-vector<int>::iterator it1;
-vector<int>::iterator it2
 
-it1 = find(foo.begin(), foo.end(), 5);   // it1 pointe sur foo[1]
-it2 = find(foo.begin(), foo.end(), 19);  // Et it2 sur foo.end()
+find(foo.begin(), foo.end(), 5);   // itérateur sur foo[1]
+find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
 ```
 
 == STL Algorithmes -- Recherche linéaire
@@ -995,7 +971,6 @@ it2 = find(foo.begin(), foo.end(), 19);  // Et it2 sur foo.end()
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-
 == STL Algorithmes -- Recherche dichotomique
 
 - Pré-requis : ensemble trié
@@ -1015,7 +990,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 == STL Algorithmes -- Recherche dichotomique
 
 - ```cpp std::upper_bound()``` retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée
-- ```cpp std::equal_range()``` retourne la paire (```cpp std::lower_bound```, ```cpp std::upper_bound```)
+- ```cpp std::equal_range()``` retourne la paire (```cpp std::lower_bound()```, ```cpp std::upper_bound()```)
 
 #alertblock("Attention", text[
   Le résultat retourné peut ne pas être la valeur recherchée
@@ -1197,7 +1172,7 @@ swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
 
 == STL Algorithmes -- Remplacement
 
-- ```cpp std::replace()``` remplace toutes les occurrences d'une valeur par une autre
+- ```cpp std::replace()``` remplace toutes les occurrences d'une valeur
 
 ```cpp
 vector<int> foo{4, 5, 7, 9 ,12, 5};
@@ -1205,17 +1180,17 @@ vector<int> foo{4, 5, 7, 9 ,12, 5};
 replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
 ```
 
-- ```cpp std::replace_if()``` remplace toutes les éléments vérifiant le prédicat par une valeur donnée
+- ```cpp std::replace_if()``` remplace toutes les éléments vérifiant le prédicat
 
 == STL Algorithmes -- Remplacement
 
-- ```cpp std::replace_copy()``` copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur par une autre
+- ```cpp std::replace_copy()``` copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur
 
 #noteblock(```cpp _copy```, text[
   Les algorithmes suffixés par ```cpp _copy``` fonctionnent comme l'algorithme de base en troquant la modification en place contre une copie du résultat
 ])
 
-- ```cpp std::replace_copy_if()``` copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat par une valeur donnée
+- ```cpp std::replace_copy_if()``` copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat
 
 #codesample(
   "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2yAQbwA1hBggRdkxZl8TAB2Kw3Xa7U4EJYMXFPS7rAAiu0JBxJt0J9IJN2xuxYTGCEHx0OJXzJRNZZLJQ3QIBAr3exCB2Iuu34qDF0l2AFZSEydXFdqQuGYdZqiRz1uKJVKZadEgYVtQkQA6KLAfnzFXO1wCk06gAc%2BItIol/GIEFSAC9MAB9HG7PBPRkaFnxp5uT2oJ2RzAClPWax4QXXCX7YWkku7a0oRY4oFAjMmTUWPCNxl1w67MAcTtrIPl0Xs4OSgjS6teWuHetdxtuBjTvvF0sc6HlsVDysjmVyogKw5K9bYBvEjXa3W7fWG41as0s9dV232mN4KiOzOu9061VO70e1EY/2BpaZKhuGeBRrGZIJgcSYplBHZftmuYWvslgFkWJZrv2VqbmOE5uPWqqNs2rZplO3bzkBS53jhaDjqRHbTpqs4UcGN4roumGLsOo7bh8e6CMqhHHr6Z4XkaJo3guJZVrxu5HAJB4IvUt5YfemB2kwKzRmgiQAJ6vi6mBugwPoZt%2BDDoKZVYRJp6LRsESgNNEEA2cQHqngGKlcZ6YbZhBqbQbsybIXB6YIWBOaAShViWIW66cRWG6jrReEEUiREtpqbaTgx5G9pRbHeVWKX0emjHMflnLeSBflxnBMEhWmSnEFmEVIRY0VofFZbedxMole26auRlJGDT2PZeRhg6qTRNalRNTFzpVq7TWyy7XBw8y0Jwmq8H4HBaKQqCcPhqGWJWizLI8Gw8KQBCaJt8zoiAmoaPonCSHtD1HZwvAKCAb33Qdm2kHAsBIJgqhvOOJDkJQ9TAAoyiGJUQgIKgADu%2B23WgLCJHQTDVMjIS0GjmP7YduP4/QMSI8wiQKOjBCkFTdDRKErCrLwrM0wA8uOZNY99kNvNcxCI79pAi8gtT4PtvD8IIIhiOwUgyIIigqOowOkLorQGEYKD5pY%2Bh4BE/2QPMqCJNU/0cAAtFK0GmGdFhcFwuz2wA6mItCe17kMEMQTC8KgrzEMQeBYBbPrEF4gh4GwAAqSK0DH8wKJdKx6FKwTE6j6NC9wvBB5gqy3RjweJA9W07V9OvHRw2BQ8gMPELsqh%2BgAbPbXeSLswDIPCEBB/H6KzLsECnTFNi7LghAkCh6xcLMJc1/MaJMFgMQ%2Bs9r3vRwn2kBToeS/9gPrwfZj14djdr8DszzOHqTOJIQA%3D%3D",
@@ -1255,7 +1230,6 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::remove(foo.begin(),+foo.end(),+5)%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-
 == STL Algorithmes -- Suppression
 
 - ```cpp std::remove_if()``` élimine les éléments vérifiant le prédicat
@@ -1289,8 +1263,9 @@ unique(foo.begin(), foo.end());  // 4 5 7 9 5 ...
 int double_val(int i) { return 2 * i;}
 
 vector<int> foo{4, 5, 7, 9};
-vector<int> bar(4);
-transform(foo.begin(), foo.end(), bar.begin(), double_val);
+vector<int> bar;
+transform(foo.begin(), foo.end(),
+          back_inserter(bar), double_val);
 // 8 10 14 18
 ```
 
@@ -1301,15 +1276,15 @@ transform(foo.begin(), foo.end(), bar.begin(), double_val);
 ```cpp
 vector<int> foo{4, 5, 7, 9};
 vector<int> bar{2, 3, 6, 1};
-vector<int> baz(4);
+vector<int> baz;
 
 transform(foo.begin(), foo.end(), bar.begin(),
-          baz.begin(), plus<int>());
+          back_inserter(baz), plus<int>());
 // 6 8 13 10
 ```
 
 #codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzADspAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu3QSwi9AA%2Bs8xBBEQi5l8TPErDddrtTgRlgxdmZdgAqBEHYm3eIAEQJN1xLCYwQg%2BOhRK%2BpMJTNJpOG6BAIFe72IQMRF12/FQwukuwArKRdoldgBOQls2Ii0XiyXSoiyw7y2LYXYRBoQST4w3s66i3YmkAEYiGBT8YgsaioVAAOiiwB5C0VQeDrl5mrtxFDmHDDDjyNRGKxtCdRtJfogaQAXph0Ui8E8WbsNIyEU83LaGsGi5heTXrNY8HzXaLhYK3e6CBKUEskUCgQ3ZWqLHgTGrK2PDrswBwl%2BtnSSe6y%2B2LB5K0F5R4dx8vZ24GCf1939S6hQKNzuh2aPpbBAqlSrNRqtZq9VvL26PSfC0jlfa0J2FMxNViTUADZNS4a9/2NXcpTec05VAm07ULB0cxvZChy9H0/QDJUkxTNMyNjSME3IiN4yYQs6NTSMPSSbwFAwggLl5PD7yjYgCzwYtS1rA5K2rQ0xMXbCm2Elsc32SwOy7N1e34h89xHOtx2w2dp1necj0XZdV0Zbd9i3fiPX3Q83GPdY1TPC8jWvfk2RuDgFloTg1V4PwOC0UhUE4ezlMsd0lhWR4Nh4UgCE0LyFgAaxANUNH0ThJH8xLgs4XgFBADKEsCrzSDgWAkEwVQ3gPEhyEoBpgAUZRDCqIQEFQAB3AK4rQFgkjoJgalakJaA67qAqC/rBvoGJmuYJIFE6ghSBmuholCVg1l4da5oAeQPCaety6q3muYhmvy0gzuQOp8AC3h%2BEEEQxHYKQZEERQVHUUrSF0NoDCMFB20sfQ8AiQrIAWVAkhqQqOAAWnFcTTHCiwuC4XZEYAdTEWhsZx6qiN4VBXmIYg8CwKG42ILxBDwNgABUg1oGmFgUKLVj0cVglG9rOpO7heC9TA1jirrvSSRLvN8nK/pCjhsBq5A6uIXZVAADhgxGYMkXZgGQeEIC9enkrmXYIDCqwwd2XBCBIJTYi4OYRZlhYEDOLAYjjVL0syjhstIKbSeuwrivdgOzHloLFbd0q5gWcm0mcSQgA%3D%3D",
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGIAOwAnKSuADJ4DJgAcj4ARpjEIGbBAA6oCoRODB7evgGp6ZkC4ZExLPGJybaY9o4CQgRMxAQ5Pn5B1bVZDU0EJdFxCUnBCo3NrXkdo739ZRXDAJS2qF7EyOwc5gDMEcjeWADUJltuTqPEmKzH2CYaAILbu/uYRycAbpgOJNe3D2Y7DD2XkOxzcYmAJEICBYP3uv2mjmQBwiBAO6BWsXoAH03mIICjkQtfiZ/FZ7gcDhcCKsGAczAcAFTI45kh7%2BAAixPuBJYTAiECJcNJvwpJNZFIpo3QIBAHy%2BxFBKOuB34qDF0gOAFZSAd/DrAiTOVtxRKpTK5UQFSclVtsAdYk0WVy7hKDmaQARiIYFPxiCxqKhUAA6eLAflLFWBoOuAU690O5AAayxESUzQSEAdxAj6K8mMwOLERONIolvogGQAXgXUXhXuyDhoWcjXm57U0g1XMALm9ZrHhBS6JWLS673WgvKjQaD2wrNRY8CZNQ3pycDmAOOvNiXycOOaO3QRpSgVlOTjON0u3AxLzuh4bnaLhbvJUfzZ9LYrBMrVeqddrdX1B87zHN9ZQ/b5rW/W1ZzFMwdS2HUADYdS4YCTVfY8LUg05oLtB1KydOEX0PY9PW9X1/VVENMDDBhY0jYMYwjLMaLohj4yYJMUwYNMCAzAiI3dFJvAUL8CGuAViwwyNiArPBqyxWt60bZs6xnAjOwU7tpKOSx%2B0HV0RxIzCZQnM83A0phCPnRdl1bC9N1vGSHxI8dTwctdL01a9nNLVy2U5e4OCWWhOE1Xg/A4LRSFQThLP0yw3RWNYXm2HhSAITQQqWRMQE1DR9E4SRIuy2LOF4BQQEKrLopC0g4FgJBMFUT5JxIchKCaYAFGUQwaiEBBUAAdyijK0BYFI6CYOoGD6yJaEGkaopiiapvoRIeuYFIFCGghSDWugEiiVgNl4Q6NoAeUnJbRrKlrPjuYgeoqkJWuQBp8Ci3h%2BEEEQxHYKQZEERQVHUOrSF0Lh9EMYw%2B0sfQ8FiKrICWVAUlmqqOAAWilY52VMRKLC4LgDmxgB1MRaDJ8mWvI3hUA%2BYhiDwLAUdjYgvEEPA2AAFUDWh2aWBQUvWPQpQieaBqGu7uF4T1MA2DLhq9FJstC8LSohuKOGwd72uIA5VAADiQ7GkMkA5gGQJEIE9LnEwWA4IASqwEYOXBCBIPSti4BZ5fVpYEEuLBEljPKCqKjgStIFaGdeqqasDqOzC1mKdYDuqFiWJmMmcSQgA%3D",
 )
 
 == STL Algorithmes -- Rotation
@@ -1423,8 +1398,9 @@ partial_sort(foo.begin(), foo.begin() + 3, foo.end());
 vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
 random_shuffle(foo.begin(), foo.end());
-// 1 8 3 7 9 4 2 6 5
-// ou ...
+// 1 8 3 7 9 4 2 6 5 ou
+// 5 6 2 1 9 4 7 8 3 ou
+// ...
 ```
 
 #codesample(
@@ -1548,7 +1524,6 @@ accumulate(foo.begin(), foo.end(), 1, multiplies<int>()); // 4320
 - Opérateur et valeur initiale configurables
 - _Reduce_/_fold_ fonctionnel
 
-
 == STL Algorithmes -- Numérique
 
 - ```cpp std::adjacent_difference()``` "différence" entre chaque élément et son prédécesseur
@@ -1563,7 +1538,6 @@ adjacent_difference(foo.begin(), foo.end(),
 ```
 
 - Opérateur configurable
-
 
 == STL Algorithmes -- Numérique
 
