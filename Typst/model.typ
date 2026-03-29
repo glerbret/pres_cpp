@@ -3,7 +3,7 @@
 // Couleur principale
 #let main_color = rgb("#007F7F")
 
-// Définition de blocs d'affichage (note, avertissement et consieil)
+// Définition de blocs d'affichage (note, avertissement et conseil)
 #let _block(title, content, color) = {
   show raw.where(block: true): it => {
     align(center)[
@@ -88,8 +88,10 @@
 
   context place(
     bottom + left,
-    dx: if (proposalcounter.get().first() < 6) {-1.3em + 4.5em * proposalcounter.get().first()} else {-1.3em + 4.5em * (proposalcounter.get().first() - 6)},
-    dy: if (proposalcounter.get().first() < 6) { -0em } else { 1.1em},
+    dx: if (proposalcounter.get().first() < 6) { -1.3em + 4.5em * proposalcounter.get().first() } else {
+      -1.3em + 4.5em * (proposalcounter.get().first() - 6)
+    },
+    dy: if (proposalcounter.get().first() < 6) { -0em } else { 1.1em },
     link(url)[
       #box(fill: white, stroke: main_color, radius: 1em, inset: (
         left: 0.3em,
@@ -105,6 +107,54 @@
         )[#fa-icon("circle-play", solid: true)]]],
   )
   context proposalcounter.step()
+}
+
+// Ressources
+#let addbook(title, authors) = {
+  text[
+    #text(main_color, size: 0.9em)[#title] #linebreak()
+    #text(size: 0.8em)[#h(0.5cm) #authors] #linebreak()
+    #v(0.6em)
+  ]
+}
+#let addarticle(title, url, authors) = {
+  text[
+    #link(url)[#text(main_color, size: 0.9em)[#title]] #linebreak()
+    #text(size: 0.8em)[#h(0.5cm) #authors] #linebreak()
+    #v(0.6em)
+  ]
+}
+#let addweb(title, url, authors) = {
+  text[
+    #link(url)[#text(main_color, size: 0.9em)[#title]] #linebreak()
+    #link(url)[#text(size: 0.8em)[#h(0.5cm) #url]] #linebreak()
+    #if (authors != none) [#text(size: 0.8em)[#h(0.5cm) #authors] #linebreak()]
+    #v(0.6em)
+  ]
+}
+#let addblog(title, url, authors) = {
+  text[
+    #link(url)[#text(main_color, size: 0.9em)[#title]] #linebreak()
+    #text(size: 0.8em)[#h(0.5cm) #authors] #linebreak()
+    #link(url)[#text(size: 0.8em)[#h(0.5cm) #url]] #linebreak()
+    #v(0.6em)
+  ]
+}
+#let addconf(name, url, youtube, github) = {
+  text[
+    #link(url)[#text(main_color, size: 0.9em)[#name]]
+    #link(youtube)[#text(red)[#fa-youtube()]]
+    #link(github)[#text[#fa-github()]]
+    #linebreak()
+    #v(0.6em)
+  ]
+}
+#let addvideo(tile, url) = {
+  text[
+    #link(url)[#text(main_color, size: 0.9em)[#tile] #text(red)[#fa-youtube()]]
+    #linebreak()
+    #v(0.6em)
+  ]
 }
 
 #let slides(
