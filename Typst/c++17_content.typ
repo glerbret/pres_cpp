@@ -661,7 +661,7 @@ foo.insert_or_assign(2, "foo2bis");
 
 #addproposal("n4279")
 
-== ``` emplace_back()```, ``` emplace_front()```}
+== ``` emplace_back()```, ``` emplace_front()```
 
 - Retournent une référence sur l'élément ajouté
 

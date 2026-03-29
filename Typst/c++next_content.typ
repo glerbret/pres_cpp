@@ -10,7 +10,7 @@
 - Plusieurs sujets proposés et non pris en compte dans les versions actuelles
 - Plusieurs TS publiés et non intégrés ou en cours d'étude
 
-== TS -- Networking TS
+== TS -- _Networking_ TS
 
 - Publié en avril 2018
 - Partiellement basé sur ```cpp Boost.Asio```
@@ -26,7 +26,7 @@
 #addproposal("n4771")
 #addproposal("P2762")
 
-== TS -- Pattern matching
+== TS -- _Pattern matching_
 
 - Utilisation du mot clé ```cpp match``` (ou ```cpp switch```, ```cpp inspect```) et du _wildcard_ ```cpp _``` (ou ```cpp __```)
 - Utilisable sur les entiers
@@ -56,7 +56,7 @@ x match {
 #addproposal("P1371")
 #addproposal("p2688")
 
-== TS -- Pattern matching
+== TS -- _Pattern matching_
 - Sur les ```cpp std::tuple```, ```cpp std::pair```, ```cpp std::array``` et tuple-like
 
 ```cpp
@@ -84,7 +84,7 @@ v match {
 #addproposal("P1371")
 #addproposal("p2688")
 
-== TS -- Pattern matching
+== TS -- _Pattern matching_
 
 - Sur les types polymorphiques
 
@@ -108,7 +108,7 @@ p match {
 #addproposal("P1371")
 #addproposal("p2688")
 
-== TS -- Library fundamentals 2
+== TS -- _Library fundamentals 2_
 
 - Partiellement intégré en C++17 et C++20
 - ```cpp std::is_detected``` indique si un _template-id_ est bien formé
@@ -124,7 +124,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("N4617")
 
-== TS -- Library fundamentals 2
+== TS -- _Library fundamentals 2_
 
 - Générateur aléatoire propre au thread ```cpp std::default_random_engine``` initialisé dans un état non prédictif
   - ```cpp std::randint()``` génère un nombre entier dans une plage spécifiée
@@ -134,7 +134,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("N4617")
 
-== TS -- Library fundamentals 3
+== TS -- _Library fundamentals 3_
 
 - _Scope Guard_ : enregistrement d'un foncteur appelé
   - à la sortie du scope : ```cpp std::scope_exit```
@@ -144,14 +144,14 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("N4948")
 
-== TS -- Parallelism 2
+== TS -- _Parallelism 2_
 
 - Exception levée durant une exécution parallèle
 - Politique d'exécution ```cpp vector_policy```
 
 #addproposal("N4808")
 
-== TS -- Concurrency
+== TS -- _Concurrency_
 
 - Partiellement intégré à C++20, C++23 et C++26
 - Versions de ```cpp std::future``` et ```cpp std::shared_future``` supportant les continuations
@@ -165,7 +165,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("P0159")
 #addproposal("N4953")
 
-== TS -- Transactional Memory
+== TS -- _Transactional Memory_
 
 - Blocs synchronisés
 - Blocs atomiques
@@ -197,7 +197,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - _Unicode Conversion Facets_
   - _Locale Category Facets for Unicode_
 
-== Contracts
+== _Contracts_
 
 - Contrats sur les fonctions virtuelles et héritage de ceux-ci
 - Contrats sur les pointeurs de fonction et pointeurs de fonction membre
@@ -217,7 +217,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p3099")
 #addproposal("p3912")
 
-== Erroneous behavior
+== _Erroneous behavior_
 
 - Applicable à l'absence de retour des fonctions d'affectations
 - ```cpp std::erroneous()``` provoque un comportement erroné
@@ -362,7 +362,7 @@ static_assert(10km / 5km == 2);
   - Obtention d'un pointeur sur la représentation via ```cpp reinterpret_cast``` vers ```cpp char*```, ```cpp unsigned char*``` ou ```cpp std::byte*```
   - Conversion pointeur sur représentation vers pointeur sur objet via ```cpp reinterpret_cast```
 
-== Shadowing
+== _Shadowing_
 
 - Masquage avec un type ```cpp void``` pour empêcher l'utilisation de la variable masquée
 - Initialisation de la nouvelle variable avec l'ancienne variable de même nom
@@ -440,7 +440,7 @@ for(int i = 0; auto x : e; ++i) { ... }
 
 #addproposal("p3784")
 
-== do expression
+== _do expression_
 
 - Ajout des _do expression_ : instructions traités comme une expression
 
@@ -588,7 +588,7 @@ flag~; // Equivalent a flag = !flag
 #addproposal("p2966")
 #addproposal("p3883")
 
-== Structured binding
+== _Structured binding_
 
 - Support du _structured binding_ sur ```cpp std::extents```
 
@@ -739,7 +739,7 @@ int a[42] = { 5... };
 #addproposal("P3710")
 #addproposal("p3862")
 
-== Tuples
+== _Tuples_
 
 - Récupération d'un index depuis un type pour ```cpp std::variant``` et ```cpp std::tuple```
 - Utilisation de tableaux C comme _tuple-like_
@@ -846,7 +846,7 @@ t[0ic] // Equivalent a std::get<0>(t)
 #addproposal("p3864")
 #addproposal("p3935")
 
-== Ranges
+== _Ranges_
 
 - Ajout d'un paramètre ```cpp pas``` à ```cpp std::iota_view```
 - Utilisation de ```cpp std::get_element<>``` comme point de configuration
@@ -867,7 +867,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p1255")
 #addproposal("p3544")
 
-== Ranges
+== _Ranges_
 
 - ```cpp views::scan``` : version paresseuse de ```cpp std::inclusive_scan```
 - ```cpp ranges::any_view``` : vue type-erasure
@@ -888,7 +888,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3732")
 #addproposal("p3806")
 
-== Ranges
+== _Ranges_
 
 - Opérations ensemblistes ```cpp views::set_difference```, ```cpp views::set_intersection```, ```cpp views::set_union``` et ```cpp views::set_symmetric_difference```
 - ```cpp static_sized_range``` : raffinement de ```cpp sized_range``` lorsque la taille est connu au _compile-time_
@@ -957,7 +957,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p2992")
 #addproposal("p2966")
 
-== Expansion statement
+== _Expansion statement_
 
 - Répétition d'une expression au _compile-time_
   - Duplication de l'expression pour chaque élément (pas de boucle)
@@ -971,7 +971,7 @@ for... (auto elem : tup)
   cout << elem << "\n";
 ```
 
-== Parameters pack
+== _Parameters pack_
 
 - Déclaration possible partout où une variable peut être déclarée
 
@@ -990,7 +990,7 @@ bar([1:]t1..., a3, [0]t1);
 #addproposal("p2994")
 #addproposal("p2662")
 
-== Parameters pack
+== _Parameters pack_
 
 - _Pack_ de taille fixe
 
@@ -1145,7 +1145,7 @@ void func(T) {...}
 
 #addproposal("p3625")
 
-== Reflection
+== Réflection
 
 - Méta-classes
   - Construction de types de classes (dont les classes elles-mêmes) ayant
@@ -1158,7 +1158,7 @@ void func(T) {...}
 
 #addproposal("p3947")
 
-== Type erasure
+== _Type erasure_
 
 - Programmation polymorphique via _type erasure_ : _Proxy_, _Facade_, _Addresser_
 // Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites

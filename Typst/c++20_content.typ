@@ -1124,7 +1124,7 @@ lerp(10, 20, 1);    // 20
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Factory
+== Ranges -- _Factory_
 
 - ```cpp std::views::empty``` crée une vue vide
 - ```cpp std::views::single``` crée une vue sur un unique élément
@@ -1153,7 +1153,7 @@ counted(a, 3);   // 1 2 3
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Factory
+== Ranges -- _Factory_
 
 - ```cpp std::ranges::istream_view``` créé une vue sur un un flux d'entrée
 - ```cpp std::ranges::subrange()``` construit un sous-range depuis
@@ -1172,7 +1172,7 @@ subrange(begin(vec), begin(vec) + 3);   // 1 2 3
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Range adaptators
+== Ranges -- _Range adaptators_
 
 - Appliquent filtres et transformations aux ranges
 - Évaluation paresseuse des ```cpp view```
@@ -1191,7 +1191,7 @@ R | C | D;
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Range adaptators
+== Ranges -- _Range adaptators_
 
 - ```cpp std::views::all``` : tous les éléments du ```cpp range```
 - ```cpp std::views::ref``` : références sur les éléments du ```cpp range```
@@ -1224,7 +1224,7 @@ ints | transform(foo);  // 0, 2, 4, 6, 8, 10
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Range adaptators
+== Ranges -- _Range adaptators_
 
 - ```cpp std::views::take``` : les $N$ premiers éléments
 
@@ -1271,7 +1271,7 @@ iota(1, 10) | drop_while([] (int i) { return i != 5; }))
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Range adaptators
+== Ranges -- _Range adaptators_
 
 - ```cpp std::views::common``` convertit une vue en ```cpp common_range```
 - ```cpp std::views::reverse``` : éléments en sens inverse
@@ -1309,7 +1309,7 @@ foo | splitbar(' '); // the, quick, brown, fox
 #addproposal("P0896")
 #addproposal("P1035")
 
-== Ranges -- Range adaptators}
+== Ranges -- _Range adaptators_
 
 - ```cpp std::views::elements``` : /* $N\textsuperscript{e}$*/ éléments d'un range de _tuple-likes_
 

@@ -64,7 +64,7 @@
 
 #addproposal("P2795")
 
-== Undefined / unspecified / ill-formed
+== _Undefined_ / _unspecified_ / _ill-formed_
 
 - La libération d'un pointeur sur un type incomplet devient _ill-formed_
 
@@ -195,7 +195,7 @@ add_sat<unsigned char>(255, 4); // 255
 
 #addproposal("P2786")
 
-== Replaceability
+== _Replaceability_
 
 - Nouvelle catégorie _replaceable type_ : destruction puis construction depuis une autre instance est équivalent à assigner depuis une autre instance
 - Objet implicitement _replaceable_ si il n'est pas ```cpp const``` ni ```cpp volatile``` et si toutes ces classes de bases et membres non-statiques sont _replaceable_
@@ -215,7 +215,7 @@ add_sat<unsigned char>(255, 4); // 255
 
 #addproposal("P3019")
 
-== Placeholders
+== _Placeholders_
 
 - Joker ```cpp _``` pour des variables inutilisées
 
@@ -248,7 +248,7 @@ std::ignore = f();
 #addproposal("P2169")
 #addproposal("p2968")
 
-== Structured binding
+== _Structured binding_
 
 - Utilisable comme condition dans les ```cpp if```, ```cpp while```, ```cpp for``` et ```cpp switch```
 
@@ -268,7 +268,7 @@ struct Foo {
 
 #addproposal("p0963")
 
-== Structured binding
+== _Structured binding_
 
 - Utilisation de _parameters pack_ dans les _structures bindings_
 
@@ -304,7 +304,7 @@ foo();
 
 #addproposal("P2573")
 
-== Variadic friends
+== _Variadic friends_
 
 - Possibilité de déclaré ```cpp friend``` un _parameter pack_
 
@@ -394,7 +394,7 @@ mdspan<float, dextents<3>> foo;
 #addproposal("P2697")
 #addproposal("P2591")
 
-== Initializer-list
+== _Initializer-list_
 
 - _static storage_ possible pour les _braced-initializer-list_
 // Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'initializer list puis vers le conteneur
@@ -413,7 +413,7 @@ mdspan<float, dextents<3>> foo;
 
 #addproposal("P2944")
 
-== Tuples
+== _Tuples_
 
 - ```cpp std::complex``` deviennent des _tuple-like_
 
@@ -593,7 +593,7 @@ first_plus_last(1, 2, 10);  // 11
 
 #addproposal("P2662")
 
-== lifetime
+== _lifetime_
 
 - ```cpp std::is_within_lifetime()``` indique si l'objet pointé est vivant
 - ... en particulier si un membre d'une union est active
@@ -611,7 +611,7 @@ first_plus_last(1, 2, 10);  // 11
 #addproposal("P2530")
 #addproposal("P2545")
 
-== SIMD (Single Instruction on Multiple Data)
+== SIMD (_Single Instruction on Multiple Data_)
 
 - Intégration de ```cpp simd```
 - ```cpp simd<T>``` se comporte comme ```cpp T``` mais manipule plusieurs valeurs simultanément
@@ -648,7 +648,7 @@ auto e = reduce(d);                               // 6
 #addproposal("P2548")
 #addproposal("P0792")
 
-== Binding
+== _Binding_
 
 - Surcharge de ```cpp std::bind_front()``` et ```cpp std::bind_back()``` prenant l'appelable en paramètre template
 - Surcharge de ```cpp std::not_fn()``` prenant l'appelable en paramètre template
@@ -904,7 +904,7 @@ post (r: r > 0) {
 
 #addproposal("P2900")
 
-== Reflection
+== Réflection
 
 - Support de la réflexion statique
   - Un type opaque ```cpp std::meta::info``` pour représenter les éléments du programme
@@ -924,7 +924,7 @@ post (r: r > 0) {
 #addproposal("p3394")
 #addproposal("p3560")
 
-== Reflection}
+== Réflection
 
 ```cpp
 enum Color { red, green, blue };

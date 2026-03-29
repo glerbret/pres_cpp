@@ -2212,7 +2212,7 @@ u8R"(Message\n en une seule \n ligne)";
 - Possibilité de définir des littéraux "utilisateur"
 - Nombre (entier ou réel), caractère ou chaîne suffixé par un identifiant
 - Identifiants non standards préfixés par ```cpp _```
-- Définit via ```cpp operator""suffixe```
+- Définit via ```cpp operator""``` suffixe
 
 #noteblock("Motivations", text[
   Pas de conversion implicite
@@ -2463,7 +2463,7 @@ struct Foo {
 == Délégation de constructeur
 
 - Utilisation d'un constructeur dans l'implémentation d'un second
-- ... en 'l'initialisant' dans la liste d'initialisation
+- ... en l'initialisant dans la liste d'initialisation
 
 ```cpp
 struct Foo {
@@ -3372,7 +3372,7 @@ is_integral<string>::value;  // false
 
 #addproposal("n1836")
 
-== Type traits -- Trait}
+== Type traits -- Trait
 
 - ```cpp std::is_fundamental``` : type fondamental (entier, réel, ```cpp void``` ou ```cpp nullptr_t```)
 
