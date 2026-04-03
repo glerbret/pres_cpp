@@ -4,7 +4,7 @@
 #let main_color = rgb("#007F7F")
 
 // Définition de blocs d'affichage (note, avertissement et conseil)
-#let _block(title, content, color) = {
+#let _block(title, content, color, symbol) = {
   show raw.where(block: true): it => {
     align(center)[
       #block(
@@ -22,11 +22,15 @@
         outset: (x: 1em),
         inset: (x: 0pt, top: 3pt, bottom: 4pt),
         radius: (top: 0.4em, bottom: 0cm),
-        text(
-          white,
-        )[#strong(
-          title,
-        )],
+        place(bottom + left, dx: -1.5em, dy: -0.2em, circle(fill: white, stroke: color, inset: 0pt)[#set align(
+            center + horizon,
+          )
+          #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
+          + text(
+            white,
+          )[#strong(
+            title,
+          )],
       ),
       block(
         width: 100%,
@@ -52,15 +56,15 @@
 }
 
 #let noteblock(title, content) = {
-  _block(title, content, main_color)
+  _block(title, content, main_color, "info")
 }
 
 #let alertblock(title, content) = {
-  _block(title, content, rgb("#BF0000"))
+  _block(title, content, rgb("#BF0000"), "exclamation")
 }
 
 #let adviceblock(title, content) = {
-  _block(title, content, rgb("#009900"))
+  _block(title, content, rgb("#009900"), "lightbulb")
 }
 
 // Logo "lien"
