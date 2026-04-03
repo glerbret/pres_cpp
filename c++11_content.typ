@@ -279,7 +279,7 @@ foo();      // Affiche V2
 
 #noteblock("Quiz : Quelle surcharge est éligible ?", text[
   ```cpp
-  void foo(char*) { cout << "chaine\n"; }
+  void foo(char*) { cout << "chaîne\n"; }
   void foo(int) { cout << "entier\n"; }
 
   foo(0);
@@ -294,7 +294,7 @@ foo();      // Affiche V2
   - Conversion implicite de ```cpp nullptr_t``` vers tout type de pointeur
 
 ```cpp
-void foo(char*) { cout << "chaine\n"; }
+void foo(char*) { cout << "chaîne\n"; }
 void foo(int) { cout << "entier\n"; }
 
 foo(0);        // Version int
@@ -1572,8 +1572,8 @@ accumulate(foo.begin(), foo.end(), 0); // 61
 ```cpp
 vector<int> foo{12, 25};
 
-foo.reserve(15);      // Taille : 2, capacite : 15
-foo.shrink_to_fit();  // Taille : 2, capacite : 2
+foo.reserve(15);      // Taille : 2, capacité : 15
+foo.shrink_to_fit();  // Taille : 2, capacité : 2
 ```
 
 #codesample(
@@ -3220,7 +3220,7 @@ public:
 - Utilisation récursive par spécialisation
 
 ```cpp
-// Condition d'arret
+// Condition d'arrêt
 template<typename T>
 T sum(T val) {
   return val;
@@ -4692,7 +4692,7 @@ regex_replace(s, r, "-"); // abcd-efg
 	uniform_int_distribution<int> distribution(0,9);
 	gen.seed(system_clock::now().time_since_epoch().count());
 
-	// Nombre aleatoire entre 0 et 9
+	// Nombre aléatoire entre 0 et 9
 	distribution(gen);
 ```
 

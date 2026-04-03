@@ -421,7 +421,7 @@ a >> b;
 
 ```cpp
 f(a(x), b, c(y));
-// Lorsque x est evalue, a(x) l'est avant b, y ou c(y)
+// Lorsque x est évalué, a(x) l'est avant b, y ou c(y)
 ```
 
 #alertblock("Ordre des paramètres", text[
@@ -443,7 +443,7 @@ T f() {
 ```cpp
 T g() {
   T t;
-  return t;    // Copie potentielle eludee
+  return t;    // Copie potentielle éludée
 }
 ```
 
@@ -475,7 +475,7 @@ struct Foo { int i; };
 struct Bar : Foo { double l; };
 
 Bar bar{{42}, 1.25};
-Bar baz{{}, 1.25};   // Foo non intialise
+Bar baz{{}, 1.25};   // Foo non initialisé
 ```
 
 #alertblock("Attention", text[
@@ -612,7 +612,7 @@ bar.insert(foo.extract(1));
 // foo : {{2,"foo2"}}
 // bar : {{1,"foo1"}, {2,"bar2"}}
 
-auto r = bar.insert(foo.extract(2));  // Echec
+auto r = bar.insert(foo.extract(2));  // Échec
 // foo : {}
 // bar : {{1,"foo1"}, {2,"bar2"}}
 // r.inserted : false, r.node : {2,"foo2"}
@@ -1498,9 +1498,9 @@ switch(foo) {
   case 2:
     ...
 [[ fallthrough ]];
-  case 3:   // Idealement : pas de warning
+  case 3:   // Idéalement : pas de warning
     ...
-  case 4:   // Idealement : warning
+  case 4:   // Idéalement : warning
     ...
     break;
 }
@@ -1521,7 +1521,7 @@ switch(foo) {
 ```cpp
 [[ nodiscard ]] int foo() { return 5; }
 
-foo();  // Idealement : warning
+foo();  // Idéalement : warning
 ```
 
 #noteblock("Note", text[
@@ -1546,7 +1546,7 @@ foo();  // Idealement : warning
 struct [[ nodiscard ]] Bar {};
 Bar baz() { return Bar{}; }
 
-baz();  // Idealement : warning
+baz();  // Idéalement : warning
 ```
 
 #codesample(
@@ -1908,7 +1908,7 @@ a.emplace<std::complex<double>>(3.0, 4.0);
 
 - ```cpp operator[]```, ```cpp at()```, ```cpp front()```, ```cpp back()```, ```cpp data()``` accèdent aux caractères
 - ```cpp remove_prefix()``` et ```cpp remove_suffix()``` modification les bornes
-- ```cpp size()```, ```cpp length()``` et  ```cpp max_size()``` accèdent à la taille et à la taille maiximale
+- ```cpp size()```, ```cpp length()``` et  ```cpp max_size()``` accèdent à la taille et à la taille maximale
 - ```cpp empty()``` teste la vacuité
 - ```cpp to_string()``` construction une chaîne depuis la vue
 - ```cpp copy()``` copie une partie de la vue
@@ -2104,7 +2104,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 == Parallelism TS
 
 - ```cpp std::for_each_n()``` parcours un ensemble défini par l'itérateur de début et sa taille
-// En soi, ce n'est pas lié au parallélisme mais cet algorithme apparait avec ce TS
+// En soi, ce n'est pas lié au parallélisme mais cet algorithme apparaît avec ce TS
 - ```cpp std::reduce()``` "ajoute" tous les éléments de l'ensemble
 
 #noteblock(text[``` std::reduce()``` ou ``` std::accumulate()``` ?], text[

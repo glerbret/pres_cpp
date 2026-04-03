@@ -27,7 +27,7 @@
 - Espaces ignorés après le ```cpp \``` de séparation de ligne
 
 ```cpp
-// Toujours une chaine vide en C++23
+// Toujours une chaîne vide en C++23
 auto str = "\<space>
 ";
 ```
@@ -270,7 +270,7 @@ if ! consteval { ... }
 const vector<int>& foo(const vector<int>& t) { return t; }
 vector<int> bar( return vector<int>{1, 2, 3}; );
 
-// Valide, duree de vie du retour de bar est etendu
+// Valide, durée de vie du retour de bar est étendu
 for (auto e : foo(bar())) { ... }
 ```
 
@@ -820,7 +820,7 @@ byteswap(j);   // 0xEFBEADDE
 
 == Évolutions de ``` std::format```
 
-- Ajout du concept ```cpp formatable```
+- Ajout du concept ```cpp formattable```
 - Vérification des chaînes de format au _compile-time_
 - Ajout du type ```cpp ?``` pour afficher les chaînes échappées
 - Formateur de ```cpp std::chrono``` _locale-independent_ par défaut

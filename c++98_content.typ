@@ -28,7 +28,7 @@
 
 - Multi-paradigme
 
-// Procédural, objet, générique et Template metaprogramming
+// Procédural, objet, générique et Template meta-programming
 
 - Typage statique déclaratif
 - Généraliste
@@ -1013,7 +1013,7 @@ vector<int>::iterator it = lower_bound(vec.begin(), vec.end(), val);
 
 vector<int> bar{1, 5, 8, 13, 25, 42};
 foo(bar, 12);  // vec.end
-foo(bar, 13);  // iterateur sur 13
+foo(bar, 13);  // itérateur sur 13
 ```
 
 #codesample(

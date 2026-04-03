@@ -1164,7 +1164,7 @@ void func(T) {...}
 
 #addproposal("p3625")
 
-== Réflection
+== Réflexion
 
 - Méta-classes
   - Construction de types de classes (dont les classes elles-mêmes) ayant
@@ -1204,7 +1204,7 @@ void func(T) {...}
 - Création de pointeurs intelligents avec une valeur par défaut
 - Comparaison entre pointeurs intelligents et pointeurs nus
 - Retour covariant avec ```cpp std::unique_ptr<T>``` (comme ```cpp T*```)
-- Améliorationq des _hazard pointers_
+- Amélioration des _hazard pointers_
 - Conversion de ```cpp std::unique_ptr``` : ```cpp const_pointer_cast``` et ```cpp dynamic_pointer_cast```
 
 #addproposal("p2966")

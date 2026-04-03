@@ -185,16 +185,16 @@ vector<int> bar = exchange(foo, {10, 11});
 - Insertion et extraction de chaînes avec guillemets
 
 ```cpp
-string foo = "Chaine avec \"guillemets\"";
-cout << foo << "\n";      // Chaine avec "guillemets"
+string foo = "Chaîne avec \"guillemets\"";
+cout << foo << "\n";      // Chaîne avec "guillemets"
 
 stringstream ss;
 ss << quoted(foo);
-cout << ss.str() << "\n"; // "Chaine avec \"guillemets\""
+cout << ss.str() << "\n"; // "Chaîne avec \"guillemets\""
 
 string bar;
 ss >> quoted(bar);
-cout << bar << "\n";      // Chaine avec "guillemets"
+cout << bar << "\n";      // Chaîne avec "guillemets"
 ```
 
 #codesample(

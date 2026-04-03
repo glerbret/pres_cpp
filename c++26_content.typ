@@ -96,7 +96,7 @@ if (!p) cerr << "bar\n"; // Suppression possible
 - Alignement avec le comportement du C
 
 ```cpp
-// Comportement indefini en C++23
+// Comportement indéfini en C++23
 while (true)
 {}
 ```
@@ -292,7 +292,7 @@ auto [...a, ...b] = f();  // ill-formed
 ```cpp
 void foo() =delete("Unsafe, use bar");
 
-// Avertisselent: use of deleted function 'void foo()': Unsafe, use bar
+// Avertissement: use of deleted function 'void foo()': Unsafe, use bar
 foo();
 ```
 
@@ -655,7 +655,7 @@ first_plus_last(1, 2, 10);  // 11
 
 - _hazard pointers_ : unique écrivain, multiples lecteurs
 - Structure de donnée _read-copy update_
-  - Une mise à jour entraine une copie
+  - Une mise à jour entraîne une copie
   - Chaque thread utilise soit l'ancienne soit la nouvelle version
   - Donc une version cohérente
 
@@ -967,7 +967,7 @@ post (r: r > 0) {
 
 #addproposal("P2900")
 
-== Réflection
+== Réflexion
 
 - Support de la réflexion statique
   - Un type opaque ```cpp std::meta::info``` pour représenter les éléments du programme
@@ -987,7 +987,7 @@ post (r: r > 0) {
 #addproposal("p3394")
 #addproposal("p3560")
 
-== Réflection
+== Réflexion
 
 ```cpp
 enum Color { red, green, blue };

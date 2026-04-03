@@ -159,7 +159,7 @@
 // Y compris dans les classes de base
 
 ```cpp
-// Agregat en C++17 pas en C++20
+// Agrégat en C++17 pas en C++20
 struct S {
   S() = default;
 };
@@ -669,7 +669,7 @@ import <version>;
 
 ```cpp
 module;
-#include "bar.h" // Definit X
+#include "bar.h" // Définit X
 export module foo;
 export using X = ::X;
 ```
@@ -1367,7 +1367,7 @@ foo | values; // 1791 1936 1815 1912
 - Limitation de la taille lue dans les flux avec ```cpp std::setw()```
 
 ```cpp
-cin >> setw(24) >> a; // Seuls 24 caracteres sont lus
+cin >> setw(24) >> a; // Seuls 24 caractères sont lus
 ```
 
 #addproposal("P0053")
