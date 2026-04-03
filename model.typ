@@ -22,7 +22,7 @@
         outset: (x: 1em),
         inset: (x: 0pt, top: 3pt, bottom: 4pt),
         radius: (top: 0.4em, bottom: 0cm),
-        place(bottom + left, dx: -1.5em, dy: -0.2em, circle(fill: white, stroke: color, inset: 0pt)[#set align(
+        place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0pt)[#set align(
             center + horizon,
           )
           #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
@@ -74,13 +74,34 @@
 
 // Exemple de code en ligne
 #let codecounter = counter("code_counter")
-#let codesample(codelink) = {
-  context place(
-    bottom + right,
-    dx: 1.5em - 1.4em * codecounter.get().first(),
-    link(codelink)[#text(main_color)[#fa-icon("circle-play", solid: true)]],
-  )
-  context codecounter.step()
+#let codesample(codelink, code: none) = {
+  if (code == none) {
+    context place(
+      bottom + right,
+      dx: 1.5em - 1.4em * codecounter.get().first(),
+      link(codelink)[#text(main_color)[#fa-icon("circle-play", solid: true)]],
+    )
+    context codecounter.step()
+  } else {
+    block(
+      width: 100%,
+      fill: white,
+      stroke: white,
+      outset: (x: 1.2em),
+      code
+        + place(
+          bottom + right,
+          dx: 1.6em,
+          dy: 0.5em,
+
+          circle(fill: white, stroke: white + 0pt, inset: -0.1em)[#set align(
+              center + horizon,
+            )
+            #link(codelink)[#text(main_color, baseline: -0.15em, size: 1.05em)[#fa-icon("circle-play", solid: true)]]
+          ],
+        ),
+    )
+  }
 }
 
 // Proposition de norme
@@ -90,12 +111,13 @@
     url = "https://wg21.link/" + ref
   }
 
+  let nbproposalperline = 6
   context place(
     bottom + left,
-    dx: if (proposalcounter.get().first() < 6) { -1.3em + 4.5em * proposalcounter.get().first() } else {
-      -1.3em + 4.5em * (proposalcounter.get().first() - 6)
+    dx: if (proposalcounter.get().first() < nbproposalperline) { -1.3em + 4.5em * proposalcounter.get().first() } else {
+      -1.3em + 4.5em * (proposalcounter.get().first() - nbproposalperline)
     },
-    dy: if (proposalcounter.get().first() < 6) { -0em } else { 1.1em },
+    dy: if (proposalcounter.get().first() < nbproposalperline) { -0em } else { 1.1em },
     link(url)[
       #box(fill: white, stroke: main_color, radius: 1em, inset: (
         left: 0.3em,
@@ -420,7 +442,6 @@
       return it
     }
   }
-
 
   // CONTENT---------------------------------------------
   // Title Slide

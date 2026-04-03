@@ -129,6 +129,7 @@ catch(logic_error& e) {
 - Utilisées par la bibliothèque standard (p.ex. ```cpp std::bad_alloc```)
 
 == Erreurs -- Critiques des exceptions
+
 - Critiquées, voire interdites, par certaines normes de codage (p.ex. : #link("https://google.github.io/styleguide/cppguide.html")[Google C++ Style Guide #linklogo()]
 - Arguments très variés
   - "Je ne comprends pas", "Ça ne sert à rien", ...
@@ -163,6 +164,7 @@ catch(logic_error& e) {
 )
 
 == Erreurs -- Exception safety
+
 - _No-throw guarantee_ : l'opération ne peut pas échouer
 
 #adviceblock("Do", text[
@@ -544,6 +546,7 @@ private:
 ])
 
 == STL -- Standard Template Library
+
 - Partie de la bibliothèque standard comprenant
   - Conteneurs et ```cpp std::basic_string```
   - Itérateurs
@@ -605,6 +608,7 @@ private:
 - Vu des algorithmes, ce qui fournit une paire d'itérateurs, est un conteneur
 
 == STL Conteneurs -- Conteneurs séquentiels
+
 - ```cpp std::vector```
   - Tableau de taille variable d'éléments contigus
   - Accès indexé
@@ -636,6 +640,7 @@ private:
   - Non compatible avec l'organisation mémoire des tableaux C
 
 == STL Conteneurs -- Conteneurs séquentiels
+
 - ```cpp std::string```
   - Alias de ```cpp std::basic_string<char>```
   - Stockage de chaînes de caractères
@@ -674,6 +679,7 @@ private:
 - Algorithmes membres (recherche) pour les performances
 
 == STL Conteneurs -- Adaptateurs
+
 - Basés sur un autre conteneur pour proposer une API simplifiée
 - Avantages et inconvénients du conteneur sous-jacent
 - ```cpp std::stack```
@@ -689,19 +695,20 @@ private:
 
 == STL Conteneurs -- Adaptateurs
 
-```cpp
-stack<int, vector<int> > foo;
-for(int i=0; i<5; ++i) foo.push(i);
-
-// Affiche 4 3 2 1 0
-while(!foo.empty()) {
-  cout << ' ' << foo.top();
-  foo.pop();
-}
-```
-
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:4,endLineNumber:9,positionColumn:4,positionLineNumber:9,selectionStartColumn:4,selectionStartLineNumber:9,startColumn:4,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::stack%3Cint,+std::vector%3Cint%3E+%3E+foo%3B%0A++for(int+i%3D0%3B+i%3C5%3B+%2B%2Bi)%0A++%7B%0A++++foo.push(i)%3B%0A++%7D%0A%0A++while(!!foo.empty())%0A++%7B%0A++++std::cout+%3C%3C+!'+!'+%3C%3C+foo.top()%3B%0A++++foo.pop()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    stack<int, vector<int> > foo;
+    for(int i=0; i<5; ++i) foo.push(i);
+
+    // Affiche 4 3 2 1 0
+    while(!foo.empty()) {
+      cout << ' ' << foo.top();
+      foo.pop();
+    }
+    ```
+  ],
 )
 
 == STL Conteneurs -- conteneurs non-STL
@@ -1004,50 +1011,58 @@ vector<int> foo{4, 5, 7, 9, 12};
   Pas de fonction de recherche dichotomique retournant l'élément cherché
 ])
 
-```cpp
-vector<int>::iterator foo(vector<int> vec, int val) {
-vector<int>::iterator it = lower_bound(vec.begin(), vec.end(), val);
-  if(it != vec.end() && *it == val) return it;
-  else return vec.end();
-}
-
-vector<int> bar{1, 5, 8, 13, 25, 42};
-foo(bar, 12);  // vec.end
-foo(bar, 13);  // itérateur sur 13
-```
-
 #codesample(
   "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D",
+  code: [
+    ```cpp
+    vector<int>::iterator foo(vector<int> vec, int val) {
+      vector<int>::iterator it = lower_bound(vec.begin(),
+                                             vec.end(), val);
+      if(it != vec.end() && *it == val) return it;
+      else return vec.end();
+    }
+
+    vector<int> bar{1, 5, 8, 13, 25, 42};
+    foo(bar, 12);  // vec.end
+    foo(bar, 13);  // itérateur sur 13
+    ```
+  ],
 )
 
 == STL Algorithmes -- Comptage
 
 - ```cpp std::count()``` compte le nombre d'éléments égaux à la valeur fournie
 
-```cpp
-vector<int> foo{4, 5, 3, 9, 5, 5 ,12};
-
-count(foo.begin(), foo.end(), 5);  // 3
-count(foo.begin(), foo.end(), 2);  // 0
-```
-
 - ```cpp std::count_if()``` compte le nombre d'éléments satisfaisant le prédicat
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:19,positionColumn:1,positionLineNumber:19,selectionStartColumn:1,selectionStartLineNumber:19,startColumn:1,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Abool+compare(int+nb)%0A%7B%0A++return+nb+%3E%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+8)+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::count(foo.begin(),+foo.end(),+7)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::cout+%3C%3C+std::count_if(foo.begin(),+foo.end(),+compare)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 3, 9, 5, 5 ,12};
+
+    count(foo.begin(), foo.end(), 5);  // 3
+    count(foo.begin(), foo.end(), 2);  // 0
+    ```
+  ],
 )
 
 == STL Algorithmes -- Comparaison
 
 - ```cpp std::equal()``` teste l'égalité de deux ensembles (valeur et position)
 
-```cpp
-vector<int> foo{4, 5, 9, 12};
-vector<int> bar{4, 5, 12, 9};
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAGykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLK1dgBWUi7AAcDLM6IAIgdMbcsfsMV9sdjcfjCURiYdSetsLsIvUqTT6UyWezOfyBUKUIs4UCgTiCHiQBFUJ4xIkEEwnm4derMABHLxiahGgB0UWASPm5OdrmRDJlxBdmDdDGRswtOrAa1pbgYEZVPMFevxaC8WsOVsTBqNBlopvN2sOu0dqCeHPWbOl9VD%2Bbcu1jUZja3WXOxyuhPKpqoT%2BpFH3FgjJfrlDPWLIZaOVTc7uv1ydTloL6sNxpzZrDC4ztvttCLAaDPs9qCd3o9ft37qraYLdejscn8enSc1a5ri6zJtX1cLFJLB3Lfov841teDZxtcLZohybZgbyzZqhmPZikc/aShWxIYvKDLMrsZgMpIE6wV2j4ps%2BD6ZsuuYkdadoOhSZ7Bh6tHHr69R0SGJHAbeBGkbOlEZku2YUZ%2BRY/mWqEAeGkY3o2sGtrcEFfBw8y0JwtK8H4HBaKQqCcJaljWDiizLI8Gw8KQBCaIp8wANYgLSGj6JwkhqRZWmcLwCggPZ5kaYppBwLASCYKobwpiQ5CUPUwAKMohiVEICCoAA7upploCwiR0Ew1QxSEtDxUl6maWlGX0DEUXMIkCgJQQpDFXQ0ShKwqy8HVpUAPIpvlyUuUFbzXMQUVuaQvXILU%2BDqbw/CCCIYjsFIMiCIoKjqD5pC6K0BhGCg1jWPoeARB5kDzKgiTVB5HAALS4r%2Bph6ZYXBcLsF0AOpiLQT3PUFBDEEwvCoK8xDEHgWCHT6xBeIIeBsAAKlmoPzAohkrHouLBDlcUJd13C8N9mCrKZiU/YkFlKSpzmrdpHDYMFyChcQuyqIycQXXEki7MAyDIIW30Q1ZoYQLpViWAyuCECQ%2Bw/Fwsw4yT8wIGcWAxD6Nl2Q5HBOaQhV/UNHlebLatmOTmmUzLPmzPMAOpM4khAA%3D%3D%3D",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 9, 12};
+    vector<int> bar{4, 5, 12, 9};
 
-equal(foo.begin(), foo.end(), foo.begin());  // true
-equal(foo.begin(), foo.end(), var.begin());  // false
-```
+    equal(foo.begin(), foo.end(), foo.begin());  // true
+    equal(foo.begin(), foo.end(), var.begin());  // false
+    ```
+  ],
+)
 
 == STL Algorithmes -- Comparaison
 
@@ -1067,30 +1082,35 @@ equal(foo.begin(), foo.end(), var.begin());  // false
 
 - ```cpp std::mistmatch()``` retourne une paire d'itérateurs sur les premiers éléments différents
 
-```cpp
-vector<int> foo{4, 5, 9, 13};
-vector<int> var{4, 5, 12, 8};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:35,endLineNumber:8,positionColumn:35,positionLineNumber:8,selectionStartColumn:35,selectionStartLineNumber:8,startColumn:35,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+13%7D%3B%0A++std::vector%3Cint%3E+bar%7B4,+5,+12,+8%7D%3B%0A%0A++std::pair%3Cstd::vector%3Cint%3E::iterator,+std::vector%3Cint%3E::iterator%3E+res+%3D+std::mismatch(foo.begin(),+foo.end(),+bar.begin())%3B%0A++std::cout+%3C%3C+*(res.first)+%3C%3C+!'+!'+%3C%3C+*(res.second)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 9, 13};
+    vector<int> var{4, 5, 12, 8};
 
-mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12
-```
+    mismatch(foo.begin(), foo.end(), bar.begin());  // 9 12
+    ```
+  ],
+)
 
 - ... ou l'itérateur de fin en cas d'égalité
-
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzLGkAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0XEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5rHByN5YANQmsW5OQ8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgs0%2BJgA7FZrjsdkN0CAQC83sRATDzjt%2BKg0RZWjsAKykHYADnpZjRABF9hibpi9ujPlisTi8QSiESDiTYtgdhF6pTqXTGcy2Ry%2BfzBShFrDAYDsQRcSAIqhPGJEggmI83Nq1ZgAI5eMTUQ0AOiiwER8zJTtcSPp0uIzswroYSNm5u1YDWNLcDHDyu5At1eLQXk1B0tCf1hoMtBNZq1Bx2DtQj3ZsVZUvqIbzbh2Mcj0bWsU5WKVUO5lJV8b1wveYsEpN9svpCR2ZnpqKVjY7Or1SZTFvzaoNRuzptDC/TNrttEL/sD3o9qEdXvdvt3bsrqfztajMcnceniY1a%2Bri8zxtXVYL5OL%2BzLvov87Vte9axlczaouyrZgTyTaqum3aiocfYSuWRLonK9JMiO9KSBOsGdo%2BybPg%2BGbLjmxFWra9rkmeQbujRx4%2BvUtHBsRwG3vhJGzhR6ZLlm5GfoWP6lqhAFhhGN4NrBLZctB7b3mqCHEshkoDuhQ7MmOeFTmqiQIohimvCKykEOceKENETAivShmEiZZkgBZxBWT2konAoxYkSweAKPCBDIAgO4um69IMQw6D7qewV0cid7QQR6pEZ%2BABUEDuY6NDEEMYlXhwNZ5SlaWYAojpKGg4U5UBEkgXF4GQTcEGfBw8y0JwNK8H4HBaKQqCcBaljWNiizLA86w8KQBCaM18wANYgDSGj6JwkgdVNPWcLwCggItk1dc1pBwLASCYKorzJiQ5CUPUwAKMohiVEICCoAA7p141oCwiR0FZ6R3SEtCPS9nXdR9X30DEN3MIkChPQQpCg3Q0ShKwqy8Aj4MAPLJoDr1rSdrxXMQN0baQ%2BPILU%2BCdbw/CCCIYjsFIMiCIoKjqHtpC6K0BhGCg1jWPoeARFtkDzKgiTVFtHAALQ4r%2BpgDZYXBcDsUsAOpiLQKuqydBDObwqAvMQxB4FgwvesQXiCHgbAACqZmb8wKMNKx6DiwR/Q9T249wvC65gqzjc9zmJFNLVtat7O9Rw2Cncg53EDsqgMgAbFLyeSDswDIMgBa65bM0hhA/VWJY9K4IQJB7N8XCzL7ofzAgpxYDE3pzQtS0cCtpDA/rJNbTt9cd2YEfdVHdd7bM8yG6kziSEAA",
-)
 
 == STL Algorithmes -- Remplissage
 
 - ```cpp std::fill()``` remplit l'ensemble avec la valeur fournie
-
-```cpp
-vector<int> foo(4);
-
-fill(foo.begin(), foo.end(), 12);  // 12 12 12 12
-```
-
 - ```cpp std::fill_n()``` idem avec un ensemble défini par sa taille
+
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCDSAA6oCoRODB7evnoJSY4CQSHhLFEx0naYDilCBEzEBGk%2Bfly2mPY5DJXVBHlhkdGxtlU1dRmNCgOdwd2FvZIAlLaoXsTI7BzmAMzByN5YANQma25Oo8SYrPvYJhoAguub25h7BwBuZUTE55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgM0%2BJgA7FZrjs9ujPlisaN0CAQC8HCRATDzjt%2BKgILN9hirnidgSiTRaLRqKhUAA6KLARFzKlc7muJGkHaSMzItYMpkslALWGAwFC1AmACsFg0GoAIo83CqwBwdkb9SrqRqLFxdWaDibjablXaLZqzDanW57V6ParLWt3QdDat1W4GEb6bjsTqUZjsbK8fKSW9yYJKRaZZH8QRCSA2bQAPoMCDyiJMZAAa3zwSUNWinNQgukErW0vjWZzaC8SsDzq5lu16r1PtNjp7npdVoDBrtI%2BNPonbsHts9s%2BXvs1/qXw%2BDofDGdjaOjUIPONj7aJSbJBwpa2wqtp4skdP3jIT2aJne70/Hfc1A6HY5eqO37rpOW6Aau86/hYi4ASBkGAROm5wUGGq7qsL5YoeKKokeVwcHMtCcOqvB%2BBwWikKgnAGpY1jMgsSwPOsPCkAQmgEXM5YgOqGj6JwkikexlGcLwCggLxbHkQRpBwLASCYKoZRdiQ5CUNUwAKMohjNEICCoAA7mRLFoCwcR0EwrRaSEtC6QZZEUSZZn0DEGnMHECh6QQpCOXQ0ShKwKy8D5zkAPJdrZhlCQpZRXMQGkiaQ0XIJU%2BBkbw/CCCIYjsFIMiCIoKjqFJpC6I0BhGCg1jWPoeARGJkBzKgcStGJHAALQEvsOqmLRlgAJwABw7G1ADqYi0MNI0KQQxBMLwqAvMQxB4Fg9VisQXiCHgbAACpcrQa1zAoDHLHoBLBFZOl6ZF3C8DNmArCx%2BmzXE7GEcRgnFVRHDYIpyDKcQOyqANABsbUg5IOzAMgyA7BAM2beWMxwzRViWOKuCECQezfFwMx3W9cwIKcWAxGKXE8XxHACaQ9nzQlYkSYTVNmJ9FHfQTUkzHMi1JM4khAA%3D",
+  code: [
+    ```cpp
+    vector<int> foo(4);
+
+    fill(foo.begin(), foo.end(), 42);   // 42 42 42 42
+    fill_n(back_inserter(foo), 4, 43);  // 43 43 43 43
+    ```],
+)
 
 #noteblock("Constructeur", text[
   Remplissage des conteneurs séquentiels à la construction
@@ -1104,33 +1124,39 @@ fill(foo.begin(), foo.end(), 12);  // 12 12 12 12
 
 - ```cpp std::generate()``` valorise les éléments à partir d'un générateur
 
-```cpp
-int gen() {
-  static int i = 0;
-  i += 5;
-  return i;
-}
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:2,endLineNumber:6,positionColumn:2,positionLineNumber:6,selectionStartColumn:2,selectionStartLineNumber:6,startColumn:2,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+int+gen()%0A%7B%0A++static+int+i+%3D+0%3B%0A++i+%2B%3D+5%3B%0A++return+i%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A++std::generate(foo.begin(),+foo.end(),+gen)%3B++//+5+10+15+20%0A++std::cout+%3C%3C+foo%5B0%5D+%3C%3C+!'+!'+%3C%3C+foo%5B1%5D+%3C%3C+!'+!'+%3C%3C+foo%5B2%5D+%3C%3C+!'+!'+%3C%3C+foo%5B3%5D+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    int gen() {
+      static int i = 0;
+      i += 5;
+      return i;
+    }
 
-vector<int> foo(4);
-generate(foo.begin(), foo.end(), gen);  // 5 10 15 20
-```
+    vector<int> foo(4);
+    generate(foo.begin(), foo.end(), gen);  // 5 10 15 20
+    ```
+  ],
+)
 
 - ```cpp std::generate_n()``` idem avec un ensemble défini par sa taille
-
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAzAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOaxwcjeWADUJrFuTsPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2Bk0cyF2wQIu2AjAgcy%2BJgA7FYbrtdrC8PDEQingARXYaA44654vD7SwHckAVipXzxpwIywYCNZ0MxpIxN2JLCYwTRGOxbP2ktxePxBHQIBAr3exCBiIuu34qAgknRsWpcvlipANFotGoqFQADoosAxQstVbra40aRdpIzPrDXLhia0F4kUCgU7UCYmRZKUzycHDrswBx44nY25Q%2BGLFxwzHDiGE0mnm4Q9r02YswXc4m8ym0xHYmXqwnw24GI2DVKsQLobKsT68X6lSqiGrDhrYtg023ZX2FUqzbQAPoMCD9kARJjIADW8%2BCSka0UtqEd0g9sW9Uun/qWQZzceLEaj2cLcbzVZvqbvGfrb/zr6f76tJZfn%2BP7Jt%2BH51tG5bPusTLNq2PodoKNLSr2xoDm8Q7qoImrarq7qSHqvLIReSoBtewEfg%2BUGpi%2BoEUQBEaZpBDaVnRRYMRYpbMd%2BtHUTWFgQY%2BFZNi26yTshiFdhJMrEWhyoYR8I7YWOoa6meU5ySiITEEwBCYAetqYPaS6OtqLoMOgbrIow3p4gA9HZuxMrsXAaC5zlmJSGkrmRfGUUBFb5tWH5MUJ0FBWBHFcWFNGsX5HGCXxjawaJRF4pJtx8p21wcAstCcEyvB%2BBwWikKgnCFgylj4ksKyPBsPCkAQmi5QsG4gEyGj6JwkhFS1ZWcLwCggF1zUlblpBwLASCYKobyBiQ5CUA0wAKMohhVEICCoAA7sVjVoCwSR0LpGTrSEtBbbtxWlYdx30DEq3MEkCjbQQpB3XQ0ShKway8J9D0APKBlde39bNbzXMQq2DaQEPIHU%2BDFbw/CCCIYjsFIMiCIoKjqONpC6G0BhGCg1jWPoeARMNkALKgSQ1MNHAALR%2BoyphVRYACc8S7MzADqYi0Hz/OzQQOm8KgrzEMQeBYDTbrEF4gh4GwAAqVq0ArCwKLVqx6H6wTnZt21g9wvDi5gayNTtOlJC1eUFX1BPlRw2BzcgC3ELsqjxAAbMzfuSMiyDwhA4vKxucy7BAlVWJY7q4IQJD0rEXBzBbDsLAgZxYDEbrtZ13UcL1pA3ZLsPDaNWfF2Yzula7mfjXMCzS2kziSEAA%3D%3D%3D",
-)
 
 == STL Algorithmes -- Copie
 
 - ```cpp std::copy()``` copie les éléments du début vers la fin
 
-```cpp
-vector<int> foo{4, 5, 9, 12};
-vector<int> bar;
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmZqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRsfEKtfWNWS2Dnd1FJf0AlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgM0%2BJgA7FZrjsdoN0CAQC83sRATDzjt%2BKg0RYAKykHZmABstNRtK4ZjRABF9hibpi9ujPlisTi8QSiESDiS1tgdhE6lyBYLhShUAkAJ7UVCoAB0UWAiLmZM1WtcSNpStlyAA1gB9YJKerRCCy4gzZFrbmC7EEXHKrywwGAmVyqkWDQmKnsx5uQNgDg7WNRwPO8MWLjhyMBg7xuMJzNuINEkNsiOJrMJ3MHJPBixrdOl/Ox8NuBiN90Kjko3mUhVC70i15i4mCUnOiAADjdHsVfeVautFstAHc6ugNdrdfraeTjQxVwbnTu95Oe16fWg/fWCymwyW89n73fkyG07fK2Wc3HH9Xixm3w2P5eT41nWd6NlSzatlOvZngs/p/leIaSCB8Hlp%2B8FAVSyHRu%2BD7odW9JYTGAFfoWFiooR75Ni2qxtl2qKclC9GfBwcy0JwVK8H4HBaKQqCcNGljWNiCxLA86w8KQBCaCxcyWiAVIaPonCSJx0m8ZwvAKCAilSdxLGkHAsBIJgqivH6JDkJQdTAAoyiGBUQgIKgi5cRJaAsAkdBMFUdkhLQjnOVxPHuZ59AxDZzAJAoTkEKQIV0NEoSsCsvDxWFADyfoBS5akma8VzEDZGmkHlyA1PgXG8PwggiGI7BSDIgiKCo6h6aQugtAYRgoNY1j6HgERaZAcwqlUWkcAAtDi%2BzsqYgmWFwXA7BNADqYi0MtK0mQQxBMLwqAvMQxB4FgQ2msQXiCHgbAACqarQZ1zAoInLHoOLBL5DlOTl3C8DtmArBJi67Qk0msexqltXxHDYKZyDmcQOyqGO9ITfSkg7MAyDIDsEA7ZdlozLjAlWJYtK4IQJB7N8XAzH9YNzAgpxYDEppyQpSkcCppBBftxVaTpDOc2YkM8dD9N6a6pCHSkziSEAA%3D%3D%3D",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 9, 12};
+    vector<int> bar;
 
-copy(foo.begin(), foo.end(), back_inserter(bar));
-```
+    copy(foo.begin(), foo.end(), back_inserter(bar));
+    ```
+  ],
+)
 
 - ```cpp std::copy_backward()``` copie les éléments de la fin vers le début
 
@@ -1139,10 +1165,6 @@ copy(foo.begin(), foo.end(), back_inserter(bar));
 
   Aux ensembles non-disjoints
 ])
-
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmZqQADqgKhE4MHt6%2BekkpjgJBIeEsUTFxtpj2eQxCBEzEBBk%2BflzllWk1dQQFYZHRsfEKtfWNWS2Dnd1FJf0AlLaoXsTI7BzmAMzByN5YANQma25Og8SYrPvYJhoAguub25h7BwBumA4k55c3ZhsMW167%2BzcYmAJEICBYH2un2CBB2LCYwQgM0%2BJgA7FZrjsdoN0CAQC83sRATDzjt%2BKg0RYAKykHZmABstNRtK4ZjRABF9hibpi9ujPlisTi8QSiESDiS1tgdhE6lyBYLhShUAkAJ7UVCoAB0UWAiLmZM1WtcSNpStlyAA1gB9YJKerRCCy4gzZFrbmC7EEXHKrywwGAmVyqkWDQmKnsx5uQNgDg7WNRwPO8MWLjhyMBg7xuMJzNuINEkNsiOJrMJ3MHJPBixrdOl/Ox8NuBiN90Kjko3mUhVC70i15i4mCUnOiAADjdHsVfeVautFstAHc6ugNdrdfraeTjQxVwbnTu95Oe16fWg/fWCymwyW89n73fkyG07fK2Wc3HH9Xixm3w2P5eT41nWd6NlSzatlOvZngs/p/leIaSCB8Hlp%2B8FAVSyHRu%2BD7odW9JYTGAFfoWFiooR75Ni2qxtl2qKclC9GfBwcy0JwVK8H4HBaKQqCcNGljWNiCxLA86w8KQBCaCxcyWiAVIaPonCSJx0m8ZwvAKCAilSdxLGkHAsBIJgqivH6JDkJQdTAAoyiGBUQgIKgi5cRJaAsAkdBMFUdkhLQjnOVxPHuZ59AxDZzAJAoTkEKQIV0NEoSsCsvDxWFADyfoBS5akma8VzEDZGmkHlyA1PgXG8PwggiGI7BSDIgiKCo6h6aQugtAYRgoNY1j6HgERaZAcwqlUWkcAAtDi%2BzsqYgmWFwXA7BNADqYi0MtK0mQQxBMLwqAvMQxB4FgQ2msQXiCHgbAACqarQZ1zAoInLHoOLBL5DlOTl3C8DtmArBJi67Qk0msexqltXxHDYKZyDmcQOyqGO9ITfSkg7MAyDIDsEA7ZdlozLjAlWJYtK4IQJB7N8XAzH9YNzAgpxYDEppyQpSkcCppBBftxVaTpDOc2YkM8dD9N6a6pCHSkziSEAA%3D%3D%3D",
-)
 
 == STL Algorithmes -- Échange
 
@@ -1155,30 +1177,36 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::swap_ranges()``` échange des éléments de deux ensembles
 
-```cpp
-vector<int> foo (5,10); // foo: 10 10 10 10 10
-vector<int> bar (5,33); // bar: 33 33 33 33 33
-
-swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
-// foo : 10 33 33 33 10
-// bar : 10 10 10 33 33
-```
-
-- ```cpp std::iter_swap()``` échange deux objets pointés par des itérateurs
-
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo+(5,10)%3B%0A++std::vector%3Cint%3E+bar+(5,33)%3B%0A%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A++std::swap_ranges(foo.begin()+%2B+1,+foo.end()+-+1,+bar.begin())%3B%0A++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+%22+%22+%3C%3C+bar%5B1%5D+%3C%3C+%22+%22+%3C%3C+bar%5B2%5D+%3C%3C+%22+%22+%3C%3C+bar%5B3%5D+%3C%3C+%22+%22+%3C%3C+bar%5B4%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo (5,10); // foo: 10 10 10 10 10
+    vector<int> bar (5,33); // bar: 33 33 33 33 33
+
+    swap_ranges(foo.begin()+1, foo.end()-1, bar.begin());
+    // foo : 10 33 33 33 10
+    // bar : 10 10 10 33 33
+    ```
+  ],
 )
+
+- ```cpp std::iter_swap()``` échange deux objets pointés par des itérateurs
 
 == STL Algorithmes -- Remplacement
 
 - ```cpp std::replace()``` remplace toutes les occurrences d'une valeur
 
-```cpp
-vector<int> foo{4, 5, 7, 9 ,12, 5};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:32,positionColumn:1,positionLineNumber:32,selectionStartColumn:1,selectionStartLineNumber:32,startColumn:1,startLineNumber:32),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+check(int+a)%0A%7B%0A++return+a+%3E%3D+7%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+5,+7,+9+,12,+5%7D%3B%0A++++std::replace(foo.begin(),+foo.end(),+5,+8)%3B%0A++++for(size_t++i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+5,+7,+9+,12,+5%7D%3B%0A++++std::replace_if(foo.begin(),+foo.end(),+check,+8)%3B%0A++++for(size_t++i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 7, 9 ,12, 5};
 
-replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
-```
+    replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
+    ```
+  ],
+)
 
 - ```cpp std::replace_if()``` remplace toutes les éléments vérifiant le prédicat
 
@@ -1193,18 +1221,23 @@ replace(foo.begin(), foo.end(), 5, 8);  // 4 8 7 9 12 8
 - ```cpp std::replace_copy_if()``` copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat
 
 #codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2yAQbwA1hBggRdkxZl8TAB2Kw3Xa7U4EJYMXFPS7rAAiu0JBxJt0J9IJN2xuxYTGCEHx0OJXzJRNZZLJQ3QIBAr3exCB2Iuu34qDF0l2AFZSEydXFdqQuGYdZqiRz1uKJVKZadEgYVtQkQA6KLAfnzFXO1wCk06gAc%2BItIol/GIEFSAC9MAB9HG7PBPRkaFnxp5uT2oJ2RzAClPWax4QXXCX7YWkku7a0oRY4oFAjMmTUWPCNxl1w67MAcTtrIPl0Xs4OSgjS6teWuHetdxtuBjTvvF0sc6HlsVDysjmVyogKw5K9bYBvEjXa3W7fWG41as0s9dV232mN4KiOzOu9061VO70e1EY/2BpaZKhuGeBRrGZIJgcSYplBHZftmuYWvslgFkWJZrv2VqbmOE5uPWqqNs2rZplO3bzkBS53jhaDjqRHbTpqs4UcGN4roumGLsOo7bh8e6CMqhHHr6Z4XkaJo3guJZVrxu5HAJB4IvUt5YfemB2kwKzRmgiQAJ6vi6mBugwPoZt%2BDDoKZVYRJp6LRsESgNNEEA2cQHqngGKlcZ6YbZhBqbQbsybIXB6YIWBOaAShViWIW66cRWG6jrReEEUiREtpqbaTgx5G9pRbHeVWKX0emjHMflnLeSBflxnBMEhWmSnEFmEVIRY0VofFZbedxMole26auRlJGDT2PZeRhg6qTRNalRNTFzpVq7TWyy7XBw8y0Jwmq8H4HBaKQqCcPhqGWJWizLI8Gw8KQBCaJt8zoiAmoaPonCSHtD1HZwvAKCAb33Qdm2kHAsBIJgqhvOOJDkJQ9TAAoyiGJUQgIKgADu%2B23WgLCJHQTDVMjIS0GjmP7YduP4/QMSI8wiQKOjBCkFTdDRKErCrLwrM0wA8uOZNY99kNvNcxCI79pAi8gtT4PtvD8IIIhiOwUgyIIigqOowOkLorQGEYKD5pY%2Bh4BE/2QPMqCJNU/0cAAtFK0GmGdFhcFwuz2wA6mItCe17kMEMQTC8KgrzEMQeBYBbPrEF4gh4GwAAqSK0DH8wKJdKx6FKwTE6j6NC9wvBB5gqy3RjweJA9W07V9OvHRw2BQ8gMPELsqh%2BgAbPbXeSLswDIPCEBB/H6KzLsECnTFNi7LghAkCh6xcLMJc1/MaJMFgMQ%2Bs9r3vRwn2kBToeS/9gPrwfZj14djdr8DszzOHqTOJIQA%3D%3D",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+check(int+a)%0A%7B%0A++return+a+%3E%3D+7%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9+,12,+5%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A++std::replace_copy(foo.begin(),+foo.end(),+std::back_inserter(bar),+5,+8)%3B%0A++for(size_t++i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++for(size_t++i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
 == STL Algorithmes -- Suppression
 
 - ```cpp std::remove()``` élimine les éléments égaux à une valeur donnée
 
-```cpp
-vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::remove(foo.begin(),+foo.end(),+5)%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
 
-remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
-```
+    remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
+    ```
+  ],
+)
 
 #alertblock("Pas de suppression", text[
   Ramène les éléments à conserver vers le début de l'ensemble
@@ -1226,10 +1259,6 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::remove(foo.begin(),+foo.end(),+5)%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
-
 == STL Algorithmes -- Suppression
 
 - ```cpp std::remove_if()``` élimine les éléments vérifiant le prédicat
@@ -1243,77 +1272,89 @@ remove(foo.begin(), foo.end(), 5);    // 4 7 9 9 ...
 // Tout comme remove, les éléments ne sont pas supprimés du conteneur mais déplacé à la fin et l'itérateur correspondant est renvoyé
 // L'ordre relatif est préservé, important si la comparaison ne se fait que sur une partie d'un élément composite
 
-```cpp
-vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::unique(foo.begin(),+foo.end())%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 5, 5, 7, 9, 9, 5};
 
-unique(foo.begin(), foo.end());  // 4 5 7 9 5 ...
-```
+    unique(foo.begin(), foo.end());  // 4 5 7 9 5 ...
+    ```
+  ],
+)
 
 - ```cpp std::unique_copy()``` copie l'ensemble en ne conservant que le premier des éléments consécutifs égaux
 
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:26,positionColumn:1,positionLineNumber:26,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+void+print(int+a)%0A%7B%0A++std::cout+%3C%3C+a+%3C%3C+!'+!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::unique(foo.begin(),+foo.end())%3B%0A++std::for_each(foo.begin(),+it,+print)%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A%23if+0%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
-
 == STL Algorithmes -- Transformation
 
-- ```cpp std::transform()``` applique une transformation aux éléments d'un ensemble
+- ```cpp std::transform()``` transforme les éléments d'un ensemble
 
-```cpp
-int double_val(int i) { return 2 * i;}
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:22,positionColumn:1,positionLineNumber:22,selectionStartColumn:1,selectionStartLineNumber:22,startColumn:1,startLineNumber:22),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+int+double_val(int+i)%0A%7B%0A++return+2+*+i%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::transform(foo.begin(),+foo.end(),+std::back_inserter(bar),+double_val)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    int double_val(int i) { return 2 * i;}
 
-vector<int> foo{4, 5, 7, 9};
-vector<int> bar;
-transform(foo.begin(), foo.end(),
-          back_inserter(bar), double_val);
-// 8 10 14 18
-```
+    vector<int> foo{4, 5, 7, 9};
+    vector<int> bar;
+    transform(foo.begin(), foo.end(),
+              back_inserter(bar), double_val);
+    // 8 10 14 18
+    ```
+  ],
+)
 
 == STL Algorithmes -- Transformation
 
 - Ou de deux ensembles en stockant le résultat dans un troisième
 
-```cpp
-vector<int> foo{4, 5, 7, 9};
-vector<int> bar{2, 3, 6, 1};
-vector<int> baz;
-
-transform(foo.begin(), foo.end(), bar.begin(),
-          back_inserter(baz), plus<int>());
-// 6 8 13 10
-```
-
 #codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGIAOwAnKSuADJ4DJgAcj4ARpjEIGbBAA6oCoRODB7evgGp6ZkC4ZExLPGJybaY9o4CQgRMxAQ5Pn5B1bVZDU0EJdFxCUnBCo3NrXkdo739ZRXDAJS2qF7EyOwc5gDMEcjeWADUJltuTqPEmKzH2CYaAILbu/uYRycAbpgOJNe3D2Y7DD2XkOxzcYmAJEICBYP3uv2mjmQBwiBAO6BWsXoAH03mIICjkQtfiZ/FZ7gcDhcCKsGAczAcAFTI45kh7%2BAAixPuBJYTAiECJcNJvwpJNZFIpo3QIBAHy%2BxFBKOuB34qDF0gOAFZSAd/DrAiTOVtxRKpTK5UQFSclVtsAdYk0WVy7hKDmaQARiIYFPxiCxqKhUAA6eLAflLFWBoOuAU690O5AAayxESUzQSEAdxAj6K8mMwOLERONIolvogGQAXgXUXhXuyDhoWcjXm57U0g1XMALm9ZrHhBS6JWLS673WgvKjQaD2wrNRY8CZNQ3pycDmAOOvNiXycOOaO3QRpSgVlOTjON0u3AxLzuh4bnaLhbvJUfzZ9LYrBMrVeqddrdX1B87zHN9ZQ/b5rW/W1ZzFMwdS2HUADYdS4YCTVfY8LUg05oLtB1KydOEX0PY9PW9X1/VVENMDDBhY0jYMYwjLMaLohj4yYJMUwYNMCAzAiI3dFJvAUL8CGuAViwwyNiArPBqyxWt60bZs6xnAjOwU7tpKOSx%2B0HV0RxIzCZQnM83A0phCPnRdl1bC9N1vGSHxI8dTwctdL01a9nNLVy2U5e4OCWWhOE1Xg/A4LRSFQThLP0yw3RWNYXm2HhSAITQQqWRMQE1DR9E4SRIuy2LOF4BQQEKrLopC0g4FgJBMFUT5JxIchKCaYAFGUQwaiEBBUAAdyijK0BYFI6CYOoGD6yJaEGkaopiiapvoRIeuYFIFCGghSDWugEiiVgNl4Q6NoAeUnJbRrKlrPjuYgeoqkJWuQBp8Ci3h%2BEEEQxHYKQZEERQVHUOrSF0Lh9EMYw%2B0sfQ8FiKrICWVAUlmqqOAAWilY52VMRKLC4LgDmxgB1MRaDJ8mWvI3hUA%2BYhiDwLAUdjYgvEEPA2AAFUDWh2aWBQUvWPQpQieaBqGu7uF4T1MA2DLhq9FJstC8LSohuKOGwd72uIA5VAADiQ7GkMkA5gGQJEIE9LnEwWA4IASqwEYOXBCBIPSti4BZ5fVpYEEuLBEljPKCqKjgStIFaGdeqqasDqOzC1mKdYDuqFiWJmMmcSQgA%3D",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:4,positionColumn:1,positionLineNumber:4,selectionStartColumn:1,selectionStartLineNumber:4,startColumn:1,startLineNumber:4),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9%7D%3B%0A++std::vector%3Cint%3E+bar%7B2,+3,+6,+1%7D%3B%0A++std::vector%3Cint%3E+baz%3B%0A%0A++std::transform(foo.begin(),+foo.end(),+bar.begin(),+std::back_inserter(baz),+std::plus%3Cint%3E())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+baz%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 7, 9};
+    vector<int> bar{2, 3, 6, 1};
+    vector<int> baz;
+
+    transform(foo.begin(), foo.end(), bar.begin(),
+              back_inserter(baz), plus<int>());
+    // 6 8 13 10
+    ```],
 )
 
 == STL Algorithmes -- Rotation
 
 - ```cpp std::rotate()``` effectue une rotation de l'ensemble, le nouveau début étant fourni par un itérateur
 
-```cpp
-vector<int> foo{4, 5, 7, 9, 12};
-
-rotate(foo.begin(), foo.begin() + 2, foo.end());  // 7 9 12 4 5
-```
-
-- ```cpp std::rotate_copy()``` effectue une rotation et copie le résultat
-
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9,+12%7D%3B%0A%0A++std::rotate(foo.begin(),+foo.begin()+%2B+2,+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 7, 9, 12};
+
+    rotate(foo.begin(), foo.begin() + 2, foo.end());  // 7 9 12 4 5
+    ```
+  ],
 )
+
+- ```cpp std::rotate_copy()``` effectue une rotation et copie le résultat
 
 == STL Algorithmes -- Partitionnement
 
 - ```cpp std::partition()``` réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas ...
 
-```cpp
-bool is_odd(int i) { return (i % 2) == 1; }
-vector<int> foo{4, 13, 28, 9 , 54};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i%252)%3D%3D1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++std::partition(foo.begin(),+foo.end(),+is_odd)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    bool is_odd(int i) { return (i % 2) == 1; }
+    vector<int> foo{4, 13, 28, 9 , 54};
 
-partition(foo.begin(), foo.end(), is_odd);
-// 9 13 28 4 54 ou 9 13 4 28 54 ou ...)
-```
+    partition(foo.begin(), foo.end(), is_odd);
+    // 9 13 28 4 54 ou 9 13 4 28 54 ou ...)
+    ```
+  ],
+)
 
 - ... et retourne un itérateur sur le début de la seconde partie
 
@@ -1325,11 +1366,16 @@ partition(foo.begin(), foo.end(), is_odd);
 
 - ```cpp std::stable_partition()``` partitionne en conservant l'ordre relatif
 
-```cpp
-vector<int> foo{4, 13, 28, 9 , 54};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:21,positionColumn:1,positionLineNumber:21,selectionStartColumn:1,selectionStartLineNumber:21,startColumn:1,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+is_odd(int+i)%0A%7B%0A++return+(i%252)%3D%3D1%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++std::stable_partition(foo.begin(),+foo.end(),+is_odd)%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 13, 28, 9 , 54};
 
-stable_partition(foo.begin(), foo.end(), is_odd);  // 13 9 4 28 54
-```
+    stable_partition(foo.begin(), foo.end(), is_odd);  // 13 9 4 28 54
+    ```
+  ],
+)
 
 #noteblock("Deux fonctions ?", text[
   Stabilité coûteuse en temps et pas toujours nécessaire
@@ -1345,26 +1391,32 @@ stable_partition(foo.begin(), foo.end(), is_odd);  // 13 9 4 28 54
 
 // Formulation "pas supérieur" étrange mais gère le cas des égalités avec le pivot et la sémantique de l'opérateur fourni
 
-```cpp
-vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
-
-nth_element(foo.begin(), foo.begin() + 3, foo.end());
-// 2 1 3 4 5 9 6 7 8
-```
-
 #codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCCSAKykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BE0cyF2EVQnl2eAUAH0MOgIMECCjZl8TAB2Kw3Xa7U4EJYMXbY8xxMz49YAEQOTK4BxJt0JLOhNxxuxYTGCEHx0OJXzJRM5ZLJQ3QIBAr3exCBOIuu34qCl0l2XHWpF2ZgAHAaAJy7A1xSRElnrTkSmVyhWJLppATUJEAOiiwGF8w1XtcIoNqIx6HQjOlMv4xAgqQAXpg0bi8E8mbsNByUU83AHUJ6E5gRVnrNY8KLrjL9uLSVXdk6UItcUCgXmTHELHh2%2BmW4ddmAOP21naHZLuaP6wR5Y2vM3Dq2B%2B23AxFyPazaCeua5XHVOFUqiCrDmr1tg28SdXqDcazRbdlaN2vbrXZXuQBMIvQ0S6Gm6GB78x9P0DU1T0g39UNMUjCcYzjPBE2TbNWQzLNU1bUDC2LO19ksMsKyrKUJ1fac0FnHN0KRdtO27ci%2BwHIcOQnDcX0nEim1o3NFziZdVyjZjnx3QiWIbA8PmPQR1U1KVTQNE1dkJA0ADZLQNHV9UNA12XHJ8JwbQQEDRSpMDYQQAO9TBfX/f1QKAqycIsXZ1NA8DoJY2DC0QtDmRQ7CvNzDD4KLSN7LwpjtzrViFVIuc3AorUOy7OIe3nOjB14sKeR3YiovY3tOLWbiV2HPjxzFTKOHmWhODiXg/A4LRSFQThYtwyx60WZZHg2HhSAITQKvmABrEA4g0fROEkWr%2BsazheAUEAxr6%2BqKtIOBYCQTBVDeWcSHISh6mABRlEMSohAQVAAHc6p6tAWESOgmGqY6QloM7Lrqhrbvu%2BgYkO5hEgUc6CFIL66GiUJWFWXhQZ%2BgB5Wc3qu6bNrea5iEO2bSBR5BanwOreH4QQRDEdgpBkQRFBUdRltIXRWgMIwUFLSx9DwCJ5sgeZUESap5o4ABaOVWVMVqLC4Lhdn5gB1MRaElqXNoIYgmF4VBXmIYg8CwDng2ILxBDwNgABUkVoHX5gUDqVj0OVgme07zqR7heCVzBVh6i7lcSfrKuqqaaaajhsC25AduIXZVCNRT%2BcUyRdmAZB4QgJX9cG2YaRaqwWd2XBCBIHD1i4WYXZ9%2BYEDOLAYmDYbRvGjhJtID7Vcx%2BbFtLuuzH9hrA5L5bZnmdXUmcSQgA%3D",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:4,positionColumn:1,positionLineNumber:4,selectionStartColumn:1,selectionStartLineNumber:4,startColumn:1,startLineNumber:4),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++std::nth_element(foo.begin(),+foo.begin()+%2B+3,+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+    nth_element(foo.begin(), foo.begin() + 3, foo.end());
+    // 2 1 3 4 5 9 6 7 8
+    ```
+  ],
 )
 
 == STL Algorithmes -- Tri
 
 - ```cpp std::sort()``` trie un ensemble
 
-```cpp
-vector<int> foo{4, 13, 28, 9 , 54};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++std::sort(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 13, 28, 9 , 54};
 
-sort(foo.begin(), foo.end());  // 4 9 13 28 54
-```
+    sort(foo.begin(), foo.end());  // 4 9 13 28 54
+    ```
+  ],
+)
 
 #alertblock("Attention", text[
   Ordre relatif non conservé
@@ -1376,55 +1428,58 @@ sort(foo.begin(), foo.end());  // 4 9 13 28 54
 
 - ```cpp std::partial_sort()``` réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant ...
 
-```cpp
-vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++std::partial_sort(foo.begin(),+foo.begin()+%2B+3,+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-partial_sort(foo.begin(), foo.begin() + 3, foo.end());
-// 1 2 3 9 8 7 6 5 4
-```
+    partial_sort(foo.begin(), foo.begin() + 3, foo.end());
+    // 1 2 3 9 8 7 6 5 4
+    ```
+  ],
+)
 
 - ... les autres éléments n'ont pas d'ordre particulier
 - ```cpp std::partial_sort_copy()``` copie l'ensemble ordonné à l'image de ```cpp std::partial_sort()```
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:29,positionColumn:1,positionLineNumber:29,selectionStartColumn:1,selectionStartLineNumber:29,startColumn:1,startLineNumber:29),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B4,+13,+28,+9+,+54%7D%3B%0A%0A++++std::sort(foo.begin(),+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++++std::partial_sort(foo.begin(),+foo.begin()+%2B+3,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
 
 == STL Algorithmes -- Mélange
 
 - ```cpp std::random_shuffle()``` réordonne aléatoirement l'ensemble
 
-```cpp
-vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
-
-random_shuffle(foo.begin(), foo.end());
-// 1 8 3 7 9 4 2 6 5 ou
-// 5 6 2 1 9 4 7 8 3 ou
-// ...
-```
-
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B9,+8,+7,+6,+5,+4,+3,+2,+1%7D%3B%0A%0A++std::random_shuffle(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+    random_shuffle(foo.begin(), foo.end());
+    // 1 8 3 7 9 4 2 6 5 ou
+    // 5 6 2 1 9 4 7 8 3 ou
+    // ...
+    ```
+  ],
 )
 
 == STL Algorithmes -- Fusion
 
 - ```cpp std::merge()``` fusionne deux ensembles triés dans un troisième
 
-```cpp
-vector<int> foo{1, 5, 6, 8};
-vector<int> bar{2, 5};
-vector<int> baz;
-
-merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
-      back_inserter(baz));      // 1 2 5 5 6 8
-```
-
-- ```cpp std::inplace_merge()``` fusionne deux sous-ensembles sur place
-
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:31,positionColumn:1,positionLineNumber:31,selectionStartColumn:1,selectionStartLineNumber:31,startColumn:1,startLineNumber:31),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8%7D%3B%0A++++std::vector%3Cint%3E+bar%7B2,+5%7D%3B%0A++++std::vector%3Cint%3E+baz%3B%0A%0A++++std::merge(foo.begin(),+foo.end(),+bar.begin(),+bar.end(),+std::back_inserter(baz))%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+baz.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+baz%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+5,+6,+8,+2,+5%7D%3B%0A%0A++++std::inplace_merge(foo.begin(),+foo.begin()+%2B+4,+foo.end())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{1, 5, 6, 8};
+    vector<int> bar{2, 5};
+    vector<int> baz;
+
+    merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
+          back_inserter(baz));      // 1 2 5 5 6 8
+    ```
+  ],
 )
+
+- ```cpp std::inplace_merge()``` fusionne deux sous-ensembles sur place
 
 == STL Algorithmes -- Opérations ensemblistes
 
@@ -1436,36 +1491,43 @@ merge(foo.begin(), foo.end(), bar.begin(), bar.end(),
 
 - ```cpp std::includes()``` vérifie si tous les éléments sont présents dans un autre ensemble
 
-```cpp
-vector<int> foo{1, 5, 6, 8};
-vector<int> bar{2, 5};
-vector<int> baz{1, 6};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+5,+6,+8%7D%3B%0A++std::vector%3Cint%3E+bar%7B2,+5%7D%3B%0A++std::vector%3Cint%3E+baz%7B1,+6%7D%3B%0A%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::includes(foo.begin(),+foo.end(),+bar.begin(),+bar.end())+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+std::includes(foo.begin(),+foo.end(),+baz.begin(),+baz.end())+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{1, 5, 6, 8};
+    vector<int> bar{2, 5};
+    vector<int> baz{1, 6};
 
-includes(foo.begin(), foo.end(), bar.begin(), bar.end());  // faux
-includes(foo.begin(), foo.end(), baz.begin(), baz.end());  // vrai
-```
+    includes(foo.begin(), foo.end(), bar.begin(), bar.end());  // faux
+    includes(foo.begin(), foo.end(), baz.begin(), baz.end());  // vrai
+    ```
+  ],
+)
 
 == STL Algorithmes -- Opérations ensemblistes
 
 - ```cpp std::set_union()``` : union de deux ensembles
 
-```cpp
-vector<int> foo{1, 5, 6, 8};
-vector<int> bar{2, 5};
-vector<int> baz;
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAA7KQADqgKhE4MHt6%2BekkpjgJBIeEsUTHxdpgOaUIETMQEGT5%2BXLaY9nkM1bUEBWGR0XG2NXUNWc0KQ93BvcX9sQCUtqhexMjsHOYAzMHI3lgA1CYbbk7jxJish9gmGgCCm9u7mAdHAG4VRMSX13dmWww7Xn2hzcYmAJEICBYX1u32CBD2LCYwQgc2%2BJliVluewOGO%2B2Ox43QIBAbwcJGBcMue34qHRFmaewArKQ9gA2FkADnRABFDpibvi9oTiaSPhTBFSIrU6WYWYyeXy8fjhST3uSjpSNtg9lKAF6KmFY5UEIkgJQEAD6XgYaWoqFQADoosBkQtqfaHa4USypcQnZgXQxvTrap6GOhg1LkABrC3BJR1aIQPVzVEbfmC/jECApXWYC3wvDPbl7DR8vZF4Eh3UO3OYFHl6zWPCoo3YulKwUqtBeeHAqt6kyMix4Icl/tHPZgDhT9bpzs43ltoUm4k9vtHKvToduBjb%2BdGhWGgU4jPG02i9XHCVa920jEM5lszkKg8ngmr1Vkz4am/a30ynKr5nh%2BF5qj%2B14EJKTD6m%2BC4quacaCNESiVAIdqOs6rosjSYYRm6vr%2BoGkahl6BFMDGSEJgQSYpmmIHutmdYFhWxaluWlaTnqtZ4HmDbpgcljNq276nguoFrksG5uAOMFDiOY7PDJk7TrOBqiUeondlJSlbusjK7vuZ6aUqHbLiql4QZq2o0nSj4suyexcrEvJvl2n6WeKUG3gBGKykywHwR54FedBsH8kFpqIfgVBUNEjCrBhRHYXeeEkX6WFBuRfpkT6FGxvG0Q0dmdHqZmJA5rx%2BaFmxZYCZxbjVjxfH0YJViWC2C5maJEkoDpE6NYOw6joy46bipM5GV1LmRZJva6RNO57nOxkzce7a4uZwXfqFt62Q%2BcoOS%2BM1ueeIohb%2B3n/tKflASdDEWRdkFheps1mpgloKAAniwbAEMQeDIBaMVxWc/z1rhmXBrhuUhhlAYpYRsNRgVDDUbRMGpmV%2BJZpVeYsZxJZ1RYrGyTWdb8STTYdSJgrdYKvXrgtg1ycNikDbOamnRtS5aZ%2BTMc9uBnLdjJlrTcHALLQnCMrwfgcFopCoJwMlCZYQpLCsTybDwpAEJoksLNGICMho%2BicJIcsG0rnC8AoIBm/rCuS6QcCwEgmCqBUvYkOQlC1MACjKIYrRCAgqAAO7y7raAsAkdBMO0wchLQYeR/Liux/H9AxIHzAJAo4cEKQWd0NEoSsGsvClznADyvZp1H1uexUNzEIHtukC3yDVPg8u8PwggiGI7BSDIgiKCo6jO6QujNAYRgoNTNi0HgET25ACyoAk7T2xwAC0hKHNyphq/SXB7PvADqYi0JfV%2Be/9TC8KgbzEADWAb96xDWo4bAACr2loF/BYChNarD0ISYIydQ7hybtwXg/1MBrF1hHYgTAEgGyljLK2M9lYcGwF7ZAPtiB7FUByVk%2B9WSSD2MAZAyA9gQH%2BtaaMcxGGq3ajYPYuBCAkEEhsLgcxEFYIWAgc4WAYjemNqbc2HBLakAzi/Tu9tHYiNkWYXBit8HCOdqmUgb8UjOEkEAA%3D%3D%3D",
+  code: [
+    ```cpp
+    vector<int> foo{1, 5, 6, 8};
+    vector<int> bar{2, 5};
+    vector<int> baz;
 
-set_union(foo.begin(), foo.end(), bar.begin(),
-          bar.end(), back_inserter(baz));   // 1 2 5 6 8
-```
+    set_union(foo.begin(), foo.end(), bar.begin(),
+              bar.end(), back_inserter(baz));   // 1 2 5 6 8
+    ```
+  ],
+)
+
 - ```cpp std::set_intersection()``` : intersection de deux ensembles
 - ```cpp std::set_difference()``` : différence de deux ensembles
 - ```cpp std::set_symmetric_difference()``` : différence symétrique de deux ensembles
 
 // set_difference() conserve les éléments présents dans le premier ensemble mais pas dans le second alors que set_symmetric_difference() conserve les éléments présents dans un des ensembles mais pas dans l'autre}
-
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAAbAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcYmAJEICBYX1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRY2nsAKykPaxVnxDEAEUOWJuBL2RJJZKIFKOVI22D2EQa9LMrKZ3N5%2BIJQtJ71FlME1JlAC96YzYkqNnyVYSCMSUEt4cDgYKLSSIqhPGIkggmM83Ha1Q9AZgFNRnQA6KLAZELGnB1wo1ky4ghzBhhgx6UNIPRuZzT12sDrJluBi55XY1UOq1eG1Hb1lp0u2huj22o72y2%2BrAB2kJpMpzsZ2NMXVd8P9wcZrNNtx7Iv5wvrE0qpUwkv0s0t4Uaz7i7WSyN0zGMllsjnGvkCtUizfHbdSuNyhUn1fnjdiq8EHUD4t3Evmy1KAgAfS8BgMkDVAh2TCNewYdAUzjcDYLTPtU2QABrf9giURpoggPVM0/AV%2BGICA0l1TB/3hPBni5PYNF5PZKLtPUgxIzAUTo6xrDwVFv1xU8BTXctKy9Zs9RMJkLDwMTqInKcOFk/CCUXflS0tNAK2zZtpwLIt52XdEeSXZSVx4p9yS1N8d1pA0FVZdk9k5fSFJ/dczK3Cyb1lTF5WZB8TLLC8XwlDz9V0r9lOckA/3QwRoiUBwQM7UNh13dNoIQ%2BMkog/t4yQmVUOizCCGw3DUVCgiSGIvBSPI%2BiqJouiGJEgdmKq1jSosA5LE47jwt41cIrUoTGI/cTJKZaSq00uSdL4nElLPMtBo0yctNnBSlIXPE/MtALzOpKz9xso97N83rTM1Nz3wpLz70csqVJci7X3fELTW2kkovwKgqGiRhVlA%2BDIKjNKIzgzL0tSmDQaYfKMOiIqiJKpzIyIliasa6jaJNWrhsHFi2OxjjLC41djN6gbrWW1N9VGqSqdzeT7rmxz3sE%2Bm820uc%2BI2vTZoE3bLss51rOZWzjzuvnzsvILU2uixvMVCXH38589p3UTQuV39MAAhQAE8WDYAhiDwZB/y%2Bn6zn%2BVjEsTZKoKh7LAad3KYbQuGsMRgc8KZlHKuqii6qxjrGsnJj8fazqrGJnqBTJ/iBKWmTRNp8b2cZvn5oetmZNWmbNoMu4WZuDgFloTgmV4PwOC0UhUE4L0ussQUlhWJ5Nh4UgCE0UuFhQkAmQ0fROEkKue7rzheAUEAh%2B7mvS9IOBYCQTBVHeCsSHISgGmABRlEMKohAQVAAHdq87tAWCSOgmBqfeQloI/T%2Br2vL%2Bv%2BgYl35gkgUY%2BCFIN%2BdBoihFYGsXggCP4AHkKxPzPuPVe7wbjEF3pPUgCDkB1HwNXXg/BBAiDEOwKQMhBCKBUOoeepBdBtAMEYFARMbC0DwBEaekAFioCSDUaeHAAC0RJDhclME3BkXA9jcIAOpiFoKIsRq9jZMF4KgN4xATbtngAsYgQFHBsAACrOloCwmMChW6rD0ESYI99D7HzgdwXgxtMBrE7ifYgTAkg9zLhXMeFD64cGwGvZAG9iB7FUPEWI3DYiSD2MAZAyA9gQGNkBFCWYICN2jjYPYuBCAkE6hsLgcxbFuIWAgc4WAYgxn7oPYeHBR6kBfgo1B09Z4FMqWYTxtdvH5PnpmUgSi0jOEkEAA%3D%3D%3D",
-)
 
 == STL Algorithmes -- Gestion de tas
 
@@ -1498,44 +1560,55 @@ max(52, 6);  // 52
 ```
 
 - ```cpp std::min_element()``` détermine le plus petit élément d'un ensemble
-
-```cpp
-vector<int> foo{18, 5, 6, 8};
-
-min_element(foo.begin(), foo.end()); // Sur 5
-```
-
 - ```cpp std::max_element()``` détermine le plus grand élément d'un ensemble
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A%0A++std::cout+%3C%3C+*std::min_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+*std::max_element(foo.begin(),+foo.end())+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{18, 5, 6, 8};
+
+    min_element(foo.begin(), foo.end());  // 5
+    max_element(foo.begin(), foo.end());  // 18
+    ```
+  ],
 )
 
 == STL Algorithmes -- Numérique
 
 - ```cpp std::accumulate()``` "ajoute" tous les éléments de l'ensemble
 
-```cpp
-vector<int> foo{18, 5, 6, 8};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A++std::cout+%3C%3C+std::accumulate(foo.begin(),+foo.end(),+1,+std::multiplies%3Cint%3E())+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{18, 5, 6, 8};
 
-accumulate(foo.begin(), foo.end(), 1, multiplies<int>()); // 4320
-```
+    accumulate(foo.begin(), foo.end(), 1, multiplies<int>()); // 4320
+    ```
+  ],
+)
 
 - Opérateur et valeur initiale configurables
 - _Reduce_/_fold_ fonctionnel
 
 == STL Algorithmes -- Numérique
 
-- ```cpp std::adjacent_difference()``` "différence" entre chaque élément et son prédécesseur
+- ```cpp std::adjacent_difference()``` "différence" entre un élément et son prédécesseur
 
-```cpp
-vector<int> foo{18, 5, 6, 8};
-vector<int> bar;
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::adjacent_difference(foo.begin(),+foo.end(),+back_inserter(bar),+std::minus%3Cint%3E())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{18, 5, 6, 8};
+    vector<int> bar;
 
-// 18 -13 1 2
-adjacent_difference(foo.begin(), foo.end(),
-                    back_inserter(bar), minus<int>());
-```
+    // 18 -13 1 2
+    adjacent_difference(foo.begin(), foo.end(),
+                        back_inserter(bar), minus<int>());
+    ```
+  ],
+)
 
 - Opérateur configurable
 
@@ -1543,12 +1616,17 @@ adjacent_difference(foo.begin(), foo.end(),
 
 - ```cpp std::inner_product()``` : "produit scalaire" de deux ensembles
 
-```cpp
-vector<int> foo{1, 2, 3, 4};
-vector<int> bar{2, 3, 4, 5};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+2,+3,+4%7D%3B%0A++std::vector%3Cint%3E+bar%7B2,+3,+4,+5%7D%3B%0A%0A++std::cout+%3C%3C+std::inner_product(foo.begin(),+foo.end(),+bar.begin(),+0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{1, 2, 3, 4};
+    vector<int> bar{2, 3, 4, 5};
 
-inner_product(foo.begin(), foo.end(), bar.begin(), 0); // 40
-```
+    inner_product(foo.begin(), foo.end(), bar.begin(), 0); // 40
+    ```
+  ],
+)
 
 - Opérateurs et valeur configurables
 
@@ -1557,19 +1635,20 @@ inner_product(foo.begin(), foo.end(), bar.begin(), 0); // 40
 - ```cpp std::partial_sum()``` : "somme" partielle d'un ensemble
 - Chaque élément résultant est la somme des éléments d'indice inférieur ou égal de l'ensemble de départ
 
-```cpp
-vector<int> foo{1, 2, 3, 4};
-vector<int> bar;
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:6,endLineNumber:19,positionColumn:6,positionLineNumber:19,selectionStartColumn:6,selectionStartLineNumber:19,startColumn:6,startLineNumber:19),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cnumeric%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+2,+3,+4%7D%3B%0A++++std::vector%3Cint%3E+bar%3B%0A%0A++++std::partial_sum(foo.begin(),+foo.end(),+back_inserter(bar))%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A%23if+0%0A++//+Factorielle%0A++%7B%0A++++std::vector%3Cint%3E+foo%7B1,+2,+3,+4%7D%3B%0A++++std::vector%3Cint%3E+bar%3B%0A%0A++++std::partial_sum(foo.begin(),+foo.end(),+back_inserter(bar),+std::multiplies%3Cint%3E())%3B%0A++++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++++%7B%0A++++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++++%7D%0A++++std::cout+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{1, 2, 3, 4};
+    vector<int> bar;
 
-// 1 3 6 10
-partial_sum(foo.begin(), foo.end(), back_inserter(bar));
-```
+    // 1 3 6 10
+    partial_sum(foo.begin(), foo.end(), back_inserter(bar));
+    ```
+  ],
+)
 
 - Opérateur configurable
-
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCAArAAcpAAOqAqETgwe3r56KWmOAkEh4SxRMQm2mPYFDEIETMQEWT5%2BXJXVGXUNBEVhkdFxiQr1jc05bcPdvSVlgwCUtqhexMjsHOYAzMHI3lgA1CYbbk7DxJish9gmGgCCm9u7mAdHAG6YDiSX13dmWww7Xn2hzcDB80Twpg2V1u32CBD2LCYwQgc2%2BJgA7FZbnsDpjvjiccN0CAQG8PsRgXDLnt%2BKgMRYuIk9rFSHsAGys%2BIYgAihyxNwJeyJJLQXnhwOBQoIxJATGQyB8XgMBEw1FQqAAdFFgMiFjT1RrXCjWW0pTKWErHElaHhMApKYJLii5s83JKwOtYiCPXz8bjeTDsbj%2BYLhaT3kQKUcqVD9XTMYzWSz2Zyeb6g4TpSSyZGHQRqREGum7hmzSSmOhtHLGAQAPr4KhUaKMVZqzXa3Ws2mGhjoY17QvIADWteCSka0QgheIerDLGCXnt0cdUOdxcF/GIEDSAC9MLX4Xhnty9ho%2BXsj5Lpxrd6rURsLAdLNY8KjS/S/aGsygluKjlei1iCw8BMWITwlI49g9KD1gfT9/XgsNRT/N1IJ9L0GB9OCgzTQMBWDRDvxzT5l3zWNaXpU0zFZDZWUkNNsPwzMZWIqNjhXbAByLTFqL2Wi9mkZkGP5QiZWQ11JTDYIQmIWskmIDAvAcNstUwHUGH7bsjT1a8Ow0vUNBdCC3Bg0DvVgkMELwnEP1LMNWLzakKITVleP4%2Bj0V5RivxYiMSPYsjOOnYtRJJJJujwMRawUHwVL0zSDW01lBxHMdohVLdpzme9LJxTdtzwPcDwvY9T3PS9IOvW8UXPawXzfJiCNLZiRV/CTKsA4DQPA/80I4UzvIJXDGqQtrjNMjCsMs4a0V%2BPAqDKoMAHolr2AAxOVI1tWh6D9WyRqIvy2JjTjnIZVyaLo4TQvDclHNjYLGJu8LGki2hoti7t4r1LTe37FLRwYccMqnBpZ2/C1aCtG07Xu7A10GvKSAKorD1Ks8HxKgDiBvQq71q59LFfeD9sFFqfzFdqTOCoCQLAqmYIG3KrIOsSxt6kz0PM9cWc2Vx5rRTzvg4BZaE4WJeD8DgtFIVBODdQnHwUJYVieTYeFIAhNBFhYhziDR9E4SRJe12XOF4BQQANrXpZF0g4FgJBMFUd4xRIchKAaYAFGUQwqiEBBUAAdyljW0BYJI6CYGpfZCWgA%2BDqWZfDyP6Bib3mCSBRA4IUgU7oaJQlYNZeHztOAHkxQTkPTed94bmIb3zdIOvkDqfApd4fhBBEMR2CkGRBEUFR1Ft0hdDaAwjBQOrLH0PAIktyAFlQJIaktjgAFoiUOblTEVrguD2TeAHUxFoY%2BT%2BdghiCYXhUDeYhiDwLAl%2BNYgvEEPA2AAFXVWg34LGVssVYegiTBFjv7QONduC8BvpgNYGsg63ySNrUW4sTZjzlhwbALsFSRj2KoeIbJN5skkHsYA8o9gQBvp/IcLoIAKysHPPYuBCAkCfBsLgcw4FoIWAgc4WAYjGj1rEA2YsODG1IEne%2BzdLbWz4YbDgZhMEy2wbw222VSCPzSM4SQQA%3D%3D%3D",
-)
 
 == STL Algorithmes -- Au delà des conteneurs
 
@@ -1607,12 +1686,17 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   - ```cpp ostream_iterator``` : output itérateur
     - Depuis un flux sortant, séparateur configurable
 
-  ```cpp
-  	vector<int> foo{5, 6, 12, 89};
-  	ostream_iterator<int> out_it (cout, ", ");
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    	vector<int> foo{5, 6, 12, 89};
+    	ostream_iterator<int> out_it (cout, ", ");
 
-  	copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
-  ```
+    	copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
+    ```
+  ],
+)
 
 #alertblock("Attention", text[
   Séparateur ajouté après chaque élément, y compris le dernier
@@ -1620,11 +1704,8 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 
 - Buffers de flux : ```cpp istreambuf_iterator``` et ```cpp ostreambuf_iterator```
 
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
-
 == STL Conclusion
+
 #adviceblock("Do", text[
   Préférez les conteneurs aux tableaux C
 ])
