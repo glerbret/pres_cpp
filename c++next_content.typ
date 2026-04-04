@@ -218,6 +218,19 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - _Unicode Conversion Facets_
   - _Locale Category Facets for Unicode_
 
+== sécurité
+
+- Safety profile
+  - Initialisation de toutes les variables
+  - Libération des resources
+  - Pas d'accès au travers de _dangling pointers_
+  - Pas de _narrowing conversion_
+
+#addproposal("p3970")
+#addproposal("p2410")
+#addproposal("p1179")
+#addproposal("p2816")
+
 == _Contracts_
 
 - Contrats sur les fonctions virtuelles et héritage de ceux-ci
@@ -225,7 +238,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 - Accès à la valeur initiale des paramètres dans les postconditions
 - Comportement ```cpp assume``` : optimisation en supposant le contrat vrai
 - Choix du comportement dans l'assertion du contrat
-- Contrat _always-enforced_
+- Contrat _always-enforced_, _quick_enforced_
 - Postcondition sur les sorties non normales d'une fonction (exceptions)
 - Contrats non évaluables au _run-time_
 - Invariants
@@ -237,6 +250,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p3831")
 #addproposal("p3099")
 #addproposal("p3912")
+#addproposal("p3977")
+#addproposal("p4005")
+#addproposal("p4015")
 
 == _Erroneous behavior_
 
@@ -484,7 +500,7 @@ int x = do { do return 42; };
 
 #addproposal("P2806")
 
-== ``` static_assert```
+== Assertions _compile-time_
 
 - Retarder à l'instanciation l'échec de ```cpp static_assert(false)``` dans des templates
 
@@ -497,7 +513,11 @@ template<typenameT>int my_func(constT&) {
 }
 ```
 
+- ```cpp constant_assert()``` alternative à ```cpp static_assert()``` couvrant plus de cas
+- ```cpp compile_assert()``` pour vérifier à la compilation qu'une expression _run-time_ est vraie pour tous les chemins
+
 #addproposal("P2593")
+#addproposal("p4021")
 
 == Évolutions des fonctions
 
@@ -744,8 +764,16 @@ int a[42] = { 5... };
   "Vérifie que l'adresse est dans la plage définie par les bornes, mais aussi que les trois adresses appartiennent au même objet",
 )
 
+- ```cpp std::rebind()``` converti le type contenu dans un conteur
+
+```cpp
+vector<float> foo = {1.0f, 2.0f, 3.0f};
+auto bar = rebind<double>(foo);  // vector<double>
+```
+
 #addproposal("p3852")
 #addproposal("p3952")
+#addproposal("p3971")
 
 == Chaînes de caractères
 
@@ -783,8 +811,10 @@ t[0ic] // Equivalent a std::get<0>(t)
 
 - ```cpp value_or_construct()``` : construction paresseuse de l'alternative
 - ```cpp value_or_else()``` : appel paresseux d'une fonction en l'absence de valeur
+- Remplacement de pointeur par ```cpp std::optional``` comme retour de fonctions de la bibliothèque standard
 
 #addproposal("p3413")
+#addproposal("p3981")
 
 == ``` std::expect```
 
@@ -864,6 +894,7 @@ t[0ic] // Equivalent a std::get<0>(t)
 - ```cpp msb_to_mask``` construit le masque permet de récupérer le bit de poids fort
 - Gestion du mode d'arrondi sur les calculs avec des ```cpp float```
 - Ajout des fonctions de manipulation de ```cpp float``` et ```cpp double``` de C23 (```cpp std::iscanonical()```, ```cpp std::iszero()```, ```cpp std::fadd()```, ...)
+- Foncteurs ```cpp std::bit_lshift<>``` et ```cpp std::bit_rshidt<>```
 
 #addproposal("p3734")
 #addproposal("p3793")
@@ -915,11 +946,13 @@ ranges::sort(v, less{}, get_element<0>);
 
 == _Ranges_
 
-- Opérations ensemblistes ```cpp views::set_difference```, ```cpp views::set_intersection```, ```cpp views::set_union``` et ```cpp views::set_symmetric_difference```
+- Opérations ensemblistes ```cpp views::set_difference()```, ```cpp views::set_intersection()```, ```cpp views::set_union()``` et ```cpp views::set_symmetric_difference()```
 - ```cpp static_sized_range``` : raffinement de ```cpp sized_range``` lorsque la taille est connu au _compile-time_
+- Vues changeant l'_endianess_ ```cpp views::to_big_endian()``` et ```cpp views::to_little_endian()```
 
 #addproposal("p3741")
 #addproposal("p3928")
+#addproposal("p4030")
 
 == Traits
 
@@ -1180,8 +1213,10 @@ void func(T) {...}
   - ```cpp class```, ```cpp struct```, ```cpp enum class```, _interface_, _value type_
 - Bindings vers d'autres langages (JS, Python) via ces mécanismes
 - Retour d'un ```cpp std::string``` par ```cpp identifier_of()```
+- Comparaison de ```cpp meta::info```
 
 #addproposal("p3947")
+#addproposal("P4032")
 
 == _Type erasure_
 

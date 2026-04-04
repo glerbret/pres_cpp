@@ -3,6 +3,7 @@
 #heading(outlined: false, bookmarked: true, "Ressources")
 
 == Livres
+
 #addbook("Le Langage C++", "Bjarne Stroustrup")
 #addbook("C++ Coding Standard: 101 Rules, Guidelines, and Best Practices", "Herb Sutter et Andrei Alexandrescu")
 #addbook("Exceptional C++: 47 Engineering Puzzles, Programming Problems, and Solutions", "Herb Sutter")
@@ -10,6 +11,7 @@
 #addbook("More Exceptional C++: 40 New Engineering Puzzles, Programming Problems, and Solutions", "Herb Sutter")
 
 == Livres
+
 #addbook("Effective C++: 55 Specific Ways to Improve Your Programs and Designs", "Scott Meyers")
 #addbook("More Effective C++: 35 New Ways to Improve Your Programs and Designs", "Scott Meyers")
 #addbook("Effective STL: 50 Specific Ways to Improve Your Use of the Standard Template Library", "Scott Meyers")
@@ -17,6 +19,7 @@
 #addbook("C++ Concurrency in Action - Pratical Multithreading", "Anthony Williams")
 
 == Articles
+
 #addarticle(
   "C++17 features in \"Tony Tables\"",
   "https://github.com/tvaneerd/cpp17_in_TTs/blob/master/ALL_IN_ONE.md",
