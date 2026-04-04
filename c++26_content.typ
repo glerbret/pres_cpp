@@ -5,6 +5,7 @@
 == Présentation
 
 - Début formel des travaux en juin 2023
+- Fin des travaux techniques en mars 2026
 - Dernier _Working Draft_ : #link("https://wg21.link/std")[N5008 #linklogo()]
 
 == Dépréciations

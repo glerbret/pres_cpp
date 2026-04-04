@@ -15,5 +15,6 @@
 #include "c++20_content.typ"
 #include "c++23_content.typ"
 #include "c++26_content.typ"
+#include "c++29_content.typ"
 #include "c++next_content.typ"
 #include "c++biblio_content.typ"
