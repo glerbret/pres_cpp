@@ -97,8 +97,8 @@
   } else {
     block(
       width: 100%,
-      fill: white,
-      stroke: white,
+      fill: none,
+      stroke: none,
       outset: (x: 1.2em),
       code
         + place(

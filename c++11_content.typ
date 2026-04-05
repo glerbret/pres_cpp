@@ -3144,8 +3144,8 @@ enum class Foo : unsigned char { BAR1, BAR2 };
   ```cpp
   int i = 5;
 
-  auto foo = [=] () { cout << ++i << "\n"; };         // Erreur
-  uto bar = [=] () mutable { cout << ++i << "\n"; };  // OK
+  auto foo = [=] () { cout << ++i << "\n"; };          // Erreur
+  auto bar = [=] () mutable { cout << ++i << "\n"; };  // OK
   ```
 
   // Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale
@@ -3527,7 +3527,6 @@ foo(1, 2, 3, 5);
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astruct+Less%0A%7B%0A++bool+operator()(int+a,+int+b)%0A++%7B%0A++++return+a+%3C+b%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+2,+8,+12,+3%7D%3B%0A++std::sort(foo.begin(),+foo.end(),+Less())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    vector<int> foo)
     struct Less {
       bool operator()(int a, int b) { return a < b; }
     };
@@ -3551,7 +3550,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("N2657")
 
-== Type traits
+== Traits
 
 === Type traits -- Helper
 
@@ -3892,12 +3891,13 @@ shared_ptr<int> sp = wp.lock();
 
 - Syntaxe standard pour les directives de compilation _inlines_
 - ... y compris celles spécifiques à un compilateur
-- Remplace la directive ```cpp #pragma```
-- Et les mots-clé propriétaires (```cpp __attribute__```, ```cpp __declspec```)
 
 ```cpp
 [[ attribut ]]
 ```
+
+- Remplace la directive ```cpp #pragma```
+- ... et les mots-clé propriétaires (```cpp __attribute__```, ```cpp __declspec```)
 
 - Peut être multiple
 
@@ -4155,7 +4155,7 @@ duration_cast<duration<double>>(t2 - t1);
 === Horloges
 
 - Horloge avec le plus petit intervalle entre deux _ticks_ ```cpp std::chrono::high_resolution_clock```
-- Possible synonyme de ```cpp std::chrono::system_clock``` ou ```cpp std::chrono::steady_clock```
+- Possible synonyme de ```cpp system_clock``` ou ```cpp steady_clock```
 
 #adviceblock("Do", text[
   Préférez ```cpp std::clock::duration``` aux entiers pour manipuler les durées
@@ -4231,10 +4231,10 @@ atomic<int> foo{5};
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A%0A++std::cout+%3C%3C+foo.fetch_add(10)+%3C%3C+%22+%22%3B%0A++std::cout+%3C%3C+foo%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    	atomic<int> foo{5};
+   	atomic<int> foo{5};
 
-    	cout << foo.fetch_add(10) << " ";
-    	cout << foo;        // Affiche 5 15
+   	cout << foo.fetch_add(10) << " ";
+   	cout << foo;        // Affiche 5 15
     ```
   ],
 )
@@ -4378,7 +4378,8 @@ thread t(foo, 10);
 === Mutex -- ``` std::lock_guard```
 
 - Capsule RAII sur les mutex
-- Constructible uniquement depuis un mutex
+- Non copiable, non déplaçable
+- Constructible depuis un mutex
 - Verrouille le mutex à la création et le relâche à la destruction
 
 #codesample(
@@ -4401,7 +4402,8 @@ thread t(foo, 10);
 === Mutex -- ``` std::unique_lock```
 
 - Capsule RAII des mutex
-- Supporte les mutex verrouillés ou non
+- Non copiable mais déplaçable
+- Constructible depuis un mutex
 - Relâche le mutex à la destruction
 - Expose les méthodes de verrouillage et libération des mutex
 
@@ -4514,7 +4516,7 @@ cv.wait(lck);
 
 === Variables conditionnelles -- ``` condition_variable```
 
-- ```cpp notify_one()``` notifie un des threads en attente sur la variable conditionnelle
+- ```cpp notify_one()``` notifie un des threads en attente
 
 #alertblock("Attention", text[
   Impossible de choisir quel thread notifié avec ```cpp notify_one()```
