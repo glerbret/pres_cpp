@@ -4,11 +4,15 @@
 
 == Présentation
 
+=== Présentation
+
 - C++26 ne marque pas la fin des évolutions du C++
 - Plusieurs sujets proposés et non pris en compte dans les versions actuelles
 - Plusieurs TS publiés et non intégrés ou en cours d'étude
 
-== TS -- _Networking_ TS
+== TS
+
+=== TS -- _Networking_ TS
 
 - Publié en avril 2018
 - Partiellement basé sur ```cpp Boost.Asio```
@@ -24,7 +28,7 @@
 #addproposal("n4771")
 #addproposal("P2762")
 
-== TS -- _Pattern matching_
+=== TS -- _Pattern matching_
 
 - Utilisation du mot clé ```cpp match``` (ou ```cpp switch```, ```cpp inspect```) et du _wildcard_ ```cpp _``` (ou ```cpp __```)
 - Utilisable sur les entiers
@@ -60,7 +64,7 @@
 #addproposal("P1371")
 #addproposal("p2688")
 
-== TS -- _Pattern matching_
+=== TS -- _Pattern matching_
 
 - Sur les ```cpp std::tuple```, ```cpp std::pair```, ```cpp std::array``` et tuple-like
 
@@ -95,7 +99,7 @@
 #addproposal("P1371")
 #addproposal("p2688")
 
-== TS -- _Pattern matching_
+=== TS -- _Pattern matching_
 
 - Sur les types polymorphiques
 
@@ -129,7 +133,7 @@
 #addproposal("P1371")
 #addproposal("p2688")
 
-== TS -- _Library fundamentals 2_
+=== TS -- _Library fundamentals 2_
 
 - Partiellement intégré en C++17 et C++20
 - ```cpp std::is_detected``` indique si un _template-id_ est bien formé
@@ -145,7 +149,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("N4617")
 
-== TS -- _Library fundamentals 2_
+=== TS -- _Library fundamentals 2_
 
 - Générateur aléatoire propre au thread ```cpp std::default_random_engine``` initialisé dans un état non prédictif
   - ```cpp std::randint()``` génère un nombre entier dans une plage spécifiée
@@ -155,7 +159,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("N4617")
 
-== TS -- _Library fundamentals 3_
+=== TS -- _Library fundamentals 3_
 
 - _Scope Guard_ : enregistrement d'un foncteur appelé
   - à la sortie du scope : ```cpp std::scope_exit```
@@ -165,14 +169,14 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("N4948")
 
-== TS -- _Parallelism 2_
+=== TS -- _Parallelism 2_
 
 - Exception levée durant une exécution parallèle
 - Politique d'exécution ```cpp vector_policy```
 
 #addproposal("N4808")
 
-== TS -- _Concurrency_
+=== TS -- _Concurrency_
 
 - Partiellement intégré à C++20, C++23 et C++26
 - Versions de ```cpp std::future``` et ```cpp std::shared_future``` supportant les continuations
@@ -186,7 +190,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("P0159")
 #addproposal("N4953")
 
-== TS -- _Transactional Memory_
+=== TS -- _Transactional Memory_
 
 - Blocs synchronisés
 - Blocs atomiques
@@ -196,7 +200,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("N4514")
 #addproposal("N4956")
 
-== Dépréciation
+== Dépréciations et suppressions
+
+=== Dépréciations
 
 - Modes d'arrondi (```cpp fesetround()```)
 - Types de caractère signés dans ```cpp iostream```
@@ -209,7 +215,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p3681")
 #addproposal("p3765")
 
-== Suppression
+=== Suppressions
 
 - Suppression d'éléments précédemment dépréciés
   - ```cpp volatile```
@@ -218,7 +224,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - _Unicode Conversion Facets_
   - _Locale Category Facets for Unicode_
 
-== sécurité
+=== sécurité
 
 - Safety profile
   - Initialisation de toutes les variables
@@ -231,7 +237,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p1179")
 #addproposal("p2816")
 
-== _Contracts_
+== Contrats
+
+=== Contrats
 
 - Contrats sur les fonctions virtuelles et héritage de ceux-ci
 - Contrats sur les pointeurs de fonction et pointeurs de fonction membre
@@ -254,7 +262,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p4005")
 #addproposal("p4015")
 
-== _Erroneous behavior_
+== Comportement
+
+=== _Erroneous behavior_
 
 - Applicable à l'absence de retour des fonctions d'affectations
 - ```cpp std::erroneous()``` provoque un comportement erroné
@@ -262,7 +272,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p2973")
 #addproposal("p3232")
 
-== Mots-clés
+== Syntaxe
+
+=== Mots-clés
 
 - Conversion de macros en mots-clés
   - ```cpp assert```
@@ -271,7 +283,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 #addproposal("p3254")
 
-== ``` using```
+=== ``` using```
 
 - Accolades pour grouper les déclarations  ```cpp using```
 
@@ -281,13 +293,15 @@ using std::chrono::{duration, time_point, duration_cast};
 
 #addproposal("p3485")
 
-== Syntaxe
+=== Syntaxe
 
 - Autorisation des _trailing commas_ dans davantage de contexte : paramètre de fonction, paramètres templates, _structure bindings_, ...
 
 #addproposal("p3776")
 
 == Encodage
+
+=== Encodage
 
 - Ajout des algorithmes Unicode
 // Algorithmes défini par Unicode pour travailler sur les séquences de code points
@@ -296,7 +310,9 @@ using std::chrono::{duration, time_point, duration_cast};
 
 #addproposal("p3733")
 
-== ``` std::arguments```
+== Ligne de commande
+
+=== ``` std::arguments```
 
 - Manipulation des arguments du programme
 - Arguments accessibles dans tous le programme, pas uniquement ```cpp main()```
@@ -305,6 +321,8 @@ using std::chrono::{duration, time_point, duration_cast};
 #addproposal("p3474")
 
 == Littéraux
+
+=== Littéraux
 
 - _f-literal_
   - Chaînes littérales contenant des _placeholders_
@@ -321,6 +339,8 @@ auto b = f"Value : {a}";
 #addproposal("P0085")
 
 == Types
+
+=== Types
 
 - Relâchement des restrictions sur les ```cpp typedef _t```
 - Vérification _compile-time_ que deux types ont la même représentation mémoire
@@ -339,7 +359,7 @@ auto b = f"Value : {a}";
 #addproposal("p2966")
 #addproposal("p3140")
 
-== Types
+=== Types
 
 - Gestion des arrondis
 - Support obligatoire de ```cpp intptr_t``` et ```cpp uintptr_t```
@@ -361,7 +381,7 @@ auto b = f"Value : {a}";
 #addproposal("P3715")
 #addproposal("p3823")
 
-== Support des unités physiques
+=== Support des unités physiques
 
 - Gestion des quantités et dimensions
 - Supports des unités de base, dérivées, multiples et sous-multiples
@@ -388,7 +408,7 @@ static_assert(10km / 5km == 2);
 #addproposal("P2982")
 #addproposal("p3045")
 
-== Représentation mémoire
+=== Représentation mémoire
 
 - Accès aux octets sous-jacents d'un objet
   - Nouvelle catégorie d'objet _contiguous-layout_
@@ -399,7 +419,9 @@ static_assert(10km / 5km == 2);
   - Obtention d'un pointeur sur la représentation via ```cpp reinterpret_cast``` vers ```cpp char*```, ```cpp unsigned char*``` ou ```cpp std::byte*```
   - Conversion pointeur sur représentation vers pointeur sur objet via ```cpp reinterpret_cast```
 
-== _Shadowing_
+== Variables
+
+=== _Shadowing_
 
 - Masquage avec un type ```cpp void``` pour empêcher l'utilisation de la variable masquée
 - Initialisation de la nouvelle variable avec l'ancienne variable de même nom
@@ -421,7 +443,7 @@ cfor(auto &bar : foo) { /* foo est constant */ }
 
 #addproposal("P2951")
 
-== ``` __COUNTER__```
+=== ``` __COUNTER__```
 
 - Normalisation de la macro ```cpp __COUNTER__```
 - Incrémentée à chaque invocation
@@ -440,6 +462,8 @@ cfor(auto &bar : foo) { /* foo est constant */ }
 #addproposal("P3384")
 
 == Contrôle de flux
+
+=== Contrôle de flux
 
 - Ajout d'une instruction à ```cpp break``` appelé lors de la sortie de la boucle
 // Alignement sur des évolutions C en cours
@@ -465,7 +489,7 @@ outer: for(...) {
 #addproposal("P2881")
 #addproposal("p3568")
 
-== Contrôle de flux
+=== Contrôle de flux
 
 - Ajout d'une expression à _range-based for loop_ évalué à chaque fin d'itération
 
@@ -479,7 +503,7 @@ for(int i = 0; auto x : e; ++i) { ... }
 
 #addproposal("p3784")
 
-== _do expression_
+=== _do expression_
 
 - Ajout des _do expression_ : instructions traités comme une expression
 
@@ -500,7 +524,7 @@ int x = do { do return 42; };
 
 #addproposal("P2806")
 
-== Assertions _compile-time_
+=== Assertions _compile-time_
 
 - Retarder à l'instanciation l'échec de ```cpp static_assert(false)``` dans des templates
 
@@ -519,7 +543,9 @@ template<typenameT>int my_func(constT&) {
 #addproposal("P2593")
 #addproposal("p4021")
 
-== Évolutions des fonctions
+== Fonctions
+
+=== Évolutions des fonctions
 
 - _Unified Call Syntax_
   - ```cpp x.f(...)``` tente d'appeler ```cpp f(x, ...)``` si ```cpp x.f(...)``` n'est pas valide
@@ -541,7 +567,7 @@ template<typenameT>int my_func(constT&) {
 #addproposal("p2966")
 #addproposal("p1045")
 
-== Évolutions des fonctions
+=== Évolutions des fonctions
 
 - Possibilité de déterminer l'appelant
 - Arguments nommés
@@ -563,7 +589,7 @@ foo(100, 10, d: 480, e: false, c: 640);
 #addproposal("p3676")
 #addproposal("n2216")
 
-== Contexte d'appel
+=== Contexte d'appel
 
 - ```cpp __local_ctx``` récupère la contexte d'appel local
 - Ajout à ```cpp std::source_location::current()``` d'un paramètre valorisé par défaut à ```cpp __local_ctx```
@@ -572,6 +598,8 @@ foo(100, 10, d: 480, e: false, c: 640);
 #addproposal("p3802")
 
 == Opérateurs
+
+=== Opérateurs
 
 - Surcharge de ```cpp operator.```
   - Si l'opérateur est défini, les opérations sont transférés à son résultat
@@ -589,7 +617,7 @@ foo(100, 10, d: 480, e: false, c: 640);
 
 #addproposal("P2561")
 
-== Opérateurs
+=== Opérateurs
 
 - Génération d'opérateurs à la demande via ```cpp =default```
   - ```cpp operatorX=``` à partir de ```cpp operatorX```
@@ -608,7 +636,7 @@ x|>f(y); // Equivalent a f(x, y);
 #addproposal("p3668")
 #addproposal("P2952")
 
-== Opérateurs
+=== Opérateurs
 
 - ```cpp operator template()``` : extension du support des _non-type template parameters_
 - Opérateur d'implication ```cpp operator=>()```
@@ -633,11 +661,15 @@ flag~; // Equivalent a flag = !flag
 
 == _Structured binding_
 
+=== _Structured binding_
+
 - Support du _structured binding_ sur ```cpp std::extents```
 
 #addproposal("P2906")
 
 == Classes
+
+=== Classes
 
 - Qualificateurs autorisés sur les constructeurs
   - Constructeurs ```cpp const``` pour construire systématiquement des objets constants
@@ -654,7 +686,7 @@ flag~; // Equivalent a flag = !flag
 #addproposal("P2895")
 #addproposal("p2966")
 
-== Classes
+=== Classes
 
 - Mécanisme de conversion tableau de structures vers structure de tableaux
 // AoS plus lisible et facile à maintenir mais SoA souvent plus efficace
@@ -667,14 +699,18 @@ flag~; // Equivalent a flag = !flag
 #addproposal("p3588")
 #addproposal("p3812")
 
-== Énumération
+== Énumérations
+
+=== Énumérations
 
 - Ajout d'énumérations _flag-only_
 - Fonctions membres sur les énumérations
 
 #addproposal("p2966")
 
-== Gestion d'erreur
+== Gestion d'erreurs
+
+=== Gestion d'erreurs
 
 - Exceptions légères (_Zero-overhead deterministic exceptions_)
 - Objet standard pour le retour d'erreur (```cpp status_code``` et ```cpp error```)
@@ -682,6 +718,8 @@ flag~; // Equivalent a flag = !flag
 #addproposal("P1028")
 
 == Conteneurs
+
+=== Conteneurs
 
 - Nouveaux conteneurs
   - Tableaux multidimensionnels ```cpp std::mdarray```
@@ -704,7 +742,7 @@ flag~; // Equivalent a flag = !flag
 #addproposal("p3160")
 #addproposal("p3698")
 
-== Conteneurs
+=== Conteneurs
 
 - ```cpp span``` de taille fixe
 - Relâchement des contraintes sur les tableaux C
@@ -732,7 +770,7 @@ int a[42] = { 5... };
 #addproposal("p3337")
 #addproposal("P3110")
 
-== Conteneurs
+=== Conteneurs
 
 - Support des _node-handle_ par ```cpp std::list``` et ```cpp std::forward_list```
 - Ajout de ```cpp pop_value()``` à ```cpp std::stack```, ```cpp std::queue``` et ```cpp std::priority_queue```
@@ -755,7 +793,7 @@ int a[42] = { 5... };
 #addproposal("p3786")
 #addproposal("p3880")
 
-== Conteneurs
+=== Conteneurs
 
 - ```cpp std::is_pointer_between()``` ou ```cpp std::is_pointer_in_range()``` vérifie si un pointeur appartient à une plage mémoire
 
@@ -775,7 +813,7 @@ auto bar = rebind<double>(foo);  // vector<double>
 #addproposal("p3952")
 #addproposal("p3971")
 
-== Chaînes de caractères
+=== Chaînes de caractères
 
 - Construction de ```cpp std::string_view``` depuis des chaînes implicites
 - Prise en charge de ```cpp std::string_view``` par ```cpp std::from_chars```
@@ -793,7 +831,9 @@ auto bar = rebind<double>(foo);  // vector<double>
 #addproposal("P3710")
 #addproposal("p3862")
 
-== _Tuples_
+== ``` std::tuple```
+
+=== ``` std::tuple```
 
 - Récupération d'un index depuis un type pour ```cpp std::variant``` et ```cpp std::tuple```
 - Utilisation de tableaux C comme _tuple-like_
@@ -809,6 +849,8 @@ t[0ic] // Equivalent a std::get<0>(t)
 
 == ``` std::optional```
 
+=== ``` std::optional```
+
 - ```cpp value_or_construct()``` : construction paresseuse de l'alternative
 - ```cpp value_or_else()``` : appel paresseux d'une fonction en l'absence de valeur
 - Remplacement de pointeur par ```cpp std::optional``` comme retour de fonctions de la bibliothèque standard
@@ -818,11 +860,15 @@ t[0ic] // Equivalent a std::get<0>(t)
 
 == ``` std::expect```
 
+=== ``` std::expect```
+
 - Ajout de ```cpp has_error()```
 
 #addproposal("p3798")
 
 == _Guarded objects_
+
+=== _Guarded objects_
 
 - Classes templates imposant la prise d'un lock avant l'utilisation d'un objet
 
@@ -832,12 +878,16 @@ t[0ic] // Equivalent a std::get<0>(t)
 
 == Itérateurs
 
+=== Itérateurs
+
 - API itérateurs de génération des nombres aléatoire
 - ```cpp std::iterator_interface``` pour la définition de nouveaux itérateurs
 
 #addproposal("p2727")
 
 == Algorithmes
+
+=== Algorithmes
 
 - ```cpp std::find_last()``` recherche depuis la fin d'un conteneur
 - ```cpp std::is_uniqued``` test l'absence de deux valeurs consécutives identiques
@@ -859,7 +909,7 @@ t[0ic] // Equivalent a std::get<0>(t)
 #addproposal("p3133")
 #addproposal("p3516")
 
-== Algorithmes
+=== Algorithmes
 
 - ```cpp std::isqrt()``` : racine entière d'un nombre positif
 // Plus grand entier dont le carré est inférieur ou égal au nombre initial
@@ -884,7 +934,7 @@ t[0ic] // Equivalent a std::get<0>(t)
 #addproposal("p3724")
 #addproposal("p3876")
 
-== Algorithmes
+=== Algorithmes
 
 - ```cpp std::partial_sort_n``` et ```cpp std::nth_element_n``` prenant un nombre d'éléments
 - Divisions entières avec choix du mode d'arrondi (vers $0$, vers $plus.minus infinity$, ...)
@@ -902,7 +952,9 @@ t[0ic] // Equivalent a std::get<0>(t)
 #addproposal("p3864")
 #addproposal("p3935")
 
-== _Ranges_
+== Ranges
+
+=== Ranges
 
 - Ajout d'un paramètre ```cpp pas``` à ```cpp std::iota_view```
 - Utilisation de ```cpp std::get_element<>``` comme point de configuration
@@ -923,7 +975,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p1255")
 #addproposal("p3544")
 
-== _Ranges_
+=== Ranges
 
 - ```cpp views::scan``` : version paresseuse de ```cpp std::inclusive_scan```
 - ```cpp ranges::any_view``` : vue type-erasure
@@ -944,7 +996,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3732")
 #addproposal("p3806")
 
-== _Ranges_
+=== Ranges
 
 - Opérations ensemblistes ```cpp views::set_difference()```, ```cpp views::set_intersection()```, ```cpp views::set_union()``` et ```cpp views::set_symmetric_difference()```
 - ```cpp static_sized_range``` : raffinement de ```cpp sized_range``` lorsque la taille est connu au _compile-time_
@@ -955,6 +1007,8 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p4030")
 
 == Traits
+
+=== Traits
 
 - Trait ```cpp std::is_narrowing_convertible```
 - Traits et fonctions pour garantir des conversions sans perte
@@ -972,7 +1026,9 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3780")
 #addproposal("p3719")
 
-== Lambda
+== Programmation fonctionnelle
+
+=== Lambda
 
 - Capture mutable partielle par les lambdas
 - Capture effectuée dans l'ordre des déclarations
@@ -981,7 +1037,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3847")
 #addproposal("p3963")
 
-== ``` std::function```
+=== ``` std::function```
 
 - ```cpp std::inplace_function``` : pendant de ```cpp std::function``` sans allocation
 - ```cpp std::function_ptr_t``` : pointeur générique sur une fonction
@@ -994,12 +1050,14 @@ ranges::sort(v, less{}, get_element<0>);
 
 == Attributs
 
+=== Attributs
+
 - Attributs sur les expressions
 - Attributs sur les contrats
 - Réservation des attributs sans namespace et avec le namespace ```cpp std```
 - Possibilité d'implémenter des attributs utilisateurs
 
-== Attributs
+=== Attributs
 
 - Nouveaux attributs
   - ```cpp [[invalidate_dereferencing]]``` : ```cpp *ptr``` et ```cpp ptr->``` inutilisables après l'appel
@@ -1017,6 +1075,8 @@ ranges::sort(v, less{}, get_element<0>);
 
 == _Expansion statement_
 
+=== _Expansion statement_
+
 - Répétition d'une expression au _compile-time_
   - Duplication de l'expression pour chaque élément (pas de boucle)
   - Utilisable avec des éléments de type différent
@@ -1030,6 +1090,8 @@ for... (auto elem : tup)
 ```
 
 == _Parameters pack_
+
+=== _Parameters pack_
 
 - Déclaration possible partout où une variable peut être déclarée
 
@@ -1048,7 +1110,7 @@ bar([1:]t1..., a3, [0]t1);
 #addproposal("p2994")
 #addproposal("p2662")
 
-== _Parameters pack_
+=== _Parameters pack_
 
 - _Pack_ de taille fixe
 
@@ -1076,7 +1138,9 @@ tuple<int, int, int> point{1, 2, 3};
 int s = sum(point.elems...);
 ```
 
-== ``` std::format```
+== Flux
+
+=== ``` std::format```
 
 - Amélioration du support de ```cpp std::chrono::time_point```
   - ```cpp %s``` : nombre de ticks depuis l'epoch
@@ -1098,7 +1162,7 @@ int s = sum(point.elems...);
 #addproposal("p3070")
 #addproposal("p3885")
 
-== ``` std::format```
+=== ``` std::format```
 
 - ```cpp std::format_as()``` : formateurs personnalisés basé sur un autre type (p.ex. formatage d'enum comme entiers)
 - String interpolation : donnée à formater dans la chaîne de format
@@ -1111,7 +1175,7 @@ std::println("val : {}", x);
 
 #addproposal("p3951")
 
-== ``` std::dump```
+=== ``` std::dump```
 
 - Imprime les paramètres de la fonction
 
@@ -1121,7 +1185,7 @@ std::dump(arg1, arg2, ..., argn);
 std::println("{} {} ... {}", arg1, arg2, ..., argn);
 ```
 
-== ``` std::scan```
+=== ``` std::scan```
 
 - Pendant du formatage de texte introduit en C++20
 - Alternative sûre et robuste à ```cpp sscanf()```
@@ -1145,12 +1209,16 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);
 
 == Durées et temps
 
+=== Durées et temps
+
 - Ajout d'une fonction membre ```cpp resolution()``` aux horloges
 - Ajout d'horloges _coarses_ moins précises mais plus rapides
 
 #addproposal("p3382")
 
 == Templates
+
+=== Templates
 
 - Instanciation possible de templates au _runtime_ (JIT limité aux templates)
 // P.ex. pour des matrices dont la taille n'est pas connue à la compilation
@@ -1170,6 +1238,8 @@ double bar = foo<deduce>();
 
 == Concepts
 
+=== Concepts
+
 - Concept pour les algorithmes numériques
 - ```cpp std::integer``` pour les nombres entiers
 - ```cpp std::signed_integer``` et ```cpp std::unsigned_integer```
@@ -1181,7 +1251,7 @@ double bar = foo<deduce>();
 #addproposal("p3003")
 #addproposal("p3701")
 
-== Concepts
+=== Concepts
 
 - ```cpp either``` et ```cpp neither```
 
@@ -1205,6 +1275,8 @@ void func(T) {...}
 
 == Réflexion
 
+=== Réflexion
+
 - Méta-classes
   - Construction de types de classes (dont les classes elles-mêmes) ayant
     - Des contraintes
@@ -1218,19 +1290,23 @@ void func(T) {...}
 #addproposal("p3947")
 #addproposal("P4032")
 
-== _Type erasure_
+== Polymorphisme
+
+=== _Type erasure_
 
 - Programmation polymorphique via _type erasure_ : _Proxy_, _Facade_, _Addresser_
 // Alternative à la POO et programmation fonctionnelle éliminant certaines de leurs limites
 
-== Références
+== Gestion mémoire
+
+=== Références
 
 - Ajout de références possédantes, ```cpp T~```, gérant la destruction de l'objet référencé
 - _Reallocation constructor_ transférant la responsabilité de l'objet initial à l'objet créé : ```cpp T::T(T~)```
 
 #addproposal("p2839")
 
-== Pointeurs
+=== Pointeurs
 
 - Suppression de ```cpp NULL``` et interdiction de ```cpp 0``` comme pointeur nul
 - Surcharge de ```cpp new``` retournant la taille réellement allouée
@@ -1239,7 +1315,7 @@ void func(T) {...}
 #addproposal("p0901")
 #addproposal("p3234")
 
-== Pointeurs intelligents
+=== Pointeurs intelligents
 
 - ```cpp std::retain_ptr``` pointeur intrusif manipulant le comptage de référence interne
 - Création de pointeurs intelligents avec une valeur par défaut
@@ -1252,7 +1328,7 @@ void func(T) {...}
 #addproposal("p3135")
 #addproposal("p3139")
 
-== Contrôle mémoire
+=== Contrôle mémoire
 
 - Mécanismes de sécurité de l'usage mémoire
   - _Aliasing_
@@ -1272,6 +1348,8 @@ void func(T) {...}
 #addproposal("P3810")
 
 == Concurrence
+
+=== Concurrence
 
 - Invocation concurrente
 - ```cpp std::volatile_load<T>``` et ```cpp std::volatile_store<T>```
@@ -1293,22 +1371,28 @@ void func(T) {...}
 #addproposal("p3832")
 #addproposal("P3833")
 
-== Coroutines
+=== Coroutines
 
 - Bibliothèques de support des coroutines
 - ```cpp std::lazy<T>``` permettant l'évaluation différée
 - Unification et amélioration des API asynchrones
 
-== Regex
+== Expressions rationnelles
+
+=== Regex
 
 - Ajout de regex _compile-time_
 
 == Interface utilisateur
 
+=== Interface utilisateur
+
 - Support des entrées/sorties audio
 - ```cpp std::web_view``` API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via _callback_)
 
-== Module
+== Compilation et implémentation
+
+=== Module
 
 - Exigences d'ABI sur les modules
 - Communication d'informations aux outils de _build_ par les modules
@@ -1318,7 +1402,7 @@ void func(T) {...}
 #addproposal("p2978")
 #addproposal("p3686")
 
-== Compilation et implémentation
+=== Compilation et implémentation
 
 - Remplaçant à ```cpp #ifdef``` ... ```cpp #endif```
 - API d'interaction avec le système de build et le compilateur

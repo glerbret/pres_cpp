@@ -4,13 +4,15 @@
 
 == Livres
 
+=== Livres
+
 #addbook("Le Langage C++", "Bjarne Stroustrup")
 #addbook("C++ Coding Standard: 101 Rules, Guidelines, and Best Practices", "Herb Sutter et Andrei Alexandrescu")
 #addbook("Exceptional C++: 47 Engineering Puzzles, Programming Problems, and Solutions", "Herb Sutter")
 #addbook("Exceptional C++ Style: 40 New Engineering Puzzles, Programming Problems, and Solutions", "Herb Sutter")
 #addbook("More Exceptional C++: 40 New Engineering Puzzles, Programming Problems, and Solutions", "Herb Sutter")
 
-== Livres
+=== Livres
 
 #addbook("Effective C++: 55 Specific Ways to Improve Your Programs and Designs", "Scott Meyers")
 #addbook("More Effective C++: 35 New Ways to Improve Your Programs and Designs", "Scott Meyers")
@@ -19,6 +21,8 @@
 #addbook("C++ Concurrency in Action - Pratical Multithreading", "Anthony Williams")
 
 == Articles
+
+=== Articles
 
 #addarticle(
   "C++17 features in \"Tony Tables\"",
@@ -38,7 +42,9 @@
   "Andrei Alexandrescu",
 )
 
-== Sites web
+== Sites Web
+
+=== Sites Web
 
 #addweb("C++ reference", "https://en.cppreference.com/w/", none)
 #addweb("hacking C++", "https://hackingcpp.com/", none)
@@ -46,13 +52,14 @@
 #addweb("C++ FAQ", "https://isocpp.org/faq", none)
 #addweb("accu - Overload", "https://accu.org/journals/nonmembers/overload_issue_members/", none)
 
-== Sites web
+=== Sites web
 
 #addweb("Guru of the Week", "http://www.gotw.ca/gotw/", "Herb Sutter")
 #addweb("More C++ Idioms", "https://en.wikibooks.org/w/index.php?title=More_C\%2B\%2B_Idioms", none)
 
-
 == Blogs
+
+=== Blogs
 
 #addblog("Sutter's Mill", "https://herbsutter.com/", "Herb Sutter")
 #addblog("C++ Stories", "https://www.cppstories.com/", "Bartlomiej Filipek")
@@ -61,11 +68,14 @@
 
 == Conférences
 
+=== Conférences
+
 #addconf("Cppcon", "https://cppcon.org/", "https://www.youtube.com/@CppCon", "https://github.com/CppCon/")
 #addconf("C++now", "https://cppnow.org/", "https://www.youtube.com/@BoostCon", "https://github.com/boostcon")
 
-
 == Vidéos
+
+=== Vidéos
 
 #addvideo("C++ Weekly With Jason Turner", "https://www.youtube.com/@cppweekly")
 #addvideo("CppFRug", "https://www.youtube.com/@cppfrug1240")

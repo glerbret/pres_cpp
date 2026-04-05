@@ -4,11 +4,15 @@
 
 == Présentation
 
+=== Présentation
+
 - Travaux techniques terminés en février 2023
 - Approuvé en octobre 2024
 - Dernier _Working Draft_ : #link("https://wg21.link/std23")[n4950 #linklogo()]
 
-== Changements d'organisation du comité
+== Organisation
+
+=== Changements d'organisation du comité
 
 - _ABI Review Group_ : étude des impacts des évolutions sur l'ABI
 - _Study Group_ pour la liaison C/C++ (SG22)
@@ -16,13 +20,17 @@
 
 == Dépréciations et suppressions
 
+=== Dépréciations et suppressions
+
 - Suppression des fonctionnalités liées au support d'un GC
 - Dépréciation de ```cpp std::aligned_storage``` et ```cpp std::aligned_union```
 - Dépréciation de ```cpp std::std::numeric_limits::has_denorm```
 
 #addproposal("p1413")
 
-== Espaces en fin de ligne
+== Syntaxe
+
+=== Espaces en fin de ligne
 
 - Espaces ignorés après le ```cpp \``` de séparation de ligne
 
@@ -36,7 +44,7 @@ auto str = "\<space>
 
 #addproposal("P2223")
 
-== Label
+=== Label
 
 - Label autorisé en fin de bloc
 - Reprise d'une évolution C2X
@@ -56,7 +64,9 @@ auto str = "\<space>
 
 #addproposal("P2324")
 
-== Compilation conditionnelle
+== Compilation conditionnelle et macro
+
+=== Compilation conditionnelle
 
 - Ajout de ```cpp #elifdef``` et ```cpp #elifndef```
 - Équivalents à ```cpp #elif defined``` et ```cpp #elif not defined```
@@ -78,7 +88,7 @@ auto str = "\<space>
 
 #addproposal("P2334")
 
-== Avertissement
+=== Avertissement
 
 - ```cpp #warning``` génère un avertissement à la compilation
 
@@ -93,7 +103,9 @@ auto str = "\<space>
 
 #addproposal("P2437")
 
-== Gestion explicite de la durée de vie
+== Durée de vie
+
+=== Gestion explicite de la durée de vie
 
 - ```cpp std::start_lifetime_as``` et ```cpp std::start_lifetime_as_array``` indiquent qu'un objet est créé mais sans initialisation
 
@@ -108,7 +120,9 @@ p->b = 2;
 #addproposal("P2590")
 #addproposal("P2679")
 
-== Types flottants étendus
+== Types
+
+=== Types flottants étendus
 
 - ```cpp std::float16_t```, ```cpp std::float32_t```, ```cpp std::float64_t```, ```cpp std::float128_t```
   - Types IEEE N-bit
@@ -131,13 +145,13 @@ p->b = 2;
 
 #addproposal("P1467")
 
-== Évolutions de ``` char8_t```
+=== Évolutions de ``` char8_t```
 
 - Initialisation d'un tableau de ```cpp char``` ou d'```cpp unsigned char``` depuis une chaîne littérale UTF-8
 
 #addproposal("P2513")
 
-== Relâchement des contraintes de ``` wchar_t```
+=== Relâchement des contraintes de ``` wchar_t```
 
 - Suppression de la contrainte
 
@@ -150,7 +164,7 @@ p->b = 2;
 
 #addproposal("P2460")
 
-== Conversions
+=== Conversions
 
 - Ajout d'une conversion implicite en booléen
   - Dans les ```cpp static_assert```
@@ -181,7 +195,7 @@ auto(str); // std::string
 #addproposal("P1401")
 #addproposal("p0849")
 
-== Énumérations
+=== Énumérations
 
 - ```cpp std::to_underlying``` convertit une énumération vers le type sous-jacent
 
@@ -199,6 +213,8 @@ auto(str); // std::string
 #addproposal("P1682")
 
 == ``` constexpr```
+
+=== ``` constexpr```
 
 - Relâchement de contrainte sur les fonctions ```cpp constexpr```
   - Code non évalué au _compile-time_
@@ -225,6 +241,8 @@ auto(str); // std::string
 
 == ``` if consteval```
 
+=== ``` if consteval```
+
 - Branche prise en compte si le code est évalué au _compile-time_
 - Peut appeler des fonctions immédiate
 // P.ex. dans une fonction constexpr
@@ -245,7 +263,7 @@ auto(str); // std::string
 
 #addproposal("P1938")
 
-== ``` if consteval```
+=== ``` if consteval```
 
 - Négation possible
 
@@ -265,13 +283,17 @@ if ! consteval { ... }
 
 == Sémantique de déplacement
 
+=== Sémantique de déplacement
+
 - Simplification des règles de déplacement implicite
 - ```cpp std::move_only_function``` équivalent _move-only_ de ```cpp std::function```
 
 #addproposal("P2266")
 #addproposal("P0288")
 
-== Durée de vie des temporaires
+== Range-based for loop
+
+=== Durée de vie des temporaires
 
 - Extension de la durée de vie des objets temporaires créés dans l'initialisation d'un _range-based for loop_ jusqu'à la fin de la boucle
 
@@ -287,6 +309,8 @@ for (auto e : foo(bar())) { ... }
 
 == init-statement
 
+=== init-statement
+
 - ```cpp using``` possible dans l'_init-statement_ de ```cpp if```, ```cpp switch``` et ```cpp for```
 
 #codesample(
@@ -301,7 +325,9 @@ for (auto e : foo(bar())) { ... }
 
 #addproposal("P2360")
 
-== Encodage
+== Littéraux
+
+=== Encodage
 
 - Support des fichiers sources en UTF-8
 - Encodage identique entre le préprocesseur et le code C++
@@ -309,7 +335,7 @@ for (auto e : foo(bar())) { ... }
 #addproposal("P2295")
 #addproposal("P2316")
 
-== Suffixes littéraux
+=== Suffixes littéraux
 
 - Suffixe ```cpp uz``` pour ```cpp size_t```
 - Suffixe ```cpp z``` pour le type entier signé correspondant à ```cpp size_t```
@@ -330,7 +356,7 @@ for (auto e : foo(bar())) { ... }
 
 #addproposal("P0330")
 
-== Chaînes littérales
+=== Chaînes littérales
 
 - Plus de concaténation de chaînes littérales adjacentes d'encodage différent
 
@@ -355,7 +381,7 @@ U"" u8"";  // Invalide
 
 #addproposal("P2201")
 
-== Caractères littéraux
+=== Caractères littéraux
 
 - Caractères Unicode conservés durant la phase du préprocesseur
 
@@ -392,7 +418,9 @@ U"" u8"";  // Invalide
 #addproposal("P2290")
 #addproposal("P2071")
 
-== Évolutions des opérateurs d'égalité
+== Opérateurs
+
+=== Évolutions des opérateurs d'égalité
 
 - Modification des règles de résolution de ```cpp operator==``` et ```cpp operator!=```
 - Corrige des ambiguïtés introduites par la réécriture de ```cpp ==``` et ```cpp !=``` en C++20
@@ -413,7 +441,7 @@ bool b = Foo{} != Foo{};
 
 #addproposal("P2468")
 
-== ``` operator[]``` multidimensionnel
+=== ``` operator[]``` multidimensionnel
 
 - Définition de ```cpp operator[]``` avec aucun ou plusieurs arguments
 - Y compris des arguments _variadic_
@@ -432,7 +460,7 @@ bool b = Foo{} != Foo{};
 
 #addproposal("P2128")
 
-== ``` operator[]``` multidimensionnel
+=== ``` operator[]``` multidimensionnel
 
 #noteblock("Au-delà de C++23", text[
   - Réécritures
@@ -444,7 +472,7 @@ bool b = Foo{} != Foo{};
 
 #addproposal("P2128")
 
-== Opérateurs ``` static```
+=== Opérateurs ``` static```
 
 - Possibilité de déclarer ```cpp static``` des ```cpp operator()```
 
@@ -480,7 +508,9 @@ bool b = Foo{} != Foo{};
 #addproposal("P1169")
 #addproposal("P2589")
 
-== Évolutions des lambdas
+== Programmation fonctionnelle
+
+=== Évolutions des lambdas
 
 - ```cpp ()``` optionnelles en l'absence de paramètres dans les lambdas mutables
 // Optionnelles dans tous les autres cas en C++20 et précédents
@@ -508,7 +538,7 @@ bool b = Foo{} != Foo{};
 #addproposal("P2036")
 #addproposal("P2173")
 
-== Évolutions des lambdas
+=== Évolutions des lambdas
 
 - Support des attributs ```cpp [[ nodiscard ]]```, ```cpp [[ deprecated ]]```, ```cpp [[ noreturn ]]```
 - Lambdas ```cpp static``` : ```cpp operator()``` de l'objet généré est ```cpp static```
@@ -533,7 +563,7 @@ bool b = Foo{} != Foo{};
 #addproposal("P2036")
 #addproposal("P2173")
 
-== ``` std::invoke_r()```
+=== ``` std::invoke_r()```
 
 - Similaire à ```cpp std::invoke()```
 - Retour convertit vers le premier paramètre template
@@ -552,7 +582,9 @@ bool b = Foo{} != Foo{};
 
 #addproposal("P2136")
 
-== Évolutions des attributs
+== Attributs
+
+=== Évolutions des attributs
 
 - Duplication possible d'un attribut dans une liste d'attributs
 
@@ -564,7 +596,7 @@ int foo();
 
 #addproposal("P2156")
 
-== Nouveaux attributs
+=== Nouveaux attributs
 
 - ```cpp [[ assume(expression) ]]``` permet au compilateur d'optimiser en supposant la véracité de l'expression
 
@@ -575,13 +607,15 @@ int foo();
 
 #addproposal("P1774")
 
-== Layout
+== Classes
+
+=== Layout
 
 - Suppression de la possibilité donnée aux compilateurs de réordonner les données d'accessibilité différente
 
 #addproposal("P1847")
 
-== Paramètre ``` this``` explicite / deducing ``` this```
+=== Paramètre ``` this``` explicite / deducing ``` this```
 
 - Limitation ses surcharges ```cpp const``` / non ```cpp const``` de fonctions membres
 - Utilisation d'un premier paramètre, préfixé ```cpp this```, notant l'instance de classe
@@ -600,7 +634,7 @@ struct Foo {
 
 #addproposal("P0847")
 
-== Paramètre ``` this``` explicite / deducing ``` this```
+=== Paramètre ``` this``` explicite / deducing ``` this```
 
 - Utilisation des règles classiques de déduction de types
 
@@ -618,7 +652,7 @@ void ex(Foo& foo, D& d) {
 
 #addproposal("P0847")
 
-== Paramètre ``` this``` explicite / deducing ``` this```
+=== Paramètre ``` this``` explicite / deducing ``` this```
 
 - Permet le passage de ```cpp this``` par valeur
 
@@ -632,7 +666,9 @@ Foo{}(4);
 
 #addproposal("P0847")
 
-== Déduction dans les constructeurs hérités
+== Templates
+
+=== Déduction dans les constructeurs hérités
 
 - Déduction des paramètres templates d'un constructeur hérité
 
@@ -654,11 +690,15 @@ Foo{}(4);
 
 #addproposal("P2582")
 
-== ``` noexcept```
+== Exception
+
+=== ``` noexcept```
 
 - Ajout de ```cpp noexcept``` à plusieurs fonctions de la bibliothèque standard
 
 == Traits
+
+=== Traits
 
 - ```cpp std::is_scoped_enum``` indique si un type est un ```cpp enum class```
 
@@ -682,7 +722,7 @@ Foo{}(4);
 
 #addproposal("P1048")
 
-== Traits
+=== Traits
 
 - ```cpp std::is_implicit_lifetime``` indique si un objet à une durée de vie implicite
 - ```cpp std::reference_constructs_from_temporary``` et ```cpp std::reference_converts_from_temporary``` indiquent si la référence est construite depuis un temporaire
@@ -690,7 +730,9 @@ Foo{}(4);
 #addproposal("P2674")
 #addproposal("P2255")
 
-== Chaînes de caractères
+== Conteneurs
+
+=== Chaînes de caractères
 
 - ```cpp contains()``` teste la présence d'une sous-chaîne dans une chaîne ou une vue
 
@@ -719,7 +761,7 @@ Foo{}(4);
 #addproposal("P1989")
 #addproposal("P2251")
 
-== Chaînes de caractères
+=== Chaînes de caractères
 
 - ```cpp resize_and_overwrite()``` redimensionne et met à jour une chaîne
   - Allocation d'un tableau de ```cpp count + 1``` caractères
@@ -744,13 +786,13 @@ Foo{}(4);
 
 #addproposal("P1072")
 
-== ``` std::span```
+=== ``` std::span```
 
 - Ajout de la contrainte trivialement copiable
 
 #addproposal("P2251")
 
-== ``` std::pair``` et ``` std::tuple```
+=== ``` std::pair``` et ``` std::tuple```
 
 - Construction de ```cpp std::pair``` depuis un _braced initializers_
 // Code auparavant valide mais inefficace
@@ -774,7 +816,7 @@ tuple<int, int> bar = array{1, 3};
 #addproposal("P1951")
 #addproposal("P2165")
 
-== ``` std::stack``` et ``` std::queue```
+=== ``` std::stack``` et ``` std::queue```
 
 - Création de ```cpp std::stack``` et ```cpp std::queue``` depuis une paire d'itérateurs
 
@@ -791,7 +833,7 @@ tuple<int, int> bar = array{1, 3};
 
 #addproposal("P1425")
 
-== Conteneurs associatifs
+=== Conteneurs associatifs
 
 - Surcharge de ```cpp erase()``` et ```cpp extract()``` ne créant pas de clés temporaires
 - Adaptateurs associatifs de conteneurs
@@ -805,7 +847,7 @@ tuple<int, int> bar = array{1, 3};
 #addproposal("P0429")
 #addproposal("P1222")
 
-== ``` std::mdspan```
+=== ``` std::mdspan```
 
 - Vues multidimensionnelles
 - Possibilité de fournir un _layout_ configurable
@@ -821,7 +863,9 @@ tuple<int, int> bar = array{1, 3};
 #addproposal("P2613")
 #addproposal("P2763")
 
-== Évolutions des itérateurs
+== Itérateurs
+
+=== Évolutions des itérateurs
 
 - Corrections de ```cpp iterator_category``` et ```cpp counted_iterator```
 - ```cpp std::move_iterator<T*>``` doit être un _random access iterator_
@@ -832,7 +876,9 @@ tuple<int, int> bar = array{1, 3};
 #addproposal("P2408")
 #addproposal("P2520")
 
-== ``` std::byteswap()```
+== Algorithmes
+
+=== ``` std::byteswap()```
 
 - Inverse les octets d'un entier
 
@@ -851,7 +897,9 @@ tuple<int, int> bar = array{1, 3};
 
 #addproposal("P1272")
 
-== Évolutions des flux
+== Flux
+
+=== Évolutions des flux
 
 - ```cpp spanstream``` remplaçant de ```cpp strstream``` utilisant un ```cpp std::span``` comme buffer
 - Support du mode exclusif à ```cpp std::fstream```
@@ -859,7 +907,7 @@ tuple<int, int> bar = array{1, 3};
 #addproposal("P0448")
 #addproposal("P2467")
 
-== Évolutions de ``` std::format```
+=== Évolutions de ``` std::format```
 
 - Ajout du concept ```cpp formattable```
 - Vérification des chaînes de format au _compile-time_
@@ -877,7 +925,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P2372")
 #addproposal("p2585")
 
-== Évolutions de ``` std::format```
+=== Évolutions de ``` std::format```
 
 - Formatage des types ```cpp std::generator```_-like_
 - Formatage des ```cpp std::pair``` et ```cpp std::tuple```
@@ -913,7 +961,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P2286")
 #addproposal("P2693")
 
-== Évolutions de ``` std::format```
+=== Évolutions de ``` std::format```
 
 - Formatage des ```cpp std::thread::id```
 
@@ -933,7 +981,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P2286")
 #addproposal("P2693")
 
-== ``` std::print```
+=== ``` std::print```
 
 - ```cpp std::print()``` écrit directement dans ```cpp std::cout```
 
@@ -955,7 +1003,9 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P2093")
 #addproposal("P2539")
 
-== ``` std::out_ptr``` et ``` std::inout_ptr```
+== Pointeurs intelligents
+
+=== ``` std::out_ptr``` et ``` std::inout_ptr```
 
 - Abstractions entre _smart pointers_ et API C modifiant un pointeur
   - Création d'un pointeur de pointeur temporaire depuis le _smart pointer_
@@ -982,7 +1032,9 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P1132")
 
-== Bibliothèque de Stacktrace
+== Debug
+
+=== Bibliothèque de Stacktrace
 
 - Basée sur ```cpp Boost.stacktrace```
 - ```cpp current()``` récupère la _stacktrace_ courante
@@ -997,7 +1049,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P0881")
 #addproposal("P2301")
 
-== Bibliothèque de Stacktrace
+=== Bibliothèque de Stacktrace
 
 - Manipulation des entrées de la _stacktrace_
   - ```cpp description()``` retourne la description de l'entrée
@@ -1022,7 +1074,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P0881")
 #addproposal("P2301")
 
-== ``` std::unreachable()```
+=== ``` std::unreachable()```
 
 - ```cpp std::unreachable()``` indique que la localisation n'est pas atteignable
 - Permet d'optimiser en supposant que le code ne sera pas atteint
@@ -1034,13 +1086,17 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P0627")
 
-== Atomiques
+== Multi-threading
+
+=== Atomiques
 
 - Support des ```cpp atomics``` C
 
 #addproposal("P0943")
 
-== ``` time_point::clock```
+== Durée et temps
+
+=== ``` time_point::clock```
 
 - Relâchement des contraintes sur ```cpp time_point::clock```
   - Plus grande flexibilité du type d'horloge
@@ -1051,12 +1107,16 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 == ``` std::variant```
 
+=== ``` std::variant```
+
 - Héritage possible de ```cpp std::variant```
 - ```cpp std::visit()``` restreints aux ```cpp std::variant```
 
 #addproposal("P2162")
 
-== Opérations monadiques de ``` std::optional```
+== ``` std::optional```
+
+=== Opérations monadiques de ``` std::optional```
 
 - ```cpp transform()``` modifie la valeur contenu dans un ```cpp std::optional```
   // Peut modifier aussi éventuellement le type}
@@ -1077,7 +1137,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P0798")
 
-== Opérations monadiques de ``` std::optional```
+=== Opérations monadiques de ``` std::optional```
 
 - ```cpp and_then()``` dérive une fonction pour retourner un ```cpp std::optional```
 
@@ -1100,7 +1160,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P0798")
 
-== Opérations monadiques de ``` std::optional```
+=== Opérations monadiques de ``` std::optional```
 
 - ```cpp or_else()```
   - Retourne le ```cpp std::optional``` s'il a une valeur
@@ -1128,6 +1188,8 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 == ``` std::expected```
 
+=== ``` std::expected```
+
 - Classe ```cpp std::expected<T, E>``` contenant
   - Soit une valeur de type ```cpp T```
   - Soit une erreur de type ```cpp E```
@@ -1152,7 +1214,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P0323")
 #addproposal("P2549")
 
-== ``` std::expected```
+=== ``` std::expected```
 
 - ```cpp value_or()``` retourne
   - La valeur si présente
@@ -1186,7 +1248,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P2505")
 
-== ``` std::expected```
+=== ``` std::expected```
 
 - ```cpp and_then()``` dérive une fonction pour retourner un ```cpp std::expected```
 
@@ -1223,7 +1285,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P2505")
 
-== ``` std::expected```
+=== ``` std::expected```
 
 - ```cpp error_or()``` retourne
   - L'erreur si la valeur n'est pas présente
@@ -1258,7 +1320,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P2505")
 
-== ``` std::unexpected```
+=== ``` std::unexpected```
 
 - Classe template ```cpp std::unexpected<E>``` contenant une erreur
 - ```cpp error()``` retourne l'erreur
@@ -1282,7 +1344,9 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P0323")
 #addproposal("P2549")
 
-== Évolutions des ranges et vues
+== Ranges
+
+=== Évolutions des ranges et vues
 
 - Ajout de ```cpp starts_with()``` et ```cpp ends_with()``` aux ranges
 - Ajout de ```cpp contains()``` aux ranges
@@ -1308,7 +1372,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P2278")
 
-== Évolutions des ranges et vues
+=== Évolutions des ranges et vues
 
 - Suppression de la contrainte _default constructible_ pour les vues
 - ```cpp std::ranges::to<>()``` construit un conteneur depuis une vue
@@ -1325,7 +1389,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P1206")
 
-== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et range adaptors
 
 - ```cpp std::views::zip()``` fusionne plusieurs ranges en un range de tuple
 
@@ -1358,7 +1422,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("p2321")
 
-== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et range adaptors
 
 - ```cpp std::views::adjacent()``` construit des ranges de $N$ éléments consécutifs
 - ```cpp std::views::pairwise()``` construit des ranges de 2 éléments consécutifs
@@ -1399,7 +1463,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("p2321")
 #addproposal("p2441")
 
-== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et range adaptors
 
 - ```cpp std::ranges::shift_left()``` et ```cpp std::ranges::shift_right()```
 - ```cpp std::views::chunck()``` coupe un range en blocs de $N$ éléments
@@ -1442,7 +1506,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P2440")
 #addproposal("p2443")
 
-== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et range adaptors
 
 - ```cpp std::views::find_last()```/```cpp find_last_if()```/```cpp find_last_if_not()```
 - ```cpp std::views::stride()``` conserve un élément sur $n$
@@ -1487,7 +1551,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("P2374")
 #addproposal("P2540")
 
-== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et range adaptors
 
 - ```cpp std::views::as_rvalue()``` convertit les éléments en _r-value_
 - ```cpp std::views::as_const()``` constifie les éléments
@@ -1522,7 +1586,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 #addproposal("p2474")
 #addproposal("p2164")
 
-== ``` borrowed_range```
+=== ``` borrowed_range```
 
 - Nouveau concept de range : ```cpp borrowed_range```
 - Range dont les itérateurs sur celui-ci reste valide après sa destruction
@@ -1531,7 +1595,7 @@ format("{:L%S}", 4s + 200ms);  // C++20 : exception / C++23 : 04,200
 
 #addproposal("P2017")
 
-== Range adaptors définis par l'utilisateur
+=== Range adaptors définis par l'utilisateur
 
 - Classe de base ```cpp std::ranges::range_adaptor_closure<t>```
 - Adaptateur de fonction ```cpp std::bind_back()```
@@ -1548,12 +1612,16 @@ f(xs..., ys...);
 
 == Modules
 
+=== Modules
+
 - Module ```cpp std``` importe tout le namespace ```cpp std``` (C++ et _wrappers_ C)
 - Module ```cpp std.compat``` importe tout le namespace ```cpp std``` et le namespace globale des _wrappers_ C
 
 #addproposal("P2465")
 
-== ``` std::generator```
+== Coroutines
+
+=== ``` std::generator```
 
 - Générateur de coroutines synchrones
 

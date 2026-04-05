@@ -2,7 +2,7 @@
 
 #show: slides.with(
   title: "C++",
-  date: datetime.today().display("[day]/[month]/[year]"),
+  date: datetime.today(),
   authors: "Grégory Lerbret",
   footer: true,
   toc: true,

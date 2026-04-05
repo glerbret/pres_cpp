@@ -4,11 +4,15 @@
 
 == Présentation
 
+=== Présentation
+
 - Début formel des travaux en juin 2023
 - Fin des travaux techniques en mars 2026
 - Dernier _Working Draft_ : #link("https://wg21.link/std")[N5008 #linklogo()]
 
-== Dépréciations
+== Dépréciations et suppressions
+
+=== Dépréciations
 
 - Annulation de la dépréciation de ```cpp std::polymorphic_allocator::destroy```
 - Dépréciation de ```cpp std::is_trivial``` et ```cpp std::is_trivial_v```
@@ -20,7 +24,7 @@
 #addproposal("p3475")
 #addproposal("p3176")
 
-== Suppressions
+=== Suppressions
 
 - Suppression d'éléments précédemment dépréciés
   - Conversion arithmétique d'énumération
@@ -43,13 +47,17 @@
 #addproposal("p2865")
 #addproposal("p3682")
 
-== En-têtes C23
+== Compatibilité C
+
+=== En-têtes C23
 
 - Support des en-têtes C23 ```cpp <stdbit.h>``` et ```cpp <stdckdint.h>```
 
 #addproposal("p3370")
 
-== Erroneous Behavior
+== Comportement
+
+=== Erroneous Behavior
 
 - Nouveau type de comportement : _Erroneous Behavior_
 - Code incorrect, mais bien défini
@@ -64,7 +72,7 @@
 
 #addproposal("P2795")
 
-== _Undefined_ / _unspecified_ / _ill-formed_
+=== _Undefined_ / _unspecified_ / _ill-formed_
 
 - La libération d'un pointeur sur un type incomplet devient _ill-formed_
 
@@ -92,7 +100,7 @@ if (!p) cerr << "bar\n"; // Suppression possible
 #addproposal("p3641")
 #addproposal("p2843")
 
-== Boucles infinies
+=== Boucles infinies
 
 - Les boucles infinies triviales ne sont plus des _Undefined Behavior_
 - Alignement avec le comportement du C
@@ -105,7 +113,9 @@ while (true)
 
 #addproposal("P2809")
 
-== Vérification statique
+== Statique
+
+=== Vérification statique
 
 - Support de messages construits par ```cpp static_assert```
 
@@ -122,7 +132,7 @@ static_assert(sizeof(Foo) == 1,
 
 #addproposal("P2741")
 
-== Lexer
+=== Lexer
 
 - Suppression de comportements indéfinis
   - _Universal characters_ sur plusieurs lignes autorisés
@@ -148,6 +158,8 @@ int CONCAT(\, u0393) = 0;
 
 == Encodage
 
+=== Encodage
+
 - Ajout de ```cpp @```, ```cpp $``` et ```cpp ` ``` au jeu de caractères de base
 // Ajoutés en C (C23)}
 // Supportés par tous les encodages communément utilisés}
@@ -171,7 +183,9 @@ int CONCAT(\, u0393) = 0;
 #addproposal("p1885")
 #addproposal("p2862")
 
-== Saturation arithmetic
+== Types
+
+=== Saturation arithmetic
 
 - Fonctions ```cpp std::add_sat()```, ```cpp std::sub_sat()```, ```cpp std::mul_sat()```, ```cpp std::div_sat()``` et ```cpp std::saturate_cast()```
 - Les calculs dont le résultat est hors borne retournent les plus grandes ou plus petites valeurs représentables
@@ -189,7 +203,7 @@ int CONCAT(\, u0393) = 0;
 
 #addproposal("P0543")
 
-== Relocation
+=== Relocation
 
 - Nouvelle catégorie _trivially relocatable_ : déplaçable par copie bit à bit
 // Opération généralement implémentable par un simple memcpy()
@@ -202,7 +216,7 @@ int CONCAT(\, u0393) = 0;
 
 #addproposal("P2786")
 
-== _Replaceability_
+=== _Replaceability_
 
 - Nouvelle catégorie _replaceable type_ : destruction puis construction depuis une autre instance est équivalent à assigner depuis une autre instance
 - Objet implicitement _replaceable_ si il n'est pas ```cpp const``` ni ```cpp volatile``` et si toutes ces classes de bases et membres non-statiques sont _replaceable_
@@ -212,7 +226,7 @@ int CONCAT(\, u0393) = 0;
 
 #addproposal("P2786")
 
-== ``` std::indirect<T>``` - ``` std::polymorphic<T>```
+=== ``` std::indirect<T>``` - ``` std::polymorphic<T>```
 
 - ```cpp std::indirect<T>``` encapsule des objets de type ```cpp T```
 - ```cpp std::polymorphic<T>``` encapsule des objets héritant de ```cpp T```
@@ -222,7 +236,9 @@ int CONCAT(\, u0393) = 0;
 
 #addproposal("P3019")
 
-== _Placeholders_
+== Variables
+
+=== _Placeholders_
 
 - Joker ```cpp _``` pour des variables inutilisées
 
@@ -259,6 +275,8 @@ auto  [x, y, _] = f();
 
 == _Structured binding_
 
+=== _Structured binding_
+
 - Utilisable comme condition dans les ```cpp if```, ```cpp while```, ```cpp for``` et ```cpp switch```
 
 #codesample(
@@ -278,7 +296,7 @@ auto  [x, y, _] = f();
 
 #addproposal("p0963")
 
-== _Structured binding_
+=== _Structured binding_
 
 - Utilisation de _parameters pack_ dans les _structures bindings_
 
@@ -294,7 +312,9 @@ auto [...a, ...b] = f();  // ill-formed
 
 #addproposal("p1061")
 
-== ``` =delete```
+== Classes
+
+=== ``` =delete```
 
 - Ajout d'un message à ```cpp =delete```
 - Permet d'indiquer la raison de la suppression
@@ -314,7 +334,7 @@ auto [...a, ...b] = f();  // ill-formed
 
 #addproposal("P2573")
 
-== _Variadic friends_
+=== _Variadic friends_
 
 - Possibilité de déclaré ```cpp friend``` un _parameter pack_
 
@@ -328,7 +348,9 @@ class Bar {
 
 #addproposal("P2893")
 
-== Template
+== Templates
+
+=== Templates
 
 - Utilisation de concepts ou de variable template comme paramètres template
 
@@ -345,7 +367,9 @@ S<Concept, Var> s;
 
 #addproposal("P2841")
 
-== Gestion d'erreur
+== Gestion d'erreurs
+
+=== Gestion d'erreurs
 
 - Récupération des informations contenues dans un ```cpp std::exception_ptr```
   - ```cpp exception_ptr_cast``` converti un ```cpp std::exception_ptr``` en un pointeur sur une exception
@@ -353,6 +377,8 @@ S<Concept, Var> s;
 #addproposal("P2927")
 
 == Conteneurs
+
+=== Conteneurs
 
 - Nouveaux conteneurs
   - Vecteur de capacité fixée en _compile-time_ ```cpp std::inplace_vector```
@@ -380,7 +406,7 @@ S<Concept, Var> s;
 #addproposal("P0447")
 #addproposal("P1901")
 
-== ``` std::span```
+=== ``` std::span```
 
 - Ajout de ```cpp at()``` à ```cpp std::span``` et  ```cpp std::mdspan```
 
@@ -414,7 +440,7 @@ mdspan<float, dextents<3>> foo;
 #addproposal("p2389")
 #addproposal("P2630")
 
-== Chaînes de caractères
+=== Chaînes de caractères
 
 - Support de ```cpp std::string_view``` par ```cpp std::stringstream```
 - Interfaçage de ```cpp std::bitset``` avec ```cpp std::string_view```
@@ -442,7 +468,7 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 #addproposal("P2697")
 #addproposal("P2591")
 
-== _Initializer-list_
+=== _Initializer-list_
 
 - _static storage_ possible pour les _braced-initializer-list_
 // Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'initializer list puis vers le conteneur
@@ -461,13 +487,15 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 #addproposal("P2752")
 #addproposal("P2447")
 
-== ```cpp reference_wrapper```
+=== ```cpp reference_wrapper```
 
 - Comparaison de ```cpp std::reference_wrapper```
 
 #addproposal("P2944")
 
-== _Tuples_
+== ``` std::tuple```
+
+=== ``` std::tuple```
 
 - ```cpp std::complex``` deviennent des _tuple-like_
 
@@ -487,13 +515,17 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 
 == ``` std::optional```
 
+=== ``` std::optional```
+
 - Support des références par ```cpp std::optional```
 - ```cpp optional<T&>``` trivialement copiable
 
 #addproposal("p2988")
 #addproposal("p3836")
 
-== Algèbre linéaire
+== Algorithmes
+
+=== Algèbre linéaire
 
 - Basé sur un sous-ensemble de #link("https://www.netlib.org/blas/")[BLAS #linklogo()]
 - Multiples opérations
@@ -515,7 +547,7 @@ linalg::scale(2.0, x); // x = 2.0 * x
 #addproposal("p3050")
 #addproposal("p3222")
 
-== Algorithmes
+=== Algorithmes
 
 - Algorithmes appelables avec des _list-initialization_
 
@@ -533,13 +565,15 @@ linalg::scale(2.0, x); // x = 2.0 * x
 
 #addproposal("P2248")
 
-== ``` std::visit()```
+=== ``` std::visit()```
 
 - Versions membres de ```cpp std::visit()``` et ```cpp std::visit_format_arg()```
 
 #addproposal("P2637")
 
 == Ranges
+
+=== Ranges
 
 - ```cpp std::views::concat``` concatène plusieurs ranges
 
@@ -568,7 +602,7 @@ ranges::generate_random(a, g);
 #addproposal("P2542")
 #addproposal("P1068")
 
-== Ranges
+=== Ranges
 
 - ```cpp std::views::cache_latest``` met en cache le résultat du dernier déréférencement de l'itérateur sous-jacent
 - ```cpp std::views::to_input``` convertit un range en _input-only_ range
@@ -592,7 +626,7 @@ ranges::generate_random(a, g);
 #addproposal("p3044")
 #addproposal("p3060")
 
-== Ranges
+=== Ranges
 
 - Traitement de ```cpp std::optional``` comme un range similaire à ```cpp single_view```
 
@@ -614,13 +648,17 @@ ranges::generate_random(a, g);
 #addproposal("p3168")
 #addproposal("p3179")
 
-== Ratio
+== Rapport
+
+=== Rapport
 
 - Ajout des préfixes ```cpp quecto```, ```cpp ronto```, ```cpp ronna``` et ```cpp quetta```
 
 #addproposal("P2734")
 
-== ``` constexpr```
+== _Compile-time_
+
+=== ``` constexpr```
 
 - Davantage de ```cpp constexpr``` dans la bibliothèque standard
 - Conversion depuis ```cpp void*``` dans des contextes ```cpp constexpr```
@@ -643,7 +681,7 @@ ranges::generate_random(a, g);
 #addproposal("p3533")
 #addproposal("p3037")
 
-== Exceptions
+=== Exceptions
 
 - Possibilité de lancer des exceptions dans des fonctions ```cpp consteval```
   - Erreur de compilation si l'exception est lancé lors d'une évaluation _compile-time_
@@ -651,7 +689,9 @@ ranges::generate_random(a, g);
 #addproposal("P3068")
 #addproposal("P3378")
 
-== Parameters pack
+== _Parameters pack_
+
+=== _Parameters pack_
 
 - Indexation des _packs_
 
@@ -671,14 +711,16 @@ ranges::generate_random(a, g);
 
 #addproposal("P2662")
 
-== _lifetime_
+== Gestion mémoire
+
+=== _lifetime_
 
 - ```cpp std::is_within_lifetime()``` indique si l'objet pointé est vivant
 - ... en particulier si un membre d'une union est active
 
 #addproposal("P2641")
 
-== Gestion mémoire
+=== Gestion mémoire
 
 - _hazard pointers_ : unique écrivain, multiples lecteurs
 - Structure de donnée _read-copy update_
@@ -689,7 +731,9 @@ ranges::generate_random(a, g);
 #addproposal("P2530")
 #addproposal("P2545")
 
-== SIMD (_Single Instruction on Multiple Data_)
+== SIMD
+
+=== SIMD (_Single Instruction on Multiple Data_)
 
 - Intégration de ```cpp simd```
 - ```cpp simd<T>``` se comporte comme ```cpp T``` mais manipule plusieurs valeurs simultanément
@@ -711,11 +755,15 @@ auto e = reduce(d);                               // 6
 
 == Traits
 
+=== Traits
+
 - Trait ```cpp std::is_virtual_base_of``` indiquant si une classe est une classe de base virtuelle d'une autre
 
 #addproposal("p2985")
 
-== Type appelable
+== Programmation fonctionnelle
+
+=== Type appelable
 
 - ```cpp std::copiable_function``` pour les fonctions copiables
 - ```cpp std::function_ref```
@@ -726,7 +774,7 @@ auto e = reduce(d);                               // 6
 #addproposal("P2548")
 #addproposal("P0792")
 
-== _Binding_
+=== _Binding_
 
 - Surcharge de ```cpp std::bind_front()``` et ```cpp std::bind_back()``` prenant l'appelable en paramètre template
 
@@ -744,7 +792,9 @@ bind_front<&S::foo>(s, p1, p2);
 
 == Attributs
 
-- Attributs sur les structured binding
+=== Attributs
+
+- Attributs sur les _structured binding_
 
 ```cpp
 auto [a, b [[attribute]], c] = foo();
@@ -765,7 +815,9 @@ f(y); // erroneous behavior
 #addproposal("P0609")
 #addproposal("p2795")
 
-== ``` std::format```
+== Flux
+
+=== ``` std::format```
 
 - Possibilité de fournir une chaîne de format au _runtime_
 
@@ -799,7 +851,7 @@ format("{:>{}}", "hello", "10");
 #addproposal("P2587")
 #addproposal("P2757")
 
-== ``` std::format```
+=== ``` std::format```
 
 - Formatage des pointeurs
 
@@ -815,7 +867,7 @@ format("{:>{}}", "hello", "10");
 
 #addproposal("P2510")
 
-== ``` std::print```
+=== ``` std::print```
 
 - Impression de ligne vide
 
@@ -837,11 +889,15 @@ format("{:>{}}", "hello", "10");
 
 == Durées et temps
 
+=== Durées et temps
+
 - Spécialisation de ```cpp std::hash``` pour ```cpp std::chrono```
 
 #addproposal("P2592")
 
-== Accès bas-niveaux aux IO
+== _Filesystem_
+
+=== Accès bas-niveaux aux IO
 
 - Alias ```cpp native_handle_type``` sur le descripteur de fichier de la plateforme
 - ```cpp native_handle()``` retourne ce descripteur
@@ -849,6 +905,8 @@ format("{:>{}}", "hello", "10");
 #addproposal("P1759")
 
 == Concurrence
+
+=== Concurrence
 
 - Version ```cpp atomic``` de minimum et maximum
 - Obtention de l'adresse de l'objet référencé par ```cpp std::atomic_ref``` via ```cpp address()```
@@ -870,13 +928,17 @@ format("{:>{}}", "hello", "10");
 #addproposal("p3552")
 #addproposal("p3111")
 
-== Générateurs
+== Nombres aléatoires
+
+=== Générateurs
 
 - Ajout des moteurs _counter based Philox_
 
 #addproposal("p2075")
 
-== Contrats - Présentation
+== Contrats
+
+=== Contrats - Présentation
 
 - Support de la programmation par contrat
 - Remplace la vérification via ```cpp assert```
@@ -894,7 +956,7 @@ format("{:>{}}", "hello", "10");
 
 #addproposal("P2900")
 
-== Contrats - Présentation
+=== Contrats - Présentation
 
 #alertblock("Nombreuses critiques", text[
   #link("https://wg21.link/p3909")[P3909 : Contracts should go into a White Paper - even at this late point #linklogo()]
@@ -906,7 +968,7 @@ format("{:>{}}", "hello", "10");
   #link("https://wg21.link/p4020")[P4020 : Concerns about contract assertions #linklogo()]
 ])
 
-== Contrats - Présentation
+=== Contrats - Présentation
 
 - Fonctions non supportées (futures propositions)
   - Préconditions et postconditions sur les fonctions virtuelles
@@ -924,7 +986,7 @@ format("{:>{}}", "hello", "10");
 
 #addproposal("P2900")
 
-== Contrats - Préconditions
+=== Contrats - Préconditions
 
 - Sur les déclarations de fonctions et coroutines
 - Introduites par le mot-clé contextuel ```cpp pre```
@@ -939,7 +1001,7 @@ pre (i >= 0)
 
 #addproposal("P2900")
 
-== Contrats - Postconditions
+=== Contrats - Postconditions
 
 - Sur les déclarations de fonctions et coroutines
 - Introduites par le mot-clé contextuel ```cpp post```
@@ -960,7 +1022,7 @@ post (r: r > 0)
 
 #addproposal("P2900")
 
-== Contrats - Assertions
+=== Contrats - Assertions
 
 - Dans le corps des fonctions
 - Introduite par le mot-clé ```cpp contract_assert```
@@ -980,7 +1042,7 @@ post (r: r > 0)
 
 #addproposal("P2900")
 
-== Contrats - Sémantiques
+=== Contrats - Sémantiques
 
 - Plusieurs sémantiques
   - ```cpp ignore``` : contrat non vérifié
@@ -1000,6 +1062,8 @@ post (r: r > 0)
 
 == Réflexion
 
+=== Réflexion
+
 - Support de la réflexion statique
   - Un type opaque ```cpp std::meta::info``` pour représenter les éléments du programme
   - Un opérateur de réflexion ```cpp ^^```
@@ -1018,7 +1082,7 @@ post (r: r > 0)
 #addproposal("p3394")
 #addproposal("p3560")
 
-== Réflexion
+=== Réflexion
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:52,endLineNumber:23,positionColumn:52,positionLineNumber:23,selectionStartColumn:52,selectionStartLineNumber:23,startColumn:52,startLineNumber:23),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cmeta%3E%0A%23include+%3Cstring_view%3E%0A%0Aenum+Color+%7B+red,+green,+blue+%7D%3B%0A%0Atemplate%3Ctypename+E,+bool+Enumerable+%3D+std::meta::is_enumerable_type(%5E%5EE)%3E%0Arequires+std::is_enum_v%3CE%3E%0Aconstexpr+std::string_view+enum_to_string(E+value)+%7B%0A++if+constexpr+(Enumerable)%0A++++template+for+(constexpr+auto+e+:%0A++++++define_static_array(std::meta::enumerators_of(%5E%5EE)))%0A++if+(value+%3D%3D+%5B:e:%5D)%0A++++return+std::meta::identifier_of(e)%3B%0A%0Areturn+%22%3Cunnamed%3E%22%3B+%7D%0A%0Aint+main()%0A%7B%0A++++std::cout+%3C%3C+enum_to_string(Color::red)+%3C%3C+%22%5Cn%22%3B%0A++++std::cout+%3C%3C+enum_to_string(Color(42))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_bb_p2996,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic+-fexpansion-statements',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+clang+(reflection+-+C%2B%2B26)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1043,13 +1107,15 @@ post (r: r > 0)
   ],
 )
 
-== Modules
+== Compilation et implémentation
+
+=== Modules
 
 - Suppression de l'expansion de macros dans les déclarations de module
 
 #addproposal("P3034")
 
-== Compilation et implémentation
+=== Compilation et implémentation
 
 - ```cpp #embed``` ressources externes disponibles au \textit{runtime}
 
@@ -1061,7 +1127,7 @@ const unsigned char foo[] = {
 
 #addproposal("p1967")
 
-== Debug
+=== Debug
 
 - ```cpp std::breakpoint()``` : point d'arrêt dans le programme
 - ```cpp std::breakpoint_if_debugging``` : point d'arrêt si l'exécution se fait dans un debugger

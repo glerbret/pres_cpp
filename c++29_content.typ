@@ -4,6 +4,8 @@
 
 == Présentation
 
+=== Présentation
+
 - Adoption du planing en mars 2026
 - Travaux en cours sur
   - la sécurité (profils, amélioration de la bibliothèque standard)

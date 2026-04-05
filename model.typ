@@ -13,7 +13,7 @@
       )]
   }
 
-  if (title != none) {
+  if (content != none) {
     stack(
       block(
         width: 100%,
@@ -21,8 +21,8 @@
         stroke: color,
         outset: (x: 1em),
         inset: (x: 0pt, top: 3pt, bottom: 4pt),
-        radius: (top: 0.4em, bottom: 0cm),
-        place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0pt)[#set align(
+        radius: (top: 0.4em, bottom: 0em),
+        place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0.03em)[#set align(
             center + horizon,
           )
           #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
@@ -37,30 +37,42 @@
         fill: color.lighten(80%),
         stroke: color,
         outset: (x: 1em),
-        radius: (top: 0cm, bottom: 0.4em),
+        radius: (top: 0em, bottom: 0.4em),
         inset: (x: 0pt, top: 5pt, bottom: 5pt),
         content,
       ),
     )
   } else {
-    block(
-      width: 100%,
-      fill: color.lighten(80%),
-      stroke: color,
-      outset: (x: 1em),
-      radius: (top: 0.4em, bottom: 0.4em),
-      inset: (x: 0pt, top: 3pt, bottom: 5pt),
-      content,
-    )
+      block(
+        width: 100%,
+        fill: color,
+        stroke: color,
+        outset: (x: 1em),
+        inset: (x: 0pt, top: 3pt, bottom: 4pt),
+        radius: (top: 0.4em, bottom: 0.4em),
+        place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0.03em)[#set align(
+            center + horizon,
+          )
+          #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
+          + text(
+            white,
+          )[#strong(
+            title,
+          )],
+      )
   }
 }
 
 #let noteblock(title, content) = {
-  _block(title, content, main_color, "info")
+  _block(title, content, main_color, "pen-to-square")
+}
+
+#let questionblock(title, content) = {
+  _block(title, content, main_color, "clipboard-question")
 }
 
 #let alertblock(title, content) = {
-  _block(title, content, rgb("#BF0000"), "exclamation")
+  _block(title, content, rgb("#BF0000"), "bell")
 }
 
 #let adviceblock(title, content) = {
@@ -207,8 +219,10 @@
   set document(
     title: title,
     author: authors,
+    date: date,
   )
-  set heading(numbering: "1.a")
+
+  set heading(numbering: (first, ..other) => if other.pos().len() == 0 { return first })
 
   // PAGE----------------------------------------------
   set page(
@@ -222,25 +236,41 @@
         let page = here().page()
         let sections = query(selector(heading.where(level: 1)))
         let section = sections.rev().find(x => x.location().page() <= page)
-        let headings = query(selector(heading.where(level: 2)))
+        let subsections = query(selector(heading.where(level: 2)))
+        let subsection = subsections.rev().find(x => x.location().page() <= page)
+        let headings = query(selector(heading.where(level: 3)))
         let heading = headings.rev().find(x => x.location().page() <= page)
 
         if heading != none {
           set align(top)
 
           if section != none {
-            block(
-              width: 100%,
-              fill: title-color.darken(50%),
-              stroke: title-color.darken(50%),
-              height: space * 0.30,
-              outset: (x: 0.5 * space),
-              inset: (right: -0.4 * space),
-              spacing: 0pt,
-            )[
-              #set text(0.8em, fill: bg-color)
-              #align(right + horizon)[#section.body]
-
+            columns(2, gutter: 0cm)[
+              #block(
+                width: 100%,
+                fill: title-color.darken(50%),
+                stroke: title-color.darken(50%),
+                height: space * 0.30,
+                outset: (x: 0.5 * space),
+                inset: (right: 0.1 * space),
+                spacing: 0pt,
+              )[
+                #set text(0.8em, fill: bg-color)
+                #align(right + horizon)[#section.body]
+              ]
+              #colbreak()
+              #block(
+                width: 100%,
+                fill: title-color.darken(25%),
+                stroke: title-color.darken(25%),
+                height: space * 0.30,
+                outset: (right: 0.5 * space),
+                inset: (left: 0.1 * space),
+                spacing: 0pt,
+              )[
+                #set text(0.8em, fill: bg-color)
+                #align(left + horizon)[#subsection.body]
+              ]
             ]
           } else {
             block(
@@ -295,7 +325,7 @@
             #if authors != none {
               if (type(authors) != array) { authors = (authors,) }
               authors.join(", ", last: " and ")
-            } else [#date]
+            } else [#date.display("[day]/[month]/[year]")]
           ]
           // Right Side of the Footer
           #block(
@@ -337,6 +367,10 @@
   }
 
   show heading.where(level: 2): it => {
+        pagebreak(weak: true)
+  }
+
+  show heading.where(level: 3): it => {
     codecounter.update(0)
     proposalcounter.update(0)
     pagebreak(weak: true)
@@ -403,7 +437,7 @@
       gap: 2em,
     ),
   )
-  show outline: set heading(level: 2) // To not make the TOC heading a section slide by itself
+  show outline: set heading(level: 3) // To not make the TOC heading a section slide by itself
   show outline.entry.where(
     level: 1,
   ): set block(above: 1.5em)
@@ -469,7 +503,7 @@
       align(center + top, authors.join(", ", last: " & "))
         + if date != none { text(1em)[ \ ] }
         + if date != none {
-          text(1em, align(center, date))
+          text(1em, align(center, date.display("[day]/[month]/[year]")))
           align(right + bottom, image("license.png", height: 10%))
         },
     )
