@@ -5,6 +5,8 @@
 
 == Présentation
 
+=== Présentation
+
 - Approuvé en décembre 2017
 - Dernier Working Draft : #link("https://wg21.link/std17")[N4659 #linklogo()]
 
@@ -12,7 +14,9 @@
   Voir #link("https://www.youtube.com/user/lefticus1/videos")[Vidéos C++ Weekly #linklogo()] (Jason Turner)
 ])
 
-== Fonctionnalités supprimées
+== Suppression
+
+=== Fonctionnalités supprimées
 
 - Suppression des trigraphes (non dépréciés)
 
@@ -27,7 +31,9 @@
 - Suppression des anciens mécanismes fonctionnels : ```cpp std::bind1st()```, ```cpp std::bind2nd()```, ...
 - Suppression des spécifications d'exception
 
-== ``` __has_include```
+== include
+
+=== ``` __has_include```
 
 - Teste la présence d'un fichier d'en-tête
 - Et donc la disponibilité d'une fonctionnalité
@@ -47,6 +53,8 @@
 #addproposal("P0061")
 
 == ``` inline``` variable
+
+=== ``` inline``` variable
 
 - Sémantique ```cpp inline``` identique sur fonctions et variables
 - Peut être définie, à l'identique, dans plusieurs unité de compilation
@@ -69,7 +77,9 @@ class Foo { static inline int bar = 42; };
 
 #addproposal("P0386")
 
-== Nested namespace
+== ``` namespace```
+
+=== Nested namespace
 
 - Simplification des imbrications de namespaces via l'opérateur ```cpp ::```
 
@@ -96,6 +106,8 @@ class Foo { static inline int bar = 42; };
 
 == ``` static_assert```
 
+=== ``` static_assert```
+
 - ```cpp static_assert``` sans message utilisateur
 
 #codesample(
@@ -112,6 +124,8 @@ class Foo { static inline int bar = 42; };
 
 == ``` if constexpr```
 
+=== ``` if constexpr```
+
 - Branchement évalué à la compilation
 
 ```cpp
@@ -124,7 +138,7 @@ else
 ```
 
 #noteblock("Motivation", text[
-  Conditions d'arrêt plus simple avec les _variadic template_}
+  Conditions d'arrêt plus simple avec les _variadic template_
 
   Moins de spécialisations explicites
 ])
@@ -137,7 +151,7 @@ else
 
 #addproposal("P0292")
 
-== ``` if constexpr```
+=== ``` if constexpr```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate+%3Ctypename+T%3E+auto+foo(T+t)%0A%7B%0A++if+constexpr+(std::is_pointer_v%3CT%3E)%0A++++return+*t%3B%0A++else%0A++++return+t%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++int+a+%3D+10,+b+%3D+5%3B%0A++int*+ptr+%3D+%26b%3B%0A++std::cout+%3C%3C+foo(a)+%3C%3C+!'+!'+%3C%3C+foo(ptr)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -159,7 +173,7 @@ else
 
 #addproposal("P0292")
 
-== ``` if constexpr```
+=== ``` if constexpr```
 
 #noteblock("Note", text[
   Les branches doivent être syntaxiquement correctes
@@ -177,7 +191,7 @@ else
 
 #addproposal("P0292")
 
-== ``` if constexpr```
+=== ``` if constexpr```
 
 #noteblock(text[_hello world_ de la récursion], text[
   ```cpp
@@ -204,9 +218,11 @@ else
 
 #addproposal("P0292")
 
-== ``` if``` init statement
+== init statement
 
-- Initialisation dans le branchement
+=== ``` if``` init statement
+
+- Création de variables dans le branchement
 - Portée identique aux déclarations dans la condition
 
 #codesample(
@@ -229,7 +245,7 @@ else
 
 #addproposal("P0305")
 
-== ``` if``` init statement
+=== ``` if``` init statement
 
 - Alternative à certaines constructions peu lisibles
 
@@ -255,9 +271,9 @@ if(ret) ...
 
 #addproposal("P0305")
 
-== ``` switch``` init statement
+=== ``` switch``` init statement
 
-- Initialisation dans le ```cpp switch()```
+- Création de variables dans le ```cpp switch()```
 - Utilisable dans le corps du ```cpp switch()```
 
 #codesample(
@@ -273,7 +289,9 @@ if(ret) ...
 
 #addproposal("P0305")
 
-== Structured binding
+== _Structured binding_
+
+=== _Structured binding_
 
 - Décomposition automatique des types composés en multiples variables
 
@@ -283,14 +301,14 @@ auto [liste de nom] = expression;
 
 - Sur des types dont les données membres non statiques
   - Sont toutes publiques
-  - Sont toutes des membres de l'objet ou de la même classe de base publique
+  - Sont toutes membres de l'objet ou de la même classe de base publique
   - Ne sont pas des unions anonymes
 - Et sur les classes implémentant ```cpp get<>()```, ```cpp tuple_size``` et ```cpp tuple_element```
 - Notamment ```cpp std::tuple```, ```cpp std::pair```, ```cpp std::array```
 
 #addproposal("P0217")
 
-== Structured binding
+=== _Structured binding_
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:20,positionColumn:1,positionLineNumber:20,selectionStartColumn:1,selectionStartLineNumber:20,startColumn:1,startLineNumber:20),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Carray%3E%0A%23include+%3Cmap%3E%0A%23include+%3Cutility%3E%0A%0Ausing+namespace+std::literals%3B%0A%0Astatic+std::tuple%3Cint,+std::string%3E+foo()%0A%7B%0A++return+std::make_tuple(42,+%22Hello%22s)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+%5Bx,y%5D+%3D+foo()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'+!'+%3C%3C+y+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -326,7 +344,7 @@ auto [liste de nom] = expression;
 
 #addproposal("P0217")
 
-== Structured binding
+=== _Structured binding_
 
 - Compatible avec ```cpp const```
 
@@ -347,7 +365,7 @@ auto& [refX,refY,refZ] = monTuple;
 
 #addproposal("P0217")
 
-== Structured binding
+=== _Structured binding_
 
 - Avec _range-based for loop_
 
@@ -376,12 +394,12 @@ auto& [refX,refY,refZ] = monTuple;
 
 #addproposal("P0217")
 
-== Structured binding
+=== _Structured binding_
 
 #noteblock("Objectif", text[
-  Meilleure lisibilité
-
   Remplacement de ```cpp std::tie()```
+
+  Meilleure lisibilité
 ])
 
 #noteblock("Nom", text[
@@ -406,6 +424,8 @@ auto& [refX,refY,refZ] = monTuple;
 
 == Ordre d'évaluation
 
+=== Ordre d'évaluation
+
 - Ordre d'évaluation fixé
   - De gauche à droite pour les expressions post-fixées
   - De droite à gauche pour les affectations
@@ -422,7 +442,7 @@ a >> b;
 ```
 #addproposal("P0145")
 
-== Ordre d'évaluation
+=== Ordre d'évaluation
 
 - Évaluation complète d'un paramètre avant celle du suivant
 
@@ -438,6 +458,8 @@ f(a(x), b, c(y));
 #addproposal("P0145")
 
 == Élision de copie
+
+=== Élision de copie
 
 - Élision garantie pour les objets créés dans l'instruction de retour
 
@@ -456,7 +478,7 @@ T g() {
 
 #addproposal("P0135")
 
-== Élision de copie
+=== Élision de copie
 
 - Élision garantie lors de la définition d'une variable locale
 
@@ -472,7 +494,9 @@ T t = f();   // Pas de copie
 
 #addproposal("P0135")
 
-== Aggregate Initialisation
+== Initialisation
+
+=== Aggregate Initialisation
 
 - Généralisation aux classes dérivées
 - Incluant l'initialisation de la classe de base
@@ -505,7 +529,7 @@ T t = f();   // Pas de copie
 
 #addproposal("p0017")
 
-== Déduction de type et Initializer list
+=== Déduction de type et Initializer list
 
 - Évolution des règles de déduction sur les listes entre accolades
   - _Direct initialisation_ : déduction d'une valeur
@@ -529,7 +553,7 @@ T t = f();   // Pas de copie
 
 #addproposal("N3922")
 
-== Initialisation des énumérations fortement typées
+=== ``` enum class```
 
 - Initialisation possible d'```cpp enum class``` avec une constante du type sous-jacent
 
@@ -543,10 +567,6 @@ T t = f();   // Pas de copie
     ```
   ],
 )
-
-#addproposal("P0138")
-
-== Initialisation des énumérations fortement typées
 
 - Pas de relâchement du typage par ailleurs
 - En particulier, pas de copie ni d'affectation depuis un entier
@@ -575,7 +595,9 @@ T t = f();   // Pas de copie
 
 #addproposal("P0138")
 
-== ``` std::byte```
+== Types
+
+=== ``` std::byte```
 
 - Stockage de bits
 - Pas un type caractère ni arithmétique
@@ -599,7 +621,9 @@ T t = f();   // Pas de copie
 
 #addproposal("P0298")
 
-== Conteneurs associatifs : déplacement de nœuds
+== Conteneurs
+
+=== Conteneurs associatifs : déplacement de nœuds
 
 - Déplacement de nœuds entre conteneurs associatifs de même type
 - Objet _node handle_ : stockage et accès au nœud
@@ -615,7 +639,7 @@ T t = f();   // Pas de copie
 
 #addproposal("P0083")
 
-== Conteneurs associatifs : déplacement de nœuds
+=== Conteneurs associatifs : déplacement de nœuds
 
 #codesample(
   "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuyxMsSdnl2arDOteWztuB8HAzwuL2CBE2D2CEEmLxMAHYrBdNpteugQCAHk9diDSEiCCiQH8jCdNvxUNs4bCLEVzGYSVxqbCACLYilmUjUklmekwhmMnbw86I5Go9E/LE4vEEgHLbCbCJVMlWOGs6ly4icsyc7m85b8l6I1UAOmCSmq1FQqANmFUBGITAcECmUJ1euJJAgaAYvU2TC8RHMADZtgBWCwAa1IADcTEGGZsQK7UFCEQqXYLcai0L67m4fptQ9nc2AOABaIsF3abCPltybMtFvku3nJoUoWagn6FpZBtwMevO5P8YjugRen1%2BsyB6NhyPR2Px1VJgUp5NpvGZ9u7XP5jsVouljjVyuHutLftLptLlvrw/07sMYsP6M9%2Blnl1j0nEO6xw3G6IEM0WlaNp2v%2BZiTE6/KIoOw6eqC74BsG05RjGcYJouiIUqm4oZm2h7bpuu4lmWO41lWJG1gefaQWSPLNumrZZuR9Z3lRLrQR6o6%2BqgCFTuGyFzrKVTocuS6rjhjEETW%2BE5oR%2B6HmRkkURRDbJheYkMRuMk1sxPasXRa64eRLYROaBi0LECBMIexBGp6f6YOgx6UQe5E2QwGCYAaoaYAAnpCTlKa5BruVgBrorEDn%2BUxXa6ae1FXoZinUg%2BxZPgwL66smbkeV5vlRcssbLCpS4/nZpo2fEiRlAw2ItiwqARpgEDZVg4HFVBbocXBXE8SGfGzqhJLCZhK7YRpeFOXJ5EKVpSl6eeWr6eJmmdml80dUOXXej1E6If1KHzkJjbkqNCUSbN0mdlNikzZ2ylnhhi2XvR17RWtcXQk9HDTLQnBBrwfgcFopCoJwOaWNYSKzPMtwrDwpAEJo33TKGIBBho%2BicJIANIyDnC8AoIAY4jQPfaQcCwEgVpNFxZAUBAVTAAoyiGCUQgIKgADugPw2gLCxHQTDVSzIS0OzXOA8DfMC/QMRM8wsQKBzBCkNLdDRKErCLLwauywA8r64vc7j1PIOcxBM/jpCmxU%2BCA7w/CCCIYjsFIMiCIoKjqKTpC6EUBhGCg1jWPoeARITkDTKgsTVYTJbIjsDKmBDlhcDCmzFgA6mItAZ5nQG2hnEXoIYjjILwDXRMQeBYBHkKkMQXiCHgbAACqmXX0wKNDCw9LiwQi2zHPG9wvA2pgizw5ztqxEjP1/TjPugxw2CqDTRCfqoAAc/rFv6kibMAyDIJsEA2k3oaTKf4NWJY2K4IQJDbG8Uxj3P0wIEcWAxPXqPo5jHBsakElhXK2hNibvwAWYRewNl5v1JuBSM0REjOEkEAA",
@@ -641,7 +665,7 @@ T t = f();   // Pas de copie
   ],
 )
 
-== Fusion de conteneurs associatif
+=== Fusion de conteneurs associatif
 
 - ```cpp merge()``` fusionne le contenu de conteneurs associatifs
 
@@ -660,7 +684,7 @@ T t = f();   // Pas de copie
 
 #addproposal("P0083")
 
-== ``` std::map``` et ``` std::unordered_map```
+=== ``` std::map``` et ``` std::unordered_map```
 
 - ```cpp try_emplace()``` tente de construire en place
 - ... sans effet, même pas un "vol" de la valeur, si la clé existe déjà
@@ -682,7 +706,7 @@ T t = f();   // Pas de copie
 
 #addproposal("n4279")
 
-== ``` emplace_back()```, ``` emplace_front()```
+=== ``` emplace_back()```, ``` emplace_front()```
 
 - Retournent une référence sur l'élément ajouté
 
@@ -711,7 +735,7 @@ auto& val = foo.emplace_back(...);    // C++17
 
 #addproposal("P0084")
 
-== Fonctions libres de manipulation
+=== Fonctions libres de manipulation
 
 - ```cpp std::size()```
   - Conteneurs : résultat de la fonction membre ```cpp size()```
@@ -728,7 +752,9 @@ auto& val = foo.emplace_back(...);    // C++17
 
 #addproposal("n4280")
 
-== ``` ContiguousIterator```
+== Itérateurs
+
+=== ``` ContiguousIterator```
 
 - Basé sur ```cpp RandomAccessIterator```
 - Mais sur des conteneurs à stockage contigu
@@ -747,7 +773,9 @@ auto& val = foo.emplace_back(...);    // C++17
 
 #addproposal("n4284")
 
-== Limitation de plage de valeurs
+== Algorithmes
+
+=== ``` std::clamp()```
 
 - ```cpp std::clamp()``` ramène une valeur dans une plage donnée
   - Retourne la borne inférieure si la valeur lui est inférieure
@@ -767,7 +795,7 @@ auto& val = foo.emplace_back(...);    // C++17
 
 #addproposal("P0025")
 
-== ``` std::to_chars()``` et ``` std::from_chars()```
+=== ``` std::to_chars()``` et ``` std::from_chars()```
 
 - Conversions entre chaînes C pré-allouées et nombre
 
@@ -796,6 +824,8 @@ auto& val = foo.emplace_back(...);    // C++17
 
 == ``` std::variant```
 
+=== ``` std::variant```
+
 - Union _type-safe_ contenant une valeur d'un type choisi parmi $n$
 - Type contenu dépend de la valeur assignée
 
@@ -823,7 +853,7 @@ auto& val = foo.emplace_back(...);    // C++17
 
 #addproposal("P0088")
 
-== ``` std::variant```
+=== ``` std::variant```
 
 - ```cpp get<>()``` récupère la valeur depuis l'index ou le nom du type
 - Et lève une exception si le type demandé n'est pas correct
@@ -838,7 +868,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0088")
 
-== ``` std::variant```
+=== ``` std::variant```
 
 #codesample(
   "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuwfBwCdnl2arDOteWztuAG5NRGIzwuVw%2BNzufyqeEMBGBlwuwQImxYTGCEEmLxMAHYrBdNpteugQCBflCYT9EaRNlRaKgmAQqYTiQ8jCdNr8qQB3Ha4874353AAi2zMZlUAE8AF6S8XmMw8l74wmbYloLxIn4/AkEIkgYCYWH3HXMgjER4nCC/SYQrVgJYAVjcDDtCpBePZQs2XHly15Sp1KpQsw1uy1TL1BopggtVptu02LsdzqWvsx7s5nvD%2BsNe2jy2wloxqfdytVwbjbm1uuzUcNBc51s18cTTpdxfhfM2GZ2wqzkd2GhjRb9VcDapDbjDxojOcRFobFYTDtbKd5iq7nt%2Brs7paD6sXfdnefrjdDzeXye3mLeeCom0HJenNd26FmEXoQ%2B3/ur/bcy0/7YrK4t5pq8qx3g%2BO5Pr%2BNJ0nWEANlebzAVQmJYoKLwcNMtCcPavB%2BBwWikKgnCTpY1gErM8y3CsPCkAQmhYdMADWID2ho%2BicJI%2BGMcRnC8AoIAcQxhFYaQcCwEgmCqE06okOQlBVMACjKIYJRCAgqCcgRdFoCwsR0PSySqSEtAaVpBFEXpBn0DEynMLECiaQy1l0NEoSsIsvCubZADy6rmdpvHSU05zEMp/GkCFyAVPgBG8PwggiGI7BSDIgiKCo6iiaQuhFAYRgoNY1j6HgESCZA0yoLEZQMIJHAALSEj2pjkZYXBYpsDUAOpiLQXXddJppMF1sSYOgMJ4MgvCoP8xBmlgFXoqQxBeIIeBsAAKqgnhLdMChUQsPQ6sEJnqZpQXcLwpqYIsdGcsQTCxIx2G4TxOUkRw2AycgcnEJsqgABwAGwNcDkibMAyDIJsECmmtzHWhAZFWJYVK4IQJAissUzXS90wIEcWAxMtrHsZxHDcaQlkzZFgnCfjFNmO9RGfXjomTNMc2JM4khAA",
@@ -864,7 +894,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0088")
 
-== ``` std::variant```
+=== ``` std::variant```
 
 - ```cpp std::visit()``` permet l'appel sur le type réellement contenu
 
@@ -891,7 +921,9 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0088")
 
-== Pack expansion sur ``` using```
+== Pack expansion
+
+=== Pack expansion sur ``` using```
 
 - Expansion du _parameter pack_ dans les _using declaration_
 
@@ -922,6 +954,8 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 == Fold expression
 
+=== Fold expression
+
 - Application d'un opérateur binaire à un _parameter pack_
 - Support du _right fold_ et du _left fold_
 
@@ -939,7 +973,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Fold expression
+=== Fold expression
 
 #columns(2)[#align(center)[
     #block(stroke: 0.05em + black, inset: (x: 1em, bottom: 1em, top: 0.5em), radius: 0.4em, text[_Right fold_
@@ -996,7 +1030,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Fold expression
+=== Fold expression
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Abool+all(Args...+args)%0A%7B%0A++return+(...+%26%26+args)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+all(true,+true,+true,+false)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1026,7 +1060,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Fold expression
+=== Fold expression
 
 #alertblock(text[_left fold_ ou _right fold_ ?], text[
   ```cpp
@@ -1052,7 +1086,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Fold expression
+=== Fold expression
 
 - Si le _parameter pack_ est vide, le résultat est
   - ```cpp true``` pour l'opérateur ```cpp &&```
@@ -1065,7 +1099,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Fold expression
+=== Fold expression
 
 - Compatible avec des opérateurs non arithmétiques ni logiques
 
@@ -1100,7 +1134,9 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Contraintes du range-based for loop
+== Range-based for loop
+
+=== Contraintes du range-based for loop
 
 - Utilisation possible de types différents pour ```cpp begin``` et ```cpp end```
 - Permet de traiter des paires d'itérateurs
@@ -1110,7 +1146,9 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0184")
 
-== Héritage de constructeurs
+== Classes
+
+=== Héritage de constructeurs
 
 - Visibilité des constructeurs hérités avec leurs paramètres par défaut
 // En C++11, les constructeurs avec paramètres par défaut (ou ellipses) étaient injectés en omettant valeurs par défaut (version avec le paramètre sans valeur par défaut et version sans le paramètre) et ellipse
@@ -1132,7 +1170,9 @@ Baz baz(0); // OK (Ambigu en C++11)
 
 #addproposal("P0136")
 
-== ``` noexcept```
+== Exceptions
+
+=== ``` noexcept```
 
 - ```cpp noexcept``` fait partie du type des fonctions
 
@@ -1154,7 +1194,7 @@ Baz baz(0); // OK (Ambigu en C++11)
 
 #addproposal("P0012")
 
-== ``` std::uncaught_exceptions()```
+=== ``` std::uncaught_exceptions()```
 
 - Retourne le nombre d'exceptions lancées (ou relancées) et non encore attrapées du thread courant
 
@@ -1174,7 +1214,9 @@ Baz baz(0); // OK (Ambigu en C++11)
 
 #addproposal("N4259")
 
-== Caractères littéraux UTF-8
+== Littéraux
+
+=== Caractères littéraux UTF-8
 
 - Caractère UTF-8 préfixé par ```cpp u8```
 - Erreur si le caractère n'est pas représentable par un unique code point UTF-8
@@ -1185,7 +1227,9 @@ char x = u8'x';
 
 #addproposal("N4267")
 
-== Déduction de template dans les constructeurs
+== Templates
+
+=== Déduction dans les constructeurs
 
 - Déduction des paramètres templates d'une classe à la construction
 - Plus de déclaration explicite des paramètres templates
@@ -1212,7 +1256,7 @@ char x = u8'x';
 
 #addproposal("P0091")
 
-== Déduction de template dans les constructeurs
+=== Déduction dans les constructeurs
 
 - Permet de fournir une lambda en paramètre template sans la déclarer
 
@@ -1232,7 +1276,7 @@ char x = u8'x';
 
 #addproposal("P0091")
 
-== ``` template <auto>```
+=== ``` template <auto>```
 
 - Déduction du type des paramètres templates numériques
 
@@ -1258,7 +1302,7 @@ foo<10>();  // int
 
 #addproposal("P0127")
 
-== Template et contraintes d'utilisation
+=== Template et contraintes d'utilisation
 
 - ```cpp typename``` autorisé dans les déclarations de _template template parameters_
 
@@ -1277,7 +1321,9 @@ foo<10>();  // int
 
 // Auparavant, il fallait obligatoirement utiliser class, alors que typename était valide partout ailleurs
 
-== Capture de ``` *this```
+== Programmation fonctionnelle
+
+=== Capture de ``` *this```
 
 - Capture ```cpp *this``` par valeur
 
@@ -1303,7 +1349,7 @@ foo<10>();  // int
 
 #addproposal("P0018")
 
-== Lambdas et expressions constantes
+=== Lambdas et expressions constantes
 
 - Lambdas autorisées dans les expressions constantes
 - Si l'initialisation de chaque capture est possible dans l'expression constante
@@ -1323,7 +1369,7 @@ foo<10>();  // int
 
 #addproposal("P0170")
 
-== Lambdas et expressions constantes
+=== Lambdas et expressions constantes
 
 - Déclaration ```cpp constexpr``` de lambda possible
 - Explicitement via ```cpp constexpr```
@@ -1352,7 +1398,7 @@ foo<10>();  // int
 
 #addproposal("P0170")
 
-== Lambdas et expressions constantes
+=== Lambdas et expressions constantes
 
 - Fermeture de type littéral si les données sont des littéraux
 
@@ -1373,7 +1419,7 @@ foo<10>();  // int
 
 #addproposal("P0170")
 
-== ``` std::invoke()```
+=== ``` std::invoke()```
 
 - Appelle l'appelable fourni en paramètre
 - ... en fournissant la liste de paramètres
@@ -1394,7 +1440,7 @@ foo<10>();  // int
 
 #addproposal("n4169")
 
-== ``` std::invoke()```
+=== ``` std::invoke()```
 
 - Fonctionne également avec des fonctions membres
 - ... le premier paramètre fourni est l'objet à utiliser
@@ -1415,7 +1461,7 @@ foo<10>();  // int
 
 #addproposal("n4169")
 
-== ``` std::not_fn()```
+=== ``` std::not_fn()```
 
 - Construction de _function object_ en niant un appelable
 
@@ -1438,7 +1484,9 @@ foo<10>();  // int
 #addproposal("p0005")
 #addproposal("p0358")
 
-== Alias de traits
+== Traits
+
+=== Alias de traits
 
 - Ajout du suffixe ```cpp _v``` aux traits de la forme ```cpp is_...```
 - Suppression de ```cpp ::value```
@@ -1462,7 +1510,7 @@ foo<10>();  // int
 
 #addproposal("P0006")
 
-== Nouveaux traits
+=== Nouveaux traits
 
 - Nouveaux traits
   - ```cpp is_swappable_with```, ```cpp is_swappable```, ```cpp is_nothrow_swappable_with``` et ```cpp is_nothrow_swappable``` : objets échangeables
@@ -1488,7 +1536,9 @@ foo<10>();  // int
 #addproposal("P0185")
 #addproposal("P0013")
 
-== Gestion des attributs
+== Attribut
+
+=== Gestion des attributs
 
 - Usage étendu aux déclarations de ```cpp namespace```
 
@@ -1507,7 +1557,7 @@ enum foo {
 
 #addproposal("N4266")
 
-== Gestion des attributs
+=== Gestion des attributs
 
 - Attributs inconnus doivent être ignorés
 // Clarification de la norme, auparavant un compilateur pouvait lever une erreur car rien n'était précisé
@@ -1526,7 +1576,7 @@ foo();
 #addproposal("P0283")
 #addproposal("P0028")
 
-== Attribut ``` [[ fallthrough ]]```
+=== Attribut ``` [[ fallthrough ]]```
 
 - Dans un ```cpp switch``` avant un ```cpp case``` ou ```cpp default```
 - Indique qu'un cas se poursuit intentionnellement dans le cas suivant
@@ -1553,7 +1603,7 @@ foo();
 
 #addproposal("P0188")
 
-== Attribut ``` [[ nodiscard ]]```
+=== Attribut ``` [[ nodiscard ]]```
 
 - Indique qu'un retour de fonction ne devrait pas être ignorée
 - Incitation à lever un avertissement dans le cas contraire
@@ -1580,7 +1630,7 @@ foo();
 
 #addproposal("P0189")
 
-== Attribut ``` [[ nodiscard ]]```
+=== Attribut ``` [[ nodiscard ]]```
 
 - ... ou sur un type (classe, structure ou énumération)
 
@@ -1598,7 +1648,7 @@ foo();
 
 #addproposal("P0189")
 
-== Attribut ``` [[ maybe_unused ]]```
+=== Attribut ``` [[ maybe_unused ]]```
 
 - Sur une classe, structure, fonction, variable, paramètre, ...
 - Indique qu'un élément peut ne pas être utilisé
@@ -1621,7 +1671,7 @@ foo();
 
 #addproposal("P0212")
 
-== Attributs C++17 - Conclusion
+=== Attributs C++17 - Conclusion
 
 #adviceblock("Do", text[
   Utilisez les attributs pour indiquer vos intentions
@@ -1632,7 +1682,9 @@ foo();
   Prise en compte par d'autres outils souhaitable
 ])
 
-== ``` std::shared_mutex```
+== Multi-thread
+
+=== ``` std::shared_mutex```
 
 - Similaire à ```cpp std::mutex``` avec deux niveaux d'accès
   - Exclusif : possible si le verrou n'est pas pris
@@ -1649,7 +1701,7 @@ foo();
 
 #addproposal("N4508")
 
-== ``` std::scoped_lock```
+=== ``` std::scoped_lock```
 
 - Acquisition de plusieurs mutex
 
@@ -1662,7 +1714,9 @@ scoped_lock lck(first_mutex, second_mutex);
 
 #addproposal("P0156")
 
-== ``` std::apply()```
+== _Library fundamentals TS_
+
+=== ``` std::apply()```
 
 - Appel de fonction depuis un _tuple-like_ d'argument
 
@@ -1696,7 +1750,7 @@ scoped_lock lck(first_mutex, second_mutex);
 
 #addproposal("P0220")
 
-== ``` std::optional```
+=== ``` std::optional```
 
 - Gestion d'objet dont la présence est optionnelle
 
@@ -1719,7 +1773,7 @@ scoped_lock lck(first_mutex, second_mutex);
 
 #addproposal("P0220")
 
-== ``` std::optional```
+=== ``` std::optional```
 
 - ```cpp value()``` retourne la valeur ou lève l'exception ```cpp std::bad_optional_access```
 - ```cpp value_or()``` retourne la valeur ou une valeur par défaut
@@ -1730,7 +1784,7 @@ scoped_lock lck(first_mutex, second_mutex);
 
 #addproposal("P0220")
 
-== ``` std::optional```
+=== ``` std::optional```
 
 - Supporte la déduction de type
 
@@ -1774,7 +1828,7 @@ optional foo(10);  // std::optional<int>
 
 #addproposal("P0220")
 
-== ``` std::optional```
+=== ``` std::optional```
 
 - Changement de la valeur via ```cpp reset()```, ```cpp swap()```, ```cpp emplace()``` ou ```cpp operator=```
 - Comparaison naturelle des valeurs contenues
@@ -1812,7 +1866,7 @@ optional foo(10);  // std::optional<int>
 
 #addproposal("P0220")
 
-== ``` std::optional```
+=== ``` std::optional```
 
 #alertblock(text[``` std::optional<bool>``` ? ``` std::optional<T*>``` ?], text[
   Utilisez des booléens "trois états" (```cpp Boost.tribool```)
@@ -1830,7 +1884,7 @@ optional foo(10);  // std::optional<int>
 
 #addproposal("P0220")
 
-== ``` std::any```
+=== ``` std::any```
 
 - ```cpp void*``` _type-safe_ contenant un objet de n'importe quel type (ou vide)
 - Implémentation de _Type-erasure_
@@ -1844,7 +1898,7 @@ a = true;   // bool
 
 #addproposal("P0220")
 
-== ``` std::any```
+=== ``` std::any```
 
 - ```cpp any_cast<Type>()``` récupère la valeur
 - ... et lève une exception si le type demandé n'est pas correct
@@ -1876,7 +1930,7 @@ a = true;   // bool
 
 #addproposal("P0220")
 
-== ``` std::any```
+=== ``` std::any```
 
 - Supporte la construction en-place
 
@@ -1925,7 +1979,7 @@ a = true;   // bool
 
 #addproposal("P0220")
 
-== ``` std::any```
+=== ``` std::any```
 
 - ```cpp reset()``` vide le contenu
 - ```cpp has_value()``` teste la vacuité
@@ -1942,13 +1996,17 @@ a = true;   // bool
 
 #addproposal("P0220")
 
-== ``` std::string_view```
+=== ``` std::string_view```
 
 - Vue sur une séquence contiguë de caractères
 - Quatre spécialisations standards (une par type de caractères)
 - Référence non possédante sur une séquence pré-existante
 - Pas de modification de la séquence depuis la vue
-- Constructible depuis ```cpp std::string```, une chaîne C ou un pointeur et une taille
+- Constructible depuis
+  - ```cpp std::string```
+  - une chaîne C
+  - un pointeur et une taille
+- Suffixe ```cpp sv``` pour construire depuis une chaîne littérale
 
 #alertblock("Attention", text[
   Pas de ```cpp \0``` terminal systématique
@@ -1959,7 +2017,7 @@ a = true;   // bool
 #addproposal("P0220")
 #addproposal("N3921")
 
-== ``` std::string_view```
+=== ``` std::string_view```
 
 - ```cpp operator[]```, ```cpp at()```, ```cpp front()```, ```cpp back()```, ```cpp data()``` accèdent aux caractères
 - ```cpp remove_prefix()``` et ```cpp remove_suffix()``` modification les bornes
@@ -1976,7 +2034,7 @@ a = true;   // bool
 #addproposal("P0220")
 #addproposal("N3921")
 
-== ``` std::string_view```
+=== ``` std::string_view```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cstring_view%3E%0A%0Aint+main()%0A%7B%0A++%7B%0A++++std::string+foo+%3D+%22Lorem+ipsum+dolor+sit+amet,+consectetur+adipiscing+elit.+Sed+non+risus.%22%3B%0A%0A++++std::string_view+bar(%26foo%5B0%5D,+11)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A%0A++++foo%5B0%5D+%3D+!'l!'%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++++std::cout+%3C%3C+bar%5B0%5D+%3C%3C+!'%5Cn!'%3B%0A%0A++++bar.remove_suffix(6)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%0A++%7B%0A++++char+foo%5B3%5D+%3D+%7B!'B!',+!'a!',+!'r!'%7D%3B%0A++++std::string_view+bar(foo,+sizeof+foo)%3B%0A++++std::cout+%3C%3C+bar.size()+%3C%3C+%22+-+%22+%3C%3C+bar+%3C%3C+!'%5Cn!'%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2002,7 +2060,7 @@ a = true;   // bool
 #addproposal("P0220")
 #addproposal("N3921")
 
-== Mémoire
+=== Mémoire
 
 - ```cpp std::shared_ptr``` et ```cpp std::weak_ptr``` sur des tableaux
 
@@ -2028,10 +2086,10 @@ std::shared_ptr<int[]> foo(new int[10]);
 #addproposal("P0414")
 #addproposal("P0035")
 
-== Algorithmes
+=== Algorithmes
 
 - Recherche d'une séquence dans une autre
-  - Foncteurs de recherche : _default_, Boyer-Moore et Boyer-Moore-Horspoll
+  - Foncteurs de recherche : _default_, _Boyer-Moore_ et _Boyer-Moore-Horspoll_
   - ```cpp std::search()``` encapsule l'appel à un des foncteurs
 - Échantillonnage
   - ```cpp std::sample()``` extrait aléatoirement n éléments d'un ensemble
@@ -2049,7 +2107,7 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 #addproposal("P0220")
 
-== PGCD et PPCM
+=== PGCD et PPCM
 
 - Ajout des fonctions ```cpp std::gcd()``` et ```cpp std::lcm()```
 - Initialement prévu pour des versions ultérieures
@@ -2067,7 +2125,9 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 #addproposal("P0295")
 
-== Filesystem TS
+== _Filesystem TS_
+
+=== _Filesystem TS_
 
 - Gestion des systèmes de fichiers
 - Adapté à l'OS et au système de fichiers utilisés
@@ -2090,7 +2150,7 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 #addproposal("P0218")
 
-== Filesystem TS
+=== _Filesystem TS_
 
 - Manipulation des répertoires, des fichiers et de leurs méta-datas
   - Copie : ```cpp copy_file()```, ```cpp copy()```
@@ -2105,7 +2165,7 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 #addproposal("P0218")
 
-== Filesystem TS
+=== _Filesystem TS_
 
 #list(marker: [ ], text[
   - Suppression : ```cpp remove()```, ```cpp remove_all()```
@@ -2118,7 +2178,7 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 #addproposal("P0218")
 
-== Filesystem TS
+=== _Filesystem TS_
 
 - Parcours de répertoires
   - Entrée du répertoire : ```cpp directory_entry```
@@ -2144,6 +2204,8 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 == Parallelism TS
 
+=== Parallelism TS
+
 - Surcharges parallèles de nombreux algorithmes standards
 - Politiques d'exécution (séquentielle, parallèle et parallèle + vectorisée)
 
@@ -2160,7 +2222,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-== Parallelism TS
+=== Parallelism TS
 
 - ```cpp std::for_each_n()``` parcours un ensemble défini par l'itérateur de début et sa taille
 // En soi, ce n'est pas lié au parallélisme mais cet algorithme apparaît avec ce TS
@@ -2182,7 +2244,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-== Parallelism TS
+=== Parallelism TS
 
 - ```cpp std::exclusive_scan()``` construit un ensemble où chaque élément est égal à la somme des éléments de rang strictement inférieur de l'ensemble initial et d'une valeur initiale
 
@@ -2200,7 +2262,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-== Parallelism TS
+=== Parallelism TS
 
 - ```cpp std::inclusive_scan()``` construit un ensemble où chaque élément est égal à la somme des éléments de rang inférieur ou égal de l'ensemble initial et d'une valeur initiale (si présente)
 
@@ -2221,7 +2283,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-== Parallelism TS
+=== Parallelism TS
 
 - ```cpp std::transform_reduce()``` : ```cpp std::reduce()``` sur des éléments préalablement transformés
 - ```cpp std::transform_exclusive_scan()``` : ```cpp std::exclusive_scan()``` sur des éléments préalablement transformés
@@ -2234,6 +2296,8 @@ for_each(execution::par, begin(foo), end(foo), bar);
 #addproposal("P0024")
 
 == Mathematical Special Functions
+
+=== Mathematical Special Functions
 
 - Une longue histoire datant du TR1
 - Ajout de fonctions mathématiques particulières

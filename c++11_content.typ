@@ -5,6 +5,8 @@
 
 == Présentation
 
+=== Présentation
+
 - Approuvé le 12 août 2011
 - Dernier _Working Draft_ : #link("https://wg21.link/std11")[N3337 #linklogo()]
 - Standardisation laborieuse
@@ -12,24 +14,26 @@
   - Périmètre initial trop ambitieux (retrait des concepts en 2009)
 - Changement de fonctionnement du comité
   - Utilisation de _Technical Specification_ et de groupes de travail dédiés
-  - Pilotage par les dates et pas les fonctionnalités
+  - Pilotage par les dates et non par les fonctionnalités
   - Des versions fréquentes (3 ans : 2011, 2014, 2017, 2020, ...)
-  - Voir #link("https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/")[Trip report: Winter ISO C++ standards meeting #linklogo()]
+  - Voir #link("https://herbsutter.com/2016/03/11/trip-report-winter-iso-c-standards-meeting/")[_Trip report: Winter ISO C++ standards meeting_ #linklogo()]
 - Objectifs : sûreté, simplicité, rapidité et meilleure détection d'erreur en _compile-time_
 
 == Dépréciations et suppressions
+
+=== Dépréciations
 
 - Dépréciation de ```cpp register```
 
 #addproposal("n4193")
 
-== Export templates
+=== Export templates
 
 - Suppression des _export templates_
 - ```cpp export``` reste un mot-clé réservé
 
 #noteblock("Compatibilité", text[
-  Rupture de comptabilité ascendante
+  Théoriquement, rupture de comptabilité ascendante
 
   Implémenté sur un unique compilateur et inutilisé en pratique
 
@@ -39,7 +43,9 @@
 
 #addproposal("N1426")
 
-== Nouveaux types entiers
+== Nouveaux types
+
+=== Nouveaux types entiers
 
 - Hérités de C99
 
@@ -49,7 +55,7 @@
 
 - ```cpp long long int``` et ```cpp unsigned long long int```
   - Au moins aussi grand que ```cpp long int```
-  - Plages garanties : [$-(2^63-1)$, $2^63-1$] et [$0$, $2^64$]
+  - Plages garanties : $[-(2^63-1), 2^63-1]$ et $[0, 2^64]$
   - Extension de nombreux compilateurs bien avant C++11
 - Types entiers le plus grand disponibles ```cpp intmax_t``` et ```cpp uintmax_t```
 
@@ -57,7 +63,7 @@
 #addproposal("N1835")
 #addproposal("n1988")
 
-== Nouveaux types entiers
+=== Nouveaux types entiers
 
 - Entiers de ```cpp N``` bits ```cpp int<N>_t``` et ```cpp uint<N>_t```
   - ```cpp N``` = 8, 16, 32 ou 64
@@ -78,7 +84,7 @@
 #addproposal("N1835")
 #addproposal("n1988")
 
-== Nouveaux types entiers
+=== Nouveaux types entiers
 
 - Macros de définition des plages correspondantes
 - Macros de construction depuis des entiers classiques
@@ -89,7 +95,7 @@
 #addproposal("N1835")
 #addproposal("n1988")
 
-== POD Généralisé -- Rappels
+=== POD Généralisé -- Rappels
 
 - Types POD (_Plain Old Data_) : classes et structures POD, unions POD, types scalaires et tableaux de ces types
 - Certaines constructions permises uniquement sur les types POD
@@ -106,27 +112,27 @@
   - Utilisation des fonctions C ```cpp qsort()``` ou ```cpp bsearch()```
   - ...
 
-== POD Généralisé -- Classe agrégat C++98
+=== POD Généralisé -- Classe agrégat C++98
 
 - Pas de constructeur déclaré par l'utilisateur
 - Pas de donnée membre non-statique privée ou protégée
 - Pas de classe de base
 - Pas de fonction virtuelle
 
-== POD Généralisé -- Classe agrégat C++11
+=== POD Généralisé -- Classe agrégat C++11
 
 - Pas de constructeur #underline[fourni] par l'utilisateur
 
 // Les constructeurs déclarés =default par l'utilisateur sont autorisés
 
-- Pas d'initialisation _brace-or-equal-initializers_ des données membres non-statiques
+- Pas de _brace-or-equal-initializers_ des données membres non-statiques
 - Pas de donnée membre non-statique privée ou protégée
 - Pas de classe de base
 - Pas de fonction virtuelle
 
 #addproposal("n2342")
 
-== POD Généralisé -- Classe POD C++98
+=== POD Généralisé -- Classe POD C++98
 
 - Classe agrégat
 - Sans donnée membre non-statique de type non-POD
@@ -134,7 +140,7 @@
 - Sans opérateur d'affectation défini par l'utilisateur
 - Sans destructeur défini par l'utilisateur
 
-== POD Généralisé -- Classe POD C++11
+=== POD Généralisé -- Classe POD C++11
 
 - Contraintes réparties en trois sous-notions
 - _trivially copyable_
@@ -152,7 +158,7 @@
 
 #addproposal("n2342")
 
-== POD Généralisé -- Classe POD C++11
+=== POD Généralisé -- Classe POD C++11
 
 #noteblock("Autre formulation", text[
   Copie, déplacement, affectation et destruction générés implicitement
@@ -164,7 +170,7 @@
 
 #addproposal("n2342")
 
-== POD Généralisé -- Classe POD C++11
+=== POD Généralisé -- Classe POD C++11
 
 - _trivial_
   - _trivially copyable_
@@ -172,11 +178,11 @@
     - Pas fourni par l'utilisateur
     - Pas de fonction virtuelle ni de classe de base virtuelle
     - Constructeur par défaut des classes de base et des membres non-statiques trivial
-    - Pas d'initialisation _brace-or-equal-initializers_ des données membres non-statiques
+    - Pas de _brace-or-equal-initializers_ des données membres non-statiques
 
 #addproposal("n2342")
 
-== POD Généralisé -- Classe POD C++11
+=== POD Généralisé -- Classe POD C++11
 
 - _Standard-layout_
   - Pas de donnée membre non-statique non-_Standard-layout_
@@ -192,7 +198,7 @@
 
 #addproposal("n2342")
 
-== POD Généralisé -- Classe POD C++11
+=== POD Généralisé -- Classe POD C++11
 
 - POD
   - _trivial_
@@ -205,7 +211,7 @@
 
 #addproposal("n2342")
 
-== POD Généralisé -- Objectifs
+=== POD Généralisé -- Objectifs
 
 - Opérations POD accessibles à la sous-notion correspondante
 - Relâchement et adaptation de certaines contraintes
@@ -220,7 +226,7 @@
 
 #addproposal("n2342")
 
-== POD Généralisé -- Conséquences
+=== POD Généralisé -- Conséquences
 
 - _standard layout_
   - Utilisation de ```cpp reinterpret_cast```
@@ -236,7 +242,7 @@
 
 #addproposal("n2342")
 
-== Unions généralisées
+=== Unions généralisées
 
 - Constructeurs, opérateurs d'assignation ou destructeurs définis par l'utilisateur acceptés sur les types membres d'une union
 - ... mais les fonctions équivalentes de l'union sont supprimées
@@ -247,9 +253,11 @@
 
 #addproposal("N2544")
 
-== ``` inline namespace```
+== ``` namespace```
 
-- Injection des déclarations du namespace imbriqué dans le namespace parent
+=== ``` inline namespace```
+
+- Injection du namespace imbriqué dans le namespace parent
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:26,startColumn:1,startLineNumber:26),source:'%23include+%3Ciostream%3E%0A%0Anamespace+V1%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V1%5Cn%22%3B%0A++%7D%0A%7D%0A%0Ainline+namespace+V2%0A%7B%0A++static+void+foo()%0A++%7B%0A++++std::cout+%3C%3C+%22V2%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++V1::foo()%3B%0A++V2::foo()%3B%0A%0A++foo()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -270,7 +278,9 @@
 
 #addproposal("N2535")
 
-== ``` 0``` ou ``` NULL``` ?
+== ``` nullptr```
+
+=== ``` 0``` ou ``` NULL``` ?
 
 - C++ 98 : ```cpp 0``` ou ```cpp NULL```
 
@@ -278,7 +288,7 @@
 
 - Cohabite mal avec les surcharges
 
-#noteblock("Quiz : Quelle surcharge est éligible ?", text[
+#questionblock("Quiz : Quelle surcharge est éligible ?", text[
   ```cpp
   void foo(char*) { cout << "chaîne\n"; }
   void foo(int) { cout << "entier\n"; }
@@ -288,7 +298,7 @@
   ```
 ])
 
-== ``` 0``` ou ``` NULL``` ? ``` nullptr``` !
+=== ``` 0``` ou ``` NULL``` ? ``` nullptr``` !
 
 - C++ 11 : ```cpp nullptr```
   - Unique pointeur du type ```cpp nullptr_t```
@@ -315,6 +325,8 @@
 
 == ``` static_assert```
 
+=== ``` static_assert```
+
 - Assertion vérifiée à la compilation
 
 #codesample(
@@ -338,6 +350,8 @@
 #addproposal("N1720")
 
 == ``` constexpr```
+
+=== ``` constexpr```
 
 - Indique une expression constante
 - Donc évaluable et utilisable à la compilation
@@ -364,7 +378,7 @@
 
 #addproposal("N2235")
 
-== ``` constexpr```
+=== ``` constexpr```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+constexpr+int+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++int+a+%3D+42%3B%0A++switch(a)%0A++%7B%0A++++case+foo():%0A++++++std::cout+%3C%3C+%22case+foo%5Cn%22%3B%0A++++++break%3B%0A%0A++++default:%0A++++++std::cout+%3C%3C+%22defuault%5Cn%22%3B%0A++++++break%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -386,7 +400,7 @@
 
 #addproposal("N2235")
 
-== ``` constexpr```
+=== ``` constexpr```
 
 - Sous certaines conditions restrictives, ```cpp const``` sur une variable est suffisant
 
@@ -418,6 +432,8 @@
 
 == Extended ``` sizeof```
 
+=== Extended ``` sizeof```
+
 - ```cpp sizeof``` sur des membres non statiques
 
 #codesample(
@@ -440,6 +456,8 @@
 
 == Sémantique de déplacement
 
+=== Sémantique de déplacement
+
 - Deux constats
   - Copie potentiellement coûteuse ou impossible
   - Copie inutile lorsque l'objet source est immédiatement détruit
@@ -458,7 +476,7 @@
 #addproposal("N2844")
 #addproposal("N3053")
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Copie
 
@@ -505,7 +523,7 @@
   line((17, -2.5), (18, -2.5))
 })
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Copie
 
@@ -589,7 +607,7 @@
   line((17, -6.5), (18, -6.5))
 })
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Copie
 
@@ -711,7 +729,7 @@
   line((17, -10.5), (18, -10.5))
 })
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Copie
 
@@ -874,7 +892,7 @@
   line((17, -14.5), (18, -14.5))
 })
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Déplacement
 
@@ -921,7 +939,7 @@
   line((17, -2.5), (18, -2.5))
 })
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Déplacement
 
@@ -1007,7 +1025,7 @@
   line((5.5, -6.5), (6, -6.5))
 })
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - _rvalue reference_
   - Référence sur un objet temporaire ou sur le point d'être détruit
@@ -1032,7 +1050,7 @@
 #addproposal("N2844")
 #addproposal("N3053")
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 - Rendre une classe déplaçable
   - Constructeur par déplacement ```cpp T(const T&&)```
@@ -1053,10 +1071,10 @@
 #addproposal("N2844")
 #addproposal("N3053")
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 #noteblock(text[_Rule of five_], text[
-  Si une classe déclare destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
+  Si une classe défini destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
 
   // Contrairement à Rule of three, l'absence des constructeur et opérateur d'affectation par déplacement n'est pas une erreur grave, mais une optimisation manquée
 ])
@@ -1076,7 +1094,7 @@
 #addproposal("N2844")
 #addproposal("N3053")
 
-== Sémantique de déplacement
+=== Sémantique de déplacement
 
 #noteblock("Dans la bibliothèque standard", text[
   Nombreuses classes standards déplaçables (thread, flux, ...)
@@ -1093,7 +1111,9 @@
 #addproposal("N2844")
 #addproposal("N3053")
 
-== Initializer list
+== Initialisation
+
+=== Initializer list
 
 - Initialisation des conteneurs
 
@@ -1116,7 +1136,7 @@
 
 #addproposal("N2672")
 
-== Initializer list
+=== Initializer list
 
 - Classe ```cpp std::initializer_list``` pour accéder aux valeurs de la liste
 
@@ -1133,7 +1153,7 @@
 
 #addproposal("N2672")
 
-== Initializer list
+=== Initializer list
 
 - Constructeurs peuvent prendre un ```cpp std::initializer_list``` en paramètre
 
@@ -1151,7 +1171,7 @@
 
 #addproposal("N2672")
 
-== Initializer list
+=== Initializer list
 
 #adviceblock("Do", text[
   Préférez ```cpp std::initializer_list``` aux insertions successives
@@ -1165,7 +1185,7 @@
 
 #addproposal("N2672")
 
-== Uniform Initialization
+=== Uniform Initialization
 
 - Plusieurs types d'initialisation en C++98/03
 
@@ -1176,7 +1196,7 @@ int c[] = {1, 2, 3};
 int d;
 ```
 
-== Uniform Initialization
+=== Uniform Initialization
 
 - Mais aucune de générique
 
@@ -1199,7 +1219,7 @@ int c{8}                    // KO
 
 // L'initialisation de Foo fonctionne car c'est un POD (pas de classe de base, pas de virtuel, etc.)
 
-== Uniform Initialization
+=== Uniform Initialization
 
 - En C++ 11, l'initialisation via ```cpp {}``` est générique
 
@@ -1225,7 +1245,7 @@ int e{};                     // OK
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Astruct+Foo+%0A%7B%0A++int+foo%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++int+a%5B%5D+%3D+%7B1,+2,+3%7D%3B%0A++Foo+b+%3D+%7B5%7D%3B%0A++std::vector%3Cint%3E+c+%3D+%7B1,+2,+3%7D%3B%0A++int+d%7B8%7D%3B%0A++int+e%7B%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-Wno-unused-variable+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== Uniform Initialization
+=== Uniform Initialization
 
 - Dans différents contextes
 
@@ -1237,7 +1257,7 @@ void f(int);
 f({2});
 ```
 
-== Uniform Initialization
+=== Uniform Initialization
 
 #alertblock("Attention", text[
   Pas de troncature avec ```cpp {}```
@@ -1256,14 +1276,14 @@ f({2});
   ```
 ])
 
-== Uniform Initialization
+=== Uniform Initialization
 
 #alertblock("Contraintes sur l'initialisation d'agrégats", text[
   Pas d'héritage
 
   Pas de constructeur fourni par l'utilisateur
 
-  Pas d'initialisation _brace-or-equal-initializers_
+  Pas de _brace-or-equal-initializers_
 
   Pas de fonction virtuelle ni de membre non statique protégé ou privé
 ])
@@ -1272,7 +1292,9 @@ f({2});
   Préférez l'initialisation ```cpp {}``` aux autres formes
 ])
 
-== ``` auto```
+== Déduction de type
+
+=== ``` auto```
 
 - Déduction (ou inférence) de type depuis l'initialisation
 
@@ -1296,9 +1318,9 @@ f({2});
 #addproposal("n1737")
 #addproposal("n2546")
 
-== ``` auto```
+=== ``` auto```
 
-- ```cpp auto``` définit une variable dont le type est déduit
+- ```cpp auto``` définit une variable dont le type est déduit de l'initialisation
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+2%3B+%0A++assert(typeid(i)+%3D%3D+typeid(int))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1325,7 +1347,7 @@ f({2});
 #addproposal("n1737")
 #addproposal("n2546")
 
-== ``` auto```
+=== ``` auto```
 
 - Combinaison possible avec ```cpp const```, ```cpp volatile``` ou ```cpp &```
 
@@ -1353,7 +1375,7 @@ auto& k = j;
 #addproposal("n1737")
 #addproposal("n2546")
 
-== ``` auto```
+=== ``` auto```
 
 - Tendance forte "Almost Always Auto" (AAA)
 
@@ -1367,7 +1389,7 @@ auto& k = j;
   - Garanties conservées au fil des corrections et refactoring
   - Généricité et simplification du code
 
-#noteblock("Quiz", text[
+#questionblock("Quiz", text[
   Type de retour de ```cpp std::list<std::string>::size()``` ?
 ])
 
@@ -1375,7 +1397,7 @@ auto& k = j;
 #addproposal("n1737")
 #addproposal("n2546")
 
-== ``` auto```
+=== ``` auto```
 
 - Limitations - solutions
   - Erreur de déduction - typage explicite de l'initialiseur
@@ -1394,7 +1416,7 @@ auto& k = j;
 #addproposal("n1737")
 #addproposal("n2546")
 
-== ``` decltype```
+=== ``` decltype```
 
 - Déduction du type d'une variable ou d'une expression
 - Permet donc la création d'une variable du même type
@@ -1423,7 +1445,7 @@ decltype( (a) ) e;     // int&
 #addproposal("N2343")
 #addproposal("N3276")
 
-== ``` declval```
+=== ``` declval```
 
 - Utilisation de fonctions membres dans ```cpp decltype``` sans instance
 - Typiquement sur des templates acceptant des types sans constructeur commun mais avec une fonction membre commune
@@ -1447,7 +1469,7 @@ decltype( (a) ) e;     // int&
   Uniquement dans des contextes non évalués
 ])
 
-== Déduction du type retour
+=== Déduction du type retour
 
 - Combinaison de ```cpp auto``` et ```cpp decltype```
 
@@ -1464,7 +1486,7 @@ decltype( (a) ) e;     // int&
 
 - Particulièrement utiles pour des fonctions templates
 
-#noteblock(text[Quiz : ``` T```, ``` U``` ou autre ?], text[
+#questionblock(text[Quiz : ``` T```, ``` U``` ou autre ?], text[
   ```cpp
   template<typename T, typename U> ??? add(T a, U b) {
     return a + b;
@@ -1474,7 +1496,7 @@ decltype( (a) ) e;     // int&
 
 #addproposal("n2541")
 
-== Déduction du type retour
+=== Déduction du type retour
 
 #noteblock("Solution", text[
   Pas de bonne réponse en typage explicite
@@ -1501,7 +1523,9 @@ decltype( (a) ) e;     // int&
 
 #addproposal("n2541")
 
-== ``` std::array```
+== Conteneurs
+
+=== ``` std::array```
 
 - ```cpp std::array```
   - Tableau de taille fixe connue à la compilation
@@ -1526,7 +1550,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 #addproposal("n1836")
 
-== ``` std::array```
+=== ``` std::array```
 
 #list(marker: [], list(indent: 5pt, text[Vérification des index à la compilation]))
 
@@ -1544,7 +1568,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 #addproposal("n1836")
 
-== ``` std::forward_list```
+=== ``` std::forward_list```
 
 - Liste simplement chaînée ```cpp std::forward_list```
 
@@ -1561,7 +1585,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 #addproposal("n1836")
 
-== Conteneurs associatifs
+=== Conteneurs associatifs
 
 - Conteneurs associatifs sous forme de tables de hachage
   - ```cpp std::unordered_map```
@@ -1582,7 +1606,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 #addproposal("n1836")
 
-== ``` shrink_to_fit()```
+=== ``` shrink_to_fit()```
 
 - ```cpp shrink_to_fit()``` réduit la capacité des ```cpp std::vector```, ```cpp std::deque``` et ```cpp std::string``` à leur taille
 // Pour être précis, ce n'est pas nécessairement exactement à la taille ça peut être plus grand - à la discrétion de l'implémentation (performances, cohérence, ...) -, mais l'idée est là
@@ -1599,7 +1623,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== ``` data()```
+=== ``` data()```
 
 - ```cpp data()``` récupère le "tableau C" d'un ```cpp std::vector```
 
@@ -1613,7 +1637,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Avoid+bar(const+int*+data,+const+size_t+size)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+size%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+data%5Bi%5D+%3C%3C+%22%5Cn%22%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B12,+25%7D%3B%0A%0A++bar(foo.data(),+foo.size())%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== ``` emplace()```
+=== ``` emplace()```
 
 - ```cpp emplace()```, ```cpp emplace_back()``` et ```cpp emplace_front()``` construisent dans le conteneur depuis les paramètres d'un des constructeurs de l'élément
 
@@ -1636,22 +1660,20 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   Éliminer des copies inutiles et gagner en performance
 ])
 
-== ``` std::string```
+=== Évolutions de ``` std::string```
 
-- Évolutions de ```cpp std::string```
-  - Éléments obligatoirement contigus
-  - ```cpp data()``` retourne une chaîne C valide (synonyme à ```cpp c_str()```)
-  // En C++98, data() renvoyait les caractères de la chaîne mais pas nécessairement sous forme d'une chaîne C valide (pas obligatoirement de 0 terminal)
-  - ```cpp front()``` retourne le premier caractère d'une chaîne
-  - ```cpp back()``` retourne le dernier caractère d'une chaîne
-  - ```cpp pop_back()``` supprime le dernier caractère d'une chaîne
-  - Interdiction du _Copy-on-Write_
+- Éléments obligatoirement contigus
+- ```cpp data()``` retourne une chaîne C valide (synonyme à ```cpp c_str()```)
+// En C++98, data() renvoyait les caractères de la chaîne mais pas nécessairement sous forme d'une chaîne C valide (pas obligatoirement de 0 terminal)
+- ```cpp front()``` retourne le premier caractère d'une chaîne
+- ```cpp back()``` retourne le dernier caractère d'une chaîne
+- ```cpp pop_back()``` supprime le dernier caractère d'une chaîne
+- Interdiction du _Copy-on-Write_
 
-== ``` std::bitset```
+=== Évolutions de ``` std::bitset```
 
-- Évolutions de ```cpp std::bitset```
-  - ```cpp all()``` teste si tous les bits sont levés
-  - ```cpp to_ullong()``` convertit en ```cpp unsigned long long```
+- ```cpp all()``` teste si tous les bits sont levés
+- ```cpp to_ullong()``` convertit en ```cpp unsigned long long```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbitset%3E%0A%0Aint+main()%0A%7B%0A++std::bitset%3C5%3E+foo%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.set(2)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.to_ullong()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.set()%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+foo.all()+%3C%3C+!'%5Cn!'%3B%0A++std::cout+%3C%3C+foo.to_ullong()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1670,7 +1692,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Conteneurs - Choix
+=== Conteneurs - Choix
 
 #adviceblock("Do", text[
   Préférez ```cpp std::array``` lorsque la taille est fixe et connue
@@ -1681,6 +1703,8 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 ])
 
 == Itérateurs
+
+=== Itérateurs
 
 - Fonctions membres ```cpp cbegin()```, ```cpp cend()```, ```cpp crbegin()``` et ```cpp crend()``` retournant des ```cpp const_iterator```
 // Les fonctions begin(), end(), etc. retournent des const_iterator si le conteneur est const, des iterator dans le cas contraire
@@ -1701,7 +1725,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Itérateurs
+=== Itérateurs
 
 #list(
   marker: [],
@@ -1730,7 +1754,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Itérateurs
+=== Itérateurs
 
 #noteblock("Conseils", text[
   ```cpp using std::begin``` et ```cpp using std::end``` permet l'ADL malgré la surcharge
@@ -1744,7 +1768,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   Préférez ```cpp std::begin()``` et ```cpp std::end()``` aux fonctions membres
 ])
 
-== Itérateurs
+=== Itérateurs
 
 - ```cpp std::prev()``` et ```cpp std::next()``` retournent l'itérateur suivant ou précédent
 - Adaptateur d'itérateur ```cpp std::move_iterator``` retournant des _rvalue reference_ lors du déréférencement
@@ -1770,7 +1794,9 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstring%3E%0A%0Atypedef+std::vector%3Cstd::string%3E::iterator+Iter%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+3,+8,+12%7D%3B%0A%0A++auto+it+%3D+std::begin(foo)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+%22+%22+%3C%3C+*next(it)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.14360313315927,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:44.85639686684073,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== Foncteurs prédéfinis
+== Algorithmes
+
+=== Foncteurs prédéfinis
 
 - Et bit à bit ```cpp std::bit_and()```
 - Ou inclusif bit à bit ```cpp std::bit_or()```
@@ -1810,7 +1836,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Recherche linéaire
+=== Algorithmes -- Recherche linéaire
 
 - ```cpp std::find_if_not()``` recherche le premier élément ne vérifiant pas le prédicat
 
@@ -1825,9 +1851,9 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Comparaison
+=== Algorithmes -- Comparaison
 
-- ```cpp std::all_of()``` teste si tous les éléments de l'ensemble vérifient un prédicat
+- ```cpp std::all_of()``` teste si tous les éléments vérifient un prédicat
 - Retourne vrai si l'ensemble est vide
 
 #codesample(
@@ -1845,7 +1871,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Comparaison
+=== Algorithmes -- Comparaison
 
 - ```cpp std::any_of()``` teste si au moins un élément vérifie un prédicat
 - Retourne faux si l'ensemble est vide
@@ -1865,7 +1891,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Comparaison
+=== Algorithmes -- Comparaison
 
 - ```cpp std::none_of()``` teste si aucun élément ne vérifie le prédicat
 - Retourne vrai si l'ensemble est vide
@@ -1885,7 +1911,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Permutation
+=== Algorithmes -- Permutation
 
 - ```cpp std::is_permutation()``` teste si un ensemble est la permutation d'un autre
 
@@ -1903,9 +1929,9 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Copie
+=== Algorithmes -- Copie
 
-- ```cpp std::copy_n()``` copie les n premiers éléments d'un ensemble
+- ```cpp std::copy_n()``` copie les $n$ premiers éléments d'un ensemble
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+4,+5,+9,+12%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A%0A++std::copy_n(std::begin(foo),+4,+std::back_inserter(bar))%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1933,7 +1959,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Déplacement
+=== Algorithmes -- Déplacement
 
 - ```cpp std::move()``` déplace les éléments d'un ensemble du début vers la fin
 
@@ -1954,7 +1980,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 - ```cpp std::move_backward()``` déplace les éléments de la fin vers le début
 - Versions "déplacement" de ```cpp std::copy()``` et ```cpp std::copy_backward()```
 
-== Algorithmes -- Partitionnement
+=== Algorithmes -- Partitionnement
 
 - ```cpp std::is_partitioned()``` indique si un ensemble est partitionné
 // C'est à dire si les éléments vérifiant un prédicat sont avant ceux ne le vérifiant pas
@@ -1972,7 +1998,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Partitionnement
+=== Algorithmes -- Partitionnement
 
 - ```cpp std::partition_copy()``` copie l'ensemble en le partitionnant
 - ```cpp std::partition_point()``` retourne le point de partition d'un ensemble partitionné
@@ -1989,7 +2015,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Tri
+=== Algorithmes -- Tri
 
 - ```cpp std::is_sorted()``` indique si l'ensemble est ordonnée (ordre ascendant)
 // Possibilité de fournir un foncteur de comparaison (< par défaut)
@@ -2020,9 +2046,9 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Mélange
+=== Algorithmes -- Mélange
 
-- ```cpp std::shuffle()``` mélange l'ensemble grâce à un générateur de nombre aléatoire uniforme
+- ```cpp std::shuffle()``` mélange l'ensemble grâce à un générateur de nombres aléatoires uniforme
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Crandom%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9,+12%7D%3B%0A++unsigned+seed+%3D+std::chrono::system_clock::now().time_since_epoch().count()%3B%0A%0A++std::shuffle(std::begin(foo),+std::end(foo),+std::default_random_engine(seed))%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2036,7 +2062,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-== Algorithmes -- Gestion de tas
+=== Algorithmes -- Gestion de tas
 
 - ```cpp std::is_heap()``` indique si l'ensemble forme un tas
 
@@ -2055,7 +2081,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 - ```cpp std::is_heap_until()``` indique le premier élément qui n'est pas dans la position correspondant à un tas
 
-== Algorithmes -- Min-max
+=== Algorithmes -- Min-max
 
 - ```cpp std::minmax()``` retourne la paire constituée du plus petit et du plus grand de deux éléments
 
@@ -2076,7 +2102,7 @@ minmax(5, 2); // 2 - 5
   ],
 )
 
-== Algorithmes -- Numérique
+=== Algorithmes -- Numérique
 
 - ```cpp std::iota()``` affecte des valeurs successives aux éléments d'un ensemble
 
@@ -2091,7 +2117,7 @@ minmax(5, 2); // 2 - 5
   ],
 )
 
-== Algorithmes -- Conclusion
+=== Algorithmes -- Conclusion
 
 #adviceblock("Do", text[
   Continuez à suivre les règles C++98/03 à propos des algorithmes
@@ -2102,6 +2128,8 @@ minmax(5, 2); // 2 - 5
 ])
 
 == Range-based for loop
+
+=== Range-based for loop
 
 - Itération sur un conteneur complet
 
@@ -2138,7 +2166,7 @@ minmax(5, 2); // 2 - 5
 #addproposal("N2930")
 #addproposal("N3271")
 
-== Range-based for loop
+=== Range-based for loop
 
 #alertblock("Modification des éléments", text[
   La variable d'itération doit être une référence
@@ -2158,7 +2186,7 @@ minmax(5, 2); // 2 - 5
 #addproposal("N2930")
 #addproposal("N3271")
 
-== Range-based for loop
+=== Range-based for loop
 
 #adviceblock("Do", text[
   Préférez _range-based for loop_ aux boucles classiques et à ```cpp std::for_each()```
@@ -2179,6 +2207,8 @@ minmax(5, 2); // 2 - 5
 #addproposal("N3271")
 
 == ``` std::string``` et conversions
+
+=== ``` std::string``` et conversions
 
 - Fonctions de conversion d'une chaîne de caractères en un nombre
   - ```cpp std::stoi()``` vers ```cpp int```
@@ -2201,7 +2231,7 @@ minmax(5, 2); // 2 - 5
 
 - S'arrêtent sur le premier caractère non convertible
 
-== ``` std::string``` et conversions
+=== ``` std::string``` et conversions
 
 - ```cpp std::to_string()``` convertit d'un nombre en une chaîne de caractères
 
@@ -2216,7 +2246,7 @@ minmax(5, 2); // 2 - 5
 
 - ```cpp std::to_wstring()``` convertit vers une chaîne de caractères larges
 
-== ``` std::string``` et conversions
+=== ``` std::string``` et conversions
 
 #alertblock("Attention", text[
   Pas de fonction ```cpp std::stoui()``` de conversion vers un ```cpp unsigned int```
@@ -2234,7 +2264,9 @@ minmax(5, 2); // 2 - 5
   ```cpp Boost.Lexical_cast``` permet de telles conversions et quelques autres
 ])
 
-== Chaînes de caractères UTF
+== Chaînes UTF
+
+=== Chaînes de caractères UTF
 
 - ```cpp char``` doit pouvoir contenir un encodage 8 bits UTF-8
 // Pas de garantie en C++98/03, implémentation-defined
@@ -2246,7 +2278,9 @@ minmax(5, 2); // 2 - 5
 
 #addproposal("N2249")
 
-== Nouvelles chaînes littérales
+== _Strings literals_
+
+=== Nouvelles chaînes littérales
 
 - Chaînes littérales UTF-8, UTF-16 et UTF32
 
@@ -2258,7 +2292,7 @@ u32string u32str = U"UTF-32 string";
 
 #addproposal("N2442")
 
-== Nouvelles chaînes littérales
+=== Nouvelles chaînes littérales
 
 - Chaînes littérales brutes (sans interprétation des échappements)
   // Utile pour écrire des expressions rationnelles, des commandes shell ou autres qui ont aussi leurs échappements
@@ -2290,12 +2324,14 @@ u32string u32str = U"UTF-32 string";
 
 #addproposal("N2442")
 
-== User-defined literals
+== _User-defined literals_
+
+=== _User-defined literals_
 
 - Possibilité de définir des littéraux "utilisateur"
 - Nombre (entier ou réel), caractère ou chaîne suffixé par un identifiant
 - Identifiants non standards préfixés par ```cpp _```
-- Définit via ```cpp operator""``` suffixe
+- Définit via ```cpp operator""suffixe```
 
 #noteblock("Motivations", text[
   Pas de conversion implicite
@@ -2306,7 +2342,7 @@ u32string u32str = U"UTF-32 string";
 
 #addproposal("N2765")
 
-== User-defined literals
+=== _User-defined literals_
 
 - Littéraux brutes : chaîne C entièrement analysée par l'opérateur
 
@@ -2335,7 +2371,7 @@ u32string u32str = U"UTF-32 string";
 
 #addproposal("N2765")
 
-== User-defined literals
+=== _User-defined literals_
 
 - Littéraux préparés par le compilateur
   - Littéraux entiers : ```cpp unsigned long long int```
@@ -2363,6 +2399,8 @@ u32string u32str = U"UTF-32 string";
 
 == ``` std::tuple```
 
+=== ``` std::tuple```
+
 - Collection d'objets de type divers
 - Généralisation de ```cpp std::pair```
 
@@ -2387,7 +2425,7 @@ tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
 
 #addproposal("n1836")
 
-== ``` std::tuple```
+=== ``` std::tuple```
 
 - Fonction de déstructuration ```cpp std::tie()```
 - Et une constante pour ignorer des éléments ```cpp std::ignore```
@@ -2421,7 +2459,7 @@ tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
 
 #addproposal("n1836")
 
-== ``` std::tuple```
+=== ``` std::tuple```
 
 - ```cpp std::tuple_cat()``` concatène deux ```cpp std::tuple```
 
@@ -2436,13 +2474,13 @@ tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
   ],
 )
 
-- Classe représentant la taille ```cpp std::tuple_size```
+- ```cpp std::tuple_size``` représente la taille de ```cpp std::tuple```
 
 ```cpp
 	tuple_size<decltype(baz)>::value;             // 4
 ```
 
-- Classe représentant le type des éléments ```cpp std::tuple_element```
+- ```cpp std::tuple_element``` représente le type des éléments de ```cpp std::tuple```
 
 ```cpp
 tuple_element<0, decltype(baz)>::type first;  // int
@@ -2450,7 +2488,7 @@ tuple_element<0, decltype(baz)>::type first;  // int
 
 #addproposal("n1836")
 
-== ``` std::tuple```
+=== ``` std::tuple```
 
 #alertblock("Don't", text[
   N'utilisez pas ```cpp std::tuple``` pour remplacer une structure
@@ -2459,10 +2497,12 @@ tuple_element<0, decltype(baz)>::type first;  // int
 ])
 
 #adviceblock("Do", text[
-  Préférez un ```cpp std::tuple``` de retour aux paramètres "_OUT_"
+  Préférez un ```cpp std::tuple``` de retour aux paramètres _OUT_
 ])
 
-== ``` fstream```
+== Flux
+
+=== ``` fstream```
 
 - Construction depuis des ```cpp std::string```
 
@@ -2476,7 +2516,9 @@ ofstream file(filename.c_str());
 ofstream file{filename};
 ```
 
-== ``` =default``` et ``` =delete```
+== Classes
+
+=== ``` =default``` et ``` =delete```
 
 - Applicables aux fonctions générées implicitement le compilateur
   - Constructeur par défaut, par copie et par déplacement
@@ -2489,7 +2531,7 @@ ofstream file{filename};
 
 #addproposal("N2346")
 
-== ``` =default``` et ``` =delete```
+=== ``` =default``` et ``` =delete```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aclass+Foo%0A%7B%0Apublic:%0A++Foo(int)+%7B%7D%0A%23if+1%0A++Foo()+%3D+default%3B%0A%23endif%0A%0Aprivate:%0A++Foo(const+Foo%26)+%3D+delete%3B%0A++Foo%26+operator%3D(const+Foo%26)+%3D+delete%3B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++Foo+foo%3B%0A++Foo+bar(5)%3B%0A%23if+0%0A++Foo+baz(bar)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2508,7 +2550,7 @@ ofstream file{filename};
 
 #addproposal("N2346")
 
-== ``` =default``` et ``` =delete```
+=== ``` =default``` et ``` =delete```
 
 #adviceblock("Do", text[
   Préférez ```cpp =default``` à une implémentation manuelle avec le même effet
@@ -2526,7 +2568,7 @@ ofstream file{filename};
 
 #addproposal("N2346")
 
-== Initialisation par défaut des membres
+=== Initialisation par défaut des membres
 
 - Initialisation des membres lors de la déclaration
 
@@ -2554,7 +2596,7 @@ ofstream file{filename};
 
 #addproposal("N2756")
 
-== Délégation de constructeur
+=== Délégation de constructeur
 
 - Utilisation d'un constructeur dans l'implémentation d'un second
 - ... en l'initialisant dans la liste d'initialisation
@@ -2574,7 +2616,7 @@ ofstream file{filename};
 
 #addproposal("N1986")
 
-== Délégation de constructeur
+=== Délégation de constructeur
 
 #adviceblock("Do", text[
   Utilisez la délégation de constructeur pour mutualiser le code commun
@@ -2582,15 +2624,13 @@ ofstream file{filename};
 
 #alertblock("Don't", text[
   Évitez la délégation pour l'initialisation constante de membres
-])
 
-#adviceblock("Do", text[
   Préférez l'initialisation par défaut des membres
 ])
 
 #addproposal("N1986")
 
-== Héritage de constructeur
+=== Héritage de constructeur
 
 - Indique que la classe hérite des constructeurs de la classe mère
 - Génération du constructeur correspondant par le compilateur
@@ -2617,7 +2657,7 @@ ofstream file{filename};
 
 #addproposal("N2540")
 
-== Héritage de constructeur
+=== Héritage de constructeur
 
 - Redéfinition possible dans la classe dérivée
 
@@ -2644,7 +2684,7 @@ ofstream file{filename};
 
 #addproposal("N2540")
 
-== ``` override```
+=== ``` override```
 
 - Indique la redéfinition d'une fonction d'une classe de base
 
@@ -2669,7 +2709,7 @@ ofstream file{filename};
 #addproposal("N3206")
 #addproposal("N3272")
 
-== ``` override```
+=== ``` override```
 
 - Provoque une erreur de compilation si
   - La fonction n'existe pas dans la classe de base
@@ -2698,7 +2738,7 @@ ofstream file{filename};
 #addproposal("N3206")
 #addproposal("N3272")
 
-== ``` override```
+=== ``` override```
 
 #noteblock("Objectifs", text[
   Documentaire
@@ -2708,9 +2748,7 @@ ofstream file{filename};
   Détection des redéfinitions involontaires
 ])
 
-#adviceblock("Do", text[
-  Marquez ```cpp override``` les fonctions que vous redéfinissez
-])
+#noteblock(text[```cpp override``` et ```cpp virtual```], text[```cpp override``` implique ```cpp virtual```])
 
 #adviceblock("Do", text[
   Utilisez ```cpp virtual``` à la base de l'arbre d'héritage
@@ -2725,7 +2763,7 @@ ofstream file{filename};
 #addproposal("N3206")
 #addproposal("N3272")
 
-== ``` final```
+=== ``` final```
 
 - Indique qu'une classe ne peut pas être dérivée
 
@@ -2749,7 +2787,7 @@ ofstream file{filename};
 #addproposal("N3206")
 #addproposal("N3272")
 
-== ``` final```
+=== ``` final```
 
 - Ou qu'une fonction ne peut plus être redéfinie
 
@@ -2779,7 +2817,7 @@ ofstream file{filename};
 #addproposal("N3206")
 #addproposal("N3272")
 
-== Opérateurs de conversion explicite
+=== Opérateurs de conversion explicite
 
 - Extension de ```cpp explicit``` aux opérateurs de conversion
 - ... qui ne définissent alors plus de conversion implicite
@@ -2812,7 +2850,9 @@ ofstream file{filename};
 
 #addproposal("N2437")
 
-== ``` noexcept```
+== Exceptions
+
+=== ``` noexcept```
 
 - Indique qu'une fonction ne jette pas d'exception
 // Rôle documentaire et permet au compilateur d'effectuer certaines optimisations (p. ex. sur le choix entre déplacement et copie)
@@ -2838,7 +2878,7 @@ void foo() noexcept(true) {}
 
 #addproposal("N3050")
 
-== ``` noexcept```
+=== ``` noexcept```
 
 - Opérateur ```cpp noexcept()``` teste, au _compile-time_, si une expression peut ou non lever une exception
 - Pour l'appel de fonction, teste si la fonction est ```cpp noexcept```
@@ -2853,16 +2893,16 @@ noexcept(foo()); // true
 
 #addproposal("N3050")
 
-== Conversion exception - pointeur
+=== Conversion exception - pointeur
 
-- Quasi-pointeur ```cpp std::exception_ptr``` à responsabilité partagée sur une exception
+- ```cpp std::exception_ptr``` : pointeur à responsabilité partagée sur une exception
 - ```cpp std::current_exception()``` récupère un pointeur sur l'exception courante
 - ```cpp std::rethrow_exception()``` relance l'exception contenue dans ```cpp std::exception_ptr```
 - ```cpp std::make_exception_ptr()``` construit ```cpp std::exception_ptr``` depuis une exception
 
 #addproposal("n2179")
 
-== Conversion exception - pointeur
+=== Conversion exception - pointeur
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Avoid+foo()%0A%7B%0A++throw+42%3B%0A%7D%0A%0Avoid+bar(std::exception_ptr+e)%0A%7B%0A++std::rethrow_exception(e)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++foo()%3B%0A++%7D%0A++catch(...)%0A++%7B%0A++++std::exception_ptr+e+%3D+std::current_exception()%3B%0A++++bar(e)%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:54.83028720626631,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:45.16971279373369,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2887,7 +2927,7 @@ noexcept(foo()); // true
 
 #addproposal("n2179")
 
-== Nested exception
+=== Nested exception
 
 - ```cpp std::nested_exception``` contient une exception imbriquée
 - ```cpp nested_ptr()``` récupère un pointeur sur l'exception imbriquée
@@ -2910,9 +2950,11 @@ noexcept(foo()); // true
   ],
 )
 
-== ``` enum class```
+== Énumérations fortement typées
 
-- Énumérations mieux typées
+=== ``` enum class```
+
+- Énumérations fortement typées
 - Sans conversions implicites
 - Énumérés locaux à l'énumération
 
@@ -2938,19 +2980,21 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 
 #addproposal("N2347")
 
-== ``` enum class```
+=== ``` enum class```
 
 #adviceblock("Do", text[
   Préférez les énumérations fortement typées
 ])
 
 #noteblock("Bémol", text[
-  Pas de méthode simple et robuste pour récupérer la valeur ou l'intitulé de l'énuméré
+  Pas de méthode simple et robuste pour récupérer l'intitulé de l'énuméré
 ])
 
 #addproposal("N2347")
 
-== ``` std::function```
+== Programmation fonctionnelle
+
+=== ``` std::function```
 
 // Fonction de première classe (first-class citizens) : utilisables comme paramètre ou retour de fonction
 // Fonction d'ordre supérieur : prend en paramètre ou retourne une autre fonction
@@ -2973,7 +3017,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 
 #addproposal("n1836")
 
-== ``` std::mem_fn```
+=== ``` std::mem_fn```
 
 - Convertit une fonction membre en _function object_ prenant une instance en paramètre
 
@@ -3002,7 +3046,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 
 #addproposal("n1836")
 
-== ``` std::bind```
+=== ``` std::bind```
 
 - Construction de _function object_ en liant des paramètres à un appelable
 - _Placeholders_ ```cpp std::placholders::_1```, ```cpp std::placholders::_2```, ... pour lier les paramètres du _function object_ à l'appelable
@@ -3031,7 +3075,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 
 #addproposal("n1836")
 
-== lambda et fermeture
+=== lambda et fermeture
 
 #noteblock("Vocabulaire", text[
   Lambda : fonction anonyme
@@ -3057,7 +3101,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 #addproposal("N2658")
 #addproposal("N2927")
 
-== lambda et fermeture
+=== lambda et fermeture
 
 - Capture
   - ```cpp []``` : pas de capture
@@ -3073,7 +3117,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 #addproposal("N2658")
 #addproposal("N2927")
 
-== lambda et fermeture
+=== lambda et fermeture
 
 - La capture de variables membres se fait par la capture de  ```cpp this```
   - Soit explicitement via ```cpp [this]```
@@ -3088,7 +3132,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 #addproposal("N2658")
 #addproposal("N2927")
 
-== lambda et fermeture
+=== lambda et fermeture
 
 - Préservation de la constante des variables capturées
 // Même avec mutable
@@ -3101,7 +3145,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
   int i = 5;
 
   auto foo = [=] () { cout << ++i << "\n"; };          // Erreur
-  uto bar = [=] () mutable { cout << ++i << "\n"; };  // OK
+  auto bar = [=] () mutable { cout << ++i << "\n"; };  // OK
   ```
 
   // Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale
@@ -3115,7 +3159,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 #addproposal("N2658")
 #addproposal("N2927")
 
-== lambda et fermeture
+=== lambda et fermeture
 
 - Spécificateurs
   - ```cpp mutable``` : modification possible des variables capturées par copie
@@ -3137,7 +3181,7 @@ auto foo = [] { return 5; };
 #addproposal("N2658")
 #addproposal("N2927")
 
-== lambda, ``` std::function```, ... - Conclusion
+=== lambda, ``` std::function```, ... - Conclusion
 
 #adviceblock("Do", text[
   Préférez les lambdas aux ```cpp std::function```
@@ -3161,7 +3205,7 @@ auto foo = [] { return 5; };
   Prenez garde à la durée de vie des variables capturées par référence
 ])
 
-== ``` std::reference_wrapper```
+=== ``` std::reference_wrapper```
 
 - Encapsule un objet en émulant une référence
 - Construction par ```cpp std::ref()``` et ```cpp std::cref()```
@@ -3181,7 +3225,9 @@ auto foo = [] { return 5; };
 
 #addproposal("n1836")
 
-== Double chevron
+== Templates
+
+=== Double chevron
 
 - En C++98/03, ```cpp >>``` est toujours l'opérateur de décalage
 - En C++11, ```cpp >>``` peut être une double fermeture de template
@@ -3202,7 +3248,7 @@ vector<array<int, (0x10 >> 3) >> foo;
 
 #addproposal("N1757")
 
-== Alias de template
+=== Alias de template
 
 - En C++98/03, ```cpp typedef``` définit des alias sur des templates
 - ... seulement si tous les paramètres templates sont explicites
@@ -3224,7 +3270,7 @@ vector<array<int, (0x10 >> 3) >> foo;
 
 #addproposal("N2258")
 
-== Alias de template
+=== Alias de template
 
 - ```cpp using``` permet la création d'alias ne définissant que certains paramètres
 
@@ -3248,7 +3294,7 @@ vector<array<int, (0x10 >> 3) >> foo;
 
 #addproposal("N2258")
 
-== Extern template
+=== Extern template
 
 - Indique que le template est instancié dans une autre unité de compilation
 - Inutile de l'instancier ici
@@ -3263,7 +3309,7 @@ extern template class std::vector<int>;
 
 #addproposal("N1987")
 
-== Variadic template
+=== Variadic template
 
 - Template à nombre de paramètres variable
 - Définition avec ```cpp typename...```
@@ -3283,7 +3329,7 @@ void bar(Args... parameters);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== Variadic template
+=== Variadic template
 
 - Récupération de la taille avec ```cpp sizeof...```
 
@@ -3303,7 +3349,7 @@ void bar(Args... parameters);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== Variadic template
+=== Variadic template
 
 - Utilisation récursive par spécialisation
 
@@ -3331,7 +3377,7 @@ void bar(Args... parameters);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== Variadic template
+=== Variadic template
 
 - Ou expansion sur une expression et une fonction d'expansion
 
@@ -3360,7 +3406,7 @@ void bar(Args... parameters);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== Variadic template
+=== Variadic template
 
 #alertblock("Contraintes de l'expansion", text[
   Paramètre unique
@@ -3385,7 +3431,7 @@ foo(1, 2, 3, 5);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== Variadic template
+=== Variadic template
 
 - ... qui règle le problème de l'ordre
 
@@ -3414,7 +3460,7 @@ foo(1, 2, 3, 5);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== Variadic template
+=== Variadic template
 
 - .. sur n'importe quelle expression prenant un paramètre
 
@@ -3453,7 +3499,7 @@ foo(1, 2, 3, 5);
 #addproposal("N2242")
 #addproposal("N2555")
 
-== ``` std::enable_if```
+=== ``` std::enable_if```
 
 - Classe template sur une expression booléenne et un type
 - Définition du type seulement si l'expression booléenne est vraie
@@ -3473,7 +3519,7 @@ foo(1, 2, 3, 5);
   ],
 )
 
-== Types locaux en arguments templates
+=== Types locaux en arguments templates
 
 - Utilisation des types locaux non-nommés comme arguments templates
 
@@ -3481,7 +3527,6 @@ foo(1, 2, 3, 5);
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astruct+Less%0A%7B%0A++bool+operator()(int+a,+int+b)%0A++%7B%0A++++return+a+%3C+b%3B%0A++%7D%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+2,+8,+12,+3%7D%3B%0A++std::sort(foo.begin(),+foo.end(),+Less())%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+%22+%22%3B%0A++%7D%0A++std::cout+%3C%3C+%22%5Cn%22%3B%0A%7D%0A%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    vector<int> foo)
     struct Less {
       bool operator()(int a, int b) { return a < b; }
     };
@@ -3505,7 +3550,9 @@ foo(1, 2, 3, 5);
 
 #addproposal("N2657")
 
-== Type traits -- Helper
+== Traits
+
+=== Type traits -- Helper
 
 - Constante _compile-time_ ```cpp std::integral_constant```
 - ```cpp std::integral_constant``` booléen vrai ```cpp true_type```
@@ -3529,7 +3576,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-== Type traits -- Trait
+=== Type traits -- Trait
 
 - Détermine, à la compilation, les caractéristiques des types
 - ```cpp std::is_array``` : tableau C
@@ -3558,7 +3605,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-== Type traits -- Trait
+=== Type traits -- Trait
 
 - ```cpp std::is_fundamental``` : type fondamental (entier, réel, ```cpp void``` ou ```cpp nullptr_t```)
 
@@ -3587,7 +3634,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-== Type traits -- Trait
+=== Type traits -- Trait
 
 - ```cpp std::is_base_of``` : base d'un autre type
 
@@ -3610,7 +3657,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-== Type traits -- Transformations
+=== Type traits -- Transformations
 
 - Construction d'un type par transformation d'un type existant
 - ```cpp std::add_const``` : type ```cpp const```
@@ -3628,7 +3675,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-== Type traits -- Transformations
+=== Type traits -- Transformations
 
 - ```cpp std::make_unsigned``` : type non signé correspondant
 
@@ -3652,6 +3699,8 @@ foo(1, 2, 3, 5);
 
 == Pointeurs intelligents
 
+=== Pointeurs intelligents
+
 - RAII appliqué aux pointeurs et aux ressources allouées
 - Objets à sémantique de pointeur gérant la durée de vie des objets
 - Garantie de libération
@@ -3660,7 +3709,7 @@ foo(1, 2, 3, 5);
   - ```cpp std::auto_ptr```
   - ```cpp boost::scoped_ptr``` et ```cpp boost::scoped_array```
 
-== Pointeurs intelligents -- ``` std::unique_ptr```
+=== Pointeurs intelligents -- ``` std::unique_ptr```
 
 - Responsabilité exclusive
 - Non copiable, mais déplaçable
@@ -3683,7 +3732,7 @@ unique_ptr<int> p(new int);
   Ne pas utilisez le pointeur retourné par ```cpp get()``` pour libérer la ressource
 ])
 
-== Pointeurs intelligents -- ``` std::unique_ptr```
+=== Pointeurs intelligents -- ``` std::unique_ptr```
 
 - Fourniture possible de la fonction de libération
 
@@ -3705,7 +3754,7 @@ for(int i=0; i<5; ++i) foo[i] = i;
   Dépréciation de ```cpp std::auto_ptr```
 ])
 
-== Pointeurs intelligents -- ``` std::shared_ptr```
+=== Pointeurs intelligents -- ``` std::shared_ptr```
 
 - Responsabilité partagée de la ressource
 - Comptage de références
@@ -3725,7 +3774,7 @@ shared_ptr<int> p(new int());
 
 #addproposal("n1836")
 
-== Pointeurs intelligents -- ``` std::make_shared()```
+=== Pointeurs intelligents -- ``` std::make_shared()```
 
 - Allocation et construction de l'objet dans le ```cpp std::shared_ptr```
 
@@ -3748,7 +3797,7 @@ shared_ptr<int> p = make_shared<int>(42);
   Utilisez ```cpp std::make_shared()``` pour construire vos ```cpp std::shared_ptr```
 ])
 
-== Pointeurs intelligents -- ``` std::weak_ptr```
+=== Pointeurs intelligents -- ``` std::weak_ptr```
 
 - Aucune responsabilité sur la ressource
 - Collabore avec ```cpp std::shared_ptr```
@@ -3766,7 +3815,7 @@ weak_ptr<int> wp(sp);
 
 #addproposal("n1836")
 
-== Pointeurs intelligents -- ``` std::weak_ptr```
+=== Pointeurs intelligents -- ``` std::weak_ptr```
 
 - Pas d'accès à la ressource
 - Convertible en ```cpp std::shared_ptr``` via ```cpp lock()```
@@ -3784,7 +3833,7 @@ shared_ptr<int> sp = wp.lock();
 
 #addproposal("n1836")
 
-== Pointeurs intelligents -- Conclusion
+=== Pointeurs intelligents -- Conclusion
 
 #alertblock("Don't", text[
   N'utilisez pas de pointeurs bruts possédants
@@ -3802,7 +3851,7 @@ shared_ptr<int> sp = wp.lock();
   Préférez une responsabilité unique à une responsabilité partagée
 ])
 
-== Pointeurs intelligents -- Conclusion
+=== Pointeurs intelligents -- Conclusion
 
 #adviceblock("Do", text[
   Brisez les cycles à l'aide de ```cpp std::weak_ptr```
@@ -3819,7 +3868,7 @@ shared_ptr<int> sp = wp.lock();
   Transférez au plus tôt la responsabilité à un pointeur intelligent
 ])
 
-== Pointeurs intelligents -- Conclusion
+=== Pointeurs intelligents -- Conclusion
 
 #noteblock("Pour aller plus loin", text[
   Voir #link("http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/")[Pointeurs intelligents #linklogo() (Loïc Joly)]
@@ -3838,14 +3887,17 @@ shared_ptr<int> sp = wp.lock();
 
 == Attributs
 
+=== Attributs
+
 - Syntaxe standard pour les directives de compilation _inlines_
 - ... y compris celles spécifiques à un compilateur
-- Remplace la directive ```cpp #pragma```
-- Et les mots-clé propriétaires (```cpp __attribute__```, ```cpp __declspec```)
 
 ```cpp
 [[ attribut ]]
 ```
+
+- Remplace la directive ```cpp #pragma```
+- ... et les mots-clé propriétaires (```cpp __attribute__```, ```cpp __declspec```)
 
 - Peut être multiple
 
@@ -3855,7 +3907,7 @@ shared_ptr<int> sp = wp.lock();
 
 #addproposal("N2761")
 
-== Attributs
+=== Attributs
 
 - Peut prendre des arguments
 
@@ -3879,7 +3931,7 @@ shared_ptr<int> sp = wp.lock();
 
 #addproposal("N2761")
 
-== Attributs
+=== Attributs
 
 - Placé après le nom pour les entités nommées
 
@@ -3902,7 +3954,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 
 #addproposal("N2761")
 
-== Attribut ``` [[ noreturn ]]```
+=== Attribut ``` [[ noreturn ]]```
 
 - Indique qu'une fonction ne retourne pas
 
@@ -3933,6 +3985,8 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 
 == Rapport
 
+=== Rapport
+
 // La rapport est dans le type, pas dans les valeurs ou les instances
 
 - ```cpp std::ratio``` représente un rapport entre deux nombres
@@ -3954,7 +4008,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
   - yocto, zepto, atto, femto, pico, nano, micro, milli, centi, déci
   - déca, hecto, kilo, méga, giga, téra, péta, exa, zetta, yotta
 
-== Rapport
+=== Rapport
 
 - Méta-fonctions arithmétiques
   - ```cpp std::ratio_add()```, ```cpp std::ratio_subtract()```
@@ -3985,7 +4039,9 @@ int [[ attribut1 ]] i [[ attribut2 ]];
   ],
 )
 
-== Durées
+== Durées et temps
+
+=== Durées
 
 - Classe template ```cpp std::chrono::duration```
 - Unité dépendante d'un ratio avec la seconde
@@ -4015,7 +4071,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
   ],
 )
 
-== Durées
+=== Durées
 
 - Opérateurs de manipulation des durées (ajout, suppression, ...)
 
@@ -4036,7 +4092,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 - ```cpp min()``` crée la plus petite valeur possible
 - ```cpp max()``` crée la plus grande valeur possible
 
-== Temps relatif
+=== Temps relatif
 
 - ```cpp std::chrono::time_point``` temps relatif depuis l'epoch
 
@@ -4050,7 +4106,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 - ```cpp min()``` retourne le plus petit temps relatif
 - ```cpp max()``` retourne le plus grand temps relatif
 
-== Horloges
+=== Horloges
 
 - Horloge temps-réel du système ```cpp std::chrono::system_clock```
 - ```cpp now()``` récupère temps courant
@@ -4079,7 +4135,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
   ],
 )
 
-== Horloges
+=== Horloges
 
 - Horloge monotone de mesure des intervalles ```cpp std::chrono::steady_clock```
 // Monotone, c'est à dire que cette horloge n'est jamais réglée, en particulier une mise à l'heure durant la mesure n'a pas d'impact sur la mesure
@@ -4096,10 +4152,10 @@ duration<double> time_span =
 duration_cast<duration<double>>(t2 - t1);
 ```
 
-== Horloges
+=== Horloges
 
 - Horloge avec le plus petit intervalle entre deux _ticks_ ```cpp std::chrono::high_resolution_clock```
-- Possible synonyme de ```cpp std::chrono::system_clock``` ou ```cpp std::chrono::steady_clock```
+- Possible synonyme de ```cpp system_clock``` ou ```cpp steady_clock```
 
 #adviceblock("Do", text[
   Préférez ```cpp std::clock::duration``` aux entiers pour manipuler les durées
@@ -4109,7 +4165,9 @@ duration_cast<duration<double>>(t2 - t1);
   N'espérez pas une précision arbitrairement grande des horloges
 ])
 
-== Thread Local Storage
+== Multi-threading
+
+=== Thread Local Storage
 
 - Spécificateur de classe de stockage ```cpp thread_local```
 - Influant sur la durée de stockage
@@ -4126,7 +4184,7 @@ thread_local int foo = 0;
 
 #addproposal("N2659")
 
-== Variables atomiques -- ``` std::atomic```
+=== Variables atomiques -- ``` std::atomic```
 
 - Encapsulation de types de base fournissant des opérations atomiques
 - Atomicité de l'affectation, de l'incrémentation et de la décrémentation
@@ -4142,7 +4200,7 @@ atomic<int> foo{5};
 
 #addproposal("N2427")
 
-== Variables atomiques -- ``` std::atomic```
+=== Variables atomiques -- ``` std::atomic```
 
 - ```cpp compare_exchange_weak``` et ```cpp compare_exchange_strong```
   // Différence weak / strong : weak peu échouer dans certains cas. Lorsque cela se produit, aucune valeur n'est modifiée
@@ -4165,7 +4223,7 @@ atomic<int> foo{5};
 
 #addproposal("N2427")
 
-== Variables atomiques -- ``` std::atomic```
+=== Variables atomiques -- ``` std::atomic```
 
 - ```cpp fetch_add()``` addition et retour de la valeur avant modification
 
@@ -4173,10 +4231,10 @@ atomic<int> foo{5};
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A%0A++std::cout+%3C%3C+foo.fetch_add(10)+%3C%3C+%22+%22%3B%0A++std::cout+%3C%3C+foo%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    	atomic<int> foo{5};
+   	atomic<int> foo{5};
 
-    	cout << foo.fetch_add(10) << " ";
-    	cout << foo;        // Affiche 5 15
+   	cout << foo.fetch_add(10) << " ";
+   	cout << foo;        // Affiche 5 15
     ```
   ],
 )
@@ -4188,7 +4246,7 @@ atomic<int> foo{5};
 
 #addproposal("N2427")
 
-== Variables atomiques -- ``` std::atomic```
+=== Variables atomiques -- ``` std::atomic```
 
 - Plusieurs instanciations standards (```cpp atomic_bool```, ```cpp atomic_int```, ...)
 
@@ -4198,7 +4256,7 @@ atomic<int> foo{5};
 
 #addproposal("N2427")
 
-== Variables atomiques -- ``` std::atomic_flag```
+=== Variables atomiques -- ``` std::atomic_flag```
 
 - Gestion atomique de _flags_
 - Non copiable, non déplaçable, _lock free_
@@ -4221,7 +4279,7 @@ atomic<int> foo{5};
 
 #addproposal("N2427")
 
-== Threads -- ``` std::thread```
+=== Threads -- ``` std::thread```
 
 - Représente un fil d'exécution
 - Déplaçable mais non copiable
@@ -4239,7 +4297,7 @@ thread t(foo, 10);
   - Pas été déplacé
   - Ni joint ni détaché
 
-== Threads -- ``` std::thread```
+=== Threads -- ``` std::thread```
 
 - ```cpp join()``` attend la fin d'exécution du thread
 - ```cpp detach()``` détache le thread
@@ -4263,7 +4321,7 @@ thread t(foo, 10);
   ],
 )
 
-== Threads -- ``` std::this_thread```
+=== Threads -- ``` std::this_thread```
 
 - Représente le thread courant
 - ```cpp yield()``` permet de "passer son tour"
@@ -4290,7 +4348,7 @@ thread t(foo, 10);
   Les autres threads continuent de s'exécuter
 ])
 
-== Mutex -- ``` std::mutex```
+=== Mutex -- ``` std::mutex```
 
 - Verrou pour l'accès exclusif à une section de code
 - ```cpp lock()``` verrouille le mutex
@@ -4309,7 +4367,7 @@ thread t(foo, 10);
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%0Astd::mutex+g_mutex%3B%0A%0Avoid+foo(size_t+imax)%0A%7B%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++g_mutex.lock()%3B%0A++++std::cout+%3C%3C+%22thread+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++g_mutex.unlock()%3B%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A%7D%0A%0Aint+main()%0A%7B%0A++size_t+imax+%3D+40%3B%0A++std::thread+t(foo,+imax)%3B%0A%0A++for(size_t+i+%3D+0%3B+i+%3C+imax%3B+%2B%2Bi)%0A++%7B%0A++++g_mutex.lock()%3B%0A++++std::cout+%3C%3C+%22main+%22+%3C%3C+i+%3C%3C+!'%5Cn!'%3B%0A++++g_mutex.unlock()%3B%0A++++std::this_thread::sleep_for(std::chrono::milliseconds(10))%3B%0A++%7D%0A++t.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== Mutex -- ``` std::timed_mutex```
+=== Mutex -- ``` std::timed_mutex```
 
 - Similaire à ```cpp std::mutex```
 - ... proposant en complément des _try lock_ temporisés
@@ -4317,10 +4375,11 @@ thread t(foo, 10);
 - ```cpp try_lock_until()``` attend, si le mutex est verrouillé, la libération de celui-ci ou l'atteinte d'un temps
 - ```cpp std::recursive_timed_mutex``` est une variante de ```cpp std::timed_mutex``` verrouillable plusieurs fois par un même thread
 
-== Mutex -- ``` std::lock_guard```
+=== Mutex -- ``` std::lock_guard```
 
 - Capsule RAII sur les mutex
-- Constructible uniquement depuis un mutex
+- Non copiable, non déplaçable
+- Constructible depuis un mutex
 - Verrouille le mutex à la création et le relâche à la destruction
 
 #codesample(
@@ -4340,10 +4399,11 @@ thread t(foo, 10);
   Gestion du mutex entièrement confiée au _lock_
 ])
 
-== Mutex -- ``` std::unique_lock```
+=== Mutex -- ``` std::unique_lock```
 
 - Capsule RAII des mutex
-- Supporte les mutex verrouillés ou non
+- Non copiable mais déplaçable
+- Support des mutex verrouillés ou non
 - Relâche le mutex à la destruction
 - Expose les méthodes de verrouillage et libération des mutex
 
@@ -4362,7 +4422,7 @@ thread t(foo, 10);
   ],
 )
 
-== Mutex -- ``` std::unique_lock```
+=== Mutex -- ``` std::unique_lock```
 
 - Comportements multiples à de la création
   - Verrouillage immédiat
@@ -4377,7 +4437,7 @@ thread t(foo, 10);
   Gestion du mutex conservée, garantie de libération
 ])
 
-== Mutex -- Gestion multiple
+=== Mutex -- Gestion multiple
 
 - ```cpp std::lock()``` verrouille tous les mutex passés en paramètre
 - ... sans produire de _deadlock_
@@ -4395,7 +4455,7 @@ thread t(foo, 10);
 - ```cpp std::try_lock``` tente de verrouiller dans l'ordre tous les mutex passés en paramètre
 - ... et relâche les mutex déjà pris en cas d'échec sur l'un d'eux
 
-== Mutex -- ``` std::call_once()```
+=== Mutex -- ``` std::call_once()```
 
 - Garantit l'appel unique (pour un _flag_ donnée) de la fonction en paramètre
 - Si la fonction a déjà été exécutée, ```cpp std::call_once()``` retourne sans exécuter la fonction
@@ -4417,7 +4477,7 @@ thread t(foo, 10);
   Appelle par un unique thread d'une fonction d'initialisation
 ])
 
-== Variables conditionnelles -- Principe
+=== Variables conditionnelles -- Principe
 
 - Mise en attente du thread sur la variable conditionnelle
 - Réveil du thread lors de la notification de la variable
@@ -4426,7 +4486,7 @@ thread t(foo, 10);
   - Relâchement du verrou par la fonction
   - Reprise du verrou lors de la notification avant le déblocage du thread
 
-== Variables conditionnelles -- ``` condition_variable```
+=== Variables conditionnelles -- ``` condition_variable```
 
 - Uniquement avec ```cpp std::unique_lock```
 - ```cpp wait()``` met en attente le thread
@@ -4445,7 +4505,7 @@ cv.wait(lck);
   - Déblocage seulement s'il retourne ```cpp true```
 ])
 
-== Variables conditionnelles -- ``` condition_variable```
+=== Variables conditionnelles -- ``` condition_variable```
 
 - ```cpp wait_for()``` met en attente le thread, au maximum la durée donnée
 - ```cpp wait_until()``` met en attente le thread, au maximum jusqu'au temps donné
@@ -4454,9 +4514,9 @@ cv.wait(lck);
   ```cpp wait_for()``` et ```cpp wait_until()``` indique si l'exécution a repris suite à un timeout
 ])
 
-== Variables conditionnelles -- ``` condition_variable```
+=== Variables conditionnelles -- ``` condition_variable```
 
-- ```cpp notify_one()``` notifie un des threads en attente sur la variable conditionnelle
+- ```cpp notify_one()``` notifie un des threads en attente
 
 #alertblock("Attention", text[
   Impossible de choisir quel thread notifié avec ```cpp notify_one()```
@@ -4469,7 +4529,7 @@ cv.wait(lck);
   - Indique de notifier tous les threads à la fin du thread courant
   - Prend un verrou qui sera libéré à la fin du thread
 
-== Variables conditionnelles -- ``` condition_variable```
+=== Variables conditionnelles -- ``` condition_variable```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cmutex%3E%0A%23include+%3Ccondition_variable%3E%0A%0Astd::mutex+mtx%3B%0Astd::condition_variable+cv%3B%0A%0Avoid+print_id(int+id)%0A%7B%0A++std::unique_lock%3Cstd::mutex%3E+lck(mtx)%3B%0A++cv.wait(lck)%3B%0A++std::cout+%3C%3C+%22thread+%22+%3C%3C+id+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::thread+threads%5B10%5D%3B%0A%0A++for(int+i+%3D+0%3B+i%3C10%3B+%2B%2Bi)%0A++%7B%0A++++threads%5Bi%5D+%3D+std::thread(print_id,+i)%3B%0A++%7D%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++cv.notify_all()%3B%0A%0A++for(auto%26+th+:+threads)%0A++%7B%0A++++th.join()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -4494,7 +4554,7 @@ cv.wait(lck);
   ],
 )
 
-== Futures et promise -- Principe
+=== Futures et promise -- Principe
 
 - ```cpp std::promise``` contient une valeur
   - Disponible ultérieurement
@@ -4509,7 +4569,7 @@ cv.wait(lck);
   ```cpp std::promise``` et ```cpp std::future``` peuvent également manipuler des exceptions
 ])
 
-== Futures et promise -- ``` std::future```
+=== Futures et promise -- ``` std::future```
 
 - Utilisable uniquement s'il est valide (associé à un état partagé)
 - Construit valide que par certaines fonctions fournisseuses
@@ -4521,7 +4581,7 @@ cv.wait(lck);
 - ```cpp wait_until()``` attend qu'il soit prêt, au plus jusqu'au temps donné
 - ```cpp get()``` attend qu'il soit prêt, retourne la valeur (ou lève l'exception) et libère l'état partagé
 
-== Futures et promise -- ``` std::future```
+=== Futures et promise -- ``` std::future```
 
 - ```cpp share()``` construit un ```cpp std::shared_future``` depuis le ```cpp std::future```
 
@@ -4534,7 +4594,7 @@ cv.wait(lck);
   - Responsabilité partagée sur l'état partagé
   - Valeur lisible à plusieurs reprises
 
-== Futures et promise -- ``` std::async()```
+=== Futures et promise -- ``` std::async()```
 
 - Appelle la fonction fournie
 - Et retourne, sans attendre la fin de l'exécution, un ```cpp std::future```
@@ -4547,7 +4607,7 @@ cv.wait(lck);
   Le choix par défaut est laissé à l'implémentation
 ])
 
-== Futures et promise -- ``` std::async()```
+=== Futures et promise -- ``` std::async()```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Aint+foo()%0A%7B%0A++std::cout+%3C%3C+%22Begin+foo%5Cn%22%3B%0A++std::this_thread::sleep_for(std::chrono::seconds(5))%3B%0A++std::cout+%3C%3C+%22End+foo%5Cn%22%3B%0A++return+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::future%3Cint%3E+bar+%3D+async(std::launch::async,+foo)%3B%0A++std::cout+%3C%3C+%22Attente%5Cn%22%3B%0A++std::this_thread::sleep_for(std::chrono::seconds(1))%3B%0A++std::cout+%3C%3C+%22Attente%5Cn%22%3B%0A++std::cout+%3C%3C+bar.get()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -4565,7 +4625,7 @@ cv.wait(lck);
   ],
 )
 
-== Futures et promise -- ``` std::promise```
+=== Futures et promise -- ``` std::promise```
 
 - Objet que l'on promet de valoriser ultérieurement
 - Déplaçable mais non copiable
@@ -4576,14 +4636,14 @@ cv.wait(lck);
   Un seul ```cpp std::future``` par ```cpp std::promise``` peut être récupéré
 ])
 
-== Futures et promise -- ``` std::promise```
+=== Futures et promise -- ``` std::promise```
 
 - ```cpp set_value()``` affecte une valeur et passe l'état partagé à prêt
 - ```cpp set_exception()``` affecte une exception et passe l'état partagé à prêt
 - ```cpp set_value_at_thread_exit()``` affecte une valeur, l'état partagé passera à prêt à la fin du thread
 - ```cpp set_exception_at_thread_exit()``` affecte une exception, l'état partagé passera à prêt à la fin du thread
 
-== Futures et promise -- ``` std::promise```
+=== Futures et promise -- ``` std::promise```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Avoid+foo(std::future%3Cint%3E%26+fut)%0A%7B%0A++int+x+%3D+fut.get()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::promise%3Cint%3E+prom%3B%0A++std::future%3Cint%3E+fut+%3D+prom.get_future()%3B%0A++std::thread+th1(foo,+ref(fut))%3B%0A%0A++std::this_thread::sleep_for(std::chrono::seconds(2))%3B%0A%0A++prom.set_value(10)%3B%0A++th1.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -4604,7 +4664,7 @@ cv.wait(lck);
   ],
 )
 
-== Futures et promise -- ``` std::packaged_task```
+=== Futures et promise -- ``` std::packaged_task```
 
 - Encapsulation d'un appelable similaire à ```cpp std::function```
 - ... dont la valeur de retour est récupérable par un ```cpp std::future```
@@ -4616,7 +4676,7 @@ cv.wait(lck);
   Un seul ```cpp std::future``` par ```cpp std::packaged_task``` peut être récupéré
 ])
 
-== Futures et promise -- ``` std::packaged_task```
+=== Futures et promise -- ``` std::packaged_task```
 
 - ```cpp operator()``` appelle l'appelable, affecte sa valeur de retour (ou l'exception levée) au ```cpp std::future``` et passe l'état partagé à prêt
 - ```cpp reset()``` réinitialise l'état partagé en conservant l'appelable
@@ -4627,7 +4687,7 @@ cv.wait(lck);
 
 - ```cpp make_ready_at_thread_exit()``` appelle l'appelable et affecte sa valeur de retour (ou l'exception levée), l'état partagé passera à prêt à la fin
 
-== Futures et promise -- ``` std::packaged_task```
+=== Futures et promise -- ``` std::packaged_task```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:8,endLineNumber:21,positionColumn:8,positionLineNumber:21,selectionStartColumn:8,selectionStartLineNumber:21,startColumn:8,startLineNumber:21),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cfuture%3E%0A%0Avoid+foo(std::future%3Cint%3E%26+fut)%0A%7B%0A++int+x+%3D+fut.get()%3B%0A++std::cout+%3C%3C+x+%3C%3C+!'%5Cn!'%3B%0A%7D%0A%0Aint+bar()%0A%7B%0A++return+10%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::packaged_task%3Cint()%3E+tsk(bar)%3B%0A++std::future%3Cint%3E+fut+%3D+tsk.get_future()%3B%0A++std::thread+th1(foo,+std::ref(fut))%3B%0A%0A++std::this_thread::sleep_for(std::chrono::seconds(2))%3B%0A%0A++tsk()%3B%0A++th1.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -4650,7 +4710,7 @@ cv.wait(lck);
   ],
 )
 
-== Conclusion
+=== Conclusion
 
 #adviceblock("Do, dans cet ordre", text[
   + Évitez de partager variables et ressources
@@ -4664,7 +4724,7 @@ cv.wait(lck);
   Encapsulez les mutex dans des ```cpp std::lock_guard``` ou ```cpp std::unique_lock```
 ])
 
-== Conclusion
+=== Conclusion
 
 #adviceblock("Do", text[
   Analysez vos cas d'utilisation pour choisir le bon outil
@@ -4684,7 +4744,9 @@ cv.wait(lck);
   // Anthony Williams est coauteur des propositions de multi-threading dans C++11 et co-auteur de Boost.Thread
 ])
 
-== Expressions rationnelles (regex)
+== Expressions rationnelles
+
+=== Expressions rationnelles (regex)
 
 - ```cpp std::basic_regex``` représente une expression rationnelle
 - Instanciations standards ```cpp std::regex``` et ```cpp std::wregex```
@@ -4702,7 +4764,7 @@ regex foo("[0-9A-Z]+", icase);
 #addproposal("n1836")
 #addproposal("N1429")
 
-== Expressions rationnelles (regex)
+=== Expressions rationnelles (regex)
 
 - ```cpp std::regex_search()``` recherche
 
@@ -4735,7 +4797,7 @@ regex foo("[0-9A-Z]+", icase);
 #addproposal("n1836")
 #addproposal("N1429")
 
-== Expressions rationnelles (regex)
+=== Expressions rationnelles (regex)
 
 - Capture de sous-expressions dans ```cpp std::match_results```
 - Instanciations standards ```cpp std::cmatch```, ```cpp std::wcmatch```, ```cpp std::smatch``` et ```cpp std::wsmatch```
@@ -4752,7 +4814,7 @@ regex foo("[0-9A-Z]+", icase);
 #addproposal("n1836")
 #addproposal("N1429")
 
-== Expressions rationnelles (regex)
+=== Expressions rationnelles (regex)
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cregex%3E%0A%0Aint+main()%0A%7B%0A++std::string+s(%22abcd123efg%22)%3B%0A++std::regex+r(%22%5B0-9%5D%2B%22)%3B%0A++std::smatch+m%3B%0A%0A++std::regex_search(s,+m,+r)%3B%0A++std::cout+%3C%3C+m.size()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.str(0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.position(0)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.prefix()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+m.suffix()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:49.99999999999999,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -4775,7 +4837,7 @@ regex foo("[0-9A-Z]+", icase);
 #addproposal("n1836")
 #addproposal("N1429")
 
-== Expressions rationnelles (regex)
+=== Expressions rationnelles (regex)
 
 - Fonction de remplacement : ```cpp std::regex_replace()```
 
@@ -4793,7 +4855,7 @@ regex foo("[0-9A-Z]+", icase);
 #addproposal("n1836")
 #addproposal("N1429")
 
-== Expressions rationnelles (regex)
+=== Expressions rationnelles (regex)
 
 #adviceblock("Do", text[
   Préférez les expressions rationnelles aux analyseurs "à la main"
@@ -4818,6 +4880,8 @@ regex foo("[0-9A-Z]+", icase);
 
 == Nombres aléatoires
 
+=== Nombres aléatoires
+
 - Générateurs pseudo-aléatoires initialisés par une graine (congruence linéaire, Mersenne, ...)
 - Générateur aléatoire
 
@@ -4832,7 +4896,7 @@ regex foo("[0-9A-Z]+", icase);
 
 #addproposal("n1836")
 
-== Nombres aléatoires
+=== Nombres aléatoires
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::default_random_engine+generator%3B%0A++std::uniform_int_distribution%3Cint%3E+distribution(0,9)%3B%0A%0A++generator.seed(std::chrono::system_clock::now().time_since_epoch().count())%3B%0A++std::cout+%3C%3C+distribution(generator)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -4852,7 +4916,7 @@ regex foo("[0-9A-Z]+", icase);
   Préférez ces générateurs et distributions à ```cpp rand()```
 ])
 
-#noteblock("Quiz", text[
+#questionblock("Quiz", text[
   Comment générer un tirage équiprobable entre 6 et 42 avec ```cpp rand()```
 ])
 

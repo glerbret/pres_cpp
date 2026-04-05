@@ -3,9 +3,11 @@
 
 = Retour sur C++98 / C++03
 
-== Rappels historiques
+== Rappels
 
-- Années 80 -- "C with classes" par Bjarne Stroustrup aux Bell Labs
+=== Rappels historiques
+
+- Années 80 -- "_C with classes_" par Bjarne Stroustrup aux Bell Labs
 - 1983 -- renommé C++
 - 1985 -- première version publique de CFront
 - 1985 -- première version de _The C++ Programming Language_
@@ -24,7 +26,7 @@
 
 - Projet de TR2 finalement transposé en _Technical Specification_
 
-== Philosophie du C++
+=== Philosophie du C++
 
 - Multi-paradigme
 
@@ -39,7 +41,7 @@
 - Évolutions par les bibliothèques plutôt que par le langage
 - Pas de "magie" dans la bibliothèque standard
 
-== Normalisation
+=== Normalisation
 
 - Normalisé par #link("http://www.open-std.org/JTC1/SC22/WG21/")[l'ISO (JTC1/SC22/WG21 #linklogo())]
 - Comité distinct de celui du C
@@ -51,21 +53,21 @@
 
 // Donc libre de droit, mais la norme ISO définitive est payante
 
-== Normalisation
+=== Normalisation
 
 - Actualité de normalisation, et du C++ en général : #link("https://isocpp.org/")[isocpp.org #linklogo()]
 
 #alertblock("isocpp.org n'est pas le site du comité", text[
-  Site de _Standard C++ Foundation_ dont le but est la promotion du C++
+  Site de la _Standard C++ Foundation_ dont le but est la promotion du C++
 
   Les deux sont cependant très proches et partagent de nombreux membres
 ])
 
-- ... ainsi que les #link("https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines")[C++ Core Guidelines #linklogo()]
+- #link("https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines")[C++ Core Guidelines #linklogo()]
 - #link("https://github.com/cplusplus")[Dépôt GIT #linklogo()] (brouillons et propositions)
 - Conférence annuelle #link("http://cppcon.org/")[cppcon #linklogo()]
 
-== Norme et support
+=== Norme et support
 
 - Compilateurs
   - GCC -- #link("https://gcc.gnu.org/projects/cxx-status.html")[C++ Standards Support in GCC #linklogo()]
@@ -82,7 +84,9 @@
   #link("https://hackingcpp.com/")[hacking C++ #linklogo()]
 ])
 
-== Erreurs -- Code retour
+== Gestion des erreurs
+
+=== Erreurs -- Code retour
 
 - Plusieurs variantes
   - Type de retour dédié
@@ -97,10 +101,10 @@
 
   Souvent délaissée dans un contexte d'enseignement ou de formation
 
-  Beaucoup de code avec une gestion d'erreur déficiente
+  Beaucoup de code avec une gestion d'erreurs déficiente
 ])
 
-== Erreurs -- Exceptions
+=== Erreurs -- Exceptions
 
 - Lancées par ```cpp throw```
 - Attrapées par ```cpp catch()``` depuis un bloc ```cpp try```
@@ -118,7 +122,7 @@ catch(logic_error& e) {
 }
 ```
 
-== Erreurs -- Exceptions
+=== Erreurs -- Exceptions
 
 - Type quelconque
 - Idéalement héritant de ```cpp std::exception``` (via ```cpp std::logic_error```, ```cpp std::runtime_error``` ou autres)
@@ -128,9 +132,9 @@ catch(logic_error& e) {
 - Appel de ```cpp std::terminate()``` si une exception n'est pas attrapée
 - Utilisées par la bibliothèque standard (p.ex. ```cpp std::bad_alloc```)
 
-== Erreurs -- Critiques des exceptions
+=== Erreurs -- Critiques des exceptions
 
-- Critiquées, voire interdites, par certaines normes de codage (p.ex. : #link("https://google.github.io/styleguide/cppguide.html")[Google C++ Style Guide #linklogo()]
+- Critiquées, parfois interdites (p.ex. : #link("https://google.github.io/styleguide/cppguide.html")[Google C++ Style Guide #linklogo()])
 - Arguments très variés
   - "Je ne comprends pas", "Ça ne sert à rien", ...
   - Impact négatif sur les performances
@@ -140,10 +144,10 @@ catch(logic_error& e) {
 
   Actuellement, une exception non levée ne coûte quasiment rien
 
-  Souvent comparée à une non gestion d'erreur, est-ce pertinent ?
+  Souvent comparée à une non gestion d'erreurs, est-ce pertinent ?
 ])
 
-== Erreurs -- Critiques des exceptions
+=== Erreurs -- Critiques des exceptions
 
 #list(marker: [], list(indent: 5pt, "Mauvais support par les différents outils"))
 
@@ -156,14 +160,14 @@ catch(logic_error& e) {
 #list(
   marker: [],
   list(indent: 5pt, "Code plus complexe à analyser"),
-  //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreur
+  //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreurs
   list(indent: 5pt, "Difficiles à introduire dans une large base de code sans exception"),
   // Argument de la difficulté d'introduction à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)
   list(indent: 5pt, "Absence d'ABI normalisée"),
   //Le problème d'ABI est plus large que les seules exceptions
 )
 
-== Erreurs -- Exception safety
+=== Erreurs -- Exception safety
 
 - _No-throw guarantee_ : l'opération ne peut pas échouer
 
@@ -175,24 +179,24 @@ catch(logic_error& e) {
 - _Basic exception safety_ : pas de fuite, invariants conservés
 - _No exception safety_ : aucune garantie
 
-== Erreurs -- Exception safety
+=== Erreurs -- Exception safety
 
 #adviceblock("Do", text[
   Privilégiez les garanties les plus fortes possibles
 ])
 
 #alertblock("Don't", text[
-  Évitez la garantie faible
+  Évitez la _Basic exception safety_
 ])
 
 #alertblock("Don't", text[
   Évitez absolument le _No exception safety_
 ])
 
-== Erreurs -- Exception safety
+=== Erreurs -- Exception safety
 
 #adviceblock("Do", text[
-  Utilisez l'idiome _copy-and-swap_ pour la _Strong exception safety_
+  Utilisez l'idiome _copy-and-swap_ pour implémenter la _Strong exception safety_
 ])
 
 ```cpp
@@ -208,7 +212,7 @@ A& A::operator=(A other) {           // Copy
   return *this;
 }
 ```
-== Erreurs -- Exceptions et bonnes pratiques
+=== Erreurs -- Exceptions et bonnes pratiques
 
 #adviceblock("Do", text[
   _Throw by value, catch by const reference_ (voir _C++ Coding Standards_)
@@ -226,7 +230,7 @@ A& A::operator=(A other) {           // Copy
   Capturez uniquement là où vous savez traiter l'erreur
 ])
 
-== Erreurs -- Exceptions et bonnes pratiques
+=== Erreurs -- Exceptions et bonnes pratiques
 
 #alertblock("Don't", text[
   N'utilisez jamais les exceptions pour contrôler le flux d'exécution
@@ -234,11 +238,11 @@ A& A::operator=(A other) {           // Copy
   Ni pour gérer les "échecs attendus"
 ])
 
-#alertblock("Don't", text[
+#adviceblock("Do", text[
   Réservez les exceptions au signalement d'erreurs
 ])
 
-== Erreurs -- ```cpp assert```
+=== Erreurs -- ```cpp assert```
 
 - Arrête le programme si l'expression est évalué à 0
 - Affiche au moins l'expression, le fichier et la ligne
@@ -255,7 +259,7 @@ assert(expression);
   Traquer les erreurs de programmation et les violations de contrat interne
 ])
 
-== Erreurs -- Conclusion
+=== Erreurs -- Conclusion
 
 #adviceblock("Do", text[
   Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
@@ -273,11 +277,11 @@ assert(expression);
   Jamais d'```cpp assert``` pour les erreurs d'exécution et le contrôle des entrées
 ])
 
-== Ressources -- Gestion manuelle
+== Gestion des ressources
 
-#alertblock(none, text[
-  Comment gérer les erreurs ?
-])
+=== Ressources -- Gestion manuelle
+
+#questionblock(" Comment gérer les erreurs ?", none)
 
 - Solution C : _Single Entry Single Exit_, bloc unique de libération
 
@@ -294,9 +298,9 @@ free(memory);
   "Difficile à mettre en place en présence d'exceptions",
 ))
 
-== Ressources -- Gestion manuelle
+=== Ressources -- Gestion manuelle
 
-#noteblock("Quiz : Comment éviter les fuites mémoires ?", ```cpp
+#questionblock("Quiz : Comment éviter les fuites mémoires ?", ```cpp
 char* memory1 = NULL;
 char* memory2 = NULL;
 ...
@@ -308,11 +312,9 @@ delete[] memory1;
 delete[] memory2;
 ```)
 
-== Ressources -- Gestion manuelle
+=== Ressources -- Gestion manuelle
 
-#alertblock(none, text[
-  Comment copier des classes possédant des ressources ?
-])
+#questionblock("Comment copier les classes possédant des ressources ?", none)
 
 - Constructeurs et opérateurs générés copient les adresses des pointeurs
 - Une double libération est une erreur
@@ -328,7 +330,7 @@ private:
 };
 ```
 
-== Ressources -- Bonnes pratiques
+=== Ressources -- Bonnes pratiques
 
 #adviceblock("Do", text[
   Si une classe manipule une ressource brute, elle doit
@@ -343,7 +345,7 @@ private:
 // Forme canonique orthodoxe de Coplien
 // Thèse de Coplien : Multi-paradigm Design
 
-== Ressources -- RAII
+=== Ressources -- RAII
 
 // Resource Acquisition Is Initialization
 
@@ -369,7 +371,7 @@ private:
   Utilisez RAII pour vos objets
 ])
 
-== Ressources -- RAII
+=== Ressources -- RAII
 
 #adviceblock("Do", text[
   Faites des constructeurs qui construisent des objets
@@ -386,7 +388,7 @@ private:
   Évitez les couples constructeur vide et ensemble de mutateurs
 ])
 
-== Ressources -- Limites du RAII
+=== Ressources -- Limites du RAII
 
 #alertblock("Gestion des erreurs", text[
   Pas d'erreur ni d'exception dans les destructeurs
@@ -406,7 +408,7 @@ private:
   //Problème résolu en forçant l'écriture (flush) en fin de la fonction copy_files() et en remontant une exception en cas d'erreur
 ])
 
-== Ressources -- Limites du RAII
+=== Ressources -- Limites du RAII
 
 #alertblock(```cpp std::auto_ptr```, text[
   Copiable, la copie transfère la responsabilité de la ressource
@@ -420,7 +422,7 @@ private:
   ```
 ])
 
-== Ressources -- Loi de Déméter
+=== Ressources -- Loi de Déméter
 
 // À strictement parler, gestion de l'accès aux ressources pas de la libération
 
@@ -454,7 +456,7 @@ private:
   // DIP : Principe d'inversion des dépendances
 ])
 
-== Ressources -- Loi de Déméter
+=== Ressources -- Loi de Déméter
 
 #adviceblock("Do, agrégats", text[
   Préférez les structures aux classes
@@ -476,7 +478,7 @@ private:
   Limitez les accesseurs et les mutateurs
 ])
 
-== Ressources -- Loi de Déméter
+=== Ressources -- Loi de Déméter
 
 #noteblock("Conseils", text[
   N'hésitez pas à étendre l'interface de classe avec des fonctions libres
@@ -497,7 +499,7 @@ private:
   ```
 ])
 
-== Ressources -- Et le Garbage Collector ?
+=== Ressources -- Et le Garbage Collector ?
 
 - Pas de GC dans le langage ni dans la bibliothèque standard
 - Au moins un GC en bibliothèque tierce (#link("http://www.hboehm.info/gc/")[Hans Boehm #linklogo()])
@@ -514,7 +516,7 @@ private:
   Indisponible à ce jour
 ])
 
-== Ressources -- Conclusion
+=== Ressources -- Conclusion
 
 #adviceblock("Do, RAII", text[
   Préférez les classes RAII de la bibliothèque standard aux ressources brutes
@@ -528,7 +530,7 @@ private:
   Respectez Déméter
 ])
 
-== Ressources -- Conclusion
+=== Ressources -- Conclusion
 
 #alertblock("Don't", text[
   Pas de ```cpp delete``` dans le code applicatif
@@ -545,7 +547,9 @@ private:
   Pensez à paramétrer correctement l'OS
 ])
 
-== STL -- Standard Template Library
+== STL
+
+=== STL -- Standard Template Library
 
 - Partie de la bibliothèque standard comprenant
   - Conteneurs et ```cpp std::basic_string```
@@ -553,7 +557,7 @@ private:
   - Algorithmes manipulation les données des conteneurs via les itérateurs
 
 #noteblock("Note", text[
-  Quelques algorithmes manipulant directement des données (p.ex. ```cpp std::min()```)
+  Quelques algorithmes manipulant directement des données (```cpp std::min()```)
 ])
 
 - Conçue initialement par Alexander Stepanov
@@ -569,7 +573,7 @@ private:
 
 - Basée sur les templates, pas sur la POO
 
-== STL -- Standard Template Library
+=== STL -- Standard Template Library
 
 #noteblock("Intérêts", text[
   $n$ conteneurs et $m$ algorithmes, seulement $m$ implémentations
@@ -585,16 +589,18 @@ private:
   Voir _Effective STL_ de Scott Meyers
 ])
 
-== STL -- Standard Template Library
+=== STL -- Standard Template Library
 
 #noteblock("À nuancer", text[
   Algorithmes membres sur certains conteneurs
   - Accès par itérateurs insuffisant (p.ex. ```cpp std::list```)
   - Habitudes et historiques (p.ex. ```cpp std::string```)
-  - Performances (p.ex. ```cpp map.find()```)
+  - Performances (p.ex. ```cpp std::map.find()```)
 ])
 
-== STL Conteneurs -- Généralités
+== STL -- Conteneurs
+
+=== STL Conteneurs -- Généralités
 
 - Contiennent des objets copiables et non constants
 - ... qui peuvent être les adresses d'autres objets
@@ -607,7 +613,7 @@ private:
 - Fourniture possible d'une politique d'allocation
 - Vu des algorithmes, ce qui fournit une paire d'itérateurs, est un conteneur
 
-== STL Conteneurs -- Conteneurs séquentiels
+=== STL Conteneurs -- Conteneurs séquentiels
 
 - ```cpp std::vector```
   - Tableau de taille variable d'éléments contigus
@@ -624,7 +630,7 @@ private:
   Voir _Effective STL_ item 18
 ])
 
-== STL Conteneurs -- Conteneurs séquentiels
+=== STL Conteneurs -- Conteneurs séquentiels
 
 - ```cpp std::list```
   - Liste doublement chaînée
@@ -639,7 +645,7 @@ private:
   - Éléments non nécessairement contigus
   - Non compatible avec l'organisation mémoire des tableaux C
 
-== STL Conteneurs -- Conteneurs séquentiels
+=== STL Conteneurs -- Conteneurs séquentiels
 
 - ```cpp std::string```
   - Alias de ```cpp std::basic_string<char>```
@@ -659,7 +665,7 @@ private:
   Voir #link("http://www.gotw.ca/gotw/084.htm")[GotW \#84 : Monoliths "Unstrung" #linklogo()]
 ])
 
-== STL Conteneurs -- Conteneurs associatifs
+=== STL Conteneurs -- Conteneurs associatifs
 
 - Quatre saveurs
   - ```cpp std::map``` -- clés-valeurs, ordonné par la clé, unicité des clés
@@ -678,7 +684,7 @@ private:
 
 - Algorithmes membres (recherche) pour les performances
 
-== STL Conteneurs -- Adaptateurs
+=== STL Conteneurs -- Adaptateurs
 
 - Basés sur un autre conteneur pour proposer une API simplifiée
 - Avantages et inconvénients du conteneur sous-jacent
@@ -693,7 +699,7 @@ private:
   - Basée sur ```cpp std::vector``` ou ```cpp std::deque```
   - Critère d'ordre configurable (strictement inférieur par défaut)
 
-== STL Conteneurs -- Adaptateurs
+=== STL Conteneurs -- Adaptateurs
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:4,endLineNumber:9,positionColumn:4,positionLineNumber:9,selectionStartColumn:4,selectionStartLineNumber:9,startColumn:4,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::stack%3Cint,+std::vector%3Cint%3E+%3E+foo%3B%0A++for(int+i%3D0%3B+i%3C5%3B+%2B%2Bi)%0A++%7B%0A++++foo.push(i)%3B%0A++%7D%0A%0A++while(!!foo.empty())%0A++%7B%0A++++std::cout+%3C%3C+!'+!'+%3C%3C+foo.top()%3B%0A++++foo.pop()%3B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B98+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -711,7 +717,7 @@ private:
   ],
 )
 
-== STL Conteneurs -- conteneurs non-STL
+=== STL Conteneurs -- conteneurs non-STL
 
 - ```cpp std::bitset```
   - Tableau de bits de taille fixe
@@ -722,7 +728,7 @@ private:
   Objectif de gain mémoire adressé par ```cpp std::bitset```, pourquoi ```cpp std::vector<bool>``` n'est-il pas un vrai conteneur de booléen ?
 ])
 
-== STL Conteneurs -- conteneurs non-STL
+=== STL Conteneurs -- conteneurs non-STL
 
 - Conteneurs non-standards
   - Listes simplement chaînées
@@ -734,7 +740,7 @@ private:
 
 // Variantes ciblant un autre compromis : listes en tableau, ropes, map à plat, ...
 
-== STL Conteneurs -- ```cpp std::pair```
+=== STL Conteneurs -- ```cpp std::pair```
 
 - Couple de deux valeurs
 - Pas un conteneur
@@ -742,7 +748,7 @@ private:
   - Candidat pour construire des vecteurs indexés par un non-numérique
 - ```cpp std::make_pair``` construit une paire
 
-== STL Conteneurs -- Choix du conteneur
+=== STL Conteneurs -- Choix du conteneur
 
 #adviceblock("Do, par défaut", text[
   ```cpp std::string``` pour les chaînes de caractères
@@ -760,7 +766,7 @@ private:
   Pas ```cpp std::vector<char>``` encore moins ```cpp std::string```
 ])
 
-== STL Conteneurs -- Choix du conteneur
+=== STL Conteneurs -- Choix du conteneur
 
 #noteblock("Conseils", text[
   Voir _Effective STL_ item 1
@@ -780,7 +786,9 @@ private:
   Un vecteur de paires peut être un bon choix pour un ensemble de clés-valeurs
 ])
 
-== STL Itérateurs -- Généralités
+== STL -- Itérateurs
+
+=== STL Itérateurs -- Généralités
 
 - Abstraction permettant le parcours des collections d'objets
 - Interaction entre conteneurs et algorithmes
@@ -800,7 +808,7 @@ private:
 
 // Un élément après la fin permet de représenter des ensemble vide (si begin et end référence le même élément)
 
-== STL Itérateurs -- Catégories et opérations
+=== STL Itérateurs -- Catégories et opérations
 
 #grid(
   columns: (4fr, 1fr),
@@ -851,7 +859,7 @@ private:
   Seules les versions mutables de _Forward_, _Bidirectional_ et _Random access_ itérateurs sont des _Output_ itérateurs
 ])
 
-== STL Itérateurs -- Catégories et conteneurs
+=== STL Itérateurs -- Catégories et conteneurs
 
 #table(
   columns: (1fr, 1fr),
@@ -871,7 +879,7 @@ private:
   [```cpp std::set``` et ```cpp std::multiset``` ], [ _Bidirectionnal_],
 )
 
-== STL Itérateurs -- Itérateurs d'insertion
+=== STL Itérateurs -- Itérateurs d'insertion
 
 - Adaptateur d'itérateurs
 - De type _Output_
@@ -880,7 +888,9 @@ private:
   - En tête : ```cpp front_inserter```
   - À la position courante : ```cpp inserter```
 
-== STL Algorithmes -- Foncteurs
+== STL -- Algorithmes
+
+=== STL Algorithmes -- Foncteurs
 
 - Instances de classe définissant ```cpp operator()```
 
@@ -898,7 +908,7 @@ public:
   cout << func(5) << "\n";   // 1
 ```
 
-== STL Algorithmes -- Foncteurs
+=== STL Algorithmes -- Foncteurs
 
 - Possèdent des données membres
 - Foncteurs standards : ```cpp std::plus```, ```cpp std::minus```, ```cpp std::equal```, ```cpp std::less```, ...
@@ -908,13 +918,13 @@ public:
   - En niant d'autres foncteurs : ```cpp std::not1```, ```cpp std::not2```
   - En fixant des paramètres : ```cpp std::bind1st```, ```cpp std::bind2nd```
 
-== STL Algorithmes -- Prédicats
+=== STL Algorithmes -- Prédicats
 
 - Appelables retournant un booléen (ou un type convertible en booléen)
 - Utilisés par de nombreux algorithmes
 - De nombreux algorithmes utilisent un prédicat par défaut (p.ex. ```cpp <``` ou ```cpp ==```)
 
-== STL Algorithmes -- Parcours
+=== STL Algorithmes -- Parcours
 
 - ```cpp std::for_each()``` parcourt un ensemble d'éléments
 - ... et applique un traitement à chaque élément
@@ -928,7 +938,7 @@ for_each(foo.begin(), foo.end(), print);
 
 - Version du _map_/_apply_ fonctionnel
 
-== STL Algorithmes -- Parcours
+=== STL Algorithmes -- Parcours
 
 - Retourne le foncteur passé en paramètre
 
@@ -946,12 +956,11 @@ for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
 - Candidat pour le _fold_/_reduce_ fonctionnel
 - Pas de sémantique, faible utilité
 
-== STL Algorithmes -- Recherche linéaire
+=== STL Algorithmes -- Recherche linéaire
 
 - ```cpp std::find()``` recherche une valeur
 - ... et retourne un itérateur sur celle-ci
 - ... ou l'itérateur de fin si la valeur n'est pas présente
-  \end{itemize}
 
 ```cpp
 vector<int> foo{4, 5, 9 ,12};
@@ -960,7 +969,7 @@ find(foo.begin(), foo.end(), 5);   // itérateur sur foo[1]
 find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
 ```
 
-== STL Algorithmes -- Recherche linéaire
+=== STL Algorithmes -- Recherche linéaire
 
 - ```cpp std::find_if()``` recherche depuis un prédicat
 
@@ -978,9 +987,10 @@ find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== STL Algorithmes -- Recherche dichotomique
+=== STL Algorithmes -- Recherche dichotomique
 
-- Pré-requis : ensemble trié
+#alertblock("Pré-requis", "L'ensemble doit être trié")
+
 - ```cpp std::lower_bound()``` retourne un itérateur sur le premier élément non strictement inférieur à la valeur recherchée
 
 // Formulation "n'est pas strictement inférieur" semble être une tournure compliquée pour supérieur ou égal, mais c'est précisément ce que fait la fonction et c'est important si on fourni un prédicat de comparaison
@@ -994,7 +1004,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 *lower_bound(foo.begin(), foo.end(), 9);  // 9
 ```
 
-== STL Algorithmes -- Recherche dichotomique
+=== STL Algorithmes -- Recherche dichotomique
 
 - ```cpp std::upper_bound()``` retourne un itérateur sur le premier élément strictement supérieur à la valeur recherchée
 - ```cpp std::equal_range()``` retourne la paire (```cpp std::lower_bound()```, ```cpp std::upper_bound()```)
@@ -1005,31 +1015,29 @@ vector<int> foo{4, 5, 7, 9, 12};
 
 - ```cpp std::binary_search()``` indique si l'élément cherché est présent
 
-== STL Algorithmes -- Recherche dichotomique
+#codesample(
+  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D")
+
+=== STL Algorithmes -- Recherche dichotomique
 
 #alertblock("Attention", text[
   Pas de fonction de recherche dichotomique retournant l'élément cherché
 ])
 
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D",
-  code: [
-    ```cpp
-    vector<int>::iterator foo(vector<int> vec, int val) {
-      vector<int>::iterator it = lower_bound(vec.begin(),
-                                             vec.end(), val);
-      if(it != vec.end() && *it == val) return it;
-      else return vec.end();
-    }
+```cpp
+vector<int>::iterator foo(vector<int> vec, int val) {
+  vector<int>::iterator it = lower_bound(vec.begin(),
+                                         vec.end(), val);
+  if(it != vec.end() && *it == val) return it;
+  else return vec.end();
+}
 
-    vector<int> bar{1, 5, 8, 13, 25, 42};
-    foo(bar, 12);  // vec.end
-    foo(bar, 13);  // itérateur sur 13
-    ```
-  ],
-)
+vector<int> bar{1, 5, 8, 13, 25, 42};
+foo(bar, 12);  // vec.end
+foo(bar, 13);  // itérateur sur 13
+```
 
-== STL Algorithmes -- Comptage
+=== STL Algorithmes -- Comptage
 
 - ```cpp std::count()``` compte le nombre d'éléments égaux à la valeur fournie
 
@@ -1047,7 +1055,7 @@ vector<int> foo{4, 5, 7, 9, 12};
   ],
 )
 
-== STL Algorithmes -- Comparaison
+=== STL Algorithmes -- Comparaison
 
 - ```cpp std::equal()``` teste l'égalité de deux ensembles (valeur et position)
 
@@ -1064,7 +1072,7 @@ vector<int> foo{4, 5, 7, 9, 12};
   ],
 )
 
-== STL Algorithmes -- Comparaison
+=== STL Algorithmes -- Comparaison
 
 #alertblock("Attention", text[
   ```cpp std::equal()``` ne vérifie pas les tailles des deux ensembles
@@ -1078,7 +1086,7 @@ vector<int> foo{4, 5, 7, 9, 12};
   Préférez ```cpp operator==``` à ```cpp std::equal()``` pour comparer un conteneur complet
 ])
 
-== STL Algorithmes -- Comparaison
+=== STL Algorithmes -- Comparaison
 
 - ```cpp std::mistmatch()``` retourne une paire d'itérateurs sur les premiers éléments différents
 
@@ -1096,7 +1104,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 
 - ... ou l'itérateur de fin en cas d'égalité
 
-== STL Algorithmes -- Remplissage
+=== STL Algorithmes -- Remplissage
 
 - ```cpp std::fill()``` remplit l'ensemble avec la valeur fournie
 - ```cpp std::fill_n()``` idem avec un ensemble défini par sa taille
@@ -1120,7 +1128,7 @@ vector<int> foo{4, 5, 7, 9, 12};
   ```
 ])
 
-== STL Algorithmes -- Remplissage
+=== STL Algorithmes -- Remplissage
 
 - ```cpp std::generate()``` valorise les éléments à partir d'un générateur
 
@@ -1142,7 +1150,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 
 - ```cpp std::generate_n()``` idem avec un ensemble défini par sa taille
 
-== STL Algorithmes -- Copie
+=== STL Algorithmes -- Copie
 
 - ```cpp std::copy()``` copie les éléments du début vers la fin
 
@@ -1160,13 +1168,7 @@ vector<int> foo{4, 5, 7, 9, 12};
 
 - ```cpp std::copy_backward()``` copie les éléments de la fin vers le début
 
-#alertblock("Attention", text[
-  À la taille du second ensemble
-
-  Aux ensembles non-disjoints
-])
-
-== STL Algorithmes -- Échange
+=== STL Algorithmes -- Échange
 
 - ```cpp std::swap()``` échange deux objets
 
@@ -1193,7 +1195,7 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::iter_swap()``` échange deux objets pointés par des itérateurs
 
-== STL Algorithmes -- Remplacement
+=== STL Algorithmes -- Remplacement
 
 - ```cpp std::replace()``` remplace toutes les occurrences d'une valeur
 
@@ -1210,7 +1212,7 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::replace_if()``` remplace toutes les éléments vérifiant le prédicat
 
-== STL Algorithmes -- Remplacement
+=== STL Algorithmes -- Remplacement
 
 - ```cpp std::replace_copy()``` copie les éléments d'un ensemble en remplaçant toutes les occurrences d'une valeur
 
@@ -1224,7 +1226,7 @@ swap(x,y);        // x:20 y:10
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+check(int+a)%0A%7B%0A++return+a+%3E%3D+7%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9+,12,+5%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A++std::replace_copy(foo.begin(),+foo.end(),+std::back_inserter(bar),+5,+8)%3B%0A++for(size_t++i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++for(size_t++i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== STL Algorithmes -- Suppression
+=== STL Algorithmes -- Suppression
 
 - ```cpp std::remove()``` élimine les éléments égaux à une valeur donnée
 
@@ -1259,13 +1261,13 @@ swap(x,y);        // x:20 y:10
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== STL Algorithmes -- Suppression
+=== STL Algorithmes -- Suppression
 
 - ```cpp std::remove_if()``` élimine les éléments vérifiant le prédicat
 - ```cpp std::remove_copy()``` copie les éléments différents d'une valeur donnée
 - ```cpp std::remove_copy_if()``` copie les éléments ne vérifiant pas le prédicat
 
-== STL Algorithmes -- Suppression des doublons
+=== STL Algorithmes -- Suppression des doublons
 
 - ```cpp std::unique()``` élimine les éléments consécutifs égaux sauf le premier
 
@@ -1285,7 +1287,7 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::unique_copy()``` copie l'ensemble en ne conservant que le premier des éléments consécutifs égaux
 
-== STL Algorithmes -- Transformation
+=== STL Algorithmes -- Transformation
 
 - ```cpp std::transform()``` transforme les éléments d'un ensemble
 
@@ -1297,14 +1299,13 @@ swap(x,y);        // x:20 y:10
 
     vector<int> foo{4, 5, 7, 9};
     vector<int> bar;
-    transform(foo.begin(), foo.end(),
-              back_inserter(bar), double_val);
+    transform(foo.begin(), foo.end(), back_inserter(bar), double_val);
     // 8 10 14 18
     ```
   ],
 )
 
-== STL Algorithmes -- Transformation
+=== STL Algorithmes -- Transformation
 
 - Ou de deux ensembles en stockant le résultat dans un troisième
 
@@ -1322,7 +1323,7 @@ swap(x,y);        // x:20 y:10
     ```],
 )
 
-== STL Algorithmes -- Rotation
+=== STL Algorithmes -- Rotation
 
 - ```cpp std::rotate()``` effectue une rotation de l'ensemble, le nouveau début étant fourni par un itérateur
 
@@ -1339,7 +1340,7 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::rotate_copy()``` effectue une rotation et copie le résultat
 
-== STL Algorithmes -- Partitionnement
+=== STL Algorithmes -- Partitionnement
 
 - ```cpp std::partition()``` réordonne l'ensemble pour que les éléments vérifiant le prédicat soit avant ceux ne le vérifiant pas ...
 
@@ -1362,7 +1363,7 @@ swap(x,y);        // x:20 y:10
   Ordre relatif non conservé
 ])
 
-== STL Algorithmes -- Partitionnement
+=== STL Algorithmes -- Partitionnement
 
 - ```cpp std::stable_partition()``` partitionne en conservant l'ordre relatif
 
@@ -1381,7 +1382,7 @@ swap(x,y);        // x:20 y:10
   Stabilité coûteuse en temps et pas toujours nécessaire
 ])
 
-== STL Algorithmes -- Partitionnement
+=== STL Algorithmes -- Partitionnement
 
 - ```cpp std::nth_element()``` réordonne les éléments
   - Élément sur l'itérateur pivot est celui qui serait à cette place si l'ensemble était trié
@@ -1403,7 +1404,7 @@ swap(x,y);        // x:20 y:10
   ],
 )
 
-== STL Algorithmes -- Tri
+=== STL Algorithmes -- Tri
 
 - ```cpp std::sort()``` trie un ensemble
 
@@ -1424,7 +1425,7 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::stable_sort()``` trie l'ensemble en conservant l'ordre relatif
 
-== STL Algorithmes -- Tri
+=== STL Algorithmes -- Tri
 
 - ```cpp std::partial_sort()``` réordonne l'ensemble de manière à ce que les éléments situés avant un itérateur pivot soient les plus petits éléments de l'ensemble ordonnés par ordre croissant ...
 
@@ -1443,7 +1444,7 @@ swap(x,y);        // x:20 y:10
 - ... les autres éléments n'ont pas d'ordre particulier
 - ```cpp std::partial_sort_copy()``` copie l'ensemble ordonné à l'image de ```cpp std::partial_sort()```
 
-== STL Algorithmes -- Mélange
+=== STL Algorithmes -- Mélange
 
 - ```cpp std::random_shuffle()``` réordonne aléatoirement l'ensemble
 
@@ -1461,7 +1462,7 @@ swap(x,y);        // x:20 y:10
   ],
 )
 
-== STL Algorithmes -- Fusion
+=== STL Algorithmes -- Fusion
 
 - ```cpp std::merge()``` fusionne deux ensembles triés dans un troisième
 
@@ -1481,7 +1482,7 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::inplace_merge()``` fusionne deux sous-ensembles sur place
 
-== STL Algorithmes -- Opérations ensemblistes
+=== STL Algorithmes -- Opérations ensemblistes
 
 #alertblock("Attention", text[
   Ensembles sans répétition de valeur
@@ -1505,7 +1506,7 @@ swap(x,y);        // x:20 y:10
   ],
 )
 
-== STL Algorithmes -- Opérations ensemblistes
+=== STL Algorithmes -- Opérations ensemblistes
 
 - ```cpp std::set_union()``` : union de deux ensembles
 
@@ -1529,7 +1530,7 @@ swap(x,y);        // x:20 y:10
 
 // set_difference() conserve les éléments présents dans le premier ensemble mais pas dans le second alors que set_symmetric_difference() conserve les éléments présents dans un des ensembles mais pas dans l'autre}
 
-== STL Algorithmes -- Gestion de tas
+=== STL Algorithmes -- Gestion de tas
 
 #noteblock("Tas", text[
   Structure permettant la récupération de l'élément de plus grande valeur
@@ -1549,7 +1550,7 @@ swap(x,y);        // x:20 y:10
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B10,20,30,5,15%7D%3B%0A%0A++std::make_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::pop_heap(foo.begin(),+foo.end())%3B%0A++foo.pop_back()%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.push_back(99)%3B%0A++std::push_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::sort_heap(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
 )
 
-== STL Algorithmes -- Min-max
+=== STL Algorithmes -- Min-max
 
 - ```cpp std::min()``` détermine le minimum de deux éléments
 - ```cpp std::max()``` détermine le maximum de deux éléments
@@ -1574,7 +1575,7 @@ max(52, 6);  // 52
   ],
 )
 
-== STL Algorithmes -- Numérique
+=== STL Algorithmes -- Numérique
 
 - ```cpp std::accumulate()``` "ajoute" tous les éléments de l'ensemble
 
@@ -1592,7 +1593,7 @@ max(52, 6);  // 52
 - Opérateur et valeur initiale configurables
 - _Reduce_/_fold_ fonctionnel
 
-== STL Algorithmes -- Numérique
+=== STL Algorithmes -- Numérique
 
 - ```cpp std::adjacent_difference()``` "différence" entre un élément et son prédécesseur
 
@@ -1603,16 +1604,16 @@ max(52, 6);  // 52
     vector<int> foo{18, 5, 6, 8};
     vector<int> bar;
 
-    // 18 -13 1 2
     adjacent_difference(foo.begin(), foo.end(),
                         back_inserter(bar), minus<int>());
+    // 18 -13 1 2
     ```
   ],
 )
 
 - Opérateur configurable
 
-== STL Algorithmes -- Numérique
+=== STL Algorithmes -- Numérique
 
 - ```cpp std::inner_product()``` : "produit scalaire" de deux ensembles
 
@@ -1630,7 +1631,7 @@ max(52, 6);  // 52
 
 - Opérateurs et valeur configurables
 
-== STL Algorithmes -- Numérique
+=== STL Algorithmes -- Numérique
 
 - ```cpp std::partial_sum()``` : "somme" partielle d'un ensemble
 - Chaque élément résultant est la somme des éléments d'indice inférieur ou égal de l'ensemble de départ
@@ -1642,15 +1643,15 @@ max(52, 6);  // 52
     vector<int> foo{1, 2, 3, 4};
     vector<int> bar;
 
-    // 1 3 6 10
     partial_sum(foo.begin(), foo.end(), back_inserter(bar));
+    // 1 3 6 10
     ```
   ],
 )
 
 - Opérateur configurable
 
-== STL Algorithmes -- Au delà des conteneurs
+=== STL Algorithmes -- Au delà des conteneurs
 
 - Itérateurs définissables hors des conteneurs
   - Abstraction du parcours
@@ -1658,7 +1659,7 @@ max(52, 6);  // 52
 - Algorithmes indépendants du conteneur
 - Utilisables sur d'autres ensembles de données
 
-== STL Algorithmes -- Au delà des conteneurs
+=== STL Algorithmes -- Au delà des conteneurs
 
 - Tableaux C
   - Pas un conteneur
@@ -1677,7 +1678,7 @@ int foo[4];
 fill(foo, foo + 4, 5);  // 5 5 5 5
 ```
 
-== STL Algorithmes -- Au delà des conteneurs
+=== STL Algorithmes -- Au delà des conteneurs
 
 - Flux
   - ```cpp istream_iterator``` : input itérateur
@@ -1704,7 +1705,9 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 
 - Buffers de flux : ```cpp istreambuf_iterator``` et ```cpp ostreambuf_iterator```
 
-== STL Conclusion
+== STL -- Conclusion
+
+=== STL Conclusion
 
 #adviceblock("Do", text[
   Préférez les conteneurs aux tableaux C
@@ -1726,7 +1729,7 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   Ou via des pointeurs intelligents
 ])
 
-== STL Conclusion
+=== STL Conclusion
 
 #adviceblock("Do, performances", text[
   Mesurez !
@@ -1751,12 +1754,12 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   Algorithmes standards généralement bons, mais pas optimaux dans toutes les situations
 ])
 
-== STL Conclusion
+=== STL Conclusion
 
 #adviceblock("Do", text[
   Faites vos propres algorithmes plutôt que des boucles
 
-  Faites des algorithmes génériques et compatibles
+  Faites des algorithmes génériques et compatibles avec la STL
 ])
 
 #adviceblock("Do, sémantique", text[
@@ -1769,7 +1772,7 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   Préférez les prédicats purs
 ])
 
-== STL Conclusion
+=== STL Conclusion
 
 #adviceblock("Do", text[
   Vérifiez que les ensembles de destination aient une taille suffisante

@@ -4,6 +4,8 @@
 
 == Présentation
 
+=== Présentation
+
 - Approuvé le 16 août 2014
 - Dernier _Working Draft_ : #link("https://wg21.link/std14")[N4140 #linklogo()]
 - Dans la continuité de C++11
@@ -11,6 +13,8 @@
 - Mais loin d'une simple version correctrice
 
 == ``` constexpr```
+
+=== ``` constexpr```
 
 - Fonctions membres ```cpp constexpr``` plus implicitement ```cpp const```
 - Relâchement des contraintes sur les fonctions ```cpp constexpr```
@@ -21,7 +25,9 @@
 
 #addproposal("N3652")
 
-== Généralisation de la déduction du type retour
+== Déduction de type
+
+=== Généralisation de la déduction du type retour
 
 - Utilisable sur les lambdas complexes
 
@@ -53,7 +59,7 @@
 
 #addproposal("N3638")
 
-== Généralisation de la déduction du type retour
+=== Généralisation de la déduction du type retour
 
 - Y compris récursive
 
@@ -77,7 +83,7 @@
 
 #addproposal("N3638")
 
-== ``` decltype(auto)```
+=== ``` decltype(auto)```
 
 - Déduction du type retour en conservant la référence
 
@@ -95,7 +101,9 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3638")
 
-== Aggregate Initialisation
+== Initialisation
+
+=== Aggregate Initialisation
 
 - Compatible avec l'initialisation par défaut des membres
 - Initialisation par défaut des membres non explicitement initialisés
@@ -114,6 +122,8 @@ auto bar3() { return bar1(); }           // string
 #addproposal("N3653")
 
 == Itérateurs
+
+=== Itérateurs
 
 - Fonctions libres ```cpp std::cbegin()``` et ```cpp std::cend()```
 - Fonctions libres ```cpp std::rbegin()``` et ```cpp std::rend()```
@@ -140,7 +150,9 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3644")
 
-== Recherche hétérogène
+== Conteneurs
+
+=== Recherche hétérogène
 
 - Optimisation de la recherche hétérogène dans les conteneurs associatifs ordonnés
 - Fourniture d'une classe exposant
@@ -151,6 +163,8 @@ auto bar3() { return bar1(); }           // string
 #addproposal("N3657")
 
 == Algorithmes
+
+=== Algorithmes
 
 - Surcharge de ```cpp std::equal()```, ```cpp std::mismatch()``` et de ```cpp std::is_permutation()``` prenant deux paires complètes d'itérateurs
 
@@ -187,7 +201,9 @@ auto bar3() { return bar1(); }           // string
 #addproposal("N3668")
 #addproposal("N3671")
 
-== Quoted string
+== Chaînes de caractères
+
+=== Quoted string
 
 - Insertion et extraction de chaînes avec guillemets
 
@@ -211,7 +227,9 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3654")
 
-== Littéraux binaires
+== Littéraux
+
+=== Littéraux binaires
 
 - Support des littéraux binaires préfixés par ```cpp 0b```
 
@@ -226,7 +244,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3472")
 
-== Séparateurs
+=== Séparateurs
 
 - Utilisation possible de ```cpp '``` dans les nombres littéraux
 
@@ -247,7 +265,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3781")
 
-== User-defined literals standards
+=== _User-defined literals_ standards
 
 - Suffixe ```cpp s``` sur les chaînes : ```cpp std::string```
 
@@ -270,7 +288,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3642")
 
-== User-defined literals standards
+=== _User-defined literals_ standards
 
 - Suffixe ```cpp h```, ```cpp min```, ```cpp s```, ```cpp ms```, ```cpp us``` et ```cpp ns``` : ```cpp std::chrono::duration```
 
@@ -286,7 +304,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3642")
 
-== User-defined literals standards
+=== _User-defined literals_ standards
 
 - Suffixe ``` if``` : nombre imaginaire de type ```cpp std::complex<float>```
 - Suffixe ``` i``` : nombre imaginaire de type ```cpp std::complex<double>```
@@ -303,9 +321,11 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3642")
 
-== Adressage des ``` std::tuple``` par le type
+== ``` std::tuple```
 
-- Utilisation du type plutôt que de l'indice
+=== ``` std::tuple```
+
+- Adressage par le type plutôt que l'indice
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+long,+long%3E+foo%7B42,+58L,+9L%7D%3B%0A%0A++std::cout+%3C%3C+std::get%3Cint%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -333,7 +353,9 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3670")
 
-== Variable template
+== Templates
+
+=== Variable template
 
 - Généralisation des templates aux variables
 - Y compris les spécialisations
@@ -357,7 +379,9 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3651")
 
-== Generic lambdas
+== Programmation fonctionnelle
+
+=== Generic lambdas
 
 - Lambdas utilisables sur différents types de paramètres
 - Déduction du type des paramètres déclarés ```cpp auto```
@@ -376,7 +400,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3649")
 
-== Variadic lambdas
+=== Variadic lambdas
 
 - Lambda à nombre de paramètres variable
 - Suffixe ```cpp ...``` à ```cpp auto```
@@ -398,7 +422,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3649")
 
-== Capture généralisée
+=== Capture généralisée
 
 - Création de variables capturées depuis des variables locales ou des constantes
 
@@ -422,7 +446,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3648")
 
-== Capture généralisée
+=== Capture généralisée
 
 - Capture par déplacement
 
@@ -457,7 +481,7 @@ auto bar3() { return bar1(); }           // string
 
 #addproposal("N3648")
 
-== Améliorations des lambdas
+=== Améliorations des lambdas
 
 - Type de retour complètement facultatif
 // Il n'y a plus les restrictions de C++11 (une seule instruction, de type return)
@@ -487,7 +511,9 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-== ``` std::is_final```
+== Traits
+
+=== ``` std::is_final```
 
 - Indique si la classe est finale ou non
 
@@ -504,16 +530,16 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-== Alias transformation
+=== Alias transformation
 
 - Simplification de l'usage des transformations de types
-- Ajout du suffixe ```cpp _t``` aux transformations
-- Suppression de ```cpp typename``` et ```cpp ::type```
+  - Ajout du suffixe ```cpp _t``` aux transformations
+  - Suppression de ```cpp typename``` et ```cpp ::type```
 
 ```cpp
-typedef add_const<int>::type A;
-typedef add_const<const int>::type B;
-typedef add_const<const int*>::type C;
+typename add_const<int>::type A;
+typename add_const<const int>::type B;
+typename add_const<const int*>::type C;
 
 // Deviennent
 
@@ -522,7 +548,9 @@ add_const_t<const int> B;
 add_const_t<const int*> C;
 ```
 
-== ``` std::make_unique```
+== Pointeurs intelligents
+
+=== ``` std::make_unique```
 
 - Allocation et construction de l'objet dans le ```cpp std::unique_ptr```
 
@@ -530,17 +558,19 @@ add_const_t<const int*> C;
 unique_ptr<int> foo = make_unique<int>(42);
 ```
 
-#alertblock("Don't", text[
-  Plus de ```cpp new``` dans le code applicatif
-])
-
 #noteblock("Note", text[
   Utilisable pour construire dans un conteneur
 ])
 
+#alertblock("Don't", text[
+  Plus de ```cpp new``` dans le code applicatif
+])
+
 #addproposal("N3656")
 
-== Attribut ``` [[ deprecated ]]```
+== Attributs
+
+=== Attribut ``` [[ deprecated ]]```
 
 - Indique qu'une entité (variable, fonction, classe, ...) est dépréciée
 - Émission possible d'avertissement sur l'utilisation d'une entité ```cpp deprecated```
@@ -563,7 +593,7 @@ unique_ptr<int> foo = make_unique<int>(42);
 
 #addproposal("N3760")
 
-== Attribut ``` [[ deprecated ]]```
+=== Attribut ``` [[ deprecated ]]```
 
 - Possibilité de fournir un message explicatif
 
@@ -583,7 +613,9 @@ warning: 'void bar()' is deprecated: Utilisez Foo
 
 #addproposal("N3760")
 
-== ``` std::shared_timed_mutex```
+== Multi-threading
+
+=== ``` std::shared_timed_mutex```
 
 - Similaire à ```cpp std::timed_mutex``` avec deux niveaux d'accès
   - Exclusif : possible si le verrou n'est pas pris
@@ -599,7 +631,7 @@ warning: 'void bar()' is deprecated: Utilisez Foo
 
 #addproposal("N3659")
 
-== ``` std::shared_lock```
+=== ``` std::shared_lock```
 
 - Capsule RAII sur les mutex partagés
 - Support des mutex verrouillés ou non
