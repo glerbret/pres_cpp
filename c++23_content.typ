@@ -131,6 +131,20 @@ p->b = 2;
   - Type IEEE binary16
   - Support optionnel
 - Suffixes littéraux correspondants (```cpp f16```, ```cpp f32```, ```cpp f64```, ```cpp f128``` et ```cpp bf16```)
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstdfloat%3E%0A%0Aint+main()%0A%7B%0A++std::float16_t+foo+%3D+2.0f16%3B%0A++std::cout+%3C%3C+sizeof+foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    float16_t foo = 2.0f16;
+    ```
+  ],
+)
+
+#addproposal("P1467")
+
+=== Types flottants étendus
+
 - Prise en compte par ```cpp std::format```, ```cpp std::ostream``` et ```cpp std::istream```
 - Prise en compte par ```cpp std::numeric_limits``` et ```cpp std::is_floating_point```
 - Ajout de surcharges dans ```cpp <cmath>```, ```cpp <complex>``` et ```cpp <atomic>```
@@ -138,10 +152,6 @@ p->b = 2;
 #alertblock("Types indépendants", text[
   Types indépendants (pas d'alias) de ```cpp float```, ```cpp double``` ou ```cpp long double```
 ])
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstdfloat%3E%0A%0Aint+main()%0A%7B%0A++std::float16_t+foo+%3D+2.0f16%3B%0A++std::cout+%3C%3C+sizeof+foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
 
 #addproposal("P1467")
 

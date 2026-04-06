@@ -2,6 +2,10 @@
 
 // Couleur principale
 #let main_color = rgb("#007F7F")
+// Position du bouton d'accès au site compiler explorer (1.3em en plein page, 0.8em dans les blocs)
+#let code_play_x = state("code_play_x", 1.3em)
+// Couleur de bordure du cadre de code et du bouton, pour être cohérent lorsqu'il est dans un bloc
+#let code_border_color =state("code_border_color", main_color)
 
 // Définition de blocs d'affichage (note, avertissement et conseil)
 #let _block(title, content, color, symbol) = {
@@ -13,6 +17,8 @@
       )]
   }
 
+  context code_play_x.update(0.8em)
+  context code_border_color.update(color)
   if (content != none) {
     stack(
       block(
@@ -43,24 +49,26 @@
       ),
     )
   } else {
-      block(
-        width: 100%,
-        fill: color,
-        stroke: color,
-        outset: (x: 1em),
-        inset: (x: 0pt, top: 3pt, bottom: 4pt),
-        radius: (top: 0.4em, bottom: 0.4em),
-        place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0.03em)[#set align(
-            center + horizon,
-          )
-          #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
-          + text(
-            white,
-          )[#strong(
-            title,
-          )],
-      )
+    block(
+      width: 100%,
+      fill: color,
+      stroke: color,
+      outset: (x: 1em),
+      inset: (x: 0pt, top: 3pt, bottom: 4pt),
+      radius: (top: 0.4em, bottom: 0.4em),
+      place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0.03em)[#set align(
+          center + horizon,
+        )
+        #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
+        + text(
+          white,
+        )[#strong(
+          title,
+        )],
+    )
   }
+  context code_play_x.update(1.3em)
+  context code_border_color.update(main_color)
 }
 
 #let noteblock(title, content) = {
@@ -87,7 +95,7 @@
 // Exemple de code en ligne
 #let codecounter = counter("code_counter")
 #let codesample(codelink, code: none) = {
-  if (code == none) {
+  context if (code == none) {
     context place(
       bottom + right,
       dx: 1.5em - 1.4em * codecounter.get().first(),
@@ -95,24 +103,25 @@
     )
     context codecounter.step()
   } else {
-    block(
-      width: 100%,
-      fill: none,
-      stroke: none,
-      outset: (x: 1.2em),
-      code
-        + place(
-          bottom + right,
-          dx: 1.6em,
-          dy: 0.5em,
+    align(center)[
+      #block(
+        width: 100%,
+        fill: none,
+        stroke: none,
+        outset: (x: 1.2em),
+        code
+          + place(
+            bottom + right,
+            dx: code_play_x.get(),
+            dy: 0.3em,
 
-          circle(fill: white, stroke: white + 0pt, inset: -0.1em)[#set align(
-              center + horizon,
-            )
-            #link(codelink)[#text(main_color, baseline: -0.15em, size: 1.05em)[#fa-icon("circle-play", solid: true)]]
-          ],
-        ),
-    )
+            circle(fill: none, stroke: none, inset: -0.1em)[#set align(
+                center + horizon,
+              )
+              #link(codelink)[#text(code_border_color.get(), baseline: -0.12em, size: 1.05em)[#fa-icon("circle-play", solid: true)]]
+            ],
+          ),
+      )]
   }
 }
 
@@ -181,15 +190,17 @@
 #let addconf(name, url, youtube, github) = {
   text[
     #link(url)[#text(main_color, size: 0.9em)[#name]]
-    #link(youtube)[#text(red)[#fa-youtube()]]
-    #link(github)[#text[#fa-github()]]
+
+    #link(youtube)[#h(0.5cm) #text(red, size: 0.9em, baseline: 0.15em)[#fa-youtube()] #text(size: 0.8em)[Chaîne #name]]
+
+    #link(github)[#h(0.5cm) #text(baseline: 0.15em)[#fa-github()] #text(size: 0.8em)[GitHub #name]]
     #linebreak()
     #v(0.6em)
   ]
 }
 #let addvideo(tile, url) = {
   text[
-    #link(url)[#text(main_color, size: 0.9em)[#tile] #text(red)[#fa-youtube()]]
+    #link(url)[#text(red, baseline: 0.15em)[#fa-youtube()] #text(main_color, size: 0.9em)[#tile]]
     #linebreak()
     #v(0.6em)
   ]
@@ -367,7 +378,7 @@
   }
 
   show heading.where(level: 2): it => {
-        pagebreak(weak: true)
+    pagebreak(weak: true)
   }
 
   show heading.where(level: 3): it => {
@@ -381,14 +392,14 @@
   // ADDITIONAL STYLING --------------------------------------------------
   // Code
   show raw.where(block: true): it => {
-    block(
+    context block(
       radius: 0.4em,
       fill: white,
-      stroke: title-color,
+      stroke: code_border_color.get(),
       width: 100%,
       inset: (x: 0pt, y: 5pt),
       outset: (x: 1.2em),
-      it,
+      align(left)[#it],
     )
   }
 

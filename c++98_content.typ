@@ -962,12 +962,17 @@ for_each(foo.begin(), foo.end(), Aggregate()).m_sum; // 30
 - ... et retourne un itérateur sur celle-ci
 - ... ou l'itérateur de fin si la valeur n'est pas présente
 
-```cpp
-vector<int> foo{4, 5, 9 ,12};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:39,endLineNumber:12,positionColumn:39,positionLineNumber:12,selectionStartColumn:39,selectionStartLineNumber:12,startColumn:39,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+9+,12%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+5)%3B%0A++std::cout+%3C%3C+*(it-1)+%3C%3C+!'+!'+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++it+%3D+find(foo.begin(),+foo.end(),+19)%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+(it+%3D%3D+foo.end())+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 9 ,12};
 
-find(foo.begin(), foo.end(), 5);   // itérateur sur foo[1]
-find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
-```
+    find(foo.begin(), foo.end(), 5);   // itérateur sur foo[1]
+    find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
+    ```
+  ],
+)
 
 === STL Algorithmes -- Recherche linéaire
 
@@ -983,10 +988,6 @@ find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
 - ```cpp std::adjacent_find()``` recherche deux éléments consécutifs égaux
 - ```cpp std::search_n()``` recherche la première suite de $n$ éléments consécutifs égaux à une valeur
 
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B2,+5,+2,+1,+8,+8,+6,+2,+8,+8,+8,+2%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+find(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'+!'+%3C%3C+*(it%2B1)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it2+%3D+std::adjacent_find(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+*it2+%3C%3C+!'+!'+%3C%3C+*(it2+-+1)+%3C%3C+!'+!'+%3C%3C+*(it2+%2B+2)+%3C%3C+!'%5Cn!'%3B%0A%0A++std::vector%3Cint%3E::iterator+it3+%3D+std::search_n(foo.begin(),+foo.end(),+3,+8)%3B%0A++std::cout+%3C%3C+*it3+%3C%3C+!'+!'+%3C%3C+*(it3+-+1)+%3C%3C+!'+!'+%3C%3C+*(it3+%2B+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
-
 === STL Algorithmes -- Recherche dichotomique
 
 #alertblock("Pré-requis", "L'ensemble doit être trié")
@@ -997,12 +998,17 @@ find(foo.begin(), foo.end(), 19);  // itérateur sur foo.end()
 
 - ... et l'itérateur de fin si un tel élément n'existe pas
 
-```cpp
-vector<int> foo{4, 5, 7, 9, 12};
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9,+12%7D%3B%0A%0A++std::vector%3Cint%3E::iterator+it+%3D+std::lower_bound(foo.begin(),+foo.end(),+6)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'%5Cn!'%3B%0A%0A++it+%3D+std::lower_bound(foo.begin(),+foo.end(),+9)%3B%0A++std::cout+%3C%3C+*it+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    vector<int> foo{4, 5, 7, 9, 12};
 
-*lower_bound(foo.begin(), foo.end(), 6);  // 7
-*lower_bound(foo.begin(), foo.end(), 9);  // 9
-```
+    *lower_bound(foo.begin(), foo.end(), 6);  // 7
+    *lower_bound(foo.begin(), foo.end(), 9);  // 9
+    ```
+  ],
+)
 
 === STL Algorithmes -- Recherche dichotomique
 
@@ -1014,9 +1020,6 @@ vector<int> foo{4, 5, 7, 9, 12};
 ])
 
 - ```cpp std::binary_search()``` indique si l'élément cherché est présent
-
-#codesample(
-  "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxCBmAJykAA6oCoRODB7evnrJqY4CQSHhLFEx8baY9vkMQgRMxASZPn5cFVXptfUEhWGR0bEJCnUNTdmtQ109xaUDAJS2qF7EyOwc5gDMwcjeWADUJutuTkPEmKwH2CYaAIIbWzuY%2B4cAbpgOJBdXt2abDNteewObjEwBIhAQLE%2BNy%2BwQIuxYTGCEFmXxMAHYrDddrshugQCBXu9iEDYRddvxUOiLNJdgBWUi7NEMhK7LhmdEAEQOmNuWP2GK%2B2OxuPxhKIxMOpPW2HxhGiTHFu0ITw5OIIeJAtFQAHdogB9CKLBjoaioVAAOiiwCR83JZvNrmRDIAbCj1jyhWqNWgvHCgUDdgAqZX%2Bw67MBrWluBgR7mC/lc6F8qnx4Xq0VvcUkwQXWUEeWKkPrVUizU6/WGrzG00Wq02hkUh3V21xN0eoWln1%2Bw4B4PdtwB2NRmNrd3xzmo5MCvlpjVij6SnPSvMFkhK7sl9MgLyJRIVo0mxt1hhOu0Wx0ttupr34rtPAdhvv3weR6OxsdTxO867YlMzm8gIkiISm4pbziBUoyiAcrEAqJAMmBmYLkcS5QTBcEStguynAoKoAZgACOXhiHqsFGJgNaWpg1onrajYXi6V7/p2iz9r2EA4eaNDEEMszPmGEbhhw/FuEGHGYAo5pKGgxp8aGolDm%2Bo7thO0Jol%2BHDzLQnC0rwfgcFopCoJwA6WNYOKLMsjwbDwpAEJomnzAA1iAtIaPonCSHpDlGZwvAKCA7n2QZmmkHAsBIJgqhvL68EUBA9TAAoyiGJUQgIDq%2Bm2WgLCJHQCrpClIS0OlmU%2BTleX0DESXMIkCgZQQpAVXQ0ShKwqy8M1VUAPK%2BqV2r6YZUVvNcxBJX5pDDcgtT4PpvD8IIIhiOwUgyIIigqOoIWkLorQGEYKDWNY%2Bh4BEAWQPMqCJNUAUcAAtLiBwcqYZmWFwXC7HdADqYi0J9X1RQQsG8KgrzEMQeBYOdTrEFWjhsAAKmatDQ/MCiWSsei4sERVpRlA2cLZQOYKstnarBiQOVpOnedtxkcNg0XILFxC7KoAAczp3c6ki7MAyDILsEBA1WTl8RAplWJYDK4IQa42bMvDBVoszzAgZxYDETouW5HkcF5pCDSDE0BUFVPUxwZi04Z9NK%2BbpBg6kziSEAA%3D%3D")
 
 === STL Algorithmes -- Recherche dichotomique
 
@@ -1222,10 +1225,6 @@ swap(x,y);        // x:20 y:10
 
 - ```cpp std::replace_copy_if()``` copie les éléments d'un ensemble en remplaçant toutes les éléments vérifiant le prédicat
 
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Astatic+bool+check(int+a)%0A%7B%0A++return+a+%3E%3D+7%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+7,+9+,12,+5%7D%3B%0A++std::vector%3Cint%3E+bar%3B%0A++std::replace_copy(foo.begin(),+foo.end(),+std::back_inserter(bar),+5,+8)%3B%0A++for(size_t++i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%0A++for(size_t++i+%3D+0%3B+i+%3C+bar.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+bar%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
-
 === STL Algorithmes -- Suppression
 
 - ```cpp std::remove()``` élimine les éléments égaux à une valeur donnée
@@ -1252,14 +1251,15 @@ swap(x,y);        // x:20 y:10
 #noteblock(text[Idiome _Erase-Remove_], text[
   Suppression via un appel à ```cpp erase()``` après le nouvel itérateur de fin
 
-  ```cpp
-  foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
-  ```
+  #codesample(
+    "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+    code: [
+      ```cpp
+      foo.erase(remove(foo.begin(), foo.end(), 5), foo.end());
+      ```
+    ],
+  )
 ])
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B4,+5,+5,+5,+7,+9,+9,+5%7D%3B%0A%0A++foo.erase(std::remove(foo.begin(),+foo.end(),+5),+foo.end())%3B%0A++for(size_t+i++%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-)
 
 === STL Algorithmes -- Suppression
 
@@ -1547,7 +1547,15 @@ swap(x,y);        // x:20 y:10
 - ```cpp std::sort_heap()``` tri le tas
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B10,20,30,5,15%7D%3B%0A%0A++std::make_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::pop_heap(foo.begin(),+foo.end())%3B%0A++foo.pop_back()%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.push_back(99)%3B%0A++std::push_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::sort_heap(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:27,positionColumn:1,positionLineNumber:27,selectionStartColumn:1,selectionStartLineNumber:27,startColumn:1,startLineNumber:27),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B10,20,30,5,15%7D%3B%0A%0A++std::make_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::pop_heap(foo.begin(),+foo.end())%3B%0A++foo.pop_back()%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++foo.push_back(99)%3B%0A++std::push_heap(foo.begin(),+foo.end())%3B%0A++std::cout+%3C%3C+foo.front()+%3C%3C+!'%5Cn!'%3B%0A%0A++std::sort_heap(foo.begin(),+foo.end())%3B%0A++for(size_t+i+%3D+0%3B+i+%3C+foo.size()%3B+%2B%2Bi)%0A++%7B%0A++++std::cout+%3C%3C+foo%5Bi%5D+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4", code: [
+```cpp
+vector<int> foo{10,20,30,5,15};
+
+make_heap(foo.begin(), foo.end()); // front : 30
+pop_heap(foo.begin(), foo.end());
+foo.pop_back();                    // front : 20
+```
+  ]
 )
 
 === STL Algorithmes -- Min-max
@@ -1691,10 +1699,10 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%23include+%3Citerator%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B5,+6,+12,+89%7D%3B%0A++std::ostream_iterator%3Cint%3E+out_it+(std::cout,+%22,+%22)%3B%0A%0A++std::copy(foo.begin(),+foo.end(),+out_it)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    	vector<int> foo{5, 6, 12, 89};
-    	ostream_iterator<int> out_it (cout, ", ");
+   	vector<int> foo{5, 6, 12, 89};
+   	ostream_iterator<int> out_it (cout, ", ");
 
-    	copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
+   	copy(foo.begin(), foo.end(), out_it); // 5, 6, 12, 89,
     ```
   ],
 )

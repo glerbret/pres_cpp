@@ -46,8 +46,8 @@
 
 === Sites Web
 
-#addweb("C++ reference", "https://en.cppreference.com/w/", none)
-#addweb("hacking C++", "https://hackingcpp.com/", none)
+#addweb("C++ reference", "https://en.cppreference.com", none)
+#addweb("hacking C++", "https://hackingcpp.com", none)
 #addweb("C++ Core Guidelines", "https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md", none)
 #addweb("C++ FAQ", "https://isocpp.org/faq", none)
 #addweb("accu - Overload", "https://accu.org/journals/nonmembers/overload_issue_members/", none)
@@ -55,7 +55,7 @@
 === Sites web
 
 #addweb("Guru of the Week", "http://www.gotw.ca/gotw/", "Herb Sutter")
-#addweb("More C++ Idioms", "https://en.wikibooks.org/w/index.php?title=More_C\%2B\%2B_Idioms", none)
+#addweb("More C++ Idioms", "https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms", none)
 
 == Blogs
 
