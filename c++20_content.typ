@@ -2860,7 +2860,7 @@ auto delay_invoke(F f, Args... args) {
 
 #addproposal("P0780")
 
-=== Binding
+=== _Binding_
 
 - ```cpp std::bind_front()``` assigne les arguments fournis aux premiers paramètres de l'appelable
 

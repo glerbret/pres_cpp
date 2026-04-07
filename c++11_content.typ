@@ -2744,7 +2744,7 @@ ofstream file{filename};
   Détection des redéfinitions involontaires
 ])
 
-#noteblock(text[```cpp override``` et ```cpp virtual```], text[```cpp override``` implique ```cpp virtual```])
+#noteblock(text[``` override``` et ``` virtual```], text[```cpp override``` implique ```cpp virtual```])
 
 #adviceblock("Do", text[
   Utilisez ```cpp virtual``` à la base de l'arbre d'héritage
@@ -4094,7 +4094,7 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 - ```cpp std::chrono::time_point``` temps relatif depuis l'epoch
 
 #noteblock("Epoch", text[
-  Origine des temps de l'OS (1 janvier 1970 00h00 sur Unix)
+  Origine des temps de l'OS (1 janvier 1970 à 00h00 sur Unix)
 ])
 
 - ```cpp time_since_epoch()``` retourne la durée depuis l'epoch

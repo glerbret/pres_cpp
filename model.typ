@@ -394,7 +394,7 @@
   show raw.where(block: true): it => {
     context block(
       radius: 0.4em,
-      fill: white,
+      fill: code_border_color.get().lighten(95%),
       stroke: code_border_color.get(),
       width: 100%,
       inset: (x: 0pt, y: 5pt),

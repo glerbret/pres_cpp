@@ -2129,8 +2129,8 @@ std::shared_ptr<int[]> foo(new int[10]);
   code: [
     ```cpp
     string in = "abcdefgh", out;
-    sample(begin(in), end(in), back_inserter(out),
-           5, mt19937{random_device{}()});
+    sample(begin(in), end(in), back_inserter(out), 5,
+           mt19937{random_device{}()});
     ```
   ],
 )
