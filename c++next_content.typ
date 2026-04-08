@@ -906,6 +906,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 #addproposal("p3103")
 #addproposal("p3133")
 #addproposal("p3516")
+#addproposal("p4037")
 
 === Algorithmes
 
@@ -913,9 +914,10 @@ t[0ic] // Équivalent a std::get<0>(t)
 // Plus grand entier dont le carré est inférieur ou égal au nombre initial
 - ```cpp std::clmul()``` : multiplication sans retenu (_XOR multiplication_)
 - Fonctions de manipulation de caractères
-  - ```cpp is_ascii()```, ```cpp is_ascii_alpha()```, ```cpp is_ascii_alphanumeric()```, ...
+  - ```cpp ascii_is_any()```, ```cpp ascii_is_alphabetic()```, ...
   - ```cpp ascii_to_lower()```, ```cpp ascii_to_upper()```
   - ```cpp ascii_case_insensitive_compare()```, ```cpp ascii_case_insensitive_equal()```
+  - ...
   - Alternative plus riche et robuste aux fonctions de ```cpp <cctype>```
 // Support de ```cpp char8_t```, ```cpp char16_t``` et ```cpp char32_t```, fonction ```cpp constexpr```, meilleure gestion typage}
 - Support des différents types de caractères (```cpp char8_t```, ```cpp char16_t```, ```cpp char32_t``` et ```cpp wchar_t```) par ```cpp std::to_chars()``` et ```cpp std::from_chars()```
@@ -925,7 +927,6 @@ t[0ic] // Équivalent a std::get<0>(t)
 #addproposal("p3688")
 #addproposal("p3711")
 #addproposal("p3735")
-#addproposal("p3724")
 #addproposal("p3876")
 
 === Algorithmes
@@ -945,6 +946,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 #addproposal("p3764")
 #addproposal("p3864")
 #addproposal("p3935")
+#addproposal("p3724")
 
 === Algorithmes
 
