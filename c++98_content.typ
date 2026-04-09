@@ -135,21 +135,13 @@ catch(logic_error& e) {
 === Erreurs -- Critiques des exceptions
 
 - Critiquées, parfois interdites (p.ex. : #link("https://google.github.io/styleguide/cppguide.html")[Google C++ Style Guide #linklogo()])
-- Arguments très variés
-  - "Je ne comprends pas", "Ça ne sert à rien", ...
   - Impact négatif sur les performances
 
-#noteblock("À nuancer", text[
-  Initialement vrai
-
+#noteblock("Plus vraiment", text[
   Actuellement, une exception non levée ne coûte quasiment rien
-
-  Souvent comparée à une non gestion d'erreurs, est-ce pertinent ?
 ])
 
-=== Erreurs -- Critiques des exceptions
-
-#list(marker: [], list(indent: 5pt, "Mauvais support par les différents outils"))
+#list(marker: [], list(indent: 7pt, "Mauvais support par les différents outils"))
 
 #noteblock("À nuancer", text[
   Correctement supportées par les compilateurs actuels
@@ -159,11 +151,11 @@ catch(logic_error& e) {
 
 #list(
   marker: [],
-  list(indent: 5pt, "Code plus complexe à analyser"),
+  list(indent: 7pt, "Code plus complexe à analyser"),
   //Complexité discutable : il faut une vision plus globale, donc plus complexe, pour suivre un programme. Mais le code local est plus simple vu qu'il n'est pas noyé de code dédié à la gestion d'erreurs
-  list(indent: 5pt, "Difficiles à introduire dans une large base de code sans exception"),
+  list(indent: 7pt, "Difficiles à introduire dans une large base de code sans exception"),
   // Argument de la difficulté d'introduction à nuancer toutefois avec la levée d'exception par la bibliothèque standard qui a lieu dans tous les cas (hors options particulières du compilateur)
-  list(indent: 5pt, "Absence d'ABI normalisée"),
+  list(indent: 7pt, "Absence d'ABI normalisée"),
   //Le problème d'ABI est plus large que les seules exceptions
 )
 
@@ -218,28 +210,24 @@ A& A::operator=(A other) {           // Copy
   _Throw by value, catch by const reference_ (voir _C++ Coding Standards_)
 ])
 
-#adviceblock("Do", text[
-  Utilisez des types dédiés héritant de ```cpp std::exception```
+#adviceblock(text[Do, _throw_], text[
+  Lancez des exceptions standards lorsqu'elles sont pertinentes
+
+  Définissez vos propres exceptions sinon
 ])
 
-#adviceblock("Do", text[
-  Définissez des hiérarchies d'exceptions
+#adviceblock("Do, définition", text[
+  Héritez de ```cpp std::runtime_error ```
+
+  Définissez des hiérarchies peu profondes et compactes
 ])
 
 #adviceblock("Do", text[
   Capturez uniquement là où vous savez traiter l'erreur
 ])
 
-=== Erreurs -- Exceptions et bonnes pratiques
-
 #alertblock("Don't", text[
   N'utilisez jamais les exceptions pour contrôler le flux d'exécution
-
-  Ni pour gérer les "échecs attendus"
-])
-
-#adviceblock("Do", text[
-  Réservez les exceptions au signalement d'erreurs
 ])
 
 === Erreurs -- ```cpp assert```
@@ -259,22 +247,22 @@ assert(expression);
   Traquer les erreurs de programmation et les violations de contrat interne
 ])
 
-=== Erreurs -- Conclusion
-
-#adviceblock("Do", text[
-  Utilisez exceptions et codes retour pour les erreurs d'exécution et la vérification des données externes
-])
-
-#adviceblock("Do", text[
-  Réservez ```cpp assert``` aux erreurs de programmation et à la vérification des contrats internes
-])
-
-#adviceblock("Do", text[
-  Préférez les exceptions aux codes retour (voir _C++ Coding Standards_)
-])
-
 #alertblock("Don't", text[
   Jamais d'```cpp assert``` pour les erreurs d'exécution et le contrôle des entrées
+])
+
+=== Erreurs -- Conclusion
+
+#adviceblock(text[Do, exception/code retour vs. ``` assert```], text[
+  Utilisez exceptions et codes retour pour les erreurs d'exécution
+
+  Réservez ```cpp assert``` aux erreurs de programmation et aux violations de contrats
+])
+
+#adviceblock("Do, exception vs. code retour", text[
+  Codes retour pour les erreurs traitées localement (par l'appelant)
+
+  Exceptions pour les erreurs non-récupérables ou au traitement lointain
 ])
 
 == Gestion des ressources

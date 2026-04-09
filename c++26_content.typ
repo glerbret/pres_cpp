@@ -380,9 +380,12 @@ S<Concept, Var> s;
 
 === Conteneurs
 
-- Nouveaux conteneurs
-  - Vecteur de capacité fixée en _compile-time_ ```cpp std::inplace_vector```
+- Vecteur de capacité fixée en _compile-time_ ```cpp std::inplace_vector```
 // Contrairement à std::array la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments "sans valeur par défaut"
+  - 3 jeux d'API d'insertion pour gérer l'absence de place
+    - API standard : lancement d'exception
+    - API ```cpp try_``` : retour d'un booléen
+    - API ```cpp unchecked_``` : pas de vérification
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:16,positionColumn:1,positionLineNumber:16,selectionStartColumn:1,selectionStartLineNumber:16,startColumn:1,startLineNumber:16),source:'%23include+%3Ciostream%3E%0A%23include+%3Cinplace_vector%3E%0A%0Aint+main()%0A%7B%0A++++std::inplace_vector%3Cint,+4%3E+foo%7B0,+1,+2%7D%3B%0A%0A++++std::cout+%3C%3C+foo.size()+%3C%3C+%22+%22+%3C%3C+foo.capacity()+%3C%3C+%22+%22+%3C%3C+foo.max_size()+%3C%3C+%22%5Cn%22%3B%0A++++foo.push_back(5)%3B%0A++++std::cout+%3C%3C+foo.size()+%3C%3C+%22+%22+%3C%3C+foo.capacity()+%3C%3C+%22+%22+%3C%3C+foo.max_size()+%3C%3C+%22%5Cn%22%3B%0A%0A%23if+0%0A++++foo.push_back(5)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-fcontracts+-std%3Dc%2B%2B26',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -395,10 +398,7 @@ S<Concept, Var> s;
   ],
 )
 
-#list(marker: [], list(
-  indent: 5pt,
-  text[_Bucket array_ ```cpp std::hive``` : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)],
-))
+- _Bucket array_ ```cpp std::hive``` : plusieurs blocs d'éléments liés entre eux avec un indicateur sur l'état de chaque élément (actif / effacé)
 
 - Possibilité d'utiliser ```cpp std::weak_ptr``` en tant que clé de conteneur associatif
 
@@ -518,6 +518,27 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 === ``` std::optional```
 
 - Support des références par ```cpp std::optional```
+
+#alertblock("Affectation", text[
+  L'affectation modifie la référence pas la valeur référencée
+
+  #codesample(
+    "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGIAKwA7KSuADJ4DJgAcj4ARpjEIGZmpAAOqAqETgwe3r4BwemZjgLhkTEs8YnJtpj2JQxCBEzEBLk%2BfgDMtfXZTS0EZdFxCSAAbLbNre353QpTgxHDlaNjAJS2qF7EyOwc5p0RyN5YANQmnW5O88SYrBfYJhoAggdHJ5jnl6ipDWIPT1eLwiBFOLCYEQga0BJkCVhep1OINOsRaXwAIqdJGYLvDnojkaiAF4Y05cDS4wGI%2BboEAgH5/WgXK6CcxjB6nfioUmo4iUhGnGl0tBeUHM5mnABUXK%2Bbgl5jM52SsolvJVlyVioV6rcKKYJPFGoVJn8bgYxs6eKpnNQ3IumOJ/PxgoItJQWzFlwl0ttOs1/sNurVgYDypDxL9xtN5uSTphZkOVFOFIFMvtp38cYTrjwVBhqdtADoAG5iLyYKE8lpO6mu4Uev0%2Bu1eo1hsMtoNokPansdvUGvtRs0Wq0CpukzOW61C92ixtpwdtrV94OLrXtuUaiPd2PRkcwwLowEcDa0Tj%2BXh%2BDhaUioThyyzWQVbHafA48UgETQnjYAawCGj6JwkiXt%2Bt6cLwCggIBX7XiepBwLASCYKomDIKKJDkJQLTAAoyiGHUQgIKgADuV4fmgLCpHQTANPhkS0ERpFXjelHUfQiS4cwqQKMRBCkGxdAJFErB7LwgkcQA8qKTFkWBKFoc8xC4RBISocgTT4FevD8IIIhiOwUgyIIigqOocGkLoXD6IYxjWNY%2Bh4LEUGQBsDLZFBHAALQ0vapiPpYZhjKcXkAOpiLQIWhShBDEEwIWpJg6CGI4yC8KgxYJMQeBYC5UKkMQXiCHgbAACq2rQeUbAoL67HoNIRPRhHEXJ3C8LFmB7B%2BJFxak36nueoEWXeHDYOpGHEKcqgABxjF5YySKcwDIMgpwQLFRW/msa0PlYlikKcuCECQSqdFwaztf1GwIHcWCJPl/7%2BIBZ4cCBpAselqlQTBV1ARwZhDTeI2XXBawbJlxCZM4khAA%3D%3D%3D",
+    code: [
+      ```cpp
+        int bar = 42;
+        int baz = 10;
+
+        optional<int&> foo = bar; // foo => bar, bar = 42, baz = 10
+        foo = baz;                // foo => baz, bar = 42, baz = 10
+        foo.value() = bar;        // foo => baz, bar = 42, baz = 42
+        *foo = 5;                 // foo => baz, bar = 42, baz = 5
+        foo = 5;                  // Invalide
+      ```
+    ],
+  )
+])
+
 - ```cpp std::optional<T&>``` trivialement copiable
 
 #addproposal("p2988")
@@ -964,6 +985,12 @@ format("{:>{}}", "hello", "10");
   #link("https://wg21.link/P4043")[P4043 : Are C++ Contracts Ready to Ship in C++26? #linklogo()]
 
   #link("https://wg21.link/p4020")[P4020 : Concerns about contract assertions #linklogo()]
+])
+
+#questionblock("Fallait-it attendre ?", text[
+Les contrats actuels sont-ils cohérents et utilisables ?
+
+Les problèmes peuvent-ils corrigés dans une version future ?
 ])
 
 === Contrats - Présentation

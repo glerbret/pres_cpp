@@ -1352,6 +1352,8 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   ],
 )
 
+#adviceblock("Gestion des erreurs", text[Préférez ```cpp std::expected``` (ou ```cpp std::optional```) aux autres types de codes retour])
+
 #addproposal("P0323")
 #addproposal("P2549")
 
