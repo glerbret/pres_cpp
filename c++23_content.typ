@@ -302,7 +302,7 @@ if ! consteval { ... }
 #addproposal("P2266")
 #addproposal("P0288")
 
-== Range-based for loop
+== _Range-based for loop_
 
 === Durée de vie des temporaires
 
@@ -707,9 +707,9 @@ Foo{}(4);
 
 - Ajout de ```cpp noexcept``` à plusieurs fonctions de la bibliothèque standard
 
-== Traits
+== _Traits_
 
-=== Traits
+=== _Traits_
 
 - ```cpp std::is_scoped_enum``` indique si un type est un ```cpp enum class```
 
@@ -733,7 +733,7 @@ Foo{}(4);
 
 #addproposal("P1048")
 
-=== Traits
+=== _Traits_
 
 - ```cpp std::is_implicit_lifetime``` indique si un objet à une durée de vie implicite
 - ```cpp std::reference_constructs_from_temporary``` et ```cpp std::reference_converts_from_temporary``` indiquent si la référence est construite depuis un temporaire

@@ -1747,7 +1747,9 @@ fill(foo, foo + 4, 5);  // 5 5 5 5
 ])
 
 #noteblock("Bémol, performances", text[
-  Algorithmes standards généralement bons, mais pas optimaux dans toutes les situations
+  Algorithmes standards généralement bons
+
+  Mais pas optimaux dans toutes les situations
 ])
 
 === STL Conclusion

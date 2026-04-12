@@ -8,7 +8,7 @@
 === Présentation
 
 - Approuvé en décembre 2017
-- Dernier Working Draft : #link("https://wg21.link/std17")[N4659 #linklogo()]
+- Dernier _Working Draft_ : #link("https://wg21.link/std17")[N4659 #linklogo()]
 
 #noteblock("Note", text[
   Voir #link("https://www.youtube.com/user/lefticus1/videos")[Vidéos C++ Weekly #linklogo()] (Jason Turner)
@@ -31,7 +31,7 @@
 - Suppression des anciens mécanismes fonctionnels : ```cpp std::bind1st()```, ```cpp std::bind2nd()```, ...
 - Suppression des spécifications d'exception
 
-== include
+== ``` include```
 
 === ``` __has_include```
 
@@ -79,9 +79,9 @@ class Foo { static inline int bar = 42; };
 
 == ``` namespace```
 
-=== Nested namespace
+=== _Nested namespace_
 
-- Simplification des imbrications de namespaces via l'opérateur ```cpp ::```
+- Simplification des imbrications de namespaces via ```cpp ::```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Anamespace+A::B::C%0A%7B%0A++int+foo+%3D+5%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+A::B::C::foo+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -362,7 +362,7 @@ auto& [refX,refY,refZ] = monTuple;
 ```
 
 #alertblock("Attention", text[
-  La portée de l'objet référencé doit être supérieure à celle des références
+  La portée de l'objet référencé doit être supérieure à celles des références
 ])
 
 #addproposal("P0217")
@@ -498,7 +498,7 @@ T t = f();   // Pas de copie
 
 == Initialisation
 
-=== Aggregate Initialisation
+=== _Aggregate Initialisation_
 
 - Généralisation aux classes dérivées
 - Incluant l'initialisation de la classe de base
@@ -531,7 +531,7 @@ T t = f();   // Pas de copie
 
 #addproposal("p0017")
 
-=== Déduction de type et Initializer list
+=== Déduction de type et ``` initializer_list```
 
 - Évolution des règles de déduction sur les listes entre accolades
   - _Direct initialisation_ : déduction d'une valeur
@@ -625,23 +625,19 @@ T t = f();   // Pas de copie
 
 == Conteneurs
 
-=== Conteneurs associatifs : déplacement de nœuds
+=== Conteneurs associatifs -- déplacement de nœuds
 
 - Déplacement de nœuds entre conteneurs associatifs de même type
 - Objet _node handle_ : stockage et accès au nœud
   - Déplaçable mais non copiable
   - Modification possible de la clé
   - Destruction du nœud lors de sa destruction
-- ```cpp extract()``` extrait le nœud du premier conteneur
-  - Nœud identifié par sa clé ou par un itérateur
-  - Retourne un _node handle_
+- ```cpp extract()``` extrait un nœud, identifié par la clé ou un itérateur
 - Surcharge de ```cpp insert()``` prenant un _node handle_ en paramètre
-  - Retourne une structure indiquant la réussite ou non de l'insertion
-  - ... et, en cas d'échec, le _node handle_
 
 #addproposal("P0083")
 
-=== Conteneurs associatifs : déplacement de nœuds
+=== Conteneurs associatifs -- déplacement de nœuds
 
 #codesample(
   "https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1DIApACYAQuYukl9ZATwDKjdAGFUtAK4sGe1wAyeAyYAHI%2BAEaYxHoADqgKhE4MHt6%2BcQlJAkEh4SxRMVy2mPaOAkIETMQEqT5%2BRXaYDskVVQQ5YZHRegqV1bXpDX3twZ353VwAlLaoXsTI7BzmAMzByN5YANQmy25OvcSYrDvYJhoAgitrG5jbuyxMsSdnl2arDOteWztuB8HAzwuL2CBE2D2CEEmLxMAHYrBdNpteugQCAHk9diDSEiCCiQH8jCdNvxUNs4bCLEVzGYSVxqbCACLYilmUjUklmekwhmMnbw86I5Go9E/LE4vEEgHLbCbCJVMlWOGs6ly4icsyc7m85b8l6I1UAOmCSmq1FQqANmFUBGITAcECmUJ1euJJAgaAYvU2TC8RHMADZtgBWCwAa1IADcTEGGZsQK7UFCEQqXYLcai0L67m4fptQ9nc2AOABaIsF3abCPltybMtFvku3nJoUoWagn6FpZBtwMevO5P8YjugRen1%2BsyB6NhyPR2Px1VJgUp5NpvGZ9u7XP5jsVouljjVyuHutLftLptLlvrw/07sMYsP6M9%2Blnl1j0nEO6xw3G6IEM0WlaNp2v%2BZiTE6/KIoOw6eqC74BsG05RjGcYJouiIUqm4oZm2h7bpuu4lmWO41lWJG1gefaQWSPLNumrZZuR9Z3lRLrQR6o6%2BqgCFTuGyFzrKVTocuS6rjhjEETW%2BE5oR%2B6HmRkkURRDbJheYkMRuMk1sxPasXRa64eRLYROaBi0LECBMIexBGp6f6YOgx6UQe5E2QwGCYAaoaYAAnpCTlKa5BruVgBrorEDn%2BUxXa6ae1FXoZinUg%2BxZPgwL66smbkeV5vlRcssbLCpS4/nZpo2fEiRlAw2ItiwqARpgEDZVg4HFVBbocXBXE8SGfGzqhJLCZhK7YRpeFOXJ5EKVpSl6eeWr6eJmmdml80dUOXXej1E6If1KHzkJjbkqNCUSbN0mdlNikzZ2ylnhhi2XvR17RWtcXQk9HDTLQnBBrwfgcFopCoJwOaWNYSKzPMtwrDwpAEJo33TKGIBBho%2BicJIANIyDnC8AoIAY4jQPfaQcCwEgVpNFxZAUBAVTAAoyiGCUQgIKgADugPw2gLCxHQTDVSzIS0OzXOA8DfMC/QMRM8wsQKBzBCkNLdDRKErCLLwauywA8r64vc7j1PIOcxBM/jpCmxU%2BCA7w/CCCIYjsFIMiCIoKjqKTpC6EUBhGCg1jWPoeARITkDTKgsTVYTJbIjsDKmBDlhcDCmzFgA6mItAZ5nQG2hnEXoIYjjILwDXRMQeBYBHkKkMQXiCHgbAACqmXX0wKNDCw9LiwQi2zHPG9wvA2pgizw5ztqxEjP1/TjPugxw2CqDTRCfqoAAc/rFv6kibMAyDIJsEA2k3oaTKf4NWJY2K4IQJDbG8Uxj3P0wIEcWAxPXqPo5jHBsakElhXK2hNibvwAWYRewNl5v1JuBSM0REjOEkEAA",
@@ -858,7 +854,7 @@ auto& val = foo.emplace_back(...);    // C++17
 === ``` std::variant```
 
 - ```cpp get<>()``` récupère la valeur depuis l'index ou le nom du type
-- Et lève une exception si le type demandé n'est pas correct
+- ... et lève une exception si le type demandé n'est pas correct
 - ```cpp get_if<>()``` retourne un pointeur sur la valeur ou ```cpp nullptr```
 - ```cpp std::holds_alternative<>()``` teste le type contenu
 - ```cpp index()``` retourne l'index d'un type donnée
@@ -1141,9 +1137,9 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 #addproposal("P0036")
 
-== Range-based for loop
+== _Range-based for loop_
 
-=== Contraintes du range-based for loop
+=== Contraintes du _range-based for loop_
 
 - Utilisation possible de types différents pour ```cpp begin``` et ```cpp end```
 - Permet de traiter des paires d'itérateurs
@@ -1203,7 +1199,7 @@ Baz baz(0); // OK (Ambigu en C++11)
 
 === ``` std::uncaught_exceptions()```
 
-- Retourne le nombre d'exceptions lancées (ou relancées) et non encore attrapées du thread courant
+- Retourne le nombre d'exceptions lancées et non attrapées du thread courant
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cexception%3E%0A%0Astruct+Foo%0A%7B%0A++Foo()+%3D+default%3B%0A++~Foo()%0A++%7B%0A++++std::cout+%3C%3C+std::uncaught_exceptions()%3B%0A++%7D%0A%7D%3B%0A%0Avoid+bar()%0A%7B%0A++Foo+foo%3B%0A%23if+0%0A++throw+std::exception()%3B%0A%23endif%0A%7D%0A%0Aint+main()%0A%7B%0A++try%0A++%7B%0A++++bar()%3B%0A++%7D%0A++catch(...)%0A++%7B%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1309,7 +1305,7 @@ foo<10>();  // int
 
 #addproposal("P0127")
 
-=== Template et contraintes d'utilisation
+=== Contraintes d'utilisation
 
 - ```cpp typename``` autorisé dans les déclarations de _template template parameters_
 
@@ -1491,11 +1487,11 @@ foo<10>();  // int
 #addproposal("p0005")
 #addproposal("p0358")
 
-== Traits
+== _Traits_
 
-=== Alias de traits
+=== Alias de _traits_
 
-- Ajout du suffixe ```cpp _v``` aux traits de la forme ```cpp is_...```
+- Ajout du suffixe ```cpp _v``` aux _traits_ de la forme ```cpp is_...```
 - Suppression de ```cpp ::value```
 
 #codesample(
@@ -1517,15 +1513,15 @@ foo<10>();  // int
 
 #addproposal("P0006")
 
-=== Nouveaux traits
+=== Nouveaux _traits_
 
-- Nouveaux traits
-  - ```cpp is_swappable_with```, ```cpp is_swappable```, ```cpp is_nothrow_swappable_with``` et ```cpp is_nothrow_swappable``` : objets échangeables
-  - ```cpp is_callable``` et ```cpp is_nothrow_callable``` : objet appelable
-  - ```cpp void_t``` conversion en ```cpp void```
-- Méta-fonctions sur les traits
-  - ```cpp std::conjunction``` : et logique entre traits
-  - ```cpp std::disjunction``` : ou logique entre traits
+- Nouveaux _traits_
+  - ```cpp std::is_swappable_with```, ```cpp std::is_swappable```, etc. : échangeables
+  - ```cpp std::is_callable``` et ```cpp std::is_nothrow_callable``` : appelable
+  - ```cpp std::void_t``` conversion en ```cpp void```
+- Méta-fonctions sur les _traits_
+  - ```cpp std::conjunction``` : et logique entre _traits_
+  - ```cpp std::disjunction``` : ou logique entre _traits_
   - ```cpp std::negation``` : négation d'un trait
 
 #codesample(
@@ -1739,7 +1735,7 @@ scoped_lock lck(first_mutex, second_mutex);
   ],
 )
 
-- Fonctionne sur tout ce qui supporte ```cpp std::get()``` et ```cpp std::tuple_size```
+- Fonctionne sur tout ce qui implémente ```cpp std::get()``` et ```cpp std::tuple_size```
 - Notamment ```cpp std::pair``` et ```cpp std::array```
 
 #codesample(
@@ -1774,9 +1770,7 @@ scoped_lock lck(first_mutex, second_mutex);
   ```cpp operator*``` ou ```cpp operator->``` indéfini sur un ```cpp std::optional``` vide
 ])
 
-#list(marker: [ ], text[
-  - ```cpp std::nullopt``` indique l'absence de l'objet
-])
+- ```cpp std::nullopt``` indique l'absence de l'objet
 
 #addproposal("P0220")
 
@@ -1889,7 +1883,7 @@ optional foo(10);  // std::optional<int>
 
 === ``` std::optional```
 
-#alertblock(text[``` std::optional<bool>``` ? ``` std::optional<T*>``` ?], text[
+#questionblock(text[``` std::optional<bool>``` ? ``` std::optional<T*>``` ?], text[
   Utilisez des booléens "trois états" (```cpp Boost.tribool```)
 
   Utilisez des pointeurs bruts
@@ -2182,7 +2176,7 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 === _Filesystem TS_
 
-- Manipulation des répertoires, des fichiers et de leurs méta-datas
+- Manipulation des répertoires, des fichiers et de leurs méta-données
   - Copie : ```cpp copy_file()```, ```cpp copy()```
   - Création de répertoires : ```cpp create_directory()```, ```cpp create_directories()```
   // Différence : création du répertoire final seulement ou de tous les répertoires intermédiaires nécessaires
@@ -2242,9 +2236,9 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 #addproposal("P0218")
 
-== Parallelism TS
+== _Parallelism TS_
 
-=== Parallelism TS
+=== _Parallelism TS_
 
 - Surcharges parallèles de nombreux algorithmes standards
 - Politiques d'exécution (séquentielle, parallèle et parallèle + vectorisée)
@@ -2262,9 +2256,9 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-=== Parallelism TS
+=== _Parallelism TS_
 
-- ```cpp std::for_each_n()``` parcours un ensemble défini par l'itérateur de début et sa taille
+- ```cpp std::for_each_n()``` parcours un ensemble défini par son début et sa taille
 // En soi, ce n'est pas lié au parallélisme mais cet algorithme apparaît avec ce TS
 
 #codesample(
@@ -2292,7 +2286,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
   ],
 )
 
-#noteblock(text[``` std::reduce()``` ou ``` std::accumulate()``` ?], text[
+#questionblock(text[``` std::reduce()``` ou ``` std::accumulate()``` ?], text[
   Ordre des "additions" non spécifié dans le cas de ```cpp std::reduce()```
   // Le résultat n'est donc pas déterministe dans le cas d'opérations non associatives ou non commutatives (car std::reduce() regroupe et réarrange les opérations)
   // Mais rend cet algorithme parallélisable contrairement à std::accumulate()
@@ -2300,7 +2294,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-=== Parallelism TS
+=== _Parallelism TS_
 
 - ```cpp std::exclusive_scan()``` construit un ensemble où chaque élément est égal à la somme des éléments de rang strictement inférieur de l'ensemble initial et d'une valeur initiale
 
@@ -2318,7 +2312,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-=== Parallelism TS
+=== _Parallelism TS_
 
 - ```cpp std::inclusive_scan()``` construit un ensemble où chaque élément est égal à la somme des éléments de rang inférieur ou égal de l'ensemble initial et d'une valeur initiale (si présente)
 
@@ -2339,7 +2333,7 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-=== Parallelism TS
+=== _Parallelism TS_
 
 - ```cpp std::transform_reduce()``` : ```cpp std::reduce()``` sur des éléments préalablement transformés
 - ```cpp std::transform_exclusive_scan()``` : ```cpp std::exclusive_scan()``` sur des éléments préalablement transformés
@@ -2351,9 +2345,9 @@ for_each(execution::par, begin(foo), end(foo), bar);
 
 #addproposal("P0024")
 
-== Mathematical Special Functions
+== _Mathematical Special Functions_
 
-=== Mathematical Special Functions
+=== _Mathematical Special Functions_
 
 - Une longue histoire datant du TR1
 - Ajout de fonctions mathématiques particulières

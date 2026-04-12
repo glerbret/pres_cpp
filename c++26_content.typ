@@ -210,7 +210,7 @@ int CONCAT(\, u0393) = 0;
 // L'idée est de permettre certaines optimisations sur les objets correspondants
 - Objet implicitement _trivially relocatable_ si toutes ces classes de base et membres non-statiques le sont
 - ```cpp trivially_relocatable_if_eligible``` sur les classes pour les marquer _trivially relocatable_
-- Traits ```cpp std::is_trivially_relocatable``` et ```cpp std::is_nothrow_relocatable```
+- _Traits_ ```cpp std::is_trivially_relocatable``` et ```cpp std::is_nothrow_relocatable```
 - Fonction ```cpp std::trivially_relocate()``` effectue ce déplacement trivial
 - Fonction ```cpp std::relocate()``` appelle ```cpp std::trivially_relocate()``` ou le constructeur par déplacement selon l'objet
 
@@ -683,7 +683,7 @@ ranges::generate_random(a, g);
 
 - Davantage de ```cpp constexpr``` dans la bibliothèque standard
 - Conversion depuis ```cpp void*``` dans des contextes ```cpp constexpr```
-  - ```cpp std::format()``` au compile-time
+  - ```cpp std::format()``` au _compile-time_
   - ```cpp std::function_ref```, ```cpp std::function``` et ```cpp std::any``` ```cpp constexpr```
 - Utilisation ```cpp constexpr``` de
   - _Structured bindings_
@@ -774,9 +774,9 @@ auto e = reduce(d);                               // 6
 #addproposal("P2663")
 #addproposal("P2933")
 
-== Traits
+== _Traits_
 
-=== Traits
+=== _Traits_
 
 - ```cpp std::is_virtual_base_of``` indique si une classe est une base virtuelle d'une autre
 

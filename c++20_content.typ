@@ -7,7 +7,7 @@
 === Présentation
 
 - Approuvé en décembre 2020
-- Dernier Working Draft : #link("https://wg21.link/std20")[ N4860 #linklogo()]
+- Dernier _Working Draft_ : #link("https://wg21.link/std20")[ N4860 #linklogo()]
 
 == Organisation
 
@@ -119,7 +119,7 @@
   // En particulier, la numérotation des lignes et colonnes peut commencer à 0 ou à 1
   // Il est toutefois encouragé de numéroter à partir de 1 et de retourner 0 lorsque le numéro n'est pas connu
 
-  - Remplaçant de ```cpp __LINE__```, ```cpp __FILE__```, ```cpp __func__``` et autres macros propriétaires
+  - Remplaçant de ```cpp __LINE__```, ```cpp __FILE__```, ```cpp __func__``` et autres
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring_view%3E%0A%23include+%3Csource_location%3E%0A%0Avoid+log(const+std::string_view%26+message,+const+std::source_location%26+location+%3D+std::source_location::current())%0A%7B%0A++std::cout+%3C%3C+location.file_name()+%3C%3C+%22:%22%0A++++++++++++%3C%3C+location.line()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+location.function_name()+%3C%3C+%22+%22%0A++++++++++++%3C%3C+message+%3C%3C+!'%5Cn!'%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++log(%22Hello+world!!%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -280,7 +280,7 @@ struct S {
 
 #addproposal("P0960")
 
-=== Endianess
+=== _Endianess_
 
 - Énumération ```cpp std::endian```
   - ```cpp little``` : _little-endian_
@@ -411,7 +411,7 @@ Bar f3() {
 
 == Opérateurs
 
-=== spaceship operator -- ``` operator<=>```
+=== _Spaceship operator_ -- ``` operator<=>```
 
 - Effectue une "_Three-way comparison_"
 - Génère les opérateurs d'ordre (```cpp <```, ```cpp <=```, ```cpp >``` et ```cpp >=```)
@@ -435,7 +435,7 @@ Bar f3() {
 #addproposal("P1186")
 #addproposal("P0768")
 
-=== spaceship operator -- ``` operator<=>```
+=== _Spaceship operator_ -- ``` operator<=>```
 
 - Trois types de retour possibles
   - ```cpp std::strong_ordering``` : ordre total et égalité
@@ -451,7 +451,7 @@ Bar f3() {
 #addproposal("P1186")
 #addproposal("P0768")
 
-=== spaceship operator -- ``` operator==```
+=== _Spaceship operator_ -- ``` operator==```
 
 - Génère l'opérateur ```cpp !=```
 - Peut être déclaré ```cpp =default``` et généré par ```cpp operator==``` des bases et membres
@@ -473,7 +473,7 @@ Bar f3() {
 #addproposal("P1186")
 #addproposal("P0768")
 
-=== spaceship operator -- Conclusion
+=== _Spaceship operator_ -- Conclusion
 
 #adviceblock("Do", text[
   Préférez la définition d'```cpp operator<=>``` aux opérateurs ```cpp <```, ```cpp <=```, ```cpp >``` et ```cpp >=```
@@ -489,7 +489,7 @@ Bar f3() {
 
 == ``` namespace```
 
-=== Nested namespace
+=== _Nested namespace_
 
 - Extension des _nested namespaces_ aux _inline namespaces_
 
@@ -752,7 +752,7 @@ export import "bar.h";
 === Chaînes de caractères
 
 - ```cpp std::basic_string::reserve()``` ne peut plus réduire la capacité
-  - Appel avec une capacité inférieure sans effet
+  - Appel avec une capacité inférieure est sans effet
   // Auparavant, la norme permettait de réduire effectivement la capacité mais ne l'imposait pas (idem shrink_to_fit())
   // Si la capacité demandée était inférieur à la taille effective, cet appel était équivalent à un appel à shrink_to_fit()
   - Comportement similaire à ```cpp std::vector::reserve()```
@@ -814,7 +814,7 @@ export import "bar.h";
 - Optimisation de la recherche hétérogène dans des conteneurs non-ordonnés
   - Fourniture d'une classe exposant
     - Différents foncteurs de calcul du hash
-    - Tag ```cpp transparent_key_equal``` sur une comparaison transparente
+    - _Tag_ ```cpp transparent_key_equal``` sur une comparaison transparente
   - Suppression de conversions inutiles
 
 #addproposal("P0919")
@@ -887,7 +887,7 @@ foo.find("def"sv);
 )
 
 #alertblock(text[``` \0``` terminal], text[
-  Le ``` \0``` terminal est un élément du tableau
+  Le ```cpp \0``` terminal est un élément du tableau
 ])
 
 #addproposal("P0325")
@@ -1001,8 +1001,8 @@ span<int> s2(foo.data(), 3);
 === Manipulation de puissances de deux
 
 - ```cpp std::has_single_bit()``` teste si un entier est une puissance de deux
-- ```cpp std::bit_ceil()``` plus petite puissance de $2$ non strictement inférieure
-- ```cpp std::bit_floor()``` plus grande puissance de $2$ non strictement supérieure
+- ```cpp std::bit_ceil()``` plus petite puissance de ```cpp 2``` non strictement inférieure
+- ```cpp std::bit_floor()``` plus grande puissance de ```cpp 2``` non strictement supérieure
 - ```cpp std::bit_width()``` plus petit nombre de bits pour représenter un entier
 
 #codesample(
@@ -1029,11 +1029,11 @@ span<int> s2(foo.data(), 3);
 === Manipulation binaire
 
 - ```cpp std::rotl()``` et ```cpp std::rotr()``` rotations binaires
-- ```cpp std::countl_zero()``` nombre consécutif de bits à $0$ depuis le MSB
-- ```cpp std::countl_one()``` nombre consécutif de bits à $1$ depuis le MSB
-- ```cpp std::countr_zero()``` nombre consécutif de bits à $0$ depuis le LSB
-- ```cpp std::countr_one()``` nombre consécutif de bits à $1$ depuis le LSB
-- ```cpp std::popcount()``` nombre de bit à $1$
+- ```cpp std::countl_zero()``` nombre consécutif de bits à ```cpp 0``` depuis le MSB
+- ```cpp std::countl_one()``` nombre consécutif de bits à ```cpp 1``` depuis le MSB
+- ```cpp std::countr_zero()``` nombre consécutif de bits à ```cpp 0``` depuis le LSB
+- ```cpp std::countr_one()``` nombre consécutif de bits à ```cpp 1``` depuis le LSB
+- ```cpp std::popcount()``` nombre de bit à ```cpp 1```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cbit%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::rotl(6u,+2)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::rotr(6u,+1)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::popcount(6u)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1152,7 +1152,7 @@ span<int> s2(foo.data(), 3);
 #noteblock("Pour aller plus loin", text[
   #link(
     "https://accu.org/content/conf2009/AndreiAlexandrescu_iterators-must-go.pdf",
-  )[Iterators Must Go #linklogo() (Andrei Alexandrescu)]
+  )[_Iterators Must Go_ #linklogo() (Andrei Alexandrescu)]
 
   #link("http://ericniebler.com/")[Blog d'Eric Niebler #linklogo()]
 ])
@@ -1517,7 +1517,7 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
 
 === ``` std::format``` -- API
 
-- ```cpp format()``` retourne une chaîne
+- ```cpp format()``` retourne une chaîne de caractères
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+%22a%22)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1573,7 +1573,7 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
   ],
 )
 
-- ```cpp vformat()``` et ```cpp vformat_to()``` arguments regroupés dans un _tuple-like_
+- ```cpp vformat()``` et ```cpp vformat_to()``` : arguments regroupés dans un _tuple-like_
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::vformat(%22%7B%7D%22,+std::make_format_args(%22a%22))+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1636,7 +1636,7 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
 
 === ``` std::format``` -- Spécification de format
 
-- Format général : ``` [[fill]align][sign][#][0][width][prec][L][type]```
+- Format général : ```cpp [[fill]align][sign][#][0][width][prec][L][type]```
   - ```cpp fill``` et ```cpp align``` : gestion de l'alignement
   - ```cpp sign``` : gestion du signe
   - ```cpp #``` : forme alternative
@@ -1645,46 +1645,6 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
   - ```cpp prec``` : précision du champ
   - ```cpp L``` : prise en compte de la locale
   - ```cpp type``` : type à afficher
-
-#addproposal("P0645")
-
-=== ``` std::format``` -- Alignement
-
-- Alignement par défaut dépendant du type
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:6%7D%22,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-  code: [
-    ```cpp
-    format("{:6}", 42);     // "    42"
-    format("{:6}", 'x');    // "x     "
-    ```
-  ],
-)
-
-- Fourniture du caractère de _padding_
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:8,positionColumn:1,positionLineNumber:8,selectionStartColumn:1,selectionStartLineNumber:8,startColumn:1,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:06%7D%22,+42)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-  code: [
-    ```cpp
-    format("{:06}", 42);    // "000042"
-    ```
-  ],
-)
-
-- Choix de l'alignement
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:*%3C6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:*%3E6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:*%5E6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-  code: [
-    ```cpp
-    format("{:*<6}", 'x');  // "x*****"
-    format("{:*>6}", 'x');  // "*****x"
-    format("{:*^6}", 'x');  // "**x***"
-    ```
-  ],
-)
 
 #addproposal("P0645")
 
@@ -1713,6 +1673,48 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
     ```cpp
     // "|  10| |          10|"
     format("|{0:{1}}| |{0:{2}}|", 10, 4, 12);
+    ```
+  ],
+)
+
+#addproposal("P0645")
+
+=== ``` std::format``` -- Alignement
+
+- Alignement par défaut dépendant du type
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:6%7D%22,+42)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    format("{:6}", 42);     // "    42"
+    format("{:6}", 'x');    // "x     "
+    ```
+  ],
+)
+
+- Choix de l'alignement
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:31,endLineNumber:8,positionColumn:31,positionLineNumber:8,selectionStartColumn:31,selectionStartLineNumber:8,startColumn:31,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:%3C6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%3E6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%5E6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    format("{:<6}", 'x');  // "x     "
+    format("{:>6}", 'x');  // "     x"
+    format("{:^6}", 'x');  // "  x   "
+    ```
+  ],
+)
+
+- Fourniture du caractère de _padding_
+
+#codesample(
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:32,endLineNumber:8,positionColumn:32,positionLineNumber:8,selectionStartColumn:32,selectionStartLineNumber:8,startColumn:32,startLineNumber:8),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:*%3C6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:*%3E6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:*%5E6%7D%22,+!'x!')+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  code: [
+    ```cpp
+    format("{:*<6}", 'x');  // "x*****"
+    format("{:*>6}", 'x');  // "*****x"
+    format("{:*^6}", 'x');  // "**x***"
     ```
   ],
 )
@@ -1771,10 +1773,10 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
 - Affichage des zéros non significatifs
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:%2B06d%7D%22,+120)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:34,endLineNumber:6,positionColumn:34,positionLineNumber:6,selectionStartColumn:34,selectionStartLineNumber:6,startColumn:34,startLineNumber:6),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B:%2B06%7D%22,+120)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    format("{:+06d}", 120);  // "+00120"
+    format("{:+06}", 120);  // "+00120"
     ```
   ],
 )
@@ -1905,7 +1907,7 @@ cin >> setw(24) >> a; // Seuls 24 caractères sont lus
   code: [
     ```cpp
     format("{:%F %T}", chrono::system_clock::now());
-    // AAAA-MM-JJ HH:mm:ss
+    // AAAA-MM-JJ HH:mm:ss.sssssssss
     ```
   ],
 )
@@ -1966,7 +1968,7 @@ struct formatter<T> {
 )
 
 #noteblock("Aller plus loin", text[
-  Voir #link("https://www.sandordargo.com/blog/2025/07/23/format-your-own-type-part-1")[Format your own type (Part 1) #linklogo()] et #link("https://www.sandordargo.com/blog/2025/07/30/format-your-own-type-part-2")[Format your own type (Part 2) #linklogo()]
+  Voir #link("https://www.sandordargo.com/blog/2025/07/23/format-your-own-type-part-1")[_Format your own type (Part 1)_ #linklogo()] et #link("https://www.sandordargo.com/blog/2025/07/30/format-your-own-type-part-2")[_Format your own type (Part 2)_ #linklogo()]
 ])
 
 #codesample(
@@ -2058,7 +2060,7 @@ struct Foo {
 - Conversion des horloges entre-elles
 
 #alertblock(text[Conversion de ```cpp std::chrono::file_clock```], text[
-  Support optionnel des conversions entre ```cpp std::chrono::file_clock``` et ```cpp std::chrono::utc_clock``` ou ```cpp std::chrono::system_clock```
+  Support optionnel des conversions entre ```cpp file_clock``` et ```cpp utc_clock``` ou ```cpp system_clock```
 ])
 
 - Pseudo-horloge ```cpp std::chrono::local_t``` temps dans la _timezone_ locale
@@ -2118,7 +2120,7 @@ struct Foo {
 
 #addproposal("P0355")
 
-=== Timezone
+=== _Timezone_
 
 - Gestion des _timezones_
   - Gestion de la base de _timezones_ de l'IANA (#text(size: 0.7em)[Internet Assigned Numbers Authority])
@@ -2133,10 +2135,11 @@ struct Foo {
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Cformat%3E%0A%0Ausing+namespace+std::literals::chrono_literals%3B%0A%0Aint+main()%0A%7B%0A++auto+tp+%3D+std::chrono::sys_days%7B2016y/std::chrono::May/29d%7D+%2B+7h+%2B+30min+%2B+6s+%2B+153ms%3B+%0A++std::chrono::zoned_time+zt+%3D+%7B%22Asia/Tokyo%22,+tp%7D%3B%0A%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T+%25Z%7D%22,+tp)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B:%25F+%25T+%25Z%7D%22,+zt)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    // 2016-05-29 07:30:06.153 UTC
     auto tp = sys_days{2016y/may/29d} + 7h + 30min + 6s + 153ms;
-    // 2016-05-29 16:30:06.153 JST
+    // 2016-05-29 07:30:06.153 UTC
+
     zoned_time zt = {"Asia/Tokyo", tp};
+    // 2016-05-29 16:30:06.153 JST
     ```
   ],
 )
@@ -2154,11 +2157,11 @@ struct Foo {
   // ICU : International Components for Unicode
 ])
 
-== Range-based for loop
+== _Range-based for loop_
 
-=== Range-based for loop
+=== _Range-based for loop_
 
-- Initialisation dans les range-based for loop
+- Initialisation dans les _range-based for loop_
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B1,+8,+5,+56,+42%7D%3B%0A++for(size_t+i+%3D+0%3B+const+auto%26+bar+:+foo)+%0A++%7B%0A++++std::cout+%3C%3C+bar+%3C%3C+%22+%22+%3C%3C+i+%3C%3C+%22%5Cn%22%3B%0A++++%2B%2Bi%3B+%0A++%7D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2200,7 +2203,9 @@ struct Foo {
   code: [
     ```cpp
     consteval int sqr(int n) { return n * n; }
+
     sqr(100);    // OK
+
     int x = 100;
     sqr(x);      // Erreur
     ```
@@ -2406,7 +2411,7 @@ entity<"hello"> e;
   - Prévu initialement pour C++0x
   - ... et cause des décalages successifs
   - Retrait à grand bruit de C++11
-  - Finalement Concept lite TS publié en 2015
+  - Finalement _Concept lite TS_ publié en 2015
   - Intégration du TS acceptée en juillet 2017
 // Mais pas en C++17, il fallait le support par les compilateurs avant pour valider le concept
 
@@ -2492,20 +2497,20 @@ entity<"hello"> e;
 - ... ou depuis des expressions
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Atemplate%3Ctypename+T%3E+requires+requires+(T+x)+%7B+x%2B%2B%3B+%7D%0Avoid+foo(T)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5)%3B%0A%23if+0%0A++foo(std::vector%3Cint%3E%7B0,+1%7D)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename+T%3E+requires+(sizeof(T)+%3E+1)%0Avoid+foo(T)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5)%3B%0A%23if+0%0A++foo(!'a!')%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    template<typename T> requires requires (T x) { ++x; }
+    template<typename T> requires (sizeof(T) > 1)
     void foo(T);
     ```
   ],
 )
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename+T%3E+requires+(sizeof(T)+%3E+1)%0Avoid+foo(T)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5)%3B%0A%23if+0%0A++foo(!'a!')%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Atemplate%3Ctypename+T%3E+requires+requires+(T+x)+%7B+x%2B%2B%3B+%7D%0Avoid+foo(T)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5)%3B%0A%23if+0%0A++foo(std::vector%3Cint%3E%7B0,+1%7D)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    template<typename T> requires (sizeof(T) > 1)
+    template<typename T> requires requires (T x) { ++x; }
     void foo(T);
     ```
   ],
@@ -2537,7 +2542,7 @@ entity<"hello"> e;
     ```cpp
     template<typename T>
     requires (sizeof(T) == 2 || sizeof(T) == 4)
-    		void foo(T);
+ 	  void foo(T);
     ```
   ],
 )
@@ -2560,11 +2565,11 @@ entity<"hello"> e;
 )
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Atemplate%3Ctypename...+T%3E%0Arequires+(std::incrementable%3CT%3E+%26%26...+%26%26+true)%0Avoid+foo(T...)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5)%3B%0A++foo(5,+6,+7)%3B%0A%23if+0%0A++foo(std::vector%3Cint%3E%7B1,+2%7D)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:36,endLineNumber:5,positionColumn:36,positionLineNumber:5,selectionStartColumn:36,selectionStartLineNumber:5,startColumn:36,startLineNumber:5),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Atemplate%3Ctypename...+T%3E%0Arequires+(std::incrementable%3CT%3E+%26%26+...)%0Avoid+foo(T...)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5)%3B%0A++foo(5,+6,+7)%3B%0A%23if+0%0A++foo(std::vector%3Cint%3E%7B1,+2%7D)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
     template<typename... T>
-    requires (Constraint<T> && ... && true)
+    requires (Constraint<T> &&  ...)
     void foo(T...);
     ```
   ],
@@ -2814,8 +2819,7 @@ template<class T> concept totally_ordered =
     ```cpp
     auto foo = []<typename T>(vector<T> const& vec) {
       cout<< size(vec) << '\n';
-      cout<< vec.capacity() << '\n';
-    };
+      cout<< vec.capacity() << '\n'; };
     ```
   ],
 )
@@ -2954,7 +2958,7 @@ int main() { thread t(foo); }  // Erreur (terminate)
   // Décrémente le compteur de 1 s'il n'est pas nul et retourne true dans ce cas, et false si le compteur est nul
   - ```cpp try_acquire_for()``` tente de prendre le sémaphore en attendant la durée donnée si besoin
   - ```cpp try_acquire_until()``` tente de prendre le sémaphore en attendant jusqu'à un temps donné si besoin
-- ```cpp std::binary_semaphore```	instanciation de ```cpp std::counting_semaphore``` pour un unique possesseur
+- ```cpp std::binary_semaphore```	instanciation pour un unique possesseur
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cthread%3E%0A%23include+%3Cchrono%3E%0A%23include+%3Csemaphore%3E%0A+%0Astd::binary_semaphore+signalMainToThread%7B0%7D%3B%0Astd::binary_semaphore+signalThreadToMain%7B0%7D%3B%0A%0Ausing+namespace+std::literals%3B%0A%0Avoid+foo()%0A%7B%0A++signalMainToThread.acquire()%3B%0A++std::cout+%3C%3C+%22%5Bthread%5D+Reception+du+signal%5Cn%22%3B%0A+%0A++std::this_thread::sleep_for(2s)%3B%0A+%0A++std::cout+%3C%3C+%22%5Bthread%5D+Envoi+a+main%5Cn%22%3B%0A++signalThreadToMain.release()%3B%0A%7D%0A+%0Aint+main()%0A%7B%0A++std::thread+worker(foo)%3B%0A++std::this_thread::sleep_for(2s)%3B%0A%0A++std::cout+%3C%3C+%22%5Bmain%5D+Envoi+au+thread%5Cn%22%3B%0A++signalMainToThread.release()%3B%0A++signalThreadToMain.acquire()%3B%0A+%0A++std::cout+%3C%3C+%22%5Bmain%5D+Got+the+signal%5Cn%22%3B+//+response+message%0A++worker.join()%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic+-pthread',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2964,7 +2968,7 @@ int main() { thread t(foo); }  // Erreur (terminate)
 
 === synchronisation -- latch
 
-- ```cpp std::latch``` compteur descendant permettant de bloquer des threads tant qu'il n'a pas atteint zéro
+- ```cpp std::latch``` compteur bloquant des threads tant qu'il n'a pas atteint zéro
   - Création avec la valeur initiale du compteur
   - ```cpp count_down()``` décrémente le compteur
   - ```cpp try_wait()``` indique si le compteur a atteint zéro

@@ -103,7 +103,7 @@ auto bar3() { return bar1(); }           // string
 
 == Initialisation
 
-=== Aggregate Initialisation
+=== _Aggregate Initialisation_
 
 - Compatible avec l'initialisation par défaut des membres
 - Initialisation par défaut des membres non explicitement initialisés
@@ -203,7 +203,7 @@ auto bar3() { return bar1(); }           // string
 
 == Chaînes de caractères
 
-=== Quoted string
+=== _Quoted string_
 
 - Insertion et extraction de chaînes avec guillemets
 
@@ -424,7 +424,7 @@ auto bar3() { return bar1(); }           // string
 
 === Capture généralisée
 
-- Création de variables capturées depuis des variables locales ou des constantes
+- Création de variables capturées depuis des variables ou des constantes
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++int+foo+%3D+42%3B%0A%0A++auto+bar+%3D+%5B+%26x+%3D+foo+%5D()+%7B+--x%3B+%7D%3B%0A++bar()%3B%0A++std::cout+%3C%3C+foo+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+baz+%3D+%5B+y+%3D+10+%5D()+%7B+return+y%3B+%7D%3B%0A++std::cout+%3C%3C+baz()+%3C%3C+%22%5Cn%22%3B%0A%0A++auto+qux+%3D+%5B+z+%3D+2+*+foo+%5D()+%7B+return+z%3B+%7D%3B%0A++std::cout+%3C%3C+qux()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -511,7 +511,7 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-== Traits
+== _Traits_
 
 === ``` std::is_final```
 
@@ -530,7 +530,7 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-=== Alias transformation
+=== _Alias transformation_
 
 - Simplification de l'usage des transformations de types
   - Ajout du suffixe ```cpp _t``` aux transformations

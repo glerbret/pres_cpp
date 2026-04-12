@@ -65,9 +65,9 @@
 
 === Nouveaux types entiers
 
-- Entiers de ```cpp N``` bits ```cpp int<N>_t``` et ```cpp uint<N>_t```
-  - ```cpp N``` = 8, 16, 32 ou 64
-  - ```cpp int<N>_t``` obligatoirement en complément à 2
+- Entiers de ```cpp N``` bits : ```cpp int<N>_t``` et ```cpp uint<N>_t```
+  - ```cpp N``` = ```cpp 8```, ```cpp 16```, ```cpp 32``` ou ```cpp 64```
+  - ```cpp int<N>_t``` obligatoirement en complément à deux
 
   // En C++, pas de contrainte sur les autres types entiers signés avant C++20
   // En C (avant C23), d'autres représentations possibles : signe + valeur (avec deux codages de 0, algorithme d'addition/ multiplication non canonique) et complément à 1 où chaque bit du positif est inversé pour donner le négatif, là encore deux valeurs de 0
@@ -75,9 +75,9 @@
 
   - Pas de bit de _padding_
   - Support optionnel
-- Plus petits entiers d'au moins ```cpp N``` bits ```cpp int_least<N>_t``` et ```cpp uint_least<N>_t```
-- Plus rapides entiers d'au moins ```cpp N``` bits ```cpp int_fast<N>_t``` et ```cpp uint_fast<N>_t```
-- Entiers capables de contenir une adresse ```cpp intptr_t``` et ```cpp uintptr_t```
+- Plus petits entiers d'au moins ```cpp N``` bits : ```cpp int_least<N>_t``` et ```cpp uint_least<N>_t```
+- Plus rapides entiers d'au moins ```cpp N``` bits : ```cpp int_fast<N>_t``` et ```cpp uint_fast<N>_t```
+- Entiers capables de contenir une adresse : ```cpp intptr_t``` et ```cpp uintptr_t```
   - Convertibles en ```cpp void*``` avec une valeur égale au pointeur original
   - Support optionnel
 
@@ -289,13 +289,18 @@
 - Cohabite mal avec les surcharges
 
 #questionblock("Quiz : Quelle surcharge est éligible ?", text[
-  ```cpp
-  void foo(char*) { cout << "chaîne\n"; }
-  void foo(int) { cout << "entier\n"; }
+  #codesample(
+    "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%0Astatic+void+foo(char*)%0A%7B%0A++std::cout+%3C%3C+%22chaine%5Cn%22%3B%0A%7D%0A%0Astatic+void+foo(int)%0A%7B%0A++std::cout+%3C%3C+%22entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(0)%3B%0A++foo(NULL)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+    code: [
+      ```cpp
+      void foo(char*) { cout << "chaîne\n"; }
+      void foo(int)   { cout << "entier\n"; }
 
-  foo(0);
-  foo(NULL);
-  ```
+      foo(0);
+      foo(NULL);
+      ```
+    ],
+  )
 ])
 
 === ``` 0``` ou ``` NULL``` ? ``` nullptr``` !
@@ -305,11 +310,11 @@
   - Conversion implicite de ```cpp nullptr_t``` vers tout type de pointeur
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Astatic+void+foo(char*)%0A%7B%0A++std::cout+%3C%3C+%22chaine%5Cn%22%3B%0A%7D%0A%0Astatic+void+foo(int)%0A%7B%0A++std::cout+%3C%3C+%22entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(0)%3B%0A%23if+1%0A++foo(NULL)%3B%0A%23else%0A++foo(nullptr)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%0Astatic+void+foo(char*)%0A%7B%0A++std::cout+%3C%3C+%22chaine%5Cn%22%3B%0A%7D%0A%0Astatic+void+foo(int)%0A%7B%0A++std::cout+%3C%3C+%22entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(0)%3B%0A++foo(nullptr)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
     void foo(char*) { cout << "chaîne\n"; }
-    void foo(int) { cout << "entier\n"; }
+    void foo(int)   { cout << "entier\n"; }
 
     foo(0);        // Version int
     foo(nullptr);  // Version pointeur
@@ -430,9 +435,9 @@
 
 #addproposal("N2235")
 
-== Extended ``` sizeof```
+== _Extended_ ``` sizeof```
 
-=== Extended ``` sizeof```
+=== _Extended_ ``` sizeof```
 
 - ```cpp sizeof``` sur des membres non statiques
 
@@ -442,7 +447,7 @@
     ```cpp
     struct Foo { int bar; };
 
-    // Valide en C++11, mal-forme en C++98/03
+    // Valide en C++11, mal-formé en C++98/03
     cout << sizeof Foo::bar;
     ```
   ],
@@ -1037,11 +1042,11 @@
 
   - ```cpp std::forward()``` convertit le paramètre en _rvalue_ s'il n'est pas une _lvalue reference_
 
-#noteblock(text[_rvalue_, _lvalue_, ... ?], text[
+#questionblock(text[_rvalue_, _lvalue_, ... ?], text[
   Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf")[N3337 #linklogo() §3.10]
 ])
 
-#noteblock(text[``` std::forward()``` ?], text[
+#questionblock(text[``` std::forward()``` ?], text[
   _perfect forwarding_ (Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm")[N1385 #linklogo()])
 ])
 
@@ -1060,7 +1065,7 @@
   Pas de constructeur par copie, d'opérateur d'affectation, de destructeur, ni l'autre déplacement _user-declared_
 ])
 
-#alertblock(text[_user-declared_ ? _user-provided_ ?], text[
+#questionblock(text[_user-declared_ ? _user-provided_ ?], text[
   _user-declared_ : fonction déclarée par l'utilisateur, y compris ```cpp =default```
 
   _user-provided_ : corps de la fonction fourni par l'utilisateur
@@ -1374,10 +1379,10 @@ auto& k = j;
 
 === ``` auto```
 
-- Tendance forte "Almost Always Auto" (AAA)
+- Tendance forte "_Almost Always Auto_" (AAA)
 
 #noteblock("Pour aller plus loin", text[
-  Voir #link("https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/")[GotW 94 : AAA Style #linklogo()]
+  Voir #link("https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/")[GotW 94 : _AAA Style_ #linklogo()]
 ])
 
 - Plusieurs avantages
@@ -1591,7 +1596,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   - ```cpp std::unordered_multiset```
 - Versions non ordonnées de ```cpp std::map```, ```cpp std::set```, ...
 
-#noteblock(text[Pourquoi ``` unordered_``` ?], text[
+#questionblock(text[Pourquoi ``` unordered_``` ?], text[
   Nombreuses implémentations ```cpp hash_``` existantes
 
   Structures fondamentalement non ordonnées
@@ -1631,7 +1636,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 - ```cpp data()``` récupère le "tableau C" d'un ```cpp std::vector```
 
-#noteblock(text[``` foo.data()``` ou ``` &foo[0]``` ?], text[
+#adviceblock(text[``` foo.data()``` ou ``` &foo[0]``` ?], text[
   Comportement identique
 
   Préférez ```cpp foo.data()``` à la sémantiquement plus clair
@@ -1663,7 +1668,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 === Évolutions de ``` std::string```
 
 - Éléments obligatoirement contigus
-- ```cpp data()``` retourne une chaîne C valide (synonyme à ```cpp c_str()```)
+- ```cpp data()``` retourne une chaîne C valide (synonyme de ```cpp c_str()```)
 // En C++98, data() renvoyait les caractères de la chaîne mais pas nécessairement sous forme d'une chaîne C valide (pas obligatoirement de 0 terminal)
 - ```cpp front()``` retourne le premier caractère d'une chaîne
 - ```cpp back()``` retourne le dernier caractère d'une chaîne
@@ -1935,8 +1940,7 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
     ```cpp
     vector<int> foo{1, 4, 5, 9, 12}, bar;
 
-    copy_n(begin(foo), 3, back_inserter(bar));
-    // 1 4 5
+    copy_n(begin(foo), 3, back_inserter(bar));  // 1 4 5
     ```
   ],
 )
@@ -2079,13 +2083,13 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 === Algorithmes -- Min-max
 
-- ```cpp std::minmax()``` retourne la paire constituée du plus petit et du plus grand de deux éléments
+- ```cpp std::minmax()``` retourne le plus petit et le plus grand de deux éléments
 
 ```cpp
 minmax(5, 2); // 2 - 5
 ```
 
-- ```cpp std::minmax_element()``` retourne la paire constituée des itérateurs sur le plus petit et le plus grand élément d'un ensemble
+- ```cpp std::minmax_element()``` retourne les itérateurs sur le plus petit et le plus grand élément d'un ensemble
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cutility%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo%7B18,+5,+6,+8%7D%3B%0A++auto+p+%3D+std::minmax_element(std::begin(foo),+std::end(foo))%3B%0A%0A++std::cout+%3C%3C+*(p.first)+%3C%3C+%22+%22+%3C%3C+*(p.second)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2123,9 +2127,9 @@ minmax(5, 2); // 2 - 5
   Privilégiez la sémantique lorsque plusieurs algorithmes sont utilisables
 ])
 
-== Range-based for loop
+== _Range-based for loop_
 
-=== Range-based for loop
+=== _Range-based for loop_
 
 - Itération sur un conteneur complet
 
@@ -2162,7 +2166,7 @@ minmax(5, 2); // 2 - 5
 #addproposal("N2930")
 #addproposal("N3271")
 
-=== Range-based for loop
+=== _Range-based for loop_
 
 #alertblock("Modification des éléments", text[
   La variable d'itération doit être une référence
@@ -2182,7 +2186,7 @@ minmax(5, 2); // 2 - 5
 #addproposal("N2930")
 #addproposal("N3271")
 
-=== Range-based for loop
+=== _Range-based for loop_
 
 #adviceblock("Do", text[
   Préférez _range-based for loop_ aux boucles classiques et à ```cpp std::for_each()```
@@ -2410,7 +2414,7 @@ tuple<int, char, long> foo;
 tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
 ```
 
-#noteblock(text[``` std::make_tuple``` ou constructeur ?], text[
+#questionblock(text[``` std::make_tuple``` ou constructeur ?], text[
   ```cpp std::make_tuple()``` permet la déduction de types, pas le constructeur
 
   ```cpp
@@ -2450,7 +2454,7 @@ tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
 )
 
 #alertblock("Attention", text[
-  Les indices commencent à 0
+  Les indices commencent à ```cpp 0```
 ])
 
 #addproposal("n1836")
@@ -2556,7 +2560,7 @@ ofstream file{filename};
   Préférez ```cpp =delete``` à une déclaration privée sans définition
 ])
 
-#noteblock(text[``` =default``` ou non définition ?], text[
+#questionblock(text[``` =default``` ou non définition ?], text[
   Consensus plutôt du côté de la non-définition
 
   Intérêt documentaire réel à ```cpp =default```
@@ -2587,7 +2591,7 @@ ofstream file{filename};
 ])
 
 #adviceblock("Do", text[
-  Préférez l'initialisation des membres à l'initialisation par constructeurs pour les initialisations avec une valeur connue à la compilation
+  Préférez l'initialisation des membres à l'initialisation par constructeurs pour les valeurs connues à la compilation
 ])
 
 #addproposal("N2756")
@@ -2739,7 +2743,7 @@ ofstream file{filename};
 #noteblock("Objectifs", text[
   Documentaire
 
-  Détection des non-reports de modifications lors d'un refactoring
+  Détection des non-reports de modifications lors d'un _refactoring_
 
   Détection des redéfinitions involontaires
 ])
@@ -2868,7 +2872,7 @@ void foo() noexcept(true) {}
 #noteblock("Dépréciation", text[
   Les spécifications d'exception sont dépréciées
 
-  Voir #link("http://www.gotw.ca/publications/mill22.htm")[A Pragmatic Look at Exception Specifications #linklogo()] (Herb Sutter)
+  Voir #link("http://www.gotw.ca/publications/mill22.htm")[_A Pragmatic Look at Exception Specifications_ #linklogo()] (Herb Sutter)
   // En pratique, seule throw() était utilisée et utilisable et a été remplacée par noexcept
 ])
 
@@ -2923,7 +2927,7 @@ noexcept(foo()); // true
 
 #addproposal("n2179")
 
-=== Nested exception
+=== ``` std::nested_exception```
 
 - ```cpp std::nested_exception``` contient une exception imbriquée
 - ```cpp nested_ptr()``` récupère un pointeur sur l'exception imbriquée
@@ -3045,7 +3049,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 === ``` std::bind```
 
 - Construction de _function object_ en liant des paramètres à un appelable
-- _Placeholders_ ```cpp std::placholders::_1```, ```cpp std::placholders::_2```, ... pour lier les paramètres du _function object_ à l'appelable
+- _Placeholders_ ```cpp std::placholders::_1```, ```cpp std::placholders::_2```, etc. pour lier les paramètres du _function object_ à l'appelable
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+a,+int+b)%0A%7B%0A++return+(a+-+1)+*+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int)%3E+bar+%3D+std::bind(%26foo,+std::placeholders::_1,+2)%3B%0A++std::cout+%3C%3C+bar(3)+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+std::bind(%26foo,+std::placeholders::_2,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+baz(3,+2,+1,+2,+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -3122,7 +3126,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
   Capture du pointeur, non de l'objet
 ])
 
-#list(marker: [], list(indent: 5pt, text[Soit via ```cpp [=]``` ou ```cpp [&]```]))
+#list(marker: [], list(indent: 7pt, text[Soit via ```cpp [=]``` ou ```cpp [&]```]))
 
 #addproposal("N2550")
 #addproposal("N2658")
@@ -3193,7 +3197,7 @@ auto foo = [] { return 5; };
 #noteblock("Motivations", text[
   Lisibilité, expressivité et performances
 
-  Voir #link("https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf")[Practical Performance Practices #linklogo()]
+  Voir #link("https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf")[_Practical Performance Practices_ #linklogo()]
 
   // Entre autres, il y a aussi des remarques intéressantes sur le choix des conteneurs, des pointeurs intelligents, sur std::endl, etc.
 ])
@@ -3291,7 +3295,7 @@ vector<array<int, (0x10 >> 3) >> foo;
 
 #addproposal("N2258")
 
-=== Extern template
+=== ``` extern template```
 
 - Indique que le template est instancié dans une autre unité de compilation
 - Inutile de l'instancier ici
@@ -3459,7 +3463,7 @@ foo(1, 2, 3, 5);
 
 === Variadic template
 
-- .. sur n'importe quelle expression prenant un paramètre
+- ... sur n'importe quelle expression prenant un paramètre
 
 //Donc appelle de fonction ou lambda mais aussi simple expression
 
@@ -3547,9 +3551,9 @@ foo(1, 2, 3, 5);
 
 #addproposal("N2657")
 
-== Traits
+== _Traits_
 
-=== Type traits -- Helper
+=== _Type traits_ -- _Helper_
 
 - Constante _compile-time_ ```cpp std::integral_constant```
 - ```cpp std::integral_constant``` booléen vrai ```cpp true_type```
@@ -3573,7 +3577,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-=== Type traits -- Trait
+=== _Type traits_ -- _Trait_
 
 - Détermine, à la compilation, les caractéristiques des types
 - ```cpp std::is_array``` : tableau C
@@ -3602,7 +3606,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-=== Type traits -- Trait
+=== _Type traits_ -- _Trait_
 
 - ```cpp std::is_fundamental``` : type fondamental (entier, réel, ```cpp void``` ou ```cpp nullptr_t```)
 
@@ -3631,7 +3635,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-=== Type traits -- Trait
+=== _Type traits_ -- _Trait_
 
 - ```cpp std::is_base_of``` : base d'un autre type
 
@@ -3654,7 +3658,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-=== Type traits -- Transformations
+=== _Type traits_ -- Transformations
 
 - Construction d'un type par transformation d'un type existant
 - ```cpp std::add_const``` : type ```cpp const```
@@ -3672,7 +3676,7 @@ foo(1, 2, 3, 5);
 
 #addproposal("n1836")
 
-=== Type traits -- Transformations
+=== _Type traits_ -- Transformations
 
 - ```cpp std::make_unsigned``` : type non signé correspondant
 
@@ -3825,7 +3829,7 @@ shared_ptr<int> sp = wp.lock();
 - ```cpp reset()``` vide le pointeur
 - ```cpp use_count()``` retourne le nombre de possesseurs de la ressource
 // Possesseurs aux nombres desquels notre std::weak_ptr n'appartient pas
-- ```cpp expired()``` indique si le ```cpp std::weak_ptr``` ne référence pas une ressource valide
+- ```cpp expired()``` indique que la ressource référencée n'est plus valide
 // Soit il pointe sur rien, soit la ressource a été libérée car n'avait plus de std::shared_ptr sur elle
 
 #addproposal("n1836")
@@ -3857,7 +3861,7 @@ shared_ptr<int> sp = wp.lock();
 #alertblock("Attention", text[
   Passez par un ```cpp std::unique_ptr``` temporaire intermédiaire pour insérer des éléments dans un conteneur de ```cpp std::unique_ptr```
 
-  Voir #link("https://accu.org/index.php/journals/2271")[Overload 134 - C++ Antipatterns #linklogo()]
+  Voir #link("https://accu.org/index.php/journals/2271")[Overload 134 - _C++ Antipatterns_ #linklogo()]
   // push_back d'un pointeur brute n'est pas possible et emplace_back peut échouer en laissant fuir le pointeur
 ])
 
@@ -3919,7 +3923,7 @@ shared_ptr<int> sp = wp.lock();
 ```
 
 #noteblock("Exemple", text[
-  les attributs ```cpp gsl``` des "C++ Core Guidelines Checker" de Microsoft
+  les attributs ```cpp gsl``` des #link("https://learn.microsoft.com/en-us/cpp/code-quality/using-the-cpp-core-guidelines-checkers?view=msvc-170")[_C++ Core Guidelines Checker_ #linklogo()] de Microsoft
 
   ```cpp
   [[ gsl::suppress(26400) ]]
@@ -4002,8 +4006,8 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 )
 
 - Instanciations standards des préfixes du système international d'unités
-  - yocto, zepto, atto, femto, pico, nano, micro, milli, centi, déci
-  - déca, hecto, kilo, méga, giga, téra, péta, exa, zetta, yotta
+  - _yocto_, _zepto_, _atto_, _femto_, _pico_, _nano_, _micro_, _milli_, _centi_, _déci_
+  - _déca_, _hecto_, _kilo_, _méga_, _giga_, _téra_, _péta_, _exa_, _zetta_, _yotta_
 
 === Rapport
 
@@ -4556,7 +4560,7 @@ cv.wait(lck);
 - ```cpp std::promise``` contient une valeur
   - Disponible ultérieurement
   - Récupérable, éventuellement dans un autre thread, via ```cpp std::future```
-- ```cpp std::future``` permet la récupération d'une valeur disponible ultérieurement
+- ```cpp std::future``` permet la récupération d'une valeur disponible
   - Depuis un ```cpp std::promise```
   - Depuis un appel asynchrone ou différé de fonction
 - Mécanismes asynchrones
@@ -4889,7 +4893,7 @@ regex foo("[0-9A-Z]+", icase);
 ])
 
 - Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, ...)
-- Fonction de normalisation ramenant la séquence générée dans [0,1)
+- Fonction de normalisation ramenant la séquence générée dans $[0,1)$
 
 #addproposal("n1836")
 
@@ -4914,7 +4918,7 @@ regex foo("[0-9A-Z]+", icase);
 ])
 
 #questionblock("Quiz", text[
-  Comment générer un tirage équiprobable entre 6 et 42 avec ```cpp rand()```
+  Comment générer un tirage équiprobable entre $6$ et $42$ avec ```cpp rand()```
 ])
 
 #addproposal("n1836")

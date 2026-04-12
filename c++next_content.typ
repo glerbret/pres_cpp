@@ -817,7 +817,7 @@ auto bar = rebind<double>(foo);  // vector<double>
 - Prise en charge de ```cpp std::string_view``` par ```cpp std::from_chars```
 - Modification du constructeur de ```cpp std::string``` depuis un caractère pour interdire les autres numériques (entiers ou flottants)
 - Voire dépréciation de la construction d'un ```cpp std::string``` depuis un caractère
-- ```cpp fixed_string``` : chaîne de caractères utilisable au compile-time
+- ```cpp fixed_string``` : chaîne de caractères utilisable au _compile-time_
 - Ajout de ```cpp first()``` et de ```cpp last()``` à ```cpp std::string``` et ```cpp std::string_view``` pour récupérer les $n$ premiers ou derniers caractères
 - ```cpp std::zstring_view``` équivalent à ```cpp std::string_view``` garantissant la présence d'un ```cpp \0``` terminal
 - Sentinelle pour les chaînes null-terminée, pour l'usage de range sur ces chaînes
@@ -1009,12 +1009,12 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3928")
 #addproposal("p4030")
 
-== Traits
+== _Traits_
 
-=== Traits
+=== _Traits_
 
 - Trait ```cpp std::is_narrowing_convertible```
-- Traits et fonctions pour garantir des conversions sans perte
+- _Traits_ et fonctions pour garantir des conversions sans perte
   - ```cpp is_value_preserving_convertible_v```
 - Trait indiquant si un type _trivially default constructible_ peut être initialisé en mettant tous les octets à 0
 - Amélioration de l'ergonomie de ```cpp std::integral_constant<int>```
