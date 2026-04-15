@@ -47,14 +47,6 @@
 #addproposal("p2865")
 #addproposal("p3682")
 
-== Compatibilité C
-
-=== En-têtes C23
-
-- Support des en-têtes C23 ```cpp <stdbit.h>``` et ```cpp <stdckdint.h>```
-
-#addproposal("p3370")
-
 == Comportement
 
 === _Erroneous Behavior_
@@ -84,7 +76,7 @@
 if (!p) cerr << "foo\n"; // Pas de suppression possible
 observable_checkpoint();
 if (!p) cerr << "bar\n"; // Suppression possible
-*p += r;                 // p suppose non-nul
+*p += r;                 // p supposé non-nul
 ```
 
 - Tous les _undefined behavior_ du préprocesseur ou du lexer deviennent _ill-formed_ sans diagnostic requis
@@ -100,6 +92,15 @@ if (!p) cerr << "bar\n"; // Suppression possible
 #addproposal("p3641")
 #addproposal("p2843")
 
+=== _Undefined_ / _unspecified_ / _ill-formed_
+
+#questionblock(text[ _Undefined_, _unspecified_, _ill-formed_ ?], text[
+  - _ill-formed_ : erreurs syntaxiques ou sémantiques
+  - _implementation-defined_ : comportement défini par l'implémentation qui doit le documenter
+  - _unspecified behavior_ : comportment défini par l'implémentation qui n'a pas l'obligation de le documenter
+  - _undefined behavior_ : aucune restriction sur le comportement
+])
+
 === Boucles infinies
 
 - Les boucles infinies triviales ne sont plus des _Undefined Behavior_
@@ -113,29 +114,12 @@ while (true)
 
 #addproposal("P2809")
 
-== Statique
+== Syntaxe
 
-=== Vérification statique
-
-- Support de messages construits par ```cpp static_assert```
-
-```cpp
-static_assert(sizeof(Foo) == 1,
-              format("Attendu 1, obtenu {}", sizeof(Foo)));
-```
-
-#alertblock(text[_Compile-time_], "Uniquement des valeurs connues à la compilation")
-
-#alertblock("Dépendance", text[
-  Nécessite que ```cpp std::format``` devienne ```cpp constexpr```
-])
-
-#addproposal("P2741")
-
-=== Lexer
+=== _Lexer_
 
 - Suppression de comportements indéfinis
-  - _Universal characters_ sur plusieurs lignes autorisés
+  - _Universal characters_ sur plusieurs lignes sont autorisés
 
 ```cpp
 int \\
@@ -156,13 +140,11 @@ int CONCAT(\, u0393) = 0;
 
 #addproposal("P2621")
 
-== Encodage
-
 === Encodage
 
 - Ajout de ```cpp @```, ```cpp $``` et ```cpp ` ``` au jeu de caractères de base
 // Ajoutés en C (C23)}
-// Supportés par tous les encodages communément utilisés}
+// Supportés par tous les encodages communément utilisés
 - Caractères non-encodables sont mal formés
 - Identification de l'encodage
   - ```cpp std::text_encoding::literal()``` : encodage du code
@@ -183,9 +165,36 @@ int CONCAT(\, u0393) = 0;
 #addproposal("p1885")
 #addproposal("p2862")
 
+== Compatibilité C
+
+=== En-têtes C23
+
+- Support des en-têtes C23 ```cpp <stdbit.h>``` et ```cpp <stdckdint.h>```
+
+#addproposal("p3370")
+
+== Statique
+
+=== ``` static_assert```
+
+- Support de messages construits par ```cpp static_assert```
+
+```cpp
+static_assert(sizeof(Foo) == 1,
+              format("Attendu 1, obtenu {}", sizeof(Foo)));
+```
+
+#alertblock(text[_Compile-time_], "Uniquement des valeurs connues à la compilation")
+
+#alertblock("Dépendance", text[
+  Nécessite que ```cpp std::format``` devienne ```cpp constexpr```
+])
+
+#addproposal("P2741")
+
 == Types
 
-=== Saturation arithmetic
+=== _Saturation arithmetic_
 
 - Fonctions ```cpp std::add_sat()```, ```cpp std::sub_sat()```, ```cpp std::mul_sat()```, ```cpp std::div_sat()``` et ```cpp std::saturate_cast()```
 - Les calculs dont le résultat est hors borne retournent les plus grandes ou plus petites valeurs représentables
@@ -222,7 +231,7 @@ int CONCAT(\, u0393) = 0;
 - Objet implicitement _replaceable_ si il n'est pas ```cpp const``` ni ```cpp volatile``` et si toutes ces classes de bases et membres non-statiques sont _replaceable_
 // std::vector<> suppose déjà que les objets qu'il manipule sont replaceable, contrairement à std::swap()
 - ```cpp replaceable_if_eligible``` sur les classes pour les marquer _replaceable_
-- Trait ```cpp std::is_replaceable```
+- _Trait_ ```cpp std::is_replaceable```
 
 #addproposal("P2786")
 
@@ -230,7 +239,7 @@ int CONCAT(\, u0393) = 0;
 
 - ```cpp std::indirect<T>``` encapsule des objets de type ```cpp T```
 - ```cpp std::polymorphic<T>``` encapsule des objets héritant de ```cpp T```
-- Wrappers à sémantique de valeur d'objets alloués dynamiquement
+- _Wrappers_ à sémantique de valeur d'objets alloués dynamiquement
   - Copie profonde
   - Propagation de ```cpp const```
 
@@ -246,7 +255,7 @@ int CONCAT(\, u0393) = 0;
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cnumeric%3E%0A%23include+%3Cclimits%3E%0A%0Aint+foo()%0A%7B%0A++return+42%3B%0A%7D%0A%0Aint+main()%0A%7B%0A%23if+1%0A++auto+bar+%3D+foo()%3B%0A%23else%0A++auto+_+%3D+foo()%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    auto _ = foo();  // Équivalent a [[maybe_unused]] auto _ = foo();
+    auto _ = foo();
     ```
   ],
 )
@@ -422,7 +431,7 @@ S<Concept, Var> s;
   ],
 )
 
-- ```cpp std::submdspan()``` retourne une vue sur un sous-ensemble d'un ```cpp std::mdspan```
+- ```cpp std::submdspan()``` : vue sur un sous-ensemble d'un ```cpp std::mdspan```
 - Layouts pour ```cpp std::mdspan``` : ```cpp layout_left_padded``` et ```cpp layout_right_padded```
 - Ajout de ```cpp dextents``` à ```cpp std::mdspan```
 
@@ -495,7 +504,7 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 
 == _tuple-like_
 
-=== _tuple-like_
+=== ``` std::complex```
 
 - ```cpp std::complex``` deviennent des _tuple-like_
 
@@ -636,7 +645,7 @@ ranges::generate_random(a, g);
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cranges%3E%0A%23include+%3Cformat%3E%0A%0Aint+main()%0A%7B%0A++++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::views::indices(5))%3B+//+%5B0,+1,+2,+3,+4%5D%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    views::indices(5)); // [0, 1, 2, 3, 4]
+    views::indices(5); // [0, 1, 2, 3, 4]
     ```
   ],
 )
@@ -673,7 +682,7 @@ ranges::generate_random(a, g);
 
 === Rapport
 
-- Ajout des préfixes ```cpp quecto```, ```cpp ronto```, ```cpp ronna``` et ```cpp quetta```
+- Ajout des préfixes _quecto_, _ronto_, _ronna_ et _quetta_
 
 #addproposal("P2734")
 
@@ -843,7 +852,7 @@ f(y); // erroneous behavior
 - Possibilité de fournir une chaîne de format au _run-time_
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+str+%3D+%22%7B%7D%22%3B%0A++std::cout+%3C%3C+std::format(std::runtime_format(str),+42)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::string+str+%3D+%22%7B%7D%22%3B%0A++std::cout+%3C%3C+std::format(std::runtime_format(str),+42)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g152,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+15.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
     string str = "{}";

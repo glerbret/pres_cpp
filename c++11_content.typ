@@ -204,7 +204,7 @@
   - _trivial_
   - _standard layout_
   - Pas de donnée membre non-statique non-POD
-- Traits correspondants
+- _Traits_ correspondants
   - ```cpp std::is_trivial```
   - ```cpp std::is_trivially_copyable```
   - ```cpp std::is_standard_layout```

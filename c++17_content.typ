@@ -1522,7 +1522,7 @@ foo<10>();  // int
 - Méta-fonctions sur les _traits_
   - ```cpp std::conjunction``` : et logique entre _traits_
   - ```cpp std::disjunction``` : ou logique entre _traits_
-  - ```cpp std::negation``` : négation d'un trait
+  - ```cpp std::negation``` : négation d'un _trait_
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Atemplate%3Ctypename+T,+typename...+Ts%3E%0Astd::enable_if_t%3Cstd::conjunction_v%3Cstd::is_same%3CT,+Ts%3E...%3E%3E%0Afoo(T,+Ts...)%0A%7B%7D%0A%0Aint+main()%0A%7B%0A++foo(5,+12,+8,+65)%3B%0A%23if+0%0A++foo(5,+12,+8.,+65)%3B%0A%23endif%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",

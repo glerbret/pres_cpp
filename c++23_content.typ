@@ -44,6 +44,14 @@ auto str = "\<space>
 
 #addproposal("P2223")
 
+=== Encodage
+
+- Support des fichiers sources en UTF-8
+- Encodage identique entre le préprocesseur et le code C++
+
+#addproposal("P2295")
+#addproposal("P2316")
+
 === Label
 
 - Label autorisé en fin de bloc
@@ -125,7 +133,7 @@ p->b = 2;
 === Types flottants étendus
 
 - ```cpp std::float16_t```, ```cpp std::float32_t```, ```cpp std::float64_t```, ```cpp std::float128_t```
-  - Types IEEE N-bit
+  - Types IEEE $N$-bit
   - Support optionnel
 - ```cpp std::bfloat16_t```
   - Type IEEE binary16
@@ -161,7 +169,7 @@ p->b = 2;
 
 #addproposal("P2513")
 
-=== Relâchement des contraintes de ``` wchar_t```
+=== ``` wchar_t```
 
 - Suppression de la contrainte
 
@@ -198,11 +206,6 @@ class Foo { static_assert(N, "Message"); };
 // auto a = x construit une lvalue, non une prvalue
 // Donc pas de const ni de volatile et les tableaux C deviennent des pointeurs
 
-```cpp
-const std::string& str = "hello";
-auto(str); // std::string
-```
-
 #addproposal("P1401")
 #addproposal("p0849")
 
@@ -223,39 +226,12 @@ auto(str); // std::string
 
 #addproposal("P1682")
 
-== ``` constexpr```
-
-=== ``` constexpr```
-
-- Relâchement de contrainte sur les fonctions ```cpp constexpr```
-  - Code non évalué au _compile-time_
-    // Soit la fonction n'est en pratique jamais appelée au compile-time soit la branche contenant ce code n'est exécutée qu'au run-time
-    - Variables non littérales
-    - Utilisation de ```cpp goto```
-    - Retour non littéral
-    - Paramètres non littéraux
-    - Appel de fonctions non ```cpp constexpr```
-  - Code non évalué au _compile-time_ ou utilisable dans un contexte constant
-    - Variables ```cpp static``` ou ```cpp thread_local```
-  // P.ex. une variable static constexpr
-  - Valeur non utilisée
-    - Utilisation de pointeurs ou références inconnus
-// P.ex. sizeof *ptr
-- Conversion implicite de fonctions ```cpp constexpr``` en ```cpp consteval```
-// Lorsque la fonction ne peut qu'être invoquée au compile-time
-- Davantage de ```cpp constexpr``` dans la bibliothèque standard
-
-#addproposal("P2242")
-#addproposal("P2448")
-#addproposal("P2647")
-#addproposal("p2273")
-
 == ``` if consteval```
 
 === ``` if consteval```
 
 - Branche prise en compte si le code est évalué au _compile-time_
-- Peut appeler des fonctions immédiate
+- Peut appeler des fonctions ```cpp consteval```
 // P.ex. dans une fonction constexpr
 - ```cpp else``` pour le code évalué au _run-time_
 
@@ -292,6 +268,39 @@ if ! consteval { ... }
 
 #addproposal("P1938")
 
+== ``` constexpr```
+
+=== ``` constexpr```
+
+- Relâchement de contraintes sur les fonctions ```cpp constexpr```
+  - Dans le code non évalué au _compile-time_
+    // Soit la fonction n'est en pratique jamais appelée au compile-time soit la branche contenant ce code n'est exécutée qu'au run-time
+    - Variables non littérales
+    - Utilisation de ```cpp goto```
+    - Retour non littéral
+    - Paramètres non littéraux
+    - Appel de fonctions non ```cpp constexpr```
+  - Variables ```cpp static``` ou ```cpp thread_local```
+    - Si utilisables dans un contexte constant (p.ex. ```cpp static constexpr```)
+    - Ou dans le code non évalué au _compile-time_
+  - Utilisation de pointeurs ou références inconnus si la valeur n'est pas utilisée (p.ex. ```cpp sizeof *ptr```)
+
+#addproposal("P2242")
+#addproposal("P2448")
+#addproposal("P2647")
+#addproposal("p2273")
+
+=== ``` constexpr```
+
+- Conversion implicite de fonctions ```cpp constexpr``` en ```cpp consteval```
+// Lorsque la fonction ne peut qu'être invoquée au compile-time
+- Davantage de ```cpp constexpr``` dans la bibliothèque standard
+
+#addproposal("P2242")
+#addproposal("P2448")
+#addproposal("P2647")
+#addproposal("p2273")
+
 == Sémantique de déplacement
 
 === Sémantique de déplacement
@@ -318,9 +327,9 @@ for (auto e : foo(bar())) { ... }
 
 #addproposal("P2718")
 
-== init-statement
+== _init-statement_
 
-=== init-statement
+=== _init-statement_
 
 - ```cpp using``` possible dans l'_init-statement_ de ```cpp if```, ```cpp switch``` et ```cpp for```
 
@@ -337,14 +346,6 @@ for (auto e : foo(bar())) { ... }
 #addproposal("P2360")
 
 == Littéraux
-
-=== Encodage
-
-- Support des fichiers sources en UTF-8
-- Encodage identique entre le préprocesseur et le code C++
-
-#addproposal("P2295")
-#addproposal("P2316")
 
 === Suffixes littéraux
 
@@ -386,7 +387,7 @@ U"" u"";   // Invalide
 U"" u8"";  // Invalide
 ```
 
-#noteblock("Et si ?", text[
+#questionblock("Et si ?", text[
   Si une des chaînes n'a pas d'encodage, on utilise celui de la seconde
 ])
 
@@ -431,7 +432,7 @@ U"" u8"";  // Invalide
 
 == Opérateurs
 
-=== Évolutions des opérateurs d'égalité
+=== Opérateurs d'égalité
 
 - Modification des règles de résolution de ```cpp operator==``` et ```cpp operator!=```
 - Corrige des ambiguïtés introduites par la réécriture de ```cpp ==``` et ```cpp !=``` en C++20
@@ -474,10 +475,10 @@ Foo{} != Foo{};
 === ``` operator[]``` multidimensionnel
 
 #noteblock("Au-delà de C++23", text[
-  - Réécritures
+  - Réécritures automatiques
     - De ```cpp a[x][y][z]``` en ```cpp a[x, y, z]```
-    - De ```cpp a(x, y, z)``` en ```cpp a[x][y][z]``` (et  ```cpp a(x)``` en ```cpp a[x]```)
     - De ```cpp a[x, y, z]``` en ```cpp a[x][y][z]```
+    - De ```cpp a(x, y, z)``` en ```cpp a[x][y][z]``` (et  ```cpp a(x)``` en ```cpp a[x]```)
   - Extension aux tableaux C, aux conteneurs standards existants et aux ```cpp operator[]``` non-membres
 ])
 
@@ -551,7 +552,7 @@ Foo{} != Foo{};
 
 === Évolutions des lambdas
 
-- Support des attributs ```cpp [[ nodiscard ]]```, ```cpp [[ deprecated ]]```, ```cpp [[ noreturn ]]```
+- Support de ```cpp [[ nodiscard ]]```, ```cpp [[ deprecated ]]```, ```cpp [[ noreturn ]]```
 - Lambdas ```cpp static``` : ```cpp operator()``` de l'objet généré est ```cpp static```
 
 #codesample(
@@ -607,12 +608,12 @@ int foo();
 
 #addproposal("P2156")
 
-=== Nouveaux attributs
+=== ``` [[ assume ]]```
 
 - ```cpp [[ assume(expression) ]]``` permet au compilateur d'optimiser en supposant la véracité de l'expression
 
 #alertblock("Contrainte", text[
-  Expression doit être vraie à l'emplacement de ```cpp assume```
+  Expression doit être vraie à l'emplacement de ```cpp [[ assume ]]```
   // UB dans le cas contraire
 ])
 
@@ -626,7 +627,7 @@ int foo();
 
 #addproposal("P1847")
 
-=== Paramètre ``` this``` explicite / deducing ``` this```
+=== _deducing_ ``` this```
 
 - Limitation des surcharges ```cpp const``` / non ```cpp const``` de fonctions membres
 - Utilisation d'un premier paramètre, préfixé ```cpp this```, notant l'instance de classe
@@ -645,7 +646,7 @@ struct Foo {
 
 #addproposal("P0847")
 
-=== Paramètre ``` this``` explicite / deducing ``` this```
+=== _deducing_ ``` this```
 
 - Utilisation des règles classiques de déduction de types
 
@@ -663,7 +664,7 @@ void ex(Foo& foo, D& d) {
 
 #addproposal("P0847")
 
-=== Paramètre ``` this``` explicite / deducing ``` this```
+=== _deducing_ ``` this```
 
 - Permet le passage de ```cpp this``` par valeur
 
@@ -679,7 +680,7 @@ Foo{}(4);
 
 == Templates
 
-=== Déduction dans les constructeurs hérités
+=== Héritage de constructeurs
 
 - Déduction des paramètres templates d'un constructeur hérité
 
@@ -701,17 +702,11 @@ Foo{}(4);
 
 #addproposal("P2582")
 
-== Exception
-
-=== ``` noexcept```
-
-- Ajout de ```cpp noexcept``` à plusieurs fonctions de la bibliothèque standard
-
 == _Traits_
 
 === _Traits_
 
-- ```cpp std::is_scoped_enum``` indique si un type est un ```cpp enum class```
+- ```cpp std::is_scoped_enum``` : le type est un ```cpp enum class```
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctype_traits%3E%0A%0Aclass+A%0A%7B%0A%7D%3B%0A%0Aenum+E%0A%7B%0A%7D%3B%0A%0Aenum+struct+Es+%0A%7B%0A%7D%3B%0A%0Aenum+class+Ec+:+int+%0A%7B%0A%7D%3B%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::boolalpha%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CA%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CE%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CEs%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3CEc%3E+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::is_scoped_enum_v%3Cint%3E+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -735,8 +730,8 @@ Foo{}(4);
 
 === _Traits_
 
-- ```cpp std::is_implicit_lifetime``` indique si un objet à une durée de vie implicite
-- ```cpp std::reference_constructs_from_temporary``` et ```cpp std::reference_converts_from_temporary``` indiquent si la référence est construite depuis un temporaire
+- ```cpp std::is_implicit_lifetime``` : l'objet à une durée de vie implicite
+- ```cpp std::reference_constructs_from_temporary``` et ```cpp std::reference_converts_from_temporary``` : la référence est construite depuis un temporaire
 
 #addproposal("P2674")
 #addproposal("P2255")
@@ -829,7 +824,7 @@ tuple<int, int> bar = array{1, 3};
 
 === ``` std::stack``` et ``` std::queue```
 
-- Création de ```cpp std::stack``` et ```cpp std::queue``` depuis une paire d'itérateurs
+- Construction de ```cpp std::stack``` et ```cpp std::queue``` depuis une paire d'itérateurs
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cqueue%3E%0A%23include+%3Cstack%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+v%7B1,+3,+7,+13%7D%3B%0A%0A++std::queue+q(std::begin(v),+std::end(v))%3B%0A++std::stack+s(std::begin(v),+std::end(v))%3B%0A%0A++std::cout+%3C%3C+q.front()+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+s.top()+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -850,7 +845,7 @@ tuple<int, int> bar = array{1, 3};
 - Adaptateurs associatifs de conteneurs
   - ```cpp std::flat_map``` et ```cpp std::flat_multimap```
   - ```cpp std::flat_set``` et ```cpp std::flat_multiset```
-    - Adapte un conteneur séquentiel pour présenter une API de conteneur associatif
+    - API de conteneur associatif au-dessus d'un conteneur séquentiel
     - Davantage _cache-friendly_
     - Clés et valeurs stockées dans deux conteneurs différents
 
@@ -926,7 +921,7 @@ tuple<int, int> bar = array{1, 3};
 - Formateur de ```cpp std::chrono``` _locale-independent_ par défaut
 
 ```cpp
-format("{:%S}", 4s + 200ms); // C++20 : 04,200 / C++23 : 04.200
+format("{:%S}", 4s + 200ms); // C++20 : 04,200    / C++23 : 04.200
 format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 ```
 
@@ -942,7 +937,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 - Formatage des ```cpp std::pair``` et ```cpp std::tuple```
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::tuple%3Cint,+long,+std::string%3E%7B5,+56L,+%22foo%22%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang1701,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic+-stdlib%3Dlibc%2B%2B',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+clang+17.0.1+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Ctuple%3E%0A%23include+%3Cstring%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::tuple%3Cint,+long,+std::string%3E%7B5,+56L,+%22foo%22%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
     format("{}", tuple<int, long, string>{5, 56L, "foo"})
@@ -958,7 +953,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   - ```cpp std::vector```, ```cpp std::list```, ... : ```cpp [v1, v2]```
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cmap%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::vector%3Cint%3E%7B5,+56%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B::%23x%7D%22,+std::vector%3Cint%3E%7B5,+56%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::map%3Cint,+int%3E%7B%7B1,+5%7D,+%7B8,+56%7D%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang1701,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic+-stdlib%3Dlibc%2B%2B',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+clang+17.0.1+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:12,positionColumn:1,positionLineNumber:12,selectionStartColumn:1,selectionStartLineNumber:12,startColumn:1,startLineNumber:12),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cvector%3E%0A%23include+%3Cmap%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::vector%3Cint%3E%7B5,+56%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B::%23x%7D%22,+std::vector%3Cint%3E%7B5,+56%7D)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::map%3Cint,+int%3E%7B%7B1,+5%7D,+%7B8,+56%7D%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
     format("{}", vector<int>{5, 56});             // [5, 56]
@@ -970,26 +965,23 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 
 #addproposal("P2418")
 #addproposal("P2286")
-#addproposal("P2693")
 
 === ``` std::format```
 
 - Formatage des ```cpp std::thread::id```
 
 #codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cthread%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::this_thread::get_id())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::thread::id%7B%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang1701,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic+-stdlib%3Dlibc%2B%2B',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+clang+17.0.1+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:10,positionColumn:1,positionLineNumber:10,selectionStartColumn:1,selectionStartLineNumber:10,startColumn:1,startLineNumber:10),source:'%23include+%3Ciostream%3E%0A%23include+%3Cformat%3E%0A%23include+%3Cthread%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::this_thread::get_id())+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+std::format(%22%7B%7D%22,+std::thread::id%7B%7D)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B23+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-    format("{}", this_thread::get_id());  // 130319936412736
-    format("{}", thread::id{});           // 0
+    format("{}", this_thread::get_id());
+    format("{}", thread::id{});
     ```
   ],
 )
 
 - Formatage des ```cpp std::stacktrace```
 
-#addproposal("P2418")
-#addproposal("P2286")
 #addproposal("P2693")
 
 === ``` std::print```
@@ -1101,7 +1093,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 
 === Atomiques
 
-- Support des ```cpp atomics``` C
+- Support des ```cpp atomic``` C
 
 #addproposal("P0943")
 
@@ -1378,8 +1370,8 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   ],
 )
 
-- Relâchement des contraintes sur les _range adaptors_ pour accepter les types _move-only_
-- Relâchement des contraintes sur ```cpp join_view``` permettant le support de davantage de ranges
+- _Range adaptors_ acceptent les types _move-only_
+- Support de davantage de ranges par ```cpp join_view```
 // Avant seulement des ranges de glvalues ranges (vues ou non) et des ranges de prvalues views
 // Maintenant aussi des ranges de prvalues non view ranges
 
@@ -1402,7 +1394,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 
 #addproposal("P1206")
 
-=== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et _range adaptors_
 
 - ```cpp std::views::zip()``` fusionne plusieurs ranges en un range de tuple
 
@@ -1435,7 +1427,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 
 #addproposal("p2321")
 
-=== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et _range adaptors_
 
 - ```cpp std::views::adjacent()``` construit des ranges de $N$ éléments consécutifs
 - ```cpp std::views::pairwise()``` construit des ranges de 2 éléments consécutifs
@@ -1476,7 +1468,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 #addproposal("p2321")
 #addproposal("p2441")
 
-=== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et _range adaptors_
 
 - ```cpp std::ranges::shift_left()``` et ```cpp std::ranges::shift_right()```
 - ```cpp std::views::chunck()``` coupe un range en blocs de $N$ éléments
@@ -1519,7 +1511,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 #addproposal("P2440")
 #addproposal("p2443")
 
-=== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et _range adaptors_
 
 - ```cpp std::views::find_last()```/```cpp find_last_if()```/```cpp find_last_if_not()```
 - ```cpp std::views::stride()``` conserve un élément sur $n$
@@ -1564,7 +1556,7 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
 #addproposal("P2374")
 #addproposal("P2540")
 
-=== Nouveaux ranges et range adaptors
+=== Nouveaux ranges et _range adaptors_
 
 - ```cpp std::views::as_rvalue()``` convertit les éléments en _r-value_
 - ```cpp std::views::as_const()``` constifie les éléments

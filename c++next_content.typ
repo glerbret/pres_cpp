@@ -66,7 +66,7 @@
 
 === TS -- _Pattern matching_
 
-- Sur les ```cpp std::tuple```, ```cpp std::pair```, ```cpp std::array``` et _tuple-like_
+- Sur les _tuple-like_ (```cpp std::tuple```, ```cpp std::pair```, ```cpp std::array```, ...)
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:9,endLineNumber:13,positionColumn:9,positionLineNumber:13,selectionStartColumn:9,selectionStartLineNumber:13,startColumn:9,startLineNumber:13),source:'%23include+%3Cprint%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+int%3E+p%7B2,+0%7D%3B%0A%0A++p+match%0A++%7B%0A++++%5B0,+0%5D+%3D%3E+std::print(%22on+origin%22)%3B%0A++++%5B0,+let+y%5D+%3D%3E+std::print(%22on+y-axis%22)%3B%0A++++%5Blet+x,+0%5D+%3D%3E+std::print(%22on+x-axis%22)%3B%0A++++let+%5Bx,+y%5D+%3D%3E+std::print(%22%7B%7D,%7B%7D%22,+x,+y)%3B%0A++%7D%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:clang_patmat,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-Wall+-Wextra+-pedantic+-Wno-unused-variable',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+clang+(pattern+matching+-+P2688)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -133,9 +133,8 @@
 #addproposal("P1371")
 #addproposal("p2688")
 
-=== TS -- _Library fundamentals 2_
+=== TS -- _Library fundamentals_
 
-- Partiellement intégré en C++17 et C++20
 - ```cpp std::is_detected``` indique si un _template-id_ est bien formé
 - Wrapper ```cpp std::propagate_const``` pour les pointeurs et _pointer-like_
 - Pointeurs intelligents non possédants ```cpp std::observer_ptr```
@@ -147,9 +146,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 // "1, 2, 3, 4, 5"
 ```
 
-#addproposal("N4617")
+#addproposal("N4948")
 
-=== TS -- _Library fundamentals 2_
+=== TS -- _Library fundamentals_
 
 - Générateur aléatoire propre au thread ```cpp std::default_random_engine``` initialisé dans un état non prédictif
   - ```cpp std::randint()``` génère un nombre entier dans une plage spécifiée
@@ -157,9 +156,9 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - ```cpp std::sample()``` choisit aléatoirement $n$ élément d'une séquence
   - ```cpp std::shuffle()``` réordonne aléatoirement les éléments d'un range
 
-#addproposal("N4617")
+#addproposal("N4948")
 
-=== TS -- _Library fundamentals 3_
+=== TS -- _Library fundamentals_
 
 - _Scope Guard_ : enregistrement d'un foncteur appelé
   - à la sortie du scope : ```cpp std::scope_exit```
@@ -223,8 +222,11 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - ```cpp std::basic_string::reserve()``` sans argument
   - _Unicode Conversion Facets_
   - _Locale Category Facets for Unicode_
+  - ...
 
-=== sécurité
+== Sécurité
+
+=== Sécurité
 
 - Safety profile
   - Initialisation de toutes les variables
@@ -246,8 +248,8 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 - Accès à la valeur initiale des paramètres dans les postconditions
 - Comportement ```cpp assume``` : optimisation en supposant le contrat vrai
 - Choix du comportement dans l'assertion du contrat
-- Contrat _always-enforced_, _quick_enforced_
-- Postcondition sur les sorties non normales d'une fonction (exceptions)
+- Contrats _always-enforced_, _quick_enforced_
+- Postconditions sur les sorties non normales d'une fonction (exceptions)
 - Contrats non évaluables au _run-time_
 - Invariants
 - Annotations de types _claim_ / _assertion_
@@ -293,7 +295,7 @@ using std::chrono::{duration, time_point, duration_cast};
 
 #addproposal("p3485")
 
-=== Syntaxe
+=== _Trailing commas_
 
 - Autorisation des _trailing commas_ dans davantage de contexte : paramètre de fonction, paramètres templates, _structure bindings_, ...
 
@@ -363,7 +365,7 @@ auto b = f"Value : {a}";
 
 - Gestion des arrondis
 - Support obligatoire de ```cpp intptr_t``` et ```cpp uintptr_t```
-- Types flottants compatible ISO/IEC 60559:2020 (résultats davantage reproductibles)
+- Types flottants compatible ISO/IEC 60559:2020 (reproductibilité)
 - Amélioration des nombres flottants
 - ```cpp CHAR_BIT``` impérativement égal à 8 ("_There are exactly 8 bits in a byte_")
 // Auparavant obligatoirement supérieur ou égal à 8, contraint par les plages garanties de signed char et unsigned char, mais pas d'autres contraintes (même pas multiple de 8)
@@ -397,6 +399,9 @@ static_assert(2km / 2kmph == 1h);
 static_assert(1000 / 1s == 1kHz);
 static_assert(10km / 5km == 2);
 ```
+
+#noteblock("Voir aussi", text[
+  #link("https://accu.org/journals/overload/34/192/wu/")[Overload 192 - _Let the Compiler Check Your Units_ #linklogo()]])
 
 #addproposal("p1935")
 #addproposal("P2980")
@@ -465,7 +470,7 @@ cfor(auto &bar : foo) { /* foo est constant */ }
 
 - Ajout d'une instruction à ```cpp break``` appelé lors de la sortie de la boucle
 // Alignement sur des évolutions C en cours
-- Ajout d'une boucle ```cpp do_until```
+- Ajout d'une boucle ```cpp do until```
 - Version _generator-based_ de _for loop_
 
 ```cpp
@@ -775,7 +780,7 @@ int a[42] = { 5... };
 - Fonction libre d'accès "range-checked" à un élément ```cpp std::at()```
 - Uniformisation de ```cpp std::span``` et ```cpp std::string_view```
   - Ajout de ```cpp remove_prefix()``` et ```cpp remove_suffix()``` à ```cpp std::span```
-  - Ajout de ```cpp first()``` et ```cpp last()``` à ```cpp std::string_view```
+  - Ajout de ```cpp first()``` et ```cpp last()``` à ```cpp std::string_view``` et ```cpp std::string```
 - Ajout de garanties à ```cpp std::array```
 - Précision sur le comportement des ```cpp std::array``` de taille nulle
 - Ajout de ```cpp reserve()``` et ```cpp capacity()``` à ```cpp std::flat_map``` et ```cpp std::flat_set```
@@ -818,10 +823,7 @@ auto bar = rebind<double>(foo);  // vector<double>
 - Modification du constructeur de ```cpp std::string``` depuis un caractère pour interdire les autres numériques (entiers ou flottants)
 - Voire dépréciation de la construction d'un ```cpp std::string``` depuis un caractère
 - ```cpp fixed_string``` : chaîne de caractères utilisable au _compile-time_
-- Ajout de ```cpp first()``` et de ```cpp last()``` à ```cpp std::string``` et ```cpp std::string_view``` pour récupérer les $n$ premiers ou derniers caractères
-- ```cpp std::zstring_view``` équivalent à ```cpp std::string_view``` garantissant la présence d'un ```cpp \0``` terminal
-- Sentinelle pour les chaînes null-terminée, pour l'usage de range sur ces chaînes
-- ```cpp std::cstring_view``` : vue systématiquement _null-terminated_
+- ```cpp std::zstring_view``` (ou ```cpp std::cstring_view```) : vue systématiquement _null-terminated_
 
 #addproposal("p3094")
 #addproposal("p3283")
@@ -833,7 +835,7 @@ auto bar = rebind<double>(foo);  // vector<double>
 
 === ``` std::tuple```
 
-- Récupération d'un index depuis un type pour ```cpp std::variant``` et ```cpp std::tuple```
+- Récupération d'un index depuis un type
 - Utilisation de tableaux C comme _tuple-like_
 - Utilisation d'_aggregates_ comme _tuple-like_
 - Amélioration de l'ergonomie d'accès aux champs des ```cpp std::tuple```
@@ -888,15 +890,14 @@ t[0ic] // Équivalent a std::get<0>(t)
 === Algorithmes
 
 - ```cpp std::find_last()``` recherche depuis la fin d'un conteneur
-- ```cpp std::is_uniqued``` test l'absence de deux valeurs consécutives identiques
+- ```cpp std::is_uniqued()``` test l'absence de deux valeurs consécutives identiques
 - Gestion des UUID
 - Fonctions statistiques (moyenne, médiane, variance, ...)
 - Améliorations du générateur aléatoire
-- Ajout de fonctions "simples" pour la génération de nombres aléatoires
-- Manipulation de bits : ```cpp bit_reverse```, ```cpp bit_repeat```, ```cpp bit_compress```, ```cpp bit_expand```, ```cpp next_bit_permutation``` et ```cpp prev_bit_permutation```
+- Manipulation de bits : ```cpp bit_reverse()```, ```cpp bit_repeat()```, ```cpp bit_compress()```, ```cpp bit_expand()```, ```cpp next_bit_permutation()``` et ```cpp prev_bit_permutation()```
 - Fonctions membres ```cpp one()```, ```cpp countl_zero()```, ```cpp countl_one()```, ```cpp countr_zero()```, ```cpp countr_one()```, ```cpp rotl()```, ```cpp rotr()``` et ```cpp reverse()``` à ```cpp std::bitset```
-- ```cpp std::first_factor``` retourne le plus petit facteur premier d'un nombre
-- ```cpp std::uninitialized_relocate```, ```cpp std::uninitialized_relocate_n``` et  ```cpp std::uninitialized_relocate_backward```
+- ```cpp std::first_factor()``` retourne le plus petit facteur premier d'un nombre
+- ```cpp std::uninitialized_relocate()```, ```cpp std::uninitialized_relocate_n()``` et  ```cpp std::uninitialized_relocate_backward()```
 
 #addproposal("P2848")
 #addproposal("p1708")
@@ -939,7 +940,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 - ```cpp msb_to_mask()``` construit le masque permet de récupérer le bit de poids fort
 - Gestion du mode d'arrondi sur les calculs avec des ```cpp float```
 - Ajout des fonctions de manipulation de ```cpp float``` et ```cpp double``` de C23 (```cpp std::iscanonical()```, ```cpp std::iszero()```, ```cpp std::fadd()```, ...)
-- Foncteurs ```cpp std::bit_lshift<>``` et ```cpp std::bit_rshidt<>```
+- Foncteurs ```cpp std::bit_lshift``` et ```cpp std::bit_rshift```
 
 #addproposal("p3734")
 #addproposal("p3793")
@@ -1002,8 +1003,8 @@ ranges::sort(v, less{}, get_element<0>);
 === Ranges
 
 - Opérations ensemblistes ```cpp views::set_difference()```, ```cpp views::set_intersection()```, ```cpp views::set_union()``` et ```cpp views::set_symmetric_difference()```
-- ```cpp static_sized_range``` : raffinement de ```cpp sized_range``` lorsque la taille est connu au _compile-time_
-- Vues changeant l'_endianess_ ```cpp views::to_big_endian()``` et ```cpp views::to_little_endian()```
+- ```cpp static_sized_range``` : ```cpp sized_range``` avec une taille connue au _compile-time_
+- Changement de l'_endianess_ ```cpp views::to_big_endian()``` et ```cpp views::to_little_endian()```
 
 #addproposal("p3741")
 #addproposal("p3928")
@@ -1013,13 +1014,13 @@ ranges::sort(v, less{}, get_element<0>);
 
 === _Traits_
 
-- Trait ```cpp std::is_narrowing_convertible```
-- _Traits_ et fonctions pour garantir des conversions sans perte
+- ```cpp std::is_narrowing_convertible```
+- Conversions garanties sans perte
   - ```cpp is_value_preserving_convertible_v```
-- Trait indiquant si un type _trivially default constructible_ peut être initialisé en mettant tous les octets à 0
+- _Trait_ indiquant si un type _trivially default constructible_ peut être initialisé en mettant tous les octets à 0
 - Amélioration de l'ergonomie de ```cpp std::integral_constant<int>```
 - ```cpp std::is_always_exhaustive``` indique qu'un objet ne contient pas de bit de padding
-- ```cpp is_bitwise_trivially_relocatable```
+- ```cpp std::is_bitwise_trivially_relocatable```
 - ```cpp std::is_vector_bool_reference<T>```
 
 #addproposal("p0870")
@@ -1313,10 +1314,8 @@ void func(T) {...}
 
 - Suppression de ```cpp NULL``` et interdiction de ```cpp 0``` comme pointeur nul
 - Surcharge de ```cpp new``` retournant la taille réellement allouée
-- ```cpp pointer_in_range``` vérifie si un pointeur est dans une plage
 
 #addproposal("p0901")
-#addproposal("p3234")
 
 === Pointeurs intelligents
 
@@ -1385,13 +1384,6 @@ void func(T) {...}
 === Regex
 
 - Ajout de regex _compile-time_
-
-== Interface utilisateur
-
-=== Interface utilisateur
-
-- Support des entrées/sorties audio
-- ```cpp std::web_view``` API fournissant une fenêtre dans laquelle le programme peut injecter des composants web (ou être appelé via _callback_)
 
 == Compilation et implémentation
 
