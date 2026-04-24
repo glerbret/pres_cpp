@@ -14,3 +14,5 @@
   - la bibliothèque de quantité et d'unité
 
 #addproposal("p5000")
+#addproposal("p4025")
+#addproposal("P4029")

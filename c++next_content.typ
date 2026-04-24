@@ -122,7 +122,7 @@
   code: [
     ```cpp
     p match {
-      let [x, y] if(x > y) => print("{} superieur a {}", x, y);
+      let [x, y] if(x > y) => print("{} supérieur a {}", x, y);
     };
     ```
   ],
@@ -209,10 +209,12 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 - Conversions implicites entre ```cpp char8_t```, ```cpp char16_t``` et ```cpp char32_t```
 - Paramètre template ```cpp std::char_traits``` de ```cpp std::basic_string```, ```cpp std::basic_string_view``` et des flux
 - Conversion implicite de ```cpp bool``` vers un type caractère
+- Support de ```cpp signed char```, ```cpp unsigned char```, ```cpp int8_t``` et ```cpp uint8_t``` par ```cpp std::ostream```
 
 #addproposal("p3695")
 #addproposal("p3681")
 #addproposal("p3765")
+#addproposal("p3154")
 
 === Suppressions
 
@@ -238,6 +240,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p2410")
 #addproposal("p1179")
 #addproposal("p2816")
+#addproposal("p4158")
 
 == Contrats
 
@@ -263,6 +266,12 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p3977")
 #addproposal("p4005")
 #addproposal("p4015")
+
+=== Contrats
+
+- ```cpp pre!``` indique un précondition qui aboutit systématiquement à un arrêt
+
+#addproposal("p4044")
 
 == Comportement
 
@@ -354,12 +363,13 @@ auto b = f"Value : {a}";
 - _Zero-initialisation_ des objets _automatic storage duration_
 - Entiers non signés pour lesquels l'_overflow_ est un UB
 - ```cpp std::initializer_list``` déplaçables
-- Détection et gestion des débordements
+- Détection et gestion des débordements : ```cpp std::add_carry()```, ```cpp std::sub_borrow()```, ```cpp std::mul_wide()```, ```cpp std::div_wide()```, ...
 
 #addproposal("P3003")
 #addproposal("P3018")
 #addproposal("p2966")
 #addproposal("p3140")
+#addproposal("p3161")
 
 === Types
 
@@ -420,6 +430,20 @@ static_assert(10km / 5km == 2);
   - Obtention d'un pointeur sur la représentation via ```cpp reinterpret_cast``` vers ```cpp char*```, ```cpp unsigned char*``` ou ```cpp std::byte*```
   - Conversion pointeur sur représentation vers pointeur sur objet via ```cpp reinterpret_cast```
 
+=== Relocation
+
+- Nouvelle catégorie _trivially relocatable_ : déplaçable par copie bit à bit
+// Opération généralement implémentable par un simple memcpy()
+// L'idée est de permettre certaines optimisations sur les objets correspondants
+- Objet implicitement _trivially relocatable_ si toutes ces classes de base et membres non-statiques le sont
+- ```cpp trivially_relocatable_if_eligible``` sur les classes pour les marquer _trivially relocatable_
+- _Traits_ ```cpp std::is_trivially_relocatable``` et ```cpp std::is_nothrow_relocatable```
+- Fonction ```cpp std::trivially_relocate()``` effectue ce déplacement trivial
+- Fonction ```cpp std::relocate()``` appelle ```cpp std::trivially_relocate()``` ou le constructeur par déplacement selon l'objet
+
+#addproposal("P2786")
+#addproposal("p4197")
+
 == Variables
 
 === _Shadowing_
@@ -449,7 +473,9 @@ cfor(auto &bar : foo) { /* foo est constant */ }
 === ``` __COUNTER__```
 
 - Normalisation de la macro ```cpp __COUNTER__```
+- Initialisé à ```cpp 0```
 - Incrémentée à chaque invocation
+- Intégré en parallèle à C2Y
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+__COUNTER__+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+__COUNTER__+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+__COUNTER__+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -504,7 +530,16 @@ for(int i = 0; auto x : e; ++i) { ... }
   - Similaire à _range-based for loop_ si le range n'est pas vide
   - Appel du contenu du ```cpp else``` si le range est vide
 
+- _Case ranges_ : plage de valeur dans les ```cpp case```
+
+```cpp
+switch (next_char) {
+  case '0' ... '9': // ...
+}
+```
+
 #addproposal("p3784")
+#addproposal("p4040")
 
 === _do expression_
 
@@ -532,7 +567,7 @@ int x = do { do return 42; };
 - Retarder à l'instanciation l'échec de ```cpp static_assert(false)``` dans les templates
 
 ```cpp
-// C++20 : echec de compilation systematique
+// C++20 : échec de compilation systématique
 template<typenameT>int my_func(constT&) {
   if constexpr(is_integral_v<T>) { return 1; }
   else if constexpr(is_convertible_v<string, T>) { return 2 ; }
@@ -544,6 +579,7 @@ template<typenameT>int my_func(constT&) {
 - ```cpp compile_assert()``` pour vérifier à la compilation qu'une expression _run-time_ est vraie pour tous les chemins
 
 #addproposal("P2593")
+#addproposal("p4019")
 #addproposal("p4021")
 
 == Fonctions
@@ -696,11 +732,13 @@ flag~; // Équivalent a flag = !flag
 - Destructeurs ```cpp consteval```
 - Données statiques dans les classes locales non nommées
 - Génération par défaut des opérateurs d'affectation des classes ayant des données ```cpp const``` ou ```cpp &``` depuis le constructeur par copie par défaut
+- ```cpp std::protocol``` : sous-typage structurel
 
 #addproposal("p2966")
 #addproposal("p3421")
 #addproposal("p3588")
 #addproposal("p3812")
+#addproposal("p4148")
 
 == Énumérations
 
@@ -812,9 +850,16 @@ vector<float> foo = {1.0f, 2.0f, 3.0f};
 auto bar = rebind<double>(foo);  // vector<double>
 ```
 
+- ```cpp std::copy()``` et ```cpp std::fill()``` sur les ```cpp std::mdspan```
+- Relocation plutôt assignation des éléments déplacés lors de l'insertion ou de la suppression dans ```cpp std::vector```, ```cpp std::inplace_vector```, ```cpp std::deque```
+- Construction de ```cpp std::span``` depuis un _initialiser list_
+
 #addproposal("p3852")
 #addproposal("p3952")
 #addproposal("p3971")
+#addproposal("p3242")
+#addproposal("P4102")
+#addproposal("p4190")
 
 === Chaînes de caractères
 
@@ -914,6 +959,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 - ```cpp std::isqrt()``` : racine entière d'un nombre positif
 // Plus grand entier dont le carré est inférieur ou égal au nombre initial
 - ```cpp std::clmul()``` : multiplication sans retenu (_XOR multiplication_)
+  - Utile pour le calcul de CRC, AES-GCM, manipulation binaire
 - Fonctions de manipulation de caractères
   - ```cpp ascii_is_any()```, ```cpp ascii_is_alphabetic()```, ...
   - ```cpp ascii_to_lower()```, ```cpp ascii_to_upper()```
@@ -942,12 +988,12 @@ t[0ic] // Équivalent a std::get<0>(t)
 - Ajout des fonctions de manipulation de ```cpp float``` et ```cpp double``` de C23 (```cpp std::iscanonical()```, ```cpp std::iszero()```, ```cpp std::fadd()```, ...)
 - Foncteurs ```cpp std::bit_lshift``` et ```cpp std::bit_rshift```
 
+#addproposal("p3724")
 #addproposal("p3734")
 #addproposal("p3793")
 #addproposal("p3764")
 #addproposal("p3864")
 #addproposal("p3935")
-#addproposal("p3724")
 
 === Algorithmes
 
@@ -955,6 +1001,29 @@ t[0ic] // Équivalent a std::get<0>(t)
   - ```cpp std::starts_with()``` et ```cpp std::ends_with()```
   - ```cpp std::join()```
   - ```cpp std::is_null_or_empty()```
+- Opérateurs _funnel shift_
+- Suppression des préconditions "_no overlapping_" pour les algorithmes effectuant une copie ou un déplacement
+- ```cpp std::for_each_index()``` parcours multidimensionnel
+- Meilleure accessibilité de surcharges de fonctions mathématique (```cpp sqrt()```, ```cpp abs()```, ...)
+
+#addproposal("p4010")
+#addproposal("p4049")
+#addproposal("p4150")
+#addproposal("p4188")
+
+== SIMD
+
+=== SIMD (_Single Instruction on Multiple Data_)
+
+- Extension de SIMD aux types utilisateur
+- Support de l'arithmétique par saturation
+- ```cpp std::chunked_invoke()``` pour appeler une lambda sur une partie d'une valeur SIMD
+- Création de masques avec $n$ bits levés : ```cpp std::mask_from_count()```
+
+#addproposal("P2964")
+#addproposal("P2956")
+#addproposal("P2929")
+#addproposal("P3440")
 
 == Ranges
 
@@ -1005,10 +1074,14 @@ ranges::sort(v, less{}, get_element<0>);
 - Opérations ensemblistes ```cpp views::set_difference()```, ```cpp views::set_intersection()```, ```cpp views::set_union()``` et ```cpp views::set_symmetric_difference()```
 - ```cpp static_sized_range``` : ```cpp sized_range``` avec une taille connue au _compile-time_
 - Changement de l'_endianess_ ```cpp views::to_big_endian()``` et ```cpp views::to_little_endian()```
+- Ajout de ```cpp at()``` aux vues
+- Ajout de ```cpp rbegin()```, ```cpp rend()```, ```cpp crbegin()```, ```cpp crend()``` aux vues
 
 #addproposal("p3741")
 #addproposal("p3928")
 #addproposal("p4030")
+#addproposal("p3052")
+#addproposal("P4179")
 
 == _Traits_
 
@@ -1038,6 +1111,7 @@ ranges::sort(v, less{}, get_element<0>);
 - Capture effectuée dans l'ordre des déclarations
 - Lambda avec capture assignable par copie ou déplacement si les entités capturées sont assignables
 
+#addproposal("p2034")
 #addproposal("p3847")
 #addproposal("p3963")
 
@@ -1290,9 +1364,11 @@ void func(T) {...}
 - Bindings vers d'autres langages (JS, Python) via ces mécanismes
 - Retour d'un ```cpp std::string``` par ```cpp identifier_of()```
 - Comparaison de ```cpp meta::info```
+- Création d'énumération : ```cpp define_enum```
 
 #addproposal("p3947")
 #addproposal("P4032")
+#addproposal("P4033")
 
 == Polymorphisme
 
@@ -1323,11 +1399,15 @@ void func(T) {...}
 - Création de pointeurs intelligents avec une valeur par défaut
 - Comparaison entre pointeurs intelligents et pointeurs nus
 - Retour covariant avec ```cpp std::unique_ptr<T>``` (comme ```cpp T*```)
-- Amélioration des _hazard pointers_
+- Amélioration des ```cpp std::hazard_pointer```
+  - Traitement par lot
+  - Récupération synchrone
+  - ...
 - Conversion de ```cpp std::unique_ptr``` : ```cpp const_pointer_cast``` et ```cpp dynamic_pointer_cast```
 
 #addproposal("p2966")
 #addproposal("p3135")
+#addproposal("p3427")
 #addproposal("p3139")
 
 === Contrôle mémoire
@@ -1376,8 +1456,13 @@ void func(T) {...}
 === Coroutines
 
 - Bibliothèques de support des coroutines
+- Diverses améliorations des coroutines
 - ```cpp std::lazy<T>``` permettant l'évaluation différée
 - Unification et amélioration des API asynchrones
+
+#addproposal("p2583")
+#addproposal("p4003")
+#addproposal("p4014")
 
 == Expressions rationnelles
 

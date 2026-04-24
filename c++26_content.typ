@@ -196,7 +196,7 @@ static_assert(sizeof(Foo) == 1,
 
 === _Saturation arithmetic_
 
-- Fonctions ```cpp std::add_sat()```, ```cpp std::sub_sat()```, ```cpp std::mul_sat()```, ```cpp std::div_sat()``` et ```cpp std::saturate_cast()```
+- Fonctions ```cpp std::saturating_add()```, ```cpp std::saturating_sub()```, ```cpp std::saturating_mul()```, ```cpp std::saturating_div()``` et ```cpp std::saturating_cast()```
 - Les calculs dont le résultat est hors borne retournent les plus grandes ou plus petites valeurs représentables
 
 #codesample(
@@ -211,19 +211,7 @@ static_assert(sizeof(Foo) == 1,
 )
 
 #addproposal("P0543")
-
-=== Relocation
-
-- Nouvelle catégorie _trivially relocatable_ : déplaçable par copie bit à bit
-// Opération généralement implémentable par un simple memcpy()
-// L'idée est de permettre certaines optimisations sur les objets correspondants
-- Objet implicitement _trivially relocatable_ si toutes ces classes de base et membres non-statiques le sont
-- ```cpp trivially_relocatable_if_eligible``` sur les classes pour les marquer _trivially relocatable_
-- _Traits_ ```cpp std::is_trivially_relocatable``` et ```cpp std::is_nothrow_relocatable```
-- Fonction ```cpp std::trivially_relocate()``` effectue ce déplacement trivial
-- Fonction ```cpp std::relocate()``` appelle ```cpp std::trivially_relocate()``` ou le constructeur par déplacement selon l'objet
-
-#addproposal("P2786")
+#addproposal("p4052")
 
 === _Replaceability_
 
@@ -244,6 +232,13 @@ static_assert(sizeof(Foo) == 1,
   - Propagation de ```cpp const```
 
 #addproposal("P3019")
+
+=== _Constant wrapper_
+
+- ```cpp std::cw()``` et ```cpp std::constant_wrapper()``` permet d'utiliser une valeur au _compile-time_
+
+#addproposal("p2781")
+#addproposal("P3948")
 
 == Variables
 
@@ -448,6 +443,7 @@ mdspan<float, dextents<3>> foo;
 #addproposal("P2642")
 #addproposal("p2389")
 #addproposal("P2630")
+#addproposal("p3982")
 
 === Chaînes de caractères
 
@@ -481,20 +477,8 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 
 - _static storage_ possible pour les _braced-initializer-list_
 // Évite de copier les données depuis le static storage vers le tableau sous-jacent de l'initializer list puis vers le conteneur
-- ```cpp std::span``` sur les _braced-initializer-list_
-
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:23,endLineNumber:9,positionColumn:23,positionLineNumber:9,selectionStartColumn:23,selectionStartLineNumber:9,startColumn:23,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Cspan%3E%0A%0Aint+main()%0A%7B%0A++++auto+foo+%3D+%7B5,+7,+12,+42%7D%3B%0A++++const+std::span+bar+%3D+foo%3B%0A%0A++++std::cout+%3C%3C+bar%5B3%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B26+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
-  code: [
-    ```cpp
-    auto foo = {5, 7, 12, 42};
-    span bar = foo;
-    ```
-  ],
-)
 
 #addproposal("P2752")
-#addproposal("P2447")
 
 === ```cpp reference_wrapper```
 
@@ -594,6 +578,7 @@ linalg::scale(2.0, x); // x = 2.0 * x
 )
 
 #addproposal("P2248")
+#addproposal("P3787")
 
 === ``` std::visit()```
 
@@ -635,7 +620,7 @@ ranges::generate_random(a, g);
 === Ranges
 
 - ```cpp std::views::cache_latest()``` met en cache le résultat du dernier déréférencement de l'itérateur sous-jacent
-- ```cpp std::views::to_input()``` convertit un range en _input-only_ range
+- ```cpp std::views::as_input()``` convertit un range en _input-only_ range
 - ```cpp std::ranges::reserve_hint()``` permet de réserver la mémoire pour des _non-sized_ ranges dont la taille peut être approximer
 - Concept ```cpp approximately_sized_range``` supporte ```cpp std::ranges::reserve_hint()```
 - Construction d'une ```cpp sub-string_view``` depuis ```cpp std::string```
@@ -652,6 +637,7 @@ ranges::generate_random(a, g);
 
 #addproposal("p3138")
 #addproposal("p3137")
+#addproposal("p3828")
 #addproposal("p2846")
 #addproposal("p3044")
 #addproposal("p3060")
@@ -674,6 +660,7 @@ ranges::generate_random(a, g);
 )
 
 - Ajout du choix de l'algorithme de parallélisme aux ranges
+
 
 #addproposal("p3168")
 #addproposal("p3179")
@@ -745,10 +732,12 @@ ranges::generate_random(a, g);
 
 === _lifetime_
 
-- ```cpp std::is_within_lifetime()``` indique si l'objet pointé est vivant
+- ```cpp std::is_within_lifetime()``` indique au _compile-time_ si l'objet pointé est vivant
 - ... en particulier si un membre d'une union est active
+- Surcharge testant, au _compile-time_, si l'objet est vivant et convertible vers un autre type
 
 #addproposal("P2641")
+#addproposal("p3450")
 
 === Gestion mémoire
 
@@ -856,7 +845,7 @@ f(y); // erroneous behavior
   code: [
     ```cpp
     string str = "{}";
-    format(runtime_format(str), 42);
+    format(dynamic_format(str), 42);
     ```
   ],
 )
@@ -878,6 +867,7 @@ format("{:>{}}", "hello", "10");
 #addproposal("p2909")
 #addproposal("P2587")
 #addproposal("P2757")
+#addproposal("p3953")
 
 === ``` std::format```
 
@@ -961,8 +951,10 @@ format("{:>{}}", "hello", "10");
 === Générateurs
 
 - Ajout des moteurs _counter based Philox_
+- Support de ```cpp signed char``` et ```cpp unsigned char``` par les générateurs aléatoires
 
 #addproposal("p2075")
+#addproposal("P4037")
 
 == Contrats
 
@@ -994,6 +986,8 @@ format("{:>{}}", "hello", "10");
   #link("https://wg21.link/P4043")[P4043 : Are C++ Contracts Ready to Ship in C++26? #linklogo()]
 
   #link("https://wg21.link/p4020")[P4020 : Concerns about contract assertions #linklogo()]
+
+  #link("https://wg21.link/p3846")[P3846 : C++26 Contract Assertions, Reasserted #linklogo()]
 ])
 
 #questionblock("Fallait-it attendre ?", text[
@@ -1107,6 +1101,7 @@ post (r: r > 0)
 - Méta-programmation et code _compile-time_
 - Injection
 - Construction de données statiques depuis du _compile-time_ : ```cpp std::define_static_string```, ```cpp std::define_static_object``` et ```cpp std::define_static_array```
+- ```cpp is_structural_type``` détermine si un type est un _structural type_
 
 #addproposal("p2996")
 #addproposal("p3096")
@@ -1115,6 +1110,7 @@ post (r: r > 0)
 #addproposal("p3293")
 #addproposal("p3394")
 #addproposal("p3560")
+#addproposal("p3856")
 
 === Réflexion
 
