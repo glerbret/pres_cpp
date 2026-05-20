@@ -97,7 +97,7 @@ if (!p) cerr << "bar\n"; // Suppression possible
 #questionblock(text[ _Undefined_, _unspecified_, _ill-formed_ ?], text[
   - _ill-formed_ : erreurs syntaxiques ou sémantiques
   - _implementation-defined_ : comportement défini par l'implémentation qui doit le documenter
-  - _unspecified behavior_ : comportment défini par l'implémentation qui n'a pas l'obligation de le documenter
+  - _unspecified behavior_ : comportement défini par l'implémentation qui n'a pas l'obligation de le documenter
   - _undefined behavior_ : aucune restriction sur le comportement
 ])
 

@@ -241,37 +241,55 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p1179")
 #addproposal("p2816")
 #addproposal("p4158")
+#addproposal("p4222")
 
 == Contrats
 
 === Contrats
 
 - Contrats sur les fonctions virtuelles et héritage de ceux-ci
-- Contrats sur les pointeurs de fonction et pointeurs de fonction membre
+- Contrats sur les pointeurs de fonction et de fonction membre
 - Accès à la valeur initiale des paramètres dans les postconditions
 - Comportement ```cpp assume``` : optimisation en supposant le contrat vrai
 - Choix du comportement dans l'assertion du contrat
 - Contrats _always-enforced_, _quick_enforced_
 - Postconditions sur les sorties non normales d'une fonction (exceptions)
 - Contrats non évaluables au _run-time_
-- Invariants
+- Invariants de classe
 - Annotations de types _claim_ / _assertion_
 - Label sur les contrats
 - Messages de diagnostic fournis par l'utilisateur
 
+#addproposal("p3850")
 #addproposal("p3400")
+#addproposal("p3097")
 #addproposal("p3831")
 #addproposal("p3099")
 #addproposal("p3912")
 #addproposal("p3977")
 #addproposal("p4005")
 #addproposal("p4015")
+#addproposal("p3098")
+#addproposal("p3327")
+#addproposal("p2755")
 
 === Contrats
 
 - ```cpp pre!``` indique un précondition qui aboutit systématiquement à un arrêt
+- API pour déclencher une violation de contrat avec la sémantique souhaitée
+- Contrat implicite sur les comportements implicites
+- Déclaration d'entités utilisées uniquement dans les contrats
+- Déstructuration de la valeur de retour dans les postconditions
+- Contrats dépendants du type
+- _Pack-expansion_ dans les contrats
+- Opérateur permettant d'évaluer les préconditions d'une fonction
+- Contrat sur les coroutines
 
+#addproposal("p3850")
 #addproposal("p4044")
+#addproposal("p3290")
+#addproposal("p3100")
+#addproposal("p2755")
 
 == Comportement
 
@@ -309,6 +327,15 @@ using std::chrono::{duration, time_point, duration_cast};
 - Autorisation des _trailing commas_ dans davantage de contexte : paramètre de fonction, paramètres templates, _structure bindings_, ...
 
 #addproposal("p3776")
+
+=== Identifiants
+
+- Possibilité pour les compilateurs d'accepter les identifiants contenant ```cpp $```
+
+#noteblock("Note")[Support possible mais non obligatoire]
+// Car les assembleurs de certaines cibles matérielles ne le supporte pas
+
+#addproposal("p4234")
 
 == Encodage
 
@@ -384,6 +411,7 @@ auto b = f"Value : {a}";
 - Suppression de ```cpp trivially_relocatable_if_eligible``` et ```cpp replaceable_if_eligible``` et redesing de la fonctionnalité
 
 #addproposal("p3248")
+#addproposal("p4231")
 #addproposal("p3375")
 #addproposal("p3477")
 #addproposal("p3635")
@@ -418,6 +446,8 @@ static_assert(10km / 5km == 2);
 #addproposal("P2981")
 #addproposal("P2982")
 #addproposal("p3045")
+#addproposal("p4185")
+#addproposal("p4213")
 
 === Représentation mémoire
 
@@ -861,6 +891,16 @@ auto bar = rebind<double>(foo);  // vector<double>
 #addproposal("P4102")
 #addproposal("p4190")
 
+=== Conteneurs
+
+- Abstraction, similaire à ```cpp std::span```, pour représenter des buffers I/O
+- Opérateurs de comparaisons sur les ```cpp std::span```
+- Ajout de ```cpp try_*_back()``` à ```cpp std::vector```
+
+#addproposal("p4036")
+#addproposal("p4216")
+#addproposal("p4228")
+
 === Chaînes de caractères
 
 - Construction de ```cpp std::string_view``` depuis des chaînes implicites
@@ -875,6 +915,8 @@ auto bar = rebind<double>(foo);  // vector<double>
 #addproposal("P3655")
 #addproposal("P3710")
 #addproposal("p3862")
+#addproposal("p4220")
+#addproposal("p4227")
 
 == ``` std::tuple```
 
@@ -889,8 +931,11 @@ auto bar = rebind<double>(foo);  // vector<double>
 t[0ic] // Équivalent a std::get<0>(t)
 ```
 
+- ```cpp std::runtime_indexed_tuple``` : ```cpp std::tuple``` indexé au _run-time_
+
 #addproposal("p2527")
 #addproposal("p2141")
+#addproposal("p4198")
 
 == ``` std::optional```
 
@@ -899,9 +944,11 @@ t[0ic] // Équivalent a std::get<0>(t)
 - ```cpp value_or_construct()``` : construction paresseuse de l'alternative
 - ```cpp value_or_else()``` : appel paresseux d'une fonction en l'absence de valeur
 - Remplacement de pointeur par ```cpp std::optional``` comme retour de fonctions de la bibliothèque standard
+- ```cpp get_ptr()``` permet de récupérer le pointeur contenu dans un ```cpp std::optional<T&>```
 
 #addproposal("p3413")
 #addproposal("p3981")
+#addproposal("p4189")
 
 == ``` std::expect```
 
@@ -1058,6 +1105,7 @@ ranges::sort(v, less{}, get_element<0>);
   - ```cpp reduce()```, ```cpp transform_reduce()```
   - ```cpp inclusive_scan()```, ```cpp transform_inclusive_scan()```
   - ```cpp exclusive_scan()```, ```cpp transform_exclusive_scan()```
+  - Des versions de ```cpp std::search()``` utilisant un _searcher_
 - ```cpp ranges::sum()```, ```cpp ranges::product()``` et ```cpp ranges::dot()``` (produit scalaire)
 // Ces trois fonctions sont des spécialisations range::reduce() et range::transform_reduce() pour l'addition et la multiplication
 - ```cpp views::cycle()``` répète un range
@@ -1067,6 +1115,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3216")
 #addproposal("p3705")
 #addproposal("p3732")
+#addproposal("p4205")
 #addproposal("p3806")
 
 === Ranges
@@ -1076,12 +1125,14 @@ ranges::sort(v, less{}, get_element<0>);
 - Changement de l'_endianess_ ```cpp views::to_big_endian()``` et ```cpp views::to_little_endian()```
 - Ajout de ```cpp at()``` aux vues
 - Ajout de ```cpp rbegin()```, ```cpp rend()```, ```cpp crbegin()```, ```cpp crend()``` aux vues
+- Adaptateurs de plages fermées (i.e. intégrant les bornes) en plages semi-ouvertes (fonctionnement usuel de range)
 
 #addproposal("p3741")
 #addproposal("p3928")
 #addproposal("p4030")
 #addproposal("p3052")
 #addproposal("P4179")
+#addproposal("p4211")
 
 == _Traits_
 
@@ -1351,6 +1402,17 @@ void func(T) {...}
 
 #addproposal("p3625")
 
+== _Compile-time_
+
+=== ``` constexpr```
+
+- Équivalent ```cpp constexpr``` à ```cpp reinterpret_cast```
+- Point de variation appelé lorsqu'une valeur évaluée au _compile-time_ sort du contexte _compile-time_
+
+#addproposal("p3377")
+#addproposal("p4147")
+
+
 == Réflexion
 
 === Réflexion
@@ -1410,6 +1472,17 @@ void func(T) {...}
 #addproposal("p3427")
 #addproposal("p3139")
 
+=== _Copy on write_
+
+- Classe template ```cpp std::copy_on_write<T>``` : _copy on write_ sur ```cpp T```
+  - La copie de l'objet incrémente le compteur de référence
+  - La modification d'une copie entraîne la copie effective de la mémoire
+  - ... et le décrément du compteur de références
+
+#noteblock("Motivation")[Évitez des copies coûteuses inutiles]
+
+#addproposal("p4210")
+
 === Contrôle mémoire
 
 - Mécanismes de sécurité de l'usage mémoire
@@ -1436,7 +1509,7 @@ void func(T) {...}
 - Invocation concurrente
 - ```cpp std::volatile_load<T>``` et ```cpp std::volatile_store<T>```
 - Gestion des processus, de la communication avec ceux-ci et des _pipes_
-- ```cpp std::fiber_context``` : changement de contexte _stackfull_ sans besoin de _scheduler_
+- ```cpp std::fiber_context``` : changement de contexte _stackfull_ sans _schedule_
 - Ajout d'un nom aux threads et mutex
 - Contrôle de la priorité et de la taille de pile des threads
 - Déclaration ```cpp const``` des fonctions ```cpp lock()``` et ```cpp unlock()``` des mutex
@@ -1452,6 +1525,12 @@ void func(T) {...}
 #addproposal("p3703")
 #addproposal("p3832")
 #addproposal("P3833")
+
+=== Concurrence
+
+- ```cpp std::compare()``` et ```cpp std::compare_load()``` : comparaison d'atomiques
+
+#addproposal("p4221")
 
 === Coroutines
 
