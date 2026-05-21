@@ -408,7 +408,7 @@ auto b = f"Value : {a}";
 // Auparavant obligatoirement supérieur ou égal à 8, contraint par les plages garanties de signed char et unsigned char, mais pas d'autres contraintes (même pas multiple de 8)
 - Entiers de $n$ bits similaires à ```cpp _BitInt``` du C
 - ```cpp std::to_signed``` et ```cpp std::to_unsigned``` permet d'obtenir le type signé/non signé correspondant au type initial
-- Suppression de ```cpp trivially_relocatable_if_eligible``` et ```cpp replaceable_if_eligible``` et redesing de la fonctionnalité
+- Suppression de ```cpp trivially_relocatable_if_eligible``` et ```cpp replaceable_if_eligible``` et redesign de la fonctionnalité
 
 #addproposal("p3248")
 #addproposal("p4231")

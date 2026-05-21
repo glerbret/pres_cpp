@@ -1607,8 +1607,8 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   code: [
     ```cpp
     unordered_map<int, string> foo{
-      {5, "Une chaine"},
-      {42, "La reponse"} };
+      {5, "Une chaîne"},
+      {42, "La réponse"} };
     ```
   ],
 )
@@ -2170,7 +2170,6 @@ minmax(5, 2); // 2 - 5
 
 #alertblock("Modification des éléments", text[
   La variable d'itération doit être une référence
-
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A%0A++for(auto%26+var+:+foo)%0A++%7B%0A++++var+%3D+5%3B%0A++%7D%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4", code: [
@@ -3049,7 +3048,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 === ``` std::bind```
 
 - Construction de _function object_ en liant des paramètres à un appelable
-- _Placeholders_ ```cpp std::placholders::_1```, ```cpp std::placholders::_2```, etc. pour lier les paramètres du _function object_ à l'appelable
+- _Placeholders_ ```cpp std::placeholders::_1```, ```cpp std::placeholders::_2```, etc. pour lier les paramètres du _function object_ à l'appelable
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cfunctional%3E%0A%0Astatic+int+foo(int+a,+int+b)%0A%7B%0A++return+(a+-+1)+*+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::function%3Cint(int)%3E+bar+%3D+std::bind(%26foo,+std::placeholders::_1,+2)%3B%0A++std::cout+%3C%3C+bar(3)+%3C%3C+!'%5Cn!'%3B%0A%0A++auto+baz+%3D+std::bind(%26foo,+std::placeholders::_2,+std::placeholders::_1)%3B%0A++std::cout+%3C%3C+baz(3,+2,+1,+2,+3)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -3890,7 +3889,7 @@ shared_ptr<int> sp = wp.lock();
 
 === Attributs
 
-- Syntaxe standard pour les directives de compilation _inlines_
+- Syntaxe standard pour les directives de compilation _inline_
 - ... y compris celles spécifiques à un compilateur
 
 ```cpp
@@ -4326,7 +4325,7 @@ thread t(foo, 10);
 
 - Représente le thread courant
 - ```cpp yield()``` permet de "passer son tour"
-// C'est à dire d'indiquer à l'ordonnanceur qu'il peut replanifier
+// C'est à dire d'indiquer à l'ordonnanceur qu'il peut re-planifier
 - ```cpp sleep_for()``` suspend l'exécution sur la durée spécifiée
 
 #codesample(

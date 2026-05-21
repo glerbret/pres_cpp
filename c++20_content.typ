@@ -280,12 +280,12 @@ struct S {
 
 #addproposal("P0960")
 
-=== _Endianess_
+=== _Endianness_
 
 - Énumération ```cpp std::endian```
   - ```cpp little``` : _little-endian_
   - ```cpp big``` : _big-endian_
-  - ```cpp native``` : _endianess_ du système
+  - ```cpp native``` : _endianness_ du système
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cbit%3E%0A%23include+%3Ciostream%3E%0A+%0Aint+main()%0A%7B%0A++if(std::endian::native+%3D%3D+std::endian::big)%0A++++std::cout+%3C%3C+%22big-endian%5Cn%22%3B%0A++else+if(std::endian::native+%3D%3D+std::endian::little)%0A++++std::cout+%3C%3C+%22little-endian%5Cn%22%3B%0A++else%0A++++std::cout+%3C%3C+%22mixed-endian%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1145,7 +1145,7 @@ span<int> s2(foo.data(), 3);
 === Ranges -- Présentation
 
 - Abstraction de plus haut niveau que les itérateurs
-- Manipulation d'ensemble au travers d'algorithmes et de _range adaptators_
+- Manipulation d'ensemble au travers d'algorithmes et de _range adaptors_
 - Vivent dans le ```cpp namespace std::ranges```
 // Pour être précis, les range adaptors manipulent seulement les viewable ranges
 
@@ -1276,7 +1276,7 @@ span<int> s2(foo.data(), 3);
 #addproposal("P0896")
 #addproposal("P1035")
 
-=== Ranges -- _Range adaptators_
+=== Ranges -- _Range adaptors_
 
 - Appliquent filtres et transformations aux ranges
 - Évaluation paresseuse des ```cpp view```
@@ -1295,7 +1295,7 @@ R | C | D;
 #addproposal("P0896")
 #addproposal("P1035")
 
-=== Ranges -- _Range adaptators_
+=== Ranges -- _Range adaptors_
 
 - ```cpp std::views::all()``` : tous les éléments du ```cpp range```
 - ```cpp std::views::ref()``` : références sur les éléments du ```cpp range```
@@ -1330,7 +1330,7 @@ R | C | D;
 #addproposal("P0896")
 #addproposal("P1035")
 
-=== Ranges -- _Range adaptators_
+=== Ranges -- _Range adaptors_
 
 - ```cpp std::views::take()``` : les $N$ premiers éléments
 
@@ -1381,7 +1381,7 @@ R | C | D;
 #addproposal("P0896")
 #addproposal("P1035")
 
-=== Ranges -- _Range adaptators_
+=== Ranges -- _Range adaptors_
 
 - ```cpp std::views::common()``` convertit une vue en ```cpp common_range```
 - ```cpp std::views::reverse()``` : éléments en sens inverse
@@ -1422,7 +1422,7 @@ R | C | D;
 #addproposal("P0896")
 #addproposal("P1035")
 
-=== Ranges -- _Range adaptators_
+=== Ranges -- _Range adaptors_
 
 - ```cpp std::views::elements()``` :  $N^e$ éléments d'un range de _tuple-likes_
 
@@ -2334,7 +2334,7 @@ entity<"hello"> e;
 
 - ```cpp typename``` optionnel lorsque seul un nom de type est possible
 
-// Il ne sert qu'à lever des ambigüités
+// Il ne sert qu'à lever des ambiguïtés
 
 - Spécialisation possible sur des classes internes privées ou protégées
 - ```cpp std::type_identity<>``` désactive la déduction de type
@@ -2684,7 +2684,7 @@ concept Swappable = requires(T&& t, U&& u) {
 
 === Concepts -- Définition
 
-- Y compris en retirant des qualifieurs
+- Y compris en retirant des qualificateurs
 
 ```cpp
 template<class T>
