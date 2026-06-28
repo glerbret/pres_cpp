@@ -31,7 +31,7 @@
 
 - Contrats sur les fonctions virtuelles
 
-#alertblock(text[Héritage], "Pas d'héritage des contrats sur les fonctions virtuelles")
+#alertblock(text[Héritage])[Pas d'héritage des contrats sur les fonctions virtuelles]
 
 #addproposal("P3097")
 

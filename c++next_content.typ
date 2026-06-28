@@ -128,7 +128,7 @@
   ],
 )
 
-#alertblock("Attention", "Prise en compte de la première correspondance et non de la meilleure")
+#alertblock("Attention")[Prise en compte de la première correspondance et non de la meilleure]
 
 #addproposal("P1371")
 #addproposal("p2688")
@@ -436,8 +436,10 @@ static_assert(1000 / 1s == 1kHz);
 static_assert(10km / 5km == 2);
 ```
 
-#noteblock("Voir aussi", text[
-  #link("https://accu.org/journals/overload/34/192/wu/")[Overload 192 - _Let the Compiler Check Your Units_ #linklogo()]])
+#noteblock("Voir aussi")[
+  #link(
+    "https://accu.org/journals/overload/34/192/wu/",
+  )[Overload 192 - _Let the Compiler Check Your Units_ #linklogo()]]
 
 #addproposal("p1935")
 #addproposal("P2980")
@@ -864,10 +866,9 @@ int a[42] = { 5... };
 
 - ```cpp std::is_pointer_between()``` ou ```cpp std::is_pointer_in_range()``` vérifie si un pointeur appartient à une plage mémoire
 
-#noteblock(
-  "Note",
-  "Vérifie que l'adresse est dans la plage définie par les bornes, mais aussi que les trois adresses appartiennent au même objet",
-)
+#noteblock("Note")[
+  Vérifie que l'adresse est dans la plage définie par les bornes, mais aussi que les trois adresses appartiennent au même objet
+]
 
 - ```cpp std::rebind()``` converti le type contenu dans un conteur
 
@@ -960,7 +961,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 
 - Classes templates imposant la prise d'un lock avant l'utilisation d'un objet
 
-#noteblock("Motivation", "Éviter l'oubli de verrouillage d'un mutex avant l'utilisation d'un objet partagé")
+#noteblock("Motivation")[Éviter l'oubli de verrouillage d'un mutex avant l'utilisation d'un objet partagé]
 
 #addproposal("p3497")
 
@@ -1369,9 +1370,9 @@ double bar = foo<deduce>();
 - ```cpp std::integer``` pour les nombres entiers
 - ```cpp std::signed_integer``` et ```cpp std::unsigned_integer```
 
-#noteblock(text[``` std::integer``` vs. ``` std::integral```], text[
+#noteblock(text[``` std::integer``` vs. ``` std::integral```])[
   ```cpp char``` et ```cpp bool``` ne sont pas des ```cpp std::integer```
-])
+]
 
 #addproposal("p3003")
 #addproposal("p3701")

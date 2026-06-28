@@ -75,11 +75,11 @@
   ],
 )
 
-#alertblock("Contraintes", text[
+#alertblock("Contraintes")[
   Un ```cpp return``` doit précéder l'appel récursive
 
   Tous les chemins doivent avoir le même type de retour
-])
+]
 
 #addproposal("N3638")
 
@@ -144,9 +144,9 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   _Null forward iterator_ non comparables avec des itérateurs classiques
-])
+]
 
 #addproposal("N3644")
 
@@ -193,10 +193,10 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-#noteblock("Dépréciation", text[
+#noteblock("Dépréciation")[
   Dépréciation de ```cpp std::random_shuffle()```
   // Remplacé par std::shuffle() qui permet un meilleur aléa
-])
+]
 
 #addproposal("N3668")
 #addproposal("N3671")
@@ -259,9 +259,9 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Purement esthétique, aucune sémantique ni place réservée
-])
+]
 
 #addproposal("N3781")
 
@@ -278,13 +278,13 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Remplace ```cpp std::string{"abcd"}```
-])
+]
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Nécessite l'utilisation de ```cpp using namespace std::literals```
-])
+]
 
 #addproposal("N3642")
 
@@ -338,9 +338,9 @@ auto bar3() { return bar1(); }           // string
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Uniquement s'il n'y a qu'une occurrence du type dans le ```cpp std::tuple```
-])
+]
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3Ciostream%3E%0A%23include+%3Ctuple%3E%0A%0Aint+main()%0A%7B%0A++std::tuple%3Cint,+long,+long%3E+foo%7B42,+58L,+9L%7D%3B%0A%0A++std::cout+%3C%3C+std::get%3Clong%3E(foo)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B14+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -558,13 +558,13 @@ add_const_t<const int*> C;
 unique_ptr<int> foo = make_unique<int>(42);
 ```
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Utilisable pour construire dans un conteneur
-])
+]
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   Plus de ```cpp new``` dans le code applicatif
-])
+]
 
 #addproposal("N3656")
 
@@ -623,11 +623,11 @@ warning: 'void bar()' is deprecated: Utilisez Foo
 - Même API que ```cpp std::timed_mutex``` pour l'accès exclusif
 - API similaire pour l'accès partagé
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Un thread ne doit pas prendre un mutex qu'il possède déjà
 
   Même en accès partagé
-])
+]
 
 #addproposal("N3659")
 

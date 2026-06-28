@@ -10,9 +10,9 @@
 - Approuvé en décembre 2017
 - Dernier _Working Draft_ : #link("https://wg21.link/std17")[N4659 #linklogo()]
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Voir #link("https://www.youtube.com/user/lefticus1/videos")[Vidéos C++ Weekly #linklogo()] (Jason Turner)
-])
+]
 
 == Suppression
 
@@ -20,9 +20,9 @@
 
 - Suppression des trigraphes (non dépréciés)
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Les digraphes ne sont pas concernés
-])
+]
 
 - Suppression de ```cpp register``` (qui reste un mot réservé)
 - Suppression des opérateurs d'incrément sur les booléens
@@ -71,9 +71,9 @@ inline int foo = 42;
 class Foo { static inline int bar = 42; };
 ```
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   Ne justifie pas l'usage de variables globales
-])
+]
 
 #addproposal("P0386")
 
@@ -137,17 +137,17 @@ else
 { ... }
 ```
 
-#noteblock("Motivation", text[
+#noteblock("Motivation")[
   Conditions d'arrêt plus simple avec les _variadic template_
 
   Moins de spécialisations explicites
-])
+]
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Conditions intégralement évaluables au _compile-time_, pas de court-circuit
 
   // C'est à dire qu'en cas de condition composée (or, and), même si la première partie permet de résoudre la condition, il faut que le reste soit évaluable en compile-time
-])
+]
 
 #addproposal("P0292")
 
@@ -175,25 +175,25 @@ else
 
 === ``` if constexpr```
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Les branches doivent être syntaxiquement correctes
 
   ... mais pas nécessairement sémantiquement valides
-])
+]
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Les branches peuvent avoir des types retour différents sans remettre en cause la déduction de type retour
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp if constexpr``` aux suites de spécialisations de template et SFINAE, aux imbrications de ternaires ou à ```cpp #if```
-])
+]
 
 #addproposal("P0292")
 
 === ``` if constexpr```
 
-#noteblock(text[_hello world_ de la récursion], text[
+#noteblock(text[_hello world_ de la récursion])[
 
   #codesample(
     "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Cint+N%3E%0Aconstexpr+int+fibo()%0A%7B%0A++if+constexpr+(N%3E%3D2)%0A++++return+fibo%3CN-1%3E()%2Bfibo%3CN-2%3E()%3B%0A++else+return+N%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+fibo%3C8%3E()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -216,7 +216,7 @@ else
       ```
     ],
   )
-])
+]
 
 #addproposal("P0292")
 
@@ -361,9 +361,9 @@ const auto [x,y,z] = foo();
 auto& [refX,refY,refZ] = monTuple;
 ```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   La portée de l'objet référencé doit être supérieure à celles des références
-])
+]
 
 #addproposal("P0217")
 
@@ -398,27 +398,27 @@ auto& [refX,refY,refZ] = monTuple;
 
 === _Structured binding_
 
-#noteblock("Objectif", text[
+#noteblock("Objectif")[
   Remplacement de ```cpp std::tie()```
 
   Meilleure lisibilité
-])
+]
 
-#noteblock("Nom", text[
+#noteblock("Nom")[
   Déstructuration (_destructuring_) dans d'autres langages
-])
+]
 
-#noteblock("Et ensuite ?", text[
+#noteblock("Et ensuite ?")[
   Premier pas vers les types algébriques de données et le _pattern matching_
-])
+]
 
 // Type algébrique : type somme de types produit
 // Type produit : analogue sur les types du produit cartésien sur les ensembles
 // Type somme : analogue sur les types de l'union disjointe
 
-#alertblock("Limite", text[
+#alertblock("Limite")[
   Pas de capture de _structured binding_ par les lambdas
-])
+]
 
 // Possible de passer par la capture généralisée
 
@@ -453,9 +453,9 @@ f(a(x), b, c(y));
 // Lorsque x est évalué, a(x) l'est avant b, y ou c(y)
 ```
 
-#alertblock("Ordre des paramètres", text[
+#alertblock("Ordre des paramètres")[
   Ordre d'évaluation des paramètres toujours non fixé
-])
+]
 
 #addproposal("P0145")
 
@@ -490,9 +490,9 @@ T t = f();   // Pas de copie
 
 - Même en l'absence de constructeur par copie
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Élision de copies possibles avant C++17, garanties maintenant
-])
+]
 
 #addproposal("P0135")
 
@@ -516,7 +516,7 @@ T t = f();   // Pas de copie
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Uniquement sur de l'héritage public non virtuel
 
   Pas de constructeur fourni par l'utilisateur (y compris hérité)
@@ -524,7 +524,7 @@ T t = f();   // Pas de copie
   Pas de donnée membre non statique privée ou protégée
 
   Pas de fonction virtuelle
-])
+]
 
 // Bref, les autres restrictions continuent de s'appliquer
 // Pour résumer, C++14 a levé l'interdiction de membres initialisés par défaut, et C++17 assoupli celle sur "pas d'héritage"
@@ -727,9 +727,9 @@ auto& val = foo.emplace_back(...);    // C++17
   ],
 )
 
-#noteblock("Note", text[
+#noteblock("Note")[
   ```cpp emplace()``` renvoie toujours un itérateur
-])
+]
 
 #addproposal("P0084")
 
@@ -763,11 +763,11 @@ auto& val = foo.emplace_back(...);    // C++17
   - ```cpp std::valarray```
   - Aux tableaux C
 
-#noteblock("Motivations", text[
+#noteblock("Motivations")[
   Utilisation avec des API C
 
   Utilisation  de ```cpp memcpy``` et ```cpp memset```
-])
+]
 
 #addproposal("n4284")
 
@@ -814,9 +814,9 @@ auto& val = foo.emplace_back(...);    // C++17
 // C'est à dire sur le caractères suivant le dernier écrit pour to_chars ou le premier non converti pour from_chars()
 - Et un code erreur
 
-#alertblock("API bas-niveau", text[
+#alertblock("API bas-niveau")[
   Pas d'exception, pas de gestion mémoire, pas de locale
-])
+]
 
 #addproposal("P0067")
 
@@ -827,7 +827,7 @@ auto& val = foo.emplace_back(...);    // C++17
 - Union _type-safe_ contenant une valeur d'un type choisi parmi $n$
 - Type contenu dépend de la valeur assignée
 
-#alertblock("Restrictions", text[
+#alertblock("Restrictions")[
   Ne peut pas contenir de références, de tableaux C, ```cpp void``` ni être vide
   // Mais peut contenir plusieurs fois le même type (avec des qualifiers cv identiques ou non)
   // Contenir plusieurs fois le même type peut être utile dans le cadre de code template
@@ -835,19 +835,19 @@ auto& val = foo.emplace_back(...);    // C++17
 
   ```cpp std::variant``` _default-constructible_ seulement si le premier type l'est
   // Le std::variant contient alors le premier type initialisé par défaut
-])
+]
 
-#noteblock(text[``` std::monostate```], text[
+#noteblock(text[``` std::monostate```])[
   Permet d'émuler des ```cpp std::variant``` vides
   // Les ```cpp std::variant``` vides peuvent être utile dans le cas de code template
 
   Rend un ```cpp std::variant``` _default constructible_
   // Si std::monostate est le premier élément du std::variant, celui-ci devient default-constructible
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::variant``` aux unions brutes
-])
+]
 
 #addproposal("P0088")
 
@@ -908,14 +908,14 @@ variant<int, float, string> v{in_place_index<0>, 10};
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Appelable valide pour tous les types du ```cpp std::variant```
   // Et ce peut être une structure/classe présentant une surcharge de operator() pour chacun des types}
-])
+]
 
-#noteblock("Alternative à C++17", text[
+#noteblock("Alternative à C++17")[
   Utilisez ```cpp Boost.Variant```
-])
+]
 
 #addproposal("P0088")
 
@@ -1060,7 +1060,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
 
 === Fold expression
 
-#alertblock(text[_left fold_ ou _right fold_ ?], text[
+#alertblock(text[_left fold_ ou _right fold_ ?])[
   #codesample(
     "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:13,positionColumn:1,positionLineNumber:13,selectionStartColumn:1,selectionStartLineNumber:13,startColumn:1,startLineNumber:13),source:'%23include+%3Ciostream%3E%0A%0Atemplate%3Ctypename...+Args%3E%0Adouble+div(Args...+args)%0A%7B%0A++return+(...+/+args)%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++std::cout+%3C%3C+div(1.0,+2.0,+3.0)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
     code: [  ```cpp
@@ -1085,7 +1085,7 @@ variant<int, float, string> v{in_place_index<0>, 10};
       ```
     ],
   )
-])
+]
 
 #addproposal("P0036")
 
@@ -1096,9 +1096,9 @@ variant<int, float, string> v{in_place_index<0>, 10};
   - ```cpp false``` pour l'opérateur ```cpp ||```
   - ```cpp void()``` pour l'opérateur ```cpp ,```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Un _parameter pack_ vide est une erreur pour les autres opérateurs
-])
+]
 
 #addproposal("P0036")
 
@@ -1158,9 +1158,9 @@ variant<int, float, string> v{in_place_index<0>, 10};
 - Comportement identique aux autres fonctions héritées
 // Le choix C++11 posait davantage de problèmes (pas de redéfinition avec valeur par défaut possible, multiples constructeurs par copie/déplacement, erreur de SFINAE, etc.)
 
-#alertblock("Compatibilité", text[
+#alertblock("Compatibilité")[
   Casse du code C++11 valide
-])
+]
 
 ```cpp
 struct Foo { Foo(int a, int b = 0); };
@@ -1211,9 +1211,9 @@ Baz baz(0); // OK (Ambigu en C++11)
   ],
 )
 
-#noteblock("Motivation", text[
+#noteblock("Motivation")[
   Comportement différent d'un destructeur en présence d'exception
-])
+]
 
 #addproposal("N4259")
 
@@ -1249,13 +1249,13 @@ char x = u8'x';
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Ne permet pas la déduction partielle
 
   ```cpp
   tuple<int> t(1, 2, 3);  // Erreur
   ```
-])
+]
 
 #addproposal("P0091")
 
@@ -1480,9 +1480,9 @@ foo<10>();  // int
   ],
 )
 
-#noteblock("Dépréciation", text[
+#noteblock("Dépréciation")[
   Dépréciation de ```cpp std::not1``` et ```cpp std::not2```
-])
+]
 
 #addproposal("p0005")
 #addproposal("p0358")
@@ -1623,13 +1623,13 @@ foo();
   ],
 )
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Conversion implicite en ```cpp void``` pour supprimer l'avertissement
 
   ```cpp
   (void)foo();
   ```
-])
+]
 
 #addproposal("P0189")
 
@@ -1668,22 +1668,22 @@ foo();
   ],
 )
 
-#noteblock("Avant C++17", text[
+#noteblock("Avant C++17")[
   Ne pas nommer les paramètres non utilisés
-])
+]
 
 #addproposal("P0212")
 
 === Attributs C++17 - Conclusion
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez les attributs pour indiquer vos intentions
   // Au delà de l'information pour le compilateur et d'autres outils, c'est aussi une documentation à l'intention des lecteurs et correcteurs
-])
+]
 
-#noteblock("Au delà du compilateur", text[
+#noteblock("Au delà du compilateur")[
   Prise en compte par d'autres outils souhaitable
-])
+]
 
 == Multi-thread
 
@@ -1698,9 +1698,9 @@ foo();
   - ```cpp try_lock_shared```
   - ```cpp unlock_shared```
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Équivalent _non-timed_ de ```cpp std::shared_timed_mutex```
-])
+]
 
 #addproposal("N4508")
 
@@ -1757,18 +1757,18 @@ scoped_lock lck(first_mutex, second_mutex);
 
 - Gestion d'objet dont la présence est optionnelle
 
-#alertblock("Restriction", text[
+#alertblock("Restriction")[
   Ne peut pas contenir des références, des tableaux C, ```cpp void``` ni être vide
-])
+]
 
 - Interface similaire à un pointeur
   - Testable via ```cpp operator bool()```
   - Accès à l'objet via ```cpp operator*```
   - Accès à un membre via ```cpp operator->```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   ```cpp operator*``` ou ```cpp operator->``` indéfini sur un ```cpp std::optional``` vide
-])
+]
 
 - ```cpp std::nullopt``` indique l'absence de l'objet
 
@@ -1824,7 +1824,7 @@ optional foo(10);  // std::optional<int>
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Coptional%3E%0A%23include+%3Cutility%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::optional%3Cstd::vector%3Cint%3E%3E+bar(std::in_place,+%7B1,+2,+3%7D)%3B%0A++for(const+auto+it+:+*bar)%0A++++std::cout+%3C%3C+it+%3C%3C+!'+!'%3B%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-   	optional<vector<int>> foo(in_place, {1, 2, 3});
+    optional<vector<int>> foo(in_place, {1, 2, 3});
     ```
   ],
 )
@@ -1883,19 +1883,19 @@ optional foo(10);  // std::optional<int>
 
 === ``` std::optional```
 
-#questionblock(text[``` std::optional<bool>``` ? ``` std::optional<T*>``` ?], text[
+#questionblock(text[``` std::optional<bool>``` ? ``` std::optional<T*>``` ?])[
   Utilisez des booléens "trois états" (```cpp Boost.tribool```)
 
   Utilisez des pointeurs bruts
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::optional``` aux pointeurs bruts pour les données optionnelles
-])
+]
 
-#noteblock("Alternative à C++17", text[
+#noteblock("Alternative à C++17")[
   Utilisez ```cpp Boost.Optional```
-])
+]
 
 #addproposal("P0220")
 
@@ -2001,9 +2001,9 @@ a = true;   // bool
 - ```cpp type()``` récupère l'information du type courant
 // L'information de type récupérée ainsi est implementation-dependant et non utilisable tel quel mais peut être comparé au retour de type_id
 
-#noteblock("Alternative à C++17", text[
+#noteblock("Alternative à C++17")[
   Utilisez ```cpp Boost.Any```
-])
+]
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cany%3E%0A%0Aint+main()%0A%7B%0A++std::any+a%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+a.has_value()+%3C%3C+!'%5Cn!'%3B%0A%0A++a+%3D+5%3B%0A++std::cout+%3C%3C+std::boolalpha+%3C%3C+a.has_value()+%3C%3C!'+!'+%3C%3C+a.type().name()+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B17+-Wall+-Wextra+-pedantic',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -2032,11 +2032,11 @@ a = true;   // bool
   - un pointeur et une taille
 - Suffixe ```cpp sv``` pour construire depuis une chaîne littérale
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Pas de ```cpp \0``` terminal systématique
 
   La chaîne référencée doit vivre au moins aussi longtemps que la vue
-])
+]
 
 #addproposal("P0220")
 #addproposal("N3921")
@@ -2075,11 +2075,11 @@ a = true;   // bool
   ],
 )
 
-#adviceblock("Performances", text[
+#adviceblock("Performances")[
   Souvent meilleures que les fonctionnalités équivalentes de ```cpp string```
 
   Mais pas toujours, donc mesurez
-])
+]
 
 #addproposal("P0220")
 #addproposal("N3921")
@@ -2092,20 +2092,20 @@ a = true;   // bool
 std::shared_ptr<int[]> foo(new int[10]);
 ```
 
-#alertblock(text[Pas de ``` std::make_shared()```], text[
+#alertblock(text[Pas de ``` std::make_shared()```])[
   ```cpp std::make_shared()``` ne supporte pas les tableaux en C++17
-])
+]
 
 - Évolutions des allocateurs
 // Type-erased allocator, polymorphic allocator, {memory ressources
 // Gestion de l'alignement des Over-Aligned Data
 - Classe de gestion de pools de ressources (synchronisés ou non)
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Pointeur intelligent sans responsabilité dans le TS ```cpp observer_ptr```
 
   Mais pas dans le périmètre accepté pour C++17
-])
+]
 
 #addproposal("P0414")
 #addproposal("P0035")
@@ -2226,13 +2226,13 @@ std::shared_ptr<int[]> foo(new int[10]);
 
 === _Filesystem TS_
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez _Filesystem_ plutôt que les API C ou systèmes
-])
+]
 
-#noteblock("Alternative à C++17", text[
+#noteblock("Alternative à C++17")[
   Utilisez ```cpp Boost.Filesystem```
-])
+]
 
 #addproposal("P0218")
 
@@ -2250,9 +2250,9 @@ vector<int> foo {0, 5, 42, 58};
 for_each(execution::par, begin(foo), end(foo), bar);
 ```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Pas de gestion intrinsèque des accès concurrents
-])
+]
 
 #addproposal("P0024")
 
@@ -2286,11 +2286,11 @@ for_each(execution::par, begin(foo), end(foo), bar);
   ],
 )
 
-#questionblock(text[``` std::reduce()``` ou ``` std::accumulate()``` ?], text[
+#questionblock(text[``` std::reduce()``` ou ``` std::accumulate()``` ?])[
   Ordre des "additions" non spécifié dans le cas de ```cpp std::reduce()```
   // Le résultat n'est donc pas déterministe dans le cas d'opérations non associatives ou non commutatives (car std::reduce() regroupe et réarrange les opérations)
   // Mais rend cet algorithme parallélisable contrairement à std::accumulate()
-])
+]
 
 #addproposal("P0024")
 
@@ -2339,9 +2339,9 @@ for_each(execution::par, begin(foo), end(foo), bar);
 - ```cpp std::transform_exclusive_scan()``` : ```cpp std::exclusive_scan()``` sur des éléments préalablement transformés
 - ```cpp std::transform_inclusive_scan()``` : ```cpp std::inclusive_scan()``` sur des éléments préalablement transformés
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Transformation non appliquée à la graine
-])
+]
 
 #addproposal("P0024")
 

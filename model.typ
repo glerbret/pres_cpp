@@ -5,10 +5,10 @@
 // Position du bouton d'accès au site compiler explorer (1.3em en plein page, 0.8em dans les blocs)
 #let code_play_x = state("code_play_x", 1.3em)
 // Couleur de bordure du cadre de code et du bouton, pour être cohérent lorsqu'il est dans un bloc
-#let code_border_color =state("code_border_color", main_color)
+#let code_border_color = state("code_border_color", main_color)
 
 // Définition de blocs d'affichage (note, avertissement et conseil)
-#let _block(title, content, color, symbol) = {
+#let _block(title: "", color: main_color, symbol: none, content) = {
   show raw.where(block: true): it => {
     align(center)[
       #block(
@@ -28,10 +28,12 @@
         outset: (x: 1em),
         inset: (x: 0pt, top: 3pt, bottom: 4pt),
         radius: (top: 0.4em, bottom: 0em),
-        place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0.03em)[#set align(
-            center + horizon,
-          )
-          #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
+        if (symbol != none) {
+          place(bottom + left, dx: -1.4em, dy: -0.1em, circle(fill: white, stroke: color, inset: 0.03em)[#set align(
+              center + horizon,
+            )
+            #text(color, baseline: -0.15em, size: 0.8em)[#fa-icon(symbol, solid: true)]])
+        }
           + text(
             white,
           )[#strong(
@@ -72,19 +74,19 @@
 }
 
 #let noteblock(title, content) = {
-  _block(title, content, main_color, "pen-to-square")
+  _block(title: title, color: main_color, symbol: "pen-to-square", content)
 }
 
 #let questionblock(title, content) = {
-  _block(title, content, main_color, "clipboard-question")
+  _block(title: title, color: main_color, symbol: "clipboard-question", content)
 }
 
 #let alertblock(title, content) = {
-  _block(title, content, rgb("#BF0000"), "bell")
+  _block(title: title, color: rgb("#BF0000"), symbol: "bell", content)
 }
 
 #let adviceblock(title, content) = {
-  _block(title, content, rgb("#009900"), "lightbulb")
+  _block(title: title, color: rgb("#009900"), symbol: "lightbulb", content)
 }
 
 // Logo "lien"
@@ -118,7 +120,10 @@
             circle(fill: none, stroke: none, inset: -0.1em)[#set align(
                 center + horizon,
               )
-              #link(codelink)[#text(code_border_color.get(), baseline: -0.12em, size: 1.05em)[#fa-icon("circle-play", solid: true)]]
+              #link(codelink)[#text(code_border_color.get(), baseline: -0.12em, size: 1.05em)[#fa-icon(
+                "circle-play",
+                solid: true,
+              )]]
             ],
           ),
       )]

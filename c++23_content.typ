@@ -157,9 +157,9 @@ p->b = 2;
 - Prise en compte par ```cpp std::numeric_limits``` et ```cpp std::is_floating_point```
 - Ajout de surcharges dans ```cpp <cmath>```, ```cpp <complex>``` et ```cpp <atomic>```
 
-#alertblock("Types indépendants", text[
+#alertblock("Types indépendants")[
   Types indépendants (pas d'alias) de ```cpp float```, ```cpp double``` ou ```cpp long double```
-])
+]
 
 #addproposal("P1467")
 
@@ -262,9 +262,9 @@ if not consteval { ... }
 if ! consteval { ... }
 ```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Accolades obligatoires, même avec une unique instruction
-])
+]
 
 #addproposal("P1938")
 
@@ -387,9 +387,9 @@ U"" u"";   // Invalide
 U"" u8"";  // Invalide
 ```
 
-#questionblock("Et si ?", text[
+#questionblock("Et si ?")[
   Si une des chaînes n'a pas d'encodage, on utilise celui de la seconde
-])
+]
 
 #addproposal("P2201")
 
@@ -474,13 +474,13 @@ Foo{} != Foo{};
 
 === ``` operator[]``` multidimensionnel
 
-#noteblock("Au-delà de C++23", text[
+#noteblock("Au-delà de C++23")[
   - Réécritures automatiques
     - De ```cpp a[x][y][z]``` en ```cpp a[x, y, z]```
     - De ```cpp a[x, y, z]``` en ```cpp a[x][y][z]```
     - De ```cpp a(x, y, z)``` en ```cpp a[x][y][z]``` (et  ```cpp a(x)``` en ```cpp a[x]```)
   - Extension aux tableaux C, aux conteneurs standards existants et aux ```cpp operator[]``` non-membres
-])
+]
 
 #addproposal("P2128")
 
@@ -565,11 +565,11 @@ Foo{} != Foo{};
   ],
 )
 
-#alertblock("Limites", text[
+#alertblock("Limites")[
   ```cpp static``` et ```cpp mutable``` sont mutuellement exclusifs
 
   Liste de capture vide
-])
+]
 
 #addproposal("P1102")
 #addproposal("P2036")
@@ -612,10 +612,10 @@ int foo();
 
 - ```cpp [[ assume(expression) ]]``` permet au compilateur d'optimiser en supposant la véracité de l'expression
 
-#alertblock("Contrainte", text[
+#alertblock("Contrainte")[
   Expression doit être vraie à l'emplacement de ```cpp [[ assume ]]```
   // UB dans le cas contraire
-])
+]
 
 #addproposal("P1774")
 
@@ -638,11 +638,11 @@ struct Foo {
 }
 ```
 
-#alertblock("Restrictions", text[
+#alertblock("Restrictions")[
   Ne peuvent pas être ```cpp virtual``` ni ```cpp static```
 
   Ne peuvent pas avoir de _cv-qualifier_ ni de _ref-qualifier_
-])
+]
 
 #addproposal("P0847")
 
@@ -1157,9 +1157,9 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   ],
 )
 
-#alertblock("Retour de fonction", text[
+#alertblock("Retour de fonction")[
   Le retour de la fonction doit être une spécialisation de ```cpp std::optional```
-])
+]
 
 #addproposal("P0798")
 
@@ -1183,9 +1183,9 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   ],
 )
 
-#alertblock("Retour de fonction", text[
+#alertblock("Retour de fonction")[
   Le retour de la fonction doit être une spécialisation de ```cpp std::optional```
-])
+]
 
 #addproposal("P0798")
 
@@ -1282,9 +1282,9 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   ],
 )
 
-#alertblock("Retour de fonction", text[
+#alertblock("Retour de fonction")[
   Le retour de   ```cpp and_then()``` et ```cpp or_else()``` doit être  ```cpp std::expected```
-])
+]
 
 #addproposal("P2505")
 
@@ -1344,7 +1344,9 @@ format("{:L%S}", 4s + 200ms);// C++20 : exception / C++23 : 04,200
   ],
 )
 
-#adviceblock("Gestion des erreurs", text[Préférez ```cpp std::expected``` (ou ```cpp std::optional```) aux autres types de codes retour])
+#adviceblock(
+  "Gestion des erreurs",
+)[Préférez ```cpp std::expected``` (ou ```cpp std::optional```) aux autres types de codes retour]
 
 #addproposal("P0323")
 #addproposal("P2549")

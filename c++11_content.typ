@@ -32,14 +32,14 @@
 - Suppression des _export templates_
 - ```cpp export``` reste un mot-clé réservé
 
-#noteblock("Compatibilité", text[
+#noteblock("Compatibilité")[
   Théoriquement, rupture de comptabilité ascendante
 
   Implémenté sur un unique compilateur et inutilisé en pratique
 
   // Un seul front end EDG, utilisé par deux compilateurs (Comeau et ICC) mais la fonctionnalité n'était pas active chez Intel
   // Suppression soutenue par l'équipe d'EDG
-])
+]
 
 #addproposal("N1426")
 
@@ -49,9 +49,8 @@
 
 - Hérités de C99
 
-#noteblock("Depuis C99", text[
-  Ainsi que _variadic macro_, ```cpp __func__```, concaténation de chaînes littérales, ...
-])
+#noteblock("Depuis C99")[
+  Ainsi que _variadic macro_, ```cpp __func__```, concaténation de chaînes littérales, ...]
 
 - ```cpp long long int``` et ```cpp unsigned long long int```
   - Au moins aussi grand que ```cpp long int```
@@ -148,25 +147,25 @@
   - Pas d'opérateur d'affectation non trivial
   - Destructeur trivial
 
-#noteblock("Trivial", text[
+#noteblock("Trivial")[
   Pas fournie par l'utilisateur
 
   Pas de fonction virtuelle ni de classe de base virtuelle
 
   Opération des classes de bases et des membres non-statiques est triviale
-])
+]
 
 #addproposal("n2342")
 
 === POD Généralisé -- Classe POD C++11
 
-#noteblock("Autre formulation", text[
+#noteblock("Autre formulation")[
   Copie, déplacement, affectation et destruction générés implicitement
 
   Pas de fonction ni de classe de base virtuelle
 
   Classes de base et membres non-statiques _trivially copyable_
-])
+]
 
 #addproposal("n2342")
 
@@ -194,7 +193,7 @@
   - Données membres non-statiques dans une seule classe de l'hiérarchie
   - Pas de classe de base du type de la première donnée membre non-statique
 
-#noteblock("En résumé", "Organisation mémoire similaire aux structures C")
+#noteblock("En résumé")[Organisation mémoire similaire aux structures C]
 
 #addproposal("n2342")
 
@@ -274,7 +273,7 @@
   ],
 )
 
-#noteblock("Motivation", "Évolution de bibliothèques et conservation des versions précédentes")
+#noteblock("Motivation")[Évolution de bibliothèques et conservation des versions précédentes]
 
 #addproposal("N2535")
 
@@ -288,7 +287,7 @@
 
 - Cohabite mal avec les surcharges
 
-#questionblock("Quiz : Quelle surcharge est éligible ?", text[
+#questionblock("Quiz : Quelle surcharge est éligible ?")[
   #codesample(
     "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:18,positionColumn:1,positionLineNumber:18,selectionStartColumn:1,selectionStartLineNumber:18,startColumn:1,startLineNumber:18),source:'%23include+%3Ciostream%3E%0A%0Astatic+void+foo(char*)%0A%7B%0A++std::cout+%3C%3C+%22chaine%5Cn%22%3B%0A%7D%0A%0Astatic+void+foo(int)%0A%7B%0A++std::cout+%3C%3C+%22entier%5Cn%22%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++foo(0)%3B%0A++foo(NULL)%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
     code: [
@@ -301,7 +300,7 @@
       ```
     ],
   )
-])
+]
 
 === ``` 0``` ou ``` NULL``` ? ``` nullptr``` !
 
@@ -322,9 +321,9 @@
   ],
 )
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez ```cpp nullptr``` plutôt que ```cpp 0``` ou ```cpp NULL```
-])
+]
 
 #addproposal("N2431")
 
@@ -344,13 +343,13 @@
   ],
 )
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez ```cpp static_assert``` pour vérifier à la compilation ce qui peut l'être
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez les vérifications _compile-time_ ou _link-time_ aux vérifications _run-time_
-])
+]
 
 #addproposal("N1720")
 
@@ -421,17 +420,17 @@
   ],
 )
 
-#alertblock(text[_Variable-Length Array_], text[
+#alertblock(text[_Variable-Length Array_])[
   Pas de rapport entre VLA et ```cpp constexpr```
 
   VLA est un mécanisme _run-time_
-])
+]
 
 // VLA est une fonctionnalité C, non reprise en C++, mais proposée sous forme d'extension par certains compilateurs. Elle consiste à accepter les tableaux de taille définie au run-time
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Déclarez ```cpp constexpr``` les constantes et fonctions évaluables en _compile-time_
-])
+]
 
 #addproposal("N2235")
 
@@ -455,7 +454,7 @@
 
 // Mal-formé (ill-formed) n'implique pas une erreur de compilation ni même un avertissement, seulement que ce n'est pas correct vu de la norme
 
-#noteblock("Note", "En pratique, cet exemple compile en mode C++98 sous GCC")
+#noteblock("Note")[En pratique, cet exemple compile en mode C++98 sous GCC]
 
 #addproposal("n2253")
 
@@ -467,14 +466,14 @@
   - Copie potentiellement coûteuse ou impossible
   - Copie inutile lorsque l'objet source est immédiatement détruit
 
-#noteblock("Optimisation des copies", "Partiellement adressé en C++98/03 par l'élision de copie et (N)RVO")
+#noteblock("Optimisation des copies")[Partiellement adressé en C++98/03 par l'élision de copie et (N)RVO]
 
 - Échange de données légères plutôt que copie profonde
 - Déplacement seulement si
   - Type déplaçable
   - Instance sur le point d'être détruite ou explicitement déplacée
 
-#alertblock("Attention", "Les données ne sont plus présentes dans l'objet initial")
+#alertblock("Attention")[Les données ne sont plus présentes dans l'objet initial]
 
 #addproposal("N2118")
 #addproposal("n2439")
@@ -1042,13 +1041,13 @@
 
   - ```cpp std::forward()``` convertit le paramètre en _rvalue_ s'il n'est pas une _lvalue reference_
 
-#questionblock(text[_rvalue_, _lvalue_, ... ?], text[
+#questionblock(text[_rvalue_, _lvalue_, ... ?])[
   Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf")[N3337 #linklogo() §3.10]
-])
+]
 
-#questionblock(text[``` std::forward()``` ?], text[
+#questionblock(text[``` std::forward()``` ?])[
   _perfect forwarding_ (Voir #link("http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm")[N1385 #linklogo()])
-])
+]
 
 #addproposal("N2118")
 #addproposal("n2439")
@@ -1061,15 +1060,15 @@
   - Constructeur par déplacement ```cpp T(const T&&)```
   - Opérateur d'affectation par déplacement ```cpp T& operator=(const T&&)```
 
-#noteblock("Génération implicite", text[
+#noteblock("Génération implicite")[
   Pas de constructeur par copie, d'opérateur d'affectation, de destructeur, ni l'autre déplacement _user-declared_
-])
+]
 
-#questionblock(text[_user-declared_ ? _user-provided_ ?], text[
+#questionblock(text[_user-declared_ ? _user-provided_ ?])[
   _user-declared_ : fonction déclarée par l'utilisateur, y compris ```cpp =default```
 
   _user-provided_ : corps de la fonction fourni par l'utilisateur
-])
+]
 
 #addproposal("N2118")
 #addproposal("n2439")
@@ -1078,21 +1077,21 @@
 
 === Sémantique de déplacement
 
-#noteblock(text[_Rule of five_], text[
+#noteblock(text[_Rule of five_])[
   Si une classe défini destructeur, constructeur par copie ou par déplacement, affectation par copie ou par déplacement, alors elle doit définir les cinq
 
   // Contrairement à Rule of three, l'absence des constructeur et opérateur d'affectation par déplacement n'est pas une erreur grave, mais une optimisation manquée
-])
+]
 
-#noteblock(text[_Rule of zero_], text[
+#noteblock(text[_Rule of zero_])[
   Lorsque c'est possible, n'en définissez aucune
 
   // Rule of zero s'applique typiquement aux classes sans gestion explicite d'ownership, c'est à dire sans membres qu'il faut explicitement libérés, fermés, ... Ce qui devrait être le cas par défaut
-])
+]
 
-#noteblock("Pour aller plus loin", text[
+#noteblock("Pour aller plus loin")[
   Voir #link("https://github.com/cppp-france/CPPP-19/blob/master/elegance_style_epure_et_classe-Loic_Joly/elegance_style_epure_et_classe-Loic_Joly.pdf")[Élégance, style épuré et classe #linklogo() (Loïc Joly)]
-])
+]
 
 #addproposal("N2118")
 #addproposal("n2439")
@@ -1145,13 +1144,13 @@
 
 - Classe ```cpp std::initializer_list``` pour accéder aux valeurs de la liste
 
-#alertblock("Accéder, pas contenir !", text[
+#alertblock("Accéder, pas contenir !")[
   ```cpp std::initializer_list``` référence mais ne contient pas les valeurs
 
   Valeurs contenues dans un tableau temporaire de même durée de vie
 
   Copier un ```cpp std::initializer_list``` ne copie pas les données
-])
+]
 
 - Fonctions membres ```cpp size()```, ```cpp begin()```, ```cpp end()```
 - Construction automatique depuis une liste de valeurs entre accolades
@@ -1178,15 +1177,15 @@
 
 === Initializer list
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::initializer_list``` aux insertions successives
-])
+]
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   N'utilisez pas ```cpp std::initializer_list``` pour copier ou transformer
 
   Utilisez les algorithmes et constructeurs idoines
-])
+]
 
 #addproposal("N2672")
 
@@ -1261,26 +1260,26 @@ f({2});
 
 === Uniform Initialization
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Pas de troncature avec ```cpp {}```
 
   ```cpp
   int foo{2.5};  // Erreur
   ```
-])
+]
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Si le constructeur par ```cpp std::initializer_list``` existe, il est utilisé
 
   ```cpp
   vector<int> foo{2};  // 2
   vector<int> foo(2);  // 0 0
   ```
-])
+]
 
 === Uniform Initialization
 
-#alertblock("Contraintes sur l'initialisation d'agrégats", text[
+#alertblock("Contraintes sur l'initialisation d'agrégats")[
   Pas d'héritage
 
   Pas de constructeur fourni par l'utilisateur
@@ -1288,11 +1287,11 @@ f({2});
   Pas de _brace-or-equal-initializers_
 
   Pas de fonction virtuelle ni de membre non statique protégé ou privé
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez l'initialisation ```cpp {}``` aux autres formes
-])
+]
 
 == Déduction de type
 
@@ -1300,21 +1299,21 @@ f({2});
 
 - Déduction (ou inférence) de type depuis l'initialisation
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Inférence de type $eq.not$ typage dynamique
 
   Inférence de type $eq.not$ typage faible
 
   Typage dynamique $eq.not$ typage faible
-])
+]
 
-#noteblock("Vocabulaire", text[
+#noteblock("Vocabulaire")[
   Statique : type porté par la variable et ne varie pas
 
   Dynamique : type porté par la valeur
 
   Absence : variable non typée, type imposé par l'opération
-])
+]
 
 #addproposal("N1984")
 #addproposal("n1737")
@@ -1336,14 +1335,14 @@ f({2});
 - Règles de déduction proches de celles des templates
 - Listes entre accolades inférées comme des ```cpp std::initializer_list```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Référence, ```cpp const``` et ```cpp volatile``` perdus durant la déduction
 
   ```cpp
   const int i = 2;
   auto j = i;  // int
   ```
-])
+]
 
 #addproposal("N1984")
 #addproposal("n1737")
@@ -1381,9 +1380,9 @@ auto& k = j;
 
 - Tendance forte "_Almost Always Auto_" (AAA)
 
-#noteblock("Pour aller plus loin", text[
+#noteblock("Pour aller plus loin")[
   Voir #link("https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/")[GotW 94 : _AAA Style_ #linklogo()]
-])
+]
 
 - Plusieurs avantages
   - Variables forcément initialisées
@@ -1391,9 +1390,9 @@ auto& k = j;
   - Garanties conservées au fil des corrections et refactoring
   - Généricité et simplification du code
 
-#questionblock("Quiz", text[
+#questionblock("Quiz")[
   Type de retour de ```cpp std::list<std::string>::size()``` ?
-])
+]
 
 #addproposal("N1984")
 #addproposal("n1737")
@@ -1408,11 +1407,11 @@ auto& k = j;
 
 //Mais il faut attendre C++20 pour avoir les concepts
 
-#alertblock("Compatibilité", text[
+#alertblock("Compatibilité")[
   ```cpp auto``` présent en C++98/03 avec un sens radicalement différent
 
   // Sens en C++98/03 : variable de type automatique (c'est à dire sur la pile) par opposition à statique (cas par défaut et donc inutilisé en pratique)
-])
+]
 
 #addproposal("N1984")
 #addproposal("n1737")
@@ -1467,9 +1466,9 @@ decltype( (a) ) e;     // int&
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Uniquement dans des contextes non évalués
-])
+]
 
 === Déduction du type retour
 
@@ -1488,24 +1487,24 @@ decltype( (a) ) e;     // int&
 
 - Particulièrement utiles pour des fonctions templates
 
-#questionblock(text[Quiz : ``` T```, ``` U``` ou autre ?], text[
+#questionblock(text[Quiz : ``` T```, ``` U``` ou autre ?])[
   ```cpp
   template<typename T, typename U> ??? add(T a, U b) {
     return a + b;
   }
   ```
-])
+]
 
 #addproposal("n2541")
 
 === Déduction du type retour
 
-#noteblock("Solution", text[
+#noteblock("Solution")[
   Pas de bonne réponse en typage explicite
   // Une solution historique : un seul type template et on compte sur les conversions implicites voire on demande des conversions explicites
 
   Mais l'inférence de type vient à notre secours
-])
+]
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cutility%3E%0A%23include+%3Ctypeinfo%3E%0A%23include+%3Ccassert%3E%0A%0Atemplate%3Ctypename+T,+typename+U%3E%0Aauto+add(T+a,+U+b)+-%3E+decltype(a+%2B+b)%0A%7B%0A++return+a+%2B+b%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++auto+i+%3D+add(1UL,+3)%3B%0A++assert(typeid(i)+%3D%3D+typeid(unsigned+long))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1519,9 +1518,9 @@ decltype( (a) ) e;     // int&
   ],
 )
 
-#adviceblock("do", text[
+#adviceblock("do")[
   Utilisez la déduction du type retour dans vos fonctions templates
-])
+]
 
 #addproposal("n2541")
 
@@ -1596,11 +1595,11 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   - ```cpp std::unordered_multiset```
 - Versions non ordonnées de ```cpp std::map```, ```cpp std::set```, ...
 
-#questionblock(text[Pourquoi ``` unordered_``` ?], text[
+#questionblock(text[Pourquoi ``` unordered_``` ?])[
   Nombreuses implémentations ```cpp hash_``` existantes
 
   Structures fondamentalement non ordonnées
-])
+]
 
 #codesample(
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%23include+%3Cunordered_map%3E%0A%0Aint+main()%0A%7B%0A++std::unordered_map%3Cint,+std::string%3E+foo%7B%7B5,+%22Une+chaine%22%7D,+%7B42,+%22La+reponse%22%7D%7D%3B%0A%0A++std::cout+%3C%3C++foo%5B42%5D+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
@@ -1636,11 +1635,11 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 - ```cpp data()``` récupère le "tableau C" d'un ```cpp std::vector```
 
-#adviceblock(text[``` foo.data()``` ou ``` &foo[0]``` ?], text[
+#adviceblock(text[``` foo.data()``` ou ``` &foo[0]``` ?])[
   Comportement identique
 
   Préférez ```cpp foo.data()``` à la sémantiquement plus clair
-])
+]
 
 === ``` emplace()```
 
@@ -1661,9 +1660,9 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
   ],
 )
 
-#noteblock("Objectif", text[
+#noteblock("Objectif")[
   Éliminer des copies inutiles et gagner en performance
-])
+]
 
 === Évolutions de ``` std::string```
 
@@ -1699,13 +1698,13 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 === Conteneurs - Choix
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::array``` lorsque la taille est fixe et connue
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Sinon préférez ```cpp std::vector```
-])
+]
 
 == Itérateurs
 
@@ -1761,17 +1760,17 @@ array<int, 8> foo{2, 5, 9, 8, 2, 6, 8, 9, 17};
 
 === Itérateurs
 
-#noteblock("Conseils", text[
+#noteblock("Conseils")[
   ```cpp using std::begin``` et ```cpp using std::end``` permet l'ADL malgré la surcharge
-])
+]
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   N'ouvrez pas le namespace ```cpp std``` pour spécialiser
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::begin()``` et ```cpp std::end()``` aux fonctions membres
-])
+]
 
 === Itérateurs
 
@@ -2119,13 +2118,13 @@ minmax(5, 2); // 2 - 5
 
 === Algorithmes -- Conclusion
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Continuez à suivre les règles C++98/03 à propos des algorithmes
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Privilégiez la sémantique lorsque plusieurs algorithmes sont utilisables
-])
+]
 
 == _Range-based for loop_
 
@@ -2168,39 +2167,41 @@ minmax(5, 2); // 2 - 5
 
 === _Range-based for loop_
 
-#alertblock("Modification des éléments", text[
+#alertblock("Modification des éléments")[
   La variable d'itération doit être une référence
 
-#codesample(
-  "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A%0A++for(auto%26+var+:+foo)%0A++%7B%0A++++var+%3D+5%3B%0A++%7D%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4", code: [
-  ```cpp
-  vector<int> foo(4);
+  #codesample(
+    "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Cvector%3E%0A%0Aint+main()%0A%7B%0A++std::vector%3Cint%3E+foo(4)%3B%0A%0A++for(auto%26+var+:+foo)%0A++%7B%0A++++var+%3D+5%3B%0A++%7D%0A%0A++for(auto+var+:+foo)%0A++%7B%0A++++std::cout+%3C%3C+var+%3C%3C+!'+!'%3B%0A++%7D%0A++std::cout+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
+    code: [
+      ```cpp
+      vector<int> foo(4);
 
-  for(auto& var : foo)
-    var = 5;    // foo : 5 5 5 5
-  ```
-  ])
-])
+      for(auto& var : foo)
+        var = 5;    // foo : 5 5 5 5
+      ```
+    ],
+  )
+]
 
 #addproposal("N2930")
 #addproposal("N3271")
 
 === _Range-based for loop_
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez _range-based for loop_ aux boucles classiques et à ```cpp std::for_each()```
   // std::for_each() n'a plus d'intérêt en C++11 mais redevient utile en C++17 avec les politiques d'exécution parallélisées
-])
+]
 
-#noteblock("Conseils", text[
+#noteblock("Conseils")[
   Contrairement à ```cpp for```, l'indice de l'itération n'est pas disponible
 
   Malgré tout, préférez la _range-based for loop_ avec un indice externe à ```cpp for```
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez l'inférence de type sur la variable d'itération
-])
+]
 
 #addproposal("N2930")
 #addproposal("N3271")
@@ -2247,21 +2248,21 @@ minmax(5, 2); // 2 - 5
 
 === ``` std::string``` et conversions
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Pas de fonction ```cpp std::stoui()``` de conversion vers un ```cpp unsigned int```
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::sto...()``` à ```cpp sscanf()```, ```cpp atoi()``` ou ```cpp strto...()```
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::to_string()``` à ```cpp snprintf()``` ou ```cpp itoa()```
-])
+]
 
-#noteblock("Alternative et complément", text[
+#noteblock("Alternative et complément")[
   ```cpp Boost.Lexical_cast``` permet de telles conversions et quelques autres
-])
+]
 
 == Chaînes UTF
 
@@ -2332,12 +2333,12 @@ u32string u32str = U"UTF-32 string";
 - Identifiants non standards préfixés par ```cpp _```
 - Définit via ```cpp operator""suffixe```
 
-#noteblock("Motivations", text[
+#noteblock("Motivations")[
   Pas de conversion implicite
 
   Expressivité
   // Exemple d'expressivité : des classes de "quantité" avec des user-defined literals pour les unités
-])
+]
 
 #addproposal("N2765")
 
@@ -2364,9 +2365,9 @@ u32string u32str = U"UTF-32 string";
   ],
 )
 
-#alertblock("Restrictions", text[
+#alertblock("Restrictions")[
   Uniquement pour les littéraux numériques
-])
+]
 
 #addproposal("N2765")
 
@@ -2413,14 +2414,14 @@ tuple<int, char, long> foo;
 tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
 ```
 
-#questionblock(text[``` std::make_tuple``` ou constructeur ?], text[
+#questionblock(text[``` std::make_tuple``` ou constructeur ?])[
   ```cpp std::make_tuple()``` permet la déduction de types, pas le constructeur
 
   ```cpp
   auto foo{5, 'e', 98L};              // KO
   auto bar = make_tuple(5, 'e', 98L); // OK
   ```
-])
+]
 
 #addproposal("n1836")
 
@@ -2452,9 +2453,9 @@ tuple<int, char, long> foo = make_tuple(5, 'e', 98L);
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Les indices commencent à ```cpp 0```
-])
+]
 
 #addproposal("n1836")
 
@@ -2489,15 +2490,15 @@ tuple_element<0, decltype(baz)>::type first;  // int
 
 === ``` std::tuple```
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   N'utilisez pas ```cpp std::tuple``` pour remplacer une structure
 
   ```cpp std::tuple``` regroupe localement des éléments sans lien sémantique
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez un ```cpp std::tuple``` de retour aux paramètres _OUT_
-])
+]
 
 == Flux
 
@@ -2551,19 +2552,19 @@ ofstream file{filename};
 
 === ``` =default``` et ``` =delete```
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp =default``` à une implémentation manuelle avec le même effet
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp =delete``` à une déclaration privée sans définition
-])
+]
 
-#questionblock(text[``` =default``` ou non définition ?], text[
+#questionblock(text[``` =default``` ou non définition ?])[
   Consensus plutôt du côté de la non-définition
 
   Intérêt documentaire réel à ```cpp =default```
-])
+]
 
 #addproposal("N2346")
 
@@ -2583,15 +2584,15 @@ ofstream file{filename};
   ],
 )
 
-#alertblock("Restriction", text[
+#alertblock("Restriction")[
   Pas d'initialisation avec ```cpp ()```
 
   Initialisation avec ```cpp =``` uniquement sur des types copiables
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez l'initialisation des membres à l'initialisation par constructeurs pour les valeurs connues à la compilation
-])
+]
 
 #addproposal("N2756")
 
@@ -2617,15 +2618,15 @@ ofstream file{filename};
 
 === Délégation de constructeur
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez la délégation de constructeur pour mutualiser le code commun
-])
+]
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   Évitez la délégation pour l'initialisation constante de membres
 
   Préférez l'initialisation par défaut des membres
-])
+]
 
 #addproposal("N1986")
 
@@ -2672,14 +2673,14 @@ ofstream file{filename};
   ],
 )
 
-#alertblock("Valeurs par défaut", text[
+#alertblock("Valeurs par défaut")[
   Génération de toutes les combinaisons de constructeurs sans valeur par défaut correspondantes au constructeur de base avec des valeurs par défaut
   // Ainsi Foo(int, int = 2) va injecter Bar(int) et Bar(int, int)
-])
+]
 
-#alertblock("Héritage multiple", text[
+#alertblock("Héritage multiple")[
   Héritage impossible de deux constructeurs avec la même signature
-])
+]
 
 #addproposal("N2540")
 
@@ -2739,24 +2740,24 @@ ofstream file{filename};
 
 === ``` override```
 
-#noteblock("Objectifs", text[
+#noteblock("Objectifs")[
   Documentaire
 
   Détection des non-reports de modifications lors d'un _refactoring_
 
   Détection des redéfinitions involontaires
-])
+]
 
-#noteblock(text[``` override``` et ``` virtual```], text[```cpp override``` implique ```cpp virtual```])
+#noteblock(text[``` override``` et ``` virtual```])[```cpp override``` implique ```cpp virtual```]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez ```cpp virtual``` à la base de l'arbre d'héritage
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez ```cpp override``` sur les redéfinitions
   // Si une fonction est virtuelle, toutes ces redéfinitions le sont qu'elles soient ou non marquées comme tel}
-])
+]
 
 #addproposal("N2928")
 #addproposal("N3206")
@@ -2809,9 +2810,9 @@ ofstream file{filename};
   ],
 )
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez ```cpp final``` avec parcimonie
-])
+]
 
 #addproposal("N3206")
 #addproposal("N3272")
@@ -2868,12 +2869,12 @@ void foo() noexcept {}
 void foo() noexcept(true) {}
 ```
 
-#noteblock("Dépréciation", text[
+#noteblock("Dépréciation")[
   Les spécifications d'exception sont dépréciées
 
   Voir #link("http://www.gotw.ca/publications/mill22.htm")[_A Pragmatic Look at Exception Specifications_ #linklogo()] (Herb Sutter)
   // En pratique, seule throw() était utilisée et utilisable et a été remplacée par noexcept
-])
+]
 
 #addproposal("N3050")
 
@@ -2886,9 +2887,9 @@ void foo() noexcept(true) {}
 noexcept(foo()); // true
 ```
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Marquez ```cpp noexcept``` les fonctions qui sémantiquement ne jette pas d'exception
-])
+]
 
 #addproposal("N3050")
 
@@ -2920,9 +2921,9 @@ noexcept(foo()); // true
   ],
 )
 
-#noteblock("Motivation", text[
+#noteblock("Motivation")[
   Faire passer la barrière des threads aux exceptions
-])
+]
 
 #addproposal("n2179")
 
@@ -2981,13 +2982,13 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 
 === ``` enum class```
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez les énumérations fortement typées
-])
+]
 
-#noteblock("Bémol", text[
+#noteblock("Bémol")[
   Pas de méthode simple et robuste pour récupérer l'intitulé de l'énuméré
-])
+]
 
 #addproposal("N2347")
 
@@ -3033,15 +3034,15 @@ enum class Foo : unsigned char { BAR1, BAR2 };
   ],
 )
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Type de retour non spécifié mais stockable dans ```cpp std::function```
-])
+]
 
-#noteblock("Dépréciation", text[
+#noteblock("Dépréciation")[
   Dépréciation de ```cpp std::mem_fun```, ```cpp std::ptr_fun``` et consorts
   // Série de fonctions templates convertissant des fonctions membres, des pointeurs de fonction, etc. en foncteur utilisable dans les algorithmes
   // Leur grosse limitation venait du nombre de paramètres limités (0 ou 1)
-])
+]
 
 #addproposal("n1836")
 
@@ -3067,20 +3068,20 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 
 // Avec auto, il est possible de passer autant de paramètres surnuméraires que souhaiter
 
-#noteblock("Dépréciation", text[
+#noteblock("Dépréciation")[
   Dépréciation de ```cpp std::bind1st``` et ```cpp std::bind2nd```
   // Version C++98 mais limités car ne pouvait que convertir une fonction binaire en fonction unaire en liant le premier ou le second paramètre
-])
+]
 
 #addproposal("n1836")
 
 === lambda et fermeture
 
-#noteblock("Vocabulaire", text[
+#noteblock("Vocabulaire")[
   Lambda : fonction anonyme
 
   Fermeture : capture des variables libres de l'environnement lexical
-])
+]
 
 - ```cpp [capture](paramètres) spécificateurs -> type_retour {instructions}```
 
@@ -3121,9 +3122,9 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 - La capture de variables membres se fait par la capture de  ```cpp this```
   - Soit explicitement via ```cpp [this]```
 
-#alertblock(text[Capture de ``` this```], text[
+#alertblock(text[Capture de ``` this```])[
   Capture du pointeur, non de l'objet
-])
+]
 
 #list(marker: [], list(indent: 7pt, text[Soit via ```cpp [=]``` ou ```cpp [&]```]))
 
@@ -3137,7 +3138,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 // Même avec mutable
 - Pas de capture des variables globales et statiques
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Par défaut, les variables capturées par copie ne sont pas modifiables
 
   #codesample(
@@ -3153,7 +3154,7 @@ enum class Foo : unsigned char { BAR1, BAR2 };
   )
 
   // Bien entendu dans le cas de mutable, ce qui est modifié est bien la copie, pas la variable originale
-])
+]
 
 #addproposal("N2550")
 #addproposal("N2658")
@@ -3173,9 +3174,9 @@ enum class Foo : unsigned char { BAR1, BAR2 };
 auto foo = [] { return 5; };
 ```
 
-#alertblock("Exception", text[
+#alertblock("Exception")[
   Omission impossible si la lambda est ```cpp mutable```
-])
+]
 
 #addproposal("N2550")
 #addproposal("N2658")
@@ -3183,27 +3184,27 @@ auto foo = [] { return 5; };
 
 === lambda, ``` std::function```, ... - Conclusion
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez les lambdas aux ```cpp std::function```
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez les lambdas à ```cpp std::bind()```
-])
+]
 
 // Les lambdas sont généralement plus efficaces
 
-#noteblock("Motivations", text[
+#noteblock("Motivations")[
   Lisibilité, expressivité et performances
 
   Voir #link("https://github.com/boostcon/cppnow_presentations_2016/blob/master/00_tuesday/practical_performance_practices.pdf")[_Practical Performance Practices_ #linklogo()]
 
   // Entre autres, il y a aussi des remarques intéressantes sur le choix des conteneurs, des pointeurs intelligents, sur std::endl, etc.
-])
+]
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Prenez garde à la durée de vie des variables capturées par référence
-])
+]
 
 === ``` std::reference_wrapper```
 
@@ -3284,13 +3285,13 @@ vector<array<int, (0x10 >> 3) >> foo;
   ],
 )
 
-#noteblock(text[``` using``` de types], text[
+#noteblock(text[``` using``` de types])[
   ```cpp using``` n'est pas réservé aux templates
 
   ```cpp
   using Error = int;
   ```
-])
+]
 
 #addproposal("N2258")
 
@@ -3303,9 +3304,9 @@ vector<array<int, (0x10 >> 3) >> foo;
 extern template class std::vector<int>;
 ```
 
-#noteblock("Objectif", text[
+#noteblock("Objectif")[
   Réduction du temps de compilation
-])
+]
 
 #addproposal("N1987")
 
@@ -3408,13 +3409,13 @@ void bar(Args... parameters);
 
 === Variadic template
 
-#alertblock("Contraintes de l'expansion", text[
+#alertblock("Contraintes de l'expansion")[
   Paramètre unique
 
   Ne retournant pas ```cpp void```
 
   Pas d'ordre garanti
-])
+]
 
 - Candidat naturel ```cpp std::initializer_list```
 - ... constructible depuis un _variadic template_
@@ -3728,9 +3729,9 @@ unique_ptr<int> p(new int);
 - ```cpp get()``` récupère un pointeur brut sur la ressource
 // P.ex. pour appeler une API C
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Ne pas utilisez le pointeur retourné par ```cpp get()``` pour libérer la ressource
-])
+]
 
 === Pointeurs intelligents -- ``` std::unique_ptr```
 
@@ -3750,9 +3751,9 @@ std::unique_ptr<int[]> foo (new int[5]);
 for(int i=0; i<5; ++i) foo[i] = i;
 ```
 
-#noteblock("Dépréciation", text[
+#noteblock("Dépréciation")[
   Dépréciation de ```cpp std::auto_ptr```
-])
+]
 
 === Pointeurs intelligents -- ``` std::shared_ptr```
 
@@ -3782,7 +3783,7 @@ shared_ptr<int> p(new int());
 shared_ptr<int> p = make_shared<int>(42);
 ```
 
-#noteblock("Objectifs", text[
+#noteblock("Objectifs")[
   Pas de ```cpp new``` explicite, plus robuste
 
   ```cpp
@@ -3791,11 +3792,11 @@ shared_ptr<int> p = make_shared<int>(42);
   ```
 
   Allocation unique pour la ressource et le compteur de référence
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Utilisez ```cpp std::make_shared()``` pour construire vos ```cpp std::shared_ptr```
-])
+]
 
 === Pointeurs intelligents -- ``` std::weak_ptr```
 
@@ -3804,9 +3805,9 @@ shared_ptr<int> p = make_shared<int>(42);
 - ... sans impact sur le comptage de références
 - Pas de création depuis un pointeur nu
 
-#noteblock("Objectif", text[
+#noteblock("Objectif")[
   Rompre les cycles
-])
+]
 
 ```cpp
 shared_ptr<int> sp(new int(20));
@@ -3835,55 +3836,55 @@ shared_ptr<int> sp = wp.lock();
 
 === Pointeurs intelligents -- Conclusion
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   N'utilisez pas de pointeurs bruts possédants
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Réfléchissez à la responsabilité de vos ressources
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::unique_ptr``` à ```cpp std::shared_ptr```
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez une responsabilité unique à une responsabilité partagée
-])
+]
 
 === Pointeurs intelligents -- Conclusion
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Brisez les cycles à l'aide de ```cpp std::weak_ptr```
-])
+]
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Passez par un ```cpp std::unique_ptr``` temporaire intermédiaire pour insérer des éléments dans un conteneur de ```cpp std::unique_ptr```
 
   Voir #link("https://accu.org/index.php/journals/2271")[Overload 134 - _C++ Antipatterns_ #linklogo()]
   // push_back d'un pointeur brute n'est pas possible et emplace_back peut échouer en laissant fuir le pointeur
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Transférez au plus tôt la responsabilité à un pointeur intelligent
-])
+]
 
 === Pointeurs intelligents -- Conclusion
 
-#noteblock("Pour aller plus loin", text[
+#noteblock("Pour aller plus loin")[
   Voir #link("http://loic-joly.developpez.com/tutoriels/cpp/smart-pointers/")[Pointeurs intelligents #linklogo() (Loïc Joly)]
-])
+]
 
-#noteblock("Sous silence", text[
+#noteblock("Sous silence")[
   Allocateurs, mémoire non-initialisée, alignement, ...
-])
+]
 
-#noteblock("Mais aussi", text[
+#noteblock("Mais aussi")[
   Support minimal des _Garbage Collector_
   // Support enlevé en C++23 : trop restrictif, inutilisé, conceptions très différentes et variés dans les langages à GC
 
   Mais pas de GC standard
-])
+]
 
 == Attributs
 
@@ -3921,13 +3922,13 @@ shared_ptr<int> sp = wp.lock();
 [[ vendor::attribut ]]
 ```
 
-#noteblock("Exemple", text[
+#noteblock("Exemple")[
   les attributs ```cpp gsl``` des #link("https://learn.microsoft.com/en-us/cpp/code-quality/using-the-cpp-core-guidelines-checkers?view=msvc-170")[_C++ Core Guidelines Checker_ #linklogo()] de Microsoft
 
   ```cpp
   [[ gsl::suppress(26400) ]]
   ```
-])
+]
 
 #addproposal("N2761")
 
@@ -3967,19 +3968,19 @@ int [[ attribut1 ]] i [[ attribut2 ]];
   ],
 )
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Qui ne retourne pas
 
   Pas qui ne retourne rien
-])
+]
 
-#noteblock("Usage", text[
+#noteblock("Usage")[
   Boucle infinie, sortie de l'application, exception systématique
-])
+]
 
-#noteblock("Sous silence", text[
+#noteblock("Sous silence")[
   ```cpp [[ carries_dependency ]]```
-])
+]
 
 #addproposal("N2761")
 
@@ -4096,9 +4097,9 @@ int [[ attribut1 ]] i [[ attribut2 ]];
 
 - ```cpp std::chrono::time_point``` temps relatif depuis l'epoch
 
-#noteblock("Epoch", text[
+#noteblock("Epoch")[
   Origine des temps de l'OS (1 janvier 1970 à 00h00 sur Unix)
-])
+]
 
 - ```cpp time_since_epoch()``` retourne la durée depuis l'epoch
 - Opérateurs d'ajout et de suppression d'une durée
@@ -4157,13 +4158,13 @@ duration_cast<duration<double>>(t2 - t1);
 - Horloge avec le plus petit intervalle entre deux _ticks_ ```cpp std::chrono::high_resolution_clock```
 - Possible synonyme de ```cpp system_clock``` ou ```cpp steady_clock```
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ```cpp std::clock::duration``` aux entiers pour manipuler les durées
-])
+]
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   N'espérez pas une précision arbitrairement grande des horloges
-])
+]
 
 == Multi-threading
 
@@ -4231,10 +4232,10 @@ atomic<int> foo{5};
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Catomic%3E%0A%0Aint+main()%0A%7B%0A++std::atomic%3Cint%3E+foo%7B5%7D%3B%0A%0A++std::cout+%3C%3C+foo.fetch_add(10)+%3C%3C+%22+%22%3B%0A++std::cout+%3C%3C+foo%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-   	atomic<int> foo{5};
+    atomic<int> foo{5};
 
-   	cout << foo.fetch_add(10) << " ";
-   	cout << foo;        // Affiche 5 15
+    cout << foo.fetch_add(10) << " ";
+    cout << foo;        // Affiche 5 15
     ```
   ],
 )
@@ -4250,9 +4251,9 @@ atomic<int> foo{5};
 
 - Plusieurs instanciations standards (```cpp atomic_bool```, ```cpp atomic_int```, ...)
 
-#noteblock("Mais aussi", text[
+#noteblock("Mais aussi")[
   Plusieurs fonctions "C-style", similaires aux fonctions membres de ```cpp std::atomic```, manipulant atomiquement des données
-])
+]
 
 #addproposal("N2427")
 
@@ -4339,14 +4340,14 @@ thread t(foo, 10);
 
 - ```cpp sleep_until()``` suspend le thread jusqu'au temps demandé
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Ne vous attendez pas à des attentes arbitrairement précises
   // À l'échéance, le thread n'interrompt pas les autres pour reprendre la main
-])
+]
 
-#noteblock("Attentes passives", text[
+#noteblock("Attentes passives")[
   Les autres threads continuent de s'exécuter
-])
+]
 
 === Mutex -- ``` std::mutex```
 
@@ -4356,9 +4357,9 @@ thread t(foo, 10);
 - ```cpp try_lock()``` verrouille le mutex s'il est libre, retourne ```cpp false``` sinon
 - ```cpp unlock()``` relâche le mutex
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   ```cpp lock()``` sur un mutex verrouillé par le même thread provoque un _deadlock_
-])
+]
 
 - ```cpp std::recursive_mutex``` verrouillable plusieurs fois par un même thread
 // Il faut le relâcher autant de fois pour qu'il soit effectivement non verrouillé
@@ -4395,9 +4396,9 @@ thread t(foo, 10);
   ],
 )
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Gestion du mutex entièrement confiée au _lock_
-])
+]
 
 === Mutex -- ``` std::unique_lock```
 
@@ -4433,9 +4434,9 @@ thread t(foo, 10);
 - ```cpp owns_lock()``` teste si le _lock_ a un mutex associé et l'a verrouillé
 - ```cpp operator bool()``` encapsule ```cpp owns_lock()```
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Gestion du mutex conservée, garantie de libération
-])
+]
 
 === Mutex -- Gestion multiple
 
@@ -4473,9 +4474,9 @@ thread t(foo, 10);
   ],
 )
 
-#noteblock("Cas d'utilisation", text[
+#noteblock("Cas d'utilisation")[
   Appelle par un unique thread d'une fonction d'initialisation
-])
+]
 
 === Variables conditionnelles -- Principe
 
@@ -4499,28 +4500,28 @@ unique_lock<std::mutex> lck(mtx);
 cv.wait(lck);
 ```
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Possibilité de fournir un prédicat
   - Blocage seulement s'il retourne ```cpp false```
   - Déblocage seulement s'il retourne ```cpp true```
-])
+]
 
 === Variables conditionnelles -- ``` condition_variable```
 
 - ```cpp wait_for()``` met en attente le thread, au maximum la durée donnée
 - ```cpp wait_until()``` met en attente le thread, au maximum jusqu'au temps donné
 
-#noteblock("Note", text[
+#noteblock("Note")[
   ```cpp wait_for()``` et ```cpp wait_until()``` indique si l'exécution a repris suite à un timeout
-])
+]
 
 === Variables conditionnelles -- ``` condition_variable```
 
 - ```cpp notify_one()``` notifie un des threads en attente
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Impossible de choisir quel thread notifié avec ```cpp notify_one()```
-])
+]
 
 - ```cpp notify_all()``` notifie tous les threads en attente
 - ```cpp std::condition_variable_any``` similaire à ```cpp std::condition_variable```
@@ -4565,9 +4566,9 @@ cv.wait(lck);
 - Mécanismes asynchrones
 - ```cpp std::future``` définissent des points de synchronisation
 
-#noteblock("Note", text[
+#noteblock("Note")[
   ```cpp std::promise``` et ```cpp std::future``` peuvent également manipuler des exceptions
-])
+]
 
 === Futures et promise -- ``` std::future```
 
@@ -4585,9 +4586,9 @@ cv.wait(lck);
 
 - ```cpp share()``` construit un ```cpp std::shared_future``` depuis le ```cpp std::future```
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Après un appel à ```cpp share()```, le ```cpp std::future``` n'est plus valide
-])
+]
 
 - ```cpp std::shared_future``` similaires à ```cpp std::future```
   - Mais copiables
@@ -4600,12 +4601,12 @@ cv.wait(lck);
 - Et retourne, sans attendre la fin de l'exécution, un ```cpp std::future```
 - ```cpp std::future``` permettant de récupérer la valeur de retour de la fonction
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Deux politiques d'exécution de la fonction appelée
   - Exécution asynchrone
   - Exécution différée à l'appel de ```cpp wait()``` ou ```cpp get()```
   Le choix par défaut est laissé à l'implémentation
-])
+]
 
 === Futures et promise -- ``` std::async()```
 
@@ -4632,9 +4633,9 @@ cv.wait(lck);
 - Partage un état avec le ```cpp std::future``` associé
 - ```cpp get_future()``` retourne le ```cpp std::future``` associé
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Un seul ```cpp std::future``` par ```cpp std::promise``` peut être récupéré
-])
+]
 
 === Futures et promise -- ``` std::promise```
 
@@ -4672,18 +4673,18 @@ cv.wait(lck);
 - ```cpp valid()``` teste s'il est associé à un état partagé (contient un appelable)
 - ```cpp get_future()``` retourne le ```cpp std::future``` associé
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Un seul ```cpp std::future``` par ```cpp std::packaged_task``` peut être récupéré
-])
+]
 
 === Futures et promise -- ``` std::packaged_task```
 
 - ```cpp operator()``` appelle l'appelable, affecte sa valeur de retour (ou l'exception levée) au ```cpp std::future``` et passe l'état partagé à prêt
 - ```cpp reset()``` réinitialise l'état partagé en conservant l'appelable
 
-#noteblock("note", text[
+#noteblock("note")[
   ```cpp reset()``` permet d'appeler une nouvelle fois l'appelable
-])
+]
 
 - ```cpp make_ready_at_thread_exit()``` appelle l'appelable et affecte sa valeur de retour (ou l'exception levée), l'état partagé passera à prêt à la fin
 
@@ -4712,37 +4713,37 @@ cv.wait(lck);
 
 === Conclusion
 
-#adviceblock("Do, dans cet ordre", text[
+#adviceblock("Do, dans cet ordre")[
   + Évitez de partager variables et ressources
   + Préférez les partages en lecture seule
   + Préférez les structures de données gérant les accès concurrents
   // std::atomic`, conteneur lock-free, conteneur thread-safe, etc.
   + Protégez l'accès par mutex ou autres barrières
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Encapsulez les mutex dans des ```cpp std::lock_guard``` ou ```cpp std::unique_lock```
-])
+]
 
 === Conclusion
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Analysez vos cas d'utilisation pour choisir le bon outil
-])
+]
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Très faibles garanties de _thread-safety_ de la part des conteneurs standards
   // En gros plusieurs threads peuvent lire un même conteneur et plusieurs threads peuvent lire ou écrire simultanément des conteneurs différents sans problème et c'est à peu prés tout
-])
+]
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   ```cpp Boost.Lockfree``` pour des structures de données _thread-safe_ et _lock-free_
-])
+]
 
-#noteblock("Pour aller plus loin", text[
+#noteblock("Pour aller plus loin")[
   Voir _C++ Concurrency in action_ d'Anthony Williams
   // Anthony Williams est coauteur des propositions de multi-threading dans C++11 et co-auteur de Boost.Thread
-])
+]
 
 == Expressions rationnelles
 
@@ -4857,23 +4858,23 @@ regex foo("[0-9A-Z]+", icase);
 
 === Expressions rationnelles (regex)
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez les expressions rationnelles aux analyseurs "à la main"
-])
+]
 
-#alertblock("Don't", text[
+#alertblock("Don't")[
   N'utilisez pas les expressions rationnelles pour les traitements triviaux
 
   Préférez les algorithmes
-])
+]
 
-#noteblock("Conseil", text[
+#noteblock("Conseil")[
   Encapsulez les expressions rationnelles ayant une sémantique claire et utilisées plusieurs fois dans une fonction dédiée au nom évocateur
-])
+]
 
-#noteblock("Performance", text[
+#noteblock("Performance")[
   Construction très coûteuse de l'expression rationnelle
-])
+]
 
 #addproposal("n1836")
 #addproposal("N1429")
@@ -4885,11 +4886,11 @@ regex foo("[0-9A-Z]+", icase);
 - Générateurs pseudo-aléatoires initialisés par une graine (congruence linéaire, Mersenne, ...)
 - Générateur aléatoire
 
-#alertblock("Attention", text[
+#alertblock("Attention")[
   Peut ne pas être présent sur certaines implémentations
 
   Peut être un générateur pseudo-aléatoire (entropie nulle) sur d'autres
-])
+]
 
 - Distributions adaptant la séquence d'un générateur pour respecter une distribution particulière (uniforme, normale, binomiale, de Poisson, ...)
 - Fonction de normalisation ramenant la séquence générée dans $[0,1)$
@@ -4902,22 +4903,22 @@ regex foo("[0-9A-Z]+", icase);
   "https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ciostream%3E%0A%23include+%3Crandom%3E%0A%23include+%3Cchrono%3E%0A%0Aint+main()%0A%7B%0A++std::default_random_engine+generator%3B%0A++std::uniform_int_distribution%3Cint%3E+distribution(0,9)%3B%0A%0A++generator.seed(std::chrono::system_clock::now().time_since_epoch().count())%3B%0A++std::cout+%3C%3C+distribution(generator)+%3C%3C+!'%5Cn!'%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:gsnapshot,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B11+-Wall+-Wextra',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',tree:'1',wrap:'0'),l:'5',n:'0',o:'Executor+x86-64+gcc+(trunk)+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4",
   code: [
     ```cpp
-   	default_random_engine gen;
-   	uniform_int_distribution<int> distribution(0,9);
-   	gen.seed(system_clock::now().time_since_epoch().count());
+    default_random_engine gen;
+    uniform_int_distribution<int> distribution(0,9);
+    gen.seed(system_clock::now().time_since_epoch().count());
 
-   	// Nombre aléatoire entre 0 et 9
-   	distribution(gen);
+    // Nombre aléatoire entre 0 et 9
+    distribution(gen);
     ```
   ],
 )
 
-#adviceblock("Do", text[
+#adviceblock("Do")[
   Préférez ces générateurs et distributions à ```cpp rand()```
-])
+]
 
-#questionblock("Quiz", text[
+#questionblock("Quiz")[
   Comment générer un tirage équiprobable entre $6$ et $42$ avec ```cpp rand()```
-])
+]
 
 #addproposal("n1836")

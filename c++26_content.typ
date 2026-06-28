@@ -81,11 +81,11 @@ if (!p) cerr << "bar\n"; // Suppression possible
 
 - Tous les _undefined behavior_ du préprocesseur ou du lexer deviennent _ill-formed_ sans diagnostic requis
 
-#noteblock("À suivre", text[
+#noteblock("À suivre")[
   Exiger un diagnostic
 
   Rendre ces comportements _well-formed_
-])
+]
 
 #addproposal("p3144")
 #addproposal("p1494")
@@ -94,12 +94,12 @@ if (!p) cerr << "bar\n"; // Suppression possible
 
 === _Undefined_ / _unspecified_ / _ill-formed_
 
-#questionblock(text[ _Undefined_, _unspecified_, _ill-formed_ ?], text[
+#questionblock(text[ _Undefined_, _unspecified_, _ill-formed_ ?])[
   - _ill-formed_ : erreurs syntaxiques ou sémantiques
   - _implementation-defined_ : comportement défini par l'implémentation qui doit le documenter
   - _unspecified behavior_ : comportement défini par l'implémentation qui n'a pas l'obligation de le documenter
   - _undefined behavior_ : aucune restriction sur le comportement
-])
+]
 
 === Boucles infinies
 
@@ -184,11 +184,11 @@ static_assert(sizeof(Foo) == 1,
               format("Attendu 1, obtenu {}", sizeof(Foo)));
 ```
 
-#alertblock(text[_Compile-time_], "Uniquement des valeurs connues à la compilation")
+#alertblock(text[_Compile-time_])[Uniquement des valeurs connues à la compilation]
 
-#alertblock("Dépendance", text[
+#alertblock("Dépendance")[
   Nécessite que ```cpp std::format``` devienne ```cpp constexpr```
-])
+]
 
 #addproposal("P2741")
 
@@ -385,7 +385,7 @@ S<Concept, Var> s;
 === Conteneurs
 
 - Vecteur de capacité fixée en _compile-time_ ```cpp std::inplace_vector```
-// Contrairement à std::array la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments "sans valeur par défaut"
+  // Contrairement à std::array la taille n'est pas fixée, seule la capacité l'est, et donc utilisable pour des éléments "sans valeur par défaut"
   - 3 jeux d'API d'insertion pour gérer l'absence de place
     - API standard : lancement d'exception
     - API ```cpp try_``` : retour d'un booléen
@@ -512,7 +512,7 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
 
 - Support des références par ```cpp std::optional```
 
-#alertblock("Affectation", text[
+#alertblock("Affectation")[
   L'affectation modifie la référence pas la valeur référencée
 
   #codesample(
@@ -530,7 +530,7 @@ bitset b1{""sv};            // Valide en C++26, invalide avant
       ```
     ],
   )
-])
+]
 
 - ```cpp std::optional<T&>``` trivialement copiable
 
@@ -967,18 +967,17 @@ format("{:>{}}", "hello", "10");
   - Vérification des bornes
   - Présence d'un élément avant accès (```cpp std::optional```, ```cpp std::expected```)
 
-#noteblock("Note", "Version plutôt minimale des contrats")
+#noteblock("Note")[Version plutôt minimale des contrats]
 
 #noteblock(
   "Note",
-  "Paramètres et variables définies hors du contrat sont constants lors de la vérification des contrats",
-)
+)[Paramètres et variables définies hors du contrat sont constants lors de la vérification des contrats]
 
 #addproposal("P2900")
 
 === Contrats - Présentation
 
-#alertblock("Nombreuses critiques", text[
+#alertblock("Nombreuses critiques")[
   #link("https://wg21.link/p3909")[P3909 : Contracts should go into a White Paper - even at this late point #linklogo()]
 
   #link("https://wg21.link/p3851")[P3851 : Position on contracts assertion for C++26 #linklogo()]
@@ -988,13 +987,13 @@ format("{:>{}}", "hello", "10");
   #link("https://wg21.link/p4020")[P4020 : Concerns about contract assertions #linklogo()]
 
   #link("https://wg21.link/p3846")[P3846 : C++26 Contract Assertions, Reasserted #linklogo()]
-])
+]
 
-#questionblock("Fallait-it attendre ?", text[
-Les contrats actuels sont-ils cohérents et utilisables ?
+#questionblock("Fallait-it attendre ?")[
+  Les contrats actuels sont-ils cohérents et utilisables ?
 
-Les problèmes peuvent-ils corrigés dans une version future ?
-])
+  Les problèmes peuvent-ils corrigés dans une version future ?
+]
 
 === Contrats - Présentation
 
@@ -1044,9 +1043,9 @@ post (r: r > 0)
 {...}
 ```
 
-#noteblock("Note", text[
+#noteblock("Note")[
   Seuls les paramètres ```cpp const``` ou de type référence sont utilisables
-])
+]
 
 #addproposal("P2900")
 
