@@ -247,7 +247,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 === Contrats
 
-- Contrats sur les fonctions virtuelles et héritage de ceux-ci
+- Héritage des contrats sur les fonctions virtuelles
 - Contrats sur les pointeurs de fonction et de fonction membre
 - Accès à la valeur initiale des paramètres dans les postconditions
 - Comportement ```cpp assume``` : optimisation en supposant le contrat vrai
@@ -401,7 +401,6 @@ auto b = f"Value : {a}";
 === Types
 
 - Gestion des arrondis
-- Support obligatoire de ```cpp intptr_t``` et ```cpp uintptr_t```
 - Types flottants compatible ISO/IEC 60559:2020 (reproductibilité)
 - Amélioration des nombres flottants
 - ```cpp CHAR_BIT``` impérativement égal à 8 ("_There are exactly 8 bits in a byte_")
@@ -410,7 +409,6 @@ auto b = f"Value : {a}";
 - ```cpp std::to_signed``` et ```cpp std::to_unsigned``` permet d'obtenir le type signé/non signé correspondant au type initial
 - Suppression de ```cpp trivially_relocatable_if_eligible``` et ```cpp replaceable_if_eligible``` et redesign de la fonctionnalité
 
-#addproposal("p3248")
 #addproposal("p4231")
 #addproposal("p3375")
 #addproposal("p3477")
@@ -691,7 +689,6 @@ foo(100, 10, d: 480, e: false, c: 640);
 - Génération d'opérateurs à la demande via ```cpp =default```
   - ```cpp operator@=``` à partir de ```cpp operator@```
   - ```cpp operator++``` et ```cpp operator--``` préfixés à partir de ```cpp operator+``` et ```cpp operator-```
-  - ```cpp operator++``` et ```cpp operator--``` suffixés à partir des versions préfixés
   - ```cpp operator->``` et ```cpp operator->*``` à partir de ```cpp operator*``` et ```cpp operator.```
 // A priori, operator-> et operator->* générés par défaut, génération désactivable avec =delete
 - Ajout de ```cpp operator[]``` à ```cpp std::initializer_list```
@@ -821,7 +818,6 @@ flag~; // Équivalent a flag = !flag
   - Copies de tableaux
   - Tableau comme type de retour
 - Correction de dysfonctionnements de ```cpp std::flat_map``` et ```cpp std::flat_set```
-- Ajout de ```cpp get()```, ```cpp get_ref()``` et ```cpp get_as()``` à ```cpp std::map``` et ```cpp std::unordered_map``` : récupération de la valeur associée à une clé
 - Support des graphes et des algorithmes de manipulation des graphes
 - Initialisation de tableau via une expansion de pattern
 
