@@ -204,17 +204,17 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 === Dépréciations
 
 - Modes d'arrondi (```cpp fesetround()```)
-- Types de caractère signés dans ```cpp iostream```
 - Notion ```cpp trivial```
 - Conversions implicites entre ```cpp char8_t```, ```cpp char16_t``` et ```cpp char32_t```
 - Paramètre template ```cpp std::char_traits``` de ```cpp std::basic_string```, ```cpp std::basic_string_view``` et des flux
 - Conversion implicite de ```cpp bool``` vers un type caractère
 - Support de ```cpp signed char```, ```cpp unsigned char```, ```cpp int8_t``` et ```cpp uint8_t``` par ```cpp std::ostream```
+- ```cpp std::function``` remplaçable par ```cpp std::copyable_function``` et ```cpp std::function_ref```
 
 #addproposal("p3695")
 #addproposal("p3681")
 #addproposal("p3765")
-#addproposal("p3154")
+#addproposal("p2721")
 
 === Suppressions
 
@@ -228,13 +228,14 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 
 == Sécurité
 
-=== Sécurité
+=== Profile
 
 - Safety profile
   - Initialisation de toutes les variables
   - Libération des resources
   - Pas d'accès au travers de _dangling pointers_
   - Pas de _narrowing conversion_
+- Profile pour les UB vérifiables au _run-time_
 
 #addproposal("p3970")
 #addproposal("p2410")
@@ -272,6 +273,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p3098")
 #addproposal("p3327")
 #addproposal("p2755")
+#addproposal("p4262")
 
 === Contrats
 
@@ -284,12 +286,15 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 - _Pack-expansion_ dans les contrats
 - Opérateur permettant d'évaluer les préconditions d'une fonction
 - Contrat sur les coroutines
+- Suppression de la sémantique ```cpp observe```
+- Clause ```cpp require``` sur les contrats
 
 #addproposal("p3850")
 #addproposal("p4044")
 #addproposal("p3290")
 #addproposal("p3100")
 #addproposal("p2755")
+#addproposal("p4283")
 
 == Comportement
 
@@ -408,6 +413,7 @@ auto b = f"Value : {a}";
 - Entiers de $n$ bits similaires à ```cpp _BitInt``` du C
 - ```cpp std::to_signed``` et ```cpp std::to_unsigned``` permet d'obtenir le type signé/non signé correspondant au type initial
 - Suppression de ```cpp trivially_relocatable_if_eligible``` et ```cpp replaceable_if_eligible``` et redesign de la fonctionnalité
+- _Bitmask_ sur les ```cpp enum class```
 
 #addproposal("p4231")
 #addproposal("p3375")
@@ -418,6 +424,7 @@ auto b = f"Value : {a}";
 #addproposal("p3643")
 #addproposal("P3715")
 #addproposal("p3823")
+#addproposal("p4313")
 
 === Support des unités physiques
 
@@ -658,6 +665,10 @@ foo(100, 10, d: 480, e: false, c: 640);
 #addproposal("p3676")
 #addproposal("n2216")
 
+=== Évolutions des fonctions
+
+- Ajout d'indicateur comportementaux "pas d'allocation", "pas de récursion", "pas de blocage", ... à la manière de ```cpp noexcept```
+
 === Contexte d'appel
 
 - ```cpp __local_ctx``` récupère la contexte d'appel local
@@ -842,6 +853,7 @@ int a[42] = { 5... };
 === Conteneurs
 
 - Support des _node-handle_ par ```cpp std::list``` et ```cpp std::forward_list```
+- Construction de _node-handle_ sans conteneur
 - Ajout de ```cpp pop_value()``` à ```cpp std::stack```, ```cpp std::queue``` et ```cpp std::priority_queue```
 - Fonction libre d'accès "range-checked" à un élément ```cpp std::at()```
 - Uniformisation de ```cpp std::span``` et ```cpp std::string_view```
@@ -854,6 +866,7 @@ int a[42] = { 5... };
 - Création de _subspan_ à partir d'_offsets_ et d'_extents_ _compile-time_
 
 #addproposal("p3049")
+#addproposal("p4309")
 #addproposal("p3182")
 #addproposal("p3404")
 #addproposal("p3729")
@@ -884,7 +897,6 @@ auto bar = rebind<double>(foo);  // vector<double>
 #addproposal("p3852")
 #addproposal("p3952")
 #addproposal("p3971")
-#addproposal("p3242")
 #addproposal("P4102")
 #addproposal("p4190")
 
@@ -983,7 +995,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 - Gestion des UUID
 - Fonctions statistiques (moyenne, médiane, variance, ...)
 - Améliorations du générateur aléatoire
-- Manipulation de bits : ```cpp bit_reverse()```, ```cpp bit_repeat()```, ```cpp bit_compress()```, ```cpp bit_expand()```, ```cpp next_bit_permutation()``` et ```cpp prev_bit_permutation()```
+- Manipulation de bits : ```cpp next_bit_permutation()``` et ```cpp prev_bit_permutation()```
 - Fonctions membres ```cpp one()```, ```cpp countl_zero()```, ```cpp countl_one()```, ```cpp countr_zero()```, ```cpp countr_one()```, ```cpp rotl()```, ```cpp rotr()``` et ```cpp reverse()``` à ```cpp std::bitset```
 - ```cpp std::first_factor()``` retourne le plus petit facteur premier d'un nombre
 - ```cpp std::uninitialized_relocate()```, ```cpp std::uninitialized_relocate_n()``` et  ```cpp std::uninitialized_relocate_backward()```
@@ -992,7 +1004,6 @@ t[0ic] // Équivalent a std::get<0>(t)
 #addproposal("p1708")
 #addproposal("p2681")
 #addproposal("p3689")
-#addproposal("p3104")
 #addproposal("p3103")
 #addproposal("p3133")
 #addproposal("p3516")
@@ -1026,7 +1037,6 @@ t[0ic] // Équivalent a std::get<0>(t)
 - Divisions entières avec choix du mode d'arrondi (vers $0$, vers $plus.minus infinity$, ...)
 - Suppression de la contrainte de régularité sur les prédicats de ```cpp std::find_if()```, ```cpp std::remove_if()```, ```cpp std::all_of()```, ```cpp std::any_of()```, ...
 // Le prédicat n'est plus tenu de fournir toujours le même résultat pour un élément donné, car chaque élément n'est parcouru qu'une fois
-- ```cpp std::shl()``` et ```cpp std::shr()``` : décalage de bits
 - ```cpp msb_to_mask()``` construit le masque permet de récupérer le bit de poids fort
 - Gestion du mode d'arrondi sur les calculs avec des ```cpp float```
 - Ajout des fonctions de manipulation de ```cpp float``` et ```cpp double``` de C23 (```cpp std::iscanonical()```, ```cpp std::iszero()```, ```cpp std::fadd()```, ...)
@@ -1038,6 +1048,7 @@ t[0ic] // Équivalent a std::get<0>(t)
 #addproposal("p3764")
 #addproposal("p3864")
 #addproposal("p3935")
+#addproposal("p4259")
 
 === Algorithmes
 
@@ -1123,6 +1134,7 @@ ranges::sort(v, less{}, get_element<0>);
 - Ajout de ```cpp at()``` aux vues
 - Ajout de ```cpp rbegin()```, ```cpp rend()```, ```cpp crbegin()```, ```cpp crend()``` aux vues
 - Adaptateurs de plages fermées (i.e. intégrant les bornes) en plages semi-ouvertes (fonctionnement usuel de range)
+- ```cpp views::unique()``` filtre les éléments consécutifs égaux
 
 #addproposal("p3741")
 #addproposal("p3928")
@@ -1130,6 +1142,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3052")
 #addproposal("P4179")
 #addproposal("p4211")
+#addproposal("p4291")
 
 == _Traits_
 
@@ -1155,7 +1168,7 @@ ranges::sort(v, less{}, get_element<0>);
 
 === Lambda
 
-- Capture mutable partielle par les lambdas
+- Capture mutable / constante partielle par les lambdas
 - Capture effectuée dans l'ordre des déclarations
 - Lambda avec capture assignable par copie ou déplacement si les entités capturées sont assignables
 
@@ -1374,8 +1387,11 @@ double bar = foo<deduce>();
   ```cpp char``` et ```cpp bool``` ne sont pas des ```cpp std::integer```
 ]
 
+- Possibilité d'utiliser ```cpp using``` dans une clause ```cpp require```
+
 #addproposal("p3003")
 #addproposal("p3701")
+#addproposal("p4281")
 
 === Concepts
 
@@ -1507,8 +1523,8 @@ void func(T) {...}
 - ```cpp std::volatile_load<T>``` et ```cpp std::volatile_store<T>```
 - Gestion des processus, de la communication avec ceux-ci et des _pipes_
 - ```cpp std::fiber_context``` : changement de contexte _stackfull_ sans _schedule_
-- Ajout d'un nom aux threads et mutex
-- Contrôle de la priorité et de la taille de pile des threads
+- Ajout d'un nom aux mutex
+- Contrôle de la priorité des threads
 - Déclaration ```cpp const``` des fonctions ```cpp lock()``` et ```cpp unlock()``` des mutex
 // Pour ne pas devoir déclaré mutable tous les mutex. Déjà le cas dans d'autres langages, p.ex. Rust
 - ```cpp std::try_lock_until()``` et ```cpp std::try_lock_for()```
@@ -1516,7 +1532,6 @@ void func(T) {...}
 
 #addproposal("p2689")
 #addproposal("p0876")
-#addproposal("p2019")
 #addproposal("p3022")
 #addproposal("p2966")
 #addproposal("p3703")
@@ -1562,10 +1577,8 @@ void func(T) {...}
 
 - Remplaçant à ```cpp #ifdef``` ... ```cpp #endif```
 - API d'interaction avec le système de build et le compilateur
-- Ajout d'un offset à ```cpp #embed```
 - Imposition de l'ordre des paramètres de ```cpp #embed```
 
 #addproposal("p2978")
 #addproposal("p2966")
-#addproposal("p3540")
 #addproposal("p3731")
