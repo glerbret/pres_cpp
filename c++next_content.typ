@@ -743,8 +743,16 @@ flag~; // Équivalent a flag = !flag
 === _Structured binding_
 
 - Support du _structured binding_ sur ```cpp std::extents```
+- Utilisation de variables pré-existantes via ```cpp using```
+
+
+```cpp
+int x;
+auto [using x, y] = ...;
+```
 
 #addproposal("P2906")
+#addproposal("p3817")
 
 == Classes
 
@@ -905,10 +913,12 @@ auto bar = rebind<double>(foo);  // vector<double>
 - Abstraction, similaire à ```cpp std::span```, pour représenter des buffers I/O
 - Opérateurs de comparaisons sur les ```cpp std::span```
 - Ajout de ```cpp try_*_back()``` à ```cpp std::vector```
+- Ajout de ```cpp clear()``` aux adaptateurs de conteneur (```cpp std::stack```, ```cpp std::queue``` et ```cpp std::priority_queue```)
 
 #addproposal("p4036")
 #addproposal("p4216")
 #addproposal("p4228")
+#addproposal("P4343")
 
 === Chaînes de caractères
 
