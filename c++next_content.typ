@@ -224,7 +224,10 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - ```cpp std::basic_string::reserve()``` sans argument
   - _Unicode Conversion Facets_
   - _Locale Category Facets for Unicode_
+  - Digraphes
   - ...
+
+#addproposal("p4235")
 
 == Sécurité
 
@@ -288,6 +291,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 - Contrat sur les coroutines
 - Suppression de la sémantique ```cpp observe```
 - Clause ```cpp require``` sur les contrats
+- Sémantique ```cpp static``` pour l'évaluation _compile-time_
 
 #addproposal("p3850")
 #addproposal("p4044")
@@ -295,6 +299,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p3100")
 #addproposal("p2755")
 #addproposal("p4283")
+#addproposal("p4363")
 
 == Comportement
 
@@ -314,8 +319,14 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - ```cpp assert```
   - ```cpp offsetof```
 - Réservation des identifiants commençant par ```cpp @``` aux annotations
+- Échappement de mot-clés pour l'utilisation comme simple nom
+
+```cpp
+bool `requires`(const std::string& data);
+```
 
 #addproposal("p3254")
+#addproposal("p4307")
 
 === ``` using```
 
@@ -414,6 +425,7 @@ auto b = f"Value : {a}";
 - ```cpp std::to_signed``` et ```cpp std::to_unsigned``` permet d'obtenir le type signé/non signé correspondant au type initial
 - Suppression de ```cpp trivially_relocatable_if_eligible``` et ```cpp replaceable_if_eligible``` et redesign de la fonctionnalité
 - _Bitmask_ sur les ```cpp enum class```
+- ```cpp std::big_int``` : entiers de précision arbitraire
 
 #addproposal("p4231")
 #addproposal("p3375")
@@ -425,6 +437,7 @@ auto b = f"Value : {a}";
 #addproposal("P3715")
 #addproposal("p3823")
 #addproposal("p4313")
+#addproposal("p4444")
 
 === Support des unités physiques
 
@@ -737,6 +750,23 @@ flag~; // Équivalent a flag = !flag
 #addproposal("P2971")
 #addproposal("p2966")
 #addproposal("p3883")
+
+=== Opérateurs
+
+- Opérateur infixé depuis un nom de fonction échappé
+
+```cpp
+u `dot` v; // En remplacement de dot(u, v);
+```
+
+- Création d'opérateur utilisateur depuis les symboles mathématiques Unicode
+
+```cpp
+auto r = a ⊗ b;
+```
+
+#addproposal("p4307")
+#addproposal("p4345")
 
 == _Structured binding_
 
@@ -1322,7 +1352,12 @@ std::println(t"val : {x}");
 std::println("val : {}", x);
 ```
 
+- Support des exceptions
+- Support de ```cpp enum``` et ```cpp enum class```
+
 #addproposal("p3951")
+#addproposal("p3256")
+#addproposal("p4267")
 
 === ``` std::dump```
 
@@ -1356,6 +1391,13 @@ chrono::seconds time;
 scan("start = 10:30", "{0} = {1:%H:%M}", key, time);
 ```
 
+=== Messages _compile-time_
+
+- ```cpp constexpr_print```, ```cpp constexpr_warning``` et ```cpp constexpr_error``` pour afficher des messages en _compile-time_
+
+#addproposal("p3951")
+
+
 == Durées et temps
 
 === Durées et temps
@@ -1363,7 +1405,7 @@ scan("start = 10:30", "{0} = {1:%H:%M}", key, time);
 - Ajout d'une fonction membre ```cpp resolution()``` aux horloges
 - Ajout d'horloges _coarses_ moins précises mais plus rapides
 
-#addproposal("p3382")
+#addproposal("p4364")
 
 == Templates
 
