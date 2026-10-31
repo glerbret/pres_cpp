@@ -237,6 +237,7 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
   - Initialisation de toutes les variables
   - Libération des resources
   - Pas d'accès au travers de _dangling pointers_
+  - Invalidations
   - Pas de _narrowing conversion_
 - Profile pour les UB vérifiables au _run-time_
 
@@ -246,13 +247,16 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p2816")
 #addproposal("p4158")
 #addproposal("p4222")
+#addproposal("p4418")
+#addproposal("p4417")
+#addproposal("p4422")
 
 == Contrats
 
 === Contrats
 
 - Héritage des contrats sur les fonctions virtuelles
-- Contrats sur les pointeurs de fonction et de fonction membre
+- Contrats sur les pointeurs de fonction et de fonction membres
 - Accès à la valeur initiale des paramètres dans les postconditions
 - Comportement ```cpp assume``` : optimisation en supposant le contrat vrai
 - Choix du comportement dans l'assertion du contrat
@@ -300,6 +304,14 @@ copy(begin(foo), end(foo), make_ostream_joiner(cout, ", "));
 #addproposal("p2755")
 #addproposal("p4283")
 #addproposal("p4363")
+
+=== Contrats
+
+- Contrats symboliques (sans effet au _runtime_)
+- Contrats sans effet de bord (_strict contracts_)
+
+#addproposal("P4425")
+#addproposal("P4423")
 
 == Comportement
 
@@ -361,8 +373,10 @@ using std::chrono::{duration, time_point, duration_cast};
 // Algorithmes défini par Unicode pour travailler sur les séquences de code points
 - Support d'Unicode (UTF-8, UTF-16 et UTF-32) dans la bibliothèque standard
 - Support des alias _figment_ et _abbreviation_ des noms de caractère
+- Fonctions de transcodage
 
 #addproposal("p3733")
+#addproposal("p4246")
 
 == Ligne de commande
 
@@ -468,6 +482,8 @@ static_assert(10km / 5km == 2);
 #addproposal("p3045")
 #addproposal("p4185")
 #addproposal("p4213")
+#addproposal("p4411")
+#addproposal("p4412")
 
 === Représentation mémoire
 
@@ -1003,9 +1019,32 @@ t[0ic] // Équivalent a std::get<0>(t)
 
 === ``` std::expect```
 
+- ```cpp value_or_construct()``` : construction paresseuse de l'alternative
+- ```cpp value_or_else()``` : appel paresseux d'une fonction en l'absence de valeur
 - Ajout de ```cpp has_error()```
+- Support des références par ```cpp std::expected```
 
+#addproposal("p3413")
 #addproposal("p3798")
+#addproposal("p4280")
+
+== _Nullable objects_
+
+=== _Nullable objects_
+
+- Fonctions libres ```cpp std::value_or()```, ```cpp std::reference_or()```, ```cpp std::or_invoke()``` et ```cpp std::or_construct()``` sur tous les types _nullables_
+
+```cpp
+Foo* foo = ...;
+Foo bar = value_or(foo, Foo{...});
+```
+
+```cpp
+optional<Foo> foo = ...;
+Foo bar = value_or(foo, Foo{...});
+```
+
+#addproposal("p4270")
 
 == _Guarded objects_
 
@@ -1175,6 +1214,7 @@ ranges::sort(v, less{}, get_element<0>);
 - Ajout de ```cpp rbegin()```, ```cpp rend()```, ```cpp crbegin()```, ```cpp crend()``` aux vues
 - Adaptateurs de plages fermées (i.e. intégrant les bornes) en plages semi-ouvertes (fonctionnement usuel de range)
 - ```cpp views::unique()``` filtre les éléments consécutifs égaux
+- ```cpp views::trim()``` et ```cpp views::trim_while()``` trimme la vue
 
 #addproposal("p3741")
 #addproposal("p3928")
@@ -1183,6 +1223,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("P4179")
 #addproposal("p4211")
 #addproposal("p4291")
+#addproposal("p4398")
 
 == _Traits_
 
@@ -1196,6 +1237,7 @@ ranges::sort(v, less{}, get_element<0>);
 - ```cpp std::is_always_exhaustive``` indique qu'un objet ne contient pas de bit de padding
 - ```cpp std::is_bitwise_trivially_relocatable```
 - ```cpp std::is_vector_bool_reference<T>```
+- Traits sur les types numériques (min, max, epsilon, infini, ...)
 
 #addproposal("p0870")
 #addproposal("p2782")
@@ -1203,6 +1245,7 @@ ranges::sort(v, less{}, get_element<0>);
 #addproposal("p3707")
 #addproposal("p3780")
 #addproposal("p3719")
+#addproposal("p4421")
 
 == Programmation fonctionnelle
 
@@ -1318,6 +1361,12 @@ int s = sum(point.elems...);
 ```
 
 == Flux
+
+=== Flux
+
+- ```cpp native_handle()``` sur les flux standards
+
+#addproposal("p4393")
 
 === ``` std::format```
 
